@@ -9,7 +9,7 @@
 
 ### 2. Functional Core, Imperative Shell
 - Domain logic is pure functions (Decider pattern)
-- Side effects (HTTP, time, randomness) live at the edges
+- Side effects (HTTP, time, randomness, exceptions, async/await, ...) live at the edges
 - No mutable state in the domain layer
 
 ### 3. Simplicity Over Sophistication
@@ -50,7 +50,7 @@
 1. **Spec** → Update `specs/game-flows.em`
 2. **Types** → Add/update records in Domain
 3. **Decider** → Update `Evolve` and `Decide` switches
-4. **Tests** → Implement GWT from spec
+4. **Tests** → Implement GTs and GWTs from spec
 5. **Web** → Update endpoints and pages
 
 ## Forbidden
