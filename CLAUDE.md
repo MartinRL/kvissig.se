@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project: Mer eller Mindre
 
-A real-time multiplayer quiz game where players guess percentages/numbers (0-100). Closest to the correct answer wins the round. Built for same-room social gaming where everyone plays on their own device.
+A real-time multiplayer quiz game where players guess whether one thing is **more** or **less** than another. Fastest correct answer wins the round. Built for same-room social gaming where everyone plays on their own device. Swedish-language game for Swedish audiences.
 
 ## Commands
 

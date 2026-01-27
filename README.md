@@ -1,64 +1,64 @@
 # Mer eller Mindre
 
-A multiplayer quiz game where players guess percentages (0-100). Closest to the correct answer wins the round.
+Ett quizspel för flera spelare där man gissar om det ena är **mer** eller **mindre** än det andra. Snabbaste rätta svaret vinner rundan.
 
-Optimized for **same-room social gaming** — everyone plays on their own device, including the game host.
+Optimerat för **sällskapsspel i samma rum** — alla spelar på sin egen enhet, inklusive spelledaren.
 
-## Quick Start
+## Snabbstart
 
 ```bash
-# Build
+# Bygg
 dotnet build
 
-# Test  
+# Testa
 dotnet test
 
-# Run
+# Kör
 dotnet run --project src/MerEllerMindre.Web
 ```
 
-## Architecture
+## Arkitektur
 
-- **Event Sourced**: All state derived from events via the Decider pattern
-- **In-Memory**: No database, games exist only during runtime
-- **HTMX + Polling**: Simple real-time updates every 2 seconds
-- **emlang Specification**: Behavior defined in `specs/game-flows.em`
+- **Event Sourcing**: All state härleds från händelser via Decider-mönstret
+- **In-Memory**: Ingen databas, spel existerar endast under körning
+- **HTMX + Polling**: Enkla realtidsuppdateringar var 2:a sekund
+- **emlang-specifikation**: Beteende definieras i `specs/game-flows.em`
 
-## Project Structure
+## Projektstruktur
 
 ```
 ├── MerEllerMindre.slnx          # .NET 9 solution
-├── CLAUDE.md                     # Claude Code instructions
+├── CLAUDE.md                     # Claude Code-instruktioner
 ├── specs/
-│   ├── game-flows.em            # emlang specification (source of truth)
-│   └── tasks.md                 # Implementation tasks
+│   ├── game-flows.em            # emlang-specifikation (sanningskälla)
+│   └── tasks.md                 # Implementationsuppgifter
 ├── docs/adr/                    # Architecture Decision Records
 ├── src/
-│   ├── MerEllerMindre.Domain/   # Game engine (pure functions)
-│   └── MerEllerMindre.Web/      # HTMX web interface
+│   ├── MerEllerMindre.Domain/   # Spelmotor (rena funktioner)
+│   └── MerEllerMindre.Web/      # HTMX-webbgränssnitt
 └── tests/
     └── MerEllerMindre.Domain.Tests/
 ```
 
-## Development with Claude Code
+## Utveckling med Claude Code
 
-This project is structured for spec-driven development with Claude Code:
+Projektet är strukturerat för specifikationsdriven utveckling med Claude Code:
 
-1. **Read the spec**: `specs/game-flows.em` defines all game behavior
-2. **Check constitution**: `.claude/constitution.md` defines coding standards
-3. **Follow tasks**: `specs/tasks.md` lists implementation work
-4. **Run tests**: Tests are derived from emlang `?test?` blocks
+1. **Läs specen**: `specs/game-flows.em` definierar allt spelbeteende
+2. **Kolla constitution**: `.claude/constitution.md` definierar kodstandarder
+3. **Följ uppgifterna**: `specs/tasks.md` listar implementationsarbete
+4. **Kör tester**: Tester härleds från emlang `?test?`-block
 
-### RALPH Loop Compatible
+### RALPH Loop-kompatibel
 
 ```bash
-# With ralph-loop plugin installed:
-/ralph-loop "Implement the next unchecked task in specs/tasks.md. 
+# Med ralph-loop-plugin installerad:
+/ralph-loop "Implement the next unchecked task in specs/tasks.md.
 Run tests after each change. Output <promise>TASK_COMPLETE</promise> when done."
 --max-iterations 20
 --completion-promise "TASK_COMPLETE"
 ```
 
-## License
+## Licens
 
 MIT
