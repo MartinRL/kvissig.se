@@ -6,6 +6,7 @@ out/
 # IDE
 .vs/
 .vscode/
+.idea/
 *.user
 *.suo
 
