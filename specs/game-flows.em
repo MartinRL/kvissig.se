@@ -1,0 +1,282 @@
+# Mer eller Mindre - Game Flows
+
+## Game Lifecycle
+
+/CreateGame/
+  %Host:CreateGameForm%
+  [CreateGame]
+    hostName
+    questionPackId
+  <Game:GameCreated>
+    gameId
+    hostPlayerId
+    joinCode
+    questionPackId
+    createdAt
+  {Lobby}
+    gameId
+    joinCode
+    players
+---
+/JoinGame/
+  %Player:JoinGameForm%
+  [JoinGame]
+    joinCode
+    playerName
+  <Game:PlayerJoined>
+    gameId
+    playerId
+    playerName
+    joinedAt
+  {Lobby}
+---
+/StartGame/
+  %Host:Lobby%
+  [StartGame]
+    gameId
+  <Game:GameStarted>
+    gameId
+    firstQuestionIndex
+    startedAt
+  {Question}
+    questionText
+    correctAnswer
+    playerGuesses
+---
+
+## Question Round
+
+/SubmitGuess/
+  %Player:Question%
+  [SubmitGuess]
+    gameId
+    playerId
+    guess
+  <Game:GuessSubmitted>
+    gameId
+    playerId
+    guess
+    submittedAt
+  {Question}
+---
+/AllGuessesIn/
+  <Game:GuessSubmitted>
+  <Game:AllGuessesSubmitted>
+    gameId
+    questionIndex
+  <Game:QuestionScored>
+    gameId
+    questionIndex
+    correctAnswer
+    scores
+  {Results}
+    questionText
+    correctAnswer
+    guesses
+    scores
+    runningScoreboard
+---
+
+## Game Progression
+
+/NextQuestion/
+  <Game:QuestionScored>
+  <Game:NextQuestionStarted>
+    gameId
+    questionIndex
+  {Question}
+---
+/GameOver/
+  <Game:QuestionScored>
+  <Game:GameEnded>
+    gameId
+    finalScoreboard
+    winnerId
+    endedAt
+  {FinalResults}
+    finalScoreboard
+    winner
+---
+
+## Exception Flows
+
+/JoinGame/
+  %Player:JoinGameForm%
+  [JoinGame]
+    joinCode
+    playerName
+  !GameNotFound!
+    joinCode
+---
+/JoinGame/
+  %Player:JoinGameForm%
+  [JoinGame]
+    joinCode
+    playerName
+  !GameAlreadyStarted!
+    gameId
+---
+/SubmitGuess/
+  %Player:Question%
+  [SubmitGuess]
+    gameId
+    playerId
+    guess
+  !GuessOutOfRange!
+    guess
+    min
+    max
+---
+/SubmitGuess/
+  %Player:Question%
+  [SubmitGuess]
+    gameId
+    playerId
+    guess
+  !AlreadyGuessed!
+    playerId
+    questionIndex
+---
+
+## GWT Tests
+
+?GameCanBeCreated?
+  [CreateGame]
+    hostName:Martin
+    questionPackId:pack-1
+  <Game:GameCreated>
+    hostPlayerId:player-1
+---
+?PlayerCanJoinLobby?
+  <Game:GameCreated>
+    gameId:game-1
+    joinCode:ABC123
+  [JoinGame]
+    joinCode:ABC123
+    playerName:Anna
+  <Game:PlayerJoined>
+    gameId:game-1
+    playerName:Anna
+---
+?CannotJoinNonexistentGame?
+  [JoinGame]
+    joinCode:INVALID
+    playerName:Erik
+  !GameNotFound!
+    joinCode:INVALID
+---
+?CannotJoinStartedGame?
+  <Game:GameCreated>
+    gameId:game-1
+    joinCode:ABC123
+  <Game:GameStarted>
+    gameId:game-1
+  [JoinGame]
+    joinCode:ABC123
+    playerName:Erik
+  !GameAlreadyStarted!
+    gameId:game-1
+---
+?GuessSubmittedSuccessfully?
+  <Game:GameCreated>
+    gameId:game-1
+  <Game:PlayerJoined>
+    gameId:game-1
+    playerId:player-1
+  <Game:GameStarted>
+    gameId:game-1
+  [SubmitGuess]
+    gameId:game-1
+    playerId:player-1
+    guess:42
+  <Game:GuessSubmitted>
+    gameId:game-1
+    playerId:player-1
+    guess:42
+---
+?GuessOutOfRangeRejected?
+  <Game:GameCreated>
+    gameId:game-1
+  <Game:GameStarted>
+    gameId:game-1
+  [SubmitGuess]
+    gameId:game-1
+    playerId:player-1
+    guess:150
+  !GuessOutOfRange!
+    guess:150
+    min:0
+    max:100
+---
+?CannotGuessAgainOnSameQuestion?
+  <Game:GameCreated>
+    gameId:game-1
+  <Game:GameStarted>
+    gameId:game-1
+    questionIndex:0
+  <Game:GuessSubmitted>
+    gameId:game-1
+    playerId:player-1
+    questionIndex:0
+  [SubmitGuess]
+    gameId:game-1
+    playerId:player-1
+    guess:50
+  !AlreadyGuessed!
+    playerId:player-1
+    questionIndex:0
+---
+?AllGuessesTriggersScoring?
+  <Game:GameCreated>
+    gameId:game-1
+  <Game:PlayerJoined>
+    playerId:player-1
+  <Game:PlayerJoined>
+    playerId:player-2
+  <Game:GameStarted>
+    gameId:game-1
+  <Game:GuessSubmitted>
+    playerId:player-1
+    guess:40
+  <Game:GuessSubmitted>
+    playerId:player-2
+    guess:45
+  <Game:AllGuessesSubmitted>
+    gameId:game-1
+  <Game:QuestionScored>
+    gameId:game-1
+---
+?ClosestGuessWins?
+  <Game:GameCreated>
+    gameId:game-1
+  <Game:PlayerJoined>
+    playerId:player-1
+  <Game:PlayerJoined>
+    playerId:player-2
+  <Game:GameStarted>
+    gameId:game-1
+    questionIndex:0
+    correctAnswer:42
+  <Game:GuessSubmitted>
+    playerId:player-1
+    guess:40
+  <Game:GuessSubmitted>
+    playerId:player-2
+    guess:50
+  <Game:QuestionScored>
+    winnerId:player-1
+---
+?LastQuestionEndsGame?
+  <Game:GameCreated>
+    gameId:game-1
+    totalQuestions:2
+  <Game:GameStarted>
+    questionIndex:0
+  <Game:QuestionScored>
+    questionIndex:0
+  <Game:NextQuestionStarted>
+    questionIndex:1
+  <Game:QuestionScored>
+    questionIndex:1
+  <Game:GameEnded>
+    gameId:game-1
