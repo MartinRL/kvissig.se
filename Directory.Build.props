@@ -1,0 +1,6 @@
+<Project>
+  <PropertyGroup>
+    <!-- Override non-standard Platform values from environment (e.g., "windows" from MAUI) -->
+    <Platform Condition="'$(Platform)' != 'AnyCPU' and '$(Platform)' != 'x64' and '$(Platform)' != 'x86' and '$(Platform)' != 'ARM64'">AnyCPU</Platform>
+  </PropertyGroup>
+</Project>
