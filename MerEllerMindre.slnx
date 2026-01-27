@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="src/MerEllerMindre.Domain/MerEllerMindre.Domain.csproj" />
+  <Project Path="src/MerEllerMindre.Web/MerEllerMindre.Web.csproj" />
+  <Project Path="tests/MerEllerMindre.Domain.Tests/MerEllerMindre.Domain.Tests.csproj" />
+</Solution>
