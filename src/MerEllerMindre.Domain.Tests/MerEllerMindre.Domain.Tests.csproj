@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\MerEllerMindre.Domain\MerEllerMindre.Domain.csproj" />
+    <ProjectReference Include="..\MerEllerMindre.Domain\MerEllerMindre.Domain.csproj" />
   </ItemGroup>
 
 </Project>
