@@ -36,41 +36,61 @@ dotnet run --project src/MerEllerMindre.Web
 
 ```
 Evolve: (State, Event) → State
-Decide: (State, Command) → Result<Event[]>
+Decide: (State, Command, GameContext) → Result<Event[]>
 ```
 
-Both use exhaustive pattern matching.
+- Both use exhaustive switch expressions
+- `GameContext` provides external dependencies (ID generators, clock)
+- `Result<T>` with `Match()` for success/failure handling
+- `Fold()` aggregates events into state
 
-### Key Files
+### Domain Structure
 
 ```
-specs/game-flows.em              # Source of truth (emlang spec)
+MerEllerMindre.Domain/
+├── Commands.cs    # CreateGame, JoinGame, StartGame, SubmitGuess
+├── Events.cs      # GameCreated, PlayerJoined, GuessSubmitted, etc.
+├── Errors.cs      # GameNotFound, AlreadyGuessed, DifferenceOutOfRange
+├── State.cs       # GameState, Player, GamePhase enum
+└── Decider.cs     # Evolve, Decide, Fold, Result<T>, GameContext
+```
+
+### Source of Truth
+
+```
+specs/game-flows.em              # emlang spec — ALL behavior defined here
 specs/tasks.md                   # Implementation checklist
 .claude/constitution.md          # Coding standards
-src/MerEllerMindre.Domain/       # Pure domain logic
-src/MerEllerMindre.Web/          # HTMX web interface
-tests/MerEllerMindre.Domain.Tests/
 ```
 
-## Constraints (from constitution.md)
+### emlang Syntax (in game-flows.em)
+
+- `[CommandName]` — Command with properties
+- `<Aggregate:EventName>` — Event that occurred
+- `!ErrorName!` — Business error
+- `?TestName?` — GWT test case (Given: events, When: command, Then: events/error)
+
+## Constraints
 
 **Required:**
 - All public types are records
 - No exceptions for business logic — use `Result<T>`
-- Exhaustive pattern matching (no default cases)
+- Exhaustive pattern matching (no default/discard cases)
+- Collections use `IReadOnlyList<T>`
 
 **Forbidden:**
 - SignalR, WebSockets, SSE
 - Entity Framework, databases
 - Blazor
+- `dynamic` or reflection in domain
 
 ## Workflow
 
-1. **Spec first**: `specs/game-flows.em` defines all behavior
-2. **Domain types**: Records matching the spec
-3. **Decider**: Update `Evolve` and `Decide`
-4. **Tests**: GWT from `?TestName?` blocks
-5. **Web**: HTMX endpoints and pages
+1. **Spec first**: Update `specs/game-flows.em`
+2. **Domain types**: Add records matching the spec
+3. **Decider**: Update `Evolve` and `Decide` switches
+4. **Tests**: Implement GWT from `?TestName?` blocks
+5. **Web**: HTMX endpoints and Razor pages
 
 ## Naming
 
