@@ -1,64 +1,35 @@
 # Mer eller Mindre
 
-Ett quizspel för flera spelare där man gissar om det ena är **mer** eller **mindre** än det andra. Snabbaste rätta svaret vinner rundan.
+Ett quizspel för flera spelare där man gissar:
+1. **Riktning**: Är A mer eller mindre än B?
+2. **Differens**: Hur stor är skillnaden? (0-100)
 
-Optimerat för **sällskapsspel i samma rum** — alla spelar på sin egen enhet, inklusive spelledaren.
+Inspirerat av sällskapsspelet [0-100](https://playmig.com/produkter/0-100-vit/).
+
+## Poängsättning
+
+| Händelse | Poäng |
+|----------|-------|
+| Differens mellan gissning och facit | +diff |
+| Rätt på mer/mindre | **-10 bonus** |
+
+**Lägsta total vinner.** Negativa poäng är möjliga!
 
 ## Snabbstart
 
 ```bash
-# Bygg
 dotnet build
-
-# Testa
 dotnet test
-
-# Kör
 dotnet run --project src/MerEllerMindre.Web
 ```
 
 ## Arkitektur
 
-- **Event Sourcing**: All state härleds från händelser via Decider-mönstret
-- **In-Memory**: Ingen databas, spel existerar endast under körning
-- **HTMX + Polling**: Enkla realtidsuppdateringar var 2:a sekund
-- **emlang-specifikation**: Beteende definieras i `specs/game-flows.em`
-
-## Projektstruktur
-
-```
-├── MerEllerMindre.slnx          # .NET 9 solution
-├── CLAUDE.md                     # Claude Code-instruktioner
-├── specs/
-│   ├── game-flows.em            # emlang-specifikation (sanningskälla)
-│   └── tasks.md                 # Implementationsuppgifter
-├── docs/adr/                    # Architecture Decision Records
-├── src/
-│   ├── MerEllerMindre.Domain/   # Spelmotor (rena funktioner)
-│   └── MerEllerMindre.Web/      # HTMX-webbgränssnitt
-└── tests/
-    └── MerEllerMindre.Domain.Tests/
-```
-
-## Utveckling med Claude Code
-
-Projektet är strukturerat för specifikationsdriven utveckling med Claude Code:
-
-1. **Läs specen**: `specs/game-flows.em` definierar allt spelbeteende
-2. **Kolla constitution**: `.claude/constitution.md` definierar kodstandarder
-3. **Följ uppgifterna**: `specs/tasks.md` listar implementationsarbete
-4. **Kör tester**: Tester härleds från emlang `?test?`-block
-
-### RALPH Loop-kompatibel
-
-```bash
-# Med ralph-loop-plugin installerad:
-/ralph-loop "Implement the next unchecked task in specs/tasks.md.
-Run tests after each change. Output <promise>TASK_COMPLETE</promise> when done."
---max-iterations 20
---completion-promise "TASK_COMPLETE"
-```
+- **Event Sourcing** via Decider-mönstret
+- **In-Memory** — inga databaser
+- **HTMX + Polling** — enkla realtidsuppdateringar
+- **emlang-spec** — `specs/game-flows.em` är sanningskällan
 
 ## Licens
 
-MIT
+MIT med icke-kommersiell klausul
