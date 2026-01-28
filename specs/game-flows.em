@@ -1,17 +1,34 @@
 # Mer eller Mindre - Game Flows
 
+## Game Rules
+
+Mer eller Mindre är ett quizspel där spelarna gissar:
+1. **Riktning**: Är A mer eller mindre än B?
+2. **Differens**: Hur stor är skillnaden? (normaliserad 0-100)
+
+### Poängsättning per fråga
+- Differenspoäng = |gissad_diff - faktisk_diff| (alltid 0-100)
+- Rätt riktning = -10 bonus
+- Fel riktning = ingen bonus
+
+### Vinnare
+Lägsta totala poäng efter alla rundor vinner.
+Negativa poäng är möjliga (rätt riktning + exakt diff = -10).
+
+---
+
 ## Game Lifecycle
 
 /CreateGame/
   %Host:CreateGameForm%
   [CreateGame]
     hostName
-    questionPackId
+    numberOfRounds
   <Game:GameCreated>
     gameId
     hostPlayerId
     joinCode
-    questionPackId
+    numberOfRounds
     createdAt
   {Lobby}
     gameId
@@ -36,12 +53,14 @@
     gameId
   <Game:GameStarted>
     gameId
-    firstQuestionIndex
     startedAt
-  {Question}
+  <Game:QuestionPresented>
+    gameId
+    questionIndex
     questionText
-    correctAnswer
-    playerGuesses
+    optionA
+    optionB
+  {Question}
 ---
 
 ## Question Round
@@ -51,13 +70,16 @@
   [SubmitGuess]
     gameId
     playerId
-    guess
+    direction (mer|mindre)
+    difference (0-100)
   <Game:GuessSubmitted>
     gameId
     playerId
-    guess
+    questionIndex
+    direction
+    difference
     submittedAt
-  {Question}
+  {WaitingForOthers}
 ---
 /AllGuessesIn/
   <Game:GuessSubmitted>
@@ -67,41 +89,51 @@
   <Game:QuestionScored>
     gameId
     questionIndex
-    correctAnswer
-    scores
+    correctDirection
+    correctDifference
+    playerScores[]
+      playerId
+      guessedDirection
+      guessedDifference
+      directionCorrect
+      differencePoints
+      bonusPoints
+      roundScore
+      totalScore
   {Results}
-    questionText
-    correctAnswer
-    guesses
-    scores
-    runningScoreboard
 ---
 
 ## Game Progression
 
 /NextQuestion/
-  <Game:QuestionScored>
-  <Game:NextQuestionStarted>
+  %Host:Results%
+  [NextQuestion]
+    gameId
+  <Game:QuestionPresented>
     gameId
     questionIndex
+    questionText
+    optionA
+    optionB
   {Question}
 ---
 /GameOver/
   <Game:QuestionScored>
   <Game:GameEnded>
     gameId
-    finalScoreboard
+    finalScoreboard[]
+      playerId
+      playerName
+      totalScore
+      rank
     winnerId
     endedAt
   {FinalResults}
-    finalScoreboard
-    winner
 ---
 
 ## Exception Flows
 
 /JoinGame/
-  %Player:JoinGameForm%
   [JoinGame]
     joinCode
     playerName
@@ -109,7 +141,6 @@
     joinCode
 ---
 /JoinGame/
-  %Player:JoinGameForm%
   [JoinGame]
     joinCode
     playerName
@@ -117,35 +148,47 @@
     gameId
 ---
 /SubmitGuess/
-  %Player:Question%
   [SubmitGuess]
     gameId
     playerId
-    guess
-  !GuessOutOfRange!
-    guess
-    min
-    max
+    direction
+    difference
+  !DifferenceOutOfRange!
+    difference
+    min:0
+    max:100
 ---
 /SubmitGuess/
-  %Player:Question%
   [SubmitGuess]
     gameId
     playerId
-    guess
+    direction
+    difference
   !AlreadyGuessed!
     playerId
     questionIndex
 ---
+/SubmitGuess/
+  [SubmitGuess]
+    gameId
+    playerId
+    direction
+    difference
+  !InvalidDirection!
+    direction
+---
 
 ## GWT Tests
+
+### Lobby Tests
 
 ?GameCanBeCreated?
   [CreateGame]
     hostName:Martin
-    questionPackId:pack-1
+    numberOfRounds:10
   <Game:GameCreated>
     hostPlayerId:player-1
+    numberOfRounds:10
 ---
 ?PlayerCanJoinLobby?
   <Game:GameCreated>
@@ -177,6 +220,9 @@
   !GameAlreadyStarted!
     gameId:game-1
 ---
+
+### Guess Tests
+
 ?GuessSubmittedSuccessfully?
   <Game:GameCreated>
     gameId:game-1
@@ -185,34 +231,61 @@
     playerId:player-1
   <Game:GameStarted>
     gameId:game-1
+  <Game:QuestionPresented>
+    gameId:game-1
+    questionIndex:0
   [SubmitGuess]
     gameId:game-1
     playerId:player-1
-    guess:42
+    direction:mer
+    difference:42
   <Game:GuessSubmitted>
     gameId:game-1
     playerId:player-1
-    guess:42
+    direction:mer
+    difference:42
 ---
-?GuessOutOfRangeRejected?
+?DifferenceOutOfRangeRejected?
   <Game:GameCreated>
     gameId:game-1
   <Game:GameStarted>
     gameId:game-1
+  <Game:QuestionPresented>
+    gameId:game-1
+    questionIndex:0
   [SubmitGuess]
     gameId:game-1
     playerId:player-1
-    guess:150
-  !GuessOutOfRange!
-    guess:150
+    direction:mer
+    difference:150
+  !DifferenceOutOfRange!
+    difference:150
     min:0
     max:100
+---
+?InvalidDirectionRejected?
+  <Game:GameCreated>
+    gameId:game-1
+  <Game:GameStarted>
+    gameId:game-1
+  <Game:QuestionPresented>
+    gameId:game-1
+    questionIndex:0
+  [SubmitGuess]
+    gameId:game-1
+    playerId:player-1
+    direction:maybe
+    difference:50
+  !InvalidDirection!
+    direction:maybe
 ---
 ?CannotGuessAgainOnSameQuestion?
   <Game:GameCreated>
     gameId:game-1
   <Game:GameStarted>
     gameId:game-1
+  <Game:QuestionPresented>
+    gameId:game-1
     questionIndex:0
   <Game:GuessSubmitted>
     gameId:game-1
@@ -221,62 +294,144 @@
   [SubmitGuess]
     gameId:game-1
     playerId:player-1
-    guess:50
+    direction:mer
+    difference:50
   !AlreadyGuessed!
     playerId:player-1
     questionIndex:0
 ---
-?AllGuessesTriggersScoring?
+
+### Scoring Tests
+
+?CorrectDirectionGivesBonus?
   <Game:GameCreated>
     gameId:game-1
   <Game:PlayerJoined>
     playerId:player-1
-  <Game:PlayerJoined>
-    playerId:player-2
   <Game:GameStarted>
     gameId:game-1
+  <Game:QuestionPresented>
+    gameId:game-1
+    questionIndex:0
+    correctDirection:mer
+    correctDifference:35
   <Game:GuessSubmitted>
     playerId:player-1
-    guess:40
-  <Game:GuessSubmitted>
-    playerId:player-2
-    guess:45
+    direction:mer
+    difference:40
   <Game:AllGuessesSubmitted>
     gameId:game-1
   <Game:QuestionScored>
-    gameId:game-1
+    playerScores[0]:
+      playerId:player-1
+      directionCorrect:true
+      differencePoints:5
+      bonusPoints:-10
+      roundScore:-5
 ---
-?ClosestGuessWins?
+?WrongDirectionNoBonus?
   <Game:GameCreated>
     gameId:game-1
   <Game:PlayerJoined>
     playerId:player-1
-  <Game:PlayerJoined>
-    playerId:player-2
   <Game:GameStarted>
     gameId:game-1
+  <Game:QuestionPresented>
+    gameId:game-1
     questionIndex:0
-    correctAnswer:42
+    correctDirection:mer
+    correctDifference:35
   <Game:GuessSubmitted>
     playerId:player-1
-    guess:40
-  <Game:GuessSubmitted>
-    playerId:player-2
-    guess:50
+    direction:mindre
+    difference:40
+  <Game:AllGuessesSubmitted>
+    gameId:game-1
   <Game:QuestionScored>
-    winnerId:player-1
+    playerScores[0]:
+      playerId:player-1
+      directionCorrect:false
+      differencePoints:5
+      bonusPoints:0
+      roundScore:5
 ---
-?LastQuestionEndsGame?
+?ExactDifferenceWithCorrectDirection?
   <Game:GameCreated>
     gameId:game-1
-    totalQuestions:2
+  <Game:PlayerJoined>
+    playerId:player-1
   <Game:GameStarted>
+    gameId:game-1
+  <Game:QuestionPresented>
+    gameId:game-1
     questionIndex:0
+    correctDirection:mer
+    correctDifference:50
+  <Game:GuessSubmitted>
+    playerId:player-1
+    direction:mer
+    difference:50
+  <Game:AllGuessesSubmitted>
+    gameId:game-1
+  <Game:QuestionScored>
+    playerScores[0]:
+      playerId:player-1
+      directionCorrect:true
+      differencePoints:0
+      bonusPoints:-10
+      roundScore:-10
+---
+?ScoresAccumulateAcrossRounds?
+  <Game:GameCreated>
+    gameId:game-1
+    numberOfRounds:2
+  <Game:PlayerJoined>
+    playerId:player-1
+  <Game:GameStarted>
+    gameId:game-1
+  # Round 1: score -5
   <Game:QuestionScored>
     questionIndex:0
-  <Game:NextQuestionStarted>
-    questionIndex:1
+    playerScores[0]:
+      playerId:player-1
+      roundScore:-5
+      totalScore:-5
+  # Round 2: score 10
   <Game:QuestionScored>
     questionIndex:1
+    playerScores[0]:
+      playerId:player-1
+      roundScore:10
+      totalScore:5
+---
+?LowestScoreWins?
+  <Game:GameCreated>
+    gameId:game-1
+    numberOfRounds:1
+  <Game:PlayerJoined>
+    playerId:player-1
+    playerName:Anna
+  <Game:PlayerJoined>
+    playerId:player-2
+    playerName:Erik
+  <Game:GameStarted>
+    gameId:game-1
+  <Game:QuestionScored>
+    questionIndex:0
+    playerScores[0]:
+      playerId:player-1
+      totalScore:-5
+    playerScores[1]:
+      playerId:player-2
+      totalScore:10
   <Game:GameEnded>
-    gameId:game-1
+    winnerId:player-1
+    finalScoreboard[0]:
+      playerId:player-1
+      totalScore:-5
+      rank:1
+    finalScoreboard[1]:
+      playerId:player-2
+      totalScore:10
+      rank:2
+---
