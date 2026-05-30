@@ -23,3 +23,6 @@ TestResults/
 
 # Logs
 *.log
+
+# Generated emlang diagrams
+specs/*.html

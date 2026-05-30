@@ -1,0 +1,7 @@
+# emlang configuration for Mer eller Mindre
+# Docs: https://emlang-project.github.io/
+
+lint:
+  ignore:
+    # Standalone read-model (view-only) slices legitimately have no events.
+    - slice-missing-event

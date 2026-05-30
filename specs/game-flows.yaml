@@ -1,0 +1,187 @@
+# Mer eller Mindre — Event-Modeling spec for one round ("omgång").
+# Transcribed from specs/MEM-omgång.png. See specs/CLAUDE.md for conventions.
+#
+# Conventions:
+#   triggers carry the actor role  (GameMaster / ...,  Player / ...,  System / ...)
+#   commands are bare              (CreateGame, SubmitGuess)
+#   events carry the stream        (Game / GameCreated)
+#   exceptions & views are bare    (GameNotFound, Lobby)
+#
+# Scoring (see SubmitGuess / ScoreQuestion):
+#   roundScore = |guessedDifference - correctDifference| + (directionCorrect ? -10 : 0)
+#   difference is normalized 0-100; lowest total score wins; negative scores possible.
+#
+# ASSUMPTION: the board's two guess screens (direction, then difference) are modeled
+# as a single SubmitGuess {direction, difference} command, matching the C# domain.
+# Split into two commands only if the board later demands it.
+
+slices:
+
+  # --- Lobby / setup -------------------------------------------------------
+
+  CreateGame:
+    - t: GameMaster / Create game
+    - c: CreateGame
+      props:
+        gameId: string
+        hostName: string
+        numberOfRounds: int
+    - e: Game / GameCreated
+      props:
+        gameId: string
+        hostPlayerId: string
+        joinCode: string
+        numberOfRounds: int
+        createdAt: timestamp
+    - v: Lobby
+
+  Lobby:
+    - v: Lobby
+      props:
+        gameId: string
+        joinCode: string
+        players: Player[]
+
+  JoinGame:
+    - t: Player / Scan QR and join
+    - c: JoinGame
+      props:
+        joinCode: string
+        playerName: string
+    - e: Game / PlayerJoined
+      props:
+        gameId: string
+        playerId: string
+        playerName: string
+        joinedAt: timestamp
+    - v: Lobby
+
+  # --- Play ----------------------------------------------------------------
+
+  StartGame:
+    - t: GameMaster / Start game
+    - c: StartGame
+      props:
+        gameId: string
+    - e: Game / GameStarted
+      props:
+        gameId: string
+        startedAt: timestamp
+    - e: Game / QuestionPresented
+      props:
+        gameId: string
+        questionIndex: int
+        questionText: string
+        optionA: string
+        optionB: string
+    - v: Question
+
+  Question:
+    - v: Question
+      props:
+        gameId: string
+        questionIndex: int
+        questionText: string
+        optionA: string
+        optionB: string
+
+  # The Game Master also plays: Martin (id0) submits guesses through this same
+  # Player / slice, exactly like Nils (id1) and Sven (id2).
+  SubmitGuess:
+    - t: Player / Submit guess
+    - c: SubmitGuess
+      props:
+        gameId: string
+        playerId: string
+        direction: mer|mindre
+        difference: int 0-100
+    - e: Game / GuessSubmitted
+      props:
+        gameId: string
+        playerId: string
+        questionIndex: int
+        direction: string
+        difference: int
+        submittedAt: timestamp
+    - v: WaitingForOthers
+
+  WaitingForOthers:
+    - v: WaitingForOthers
+      props:
+        gameId: string
+        questionIndex: int
+        submittedPlayerIds: string[]
+        pendingPlayerIds: string[]
+
+  # --- Scoring (System) ----------------------------------------------------
+
+  # Policy: once the last outstanding GuessSubmitted lands, the System scores.
+  ScoreQuestion:
+    - e: Game / GuessSubmitted
+    - t: System / All guesses in
+    - c: ScoreQuestion
+      props:
+        gameId: string
+        questionIndex: int
+    - e: Game / AllGuessesSubmitted
+      props:
+        gameId: string
+        questionIndex: int
+    - e: Game / QuestionScored
+      props:
+        gameId: string
+        questionIndex: int
+        correctDirection: string
+        correctDifference: int
+        playerScores: PlayerScore[]
+    - v: Results
+
+  Results:
+    - v: Results
+      props:
+        gameId: string
+        questionIndex: int
+        correctDirection: string
+        correctDifference: int
+        playerScores: PlayerScore[]
+
+  # --- Progression (System) ------------------------------------------------
+
+  # Maps the lilac "möjliggör / ställ nästa fråga" on the board.
+  AskNextQuestion:
+    - e: Game / QuestionScored
+    - t: System / Next question
+    - c: AskNextQuestion
+      props:
+        gameId: string
+    - e: Game / QuestionPresented
+      props:
+        gameId: string
+        questionIndex: int
+        questionText: string
+        optionA: string
+        optionB: string
+    - v: Question
+
+  # --- End (System) --------------------------------------------------------
+
+  EndGame:
+    - e: Game / QuestionScored
+    - t: System / Last question
+    - c: EndGame
+      props:
+        gameId: string
+    - e: Game / GameEnded
+      props:
+        gameId: string
+        finalScoreboard: ScoreboardEntry[]
+        winnerId: string
+        endedAt: timestamp
+    - v: FinalResults
+
+  FinalResults:
+    - v: FinalResults
+      props:
+        gameId: string
+        finalScoreboard: ScoreboardEntry[]
+        winnerId: string
