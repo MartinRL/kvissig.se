@@ -35,11 +35,11 @@ Root is a single `slices:` map. Each slice is either:
 
   ```yaml
   slices:
-    CreateGame:
-      - t: GameMaster / Create game
-      - c: CreateGame
-      - e: Game / GameCreated
-      - v: Lobby
+    OpenLobby:
+      - t: GameMaster / Quiz catalog
+      - c: OpenLobby
+      - e: Game / LobbyOpened
+      - v: Game lobby
   ```
 
 - **extended form** — `steps:` + `tests:`:
@@ -48,13 +48,13 @@ Root is a single `slices:` map. Each slice is either:
   slices:
     JoinGame:
       steps:
-        - t: Player / Join game
+        - t: Player / Join form
         - c: JoinGame
         - e: Game / PlayerJoined
       tests:
         PlayerJoins:
           given:
-            - e: Game / GameCreated
+            - e: Game / LobbyOpened
           when:
             - c: JoinGame
               props: { playerName: Nils }
@@ -84,14 +84,35 @@ Root is a single `slices:` map. Each slice is either:
 
 Two user roles + System. Events live on the `Game` stream; views are bare.
 
-- **Triggers carry the actor role**: `GameMaster / ...`, `Player / ...`, `System / ...`.
-- **Commands are bare**: `CreateGame`, `SubmitGuess`.
-- **Events carry the stream**: `Game / GameCreated`.
-- **Exceptions and views are bare**: `GameNotFound`, `Lobby`.
+- **Triggers carry the actor role + originating screen**: a command is issued *from*
+  a screen, which is itself a read model. Name the trigger after that screen:
+  `GameMaster / Quiz catalog`, `Player / Question`, `GameMaster / Game lobby`. The
+  one exception is a plain UI entry point with no backing read model — the
+  `Player / Join form` (you type a join code before any game state exists for you).
+  `System / ...` triggers name the policy.
+- **Commands are bare**: `OpenLobby`, `SubmitGuess`.
+- **Events carry the stream**: `Game / LobbyOpened`.
+- **Exceptions and views are bare**: `GameNotFound`, `Game lobby`.
+
+### Views (read models)
+
+Resulting read models — the screens players actually see — not command echoes:
+
+| View                  | Shown when                                  |
+|-----------------------|---------------------------------------------|
+| `Quiz catalog`        | GM browses packs (kviss) to start a game    |
+| `Game lobby`          | After create / join, waiting to start       |
+| `Question`            | A question is presented (Q0 or next)        |
+| `Waiting for others`  | Player guessed, others still pending        |
+| `Round results`       | Question scored, per-player round + total   |
+| `Final standings`     | Game ended, scoreboard + winner             |
+
+`Question` derives its card text/options from the chosen **question pack** by index;
+those are not carried on events.
 
 Roles:
 
-- `GameMaster /` — exactly one (Martin, id0): `CreateGame`, `StartGame`.
+- `GameMaster /` — exactly one (Martin, id0): `OpenLobby`, `StartGame`.
 - `Player /` — one or more (Nils id1, Sven id2): `JoinGame`, `SubmitGuess`.
   **The Game Master also plays** — Martin guesses through the same `Player /`
   `SubmitGuess` slice (GM ⊃ Player).
@@ -109,13 +130,20 @@ per-player test cases, keeping the model generic to N players.
 | omgång (spelomgång)    | Game (session)      |
 | spelledare / värd      | GameMaster (host)   |
 | spelare                | Player              |
-| fråga                  | Question            |
+| kviss / frågepaket     | QuestionPack        |
+| fråga (frågekort)      | Question (card)     |
 | gissning               | Guess               |
 | riktning (mer/mindre)  | direction           |
 | differens / skillnad   | difference          |
 | poäng                  | score               |
-| resultat               | Results             |
+| resultat               | Round results       |
+| slutställning          | Final standings     |
 | vinnare                | winner              |
+
+**QuestionPack**: a deck of designated question-cards (one card per question, e.g.
+"0-100"). Choosing to play MEM = choosing a pack from the `Quiz catalog`. The
+`questionPackId` on `LobbyOpened` *is* the catalog selection — there is no separate
+`quizId`. The catalog is reference data, not on the `Game` stream.
 
 ## Iterative workflow
 

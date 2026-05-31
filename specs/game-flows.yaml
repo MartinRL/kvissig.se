@@ -2,48 +2,60 @@
 # Transcribed from specs/MEM-omgång.png. See specs/CLAUDE.md for conventions.
 #
 # Conventions:
-#   triggers carry the actor role  (GameMaster / ...,  Player / ...,  System / ...)
-#   commands are bare              (CreateGame, SubmitGuess)
-#   events carry the stream        (Game / GameCreated)
-#   exceptions & views are bare    (GameNotFound, Lobby)
+#   triggers carry the actor role + originating screen
+#                                  (GameMaster / Quiz catalog, Player / Question, System / ...)
+#   commands are bare              (OpenLobby, SubmitGuess)
+#   events carry the stream        (Game / LobbyOpened)
+#   exceptions & views are bare    (GameNotFound, Game lobby)
 #
-# Scoring (see SubmitGuess / ScoreQuestion):
+# Scoring (see ScoreQuestion / QuestionScored):
 #   roundScore = |guessedDifference - correctDifference| + (directionCorrect ? -10 : 0)
 #   difference is normalized 0-100; lowest total score wins; negative scores possible.
 #
 # ASSUMPTION: the board's two guess screens (direction, then difference) are modeled
 # as a single SubmitGuess {direction, difference} command, matching the C# domain.
 # Split into two commands only if the board later demands it.
+#
+# ASSUMPTION: question-card content (text/options) is NOT carried on events. The
+# Question read-model derives card text and options from the chosen question pack by
+# index. Events carry only the index that advances play.
 
 slices:
 
-  # --- Lobby / setup -------------------------------------------------------
+  # --- Catalog / setup -----------------------------------------------------
 
-  CreateGame:
-    - t: GameMaster / Create game
-    - c: CreateGame
+  # ASSUMPTION: the Quiz catalog is reference data, not on the Game stream.
+  # Choosing to play MEM = choosing a question pack (a deck of designated
+  # question-cards, e.g. "0-100"). Pack publishing/commerce is out of scope.
+  QuizCatalog:
+    - v: Quiz catalog
       props:
-        gameId: string
+        packs: QuestionPack[]   # { packId, name, questionCount }
+
+  OpenLobby:
+    - t: GameMaster / Quiz catalog
+    - c: OpenLobby
+      props:
         hostName: string
-        numberOfRounds: int
-    - e: Game / GameCreated
+        questionPackId: string
+    - e: Game / LobbyOpened
       props:
         gameId: string
         hostPlayerId: string
         joinCode: string
-        numberOfRounds: int
+        questionPackId: string
         createdAt: timestamp
-    - v: Lobby
+    - v: Game lobby
 
-  Lobby:
-    - v: Lobby
+  GameLobby:
+    - v: Game lobby
       props:
         gameId: string
         joinCode: string
         players: Player[]
 
   JoinGame:
-    - t: Player / Scan QR and join
+    - t: Player / Join form
     - c: JoinGame
       props:
         joinCode: string
@@ -54,26 +66,22 @@ slices:
         playerId: string
         playerName: string
         joinedAt: timestamp
-    - v: Lobby
+    - v: Game lobby
 
   # --- Play ----------------------------------------------------------------
 
+  # StartGame presents Q0 by index; the Question read-model resolves card content
+  # from the pack. No QuestionPresented event (aligns to the C# domain).
   StartGame:
-    - t: GameMaster / Start game
+    - t: GameMaster / Game lobby
     - c: StartGame
       props:
         gameId: string
     - e: Game / GameStarted
       props:
         gameId: string
+        firstQuestionIndex: int
         startedAt: timestamp
-    - e: Game / QuestionPresented
-      props:
-        gameId: string
-        questionIndex: int
-        questionText: string
-        optionA: string
-        optionB: string
     - v: Question
 
   Question:
@@ -81,6 +89,7 @@ slices:
       props:
         gameId: string
         questionIndex: int
+        totalQuestions: int
         questionText: string
         optionA: string
         optionB: string
@@ -88,7 +97,7 @@ slices:
   # The Game Master also plays: Martin (id0) submits guesses through this same
   # Player / slice, exactly like Nils (id1) and Sven (id2).
   SubmitGuess:
-    - t: Player / Submit guess
+    - t: Player / Question
     - c: SubmitGuess
       props:
         gameId: string
@@ -103,10 +112,10 @@ slices:
         direction: string
         difference: int
         submittedAt: timestamp
-    - v: WaitingForOthers
+    - v: Waiting for others
 
   WaitingForOthers:
-    - v: WaitingForOthers
+    - v: Waiting for others
       props:
         gameId: string
         questionIndex: int
@@ -134,10 +143,10 @@ slices:
         correctDirection: string
         correctDifference: int
         playerScores: PlayerScore[]
-    - v: Results
+    - v: Round results
 
-  Results:
-    - v: Results
+  RoundResults:
+    - v: Round results
       props:
         gameId: string
         questionIndex: int
@@ -147,20 +156,18 @@ slices:
 
   # --- Progression (System) ------------------------------------------------
 
-  # Maps the lilac "möjliggör / ställ nästa fråga" on the board.
+  # Maps the lilac "möjliggör / ställ nästa fråga" on the board. Presents the next
+  # question by index; the Question read-model resolves card content from the pack.
   AskNextQuestion:
     - e: Game / QuestionScored
     - t: System / Next question
     - c: AskNextQuestion
       props:
         gameId: string
-    - e: Game / QuestionPresented
+    - e: Game / NextQuestionStarted
       props:
         gameId: string
         questionIndex: int
-        questionText: string
-        optionA: string
-        optionB: string
     - v: Question
 
   # --- End (System) --------------------------------------------------------
@@ -177,10 +184,10 @@ slices:
         finalScoreboard: ScoreboardEntry[]
         winnerId: string
         endedAt: timestamp
-    - v: FinalResults
+    - v: Final standings
 
-  FinalResults:
-    - v: FinalResults
+  FinalStandings:
+    - v: Final standings
       props:
         gameId: string
         finalScoreboard: ScoreboardEntry[]
