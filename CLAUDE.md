@@ -58,17 +58,23 @@ MerEllerMindre.Domain/
 ### Source of Truth
 
 ```
-specs/game-flows.em              # emlang spec — ALL behavior defined here
+specs/game-flows.yaml            # emlang YAML spec (CLI v1.0.0) — ALL behavior defined here
 specs/tasks.md                   # Implementation checklist
 .claude/constitution.md          # Coding standards
 ```
 
-### emlang Syntax (in game-flows.em)
+### emlang Syntax (in game-flows.yaml)
 
-- `[CommandName]` — Command with properties
-- `<Aggregate:EventName>` — Event that occurred
-- `!ErrorName!` — Business error
-- `?TestName?` — GWT test case (Given: events, When: command, Then: events/error)
+YAML element types (one key per element, plus optional `props`):
+
+- `t:` — Trigger (actor role + originating screen)
+- `c:` — Command
+- `e:` — Event (carries the stream, e.g. `Game / LobbyOpened`)
+- `x:` — Exception (business error)
+- `v:` — View (read model)
+- `tests:` — GWT cases (`given:` events/views, `when:` commands, `then:` events/views/exceptions)
+
+See `specs/CLAUDE.md` for the full cheat-sheet.
 
 ## Constraints
 
@@ -86,7 +92,7 @@ specs/tasks.md                   # Implementation checklist
 
 ## Workflow
 
-1. **Spec first**: Update `specs/game-flows.em`
+1. **Spec first**: Update `specs/game-flows.yaml`
 2. **Domain types**: Add records matching the spec
 3. **Decider**: Update `Evolve` and `Decide` switches
 4. **Tests**: Implement GWT from `?TestName?` blocks

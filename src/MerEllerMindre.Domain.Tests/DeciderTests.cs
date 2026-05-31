@@ -4,7 +4,7 @@ using Xunit;
 namespace MerEllerMindre.Domain.Tests;
 
 /// <summary>
-/// Tests derived from ?Test? blocks in specs/game-flows.em
+/// Tests derived from `tests:` (given/when/then) blocks in specs/game-flows.yaml
 /// </summary>
 public class DeciderTests
 {

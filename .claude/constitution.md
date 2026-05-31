@@ -3,9 +3,9 @@
 ## Core Principles
 
 ### 1. Specification First
-- The `specs/game-flows.em` file is the **single source of truth**
+- The `specs/game-flows.yaml` file is the **single source of truth**
 - All behavior must be specified in emlang before implementation
-- Tests are derived from `?test?` blocks, not invented
+- Tests are derived from `tests:` (given/when/then) blocks, not invented
 
 ### 2. Functional Core, Imperative Shell
 - Domain logic is pure functions (Decider pattern)
@@ -42,12 +42,12 @@
 
 ### Testing
 - One test class per GWT scenario group
-- Test names match emlang `?TestName?`
+- Test names match the emlang `tests:` names
 - Given = events, When = command, Then = events or error
 
 ## Workflow
 
-1. **Spec** → Update `specs/game-flows.em`
+1. **Spec** → Update `specs/game-flows.yaml`
 2. **Types** → Add/update records in Domain
 3. **Decider** → Update `Evolve` and `Decide` switches
 4. **Tests** → Implement GTs and GWTs from spec

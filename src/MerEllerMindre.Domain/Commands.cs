@@ -2,7 +2,7 @@ namespace MerEllerMindre.Domain;
 
 /// <summary>
 /// Commands represent player intentions - things players want to do.
-/// Derived from [Command] blocks in specs/game-flows.em
+/// Derived from command (`c:`) elements in specs/game-flows.yaml
 /// </summary>
 public abstract record GameCommand;
 

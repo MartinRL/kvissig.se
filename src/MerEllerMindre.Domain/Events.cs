@@ -2,7 +2,7 @@ namespace MerEllerMindre.Domain;
 
 /// <summary>
 /// Events represent facts that happened - immutable history.
-/// Derived from &lt;Aggregate:Event&gt; blocks in specs/game-flows.em
+/// Derived from event (`e:`) elements in specs/game-flows.yaml
 /// </summary>
 public abstract record GameEvent
 {

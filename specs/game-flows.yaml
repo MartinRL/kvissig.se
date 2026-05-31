@@ -37,8 +37,7 @@
 #
 # Prop types (these annotations ARE the intended C# types; see specs/CLAUDE.md):
 #   ids                    Guid          (gameId, playerId, hostPlayerId, winnerId,
-#                                         questionPackId, packId, and *PlayerIds[])
-#   joinCode               string        (short human-typed code, e.g. "ABC123")
+#                                         questionPackId, packId, joinCode, and *PlayerIds[])
 #   timestamps (*At)       DateTimeOffset
 #   direction              Direction (mer|mindre)  — enum
 #   difference family      int (0-100)   (difference, correctDifference, guessedDifference)
@@ -67,7 +66,7 @@ slices:
       props:
         gameId: Guid
         hostPlayerId: Guid
-        joinCode: string
+        joinCode: Guid
         questionPackId: Guid
         createdAt: DateTimeOffset
     - v: Screen / Game lobby
@@ -76,14 +75,14 @@ slices:
     - v: Screen / Game lobby
       props:
         gameId: Guid
-        joinCode: string
+        joinCode: Guid
         players: Player[]   # { playerId: Guid, name: string, isHost: bool }
 
   JoinGame:
     - t: Player / Join form
     - c: JoinGame
       props:
-        joinCode: string
+        joinCode: Guid
         playerName: string
     - e: Game / PlayerJoined
       props:

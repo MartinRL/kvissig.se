@@ -28,7 +28,7 @@ dotnet run --project src/MerEllerMindre.Web
 - **Event Sourcing** via Decider-mönstret
 - **In-Memory** — inga databaser
 - **HTMX + Polling** — enkla realtidsuppdateringar
-- **emlang-spec** — `specs/game-flows.em` är sanningskällan
+- **emlang-spec** — `specs/game-flows.yaml` är sanningskällan
 
 ## Licens
 

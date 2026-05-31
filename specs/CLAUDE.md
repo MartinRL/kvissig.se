@@ -183,7 +183,7 @@ this spec is the single source of truth the C# domain maps to 1:1, so the annota
 | `gameId` `playerId` `hostPlayerId` `winnerId` | `Guid`                  |
 | `questionPackId` `packId`                     | `Guid`                  |
 | `submittedPlayerIds` `pendingPlayerIds`       | `Guid[]`                |
-| `joinCode`                                    | `string` (short human-typed code, e.g. "ABC123") |
+| `joinCode`                                    | `Guid`                  |
 | `*At` (created/joined/started/submitted/ended)| `DateTimeOffset`        |
 | `direction` `correctDirection` `guessedDirection` | `Direction (mer\|mindre)` |
 | `difference` `correctDifference` `guessedDifference` | `int (0-100)`    |
@@ -198,7 +198,7 @@ Notes:
   `Direction (mer|mindre)` on the `SubmitGuess` command **and** on the events
   (`GuessSubmitted`, `QuestionAnswered.correctDirection`,
   `QuestionScored.guessedDirection`) — the event types are not weaker than the command.
-- **`joinCode` stays `string`** — a short human-typed code, not a minted domain id.
+- **`joinCode` is a `Guid`** — a minted join token, distinct from `gameId`.
 - **Timestamps are `DateTimeOffset`** (unambiguous instant; survives serialization
   without `DateTime.Kind` loss; matches `GameEvent.OccurredAt` / `GameContext.Now`).
 - Complex element types carry precise field types inline:

@@ -2,7 +2,7 @@ namespace MerEllerMindre.Domain;
 
 /// <summary>
 /// Errors represent why a command was rejected.
-/// Derived from !Exception! blocks in specs/game-flows.em
+/// Derived from exception (`x:`) elements in specs/game-flows.yaml
 /// </summary>
 public abstract record GameError;
 
