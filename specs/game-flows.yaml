@@ -6,11 +6,26 @@
 #                                  (GameMaster / Quiz catalog, Player / Question, System / ...)
 #   commands are bare              (OpenLobby, SubmitGuess)
 #   events carry the stream        (Game / LobbyOpened)
-#   exceptions & views are bare    (GameNotFound, Game lobby)
+#   exceptions are bare            (GameNotFound)
+#   views carry a view lane        (Screen / Game lobby, Todo / Outstanding guesses)
+#
+# View lanes:
+#   Screen / ...  human screens players & the GM actually see
+#   Todo / ...    processor-facing read-models the System observes (never shown)
+# NOTE: emlang parses + lints these view-lane prefixes fine, but the diagram renders
+#   views by their bare name without a per-view lane label (only triggers and events
+#   get a visible swimlane label). The prefix still documents intent and maps to code.
+#
+# Automations are the Event-Modeling PROCESSOR pattern, not a dedicated element
+# (emlang has no cog/gear): event(s) -> Todo read-model -> System trigger -> command
+# -> event(s) -> Screen. "All guesses in" is therefore a CONDITION of a todo
+# read-model (Todo / Outstanding guesses), not an event.
 #
 # Scoring (see ScoreQuestion / QuestionScored):
 #   roundScore = |guessedDifference - correctDifference| + (directionCorrect ? -10 : 0)
 #   difference is normalized 0-100; lowest total score wins; negative scores possible.
+#   correctDirection/correctDifference are revealed once per question on
+#   Game / QuestionAnswered; per-player scoring is one Game / QuestionScored each.
 #
 # ASSUMPTION: the board's two guess screens (direction, then difference) are modeled
 # as a single SubmitGuess {direction, difference} command, matching the C# domain.
@@ -28,7 +43,7 @@ slices:
   # Choosing to play MEM = choosing a question pack (a deck of designated
   # question-cards, e.g. "0-100"). Pack publishing/commerce is out of scope.
   QuizCatalog:
-    - v: Quiz catalog
+    - v: Screen / Quiz catalog
       props:
         packs: QuestionPack[]   # { packId, name, questionCount }
 
@@ -45,10 +60,10 @@ slices:
         joinCode: string
         questionPackId: string
         createdAt: timestamp
-    - v: Game lobby
+    - v: Screen / Game lobby
 
   GameLobby:
-    - v: Game lobby
+    - v: Screen / Game lobby
       props:
         gameId: string
         joinCode: string
@@ -66,7 +81,7 @@ slices:
         playerId: string
         playerName: string
         joinedAt: timestamp
-    - v: Game lobby
+    - v: Screen / Game lobby
 
   # --- Play ----------------------------------------------------------------
 
@@ -82,10 +97,10 @@ slices:
         gameId: string
         firstQuestionIndex: int
         startedAt: timestamp
-    - v: Question
+    - v: Screen / Question
 
   Question:
-    - v: Question
+    - v: Screen / Question
       props:
         gameId: string
         questionIndex: int
@@ -112,55 +127,87 @@ slices:
         direction: string
         difference: int
         submittedAt: timestamp
-    - v: Waiting for others
+    - v: Screen / Waiting for others
 
   WaitingForOthers:
-    - v: Waiting for others
+    - v: Screen / Waiting for others
       props:
         gameId: string
         questionIndex: int
         submittedPlayerIds: string[]
         pendingPlayerIds: string[]
 
-  # --- Scoring (System) ----------------------------------------------------
+  # --- Scoring (System processor) ------------------------------------------
 
-  # Policy: once the last outstanding GuessSubmitted lands, the System scores.
+  # Todo read-model the scorer observes. ASSUMPTION: derived from PlayerJoined
+  # minus per-question GuessSubmitted; allGuessesIn = pendingPlayerIds empty.
+  # The player count is known, so "all guesses in" is a condition here, not an event.
+  OutstandingGuesses:
+    - v: Todo / Outstanding guesses
+      props:
+        gameId: string
+        questionIndex: int
+        pendingPlayerIds: string[]
+        allGuessesIn: bool
+
+  # Processor: once Outstanding guesses shows allGuessesIn, the System scores.
+  # Reveals the answer once (QuestionAnswered) and emits one QuestionScored per player.
   ScoreQuestion:
     - e: Game / GuessSubmitted
-    - t: System / All guesses in
+    - v: Todo / Outstanding guesses
+    - t: System / Score question
     - c: ScoreQuestion
       props:
         gameId: string
         questionIndex: int
-    - e: Game / AllGuessesSubmitted
-      props:
-        gameId: string
-        questionIndex: int
-    - e: Game / QuestionScored
+    - e: Game / QuestionAnswered
       props:
         gameId: string
         questionIndex: int
         correctDirection: string
         correctDifference: int
-        playerScores: PlayerScore[]
-    - v: Round results
+    - e: Game / QuestionScored       # one per player
+      props:
+        gameId: string
+        questionIndex: int
+        playerId: string
+        guessedDirection: string
+        guessedDifference: int
+        directionCorrect: bool
+        differencePoints: int
+        bonusPoints: int
+        roundScore: int
+        totalScore: int
+    - v: Screen / Round results
 
   RoundResults:
-    - v: Round results
+    - v: Screen / Round results
       props:
         gameId: string
         questionIndex: int
-        correctDirection: string
-        correctDifference: int
-        playerScores: PlayerScore[]
+        correctDirection: string     # from QuestionAnswered
+        correctDifference: int       # from QuestionAnswered
+        playerScores: PlayerScore[]  # from per-player QuestionScored
 
-  # --- Progression (System) ------------------------------------------------
+  # --- Progression (System processor) --------------------------------------
 
-  # Maps the lilac "möjliggör / ställ nästa fråga" on the board. Presents the next
-  # question by index; the Question read-model resolves card content from the pack.
+  # Todo read-model the progression processors observe. totalQuestions resolved
+  # read-side from the pack (questionPackId stays an opaque reference).
+  GameProgress:
+    - v: Todo / Game progress
+      props:
+        gameId: string
+        questionIndex: int
+        totalQuestions: int
+        scoredQuestionCount: int
+        hasNextQuestion: bool
+
+  # Maps the lilac "möjliggör / ställ nästa fråga" on the board. Fires when
+  # Game progress shows hasNextQuestion. Presents the next question by index.
   AskNextQuestion:
-    - e: Game / QuestionScored
-    - t: System / Next question
+    - e: Game / QuestionAnswered
+    - v: Todo / Game progress
+    - t: System / Ask next question
     - c: AskNextQuestion
       props:
         gameId: string
@@ -168,13 +215,16 @@ slices:
       props:
         gameId: string
         questionIndex: int
-    - v: Question
+    - v: Screen / Question
 
-  # --- End (System) --------------------------------------------------------
+  # --- End (System processor) ----------------------------------------------
 
+  # Fires when Game progress shows NOT hasNextQuestion (mutually exclusive with
+  # AskNextQuestion). Both react to QuestionAnswered.
   EndGame:
-    - e: Game / QuestionScored
-    - t: System / Last question
+    - e: Game / QuestionAnswered
+    - v: Todo / Game progress
+    - t: System / End game
     - c: EndGame
       props:
         gameId: string
@@ -184,10 +234,10 @@ slices:
         finalScoreboard: ScoreboardEntry[]
         winnerId: string
         endedAt: timestamp
-    - v: Final standings
+    - v: Screen / Final standings
 
   FinalStandings:
-    - v: Final standings
+    - v: Screen / Final standings
       props:
         gameId: string
         finalScoreboard: ScoreboardEntry[]

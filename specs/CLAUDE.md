@@ -92,23 +92,61 @@ Two user roles + System. Events live on the `Game` stream; views are bare.
   `System / ...` triggers name the policy.
 - **Commands are bare**: `OpenLobby`, `SubmitGuess`.
 - **Events carry the stream**: `Game / LobbyOpened`.
-- **Exceptions and views are bare**: `GameNotFound`, `Game lobby`.
+- **Exceptions are bare**: `GameNotFound`.
+- **Views carry a view lane**: `Screen / Game lobby`, `Todo / Outstanding guesses`
+  (see below).
+
+### Automations (processor pattern)
+
+emlang has **no dedicated cog/gear element**. An automation is the Event-Modeling
+**processor pattern** (cf. the official "Invoice generation" example):
+
+```
+event(s) → Todo read-model → System trigger (the gear) → command → event(s) → Screen
+```
+
+Consequences for this spec:
+
+- **"All guesses in" is a read-model condition, not an event.** It is the
+  `allGuessesIn` flag on `Todo / Outstanding guesses`; the `System / Score question`
+  processor observes it. The player count is known, so there is no
+  `AllGuessesSubmitted` event.
+- **`QuestionScored` is per-player** — one event per `playerId`. A single
+  `ScoreQuestion` emits one `QuestionAnswered` (the answer reveal) plus N
+  `QuestionScored`.
+- The three System slices (`Score question`, `Ask next question`, `End game`) each
+  read a `Todo /` read-model before their trigger. `Ask next question` / `End game`
+  both react to `QuestionAnswered` and are mutually exclusive on
+  `Todo / Game progress`'s `hasNextQuestion`.
 
 ### Views (read models)
 
-Resulting read models — the screens players actually see — not command echoes:
+Two view lanes distinguish human screens from processor-facing projections:
 
-| View                  | Shown when                                  |
-|-----------------------|---------------------------------------------|
-| `Quiz catalog`        | GM browses packs (kviss) to start a game    |
-| `Game lobby`          | After create / join, waiting to start       |
-| `Question`            | A question is presented (Q0 or next)        |
-| `Waiting for others`  | Player guessed, others still pending        |
-| `Round results`       | Question scored, per-player round + total   |
-| `Final standings`     | Game ended, scoreboard + winner             |
+- `Screen / ...` — screens players & the GM actually see.
+- `Todo / ...` — read-models a `System /` processor consumes; never shown to a human.
 
-`Question` derives its card text/options from the chosen **question pack** by index;
-those are not carried on events.
+> **NOTE**: emlang parses + lints both lanes fine, but the diagram renders views by
+> their bare name without a per-view lane label (only triggers and events get a
+> visible swimlane label). The prefix still documents intent and maps to code, so we
+> keep it regardless.
+
+| View (Screen lane)            | Shown when                                  |
+|-------------------------------|---------------------------------------------|
+| `Screen / Quiz catalog`       | GM browses packs (kviss) to start a game    |
+| `Screen / Game lobby`         | After open-lobby / join, waiting to start   |
+| `Screen / Question`           | A question is presented (Q0 or next)        |
+| `Screen / Waiting for others` | Player guessed, others still pending        |
+| `Screen / Round results`      | Question scored, per-player round + total   |
+| `Screen / Final standings`    | Game ended, scoreboard + winner             |
+
+| View (Todo lane)              | Consumed by                                 |
+|-------------------------------|---------------------------------------------|
+| `Todo / Outstanding guesses`  | `System / Score question` (allGuessesIn)    |
+| `Todo / Game progress`        | `System / Ask next question`, `End game`    |
+
+`Screen / Question` derives its card text/options from the chosen **question pack**
+by index; those are not carried on events.
 
 Roles:
 
@@ -116,8 +154,19 @@ Roles:
 - `Player /` — one or more (Nils id1, Sven id2): `JoinGame`, `SubmitGuess`.
   **The Game Master also plays** — Martin guesses through the same `Player /`
   `SubmitGuess` slice (GM ⊃ Player).
-- `System /` — automations/policies: score when all guesses are in, advance to the
-  next question, end the game. The GM does **not** manually advance or end.
+- `System /` — processors named by action: `System / Score question`,
+  `System / Ask next question`, `System / End game`. The GM does **not** manually
+  advance or end.
+
+### Event vocabulary
+
+`LobbyOpened → PlayerJoined → GameStarted → GuessSubmitted → QuestionAnswered →
+QuestionScored(×players) → NextQuestionStarted → … → GameEnded`.
+
+- `QuestionAnswered {questionIndex, correctDirection, correctDifference}` — the
+  answer reveal, once per question.
+- `QuestionScored {…, playerId, …}` — **per-player** scoring, one per player.
+- No `AllGuessesSubmitted` event (it is a `Todo / Outstanding guesses` condition).
 
 Granularity: **behavior-based slices** (one `JoinGame`, one `SubmitGuess`), not
 per-player. Concrete players (Martin id0, Nils id1, Sven id2) appear as test props /
