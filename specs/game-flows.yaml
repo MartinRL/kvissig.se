@@ -34,6 +34,16 @@
 # ASSUMPTION: question-card content (text/options) is NOT carried on events. The
 # Question read-model derives card text and options from the chosen question pack by
 # index. Events carry only the index that advances play.
+#
+# Prop types (these annotations ARE the intended C# types; see specs/CLAUDE.md):
+#   ids                    Guid          (gameId, playerId, hostPlayerId, winnerId,
+#                                         questionPackId, packId, and *PlayerIds[])
+#   joinCode               string        (short human-typed code, e.g. "ABC123")
+#   timestamps (*At)       DateTimeOffset
+#   direction              Direction (mer|mindre)  — enum
+#   difference family      int (0-100)   (difference, correctDifference, guessedDifference)
+#   points/scores          int           (may be negative per scoring rule)
+#   index/count            int
 
 slices:
 
@@ -45,29 +55,29 @@ slices:
   QuizCatalog:
     - v: Screen / Quiz catalog
       props:
-        packs: QuestionPack[]   # { packId, name, questionCount }
+        packs: QuestionPack[]   # { packId: Guid, name: string, questionCount: int }
 
   OpenLobby:
     - t: GameMaster / Quiz catalog
     - c: OpenLobby
       props:
         hostName: string
-        questionPackId: string
+        questionPackId: Guid
     - e: Game / LobbyOpened
       props:
-        gameId: string
-        hostPlayerId: string
+        gameId: Guid
+        hostPlayerId: Guid
         joinCode: string
-        questionPackId: string
-        createdAt: timestamp
+        questionPackId: Guid
+        createdAt: DateTimeOffset
     - v: Screen / Game lobby
 
   GameLobby:
     - v: Screen / Game lobby
       props:
-        gameId: string
+        gameId: Guid
         joinCode: string
-        players: Player[]
+        players: Player[]   # { playerId: Guid, name: string, isHost: bool }
 
   JoinGame:
     - t: Player / Join form
@@ -77,10 +87,10 @@ slices:
         playerName: string
     - e: Game / PlayerJoined
       props:
-        gameId: string
-        playerId: string
+        gameId: Guid
+        playerId: Guid
         playerName: string
-        joinedAt: timestamp
+        joinedAt: DateTimeOffset
     - v: Screen / Game lobby
 
   # --- Play ----------------------------------------------------------------
@@ -91,18 +101,18 @@ slices:
     - t: GameMaster / Game lobby
     - c: StartGame
       props:
-        gameId: string
+        gameId: Guid
     - e: Game / GameStarted
       props:
-        gameId: string
+        gameId: Guid
         firstQuestionIndex: int
-        startedAt: timestamp
+        startedAt: DateTimeOffset
     - v: Screen / Question
 
   Question:
     - v: Screen / Question
       props:
-        gameId: string
+        gameId: Guid
         questionIndex: int
         totalQuestions: int
         questionText: string
@@ -115,27 +125,27 @@ slices:
     - t: Player / Question
     - c: SubmitGuess
       props:
-        gameId: string
-        playerId: string
-        direction: mer|mindre
-        difference: int 0-100
+        gameId: Guid
+        playerId: Guid
+        direction: Direction (mer|mindre)
+        difference: int (0-100)
     - e: Game / GuessSubmitted
       props:
-        gameId: string
-        playerId: string
+        gameId: Guid
+        playerId: Guid
         questionIndex: int
-        direction: string
-        difference: int
-        submittedAt: timestamp
+        direction: Direction (mer|mindre)
+        difference: int (0-100)
+        submittedAt: DateTimeOffset
     - v: Screen / Waiting for others
 
   WaitingForOthers:
     - v: Screen / Waiting for others
       props:
-        gameId: string
+        gameId: Guid
         questionIndex: int
-        submittedPlayerIds: string[]
-        pendingPlayerIds: string[]
+        submittedPlayerIds: Guid[]
+        pendingPlayerIds: Guid[]
 
   # --- Scoring (System processor) ------------------------------------------
 
@@ -145,9 +155,9 @@ slices:
   OutstandingGuesses:
     - v: Todo / Outstanding guesses
       props:
-        gameId: string
+        gameId: Guid
         questionIndex: int
-        pendingPlayerIds: string[]
+        pendingPlayerIds: Guid[]
         allGuessesIn: bool
 
   # Processor: once Outstanding guesses shows allGuessesIn, the System scores.
@@ -158,21 +168,21 @@ slices:
     - t: System / Score question
     - c: ScoreQuestion
       props:
-        gameId: string
+        gameId: Guid
         questionIndex: int
     - e: Game / QuestionAnswered
       props:
-        gameId: string
+        gameId: Guid
         questionIndex: int
-        correctDirection: string
-        correctDifference: int
+        correctDirection: Direction (mer|mindre)
+        correctDifference: int (0-100)
     - e: Game / QuestionScored       # one per player
       props:
-        gameId: string
+        gameId: Guid
         questionIndex: int
-        playerId: string
-        guessedDirection: string
-        guessedDifference: int
+        playerId: Guid
+        guessedDirection: Direction (mer|mindre)
+        guessedDifference: int (0-100)
         directionCorrect: bool
         differencePoints: int
         bonusPoints: int
@@ -183,11 +193,11 @@ slices:
   RoundResults:
     - v: Screen / Round results
       props:
-        gameId: string
+        gameId: Guid
         questionIndex: int
-        correctDirection: string     # from QuestionAnswered
-        correctDifference: int       # from QuestionAnswered
-        playerScores: PlayerScore[]  # from per-player QuestionScored
+        correctDirection: Direction (mer|mindre)   # from QuestionAnswered
+        correctDifference: int (0-100)             # from QuestionAnswered
+        playerScores: PlayerScore[]  # { playerId: Guid, roundScore: int, totalScore: int } from per-player QuestionScored
 
   # --- Progression (System processor) --------------------------------------
 
@@ -196,7 +206,7 @@ slices:
   GameProgress:
     - v: Todo / Game progress
       props:
-        gameId: string
+        gameId: Guid
         questionIndex: int
         totalQuestions: int
         scoredQuestionCount: int
@@ -210,10 +220,10 @@ slices:
     - t: System / Ask next question
     - c: AskNextQuestion
       props:
-        gameId: string
+        gameId: Guid
     - e: Game / NextQuestionStarted
       props:
-        gameId: string
+        gameId: Guid
         questionIndex: int
     - v: Screen / Question
 
@@ -227,18 +237,18 @@ slices:
     - t: System / End game
     - c: EndGame
       props:
-        gameId: string
+        gameId: Guid
     - e: Game / GameEnded
       props:
-        gameId: string
-        finalScoreboard: ScoreboardEntry[]
-        winnerId: string
-        endedAt: timestamp
+        gameId: Guid
+        finalScoreboard: ScoreboardEntry[]   # { playerId: Guid, playerName: string, totalScore: int }
+        winnerId: Guid
+        endedAt: DateTimeOffset
     - v: Screen / Final standings
 
   FinalStandings:
     - v: Screen / Final standings
       props:
-        gameId: string
-        finalScoreboard: ScoreboardEntry[]
-        winnerId: string
+        gameId: Guid
+        finalScoreboard: ScoreboardEntry[]   # { playerId: Guid, playerName: string, totalScore: int }
+        winnerId: Guid

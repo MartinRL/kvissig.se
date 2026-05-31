@@ -172,6 +172,44 @@ Granularity: **behavior-based slices** (one `JoinGame`, one `SubmitGuess`), not
 per-player. Concrete players (Martin id0, Nils id1, Sven id2) appear as test props /
 per-player test cases, keeping the model generic to N players.
 
+### Prop type vocabulary
+
+emlang props are free-form annotations (`emlang lint` does not validate them), but
+this spec is the single source of truth the C# domain maps to 1:1, so the annotations
+**are** the intended types. Apply this vocabulary consistently:
+
+| Prop family                                   | Type                    |
+|-----------------------------------------------|-------------------------|
+| `gameId` `playerId` `hostPlayerId` `winnerId` | `Guid`                  |
+| `questionPackId` `packId`                     | `Guid`                  |
+| `submittedPlayerIds` `pendingPlayerIds`       | `Guid[]`                |
+| `joinCode`                                    | `string` (short human-typed code, e.g. "ABC123") |
+| `*At` (created/joined/started/submitted/ended)| `DateTimeOffset`        |
+| `direction` `correctDirection` `guessedDirection` | `Direction (mer\|mindre)` |
+| `difference` `correctDifference` `guessedDifference` | `int (0-100)`    |
+| `differencePoints` `bonusPoints` `roundScore` `totalScore` | `int` (may be negative) |
+| index/count (`questionIndex`, `totalQuestions`, `questionCount`, …) | `int`  |
+| `allGuessesIn` `hasNextQuestion` `directionCorrect` `isHost` | `bool`      |
+| names/text (`hostName`, `playerName`, `questionText`, `optionA/B`, `name`) | `string` |
+
+Notes:
+
+- **`direction` is a `Direction` enum** with members `mer | mindre`. Annotated
+  `Direction (mer|mindre)` on the `SubmitGuess` command **and** on the events
+  (`GuessSubmitted`, `QuestionAnswered.correctDirection`,
+  `QuestionScored.guessedDirection`) — the event types are not weaker than the command.
+- **`joinCode` stays `string`** — a short human-typed code, not a minted domain id.
+- **Timestamps are `DateTimeOffset`** (unambiguous instant; survives serialization
+  without `DateTime.Kind` loss; matches `GameEvent.OccurredAt` / `GameContext.Now`).
+- Complex element types carry precise field types inline:
+  `QuestionPack { packId: Guid, name: string, questionCount: int }`,
+  `Player { playerId: Guid, name: string, isHost: bool }`,
+  `PlayerScore { playerId: Guid, roundScore: int, totalScore: int }`,
+  `ScoreboardEntry { playerId: Guid, playerName: string, totalScore: int }`.
+
+> The current C# records (string ids, `int Guess`, single `DateTimeOffset` on
+> `OccurredAt`) are reconciled to this vocabulary in a later, separate effort.
+
 ## SV ↔ EN glossary
 
 | Svenska (board)        | English (spec/code) |
