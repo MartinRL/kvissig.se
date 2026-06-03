@@ -22,6 +22,10 @@ Result<GameEvent[]> Decide(GameState state, GameCommand command)
 
 Both functions use exhaustive pattern matching switches.
 
+![Decider pattern: command → decide → events → evolve → state, with the GWT testing mapping](decider-pattern.svg)
+
+The cycle is closed: `state` feeds `decide`, which either rejects the command or emits `event`(s); `evolve` folds those events back into `state`. The bottom row shows how Given/When/Then test cases map onto the same flow.
+
 ## Rationale
 - **Pure functions**: No side effects, easy to test
 - **Exhaustive matching**: Compiler ensures all cases handled
