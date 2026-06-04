@@ -65,7 +65,7 @@ slices:
   # game is never empty. x: QuestionPackNotFound when the id resolves to no pack.
   #
   # Test fixtures (referenced by name in the cases below):
-  #   pack packId = [ question0, question1 ]
+  #   pack mer-eller-mindre = [ question0, question1 ]  (the default deck)
   #   question0 = Question { questionText: question0, optionA: question0A, optionB: question0B, correctDirection: mer,    correctDifference: 40 }
   #   question1 = Question { questionText: question1, optionA: question1A, optionB: question1B, correctDirection: mindre, correctDifference: 20 }
   #   host hostName = Martin ; minted joinCode = joinCode
@@ -91,13 +91,13 @@ slices:
         given: []
         when:
           - c: OpenLobby
-            props: { hostName: Martin, questionPackId: packId }
+            props: { hostName: Martin, questionPackId: mer-eller-mindre }
         then:
           - e: Game / LobbyOpened
             props:
               hostPlayerId: hostPlayerId
               joinCode: joinCode
-              questionPackId: packId
+              questionPackId: mer-eller-mindre
               questions: [question0, question1]
               createdAt: createdAt
       CannotOpenLobbyWithUnknownPack:
