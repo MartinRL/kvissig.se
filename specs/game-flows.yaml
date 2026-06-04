@@ -31,9 +31,12 @@
 # as a single SubmitGuess {direction, difference} command, matching the C# domain.
 # Split into two commands only if the board later demands it.
 #
-# ASSUMPTION: question-card content (text/options) is NOT carried on events. The
-# Question read-model derives card text and options from the chosen question pack by
-# index. Events carry only the index that advances play.
+# ASSUMPTION: question-card content (text/options/answers) is snapshotted onto
+# Game / LobbyOpened (questions: Question[]). OpenLobby resolves the chosen pack via a
+# GameContext dependency and stamps the full question set, so read models read events
+# only. Screen / Question reads card text/options by index from folded state;
+# totalQuestions = questions.Count; the per-question reveal (correctDirection/
+# correctDifference) is computed by the decider from that same LobbyOpened state.
 #
 # Prop types (these annotations ARE the intended C# types; see specs/CLAUDE.md):
 #   ids                    Guid          (gameId, playerId, hostPlayerId, winnerId,
@@ -56,20 +59,54 @@ slices:
       props:
         packs: QuestionPack[]   # { packId: Guid, name: string, questionCount: int }
 
+  # OpenLobby resolves {questionPackId} to a pack via a GameContext dependency
+  # (same pattern that stamps gameId/joinCode/createdAt) and snapshots the full
+  # question set onto LobbyOpened. The host is the first player (hostPlayerId), so a
+  # game is never empty. x: QuestionPackNotFound when the id resolves to no pack.
+  #
+  # Test fixtures (referenced by name in the cases below):
+  #   pack P  = [ Q0, Q1 ]
+  #   Q0 = Question { questionText: Q0, optionA: Q0A, optionB: Q0B, correctDirection: mer,    correctDifference: 40 }
+  #   Q1 = Question { questionText: Q1, optionA: Q1A, optionB: Q1B, correctDirection: mindre, correctDifference: 20 }
+  #   host hostName = Martin ; minted joinCode = J
   OpenLobby:
-    - t: GameMaster / Quiz catalog
-    - c: OpenLobby
-      props:
-        hostName: string
-        questionPackId: Guid
-    - e: Game / LobbyOpened
-      props:
-        gameId: Guid
-        hostPlayerId: Guid
-        joinCode: Guid
-        questionPackId: Guid
-        createdAt: DateTimeOffset
-    - v: Screen / Game lobby
+    steps:
+      - t: GameMaster / Quiz catalog
+      - c: OpenLobby
+        props:
+          hostName: string
+          questionPackId: Guid
+      - x: QuestionPackNotFound
+      - e: Game / LobbyOpened
+        props:
+          gameId: Guid
+          hostPlayerId: Guid
+          joinCode: Guid
+          questionPackId: Guid    # opaque audit reference to the chosen pack
+          questions: Question[]   # { questionText: string, optionA: string, optionB: string, correctDirection: Direction (mer|mindre), correctDifference: int (0-100) }
+          createdAt: DateTimeOffset
+      - v: Screen / Game lobby
+    tests:
+      GameCanBeCreated:
+        given: []
+        when:
+          - c: OpenLobby
+            props: { hostName: Martin, questionPackId: P }
+        then:
+          - e: Game / LobbyOpened
+            props:
+              hostPlayerId: hostPlayerId
+              joinCode: J
+              questionPackId: P
+              questions: [Q0, Q1]
+              createdAt: createdAt
+      CannotOpenLobbyWithUnknownPack:
+        given: []
+        when:
+          - c: OpenLobby
+            props: { questionPackId: unknown }
+        then:
+          - x: QuestionPackNotFound
 
   GameLobby:
     - v: Screen / Game lobby
