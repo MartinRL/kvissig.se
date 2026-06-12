@@ -251,23 +251,110 @@ slices:
 
   # The Game Master also plays: Martin (id0) submits guesses through this same
   # Player / slice, exactly like Nils (id1) and Sven (id2).
+  # Failures are Result failure-track values (see docs/adr/006), never thrown:
+  #   x: GameNotFound          — gameId resolves to no game (empty/unknown stream).
+  #   x: GameNotStarted        — still in the lobby; no question is presented yet.
+  #   x: PlayerNotInGame       — playerId never joined this game.
+  #   x: AlreadyGuessed        — this player already guessed the current question.
+  #   x: DifferenceOutOfRange  — difference is outside 0-100.
+  # NOTE: "invalid direction" is NOT modeled — direction is a typed Direction
+  #   (mer|mindre) enum, so an invalid value is unrepresentable in the decider; any
+  #   bad input is a web/model-binding concern in the imperative shell, not a slice.
+  # The guess targets the current question by folded state, so SubmitGuess carries no
+  # questionIndex; GuessSubmitted stamps the resolved questionIndex.
   Submit Guess:
-    - t: Player / Question
-    - c: SubmitGuess
-      props:
-        gameId: Guid
-        playerId: Guid
-        direction: Direction (mer|mindre)
-        difference: int (0-100)
-    - e: Game / GuessSubmitted
-      props:
-        gameId: Guid
-        playerId: Guid
-        questionIndex: int
-        direction: Direction (mer|mindre)
-        difference: int (0-100)
-        submittedAt: DateTimeOffset
-    - v: Screen / Waiting for others
+    steps:
+      - t: Player / Question
+      - c: SubmitGuess
+        props:
+          gameId: Guid
+          playerId: Guid
+          direction: Direction (mer|mindre)
+          difference: int (0-100)
+      - x: GameNotFound
+      - x: GameNotStarted
+      - x: PlayerNotInGame
+      - x: AlreadyGuessed
+      - x: DifferenceOutOfRange
+      - e: Game / GuessSubmitted
+        props:
+          gameId: Guid
+          playerId: Guid
+          questionIndex: int
+          direction: Direction (mer|mindre)
+          difference: int (0-100)
+          submittedAt: DateTimeOffset
+      - v: Screen / Waiting for others
+    tests:
+      guess submitted successfully:
+        given:
+          - e: Game / LobbyOpened
+            props: { joinCode: joinCode }
+          - e: Game / PlayerJoined
+            props: { playerId: playerId, playerName: Nils }
+          - e: Game / GameStarted
+        when:
+          - c: SubmitGuess
+            props: { gameId: gameId, playerId: playerId, direction: mer, difference: 30 }
+        then:
+          - e: Game / GuessSubmitted
+            props: { playerId: playerId, questionIndex: 0, direction: mer, difference: 30, submittedAt: submittedAt }
+      cannot guess in nonexistent game:
+        given: []
+        when:
+          - c: SubmitGuess
+            props: { gameId: unknown, playerId: playerId, direction: mer, difference: 30 }
+        then:
+          - x: GameNotFound
+      cannot guess before game starts:
+        given:
+          - e: Game / LobbyOpened
+            props: { joinCode: joinCode }
+          - e: Game / PlayerJoined
+            props: { playerId: playerId, playerName: Nils }
+        when:
+          - c: SubmitGuess
+            props: { gameId: gameId, playerId: playerId, direction: mer, difference: 30 }
+        then:
+          - x: GameNotStarted
+      cannot guess as non-member:
+        given:
+          - e: Game / LobbyOpened
+            props: { joinCode: joinCode }
+          - e: Game / PlayerJoined
+            props: { playerId: playerId, playerName: Nils }
+          - e: Game / GameStarted
+        when:
+          - c: SubmitGuess
+            props: { gameId: gameId, playerId: stranger, direction: mer, difference: 30 }
+        then:
+          - x: PlayerNotInGame
+      cannot guess again on same question:
+        given:
+          - e: Game / LobbyOpened
+            props: { joinCode: joinCode }
+          - e: Game / PlayerJoined
+            props: { playerId: playerId, playerName: Nils }
+          - e: Game / GameStarted
+          - e: Game / GuessSubmitted
+            props: { playerId: playerId, questionIndex: 0 }
+        when:
+          - c: SubmitGuess
+            props: { gameId: gameId, playerId: playerId, direction: mindre, difference: 20 }
+        then:
+          - x: AlreadyGuessed
+      difference out of range rejected:
+        given:
+          - e: Game / LobbyOpened
+            props: { joinCode: joinCode }
+          - e: Game / PlayerJoined
+            props: { playerId: playerId, playerName: Nils }
+          - e: Game / GameStarted
+        when:
+          - c: SubmitGuess
+            props: { gameId: gameId, playerId: playerId, direction: mer, difference: 150 }
+        then:
+          - x: DifferenceOutOfRange
 
   Waiting For Others:
     - v: Screen / Waiting for others

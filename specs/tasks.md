@@ -30,9 +30,11 @@
 
 ### Guess Tests
 - [ ] `guess submitted successfully`
-- [ ] `difference out of range rejected`
-- [ ] `invalid direction rejected`
+- [ ] `cannot guess in nonexistent game`
+- [ ] `cannot guess before game starts`
+- [ ] `cannot guess as non-member`
 - [ ] `cannot guess again on same question`
+- [ ] `difference out of range rejected`
 
 ### Scoring Tests
 - [ ] `correct direction gives bonus`
