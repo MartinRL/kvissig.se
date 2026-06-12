@@ -36,8 +36,10 @@
 - Errors: descriptive (`GameNotFound`, `AlreadyGuessed`)
 
 ### Error Handling
-- No exceptions for business logic
-- Use `Result<T, Error>` or similar
+- No exceptions for business logic — the functional core is total and synchronous
+- Business failures are values on the `Result` failure track (Railway Oriented
+  Programming); `Result<T>` is a native C# union (see ADR 006)
+- emlang `x:` elements map to `Error` cases on the failure track, never `throw`
 - Fail fast on infrastructure errors (startup, config)
 
 ### Testing

@@ -7,3 +7,4 @@
 | [003](003-htmx-polling.md) | HTMX with Polling for Real-Time | Accepted |
 | [004](004-emlang-specification.md) | emlang for Behavior Specification | Accepted |
 | [005](005-csv-questions.md) | CSV File for Questions | Accepted |
+| [006](006-result-railway-oriented.md) | Error Handling via Result / Railway Oriented Programming | Accepted |
