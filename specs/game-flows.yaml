@@ -115,19 +115,72 @@ slices:
         joinCode: Guid
         players: Player[]   # { playerId: Guid, name: string, isHost: bool }
 
+  # JoinGame keys on the minted joinCode from LobbyOpened. A joined player is
+  # identified downstream by the playerId minted on PlayerJoined; the join form
+  # only carries {joinCode, playerName}. Failures are Result failure-track values
+  # (see docs/adr/006), never thrown exceptions:
+  #   x: GameNotFound        — joinCode resolves to no open game (empty/unknown stream).
+  #   x: GameAlreadyStarted  — the game has started; the lobby no longer accepts joins.
+  #   x: NameAlreadyTaken    — see ASSUMPTION below.
+  # ASSUMPTION: duplicate joins are detected by playerName within a game (the
+  #   command carries no playerId), so NameAlreadyTaken guards a name already
+  #   present in the lobby — including the host's name (the GM is the first player).
   JoinGame:
-    - t: Player / Join form
-    - c: JoinGame
-      props:
-        joinCode: Guid
-        playerName: string
-    - e: Game / PlayerJoined
-      props:
-        gameId: Guid
-        playerId: Guid
-        playerName: string
-        joinedAt: DateTimeOffset
-    - v: Screen / Game lobby
+    steps:
+      - t: Player / Join form
+      - c: JoinGame
+        props:
+          joinCode: Guid
+          playerName: string
+      - x: GameNotFound
+      - x: GameAlreadyStarted
+      - x: NameAlreadyTaken
+      - e: Game / PlayerJoined
+        props:
+          gameId: Guid
+          playerId: Guid
+          playerName: string
+          joinedAt: DateTimeOffset
+      - v: Screen / Game lobby
+    tests:
+      PlayerCanJoinLobby:
+        given:
+          - e: Game / LobbyOpened
+            props: { joinCode: joinCode }
+        when:
+          - c: JoinGame
+            props: { joinCode: joinCode, playerName: Nils }
+        then:
+          - e: Game / PlayerJoined
+            props: { playerId: playerId, playerName: Nils, joinedAt: joinedAt }
+      CannotJoinNonexistentGame:
+        given: []
+        when:
+          - c: JoinGame
+            props: { joinCode: unknown, playerName: Nils }
+        then:
+          - x: GameNotFound
+      CannotJoinStartedGame:
+        given:
+          - e: Game / LobbyOpened
+            props: { joinCode: joinCode }
+          - e: Game / GameStarted
+        when:
+          - c: JoinGame
+            props: { joinCode: joinCode, playerName: Nils }
+        then:
+          - x: GameAlreadyStarted
+      CannotJoinWithNameAlreadyTaken:
+        given:
+          - e: Game / LobbyOpened
+            props: { joinCode: joinCode }
+          - e: Game / PlayerJoined
+            props: { playerName: Nils }
+        when:
+          - c: JoinGame
+            props: { joinCode: joinCode, playerName: Nils }
+        then:
+          - x: NameAlreadyTaken
 
   # --- Play ----------------------------------------------------------------
 

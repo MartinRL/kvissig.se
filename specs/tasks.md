@@ -17,10 +17,11 @@
 ## Phase 3: GWT Tests (from spec)
 
 ### Lobby Tests
-- [ ] `GameCanBeCreated`
-- [ ] `PlayerCanJoinLobby`
-- [ ] `CannotJoinNonexistentGame`
-- [ ] `CannotJoinStartedGame`
+- [x] `GameCanBeCreated`
+- [x] `PlayerCanJoinLobby`
+- [x] `CannotJoinNonexistentGame`
+- [x] `CannotJoinStartedGame`
+- [x] `CannotJoinWithNameAlreadyTaken`
 
 ### Guess Tests
 - [ ] `GuessSubmittedSuccessfully`
