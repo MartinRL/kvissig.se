@@ -23,6 +23,11 @@
 - [x] `cannot join started game`
 - [x] `cannot join with name already taken`
 
+### Start Tests
+- [ ] `game can be started`
+- [ ] `cannot start nonexistent game`
+- [ ] `cannot start without enough players`
+
 ### Guess Tests
 - [ ] `guess submitted successfully`
 - [ ] `difference out of range rejected`

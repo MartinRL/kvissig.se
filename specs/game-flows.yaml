@@ -49,12 +49,12 @@
 
 slices:
 
-  # --- Catalog / setup -----------------------------------------------------
+  # --- Catalog / Setup -----------------------------------------------------
 
   # ASSUMPTION: the Quiz catalog is reference data, not on the Game stream.
   # Choosing to play MEM = choosing a question pack (a deck of designated
   # question-cards, e.g. "0-100"). Pack publishing/commerce is out of scope.
-  QuizCatalog:
+  Quiz Catalog:
     - v: Screen / Quiz catalog
       props:
         packs: QuestionPack[]   # { packId: Guid, name: string, questionCount: int }
@@ -69,7 +69,7 @@ slices:
   #   question0 = Question { questionText: question0, optionA: question0A, optionB: question0B, correctDirection: mer,    correctDifference: 40 }
   #   question1 = Question { questionText: question1, optionA: question1A, optionB: question1B, correctDirection: mindre, correctDifference: 20 }
   #   host hostName = Martin ; minted joinCode = joinCode
-  OpenLobby:
+  Open Lobby:
     steps:
       - t: GameMaster / Quiz catalog
       - c: OpenLobby
@@ -108,7 +108,7 @@ slices:
         then:
           - x: QuestionPackNotFound
 
-  GameLobby:
+  Game Lobby:
     - v: Screen / Game lobby
       props:
         gameId: Guid
@@ -125,7 +125,7 @@ slices:
   # ASSUMPTION: duplicate joins are detected by playerName within a game (the
   #   command carries no playerId), so NameAlreadyTaken guards a name already
   #   present in the lobby — including the host's name (the GM is the first player).
-  JoinGame:
+  Join Game:
     steps:
       - t: Player / Join form
       - c: JoinGame
@@ -188,17 +188,56 @@ slices:
 
   # StartGame presents Q0 by index; the Question read-model resolves card content
   # from the pack. No QuestionPresented event (aligns to the C# domain).
-  StartGame:
-    - t: GameMaster / Game lobby
-    - c: StartGame
-      props:
-        gameId: Guid
-    - e: Game / GameStarted
-      props:
-        gameId: Guid
-        firstQuestionIndex: int
-        startedAt: DateTimeOffset
-    - v: Screen / Question
+  # Failures are Result failure-track values (see docs/adr/006), never thrown:
+  #   x: GameNotFound       — gameId resolves to no open game (empty/unknown stream).
+  #   x: NotEnoughPlayers   — see ASSUMPTION below.
+  # ASSUMPTION: at least 2 players (the host + >=1 join) are required to start;
+  #   otherwise NotEnoughPlayers. GameAlreadyStarted is NOT guarded here (already
+  #   guarded on Join Game); host-only (NotGameHost) would need requestingPlayerId
+  #   on the command and is deferred.
+  Start Game:
+    steps:
+      - t: GameMaster / Game lobby
+      - c: StartGame
+        props:
+          gameId: Guid
+      - x: GameNotFound
+      - x: NotEnoughPlayers
+      - e: Game / GameStarted
+        props:
+          gameId: Guid
+          firstQuestionIndex: int
+          startedAt: DateTimeOffset
+      - v: Screen / Question
+    tests:
+      game can be started:
+        given:
+          - e: Game / LobbyOpened
+            props: { joinCode: joinCode }
+          - e: Game / PlayerJoined
+            props: { playerName: Nils }
+        when:
+          - c: StartGame
+            props: { gameId: gameId }
+        then:
+          - e: Game / GameStarted
+            props: { firstQuestionIndex: 0, startedAt: startedAt }
+      cannot start nonexistent game:
+        given: []
+        when:
+          - c: StartGame
+            props: { gameId: unknown }
+        then:
+          - x: GameNotFound
+      cannot start without enough players:
+        given:
+          - e: Game / LobbyOpened
+            props: { joinCode: joinCode }
+        when:
+          - c: StartGame
+            props: { gameId: gameId }
+        then:
+          - x: NotEnoughPlayers
 
   Question:
     - v: Screen / Question
@@ -212,7 +251,7 @@ slices:
 
   # The Game Master also plays: Martin (id0) submits guesses through this same
   # Player / slice, exactly like Nils (id1) and Sven (id2).
-  SubmitGuess:
+  Submit Guess:
     - t: Player / Question
     - c: SubmitGuess
       props:
@@ -230,7 +269,7 @@ slices:
         submittedAt: DateTimeOffset
     - v: Screen / Waiting for others
 
-  WaitingForOthers:
+  Waiting For Others:
     - v: Screen / Waiting for others
       props:
         gameId: Guid
@@ -243,7 +282,7 @@ slices:
   # Todo read-model the scorer observes. ASSUMPTION: derived from PlayerJoined
   # minus per-question GuessSubmitted; allGuessesIn = pendingPlayerIds empty.
   # The player count is known, so "all guesses in" is a condition here, not an event.
-  OutstandingGuesses:
+  Outstanding Guesses:
     - v: Todo / Outstanding guesses
       props:
         gameId: Guid
@@ -253,7 +292,7 @@ slices:
 
   # Processor: once Outstanding guesses shows allGuessesIn, the System scores.
   # Reveals the answer once (QuestionAnswered) and emits one QuestionScored per player.
-  ScoreQuestion:
+  Score Question:
     - e: Game / GuessSubmitted
     - v: Todo / Outstanding guesses
     - t: System / Score question
@@ -281,7 +320,7 @@ slices:
         totalScore: int
     - v: Screen / Round results
 
-  RoundResults:
+  Round Results:
     - v: Screen / Round results
       props:
         gameId: Guid
@@ -294,7 +333,7 @@ slices:
 
   # Todo read-model the progression processors observe. totalQuestions resolved
   # read-side from the pack (questionPackId stays an opaque reference).
-  GameProgress:
+  Game Progress:
     - v: Todo / Game progress
       props:
         gameId: Guid
@@ -305,7 +344,7 @@ slices:
 
   # Maps the lilac "möjliggör / ställ nästa fråga" on the board. Fires when
   # Game progress shows hasNextQuestion. Presents the next question by index.
-  AskNextQuestion:
+  Ask Next Question:
     - e: Game / QuestionAnswered
     - v: Todo / Game progress
     - t: System / Ask next question
@@ -322,7 +361,7 @@ slices:
 
   # Fires when Game progress shows NOT hasNextQuestion (mutually exclusive with
   # AskNextQuestion). Both react to QuestionAnswered.
-  EndGame:
+  End Game:
     - e: Game / QuestionAnswered
     - v: Todo / Game progress
     - t: System / End game
@@ -337,7 +376,7 @@ slices:
         endedAt: DateTimeOffset
     - v: Screen / Final standings
 
-  FinalStandings:
+  Final Standings:
     - v: Screen / Final standings
       props:
         gameId: Guid
