@@ -1,5 +1,19 @@
 {
   "enabledPlugins": {
     "ralph-loop@claude-plugins-official": true
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if grep -q 'game-flows\\.yaml'; then export PATH=\"$PATH:/c/Program Files/Go/bin:$HOME/go/bin\"; emlang diagram specs/game-flows.yaml -o specs/game-flows.html; fi 2>/dev/null || true",
+            "statusMessage": "Regenerating game-flows.html"
+          }
+        ]
+      }
+    ]
   }
 }
