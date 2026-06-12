@@ -44,7 +44,11 @@
 
 ### Testing
 - One test class per GWT scenario group
-- Test names match the emlang `tests:` names
+- emlang `tests:` names are lowercase sentences with spaces (`cannot join
+  nonexistent game`) so the diagram renders them as readable sentences
+- C# `[Fact]` method names are the deterministic transform of the spec name:
+  join words with underscores, capitalize the first word
+  (`cannot join nonexistent game` → `Cannot_join_nonexistent_game`)
 - Given = events, When = command, Then = events or error
 
 ## Workflow

@@ -17,24 +17,24 @@
 ## Phase 3: GWT Tests (from spec)
 
 ### Lobby Tests
-- [x] `GameCanBeCreated`
-- [x] `PlayerCanJoinLobby`
-- [x] `CannotJoinNonexistentGame`
-- [x] `CannotJoinStartedGame`
-- [x] `CannotJoinWithNameAlreadyTaken`
+- [x] `game can be created`
+- [x] `player can join lobby`
+- [x] `cannot join nonexistent game`
+- [x] `cannot join started game`
+- [x] `cannot join with name already taken`
 
 ### Guess Tests
-- [ ] `GuessSubmittedSuccessfully`
-- [ ] `DifferenceOutOfRangeRejected`
-- [ ] `InvalidDirectionRejected`
-- [ ] `CannotGuessAgainOnSameQuestion`
+- [ ] `guess submitted successfully`
+- [ ] `difference out of range rejected`
+- [ ] `invalid direction rejected`
+- [ ] `cannot guess again on same question`
 
 ### Scoring Tests
-- [ ] `CorrectDirectionGivesBonus`
-- [ ] `WrongDirectionNoBonus`
-- [ ] `ExactDifferenceWithCorrectDirection`
-- [ ] `ScoresAccumulateAcrossRounds`
-- [ ] `LowestScoreWins`
+- [ ] `correct direction gives bonus`
+- [ ] `wrong direction no bonus`
+- [ ] `exact difference with correct direction`
+- [ ] `scores accumulate across rounds`
+- [ ] `lowest score wins`
 
 ## Phase 4: Question Loading
 - [ ] Create `Question` record (text, optionA, optionB, correctDirection, correctDifference)
