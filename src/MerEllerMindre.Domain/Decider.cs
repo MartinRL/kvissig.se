@@ -92,7 +92,7 @@ public static class Decider
         var hostPlayerId = context.NewId();
         var joinCode = context.NewJoinCode();
         
-        return Result<GameEvent[]>.Success([
+        return new Ok<GameEvent[]>([
             new GameCreated(gameId, hostPlayerId, joinCode, command.QuestionPackId)
         ]);
     }
@@ -100,14 +100,14 @@ public static class Decider
     private static Result<GameEvent[]> DecideJoinGame(GameState state, JoinGame command, GameContext context)
     {
         if (state.Phase == GamePhase.NotCreated)
-            return Result<GameEvent[]>.Failure(new GameNotFound(command.JoinCode));
-        
+            return new Err(new GameNotFound(command.JoinCode));
+
         if (state.Phase != GamePhase.Lobby)
-            return Result<GameEvent[]>.Failure(new GameAlreadyStarted(state.GameId!));
-        
+            return new Err(new GameAlreadyStarted(state.GameId!));
+
         var playerId = context.NewId();
-        
-        return Result<GameEvent[]>.Success([
+
+        return new Ok<GameEvent[]>([
             new PlayerJoined(state.GameId!, playerId, command.PlayerName)
         ]);
     }
@@ -115,15 +115,15 @@ public static class Decider
     private static Result<GameEvent[]> DecideStartGame(GameState state, StartGame command, GameContext context)
     {
         if (state.Phase == GamePhase.NotCreated)
-            return Result<GameEvent[]>.Failure(new GameNotFound(command.GameId));
-        
+            return new Err(new GameNotFound(command.GameId));
+
         if (state.Phase != GamePhase.Lobby)
-            return Result<GameEvent[]>.Failure(new GameAlreadyStarted(state.GameId!));
-        
+            return new Err(new GameAlreadyStarted(state.GameId!));
+
         if (state.Players.Count < 2)
-            return Result<GameEvent[]>.Failure(new NotEnoughPlayers(state.GameId!, 2, state.Players.Count));
-        
-        return Result<GameEvent[]>.Success([
+            return new Err(new NotEnoughPlayers(state.GameId!, 2, state.Players.Count));
+
+        return new Ok<GameEvent[]>([
             new GameStarted(state.GameId!, FirstQuestionIndex: 0)
         ]);
     }
@@ -131,19 +131,19 @@ public static class Decider
     private static Result<GameEvent[]> DecideSubmitGuess(GameState state, SubmitGuess command, GameContext context)
     {
         if (state.Phase == GamePhase.NotCreated)
-            return Result<GameEvent[]>.Failure(new GameNotFound(command.GameId));
-        
+            return new Err(new GameNotFound(command.GameId));
+
         if (state.Phase != GamePhase.Question)
-            return Result<GameEvent[]>.Failure(new GameNotStarted(command.GameId));
-        
+            return new Err(new GameNotStarted(command.GameId));
+
         if (!state.Players.Any(p => p.PlayerId == command.PlayerId))
-            return Result<GameEvent[]>.Failure(new PlayerNotInGame(command.PlayerId, command.GameId));
-        
+            return new Err(new PlayerNotInGame(command.PlayerId, command.GameId));
+
         if (command.Guess < 0 || command.Guess > 100)
-            return Result<GameEvent[]>.Failure(new GuessOutOfRange(command.Guess, 0, 100));
-        
+            return new Err(new GuessOutOfRange(command.Guess, 0, 100));
+
         if (state.CurrentGuesses.ContainsKey(command.PlayerId))
-            return Result<GameEvent[]>.Failure(new AlreadyGuessed(command.PlayerId, state.CurrentQuestionIndex));
+            return new Err(new AlreadyGuessed(command.PlayerId, state.CurrentQuestionIndex));
         
         var events = new List<GameEvent>
         {
@@ -158,7 +158,7 @@ public static class Decider
             // Note: QuestionScored would be triggered by a separate process that knows the correct answer
         }
         
-        return Result<GameEvent[]>.Success([..events]);
+        return new Ok<GameEvent[]>([..events]);
     }
     
     /// <summary>
@@ -186,23 +186,10 @@ public record GameContext(
 }
 
 /// <summary>
-/// Result type for operations that can fail.
+/// Railway-Oriented Result: an Ok track or an Err track (see ADR 006).
+/// Represented as a native C# 15 union type (LangVersion preview, .NET 11).
+/// Callers pattern-match the cases exhaustively (no default arm).
 /// </summary>
-public record Result<T>
-{
-    public T? Value { get; }
-    public GameError? Error { get; }
-    public bool IsSuccess => Error is null;
-    
-    private Result(T? value, GameError? error)
-    {
-        Value = value;
-        Error = error;
-    }
-    
-    public static Result<T> Success(T value) => new(value, null);
-    public static Result<T> Failure(GameError error) => new(default, error);
-    
-    public TResult Match<TResult>(Func<T, TResult> onSuccess, Func<GameError, TResult> onFailure) =>
-        IsSuccess ? onSuccess(Value!) : onFailure(Error!);
-}
+public record Ok<T>(T Value);
+public record Err(GameError Error);
+public union Result<T>(Ok<T>, Err);

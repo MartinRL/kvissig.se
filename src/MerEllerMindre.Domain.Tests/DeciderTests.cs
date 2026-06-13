@@ -29,8 +29,8 @@ public class DeciderTests
         var result = Decider.Decide(state, command, _context);
         
         // Then: GameCreated event
-        result.IsSuccess.Should().BeTrue();
-        result.Value.Should().ContainSingle()
+        if (result is not Ok<GameEvent[]> ok) { Assert.Fail("expected Ok"); return; }
+        ok.Value.Should().ContainSingle()
             .Which.Should().BeOfType<GameCreated>()
             .Which.QuestionPackId.Should().Be("pack-1");
     }
@@ -62,8 +62,8 @@ public class DeciderTests
         var result = Decider.Decide(state, command, _context);
         
         // Then: PlayerJoined event
-        result.IsSuccess.Should().BeTrue();
-        result.Value.Should().ContainSingle()
+        if (result is not Ok<GameEvent[]> ok) { Assert.Fail("expected Ok"); return; }
+        ok.Value.Should().ContainSingle()
             .Which.Should().BeOfType<PlayerJoined>()
             .Which.PlayerName.Should().Be("Anna");
     }
@@ -87,8 +87,8 @@ public class DeciderTests
         var result = Decider.Decide(state, command, _context);
         
         // Then: GameNotFound error
-        result.IsSuccess.Should().BeFalse();
-        result.Error.Should().BeOfType<GameNotFound>()
+        if (result is not Err err) { Assert.Fail("expected Err"); return; }
+        err.Error.Should().BeOfType<GameNotFound>()
             .Which.JoinCode.Should().Be("INVALID");
     }
 
@@ -122,8 +122,8 @@ public class DeciderTests
         var result = Decider.Decide(state, command, _context);
         
         // Then: GameAlreadyStarted error
-        result.IsSuccess.Should().BeFalse();
-        result.Error.Should().BeOfType<GameAlreadyStarted>()
+        if (result is not Err err) { Assert.Fail("expected Err"); return; }
+        err.Error.Should().BeOfType<GameAlreadyStarted>()
             .Which.GameId.Should().Be("game-1");
     }
 
@@ -159,9 +159,9 @@ public class DeciderTests
         var result = Decider.Decide(state, command, _context);
         
         // Then: GuessOutOfRange error
-        result.IsSuccess.Should().BeFalse();
-        result.Error.Should().BeOfType<GuessOutOfRange>()
-            .Which.Should().Match<GuessOutOfRange>(e => 
+        if (result is not Err err) { Assert.Fail("expected Err"); return; }
+        err.Error.Should().BeOfType<GuessOutOfRange>()
+            .Which.Should().Match<GuessOutOfRange>(e =>
                 e.Guess == 150 && e.Min == 0 && e.Max == 100);
     }
 }

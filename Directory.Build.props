@@ -3,4 +3,10 @@
     <!-- Override non-standard Platform values from environment (e.g., "windows" from MAUI) -->
     <Platform Condition="'$(Platform)' != 'AnyCPU' and '$(Platform)' != 'x64' and '$(Platform)' != 'x86' and '$(Platform)' != 'ARM64'">AnyCPU</Platform>
   </PropertyGroup>
+
+  <PropertyGroup>
+    <!-- C# 15 union types ship with .NET 11 / LangVersion preview (see ADR 006) -->
+    <TargetFramework>net11.0</TargetFramework>
+    <LangVersion>preview</LangVersion>
+  </PropertyGroup>
 </Project>
