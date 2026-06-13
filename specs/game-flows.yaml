@@ -125,6 +125,7 @@ slices:
         props:
           gameId: Guid
           hostPlayerId: Guid
+          hostName: string        # the host is the first player; their name lives here (never goes through JoinGame)
           joinCode: Guid
           questionPackId: Guid    # opaque audit reference to the chosen pack
           questions: Question[]   # { questionText: string, optionA: string, optionB: string, valueA: double, valueB: double } — raw values; no precomputed answer
@@ -140,6 +141,7 @@ slices:
           - e: Game / LobbyOpened
             props:
               hostPlayerId: hostPlayerId
+              hostName: Martin
               joinCode: joinCode
               questionPackId: mer-eller-mindre
               questions: [question0, question1]
@@ -153,11 +155,27 @@ slices:
           - x: QuestionPackNotFound
 
   👀 Game Lobby:
-    - v: Screen / Game lobby
-      props:
-        gameId: Guid
-        joinCode: Guid
-        players: Player[]   # { playerId: Guid, name: string, isHost: bool }
+    steps:
+      - v: Screen / Game lobby
+        props:
+          gameId: Guid
+          joinCode: Guid
+          players: Player[]   # { playerId: Guid, name: string, isHost: bool }
+    # Projection GT: given prior Game-stream events, then the view (verifies evolve into
+    # the screen). The host is the first player (from LobbyOpened.hostName); each
+    # PlayerJoined appends another. joinCode comes straight from LobbyOpened.
+    tests:
+      lobby lists the host and joined players:
+        given:
+          - e: Game / LobbyOpened
+            props: { hostPlayerId: martinId, hostName: Martin, joinCode: joinCode, questions: [question0, question1] }
+          - e: Game / PlayerJoined
+            props: { playerId: nilsId, playerName: Nils }
+        then:
+          - v: Screen / Game lobby
+            props:
+              joinCode: joinCode
+              players: [hostMartin, playerNils]
 
   # JoinGame keys on the minted joinCode from LobbyOpened. A joined player is
   # identified downstream by the playerId minted on PlayerJoined; the join form
@@ -296,14 +314,33 @@ slices:
           - x: NotEnoughPlayers
 
   👀 Question:
-    - v: Screen / Question
-      props:
-        gameId: Guid
-        questionIndex: int
-        totalQuestions: int
-        questionText: string
-        optionA: string
-        optionB: string
+    steps:
+      - v: Screen / Question
+        props:
+          gameId: Guid
+          questionIndex: int
+          totalQuestions: int
+          questionText: string
+          optionA: string
+          optionB: string
+    # Projection GT: given the deck loaded + game started, then the current card resolved
+    # by index from the folded questions. totalQuestions = the deck count; card text/options
+    # are read from question0 (the raw valueA/valueB are NOT shown — only at reveal).
+    tests:
+      current question presented with card content and progress:
+        given:
+          - e: Game / LobbyOpened
+            props: { hostPlayerId: martinId, hostName: Martin, questions: [question0, question1] }
+          - e: Game / GameStarted
+            props: { firstQuestionIndex: 0 }
+        then:
+          - v: Screen / Question
+            props:
+              questionIndex: 0
+              totalQuestions: 2
+              questionText: question0
+              optionA: question0A
+              optionB: question0B
 
   # The Game Master also plays: Martin (id0) submits guesses through this same
   # Player / slice, exactly like Nils (id1) and Sven (id2).
@@ -420,12 +457,32 @@ slices:
           - x: DifferenceOutOfRange
 
   👀 Waiting For Others:
-    - v: Screen / Waiting for others
-      props:
-        gameId: Guid
-        questionIndex: int
-        submittedPlayerIds: Guid[]
-        pendingPlayerIds: Guid[]
+    steps:
+      - v: Screen / Waiting for others
+        props:
+          gameId: Guid
+          questionIndex: int
+          submittedPlayerIds: Guid[]
+          pendingPlayerIds: Guid[]
+    # Projection GT: given the current question received one guess, then the screen splits
+    # players into who has submitted vs who is still pending (the guessing player's own
+    # screen after submitting). Derived from the current question's guesses keys vs players.
+    tests:
+      shows who has guessed and who is still pending:
+        given:
+          - e: Game / LobbyOpened
+            props: { hostPlayerId: martinId, hostName: Martin, questions: [question0, question1] }
+          - e: Game / PlayerJoined
+            props: { playerId: nilsId, playerName: Nils }
+          - e: Game / GameStarted
+          - e: Game / GuessSubmitted
+            props: { playerId: martinId, questionIndex: 0, direction: mer, difference: 30 }
+        then:
+          - v: Screen / Waiting for others
+            props:
+              questionIndex: 0
+              submittedPlayerIds: [martinId]
+              pendingPlayerIds: [nilsId]
 
   # --- Scoring (System processor) ------------------------------------------
 
@@ -658,13 +715,45 @@ slices:
           - x: QuestionAlreadyScored
 
   👀 Round Results:
-    - v: Screen / Round results
-      props:
-        gameId: Guid
-        questionIndex: int
-        correctDirection: Direction (mer|mindre)   # from QuestionAnswered
-        correctDifference: int (0-100)             # from QuestionAnswered
-        playerScores: PlayerScore[]  # { playerId: Guid, roundScore: int, totalScore: int } from per-player QuestionScored
+    steps:
+      - v: Screen / Round results
+        props:
+          gameId: Guid
+          questionIndex: int
+          correctDirection: Direction (mer|mindre)   # from QuestionAnswered
+          correctDifference: int (0-100)             # from QuestionAnswered
+          playerScores: PlayerScore[]  # { playerId: Guid, roundScore: int, totalScore: int } from per-player QuestionScored
+    # Projection GT: given the question scored (the answer reveal + one QuestionScored per
+    # player), then the results screen shows the revealed answer and each player's round +
+    # running total. correctDirection/Difference come from QuestionAnswered; scores from
+    # the per-player QuestionScored events.
+    tests:
+      reveals the answer and per-player scores once scored:
+        given:
+          - e: Game / LobbyOpened
+            props: { hostPlayerId: martinId, hostName: Martin, questions: [question0, question1] }
+          - e: Game / PlayerJoined
+            props: { playerId: nilsId, playerName: Nils }
+          - e: Game / GameStarted
+          - e: Game / GuessSubmitted
+            props: { playerId: martinId, questionIndex: 0, direction: mer, difference: 30 }
+          - e: Game / GuessSubmitted
+            props: { playerId: nilsId, questionIndex: 0, direction: mindre, difference: 50 }
+          - e: Game / QuestionAnswered
+            props: { questionIndex: 0, correctDirection: mer, correctDifference: 40 }
+          - e: Game / QuestionScored
+            props: { questionIndex: 0, playerId: martinId, roundScore: 0, totalScore: 0 }
+          - e: Game / QuestionScored
+            props: { questionIndex: 0, playerId: nilsId, roundScore: 10, totalScore: 10 }
+        then:
+          - v: Screen / Round results
+            props:
+              questionIndex: 0
+              correctDirection: mer
+              correctDifference: 40
+              playerScores:
+                - { playerId: martinId, roundScore: 0, totalScore: 0 }
+                - { playerId: nilsId, roundScore: 10, totalScore: 10 }
 
   # --- Progression (System processor) --------------------------------------
 
@@ -841,11 +930,31 @@ slices:
               endedAt: endedAt
 
   👀 Final Standings:
-    - v: Screen / Final standings
-      props:
-        gameId: Guid
-        finalScoreboard: ScoreboardEntry[]   # { playerId: Guid, playerName: string, totalScore: int }
-        winnerIds: Guid[]   # all players tied at the lowest total
+    steps:
+      - v: Screen / Final standings
+        props:
+          gameId: Guid
+          finalScoreboard: ScoreboardEntry[]   # { playerId: Guid, playerName: string, totalScore: int }
+          winnerIds: Guid[]   # all players tied at the lowest total
+    # Projection GT: GameEnded already carries the computed scoreboard + winnerIds (lowest
+    # total wins; ties share), so the final screen projects them straight through.
+    tests:
+      shows the final scoreboard and winner:
+        given:
+          - e: Game / GameEnded
+            props:
+              finalScoreboard:
+                - { playerId: martinId, playerName: Martin, totalScore: 5 }
+                - { playerId: nilsId, playerName: Nils, totalScore: 10 }
+              winnerIds: [martinId]
+              endedAt: endedAt
+        then:
+          - v: Screen / Final standings
+            props:
+              finalScoreboard:
+                - { playerId: martinId, playerName: Martin, totalScore: 5 }
+                - { playerId: nilsId, playerName: Nils, totalScore: 10 }
+              winnerIds: [martinId]
 
   # --- Decision model (decider State) — APPENDIX, not a timeline step ------
 
