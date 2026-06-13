@@ -26,39 +26,46 @@
 #   lowest total score wins; negative scores possible (exact difference + right
 #   direction = -10, the best possible round).
 #
-#   The difference is a NORMALIZED 0-100 number, never a raw gap. Picture the two
-#   answers as two bars side by side; the difference is how much taller the tall bar
-#   is, as a share of the tall bar itself:
+#   The guessedDifference players submit is a 0-100 slider value. The question card
+#   stores the two RAW absolute values (valueA, valueB) — never a 0-100 number — so the
+#   author just types the real figures, no mental arithmetic. ScoreQuestion balances
+#   them onto 0-100: it derives correctDirection (whichever value is larger) and reveals
+#   correctDifference = |A-B| / max(A,B) * 100. Picture the two values as two bars side
+#   by side; the difference is how much taller the tall bar is, as a share of the tall
+#   bar itself:
 #     equal bars            -> 0
 #     short bar = half tall -> 50
 #     short bar = a tenth   -> 90
 #     short bar ~ nothing   -> near 100
-#   So correctDifference = |A-B| / max(A,B) * 100. This deliberately compresses large
-#   ratios (2x->50, 10x->90, 100x->99): small differences are the fun ones to pin
-#   down, giant ones are obviously giant. Simplicity is the guiding star.
-#   For quantities already measured on a multiplicative scale (decibel, Richter, pH),
-#   normalize the scale values themselves, not the raw underlying amounts.
+#   This deliberately compresses large ratios (2x->50, 10x->90, 100x->99): small
+#   differences are the fun ones to pin down, giant ones are obviously giant.
+#   Simplicity is the guiding star. For quantities already measured on a multiplicative
+#   scale (decibel, Richter, pH), those scale values are themselves what gets balanced.
 #
-#   correctDirection/correctDifference are revealed once per question on
-#   Game / QuestionAnswered; per-player scoring is one Game / QuestionScored each.
+#   correctDirection/correctDifference are derived by ScoreQuestion and revealed once
+#   per question on Game / QuestionAnswered; per-player scoring is one
+#   Game / QuestionScored each.
 #
 # ASSUMPTION: the board's two guess screens (direction, then difference) are modeled
 # as a single SubmitGuess {direction, difference} command, matching the C# domain.
 # Split into two commands only if the board later demands it.
 #
-# ASSUMPTION: question-card content (text/options/answers) is snapshotted onto
-# Game / LobbyOpened (questions: Question[]). OpenLobby resolves the chosen pack via a
-# GameContext dependency and stamps the full question set, so read models read events
-# only. Screen / Question reads card text/options by index from folded state;
-# totalQuestions = questions.Count; the per-question reveal (correctDirection/
-# correctDifference) is computed by the decider from that same LobbyOpened state.
+# ASSUMPTION: question-card content (text, option labels, and the two RAW values
+# valueA/valueB) is snapshotted onto Game / LobbyOpened (questions: Question[]).
+# OpenLobby resolves the chosen pack via a GameContext dependency and stamps the full
+# question set, so read models read events only. Screen / Question reads card
+# text/labels by index from folded state; totalQuestions = questions.Count. The card
+# carries NO precomputed answer — the per-question reveal (correctDirection/normalized
+# correctDifference) is derived by the decider from valueA/valueB in that state.
 #
 # Prop types (these annotations ARE the intended C# types; see specs/CLAUDE.md):
 #   ids                    Guid          (gameId, playerId, hostPlayerId, winnerId,
 #                                         questionPackId, packId, joinCode, and *PlayerIds[])
 #   timestamps (*At)       DateTimeOffset
 #   direction              Direction (mer|mindre)  — enum
-#   difference family      int (0-100)   (difference, correctDifference, guessedDifference)
+#   difference family      int (0-100)   (difference, guessedDifference, and the
+#                                         derived correctDifference — never on the card)
+#   raw card values        double        (valueA, valueB — real magnitudes, any unit)
 #   points/scores          int           (may be negative per scoring rule)
 #   index/count            int
 
@@ -81,8 +88,8 @@ slices:
   #
   # Test fixtures (referenced by name in the cases below):
   #   pack mer-eller-mindre = [ question0, question1 ]  (the default deck)
-  #   question0 = Question { questionText: question0, optionA: question0A, optionB: question0B, correctDirection: mer,    correctDifference: 40 }
-  #   question1 = Question { questionText: question1, optionA: question1A, optionB: question1B, correctDirection: mindre, correctDifference: 20 }
+  #   question0 = Question { questionText: question0, optionA: question0A, optionB: question0B, valueA: 100, valueB: 60 }  # ScoreQuestion derives -> mer,    40
+  #   question1 = Question { questionText: question1, optionA: question1A, optionB: question1B, valueA: 80,  valueB: 100 } # ScoreQuestion derives -> mindre, 20
   #   host hostName = Martin ; minted joinCode = joinCode
   Open Lobby:
     steps:
@@ -98,7 +105,7 @@ slices:
           hostPlayerId: Guid
           joinCode: Guid
           questionPackId: Guid    # opaque audit reference to the chosen pack
-          questions: Question[]   # { questionText: string, optionA: string, optionB: string, correctDirection: Direction (mer|mindre), correctDifference: int (0-100) }
+          questions: Question[]   # { questionText: string, optionA: string, optionB: string, valueA: double, valueB: double } — raw values; no precomputed answer
           createdAt: DateTimeOffset
       - v: Screen / Game lobby
     tests:
@@ -393,7 +400,9 @@ slices:
         allGuessesIn: bool
 
   # Processor: once Outstanding guesses shows allGuessesIn, the System scores.
-  # Reveals the answer once (QuestionAnswered) and emits one QuestionScored per player.
+  # Balances the card's raw valueA/valueB onto 0-100: derives correctDirection (larger
+  # value) and correctDifference = |A-B|/max(A,B)*100, revealed once on QuestionAnswered,
+  # then emits one QuestionScored per player.
   # Failures are Result failure-track values (see docs/adr/006), never thrown:
   #   x: NotAllGuessesIn        — allGuessesIn is false (a player is still pending).
   #   x: QuestionAlreadyScored  — this question was already revealed/scored (guards a
