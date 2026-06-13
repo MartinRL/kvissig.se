@@ -6,4 +6,10 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
 
+  <!-- The Quiz catalog (question packs) is domain reference data. Copy the CSVs to
+       output so referencing projects (Web, Tests) find them beside the assembly. -->
+  <ItemGroup>
+    <Content Include="data\**\*.csv" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
 </Project>
