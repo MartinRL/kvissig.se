@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mer eller Mindre — Väntar på andra</title>
+  <link rel="stylesheet" href="https://early.webawesome.com/webawesome@3.0.0-beta.4/dist/styles/webawesome.css" />
+  <script type="module" src="https://early.webawesome.com/webawesome@3.0.0-beta.4/dist/webawesome.loader.js"></script>
+  <link rel="stylesheet" href="theme.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="mem-brand">
+      <div class="logo"><span class="mer">Mer</span> eller <span class="mindre">Mindre</span></div>
+      <div class="progress-label">Fråga 3 / 8 · väntar på andra</div>
+    </header>
+
+    <wa-card with-header class="center">
+      <div slot="header">Din gissning är ställd ✓</div>
+      <p class="muted">Väntar på att alla ska gissa. Systemet rättar automatiskt när alla är klara.</p>
+      <wa-progress-bar value="67" style="--track-height:10px;margin:1rem 0"></wa-progress-bar>
+      <p class="muted">2 av 3 klara</p>
+    </wa-card>
+
+    <wa-card with-header>
+      <div slot="header">Klara</div>
+      <ul class="players">
+        <li><span class="dot"></span><span class="who">Martin</span><span class="tag">du · klar</span></li>
+        <li><span class="dot"></span><span class="who">Sven</span><span class="tag">klar</span></li>
+      </ul>
+    </wa-card>
+
+    <wa-card with-header>
+      <div slot="header">Väntar på</div>
+      <ul class="players">
+        <li><span class="dot pending"></span><span class="who">Nils</span><span class="tag">gissar…</span></li>
+      </ul>
+    </wa-card>
+
+    <p class="fakenav">
+      Systemet rättar automatiskt när sista gissningen kommit in. ·
+      <a href="results.html">simulera rättning →</a>
+    </p>
+    <p class="fakenav"><a href="../index.html">← Tillbaka till jämförelsen</a></p>
+  </div>
+</body>
+</html>

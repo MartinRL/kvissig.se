@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mer eller Mindre — Slutställning</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/themes/light.css" />
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/shoelace-autoloader.js"></script>
+  <link rel="stylesheet" href="theme.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="mem-brand">
+      <div class="logo"><span class="mer">Mer</span> eller <span class="mindre">Mindre</span></div>
+      <div class="progress-label">Slut · 8 frågor klara</div>
+    </header>
+
+    <sl-card class="center">
+      <div slot="header">Slutställning</div>
+      <p class="winner-banner"><span class="name">Nils</span> vann! 🏆</p>
+      <p class="muted">Lägst total poäng vinner.</p>
+
+      <table class="scoreboard">
+        <tbody>
+          <tr class="winner"><td class="rank">1</td><td class="who">Nils</td><td class="total">5</td></tr>
+          <tr><td class="rank">2</td><td class="who">Sven</td><td class="total">12</td></tr>
+          <tr><td class="rank">3</td><td class="who">Martin <small class="muted">(du)</small></td><td class="total">18</td></tr>
+        </tbody>
+      </table>
+    </sl-card>
+
+    <sl-button variant="primary" size="large" class="block" href="catalog.html">Spela igen</sl-button>
+
+    <p class="fakenav"><a href="../index.html">← Tillbaka till jämförelsen</a></p>
+  </div>
+</body>
+</html>

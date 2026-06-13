@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mer eller Mindre — Väntar på andra</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/themes/light.css" />
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/shoelace-autoloader.js"></script>
+  <link rel="stylesheet" href="theme.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="mem-brand">
+      <div class="logo"><span class="mer">Mer</span> eller <span class="mindre">Mindre</span></div>
+      <div class="progress-label">Fråga 3 / 8 · väntar på andra</div>
+    </header>
+
+    <sl-card class="center">
+      <div slot="header">Din gissning är ställd ✓</div>
+      <p class="muted">Väntar på att alla ska gissa. Systemet rättar automatiskt när alla är klara.</p>
+      <sl-progress-bar value="67" style="--height:10px;margin:1rem 0"></sl-progress-bar>
+      <p class="muted">2 av 3 klara</p>
+    </sl-card>
+
+    <sl-card>
+      <div slot="header">Klara</div>
+      <ul class="players">
+        <li><span class="dot"></span><span class="who">Martin</span><span class="tag">du · klar</span></li>
+        <li><span class="dot"></span><span class="who">Sven</span><span class="tag">klar</span></li>
+      </ul>
+    </sl-card>
+
+    <sl-card>
+      <div slot="header">Väntar på</div>
+      <ul class="players">
+        <li><span class="dot pending"></span><span class="who">Nils</span><span class="tag">gissar…</span></li>
+      </ul>
+    </sl-card>
+
+    <p class="fakenav">
+      Systemet rättar automatiskt när sista gissningen kommit in. ·
+      <a href="results.html">simulera rättning →</a>
+    </p>
+    <p class="fakenav"><a href="../index.html">← Tillbaka till jämförelsen</a></p>
+  </div>
+</body>
+</html>

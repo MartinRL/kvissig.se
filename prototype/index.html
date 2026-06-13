@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mer eller Mindre — designprototyp</title>
+  <style>
+    :root {
+      --bg: #0f1024;
+      --surface: #1b1d3a;
+      --surface-2: #24264a;
+      --text: #eef0ff;
+      --muted: #a6a9d8;
+      --primary: #6c5ce7;
+      --mer: #2dd4a7;
+      --mindre: #ffa94d;
+      --border: #34376a;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background: radial-gradient(1200px 600px at 50% -10%, #25275a 0%, var(--bg) 60%);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 2rem 1rem 4rem;
+    }
+    .wrap { max-width: 980px; margin: 0 auto; }
+    header { text-align: center; margin-bottom: 2.5rem; }
+    h1 { font-size: clamp(1.8rem, 6vw, 2.8rem); margin: 0 0 .3rem; letter-spacing: -.02em; }
+    .tagline { color: var(--muted); margin: 0 0 1rem; }
+    .sub { color: var(--muted); font-size: .95rem; max-width: 60ch; margin: 0 auto; line-height: 1.6; }
+    h2 { font-size: 1.1rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 2.5rem 0 1rem; }
+    .libs { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+    .lib {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+    }
+    .lib h3 { margin: 0 0 .25rem; font-size: 1.3rem; }
+    .lib .meta { color: var(--muted); font-size: .85rem; margin: 0 0 1rem; }
+    .badge { display: inline-block; font-size: .7rem; padding: .15rem .5rem; border-radius: 999px; font-weight: 700; letter-spacing: .04em; }
+    .badge.free { background: rgba(45,212,167,.18); color: var(--mer); }
+    .badge.sunset { background: rgba(255,169,77,.18); color: var(--mindre); }
+    .flow { margin: 0 0 1rem; }
+    .flow strong { display: block; font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-bottom: .4rem; }
+    .chips { display: flex; flex-wrap: wrap; gap: .4rem; }
+    .chips a {
+      font-size: .85rem; text-decoration: none; color: var(--text);
+      background: var(--surface-2); border: 1px solid var(--border);
+      padding: .35rem .65rem; border-radius: 8px; transition: background .15s;
+    }
+    .chips a:hover { background: var(--primary); }
+    .lib .start { margin-top: auto; }
+    .lib .start a {
+      display: block; text-align: center; text-decoration: none; font-weight: 700;
+      background: var(--primary); color: #fff; padding: .7rem; border-radius: 10px; margin-top: 1rem;
+    }
+    footer { color: var(--muted); font-size: .85rem; text-align: center; margin-top: 3rem; line-height: 1.6; }
+    code { background: var(--surface-2); padding: .1rem .35rem; border-radius: 5px; font-size: .85em; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Mer eller Mindre</h1>
+      <p class="tagline">Statisk designprototyp — tre UI-bibliotek sida vid sida</p>
+      <p class="sub">
+        Samma åtta skärmar, samma svenska text och samma fejkdata (Martin, Nils, Sven · VW ID.4 Pro
+        vs BMW iX3) i tre gratis CDN-bibliotek. Inget API, ingen polling — bara länkar mellan
+        skärmar för att låsa look &amp; feel och responsivitet. Välj ett bibliotek nedan.
+      </p>
+    </header>
+
+    <h2>Bibliotek</h2>
+    <div class="libs">
+
+      <div class="lib">
+        <h3>Pico CSS <span class="badge free">gratis · MIT</span></h3>
+        <p class="meta">2.1 · classless CSS · noll JS · CDN</p>
+        <div class="flow">
+          <strong>Spelledare (GM)</strong>
+          <div class="chips">
+            <a href="pico/catalog.html">katalog</a>
+            <a href="pico/lobby-gm.html">lobby</a>
+            <a href="pico/question.html">fråga</a>
+            <a href="pico/waiting.html">väntar</a>
+            <a href="pico/results.html">resultat</a>
+            <a href="pico/standings.html">slutställning</a>
+          </div>
+        </div>
+        <div class="flow">
+          <strong>Spelare</strong>
+          <div class="chips">
+            <a href="pico/join.html">gå med</a>
+            <a href="pico/lobby-player.html">lobby</a>
+            <a href="pico/question.html">fråga</a>
+            <a href="pico/waiting.html">väntar</a>
+            <a href="pico/results.html">resultat</a>
+            <a href="pico/standings.html">slutställning</a>
+          </div>
+        </div>
+        <div class="start"><a href="pico/catalog.html">Starta GM-flödet →</a></div>
+      </div>
+
+      <div class="lib">
+        <h3>Web Awesome <span class="badge free">gratis kärna</span></h3>
+        <p class="meta">3.x · web components · CDN · ingen build</p>
+        <div class="flow">
+          <strong>Spelledare (GM)</strong>
+          <div class="chips">
+            <a href="webawesome/catalog.html">katalog</a>
+            <a href="webawesome/lobby-gm.html">lobby</a>
+            <a href="webawesome/question.html">fråga</a>
+            <a href="webawesome/waiting.html">väntar</a>
+            <a href="webawesome/results.html">resultat</a>
+            <a href="webawesome/standings.html">slutställning</a>
+          </div>
+        </div>
+        <div class="flow">
+          <strong>Spelare</strong>
+          <div class="chips">
+            <a href="webawesome/join.html">gå med</a>
+            <a href="webawesome/lobby-player.html">lobby</a>
+            <a href="webawesome/question.html">fråga</a>
+            <a href="webawesome/waiting.html">väntar</a>
+            <a href="webawesome/results.html">resultat</a>
+            <a href="webawesome/standings.html">slutställning</a>
+          </div>
+        </div>
+        <div class="start"><a href="webawesome/catalog.html">Starta GM-flödet →</a></div>
+      </div>
+
+      <div class="lib">
+        <h3>Shoelace <span class="badge sunset">solnedgång</span></h3>
+        <p class="meta">2.20 · web components · CDN · blev Web Awesome</p>
+        <div class="flow">
+          <strong>Spelledare (GM)</strong>
+          <div class="chips">
+            <a href="shoelace/catalog.html">katalog</a>
+            <a href="shoelace/lobby-gm.html">lobby</a>
+            <a href="shoelace/question.html">fråga</a>
+            <a href="shoelace/waiting.html">väntar</a>
+            <a href="shoelace/results.html">resultat</a>
+            <a href="shoelace/standings.html">slutställning</a>
+          </div>
+        </div>
+        <div class="flow">
+          <strong>Spelare</strong>
+          <div class="chips">
+            <a href="shoelace/join.html">gå med</a>
+            <a href="shoelace/lobby-player.html">lobby</a>
+            <a href="shoelace/question.html">fråga</a>
+            <a href="shoelace/waiting.html">väntar</a>
+            <a href="shoelace/results.html">resultat</a>
+            <a href="shoelace/standings.html">slutställning</a>
+          </div>
+        </div>
+        <div class="start"><a href="shoelace/catalog.html">Starta GM-flödet →</a></div>
+      </div>
+
+    </div>
+
+    <footer>
+      Co-located spel: ingen storbild, alla spelar på sin egen telefon, gå med genom att skanna
+      spelledarens QR. Inga timeouts — systemet poängsätter och går vidare automatiskt.<br />
+      Se <code>prototype/README.md</code> för bibliotekanteckningar och Shoelace-solnedgången.
+    </footer>
+  </div>
+</body>
+</html>

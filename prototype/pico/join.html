@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mer eller Mindre — Gå med</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
+  <link rel="stylesheet" href="theme.css" />
+</head>
+<body>
+  <main class="container">
+    <header class="mem-brand">
+      <div class="logo"><span class="mer">Mer</span> eller <span class="mindre">Mindre</span></div>
+      <div class="progress-label">Du skannade spelledarens QR</div>
+    </header>
+
+    <article>
+      <hgroup>
+        <h2>Gå med i omgången</h2>
+        <p class="muted">Kod <strong>MEM-4827</strong> · värd Martin</p>
+      </hgroup>
+
+      <form action="lobby-player.html" method="get">
+        <label>
+          Ditt namn
+          <input type="text" name="name" value="Nils" placeholder="Skriv ditt namn" autofocus required />
+        </label>
+        <button type="submit">Gå med</button>
+      </form>
+
+      <p class="muted center">Skannade du fel? <a href="#">Skriv koden manuellt</a></p>
+    </article>
+
+    <p class="fakenav"><a href="../index.html">← Tillbaka till jämförelsen</a></p>
+  </main>
+</body>
+</html>

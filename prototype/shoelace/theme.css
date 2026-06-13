@@ -1,0 +1,129 @@
+/* Mer eller Mindre — MEM brand + game styling on top of Shoelace 2.x. */
+
+:root {
+  /* Recolor Shoelace's primary scale to the MEM violet */
+  --sl-color-primary-50:  #f1effd;
+  --sl-color-primary-100: #e3dffb;
+  --sl-color-primary-200: #c7bff7;
+  --sl-color-primary-300: #a99cf1;
+  --sl-color-primary-400: #8a78ec;
+  --sl-color-primary-500: #6c5ce7;
+  --sl-color-primary-600: #5a4bd6;
+  --sl-color-primary-700: #4a3fc0;
+  --sl-color-primary-800: #3a3199;
+  --sl-color-primary-900: #2a2473;
+
+  --sl-border-radius-medium: 12px;
+  --sl-border-radius-large: 16px;
+  --sl-font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  --mem-mer: #2dd4a7;
+  --mem-mindre: #ffa94d;
+  --mem-gold: #ffc107;
+  --mem-muted: var(--sl-color-neutral-500);
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: var(--sl-font-sans);
+  background: linear-gradient(180deg, #f6f5ff 0%, #eef0fb 100%);
+  color: var(--sl-color-neutral-900);
+  min-height: 100vh;
+}
+
+/* Desktop reuses the tablet layout: capped, centered column. Mobile-first. */
+.page {
+  max-width: 720px;
+  margin-inline: auto;
+  padding: 1.25rem 1rem 3rem;
+}
+
+/* Brand header */
+.mem-brand { text-align: center; margin-bottom: 1.25rem; }
+.mem-brand .logo { font-size: 1.35rem; font-weight: 800; letter-spacing: -0.02em; }
+.mem-brand .logo .mer { color: var(--mem-mer); }
+.mem-brand .logo .mindre { color: var(--mem-mindre); }
+.mem-brand .progress-label { font-size: 0.85rem; color: var(--mem-muted); margin-top: 0.15rem; }
+
+sl-card { width: 100%; margin-bottom: 1rem; }
+sl-card::part(base) { width: 100%; }
+sl-card [slot="header"] { font-weight: 700; display: flex; align-items: center; gap: .5rem; }
+.muted { color: var(--mem-muted); }
+.center { text-align: center; }
+h2 { margin-top: 0; }
+.block { display: block; width: 100%; }
+
+/* Join code + QR */
+.joincode {
+  font-size: 2rem; font-weight: 800; letter-spacing: 0.15em;
+  text-align: center; font-variant-numeric: tabular-nums; margin: .5rem 0;
+}
+.qr {
+  display: block; margin: 0 auto; width: 200px; height: 200px;
+  background: #fff; border-radius: 12px; padding: 10px;
+  box-shadow: var(--sl-shadow-medium);
+}
+
+/* Player list */
+.players { list-style: none; padding: 0; margin: 0; }
+.players li {
+  display: flex; align-items: center; gap: 0.6rem;
+  padding: 0.55rem 0.75rem; border: 1px solid var(--sl-color-neutral-200);
+  border-radius: 10px; background: var(--sl-color-neutral-0);
+}
+.players li + li { margin-top: 0.5rem; }
+.players .who { font-weight: 600; }
+.players .tag { margin-left: auto; font-size: 0.75rem; color: var(--mem-muted); }
+.players .dot { width: 0.7rem; height: 0.7rem; border-radius: 50%; background: var(--mem-mer); flex: none; }
+.players .dot.pending { background: var(--mem-mindre); }
+
+/* Direction picker */
+.direction { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin: .5rem 0 1.25rem; }
+.direction sl-button::part(base) { height: auto; padding-block: 1rem; font-size: 1.05rem; font-weight: 700; flex-direction: column; }
+.direction .arrow { font-size: 1.5rem; line-height: 1; }
+.direction sl-button[data-active].mer::part(base) { background: var(--mem-mer); border-color: var(--mem-mer); color: #06281f; }
+.direction sl-button[data-active].mindre::part(base) { background: var(--mem-mindre); border-color: var(--mem-mindre); color: #3a2300; }
+
+/* Slider + readout */
+.diffwrap { margin: 1rem 0; }
+.diffwrap .diffout { display: block; text-align: center; font-size: 2.4rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+.scale { display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--mem-muted); margin-top: .25rem; }
+
+/* Two-bars visualization */
+.twobars { display: flex; gap: 1rem; align-items: flex-end; height: 180px; margin: 1rem 0; }
+.twobars .bar {
+  flex: 1; background: linear-gradient(180deg, var(--sl-color-primary-500), var(--sl-color-primary-700));
+  border-radius: 12px 12px 0 0; min-height: 8px;
+  display: flex; flex-direction: column; justify-content: flex-end; align-items: center;
+  padding: 0.5rem 0.25rem; color: #fff; position: relative; transition: height 0.15s ease;
+}
+.twobars .bar.a { background: linear-gradient(180deg, var(--mem-mer), #15a07b); }
+.twobars .bar.b { background: linear-gradient(180deg, var(--mem-mindre), #d97a1f); color: #2a1a00; }
+.twobars .bar .bval { font-weight: 800; }
+.twobars-legend { display: flex; justify-content: space-around; margin-top: .5rem; }
+
+/* Reveal block */
+.reveal { text-align: center; }
+.reveal .answer { font-size: 1.3rem; font-weight: 800; }
+.reveal .answer .mer { color: var(--mem-mer); }
+.reveal .answer .mindre { color: var(--mem-mindre); }
+.reveal .diffnum { font-size: 3rem; font-weight: 800; line-height: 1; }
+
+/* Scoreboard */
+.scoreboard { width: 100%; border-collapse: collapse; }
+.scoreboard td, .scoreboard th { padding: .55rem .5rem; border-bottom: 1px solid var(--sl-color-neutral-200); }
+.scoreboard th { text-align: left; font-size: .75rem; text-transform: uppercase; letter-spacing: .05em; color: var(--mem-muted); }
+.scoreboard .rank { width: 2.5rem; color: var(--mem-muted); font-weight: 700; }
+.scoreboard .total { text-align: right; font-weight: 800; font-variant-numeric: tabular-nums; }
+.scoreboard .round { text-align: right; color: var(--mem-muted); font-variant-numeric: tabular-nums; }
+.scoreboard tr.winner { background: rgba(255, 193, 7, 0.16); }
+.scoreboard tr.winner .who::after { content: " 👑"; }
+.winner-banner { text-align: center; font-size: 1.6rem; font-weight: 800; margin: .5rem 0 1.25rem; }
+.winner-banner .name { color: #d39e00; }
+
+/* Footer nav */
+.fakenav { margin-top: 1.5rem; text-align: center; font-size: 0.8rem; color: var(--mem-muted); }
+.fakenav a { color: var(--sl-color-primary-600); }
+
+@media (min-width: 1024px) { .page { max-width: 760px; } }

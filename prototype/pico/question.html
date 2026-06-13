@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mer eller Mindre — Fråga 3</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
+  <link rel="stylesheet" href="theme.css" />
+</head>
+<body>
+  <main class="container">
+    <header class="mem-brand">
+      <div class="logo"><span class="mer">Mer</span> eller <span class="mindre">Mindre</span></div>
+      <div class="progress-label">Fråga 3 / 8 · Bilar &amp; Motor</div>
+    </header>
+
+    <article>
+      <hgroup>
+        <h2>Vilken elbil kommer längst på en laddning (WLTP)?</h2>
+        <p class="muted">Steg 1 — välj vilken som är <strong>mer</strong>. Steg 2 — dra hur stor skillnaden är.</p>
+      </hgroup>
+
+      <p><strong>1. Vilken har störst räckvidd?</strong></p>
+      <div class="direction" role="group" aria-label="Riktning">
+        <button type="button" class="outline mer" data-dir="mer" aria-pressed="true">
+          <span class="arrow">▲</span> VW ID.4 Pro
+        </button>
+        <button type="button" class="outline mindre" data-dir="mindre" aria-pressed="false">
+          <span class="arrow">▼</span> BMW iX3
+        </button>
+      </div>
+
+      <p><strong>2. Hur stor är skillnaden?</strong></p>
+      <div class="diffwrap">
+        <output id="diffOut">30</output>
+        <input type="range" id="diff" min="0" max="100" value="30" step="1" />
+        <div class="scale"><span>0 · lika</span><span>50 · hälften</span><span>100 · nästan allt</span></div>
+      </div>
+
+      <div class="twobars" aria-hidden="true">
+        <div class="bar a" id="barTall" style="height:100%"><span class="bval">mer</span></div>
+        <div class="bar b" id="barShort" style="height:70%"><span class="bval">mindre</span></div>
+      </div>
+
+      <a href="waiting.html" role="button" style="margin-top:2rem">Ställ gissning</a>
+    </article>
+
+    <p class="fakenav"><a href="../index.html">← Tillbaka till jämförelsen</a></p>
+  </main>
+
+  <script>
+    // Prototype-only vanilla JS (shared verbatim across all three libraries).
+    const out = document.getElementById('diffOut');
+    const range = document.getElementById('diff');
+    const barShort = document.getElementById('barShort');
+    function syncDiff() {
+      const v = Number(range.value);
+      out.textContent = v;
+      barShort.style.height = (100 - v) + '%';   // equal->100% (no gap), 100->flat
+    }
+    range.addEventListener('input', syncDiff);
+    syncDiff();
+
+    document.querySelectorAll('.direction button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.direction button').forEach(b =>
+          b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'));
+      });
+    });
+  </script>
+</body>
+</html>

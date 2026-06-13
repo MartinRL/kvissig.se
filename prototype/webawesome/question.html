@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mer eller Mindre — Fråga 3</title>
+  <link rel="stylesheet" href="https://early.webawesome.com/webawesome@3.0.0-beta.4/dist/styles/webawesome.css" />
+  <script type="module" src="https://early.webawesome.com/webawesome@3.0.0-beta.4/dist/webawesome.loader.js"></script>
+  <link rel="stylesheet" href="theme.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="mem-brand">
+      <div class="logo"><span class="mer">Mer</span> eller <span class="mindre">Mindre</span></div>
+      <div class="progress-label">Fråga 3 / 8 · Bilar &amp; Motor</div>
+    </header>
+
+    <wa-progress-bar value="37" style="--track-height:6px;margin-bottom:1rem"></wa-progress-bar>
+
+    <wa-card with-header>
+      <div slot="header">Vilken elbil kommer längst på en laddning (WLTP)?</div>
+      <p class="muted">Steg 1 — välj vilken som är <strong>mer</strong>. Steg 2 — dra hur stor skillnaden är.</p>
+
+      <p><strong>1. Vilken har störst räckvidd?</strong></p>
+      <div class="direction">
+        <wa-button variant="neutral" class="mer" data-dir="mer" data-active>
+          <span class="arrow">▲</span> VW ID.4 Pro
+        </wa-button>
+        <wa-button variant="neutral" class="mindre" data-dir="mindre">
+          <span class="arrow">▼</span> BMW iX3
+        </wa-button>
+      </div>
+
+      <p><strong>2. Hur stor är skillnaden?</strong></p>
+      <div class="diffwrap">
+        <span class="diffout" id="diffOut">30</span>
+        <wa-slider id="diff" min="0" max="100" value="30" without-tooltip></wa-slider>
+        <div class="scale"><span>0 · lika</span><span>50 · hälften</span><span>100 · nästan allt</span></div>
+      </div>
+
+      <div class="twobars" aria-hidden="true">
+        <div class="bar a" style="height:100%"><span class="bval">mer</span></div>
+        <div class="bar b" id="barShort" style="height:70%"><span class="bval">mindre</span></div>
+      </div>
+
+      <wa-button variant="brand" size="large" class="block" href="waiting.html" style="margin-top:2rem">Ställ gissning</wa-button>
+    </wa-card>
+
+    <p class="fakenav"><a href="../index.html">← Tillbaka till jämförelsen</a></p>
+  </div>
+
+  <script type="module">
+    // Prototype-only vanilla JS (shared logic across all three libraries).
+    const out = document.getElementById('diffOut');
+    const range = document.getElementById('diff');
+    const barShort = document.getElementById('barShort');
+    function syncDiff() {
+      const v = Number(range.value);
+      if (Number.isNaN(v)) return;   // slider may not have upgraded yet
+      out.textContent = v;
+      barShort.style.height = (100 - v) + '%';
+    }
+    ['input', 'change', 'wa-input'].forEach(ev => range.addEventListener(ev, syncDiff));
+    customElements.whenDefined('wa-slider').then(syncDiff);   // re-sync once ready
+    syncDiff();
+
+    document.querySelectorAll('.direction wa-button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.direction wa-button').forEach(b => b.removeAttribute('data-active'));
+        btn.setAttribute('data-active', '');
+      });
+    });
+  </script>
+</body>
+</html>

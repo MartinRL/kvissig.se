@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mer eller Mindre — Lobby (spelare)</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/themes/light.css" />
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/shoelace-autoloader.js"></script>
+  <link rel="stylesheet" href="theme.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="mem-brand">
+      <div class="logo"><span class="mer">Mer</span> eller <span class="mindre">Mindre</span></div>
+      <div class="progress-label">Lobby · du är med</div>
+    </header>
+
+    <sl-card class="center">
+      <div slot="header">Du är med, Nils! 🎉</div>
+      <p class="muted">Väntar på att Martin startar omgången…</p>
+      <sl-spinner style="font-size:2rem;--track-width:4px;margin:.5rem auto;display:block"></sl-spinner>
+      <p class="muted">Inväntar start</p>
+    </sl-card>
+
+    <sl-card>
+      <div slot="header">Spelare <sl-badge variant="success" pill>3 med</sl-badge></div>
+      <ul class="players">
+        <li><span class="dot"></span><span class="who">Martin</span><span class="tag">värd</span></li>
+        <li><span class="dot"></span><span class="who">Nils</span><span class="tag">du</span></li>
+        <li><span class="dot"></span><span class="who">Sven</span><span class="tag">med</span></li>
+      </ul>
+    </sl-card>
+
+    <p class="fakenav">
+      Systemet startar automatiskt när spelledaren trycker. ·
+      <a href="question.html">simulera start →</a>
+    </p>
+    <p class="fakenav"><a href="../index.html">← Tillbaka till jämförelsen</a></p>
+  </div>
+</body>
+</html>

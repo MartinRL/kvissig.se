@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mer eller Mindre — Välj kviss</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/themes/light.css" />
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/shoelace-autoloader.js"></script>
+  <link rel="stylesheet" href="theme.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="mem-brand">
+      <div class="logo"><span class="mer">Mer</span> eller <span class="mindre">Mindre</span></div>
+      <div class="progress-label">Spelledare · välj ett frågepaket</div>
+    </header>
+
+    <h2>Välj kviss</h2>
+    <p class="muted">Ett frågepaket är en kortlek. Du blir värd och första spelaren.</p>
+
+    <sl-card>
+      <div slot="header">Bilar &amp; Motor <sl-badge variant="neutral" pill>8 frågor</sl-badge></div>
+      <p class="muted">Mer eller mindre om bilar, hästkrafter och räckvidd.</p>
+      <div slot="footer"><sl-button variant="primary" href="lobby-gm.html">Spela</sl-button></div>
+    </sl-card>
+
+    <sl-card>
+      <div slot="header">Mer eller Mindre — Klassiker <sl-badge variant="neutral" pill>12 frågor</sl-badge></div>
+      <p class="muted">Den ursprungliga blandade leken.</p>
+      <div slot="footer"><sl-button variant="default" href="lobby-gm.html">Spela</sl-button></div>
+    </sl-card>
+
+    <sl-card>
+      <div slot="header">Sverige i siffror <sl-badge variant="neutral" pill>10 frågor</sl-badge></div>
+      <p class="muted">Befolkning, geografi och kuriosa.</p>
+      <div slot="footer"><sl-button variant="default" href="lobby-gm.html">Spela</sl-button></div>
+    </sl-card>
+
+    <p class="fakenav"><a href="../index.html">← Tillbaka till jämförelsen</a></p>
+  </div>
+</body>
+</html>

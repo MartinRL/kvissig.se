@@ -1,0 +1,200 @@
+/* Mer eller Mindre — MEM brand + game styling on top of Pico CSS (classless). */
+
+:root {
+  --pico-font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --pico-border-radius: 12px;
+  --pico-primary: #6c5ce7;
+  --pico-primary-hover: #5a4bd6;
+  --pico-primary-focus: rgba(108, 92, 231, 0.3);
+  --pico-primary-inverse: #fff;
+  --mem-mer: #2dd4a7;
+  --mem-mindre: #ffa94d;
+  --mem-gold: #ffd54a;
+  --mem-muted: var(--pico-muted-color);
+}
+
+/* Desktop reuses the tablet layout: cap width, center. Mobile-first base. */
+body { padding-block: 1.25rem; }
+body > main.container {
+  max-width: 720px;
+  margin-inline: auto;
+}
+
+/* Brand header shared by every screen */
+.mem-brand {
+  text-align: center;
+  margin-bottom: 1.25rem;
+}
+.mem-brand .logo {
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+.mem-brand .logo .mer { color: var(--mem-mer); }
+.mem-brand .logo .mindre { color: var(--mem-mindre); }
+.mem-brand .progress-label {
+  font-size: 0.85rem;
+  color: var(--mem-muted);
+  margin-top: 0.15rem;
+}
+
+/* Generic helpers */
+.muted { color: var(--mem-muted); }
+.center { text-align: center; }
+.stack > * + * { margin-top: 0.75rem; }
+.pill {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  background: var(--pico-secondary-background);
+  color: var(--pico-secondary-inverse);
+}
+
+/* Join code + QR (lobby GM) */
+.joincode {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+.qr {
+  display: block;
+  margin: 0 auto;
+  width: 200px;
+  height: 200px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 10px;
+}
+
+/* Player list */
+.players { list-style: none; padding: 0; margin: 0; }
+.players li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid var(--pico-muted-border-color);
+  border-radius: 10px;
+}
+.players li + li { margin-top: 0.5rem; }
+.players .who { font-weight: 600; }
+.players .tag { margin-left: auto; font-size: 0.75rem; color: var(--mem-muted); }
+.players .dot {
+  width: 0.7rem; height: 0.7rem; border-radius: 50%;
+  background: var(--mem-mer); flex: none;
+}
+.players .dot.pending { background: var(--mem-mindre); }
+
+/* Direction picker (mer / mindre) */
+.direction {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-block: 0.5rem 1.25rem;
+}
+.direction button {
+  --pico-background-color: var(--pico-card-background-color);
+  --pico-color: var(--pico-color);
+  --pico-border-color: var(--pico-muted-border-color);
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding-block: 1rem;
+}
+.direction button .arrow { display: block; font-size: 1.6rem; line-height: 1; }
+.direction button[aria-pressed="true"].mer {
+  --pico-background-color: var(--mem-mer);
+  --pico-border-color: var(--mem-mer);
+  --pico-color: #06281f;
+}
+.direction button[aria-pressed="true"].mindre {
+  --pico-background-color: var(--mem-mindre);
+  --pico-border-color: var(--mem-mindre);
+  --pico-color: #3a2300;
+}
+
+/* Slider + readout */
+.diffwrap { margin-block: 1rem; }
+.diffwrap output {
+  display: block;
+  text-align: center;
+  font-size: 2.4rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+.diffwrap input[type="range"] { height: 2.5rem; }
+.scale {
+  display: flex; justify-content: space-between;
+  font-size: 0.7rem; color: var(--mem-muted);
+}
+
+/* Two-bars visualization */
+.twobars {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-end;
+  height: 180px;
+  margin-block: 1rem;
+}
+.twobars .bar {
+  flex: 1;
+  background: linear-gradient(180deg, var(--pico-primary), #4a3fc0);
+  border-radius: 12px 12px 0 0;
+  min-height: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0.5rem 0.25rem;
+  color: #fff;
+  position: relative;
+  transition: height 0.15s ease;
+}
+.twobars .bar.a { background: linear-gradient(180deg, var(--mem-mer), #15a07b); }
+.twobars .bar.b { background: linear-gradient(180deg, var(--mem-mindre), #d97a1f); color: #2a1a00; }
+.twobars .bar .bval { font-weight: 800; }
+.twobars .bar .blabel {
+  position: absolute; bottom: -1.4rem; left: 0; right: 0;
+  text-align: center; font-size: 0.75rem; color: var(--pico-color);
+}
+.twobars + .twobars-legend { margin-top: 1.75rem; }
+
+/* Reveal block (round results) */
+.reveal { text-align: center; }
+.reveal .answer { font-size: 1.3rem; font-weight: 800; }
+.reveal .answer .mer { color: var(--mem-mer); }
+.reveal .answer .mindre { color: var(--mem-mindre); }
+.reveal .diffnum { font-size: 3rem; font-weight: 800; line-height: 1; }
+
+/* Scoreboard */
+.scoreboard { width: 100%; }
+.scoreboard td, .scoreboard th { vertical-align: middle; }
+.scoreboard .rank { width: 2.5rem; color: var(--mem-muted); font-weight: 700; }
+.scoreboard .total { text-align: right; font-weight: 800; font-variant-numeric: tabular-nums; }
+.scoreboard .round { text-align: right; color: var(--mem-muted); font-variant-numeric: tabular-nums; }
+.scoreboard tr.winner { background: rgba(255, 213, 74, 0.16); }
+.scoreboard tr.winner .who::after { content: " 👑"; }
+.winner-banner {
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin-block: 0.5rem 1.25rem;
+}
+.winner-banner .name { color: var(--mem-gold); }
+
+/* Footer nav (fakes the System's auto-advance) */
+.fakenav {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--mem-muted);
+}
+.fakenav a { color: var(--mem-muted); }
+
+@media (min-width: 1024px) {
+  /* desktop == tablet: keep the same capped, centered column */
+  body > main.container { max-width: 760px; }
+}

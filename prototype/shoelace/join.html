@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mer eller Mindre — Gå med</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/themes/light.css" />
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/shoelace-autoloader.js"></script>
+  <link rel="stylesheet" href="theme.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="mem-brand">
+      <div class="logo"><span class="mer">Mer</span> eller <span class="mindre">Mindre</span></div>
+      <div class="progress-label">Du skannade spelledarens QR</div>
+    </header>
+
+    <sl-card>
+      <div slot="header">Gå med i omgången</div>
+      <p class="muted">Kod <strong>MEM-4827</strong> · värd Martin</p>
+
+      <form action="lobby-player.html" method="get">
+        <sl-input name="name" label="Ditt namn" value="Nils" placeholder="Skriv ditt namn" autofocus></sl-input>
+        <sl-button type="submit" variant="primary" class="block" style="margin-top:1rem">Gå med</sl-button>
+      </form>
+
+      <p class="muted center" style="margin-top:1rem">Skannade du fel? <a href="#">Skriv koden manuellt</a></p>
+    </sl-card>
+
+    <p class="fakenav"><a href="../index.html">← Tillbaka till jämförelsen</a></p>
+  </div>
+
+  <script type="module">
+    document.querySelector('form').addEventListener('submit', e => {
+      e.preventDefault();
+      window.location.href = 'lobby-player.html';
+    });
+  </script>
+</body>
+</html>
