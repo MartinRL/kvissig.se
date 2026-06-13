@@ -667,31 +667,76 @@ slices:
 
   # --- Progression (System processor) --------------------------------------
 
-  # Todo read-model the progression processors observe. totalQuestions resolved
-  # read-side from the pack (questionPackId stays an opaque reference).
+  # Minimal Todo read-model the progression processors gate on. The whole deck is on
+  # the stream (LobbyOpened carries questions), so totalQuestions = questions.Count and
+  # scoredQuestionCount / hasNextQuestion are projected as each question is answered.
+  # hasNextQuestion is the gate: true -> ⚙️ Ask next question, false -> ⚙️ End game
+  # (mutually exclusive). SEPARATE from State / Game, kept minimal. GT below proves it.
   Game Progress:
-    - v: Todo / Game progress
-      props:
-        gameId: Guid
-        questionIndex: int
-        totalQuestions: int
-        scoredQuestionCount: int
-        hasNextQuestion: bool
+    steps:
+      - v: Todo / Game progress
+        props:
+          gameId: Guid
+          questionIndex: int
+          totalQuestions: int
+          scoredQuestionCount: int
+          hasNextQuestion: bool
+    tests:
+      progress shows a next question while questions remain:
+        given:
+          - e: Game / LobbyOpened
+            props: { joinCode: joinCode, hostPlayerId: martinId, questions: [question0, question1] }
+          - e: Game / PlayerJoined
+            props: { playerId: nilsId, playerName: Nils }
+          - e: Game / GameStarted
+          - e: Game / GuessSubmitted
+            props: { playerId: martinId, questionIndex: 0, direction: mer, difference: 30 }
+          - e: Game / GuessSubmitted
+            props: { playerId: nilsId, questionIndex: 0, direction: mindre, difference: 50 }
+          - e: Game / QuestionAnswered
+            props: { questionIndex: 0, correctDirection: mer, correctDifference: 40 }
+          - e: Game / QuestionScored
+            props: { playerId: martinId, questionIndex: 0, roundScore: 0, totalScore: 0 }
+          - e: Game / QuestionScored
+            props: { playerId: nilsId, questionIndex: 0, roundScore: 10, totalScore: 10 }
+        then:
+          - v: Todo / Game progress
+            props: { questionIndex: 0, totalQuestions: 2, scoredQuestionCount: 1, hasNextQuestion: true }
 
   # Maps the lilac "möjliggör / ställ nästa fråga" on the board. Fires when
   # Game progress shows hasNextQuestion. Presents the next question by index.
   Ask Next Question:
-    - e: Game / QuestionAnswered
-    - v: Todo / Game progress
-    - t: ⚙️ System / Ask next question
-    - c: AskNextQuestion
-      props:
-        gameId: Guid
-    - e: Game / NextQuestionStarted
-      props:
-        gameId: Guid
-        questionIndex: int
-    - v: Screen / Question
+    steps:
+      - e: Game / QuestionAnswered
+      - v: Todo / Game progress
+      - t: ⚙️ System / Ask next question
+      - c: AskNextQuestion
+        props:
+          gameId: Guid
+      - e: Game / NextQuestionStarted
+        props:
+          gameId: Guid
+          questionIndex: int
+      - v: Screen / Question
+    # Decider-true GWT: given the folded State / Game (current question scored, another
+    # remains — hasNextQuestion derived true), when AskNextQuestion, then
+    # NextQuestionStarted at the next index. The gate is verified by Game progress' GT.
+    tests:
+      next question presented when one remains:
+        given:
+          - v: State / Game
+            props:
+              phase: started
+              currentQuestionIndex: 0
+              questions:
+                - { card: question0, guesses: { martinId: guessMer30, nilsId: guessMindre50 }, correctDirection: mer, correctDifference: 40, roundScores: { martinId: 0, nilsId: 10 }, scored: true }
+                - { card: question1, guesses: {}, scored: false }
+        when:
+          - c: AskNextQuestion
+            props: { gameId: gameId }
+        then:
+          - e: Game / NextQuestionStarted
+            props: { questionIndex: 1 }
 
   # --- End (System processor) ----------------------------------------------
 

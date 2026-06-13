@@ -44,6 +44,10 @@
 - [ ] `cannot score an already-scored question`
 - [ ] `lowest score wins` (deferred to End Game — winner determination)
 
+### Progression Tests
+- [x] `progress shows a next question while questions remain`
+- [x] `next question presented when one remains`
+
 ## Phase 4: Question Loading
 - [ ] Create `Question` record (text, optionA, optionB, correctDirection, correctDifference)
 - [ ] Create `QuestionRepository` with CSV loading
