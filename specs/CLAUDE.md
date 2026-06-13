@@ -175,7 +175,7 @@ Two view lanes distinguish human screens from processor-facing projections:
 | `Todo / Outstanding guesses`  | `System / Score question` (allGuessesIn)    |
 | `Todo / Game progress`        | `System / Ask next question`, `End game`    |
 
-`Screen / Question` derives its card text/options from the chosen **question pack**
+`Screen / Question` derives its card text/items from the chosen **question pack**
 by index; those are not carried on events.
 
 Roles:
@@ -211,7 +211,7 @@ this spec is the single source of truth the C# domain maps to 1:1, so the annota
 | Prop family                                   | Type                    |
 |-----------------------------------------------|-------------------------|
 | `gameId` `playerId` `hostPlayerId`            | `Guid`                  |
-| `questionPackId` `packId`                     | `Guid`                  |
+| `questionPackId` `packId`                     | `string` (filename slug)|
 | `submittedPlayerIds` `pendingPlayerIds` `winnerIds` | `Guid[]`          |
 | `joinCode`                                    | `Guid`                  |
 | `*At` (created/joined/started/submitted/ended)| `DateTimeOffset`        |
@@ -220,7 +220,7 @@ this spec is the single source of truth the C# domain maps to 1:1, so the annota
 | `differencePoints` `bonusPoints` `roundScore` `totalScore` | `int` (may be negative) |
 | index/count (`questionIndex`, `totalQuestions`, `questionCount`, …) | `int`  |
 | `allGuessesIn` `hasNextQuestion` `directionCorrect` `isHost` | `bool`      |
-| names/text (`hostName`, `playerName`, `questionText`, `optionA/B`, `name`) | `string` |
+| names/text (`hostName`, `playerName`, `questionText`, `itemA/B`, `unit`, `name`) | `string` |
 
 Notes:
 
@@ -258,6 +258,8 @@ Notes:
 | spelare                | Player              |
 | kviss / frågepaket     | QuestionPack        |
 | fråga (frågekort)      | Question (card)     |
+| sak (det som jämförs)  | item (itemA/itemB)  |
+| enhet                  | unit                |
 | gissning               | Guess               |
 | riktning (mer/mindre)  | direction           |
 | differens / skillnad   | difference          |
@@ -270,6 +272,26 @@ Notes:
 "0-100"). Choosing to play MEM = choosing a pack from the `Quiz catalog`. The
 `questionPackId` on `LobbyOpened` *is* the catalog selection — there is no separate
 `quizId`. The catalog is reference data, not on the `Game` stream.
+
+**Question** (frågekort) compares two things (`itemA`, `itemB`), each with a hidden raw
+`double` value (`valueA`, `valueB`) and a shared `unit`. `questionText` is a complete,
+natural Swedish sentence the author writes (full control of the grammar; convention:
+**Mer = `itemA` has the larger value**). The card carries NO precomputed answer —
+`ScoreQuestion` derives direction + normalized difference from the raw values at reveal.
+
+**File-based CSV catalog**: the catalog is reference data stored as plain CSV files on
+disk — one pack = one `data/packs/*.csv`, edited by the author in Excel / Google Sheets
+(no DB, no embedded resource). The **filename slug is the `packId`/`questionPackId`**
+(`mer-eller-mindre.csv` → `mer-eller-mindre`; de-slugged → display name "Mer eller
+mindre"). Files use the **Swedish Excel dialect** (`;` separator, `,` decimal, sv-SE) with
+**Swedish column headers** mapped to the English domain fields via the SV↔EN glossary:
+
+| CSV header (sv) | Domain field |
+|-----------------|--------------|
+| `fråga`         | `questionText` |
+| `sakA` / `sakB` | `itemA` / `itemB` |
+| `värdeA` / `värdeB` | `valueA` / `valueB` (double) |
+| `enhet`         | `unit` |
 
 ## Iterative workflow
 

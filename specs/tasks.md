@@ -52,10 +52,12 @@
 - [x] `lowest score wins` (lowest total; ties share the win via `winnerIds`)
 - [x] `tied lowest totals share the win`
 
-## Phase 4: Question Loading
-- [ ] Create `Question` record (text, optionA, optionB, correctDirection, correctDifference)
-- [ ] Create `QuestionRepository` with CSV loading
-- [ ] Add sample `questions.csv` with 10 questions
+## Phase 4: Question Loading (file-based CSV catalog)
+- [x] Create `Question` record (questionText, itemA, itemB, valueA, valueB, unit — raw values, no precomputed answer)
+- [x] Create `QuestionPack` record (slug packId, deslugged name, derived questionCount)
+- [x] Create pure `QuestionPackCsvParser` in Domain (sv-SE `;`/`,`, RFC4180 quotes, BOM, header-mapped)
+- [x] Create `FileSystemQuestionPackCatalog` in Web (IO, fail-fast) + DI registration
+- [x] Add first real pack `data/packs/mer-eller-mindre.csv` (10 Swedish cards)
 
 ## Phase 5: Game Repository
 - [ ] Create `GameRepository` (in-memory event store per game)

@@ -64,7 +64,7 @@
 # as a single SubmitGuess {direction, difference} command, matching the C# domain.
 # Split into two commands only if the board later demands it.
 #
-# ASSUMPTION: question-card content (text, option labels, and the two RAW values
+# ASSUMPTION: question-card content (text, item labels, the unit, and the two RAW values
 # valueA/valueB) is snapshotted onto Game / LobbyOpened (questions: Question[]).
 # OpenLobby resolves the chosen pack via a GameContext dependency and stamps the full
 # question set, so read models read events only. Screen / Question reads card
@@ -74,8 +74,11 @@
 #
 # Prop types (these annotations ARE the intended C# types; see specs/CLAUDE.md):
 #   ids                    Guid          (gameId, playerId, hostPlayerId,
-#                                         questionPackId, packId, joinCode; Guid[] for
+#                                         joinCode; Guid[] for
 #                                         *PlayerIds and winnerIds — tied lowest totals share the win)
+#   pack ids               string        (questionPackId, packId — a filename slug, e.g.
+#                                         "mer-eller-mindre"; the file-based CSV catalog
+#                                         keys packs by slug, not Guid — see specs/CLAUDE.md)
 #   timestamps (*At)       DateTimeOffset
 #   direction              Direction (mer|mindre)  — enum
 #   difference family      int (0-100)   (difference, guessedDifference, and the
@@ -98,10 +101,13 @@ slices:
   # ASSUMPTION: the Quiz catalog is reference data, not on the Game stream.
   # Choosing to play MEM = choosing a question pack (a deck of designated
   # question-cards, e.g. "0-100"). Pack publishing/commerce is out of scope.
+  # The catalog is a file-based CSV store: one pack = one data/packs/*.csv whose
+  # filename slug is the packId/questionPackId (the author edits cards in Excel /
+  # Google Sheets; sv-SE ';'-separated, ','-decimal). See specs/CLAUDE.md.
   👀 Quiz Catalog:
     - v: Screen / Quiz catalog
       props:
-        packs: QuestionPack[]   # { packId: Guid, name: string, questionCount: int }
+        packs: QuestionPack[]   # { packId: string (slug), name: string, questionCount: int }
 
   # OpenLobby resolves {questionPackId} to a pack via a GameContext dependency
   # (same pattern that stamps gameId/joinCode/createdAt) and snapshots the full
@@ -110,8 +116,8 @@ slices:
   #
   # Test fixtures (referenced by name in the cases below):
   #   pack mer-eller-mindre = [ question0, question1 ]  (the default deck)
-  #   question0 = Question { questionText: question0, optionA: question0A, optionB: question0B, valueA: 100, valueB: 60 }  # ScoreQuestion derives -> mer,    40
-  #   question1 = Question { questionText: question1, optionA: question1A, optionB: question1B, valueA: 80,  valueB: 100 } # ScoreQuestion derives -> mindre, 20
+  #   question0 = Question { questionText: question0, itemA: question0A, itemB: question0B, valueA: 100, valueB: 60, unit: question0U }  # ScoreQuestion derives -> mer,    40
+  #   question1 = Question { questionText: question1, itemA: question1A, itemB: question1B, valueA: 80,  valueB: 100, unit: question1U } # ScoreQuestion derives -> mindre, 20
   #   host hostName = Martin ; minted joinCode = joinCode
   ✍️ Open Lobby:
     steps:
@@ -119,7 +125,7 @@ slices:
       - c: OpenLobby
         props:
           hostName: string
-          questionPackId: Guid
+          questionPackId: string   # filename slug of the chosen pack (e.g. mer-eller-mindre)
       - x: QuestionPackNotFound
       - e: Game / LobbyOpened
         props:
@@ -127,8 +133,8 @@ slices:
           hostPlayerId: Guid
           hostName: string        # the host is the first player; their name lives here (never goes through JoinGame)
           joinCode: Guid
-          questionPackId: Guid    # opaque audit reference to the chosen pack
-          questions: Question[]   # { questionText: string, optionA: string, optionB: string, valueA: double, valueB: double } — raw values; no precomputed answer
+          questionPackId: string  # slug of the chosen pack (audit reference)
+          questions: Question[]   # { questionText: string, itemA: string, itemB: string, valueA: double, valueB: double, unit: string } — raw values; no precomputed answer
           createdAt: DateTimeOffset
       - v: Screen / Game lobby
     tests:
@@ -321,10 +327,10 @@ slices:
           questionIndex: int
           totalQuestions: int
           questionText: string
-          optionA: string
-          optionB: string
+          itemA: string
+          itemB: string
     # Projection GT: given the deck loaded + game started, then the current card resolved
-    # by index from the folded questions. totalQuestions = the deck count; card text/options
+    # by index from the folded questions. totalQuestions = the deck count; card text/items
     # are read from question0 (the raw valueA/valueB are NOT shown — only at reveal).
     tests:
       current question presented with card content and progress:
@@ -339,8 +345,8 @@ slices:
               questionIndex: 0
               totalQuestions: 2
               questionText: question0
-              optionA: question0A
-              optionB: question0B
+              itemA: question0A
+              itemB: question0B
 
   # The Game Master also plays: Martin (id0) submits guesses through this same
   # Player / slice, exactly like Nils (id1) and Sven (id2).
@@ -1002,7 +1008,7 @@ slices:
           currentQuestionIndex: int
           questions: IReadOnlyList<QuestionRound>   # the fixed deck loaded up front + how each is being answered
           # QuestionRound = {
-          #   card: Question,                                 # immutable card from LobbyOpened: { questionText, optionA, optionB: string; valueA, valueB: double } — raw values, no precomputed answer
+          #   card: Question,                                 # immutable card from LobbyOpened: { questionText, itemA, itemB: string; valueA, valueB: double; unit: string } — raw values, no precomputed answer
           #   guesses: IReadOnlyDictionary<Guid, Guess>,      # THIS question's guesses; key=playerId, Guess = { direction: Direction (mer|mindre), difference: int (0-100) }
           #   correctDirection: Direction? (mer|mindre),      # revealed when scored (null before)
           #   correctDifference: int? (0-100),                # revealed when scored (null before)
