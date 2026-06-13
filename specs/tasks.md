@@ -37,11 +37,12 @@
 - [ ] `difference out of range rejected`
 
 ### Scoring Tests
-- [ ] `correct direction gives bonus`
-- [ ] `wrong direction no bonus`
+- [ ] `all guesses scored and answer revealed`
 - [ ] `exact difference with correct direction`
 - [ ] `scores accumulate across rounds`
-- [ ] `lowest score wins`
+- [ ] `cannot score before all guesses in`
+- [ ] `cannot score an already-scored question`
+- [ ] `lowest score wins` (deferred to End Game — winner determination)
 
 ## Phase 4: Question Loading
 - [ ] Create `Question` record (text, optionA, optionB, correctDirection, correctDifference)

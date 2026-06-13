@@ -23,7 +23,22 @@
 #
 # Scoring (see ScoreQuestion / QuestionScored):
 #   roundScore = |guessedDifference - correctDifference| + (directionCorrect ? -10 : 0)
-#   difference is normalized 0-100; lowest total score wins; negative scores possible.
+#   lowest total score wins; negative scores possible (exact difference + right
+#   direction = -10, the best possible round).
+#
+#   The difference is a NORMALIZED 0-100 number, never a raw gap. Picture the two
+#   answers as two bars side by side; the difference is how much taller the tall bar
+#   is, as a share of the tall bar itself:
+#     equal bars            -> 0
+#     short bar = half tall -> 50
+#     short bar = a tenth   -> 90
+#     short bar ~ nothing   -> near 100
+#   So correctDifference = |A-B| / max(A,B) * 100. This deliberately compresses large
+#   ratios (2x->50, 10x->90, 100x->99): small differences are the fun ones to pin
+#   down, giant ones are obviously giant. Simplicity is the guiding star.
+#   For quantities already measured on a multiplicative scale (decibel, Richter, pH),
+#   normalize the scale values themselves, not the raw underlying amounts.
+#
 #   correctDirection/correctDifference are revealed once per question on
 #   Game / QuestionAnswered; per-player scoring is one Game / QuestionScored each.
 #
@@ -379,33 +394,156 @@ slices:
 
   # Processor: once Outstanding guesses shows allGuessesIn, the System scores.
   # Reveals the answer once (QuestionAnswered) and emits one QuestionScored per player.
+  # Failures are Result failure-track values (see docs/adr/006), never thrown:
+  #   x: NotAllGuessesIn        — allGuessesIn is false (a player is still pending).
+  #   x: QuestionAlreadyScored  — this question was already revealed/scored (guards a
+  #                               double fire of the processor).
+  # Because allGuessesIn requires ALL joined players to have guessed, one ScoreQuestion
+  # always emits N QuestionScored (one per player) — the happy cases are multi-player.
+  # 'lowest score wins' is winner determination and lives on End Game, not here.
+  # Fixtures: question0 = {mer, 40}, question1 = {mindre, 20}; host = martinId, Nils = nilsId.
   Score Question:
-    - e: Game / GuessSubmitted
-    - v: Todo / Outstanding guesses
-    - t: System / Score question
-    - c: ScoreQuestion
-      props:
-        gameId: Guid
-        questionIndex: int
-    - e: Game / QuestionAnswered
-      props:
-        gameId: Guid
-        questionIndex: int
-        correctDirection: Direction (mer|mindre)
-        correctDifference: int (0-100)
-    - e: Game / QuestionScored       # one per player
-      props:
-        gameId: Guid
-        questionIndex: int
-        playerId: Guid
-        guessedDirection: Direction (mer|mindre)
-        guessedDifference: int (0-100)
-        directionCorrect: bool
-        differencePoints: int
-        bonusPoints: int
-        roundScore: int
-        totalScore: int
-    - v: Screen / Round results
+    steps:
+      - e: Game / GuessSubmitted
+      - v: Todo / Outstanding guesses
+      - t: System / Score question
+      - c: ScoreQuestion
+        props:
+          gameId: Guid
+          questionIndex: int
+      - x: NotAllGuessesIn
+      - x: QuestionAlreadyScored
+      - e: Game / QuestionAnswered
+        props:
+          gameId: Guid
+          questionIndex: int
+          correctDirection: Direction (mer|mindre)
+          correctDifference: int (0-100)
+      - e: Game / QuestionScored       # one per player
+        props:
+          gameId: Guid
+          questionIndex: int
+          playerId: Guid
+          guessedDirection: Direction (mer|mindre)
+          guessedDifference: int (0-100)
+          directionCorrect: bool
+          differencePoints: int
+          bonusPoints: int
+          roundScore: int
+          totalScore: int
+      - v: Screen / Round results
+    tests:
+      all guesses scored and answer revealed:
+        given:
+          - e: Game / LobbyOpened
+            props: { joinCode: joinCode, hostPlayerId: martinId }
+          - e: Game / PlayerJoined
+            props: { playerId: nilsId, playerName: Nils }
+          - e: Game / GameStarted
+          - e: Game / GuessSubmitted
+            props: { playerId: martinId, questionIndex: 0, direction: mer, difference: 30 }
+          - e: Game / GuessSubmitted
+            props: { playerId: nilsId, questionIndex: 0, direction: mindre, difference: 50 }
+        when:
+          - c: ScoreQuestion
+            props: { gameId: gameId, questionIndex: 0 }
+        then:
+          - e: Game / QuestionAnswered
+            props: { questionIndex: 0, correctDirection: mer, correctDifference: 40 }
+          - e: Game / QuestionScored
+            props: { playerId: martinId, guessedDirection: mer, guessedDifference: 30, directionCorrect: true, differencePoints: 10, bonusPoints: -10, roundScore: 0, totalScore: 0 }
+          - e: Game / QuestionScored
+            props: { playerId: nilsId, guessedDirection: mindre, guessedDifference: 50, directionCorrect: false, differencePoints: 10, bonusPoints: 0, roundScore: 10, totalScore: 10 }
+      exact difference with correct direction:
+        given:
+          - e: Game / LobbyOpened
+            props: { joinCode: joinCode, hostPlayerId: martinId }
+          - e: Game / PlayerJoined
+            props: { playerId: nilsId, playerName: Nils }
+          - e: Game / GameStarted
+          - e: Game / GuessSubmitted
+            props: { playerId: martinId, questionIndex: 0, direction: mer, difference: 40 }
+          - e: Game / GuessSubmitted
+            props: { playerId: nilsId, questionIndex: 0, direction: mindre, difference: 50 }
+        when:
+          - c: ScoreQuestion
+            props: { gameId: gameId, questionIndex: 0 }
+        then:
+          - e: Game / QuestionAnswered
+            props: { questionIndex: 0, correctDirection: mer, correctDifference: 40 }
+          - e: Game / QuestionScored
+            props: { playerId: martinId, guessedDirection: mer, guessedDifference: 40, directionCorrect: true, differencePoints: 0, bonusPoints: -10, roundScore: -10, totalScore: -10 }
+          - e: Game / QuestionScored
+            props: { playerId: nilsId, guessedDirection: mindre, guessedDifference: 50, directionCorrect: false, differencePoints: 10, bonusPoints: 0, roundScore: 10, totalScore: 10 }
+      scores accumulate across rounds:
+        given:
+          - e: Game / LobbyOpened
+            props: { joinCode: joinCode, hostPlayerId: martinId }
+          - e: Game / PlayerJoined
+            props: { playerId: nilsId, playerName: Nils }
+          - e: Game / GameStarted
+          - e: Game / GuessSubmitted
+            props: { playerId: martinId, questionIndex: 0, direction: mer, difference: 30 }
+          - e: Game / GuessSubmitted
+            props: { playerId: nilsId, questionIndex: 0, direction: mindre, difference: 50 }
+          - e: Game / QuestionAnswered
+            props: { questionIndex: 0, correctDirection: mer, correctDifference: 40 }
+          - e: Game / QuestionScored
+            props: { playerId: martinId, questionIndex: 0, roundScore: 0, totalScore: 0 }
+          - e: Game / QuestionScored
+            props: { playerId: nilsId, questionIndex: 0, roundScore: 10, totalScore: 10 }
+          - e: Game / NextQuestionStarted
+            props: { questionIndex: 1 }
+          - e: Game / GuessSubmitted
+            props: { playerId: martinId, questionIndex: 1, direction: mindre, difference: 25 }
+          - e: Game / GuessSubmitted
+            props: { playerId: nilsId, questionIndex: 1, direction: mindre, difference: 20 }
+        when:
+          - c: ScoreQuestion
+            props: { gameId: gameId, questionIndex: 1 }
+        then:
+          - e: Game / QuestionAnswered
+            props: { questionIndex: 1, correctDirection: mindre, correctDifference: 20 }
+          - e: Game / QuestionScored
+            props: { playerId: martinId, guessedDifference: 25, directionCorrect: true, differencePoints: 5, bonusPoints: -10, roundScore: -5, totalScore: -5 }
+          - e: Game / QuestionScored
+            props: { playerId: nilsId, guessedDifference: 20, directionCorrect: true, differencePoints: 0, bonusPoints: -10, roundScore: -10, totalScore: 0 }
+      cannot score before all guesses in:
+        given:
+          - e: Game / LobbyOpened
+            props: { joinCode: joinCode, hostPlayerId: martinId }
+          - e: Game / PlayerJoined
+            props: { playerId: nilsId, playerName: Nils }
+          - e: Game / GameStarted
+          - e: Game / GuessSubmitted
+            props: { playerId: martinId, questionIndex: 0, direction: mer, difference: 30 }
+        when:
+          - c: ScoreQuestion
+            props: { gameId: gameId, questionIndex: 0 }
+        then:
+          - x: NotAllGuessesIn
+      cannot score an already-scored question:
+        given:
+          - e: Game / LobbyOpened
+            props: { joinCode: joinCode, hostPlayerId: martinId }
+          - e: Game / PlayerJoined
+            props: { playerId: nilsId, playerName: Nils }
+          - e: Game / GameStarted
+          - e: Game / GuessSubmitted
+            props: { playerId: martinId, questionIndex: 0, direction: mer, difference: 30 }
+          - e: Game / GuessSubmitted
+            props: { playerId: nilsId, questionIndex: 0, direction: mindre, difference: 50 }
+          - e: Game / QuestionAnswered
+            props: { questionIndex: 0, correctDirection: mer, correctDifference: 40 }
+          - e: Game / QuestionScored
+            props: { playerId: martinId, questionIndex: 0 }
+          - e: Game / QuestionScored
+            props: { playerId: nilsId, questionIndex: 0 }
+        when:
+          - c: ScoreQuestion
+            props: { gameId: gameId, questionIndex: 0 }
+        then:
+          - x: QuestionAlreadyScored
 
   Round Results:
     - v: Screen / Round results
