@@ -741,7 +741,7 @@ slices:
   #   hostMartin = { playerId: martinId, name: Martin, isHost: true }
   #   playerNils = { playerId: nilsId,   name: Nils,   isHost: false }
   #   playerSven = { playerId: svenId,   name: Sven,   isHost: false }
-  State Game:
+  Decision model:
     steps:
       - v: State / Game
         props:
