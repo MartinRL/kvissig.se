@@ -101,9 +101,10 @@ slices:
   # ASSUMPTION: the Quiz catalog is reference data, not on the Game stream.
   # Choosing to play MEM = choosing a question pack (a deck of designated
   # question-cards, e.g. "0-100"). Pack publishing/commerce is out of scope.
-  # The catalog is a file-based CSV store: one pack = one data/packs/*.csv whose
-  # filename slug is the packId/questionPackId (the author edits cards in Excel /
-  # Google Sheets; sv-SE ';'-separated, ','-decimal). See specs/CLAUDE.md.
+  # The catalog is a file-based CSV store: one pack = one *.csv whose filename slug is
+  # the packId/questionPackId. The packs are domain reference data, kept in the Domain
+  # project (src/MerEllerMindre.Domain/data/packs) and copied to output. The author edits
+  # cards in Excel / Google Sheets (sv-SE ';'-separated, ','-decimal). See specs/CLAUDE.md.
   👀 Quiz Catalog:
     - v: Screen / Quiz catalog
       props:
