@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MEM — Lekfull kortlek</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #fff7ec;
+      --bg-2: #ffeccf;
+      --ink: #2b2118;
+      --ink-soft: #7a6a58;
+      --card: #fffdf9;
+      --line: #f0e0c8;
+      --mer: #21c08a;        /* warm green */
+      --mer-deep: #12805c;
+      --mer-ink: #06281f;
+      --mindre: #ffab40;     /* warm amber */
+      --mindre-deep: #e07f0e;
+      --mindre-ink: #3a2300;
+      --accent: #ff5d73;     /* coral pop */
+      --radius: 22px;
+      --shadow: 0 10px 24px -12px rgba(120,80,20,.45);
+      --shadow-lift: 0 18px 36px -14px rgba(120,80,20,.5);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; font-family: 'Nunito', system-ui, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(120% 80% at 50% -10%, var(--bg-2), transparent 60%),
+        var(--bg);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrap { max-width: 520px; margin-inline: auto; padding: 1.25rem 1.1rem 3rem; }
+
+    .brand { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; }
+    .logo { font-family: 'Baloo 2', cursive; font-weight: 800; font-size: 1.35rem; letter-spacing: -.01em; }
+    .logo .mer { color: var(--mer-deep); }
+    .logo .mindre { color: var(--mindre-deep); }
+    .pill {
+      font-family: 'Baloo 2', cursive; font-weight: 700; font-size: .8rem;
+      background: var(--ink); color: var(--bg); padding: .35rem .8rem; border-radius: 999px;
+    }
+
+    .card {
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: var(--radius); box-shadow: var(--shadow);
+      padding: 1.5rem 1.35rem;
+    }
+    h1 { font-family: 'Baloo 2', cursive; font-weight: 800; font-size: 1.7rem; line-height: 1.1; margin: 0 0 .35rem; }
+    .sub { color: var(--ink-soft); margin: 0 0 1.4rem; font-size: .95rem; }
+    .steplabel { font-family: 'Baloo 2', cursive; font-weight: 700; font-size: .95rem; margin: 0 0 .6rem; }
+
+    /* direction picker — no Pico .outline, proper active state */
+    .direction { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; margin-bottom: 1.5rem; }
+    .dirbtn {
+      appearance: none; cursor: pointer; text-align: left;
+      border: 2px solid var(--line); background: var(--card); color: var(--ink);
+      border-radius: 16px; padding: 1rem 1.1rem; font-family: 'Baloo 2', cursive;
+      font-weight: 700; font-size: 1.1rem; transition: transform .12s ease, box-shadow .12s ease, border-color .12s, background .12s;
+      display: flex; flex-direction: column; gap: .35rem;
+    }
+    .dirbtn .arrow { font-size: 1.4rem; line-height: 1; color: var(--mer-deep); }
+    .dirbtn[aria-pressed="false"] .arrow { color: var(--ink-soft); }
+    .dirbtn:active { transform: scale(.97); }
+    .dirbtn[aria-pressed="true"] {
+      transform: translateY(-3px); box-shadow: var(--shadow-lift);
+      background: var(--mer); border-color: var(--mer-deep); color: var(--mer-ink);
+    }
+    .dirbtn[aria-pressed="true"] .arrow { color: var(--mer-ink); }
+
+    /* difference slider */
+    .diffwrap { text-align: center; margin-bottom: 1.25rem; }
+    .diffout { font-family: 'Baloo 2', cursive; font-weight: 800; font-size: 3.2rem; line-height: 1; color: var(--accent); }
+    input[type=range] {
+      -webkit-appearance: none; appearance: none; width: 100%; height: 14px;
+      border-radius: 999px; background: linear-gradient(90deg, var(--accent) 30%, var(--line) 30%);
+      margin: .9rem 0 .4rem; cursor: pointer;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none; width: 30px; height: 30px; border-radius: 50%;
+      background: #fff; border: 4px solid var(--accent); box-shadow: 0 3px 8px rgba(0,0,0,.2); cursor: grab;
+    }
+    .scale { display: flex; justify-content: space-between; color: var(--ink-soft); font-size: .75rem; }
+
+    /* two-bars — fixed narrow width, centered */
+    .twobars { display: flex; gap: 1.5rem; align-items: flex-end; justify-content: center; height: 150px; margin: 1.5rem 0 .4rem; position: relative; }
+    .twobars::before { content: ""; position: absolute; left: 8%; right: 8%; top: 50%; border-top: 2px dashed var(--line); }
+    .bar { width: 64px; border-radius: 14px 14px 6px 6px; display: flex; align-items: flex-start; justify-content: center; padding-top: .5rem; color: #fff; font-family: 'Baloo 2', cursive; font-weight: 700; transition: height .25s cubic-bezier(.34,1.56,.64,1); position: relative; }
+    .bar.is-mer { background: linear-gradient(180deg, var(--mer), var(--mer-deep)); color: var(--mer-ink); }
+    .bar.is-mindre { background: linear-gradient(180deg, var(--mindre), var(--mindre-deep)); color: var(--mindre-ink); }
+    .barcap { position: absolute; bottom: -1.4rem; color: var(--ink-soft); font-size: .8rem; white-space: nowrap; }
+
+    .submit {
+      appearance: none; cursor: pointer; width: 100%; margin-top: 1.75rem;
+      border: none; border-radius: 16px; padding: 1.05rem; font-family: 'Baloo 2', cursive;
+      font-weight: 800; font-size: 1.15rem; color: #fff;
+      background: linear-gradient(135deg, var(--accent), #ff8a3d);
+      box-shadow: 0 10px 22px -8px rgba(255,93,115,.7); transition: transform .12s;
+    }
+    .submit:active { transform: scale(.98); }
+    .back { display: block; text-align: center; margin-top: 1.5rem; color: var(--ink-soft); font-size: .85rem; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="brand">
+      <div class="logo"><span class="mer">Mer</span> eller <span class="mindre">Mindre</span></div>
+      <span class="pill">Fråga 3 / 8</span>
+    </div>
+
+    <div class="card">
+      <h1>Vilken elbil kommer längst på en laddning?</h1>
+      <p class="sub">WLTP-räckvidd · Bilar &amp; Motor</p>
+
+      <p class="steplabel">1 · Vilken är mer?</p>
+      <div class="direction" role="group" aria-label="Riktning">
+        <button type="button" class="dirbtn" data-car="vw" aria-pressed="true">
+          <span class="arrow">▲</span> VW ID.4 Pro
+        </button>
+        <button type="button" class="dirbtn" data-car="bmw" aria-pressed="false">
+          <span class="arrow">▼</span> BMW iX3
+        </button>
+      </div>
+
+      <p class="steplabel">2 · Hur stor är skillnaden?</p>
+      <div class="diffwrap">
+        <div class="diffout" id="diffOut">30</div>
+        <input type="range" id="diff" min="0" max="100" value="30" step="1" />
+        <div class="scale"><span>0 · lika</span><span>50 · hälften</span><span>100 · nästan allt</span></div>
+      </div>
+
+      <div class="twobars" aria-hidden="true">
+        <div class="bar" id="barVW"><span class="bval">mer</span><span class="barcap">VW</span></div>
+        <div class="bar" id="barBMW"><span class="bval">mindre</span><span class="barcap">BMW</span></div>
+      </div>
+
+      <button type="button" class="submit">Ställ gissning</button>
+    </div>
+
+    <a class="back" href="design-compare.html">← Tillbaka till jämförelsen</a>
+  </div>
+
+  <script>
+    const out = document.getElementById('diffOut');
+    const range = document.getElementById('diff');
+    const bars = { vw: document.getElementById('barVW'), bmw: document.getElementById('barBMW') };
+    const buttons = document.querySelectorAll('.direction button');
+
+    function render() {
+      const v = Number(range.value);
+      out.textContent = v;
+      range.style.background = `linear-gradient(90deg, var(--accent) ${v}%, var(--line) ${v}%)`;
+      const selected = document.querySelector('.direction button[aria-pressed="true"]').dataset.car;
+      for (const [car, el] of Object.entries(bars)) {
+        const isMer = car === selected;          // selected car = "mer" = the tall bar
+        el.classList.toggle('is-mer', isMer);
+        el.classList.toggle('is-mindre', !isMer);
+        el.style.height = isMer ? '100%' : (100 - v) + '%';   // the OTHER bar shrinks
+        el.querySelector('.bval').textContent = isMer ? 'mer' : 'mindre';
+      }
+    }
+
+    range.addEventListener('input', render);
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        buttons.forEach(b => {
+          const pressed = b === btn;
+          b.setAttribute('aria-pressed', pressed ? 'true' : 'false');
+          b.querySelector('.arrow').textContent = pressed ? '▲' : '▼';
+        });
+        render();
+      });
+    });
+    render();
+  </script>
+</body>
+</html>

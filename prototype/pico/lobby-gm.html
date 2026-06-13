@@ -1,27 +1,24 @@
 <!DOCTYPE html>
-<html lang="sv" data-theme="light">
+<html lang="sv">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mer eller Mindre — Lobby (spelledare)</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
-  <link rel="stylesheet" href="theme.css" />
+  <link rel="stylesheet" href="playful.css" />
 </head>
 <body>
-  <main class="container">
-    <header class="mem-brand">
+  <div class="wrap">
+    <div class="brand">
       <div class="logo"><span class="mer">Mer</span> eller <span class="mindre">Mindre</span></div>
-      <div class="progress-label">Lobby · spelledare (Martin)</div>
-    </header>
+      <span class="pill soft">Lobby · värd Martin</span>
+    </div>
 
-    <article class="center">
-      <hgroup>
-        <h2>Skanna för att gå med</h2>
-        <p class="muted">Visa den här skärmen för spelarna. De skannar med sin telefon.</p>
-      </hgroup>
+    <div class="card center">
+      <h1>Skanna för att gå med</h1>
+      <p class="sub">Visa den här skärmen för spelarna. De skannar med sin telefon.</p>
       <svg class="qr" viewBox="0 0 29 29" shape-rendering="crispEdges" role="img" aria-label="QR-kod">
         <rect width="29" height="29" fill="#fff"/>
-        <g fill="#0f1024">
+        <g fill="#2b2118">
           <path d="M0 0h7v7h-7zM1 1v5h5v-5z M2 2h3v3h-3z"/>
           <path d="M22 0h7v7h-7zM23 1v5h5v-5z M24 2h3v3h-3z"/>
           <path d="M0 22h7v7h-7zM1 23v5h5v-5z M2 24h3v3h-3z"/>
@@ -51,21 +48,21 @@
       </svg>
       <p class="joincode">MEM-4827</p>
       <p class="muted">…eller knappa in koden på <strong>kvissig.se</strong></p>
-    </article>
+    </div>
 
-    <article>
-      <header><strong>Spelare</strong> <span class="pill">3 med</span></header>
+    <div class="card">
+      <div class="cardhead">Spelare <span class="pill">3 med</span></div>
       <ul class="players">
         <li><span class="dot"></span><span class="who">Martin</span><span class="tag">värd · du</span></li>
         <li><span class="dot"></span><span class="who">Nils</span><span class="tag">med</span></li>
         <li><span class="dot"></span><span class="who">Sven</span><span class="tag">med</span></li>
       </ul>
-    </article>
+    </div>
 
-    <a href="question.html" role="button">Starta omgång</a>
-    <p class="muted center" style="font-size:.8rem">Behöver minst 2 spelare · 3 anslutna</p>
+    <a class="btn" href="question.html">Starta omgång</a>
+    <p class="muted center" style="margin-top:.6rem">Behöver minst 2 spelare · 3 anslutna</p>
 
     <p class="fakenav"><a href="../index.html">← Tillbaka till jämförelsen</a></p>
-  </main>
+  </div>
 </body>
 </html>

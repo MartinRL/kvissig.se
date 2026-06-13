@@ -1,41 +1,35 @@
 <!DOCTYPE html>
-<html lang="sv" data-theme="light">
+<html lang="sv">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mer eller Mindre — Lobby (spelare)</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
-  <link rel="stylesheet" href="theme.css" />
+  <link rel="stylesheet" href="playful.css" />
 </head>
 <body>
-  <main class="container">
-    <header class="mem-brand">
+  <div class="wrap">
+    <div class="brand">
       <div class="logo"><span class="mer">Mer</span> eller <span class="mindre">Mindre</span></div>
-      <div class="progress-label">Lobby · du är med</div>
-    </header>
+      <span class="pill soft">Du är med</span>
+    </div>
 
-    <article class="center">
-      <hgroup>
-        <h2>Du är med, Nils! 🎉</h2>
-        <p class="muted">Väntar på att Martin startar omgången…</p>
-      </hgroup>
-      <p aria-busy="true">Inväntar start</p>
-    </article>
+    <div class="card center">
+      <h1>Du är med, Nils! 🎉</h1>
+      <p class="sub">Väntar på att Martin startar omgången…</p>
+      <p class="busy">Inväntar start</p>
+    </div>
 
-    <article>
-      <header><strong>Spelare</strong> <span class="pill">3 med</span></header>
+    <div class="card">
+      <div class="cardhead">Spelare <span class="pill">3 med</span></div>
       <ul class="players">
         <li><span class="dot"></span><span class="who">Martin</span><span class="tag">värd</span></li>
         <li><span class="dot"></span><span class="who">Nils</span><span class="tag">du</span></li>
         <li><span class="dot"></span><span class="who">Sven</span><span class="tag">med</span></li>
       </ul>
-    </article>
+    </div>
 
-    <p class="fakenav">
-      Systemet startar automatiskt när spelledaren trycker. ·
-      <a href="question.html">simulera start →</a>
-    </p>
+    <p class="fakenav next-hint">Systemet startar automatiskt när spelledaren trycker. · <a href="question.html">simulera start →</a></p>
     <p class="fakenav"><a href="../index.html">← Tillbaka till jämförelsen</a></p>
-  </main>
+  </div>
 </body>
 </html>

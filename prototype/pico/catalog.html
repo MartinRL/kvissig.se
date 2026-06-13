@@ -1,49 +1,52 @@
 <!DOCTYPE html>
-<html lang="sv" data-theme="light">
+<html lang="sv">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mer eller Mindre — Välj kviss</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
-  <link rel="stylesheet" href="theme.css" />
+  <link rel="stylesheet" href="playful.css" />
 </head>
 <body>
-  <main class="container">
-    <header class="mem-brand">
+  <div class="wrap">
+    <div class="brand">
       <div class="logo"><span class="mer">Mer</span> eller <span class="mindre">Mindre</span></div>
-      <div class="progress-label">Spelledare · välj ett frågepaket</div>
-    </header>
+      <span class="pill soft">Spelledare</span>
+    </div>
 
-    <hgroup>
-      <h2>Välj kviss</h2>
-      <p class="muted">Ett frågepaket är en kortlek. Du blir värd och första spelaren.</p>
-    </hgroup>
+    <h1>Välj kviss</h1>
+    <p class="sub">Ett frågepaket är en kortlek. Du blir värd och första spelaren.</p>
 
-    <article>
-      <header><strong>Bilar &amp; Motor</strong></header>
-      <p class="muted">8 frågor · mer eller mindre om bilar, hästkrafter och räckvidd.</p>
-      <footer>
-        <a href="lobby-gm.html" role="button">Spela</a>
-      </footer>
-    </article>
+    <div class="card">
+      <div class="pack">
+        <div class="info">
+          <div class="name">Bilar &amp; Motor</div>
+          <div class="count">8 frågor · hästkrafter, räckvidd, vikt</div>
+        </div>
+        <a class="btn" href="lobby-gm.html">Spela</a>
+      </div>
+    </div>
 
-    <article>
-      <header><strong>Mer eller Mindre — Klassiker</strong></header>
-      <p class="muted">12 frågor · den ursprungliga blandade leken.</p>
-      <footer>
-        <a href="lobby-gm.html" role="button" class="secondary">Spela</a>
-      </footer>
-    </article>
+    <div class="card">
+      <div class="pack">
+        <div class="info">
+          <div class="name">Klassiker</div>
+          <div class="count">12 frågor · den blandade urleken</div>
+        </div>
+        <a class="btn secondary" href="lobby-gm.html">Spela</a>
+      </div>
+    </div>
 
-    <article>
-      <header><strong>Sverige i siffror</strong></header>
-      <p class="muted">10 frågor · befolkning, geografi och kuriosa.</p>
-      <footer>
-        <a href="lobby-gm.html" role="button" class="secondary">Spela</a>
-      </footer>
-    </article>
+    <div class="card">
+      <div class="pack">
+        <div class="info">
+          <div class="name">Sverige i siffror</div>
+          <div class="count">10 frågor · befolkning, geografi, kuriosa</div>
+        </div>
+        <a class="btn secondary" href="lobby-gm.html">Spela</a>
+      </div>
+    </div>
 
     <p class="fakenav"><a href="../index.html">← Tillbaka till jämförelsen</a></p>
-  </main>
+  </div>
 </body>
 </html>

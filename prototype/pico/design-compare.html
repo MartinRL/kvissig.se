@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MEM — Designjämförelse</title>
+  <style>
+    body { margin: 0; font-family: system-ui, sans-serif; background: #f4f4f5; color: #18181b; }
+    .wrap { max-width: 720px; margin-inline: auto; padding: 2.5rem 1.25rem; }
+    h1 { font-size: 1.5rem; }
+    p { color: #52525b; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem; }
+    a.card { display: block; text-decoration: none; color: inherit; border-radius: 16px; padding: 1.5rem; border: 1px solid #e4e4e7; }
+    a.playful { background: linear-gradient(135deg, #fff7ec, #ffeccf); }
+    a.sharp { background: #16181d; color: #f4f5f7; border-color: #2a2e36; }
+    a.card strong { font-size: 1.15rem; display: block; margin-bottom: .35rem; }
+    a.card span { font-size: .85rem; opacity: .8; }
+    @media (max-width: 560px) { .grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Mer eller Mindre — två designriktningar</h1>
+    <p>Samma question-skärm, samma mock-data. Two-bars och direction-pickern är fixade i båda. Öppna och jämför på telefon/desktop.</p>
+    <div class="grid">
+      <a class="card playful" href="question-playful.html">
+        <strong>Lekfull kortlek</strong>
+        <span>Baloo 2 + Nunito · varm cream-palett · runda kort · lyft &amp; coral-pop</span>
+      </a>
+      <a class="card sharp" href="question-sharp.html">
+        <strong>Skarp &amp; modern</strong>
+        <span>Space Grotesk + mono-siffror · mörk yta · electric lime · hairlines</span>
+      </a>
+    </div>
+  </div>
+</body>
+</html>

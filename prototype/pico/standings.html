@@ -1,25 +1,24 @@
 <!DOCTYPE html>
-<html lang="sv" data-theme="light">
+<html lang="sv">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mer eller Mindre — Slutställning</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
-  <link rel="stylesheet" href="theme.css" />
+  <link rel="stylesheet" href="playful.css" />
 </head>
 <body>
-  <main class="container">
-    <header class="mem-brand">
+  <div class="wrap">
+    <div class="brand">
       <div class="logo"><span class="mer">Mer</span> eller <span class="mindre">Mindre</span></div>
-      <div class="progress-label">Slut · 8 frågor klara</div>
-    </header>
+      <span class="pill">Slut · 8 frågor klara</span>
+    </div>
 
-    <article class="center">
-      <h2>Slutställning</h2>
+    <div class="card center">
+      <h1>Slutställning</h1>
       <p class="winner-banner"><span class="name">Nils</span> vann! 🏆</p>
       <p class="muted">Lägst total poäng vinner.</p>
 
-      <table class="scoreboard">
+      <table class="scoreboard" style="margin-top:1rem">
         <tbody>
           <tr class="winner">
             <td class="rank">1</td>
@@ -38,11 +37,11 @@
           </tr>
         </tbody>
       </table>
-    </article>
+    </div>
 
-    <a href="catalog.html" role="button">Spela igen</a>
+    <a class="btn" href="catalog.html">Spela igen</a>
 
     <p class="fakenav"><a href="../index.html">← Tillbaka till jämförelsen</a></p>
-  </main>
+  </div>
 </body>
 </html>

@@ -1,35 +1,33 @@
 <!DOCTYPE html>
-<html lang="sv" data-theme="light">
+<html lang="sv">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mer eller Mindre — Resultat</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
-  <link rel="stylesheet" href="theme.css" />
+  <link rel="stylesheet" href="playful.css" />
 </head>
 <body>
-  <main class="container">
-    <header class="mem-brand">
+  <div class="wrap">
+    <div class="brand">
       <div class="logo"><span class="mer">Mer</span> eller <span class="mindre">Mindre</span></div>
-      <div class="progress-label">Fråga 3 / 8 · resultat</div>
-    </header>
+      <span class="pill">Fråga 3 / 8 · resultat</span>
+    </div>
 
-    <article class="reveal">
-      <h2>Vilken elbil kommer längst (WLTP)?</h2>
+    <div class="card center">
+      <h1>Vilken elbil kommer längst (WLTP)?</h1>
       <p class="answer"><span class="mer">VW ID.4 Pro</span> är <span class="mer">MER</span></p>
-      <div class="twobars" aria-hidden="true">
-        <div class="bar a" style="height:100%"><span class="bval">550 km</span></div>
-        <div class="bar b" style="height:60%"><span class="bval">330 km</span></div>
-      </div>
-      <div class="twobars-legend center muted" style="display:flex;justify-content:space-around">
-        <span>VW ID.4 Pro · 550 km</span><span>BMW iX3 · 330 km</span>
-      </div>
-      <p style="margin-top:1.5rem">Normaliserad skillnad <span class="diffnum">40</span> / 100</p>
-      <p class="muted">|550 − 330| / 550 × 100 = 40 · korta stapeln är 60 % av den höga.</p>
-    </article>
 
-    <article>
-      <header><strong>Poäng</strong> · lägst total leder</header>
+      <div class="twobars" aria-hidden="true">
+        <div class="bar a" style="height:100%"><span>550</span><span class="barcap">VW · 550 km</span></div>
+        <div class="bar b" style="height:60%"><span>330</span><span class="barcap">BMW · 330 km</span></div>
+      </div>
+
+      <p style="margin-top:2.2rem">Normaliserad skillnad <span class="diffnum">40</span> / 100</p>
+      <p class="muted">|550 − 330| / 550 × 100 = 40 · korta stapeln är 60 % av den höga.</p>
+    </div>
+
+    <div class="card">
+      <div class="cardhead">Poäng <span class="pill soft">lägst total leder</span></div>
       <table class="scoreboard">
         <thead>
           <tr><th class="rank">#</th><th>Spelare</th><th class="round">Gissning</th><th class="round">Rond</th><th class="total">Total</th></tr>
@@ -58,15 +56,11 @@
           </tr>
         </tbody>
       </table>
-      <p class="muted" style="font-size:.8rem">Rätt riktning ger −10 bonus; differenspoäng = |gissad − 40|.</p>
-    </article>
+      <p class="muted" style="margin-top:.8rem">Rätt riktning ger −10 bonus; differenspoäng = |gissad − 40|.</p>
+    </div>
 
-    <p class="fakenav">
-      Systemet ställer nästa fråga automatiskt. ·
-      <a href="question.html">nästa fråga →</a> ·
-      <a href="standings.html">hoppa till slut →</a>
-    </p>
+    <p class="fakenav next-hint">Systemet ställer nästa fråga automatiskt. · <a href="question.html">nästa fråga →</a> · <a href="standings.html">hoppa till slut →</a></p>
     <p class="fakenav"><a href="../index.html">← Tillbaka till jämförelsen</a></p>
-  </main>
+  </div>
 </body>
 </html>

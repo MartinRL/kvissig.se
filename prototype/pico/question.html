@@ -1,72 +1,82 @@
 <!DOCTYPE html>
-<html lang="sv" data-theme="light">
+<html lang="sv">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mer eller Mindre — Fråga 3</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
-  <link rel="stylesheet" href="theme.css" />
+  <link rel="stylesheet" href="playful.css" />
 </head>
 <body>
-  <main class="container">
-    <header class="mem-brand">
+  <div class="wrap">
+    <div class="brand">
       <div class="logo"><span class="mer">Mer</span> eller <span class="mindre">Mindre</span></div>
-      <div class="progress-label">Fråga 3 / 8 · Bilar &amp; Motor</div>
-    </header>
+      <span class="pill">Fråga 3 / 8</span>
+    </div>
 
-    <article>
-      <hgroup>
-        <h2>Vilken elbil kommer längst på en laddning (WLTP)?</h2>
-        <p class="muted">Steg 1 — välj vilken som är <strong>mer</strong>. Steg 2 — dra hur stor skillnaden är.</p>
-      </hgroup>
+    <div class="card">
+      <h1>Vilken elbil kommer längst på en laddning?</h1>
+      <p class="sub">WLTP-räckvidd · Bilar &amp; Motor</p>
 
-      <p><strong>1. Vilken har störst räckvidd?</strong></p>
+      <p class="steplabel">1 · Vilken är mer?</p>
       <div class="direction" role="group" aria-label="Riktning">
-        <button type="button" class="outline mer" data-dir="mer" aria-pressed="true">
+        <button type="button" class="dirbtn" data-car="vw" aria-pressed="true">
           <span class="arrow">▲</span> VW ID.4 Pro
         </button>
-        <button type="button" class="outline mindre" data-dir="mindre" aria-pressed="false">
+        <button type="button" class="dirbtn" data-car="bmw" aria-pressed="false">
           <span class="arrow">▼</span> BMW iX3
         </button>
       </div>
 
-      <p><strong>2. Hur stor är skillnaden?</strong></p>
+      <p class="steplabel">2 · Hur stor är skillnaden?</p>
       <div class="diffwrap">
-        <output id="diffOut">30</output>
+        <div class="diffout" id="diffOut">30</div>
         <input type="range" id="diff" min="0" max="100" value="30" step="1" />
         <div class="scale"><span>0 · lika</span><span>50 · hälften</span><span>100 · nästan allt</span></div>
       </div>
 
       <div class="twobars" aria-hidden="true">
-        <div class="bar a" id="barTall" style="height:100%"><span class="bval">mer</span></div>
-        <div class="bar b" id="barShort" style="height:70%"><span class="bval">mindre</span></div>
+        <div class="bar" id="barVW"><span class="bval">mer</span><span class="barcap">VW</span></div>
+        <div class="bar" id="barBMW"><span class="bval">mindre</span><span class="barcap">BMW</span></div>
       </div>
 
-      <a href="waiting.html" role="button" style="margin-top:2rem">Ställ gissning</a>
-    </article>
+      <a class="btn" href="waiting.html" style="margin-top:1.75rem">Gissa!</a>
+    </div>
 
     <p class="fakenav"><a href="../index.html">← Tillbaka till jämförelsen</a></p>
-  </main>
+  </div>
 
   <script>
-    // Prototype-only vanilla JS (shared verbatim across all three libraries).
     const out = document.getElementById('diffOut');
     const range = document.getElementById('diff');
-    const barShort = document.getElementById('barShort');
-    function syncDiff() {
+    const bars = { vw: document.getElementById('barVW'), bmw: document.getElementById('barBMW') };
+    const buttons = document.querySelectorAll('.direction button');
+
+    function render() {
       const v = Number(range.value);
       out.textContent = v;
-      barShort.style.height = (100 - v) + '%';   // equal->100% (no gap), 100->flat
+      range.style.background = `linear-gradient(90deg, var(--accent) ${v}%, var(--line) ${v}%)`;
+      const selected = document.querySelector('.direction button[aria-pressed="true"]').dataset.car;
+      for (const [car, el] of Object.entries(bars)) {
+        const isMer = car === selected;          // selected car = "mer" = the tall bar
+        el.classList.toggle('is-mer', isMer);
+        el.classList.toggle('is-mindre', !isMer);
+        el.style.height = isMer ? '100%' : (100 - v) + '%';   // the OTHER bar shrinks
+        el.querySelector('.bval').textContent = isMer ? 'mer' : 'mindre';
+      }
     }
-    range.addEventListener('input', syncDiff);
-    syncDiff();
 
-    document.querySelectorAll('.direction button').forEach(btn => {
+    range.addEventListener('input', render);
+    buttons.forEach(btn => {
       btn.addEventListener('click', () => {
-        document.querySelectorAll('.direction button').forEach(b =>
-          b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'));
+        buttons.forEach(b => {
+          const pressed = b === btn;
+          b.setAttribute('aria-pressed', pressed ? 'true' : 'false');
+          b.querySelector('.arrow').textContent = pressed ? '▲' : '▼';
+        });
+        render();
       });
     });
+    render();
   </script>
 </body>
 </html>

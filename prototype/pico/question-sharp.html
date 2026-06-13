@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MEM — Skarp &amp; modern</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0e0f12;
+      --panel: #16181d;
+      --panel-2: #1d2026;
+      --ink: #f4f5f7;
+      --ink-soft: #8b8f99;
+      --line: #2a2e36;
+      --accent: #d6ff3f;     /* electric lime */
+      --accent-ink: #16180a;
+      --mer: #3ddc97;
+      --mindre: #ff9f45;
+      --radius: 4px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; font-family: 'Space Grotesk', system-ui, sans-serif;
+      color: var(--ink); background: var(--bg); min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrap { max-width: 520px; margin-inline: auto; padding: 1.5rem 1.1rem 3rem; }
+
+    .brand { display: flex; align-items: center; justify-content: space-between; padding-bottom: 1rem; border-bottom: 1px solid var(--line); margin-bottom: 1.75rem; }
+    .logo { font-weight: 700; font-size: 1rem; letter-spacing: .12em; text-transform: uppercase; }
+    .logo .dot { color: var(--accent); }
+    .prog { font-family: 'Space Mono', monospace; font-size: .85rem; color: var(--ink-soft); letter-spacing: .05em; }
+
+    .eyebrow { font-family: 'Space Mono', monospace; font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 .6rem; }
+    h1 { font-weight: 600; font-size: 1.75rem; line-height: 1.12; letter-spacing: -.02em; margin: 0 0 2rem; }
+
+    .steplabel { font-family: 'Space Mono', monospace; font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 .7rem; display: flex; align-items: center; gap: .6rem; }
+    .steplabel .n { color: var(--accent); }
+
+    /* direction — sharp hairline tiles, lime active */
+    .direction { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; margin-bottom: 2rem; }
+    .dirbtn {
+      appearance: none; cursor: pointer; text-align: left;
+      border: none; background: var(--panel); color: var(--ink);
+      padding: 1.1rem 1.1rem; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 1.05rem;
+      display: flex; align-items: center; gap: .6rem; transition: background .12s, color .12s;
+    }
+    .dirbtn .arrow { font-family: 'Space Mono', monospace; font-size: 1rem; }
+    .dirbtn:hover { background: var(--panel-2); }
+    .dirbtn[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+    .dirbtn[aria-pressed="true"] .arrow { color: var(--accent-ink); }
+
+    /* difference */
+    .diffwrap { margin-bottom: 1.5rem; }
+    .diffhead { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: .6rem; }
+    .diffout { font-family: 'Space Mono', monospace; font-weight: 700; font-size: 2.6rem; line-height: 1; color: var(--accent); font-variant-numeric: tabular-nums; }
+    .diffout::after { content: " / 100"; font-size: .95rem; color: var(--ink-soft); }
+    input[type=range] {
+      -webkit-appearance: none; appearance: none; width: 100%; height: 4px;
+      background: var(--line); cursor: pointer; margin: .4rem 0;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none; width: 18px; height: 18px; border-radius: 2px;
+      background: var(--accent); cursor: grab; box-shadow: 0 0 0 4px rgba(214,255,63,.15);
+    }
+    .scale { display: flex; justify-content: space-between; font-family: 'Space Mono', monospace; color: var(--ink-soft); font-size: .68rem; letter-spacing: .04em; }
+
+    /* two-bars — narrow, baseline grid, mono captions */
+    .twobars { display: flex; gap: 2.5rem; align-items: flex-end; justify-content: center; height: 150px; margin: 2rem 0 .4rem; padding-bottom: 1px; border-bottom: 1px solid var(--line); position: relative; }
+    .twobars::before { content: "50"; position: absolute; left: 0; top: calc(50% - .5rem); font-family: 'Space Mono', monospace; font-size: .6rem; color: var(--ink-soft); }
+    .twobars::after { content: ""; position: absolute; left: 1.6rem; right: 0; top: 50%; border-top: 1px dashed var(--line); }
+    .bar { width: 44px; display: flex; align-items: flex-start; justify-content: center; padding-top: .4rem; font-family: 'Space Mono', monospace; font-size: .7rem; transition: height .25s ease; position: relative; z-index: 1; }
+    .bar.a { background: var(--mer); color: var(--accent-ink); }
+    .bar.b { background: var(--mindre); color: var(--accent-ink); }
+    .barcap { position: absolute; bottom: -1.5rem; font-family: 'Space Mono', monospace; font-size: .68rem; color: var(--ink-soft); }
+
+    .submit {
+      appearance: none; cursor: pointer; width: 100%; margin-top: 1.75rem;
+      border: none; border-radius: var(--radius); padding: 1rem; font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700; font-size: 1rem; letter-spacing: .03em; color: var(--accent-ink);
+      background: var(--accent); transition: opacity .12s;
+    }
+    .submit:hover { opacity: .9; }
+    .submit:active { transform: translateY(1px); }
+    .back { display: block; text-align: center; margin-top: 1.75rem; color: var(--ink-soft); font-family: 'Space Mono', monospace; font-size: .75rem; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="brand">
+      <div class="logo">Mer <span class="dot">·</span> Mindre</div>
+      <div class="prog">03 / 08</div>
+    </div>
+
+    <p class="eyebrow">Bilar &amp; Motor · WLTP</p>
+    <h1>Vilken elbil kommer längst på en laddning?</h1>
+
+    <p class="steplabel"><span class="n">01</span> Vilken är mer?</p>
+    <div class="direction" role="group" aria-label="Riktning">
+      <button type="button" class="dirbtn mer" data-dir="mer" aria-pressed="true">
+        <span class="arrow">↑</span> VW ID.4 Pro
+      </button>
+      <button type="button" class="dirbtn mindre" data-dir="mindre" aria-pressed="false">
+        <span class="arrow">↓</span> BMW iX3
+      </button>
+    </div>
+
+    <p class="steplabel"><span class="n">02</span> Hur stor är skillnaden?</p>
+    <div class="diffwrap">
+      <div class="diffhead">
+        <div class="diffout" id="diffOut">30</div>
+      </div>
+      <input type="range" id="diff" min="0" max="100" value="30" step="1" />
+      <div class="scale"><span>0 · LIKA</span><span>50 · HÄLFTEN</span><span>100 · NÄSTAN ALLT</span></div>
+    </div>
+
+    <div class="twobars" aria-hidden="true">
+      <div class="bar a" id="barTall" style="height:100%"><span class="barcap">VW</span></div>
+      <div class="bar b" id="barShort" style="height:70%"><span class="barcap">BMW</span></div>
+    </div>
+
+    <button type="button" class="submit">Ställ gissning →</button>
+    <a class="back" href="design-compare.html">← tillbaka till jämförelsen</a>
+  </div>
+
+  <script>
+    const out = document.getElementById('diffOut');
+    const range = document.getElementById('diff');
+    const barShort = document.getElementById('barShort');
+    function syncDiff() {
+      const v = Number(range.value);
+      out.textContent = String(v).padStart(2, '0');
+      barShort.style.height = (100 - v) + '%';
+    }
+    range.addEventListener('input', syncDiff);
+    syncDiff();
+    document.querySelectorAll('.direction button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.direction button').forEach(b =>
+          b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'));
+      });
+    });
+  </script>
+</body>
+</html>

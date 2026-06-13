@@ -1,37 +1,32 @@
 <!DOCTYPE html>
-<html lang="sv" data-theme="light">
+<html lang="sv">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mer eller Mindre — Gå med</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
-  <link rel="stylesheet" href="theme.css" />
+  <link rel="stylesheet" href="playful.css" />
 </head>
 <body>
-  <main class="container">
-    <header class="mem-brand">
+  <div class="wrap">
+    <div class="brand">
       <div class="logo"><span class="mer">Mer</span> eller <span class="mindre">Mindre</span></div>
-      <div class="progress-label">Du skannade spelledarens QR</div>
-    </header>
+      <span class="pill soft">QR skannad</span>
+    </div>
 
-    <article>
-      <hgroup>
-        <h2>Gå med i omgången</h2>
-        <p class="muted">Kod <strong>MEM-4827</strong> · värd Martin</p>
-      </hgroup>
+    <div class="card">
+      <h1>Gå med i omgången</h1>
+      <p class="sub">Kod <strong>MEM-4827</strong> · värd Martin</p>
 
       <form action="lobby-player.html" method="get">
-        <label>
-          Ditt namn
-          <input type="text" name="name" value="Nils" placeholder="Skriv ditt namn" autofocus required />
-        </label>
-        <button type="submit">Gå med</button>
+        <label for="name">Ditt namn</label>
+        <input type="text" id="name" name="name" value="Nils" placeholder="Skriv ditt namn" autofocus required />
+        <button type="submit" class="btn">Gå med</button>
       </form>
 
-      <p class="muted center">Skannade du fel? <a href="#">Skriv koden manuellt</a></p>
-    </article>
+      <p class="muted center" style="margin-top:1rem">Skannade du fel? <a href="#">Skriv koden manuellt</a></p>
+    </div>
 
     <p class="fakenav"><a href="../index.html">← Tillbaka till jämförelsen</a></p>
-  </main>
+  </div>
 </body>
 </html>
