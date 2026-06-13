@@ -1,0 +1,13 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="windows" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/src/">
+    <Project Path="src/MerEllerMindre.Domain.Tests/MerEllerMindre.Domain.Tests.csproj" />
+    <Project Path="src/MerEllerMindre.Domain/MerEllerMindre.Domain.csproj" />
+    <Project Path="src/MerEllerMindre.Web/MerEllerMindre.Web.csproj" />
+  </Folder>
+</Solution>
