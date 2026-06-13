@@ -264,11 +264,17 @@ slices:
           playerName: string
           joinedAt: DateTimeOffset
       - v: Screen / Game lobby
+    # Decider-true GWT: given the folded State / Game props `decide` reads (phase guards
+    # the lobby-open window, players guards a duplicate name), when JoinGame, then the
+    # event | rejection. GameNotFound is the empty stream (no State / Game yet).
     tests:
       player can join lobby:
         given:
-          - e: Game / LobbyOpened
-            props: { joinCode: joinCode }
+          - v: State / Game
+            props:
+              phase: lobby
+              joinCode: joinCode
+              players: [hostMartin]
         when:
           - c: JoinGame
             props: { joinCode: joinCode, playerName: Nils }
@@ -284,11 +290,11 @@ slices:
           - x: GameNotFound
       cannot join started game:
         given:
-          - e: Game / LobbyOpened
-            props: { joinCode: joinCode }
-          - e: Game / PlayerJoined
-            props: { playerName: Nils }
-          - e: Game / GameStarted
+          - v: State / Game
+            props:
+              phase: started
+              joinCode: joinCode
+              players: [hostMartin, playerNils]
         when:
           - c: JoinGame
             props: { joinCode: joinCode, playerName: Sven }
@@ -296,10 +302,11 @@ slices:
           - x: GameAlreadyStarted
       cannot join with name already taken:
         given:
-          - e: Game / LobbyOpened
-            props: { joinCode: joinCode }
-          - e: Game / PlayerJoined
-            props: { playerName: Nils }
+          - v: State / Game
+            props:
+              phase: lobby
+              joinCode: joinCode
+              players: [hostMartin, playerNils]
         when:
           - c: JoinGame
             props: { joinCode: joinCode, playerName: Nils }
