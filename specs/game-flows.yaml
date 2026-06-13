@@ -82,6 +82,12 @@
 #   raw card values        double        (valueA, valueB — real magnitudes, any unit)
 #   points/scores          int           (may be negative per scoring rule)
 #   index/count            int
+#   per-player State maps   IReadOnlyDictionary<Guid, T>  (guesses, totalScores)
+#     The folded decision model keys per-player data by playerId for O(1) lookup, so
+#     these State props are maps, NOT IReadOnlyList<T> (a deliberate deviation from the
+#     constitution's collection rule for the keyed decision model). The value objects
+#     (Guess, int) NEVER repeat the key. Wire EVENTS stay flat with an explicit playerId
+#     (GuessSubmitted, QuestionScored); only the folded State is keyed.
 
 slices:
 
@@ -94,14 +100,16 @@ slices:
   # case asserts only the props its `decide` actually reads. This box is distinct from
   # the minimal Todo / read-models the System processors gate on — an event feeds both.
   #
-  # Guess / total fixtures (current-question State, reused by Score Question GWT):
-  #   martinGuessMer30    = { playerId: martinId, direction: mer,    difference: 30 }
-  #   martinGuessMer40    = { playerId: martinId, direction: mer,    difference: 40 }
-  #   martinGuessMindre25 = { playerId: martinId, direction: mindre, difference: 25 }
-  #   nilsGuessMindre50   = { playerId: nilsId,   direction: mindre, difference: 50 }
-  #   nilsGuessMindre20   = { playerId: nilsId,   direction: mindre, difference: 20 }
-  #   martinTotal0        = { playerId: martinId, totalScore: 0 }
-  #   nilsTotal10         = { playerId: nilsId,   totalScore: 10 }
+  # Guess fixtures are pure value objects — the playerId is the MAP KEY, never a
+  # property of the value (guesses/totalScores are Dictionary<Guid, T>, see props).
+  # Tests supply them as YAML flow-maps keyed by playerId, e.g.
+  #   guesses:     { martinId: guessMer30, nilsId: guessMindre50 }
+  #   totalScores: { martinId: 0, nilsId: 10 }   # totals are inline ints, no object
+  #   guessMer30     = { direction: mer,    difference: 30 }
+  #   guessMer40     = { direction: mer,    difference: 40 }
+  #   guessMindre25  = { direction: mindre, difference: 25 }
+  #   guessMindre50  = { direction: mindre, difference: 50 }
+  #   guessMindre20  = { direction: mindre, difference: 20 }
   State Game:
     steps:
       - v: State / Game
@@ -113,10 +121,10 @@ slices:
           players: Player[]              # { playerId: Guid, name: string, isHost: bool }
           questions: Question[]          # raw valueA/valueB per card; no precomputed answer
           currentQuestionIndex: int
-          guesses: Guess[]               # current question only: { playerId: Guid, direction: Direction (mer|mindre), difference: int (0-100) }
+          guesses: IReadOnlyDictionary<Guid, Guess>   # current question only; key=playerId, Guess = { direction: Direction (mer|mindre), difference: int (0-100) }
           pendingPlayerIds: Guid[]       # joined players yet to guess the current question
           currentQuestionScored: bool    # the current question was already revealed/scored
-          totalScores: PlayerTotal[]     # running { playerId: Guid, totalScore: int }
+          totalScores: IReadOnlyDictionary<Guid, int>  # running total per player; key=playerId, value=totalScore
     tests:
       state folds events into the decision model:
         given:
@@ -133,7 +141,7 @@ slices:
               phase: started
               hostPlayerId: martinId
               currentQuestionIndex: 0
-              guesses: [martinGuessMer30]
+              guesses: { martinId: guessMer30 }
               pendingPlayerIds: [nilsId]
               currentQuestionScored: false
       scoring a question accumulates totals and advances state:
@@ -158,10 +166,10 @@ slices:
             props:
               phase: started
               currentQuestionIndex: 0
-              guesses: [martinGuessMer30, nilsGuessMindre50]
+              guesses: { martinId: guessMer30, nilsId: guessMindre50 }
               pendingPlayerIds: []
               currentQuestionScored: true
-              totalScores: [martinTotal0, nilsTotal10]
+              totalScores: { martinId: 0, nilsId: 10 }
 
   # --- Catalog / Setup -----------------------------------------------------
 
@@ -606,10 +614,10 @@ slices:
               phase: started
               questions: [question0, question1]
               currentQuestionIndex: 0
-              guesses: [martinGuessMer30, nilsGuessMindre50]
+              guesses: { martinId: guessMer30, nilsId: guessMindre50 }
               pendingPlayerIds: []
               currentQuestionScored: false
-              totalScores: []
+              totalScores: {}
         when:
           - c: ScoreQuestion
             props: { gameId: gameId, questionIndex: 0 }
@@ -627,10 +635,10 @@ slices:
               phase: started
               questions: [question0, question1]
               currentQuestionIndex: 0
-              guesses: [martinGuessMer40, nilsGuessMindre50]
+              guesses: { martinId: guessMer40, nilsId: guessMindre50 }
               pendingPlayerIds: []
               currentQuestionScored: false
-              totalScores: []
+              totalScores: {}
         when:
           - c: ScoreQuestion
             props: { gameId: gameId, questionIndex: 0 }
@@ -648,10 +656,10 @@ slices:
               phase: started
               questions: [question0, question1]
               currentQuestionIndex: 1
-              guesses: [martinGuessMindre25, nilsGuessMindre20]
+              guesses: { martinId: guessMindre25, nilsId: guessMindre20 }
               pendingPlayerIds: []
               currentQuestionScored: false
-              totalScores: [martinTotal0, nilsTotal10]   # carried in from question0
+              totalScores: { martinId: 0, nilsId: 10 }   # carried in from question0
         when:
           - c: ScoreQuestion
             props: { gameId: gameId, questionIndex: 1 }
@@ -669,7 +677,7 @@ slices:
               phase: started
               questions: [question0, question1]
               currentQuestionIndex: 0
-              guesses: [martinGuessMer30]
+              guesses: { martinId: guessMer30 }
               pendingPlayerIds: [nilsId]   # still pending -> gate not open
               currentQuestionScored: false
         when:
@@ -684,7 +692,7 @@ slices:
               phase: started
               questions: [question0, question1]
               currentQuestionIndex: 0
-              guesses: [martinGuessMer30, nilsGuessMindre50]
+              guesses: { martinId: guessMer30, nilsId: guessMindre50 }
               pendingPlayerIds: []
               currentQuestionScored: true   # already revealed/scored -> double fire guarded
         when:
