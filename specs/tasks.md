@@ -24,24 +24,24 @@
 - [x] `cannot join with name already taken`
 
 ### Start Tests
-- [ ] `game can be started`
-- [ ] `cannot start nonexistent game`
-- [ ] `cannot start without enough players`
+- [x] `game can be started`
+- [x] `cannot start nonexistent game`
+- [x] `cannot start without enough players`
 
 ### Guess Tests
-- [ ] `guess submitted successfully`
-- [ ] `cannot guess in nonexistent game`
-- [ ] `cannot guess before game starts`
-- [ ] `cannot guess as non-member`
-- [ ] `cannot guess again on same question`
-- [ ] `difference out of range rejected`
+- [x] `guess submitted successfully`
+- [x] `cannot guess in nonexistent game`
+- [x] `cannot guess before game starts`
+- [x] `cannot guess as non-member`
+- [x] `cannot guess again on same question`
+- [x] `difference out of range rejected`
 
 ### Scoring Tests
-- [ ] `all guesses scored and answer revealed`
-- [ ] `exact difference with correct direction`
-- [ ] `scores accumulate across rounds`
-- [ ] `cannot score before all guesses in`
-- [ ] `cannot score an already-scored question`
+- [x] `all guesses scored and answer revealed`
+- [x] `exact difference with correct direction`
+- [x] `scores accumulate across rounds`
+- [x] `cannot score before all guesses in`
+- [x] `cannot score an already-scored question`
 
 ### Progression Tests
 - [x] `progress shows a next question while questions remain`
