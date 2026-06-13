@@ -210,9 +210,9 @@ this spec is the single source of truth the C# domain maps to 1:1, so the annota
 
 | Prop family                                   | Type                    |
 |-----------------------------------------------|-------------------------|
-| `gameId` `playerId` `hostPlayerId` `winnerId` | `Guid`                  |
+| `gameId` `playerId` `hostPlayerId`            | `Guid`                  |
 | `questionPackId` `packId`                     | `Guid`                  |
-| `submittedPlayerIds` `pendingPlayerIds`       | `Guid[]`                |
+| `submittedPlayerIds` `pendingPlayerIds` `winnerIds` | `Guid[]`          |
 | `joinCode`                                    | `Guid`                  |
 | `*At` (created/joined/started/submitted/ended)| `DateTimeOffset`        |
 | `direction` `correctDirection` `guessedDirection` | `Direction (mer\|mindre)` |

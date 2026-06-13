@@ -42,11 +42,15 @@
 - [ ] `scores accumulate across rounds`
 - [ ] `cannot score before all guesses in`
 - [ ] `cannot score an already-scored question`
-- [ ] `lowest score wins` (deferred to End Game — winner determination)
 
 ### Progression Tests
 - [x] `progress shows a next question while questions remain`
+- [x] `progress shows no next question once the last is scored`
 - [x] `next question presented when one remains`
+
+### End Game Tests
+- [x] `lowest score wins` (lowest total; ties share the win via `winnerIds`)
+- [x] `tied lowest totals share the win`
 
 ## Phase 4: Question Loading
 - [ ] Create `Question` record (text, optionA, optionB, correctDirection, correctDifference)

@@ -73,8 +73,9 @@
 # correctDifference) is derived by the decider from valueA/valueB in that state.
 #
 # Prop types (these annotations ARE the intended C# types; see specs/CLAUDE.md):
-#   ids                    Guid          (gameId, playerId, hostPlayerId, winnerId,
-#                                         questionPackId, packId, joinCode, and *PlayerIds[])
+#   ids                    Guid          (gameId, playerId, hostPlayerId,
+#                                         questionPackId, packId, joinCode; Guid[] for
+#                                         *PlayerIds and winnerIds — tied lowest totals share the win)
 #   timestamps (*At)       DateTimeOffset
 #   direction              Direction (mer|mindre)  — enum
 #   difference family      int (0-100)   (difference, guessedDifference, and the
@@ -702,6 +703,38 @@ slices:
         then:
           - v: Todo / Game progress
             props: { questionIndex: 0, totalQuestions: 2, scoredQuestionCount: 1, hasNextQuestion: true }
+      progress shows no next question once the last is scored:
+        given:
+          - e: Game / LobbyOpened
+            props: { joinCode: joinCode, hostPlayerId: martinId, questions: [question0, question1] }
+          - e: Game / PlayerJoined
+            props: { playerId: nilsId, playerName: Nils }
+          - e: Game / GameStarted
+          - e: Game / GuessSubmitted
+            props: { playerId: martinId, questionIndex: 0, direction: mer, difference: 30 }
+          - e: Game / GuessSubmitted
+            props: { playerId: nilsId, questionIndex: 0, direction: mindre, difference: 50 }
+          - e: Game / QuestionAnswered
+            props: { questionIndex: 0, correctDirection: mer, correctDifference: 40 }
+          - e: Game / QuestionScored
+            props: { playerId: martinId, questionIndex: 0, roundScore: 0, totalScore: 0 }
+          - e: Game / QuestionScored
+            props: { playerId: nilsId, questionIndex: 0, roundScore: 10, totalScore: 10 }
+          - e: Game / NextQuestionStarted
+            props: { questionIndex: 1 }
+          - e: Game / GuessSubmitted
+            props: { playerId: martinId, questionIndex: 1, direction: mindre, difference: 25 }
+          - e: Game / GuessSubmitted
+            props: { playerId: nilsId, questionIndex: 1, direction: mindre, difference: 20 }
+          - e: Game / QuestionAnswered
+            props: { questionIndex: 1, correctDirection: mindre, correctDifference: 20 }
+          - e: Game / QuestionScored
+            props: { playerId: martinId, questionIndex: 1, roundScore: 5, totalScore: 5 }
+          - e: Game / QuestionScored
+            props: { playerId: nilsId, questionIndex: 1, roundScore: 0, totalScore: 10 }
+        then:
+          - v: Todo / Game progress
+            props: { questionIndex: 1, totalQuestions: 2, scoredQuestionCount: 2, hasNextQuestion: false }
 
   # Maps the lilac "möjliggör / ställ nästa fråga" on the board. Fires when
   # Game progress shows hasNextQuestion. Presents the next question by index.
@@ -740,29 +773,79 @@ slices:
 
   # --- End (System processor) ----------------------------------------------
 
-  # Fires when Game progress shows NOT hasNextQuestion (mutually exclusive with
-  # AskNextQuestion). Both react to QuestionAnswered.
+  # Fires when Game progress shows NOT hasNextQuestion (mutually exclusive with Ask Next
+  # Question; both react to QuestionAnswered and the gate decides which fires). Computes
+  # the final scoreboard from each player's DERIVED totalScore; winnerIds = ALL players
+  # tied at the lowest total (lowest score wins; ties share the win).
   ✍️ End Game:
-    - e: Game / QuestionAnswered
-    - v: Todo / Game progress
-    - t: ⚙️ System / End game
-    - c: EndGame
-      props:
-        gameId: Guid
-    - e: Game / GameEnded
-      props:
-        gameId: Guid
-        finalScoreboard: ScoreboardEntry[]   # { playerId: Guid, playerName: string, totalScore: int }
-        winnerId: Guid
-        endedAt: DateTimeOffset
-    - v: Screen / Final standings
+    steps:
+      - e: Game / QuestionAnswered
+      - v: Todo / Game progress
+      - t: ⚙️ System / End game
+      - c: EndGame
+        props:
+          gameId: Guid
+      - e: Game / GameEnded
+        props:
+          gameId: Guid
+          finalScoreboard: ScoreboardEntry[]   # { playerId: Guid, playerName: string, totalScore: int }
+          winnerIds: Guid[]                     # all players tied at the lowest total
+          endedAt: DateTimeOffset
+      - v: Screen / Final standings
+    # Decider-true GWT: given the folded State / Game (all questions scored, none left —
+    # hasNextQuestion derived false), when EndGame, then GameEnded with the scoreboard and
+    # the lowest-total winner(s). No x: — the hasNextQuestion gate makes End Game / Ask Next
+    # mutually exclusive and each fires once per QuestionAnswered.
+    tests:
+      lowest score wins:
+        given:
+          - v: State / Game
+            props:
+              phase: started
+              currentQuestionIndex: 1
+              players: [hostMartin, playerNils]
+              questions:
+                - { card: question0, roundScores: { martinId: 0, nilsId: 10 }, scored: true }
+                - { card: question1, roundScores: { martinId: 5, nilsId: 0 }, scored: true }
+        when:
+          - c: EndGame
+            props: { gameId: gameId }
+        then:
+          - e: Game / GameEnded
+            props:
+              finalScoreboard:
+                - { playerId: martinId, playerName: Martin, totalScore: 5 }
+                - { playerId: nilsId, playerName: Nils, totalScore: 10 }
+              winnerIds: [martinId]   # martin lowest total (5 < 10)
+              endedAt: endedAt
+      tied lowest totals share the win:
+        given:
+          - v: State / Game
+            props:
+              phase: started
+              currentQuestionIndex: 1
+              players: [hostMartin, playerNils]
+              questions:
+                - { card: question0, roundScores: { martinId: 5, nilsId: 5 }, scored: true }
+                - { card: question1, roundScores: { martinId: 5, nilsId: 5 }, scored: true }
+        when:
+          - c: EndGame
+            props: { gameId: gameId }
+        then:
+          - e: Game / GameEnded
+            props:
+              finalScoreboard:
+                - { playerId: martinId, playerName: Martin, totalScore: 10 }
+                - { playerId: nilsId, playerName: Nils, totalScore: 10 }
+              winnerIds: [martinId, nilsId]   # equal lowest total -> shared win
+              endedAt: endedAt
 
   👀 Final Standings:
     - v: Screen / Final standings
       props:
         gameId: Guid
         finalScoreboard: ScoreboardEntry[]   # { playerId: Guid, playerName: string, totalScore: int }
-        winnerId: Guid
+        winnerIds: Guid[]   # all players tied at the lowest total
 
   # --- Decision model (decider State) — APPENDIX, not a timeline step ------
 
