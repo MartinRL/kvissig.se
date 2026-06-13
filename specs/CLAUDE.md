@@ -279,9 +279,11 @@ natural Swedish sentence the author writes (full control of the grammar; convent
 **Mer = `itemA` has the larger value**). The card carries NO precomputed answer —
 `ScoreQuestion` derives direction + normalized difference from the raw values at reveal.
 
-**File-based CSV catalog**: the catalog is reference data stored as plain CSV files on
-disk — one pack = one `data/packs/*.csv`, edited by the author in Excel / Google Sheets
-(no DB, no embedded resource). The **filename slug is the `packId`/`questionPackId`**
+**File-based CSV catalog**: the catalog is domain reference data stored as plain CSV files
+on disk — one pack = one `*.csv`, edited by the author in Excel / Google Sheets (no DB, no
+embedded resource). The packs live in the **Domain project**
+(`src/MerEllerMindre.Domain/data/packs`) and are copied to output (so the Web shell and
+tests find them beside the assembly). The **filename slug is the `packId`/`questionPackId`**
 (`mer-eller-mindre.csv` → `mer-eller-mindre`; de-slugged → display name "Mer eller
 mindre"). Files use the **Swedish Excel dialect** (`;` separator, `,` decimal, sv-SE) with
 **Swedish column headers** mapped to the English domain fields via the SV↔EN glossary:
