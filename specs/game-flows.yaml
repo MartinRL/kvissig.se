@@ -259,13 +259,16 @@ slices:
           firstQuestionIndex: int
           startedAt: DateTimeOffset
       - v: Screen / Question
+    # Decider-true GWT: given the folded State / Game props `decide` reads (players
+    # count guards NotEnoughPlayers; phase: lobby is the start window), when StartGame,
+    # then the event | rejection. GameNotFound is the empty stream (no State / Game yet).
     tests:
       game can be started:
         given:
-          - e: Game / LobbyOpened
-            props: { joinCode: joinCode }
-          - e: Game / PlayerJoined
-            props: { playerName: Nils }
+          - v: State / Game
+            props:
+              phase: lobby
+              players: [hostMartin, playerNils]
         when:
           - c: StartGame
             props: { gameId: gameId }
@@ -281,8 +284,10 @@ slices:
           - x: GameNotFound
       cannot start without enough players:
         given:
-          - e: Game / LobbyOpened
-            props: { joinCode: joinCode }
+          - v: State / Game
+            props:
+              phase: lobby
+              players: [hostMartin]
         when:
           - c: StartGame
             props: { gameId: gameId }
@@ -741,7 +746,7 @@ slices:
   #   hostMartin = { playerId: martinId, name: Martin, isHost: true }
   #   playerNils = { playerId: nilsId,   name: Nils,   isHost: false }
   #   playerSven = { playerId: svenId,   name: Sven,   isHost: false }
-  Decision model:
+  Decision Model:
     steps:
       - v: State / Game
         props:
