@@ -340,74 +340,81 @@ slices:
           difference: int (0-100)
           submittedAt: DateTimeOffset
       - v: Screen / Waiting for others
+    # Decider-true GWT: given the folded State / Game props `decide` reads — phase
+    # (GameNotStarted), players (PlayerNotInGame), the current question's guesses
+    # (AlreadyGuessed) — when SubmitGuess, then GuessSubmitted | rejection. The 0-100
+    # range is a command-value guard (DifferenceOutOfRange). GameNotFound = empty stream.
     tests:
       guess submitted successfully:
         given:
-          - e: Game / LobbyOpened
-            props: { joinCode: joinCode }
-          - e: Game / PlayerJoined
-            props: { playerId: playerId, playerName: Nils }
-          - e: Game / GameStarted
+          - v: State / Game
+            props:
+              phase: started
+              currentQuestionIndex: 0
+              players: [hostMartin, playerNils]
+              questions:
+                - { card: question0, guesses: {}, scored: false }
         when:
           - c: SubmitGuess
-            props: { gameId: gameId, playerId: playerId, direction: mer, difference: 30 }
+            props: { gameId: gameId, playerId: nilsId, direction: mer, difference: 30 }
         then:
           - e: Game / GuessSubmitted
-            props: { playerId: playerId, questionIndex: 0, direction: mer, difference: 30, submittedAt: submittedAt }
+            props: { playerId: nilsId, questionIndex: 0, direction: mer, difference: 30, submittedAt: submittedAt }
       cannot guess in nonexistent game:
         given: []
         when:
           - c: SubmitGuess
-            props: { gameId: unknown, playerId: playerId, direction: mer, difference: 30 }
+            props: { gameId: unknown, playerId: nilsId, direction: mer, difference: 30 }
         then:
           - x: GameNotFound
       cannot guess before game starts:
         given:
-          - e: Game / LobbyOpened
-            props: { joinCode: joinCode }
-          - e: Game / PlayerJoined
-            props: { playerId: playerId, playerName: Nils }
+          - v: State / Game
+            props:
+              phase: lobby
+              players: [hostMartin, playerNils]
         when:
           - c: SubmitGuess
-            props: { gameId: gameId, playerId: playerId, direction: mer, difference: 30 }
+            props: { gameId: gameId, playerId: nilsId, direction: mer, difference: 30 }
         then:
           - x: GameNotStarted
       cannot guess as non-member:
         given:
-          - e: Game / LobbyOpened
-            props: { joinCode: joinCode }
-          - e: Game / PlayerJoined
-            props: { playerId: playerId, playerName: Nils }
-          - e: Game / GameStarted
+          - v: State / Game
+            props:
+              phase: started
+              players: [hostMartin, playerNils]
         when:
           - c: SubmitGuess
-            props: { gameId: gameId, playerId: stranger, direction: mer, difference: 30 }
+            props: { gameId: gameId, playerId: svenId, direction: mer, difference: 30 }
         then:
           - x: PlayerNotInGame
       cannot guess again on same question:
         given:
-          - e: Game / LobbyOpened
-            props: { joinCode: joinCode }
-          - e: Game / PlayerJoined
-            props: { playerId: playerId, playerName: Nils }
-          - e: Game / GameStarted
-          - e: Game / GuessSubmitted
-            props: { playerId: playerId, questionIndex: 0 }
+          - v: State / Game
+            props:
+              phase: started
+              currentQuestionIndex: 0
+              players: [hostMartin, playerNils]
+              questions:
+                - { card: question0, guesses: { nilsId: guessMer30 }, scored: false }
         when:
           - c: SubmitGuess
-            props: { gameId: gameId, playerId: playerId, direction: mindre, difference: 20 }
+            props: { gameId: gameId, playerId: nilsId, direction: mindre, difference: 20 }
         then:
           - x: AlreadyGuessed
       difference out of range rejected:
         given:
-          - e: Game / LobbyOpened
-            props: { joinCode: joinCode }
-          - e: Game / PlayerJoined
-            props: { playerId: playerId, playerName: Nils }
-          - e: Game / GameStarted
+          - v: State / Game
+            props:
+              phase: started
+              currentQuestionIndex: 0
+              players: [hostMartin, playerNils]
+              questions:
+                - { card: question0, guesses: {}, scored: false }
         when:
           - c: SubmitGuess
-            props: { gameId: gameId, playerId: playerId, direction: mer, difference: 150 }
+            props: { gameId: gameId, playerId: nilsId, direction: mer, difference: 150 }
         then:
           - x: DifferenceOutOfRange
 
