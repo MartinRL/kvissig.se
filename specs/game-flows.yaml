@@ -10,16 +10,30 @@
 #   views carry a view lane        (Screen / Game lobby, Todo / Outstanding guesses)
 #
 # View lanes:
+#   State / ...   the decider's decision model (folded GameState); read by `decide`
 #   Screen / ...  human screens players & the GM actually see
 #   Todo / ...    processor-facing read-models the System observes (never shown)
 # NOTE: emlang parses + lints these view-lane prefixes fine, but the diagram renders
 #   views by their bare name without a per-view lane label (only triggers and events
 #   get a visible swimlane label). The prefix still documents intent and maps to code.
 #
+# Verification is decider-true (see docs/adr/decider-pattern.svg):
+#   Given -> state (prior events folded via evolve)   When -> command   Then -> events|x
+# emlang has no `state` element, so the decider's Given is expressed as a VIEW:
+# State / Game, the single folded decision model (one Decider per game, one State).
+# Every command/processor slice references `State / Game` in `given:`, asserting only
+# the props that case relies on. GWT given:s never replay events — that is what the
+# State / Game / Todo / Screen view-slices' own GT (prior events -> view) verify.
+#
 # Automations are the Event-Modeling PROCESSOR pattern, not a dedicated element
 # (emlang has no cog/gear): event(s) -> Todo read-model -> System trigger -> command
-# -> event(s) -> Screen. "All guesses in" is therefore a CONDITION of a todo
-# read-model (Todo / Outstanding guesses), not an event.
+# -> event(s) -> Screen. The Todo read-model is MINIMAL (only what the gear needs to
+# see a task exists) and SEPARATE from State / Game — an event feeds many green boxes;
+# the decision model is never reused as a todo list. "All guesses in" is therefore a
+# CONDITION of a todo read-model (Todo / Outstanding guesses), not an event. The game
+# is co-located (one room, like a board game) so automations fire on a STATE CONDITION,
+# never a clock — there are NO timeouts and no Passage-of-Time slices (a documented
+# future possibility only).
 #
 # Scoring (see ScoreQuestion / QuestionScored):
 #   roundScore = |guessedDifference - correctDifference| + (directionCorrect ? -10 : 0)
@@ -70,6 +84,84 @@
 #   index/count            int
 
 slices:
+
+  # --- Decision model (decider State) --------------------------------------
+
+  # State / Game is the folded GameState the decider's `decide` reads — the SINGLE
+  # decision model (one Decider per game, one State). emlang has no `state` element,
+  # so every command/processor slice expresses its Given as this view (see
+  # docs/adr/decider-pattern.svg: Given = prior events -> state via evolve). A GWT
+  # case asserts only the props its `decide` actually reads. This box is distinct from
+  # the minimal Todo / read-models the System processors gate on — an event feeds both.
+  #
+  # Guess / total fixtures (current-question State, reused by Score Question GWT):
+  #   martinGuessMer30    = { playerId: martinId, direction: mer,    difference: 30 }
+  #   martinGuessMer40    = { playerId: martinId, direction: mer,    difference: 40 }
+  #   martinGuessMindre25 = { playerId: martinId, direction: mindre, difference: 25 }
+  #   nilsGuessMindre50   = { playerId: nilsId,   direction: mindre, difference: 50 }
+  #   nilsGuessMindre20   = { playerId: nilsId,   direction: mindre, difference: 20 }
+  #   martinTotal0        = { playerId: martinId, totalScore: 0 }
+  #   nilsTotal10         = { playerId: nilsId,   totalScore: 10 }
+  State Game:
+    steps:
+      - v: State / Game
+        props:
+          gameId: Guid
+          joinCode: Guid
+          phase: GamePhase (lobby|started|ended)
+          hostPlayerId: Guid
+          players: Player[]              # { playerId: Guid, name: string, isHost: bool }
+          questions: Question[]          # raw valueA/valueB per card; no precomputed answer
+          currentQuestionIndex: int
+          guesses: Guess[]               # current question only: { playerId: Guid, direction: Direction (mer|mindre), difference: int (0-100) }
+          pendingPlayerIds: Guid[]       # joined players yet to guess the current question
+          currentQuestionScored: bool    # the current question was already revealed/scored
+          totalScores: PlayerTotal[]     # running { playerId: Guid, totalScore: int }
+    tests:
+      state folds events into the decision model:
+        given:
+          - e: Game / LobbyOpened
+            props: { joinCode: joinCode, hostPlayerId: martinId }
+          - e: Game / PlayerJoined
+            props: { playerId: nilsId, playerName: Nils }
+          - e: Game / GameStarted
+          - e: Game / GuessSubmitted
+            props: { playerId: martinId, questionIndex: 0, direction: mer, difference: 30 }
+        then:
+          - v: State / Game
+            props:
+              phase: started
+              hostPlayerId: martinId
+              currentQuestionIndex: 0
+              guesses: [martinGuessMer30]
+              pendingPlayerIds: [nilsId]
+              currentQuestionScored: false
+      scoring a question accumulates totals and advances state:
+        given:
+          - e: Game / LobbyOpened
+            props: { joinCode: joinCode, hostPlayerId: martinId }
+          - e: Game / PlayerJoined
+            props: { playerId: nilsId, playerName: Nils }
+          - e: Game / GameStarted
+          - e: Game / GuessSubmitted
+            props: { playerId: martinId, questionIndex: 0, direction: mer, difference: 30 }
+          - e: Game / GuessSubmitted
+            props: { playerId: nilsId, questionIndex: 0, direction: mindre, difference: 50 }
+          - e: Game / QuestionAnswered
+            props: { questionIndex: 0, correctDirection: mer, correctDifference: 40 }
+          - e: Game / QuestionScored
+            props: { playerId: martinId, questionIndex: 0, roundScore: 0, totalScore: 0 }
+          - e: Game / QuestionScored
+            props: { playerId: nilsId, questionIndex: 0, roundScore: 10, totalScore: 10 }
+        then:
+          - v: State / Game
+            props:
+              phase: started
+              currentQuestionIndex: 0
+              guesses: [martinGuessMer30, nilsGuessMindre50]
+              pendingPlayerIds: []
+              currentQuestionScored: true
+              totalScores: [martinTotal0, nilsTotal10]
 
   # --- Catalog / Setup -----------------------------------------------------
 
@@ -388,16 +480,77 @@ slices:
 
   # --- Scoring (System processor) ------------------------------------------
 
-  # Todo read-model the scorer observes. ASSUMPTION: derived from PlayerJoined
-  # minus per-question GuessSubmitted; allGuessesIn = pendingPlayerIds empty.
+  # Minimal Todo read-model the scorer's gear observes — only enough to see that a
+  # scoring task exists. Lifecycle: GameStarted / NextQuestionStarted OPENS the entry
+  # (every joined player pending); each GuessSubmitted CHECKS OFF one player;
+  # allGuessesIn = pendingPlayerIds empty (the gate the System / Score question
+  # processor fires on); the next NextQuestionStarted reopens it at the new index.
   # The player count is known, so "all guesses in" is a condition here, not an event.
+  # SEPARATE from State / Game — re-validation of the gate (QuestionAlreadyScored)
+  # lives on State, keeping this list minimal. The GT below proves the projection.
   Outstanding Guesses:
-    - v: Todo / Outstanding guesses
-      props:
-        gameId: Guid
-        questionIndex: int
-        pendingPlayerIds: Guid[]
-        allGuessesIn: bool
+    steps:
+      - v: Todo / Outstanding guesses
+        props:
+          gameId: Guid
+          questionIndex: int
+          pendingPlayerIds: Guid[]
+          allGuessesIn: bool
+    tests:
+      outstanding guesses open for every player when the game starts:
+        given:
+          - e: Game / LobbyOpened
+            props: { joinCode: joinCode, hostPlayerId: martinId }
+          - e: Game / PlayerJoined
+            props: { playerId: nilsId, playerName: Nils }
+          - e: Game / GameStarted
+        then:
+          - v: Todo / Outstanding guesses
+            props: { questionIndex: 0, pendingPlayerIds: [martinId, nilsId], allGuessesIn: false }
+      a submitted guess checks off that player:
+        given:
+          - e: Game / LobbyOpened
+            props: { joinCode: joinCode, hostPlayerId: martinId }
+          - e: Game / PlayerJoined
+            props: { playerId: nilsId, playerName: Nils }
+          - e: Game / GameStarted
+          - e: Game / GuessSubmitted
+            props: { playerId: martinId, questionIndex: 0, direction: mer, difference: 30 }
+        then:
+          - v: Todo / Outstanding guesses
+            props: { questionIndex: 0, pendingPlayerIds: [nilsId], allGuessesIn: false }
+      all guesses in once every player has guessed:
+        given:
+          - e: Game / LobbyOpened
+            props: { joinCode: joinCode, hostPlayerId: martinId }
+          - e: Game / PlayerJoined
+            props: { playerId: nilsId, playerName: Nils }
+          - e: Game / GameStarted
+          - e: Game / GuessSubmitted
+            props: { playerId: martinId, questionIndex: 0, direction: mer, difference: 30 }
+          - e: Game / GuessSubmitted
+            props: { playerId: nilsId, questionIndex: 0, direction: mindre, difference: 50 }
+        then:
+          - v: Todo / Outstanding guesses
+            props: { questionIndex: 0, pendingPlayerIds: [], allGuessesIn: true }
+      the next question reopens outstanding guesses:
+        given:
+          - e: Game / LobbyOpened
+            props: { joinCode: joinCode, hostPlayerId: martinId }
+          - e: Game / PlayerJoined
+            props: { playerId: nilsId, playerName: Nils }
+          - e: Game / GameStarted
+          - e: Game / GuessSubmitted
+            props: { playerId: martinId, questionIndex: 0, direction: mer, difference: 30 }
+          - e: Game / GuessSubmitted
+            props: { playerId: nilsId, questionIndex: 0, direction: mindre, difference: 50 }
+          - e: Game / QuestionAnswered
+            props: { questionIndex: 0, correctDirection: mer, correctDifference: 40 }
+          - e: Game / NextQuestionStarted
+            props: { questionIndex: 1 }
+        then:
+          - v: Todo / Outstanding guesses
+            props: { questionIndex: 1, pendingPlayerIds: [martinId, nilsId], allGuessesIn: false }
 
   # Processor: once Outstanding guesses shows allGuessesIn, the System scores.
   # Balances the card's raw valueA/valueB onto 0-100: derives correctDirection (larger
@@ -441,18 +594,22 @@ slices:
           roundScore: int
           totalScore: int
       - v: Screen / Round results
+    # Decider-true GWT: given the folded State / Game (the props `decide` reads),
+    # when ScoreQuestion, then the events | rejection. No event-replay in given —
+    # the open->checked-off->scored history is verified by State / Game's and
+    # Outstanding Guesses' own GT. allGuessesIn is encoded here as empty pendingPlayerIds.
     tests:
       all guesses scored and answer revealed:
         given:
-          - e: Game / LobbyOpened
-            props: { joinCode: joinCode, hostPlayerId: martinId }
-          - e: Game / PlayerJoined
-            props: { playerId: nilsId, playerName: Nils }
-          - e: Game / GameStarted
-          - e: Game / GuessSubmitted
-            props: { playerId: martinId, questionIndex: 0, direction: mer, difference: 30 }
-          - e: Game / GuessSubmitted
-            props: { playerId: nilsId, questionIndex: 0, direction: mindre, difference: 50 }
+          - v: State / Game
+            props:
+              phase: started
+              questions: [question0, question1]
+              currentQuestionIndex: 0
+              guesses: [martinGuessMer30, nilsGuessMindre50]
+              pendingPlayerIds: []
+              currentQuestionScored: false
+              totalScores: []
         when:
           - c: ScoreQuestion
             props: { gameId: gameId, questionIndex: 0 }
@@ -465,15 +622,15 @@ slices:
             props: { playerId: nilsId, guessedDirection: mindre, guessedDifference: 50, directionCorrect: false, differencePoints: 10, bonusPoints: 0, roundScore: 10, totalScore: 10 }
       exact difference with correct direction:
         given:
-          - e: Game / LobbyOpened
-            props: { joinCode: joinCode, hostPlayerId: martinId }
-          - e: Game / PlayerJoined
-            props: { playerId: nilsId, playerName: Nils }
-          - e: Game / GameStarted
-          - e: Game / GuessSubmitted
-            props: { playerId: martinId, questionIndex: 0, direction: mer, difference: 40 }
-          - e: Game / GuessSubmitted
-            props: { playerId: nilsId, questionIndex: 0, direction: mindre, difference: 50 }
+          - v: State / Game
+            props:
+              phase: started
+              questions: [question0, question1]
+              currentQuestionIndex: 0
+              guesses: [martinGuessMer40, nilsGuessMindre50]
+              pendingPlayerIds: []
+              currentQuestionScored: false
+              totalScores: []
         when:
           - c: ScoreQuestion
             props: { gameId: gameId, questionIndex: 0 }
@@ -486,27 +643,15 @@ slices:
             props: { playerId: nilsId, guessedDirection: mindre, guessedDifference: 50, directionCorrect: false, differencePoints: 10, bonusPoints: 0, roundScore: 10, totalScore: 10 }
       scores accumulate across rounds:
         given:
-          - e: Game / LobbyOpened
-            props: { joinCode: joinCode, hostPlayerId: martinId }
-          - e: Game / PlayerJoined
-            props: { playerId: nilsId, playerName: Nils }
-          - e: Game / GameStarted
-          - e: Game / GuessSubmitted
-            props: { playerId: martinId, questionIndex: 0, direction: mer, difference: 30 }
-          - e: Game / GuessSubmitted
-            props: { playerId: nilsId, questionIndex: 0, direction: mindre, difference: 50 }
-          - e: Game / QuestionAnswered
-            props: { questionIndex: 0, correctDirection: mer, correctDifference: 40 }
-          - e: Game / QuestionScored
-            props: { playerId: martinId, questionIndex: 0, roundScore: 0, totalScore: 0 }
-          - e: Game / QuestionScored
-            props: { playerId: nilsId, questionIndex: 0, roundScore: 10, totalScore: 10 }
-          - e: Game / NextQuestionStarted
-            props: { questionIndex: 1 }
-          - e: Game / GuessSubmitted
-            props: { playerId: martinId, questionIndex: 1, direction: mindre, difference: 25 }
-          - e: Game / GuessSubmitted
-            props: { playerId: nilsId, questionIndex: 1, direction: mindre, difference: 20 }
+          - v: State / Game
+            props:
+              phase: started
+              questions: [question0, question1]
+              currentQuestionIndex: 1
+              guesses: [martinGuessMindre25, nilsGuessMindre20]
+              pendingPlayerIds: []
+              currentQuestionScored: false
+              totalScores: [martinTotal0, nilsTotal10]   # carried in from question0
         when:
           - c: ScoreQuestion
             props: { gameId: gameId, questionIndex: 1 }
@@ -519,13 +664,14 @@ slices:
             props: { playerId: nilsId, guessedDifference: 20, directionCorrect: true, differencePoints: 0, bonusPoints: -10, roundScore: -10, totalScore: 0 }
       cannot score before all guesses in:
         given:
-          - e: Game / LobbyOpened
-            props: { joinCode: joinCode, hostPlayerId: martinId }
-          - e: Game / PlayerJoined
-            props: { playerId: nilsId, playerName: Nils }
-          - e: Game / GameStarted
-          - e: Game / GuessSubmitted
-            props: { playerId: martinId, questionIndex: 0, direction: mer, difference: 30 }
+          - v: State / Game
+            props:
+              phase: started
+              questions: [question0, question1]
+              currentQuestionIndex: 0
+              guesses: [martinGuessMer30]
+              pendingPlayerIds: [nilsId]   # still pending -> gate not open
+              currentQuestionScored: false
         when:
           - c: ScoreQuestion
             props: { gameId: gameId, questionIndex: 0 }
@@ -533,21 +679,14 @@ slices:
           - x: NotAllGuessesIn
       cannot score an already-scored question:
         given:
-          - e: Game / LobbyOpened
-            props: { joinCode: joinCode, hostPlayerId: martinId }
-          - e: Game / PlayerJoined
-            props: { playerId: nilsId, playerName: Nils }
-          - e: Game / GameStarted
-          - e: Game / GuessSubmitted
-            props: { playerId: martinId, questionIndex: 0, direction: mer, difference: 30 }
-          - e: Game / GuessSubmitted
-            props: { playerId: nilsId, questionIndex: 0, direction: mindre, difference: 50 }
-          - e: Game / QuestionAnswered
-            props: { questionIndex: 0, correctDirection: mer, correctDifference: 40 }
-          - e: Game / QuestionScored
-            props: { playerId: martinId, questionIndex: 0 }
-          - e: Game / QuestionScored
-            props: { playerId: nilsId, questionIndex: 0 }
+          - v: State / Game
+            props:
+              phase: started
+              questions: [question0, question1]
+              currentQuestionIndex: 0
+              guesses: [martinGuessMer30, nilsGuessMindre50]
+              pendingPlayerIds: []
+              currentQuestionScored: true   # already revealed/scored -> double fire guarded
         when:
           - c: ScoreQuestion
             props: { gameId: gameId, questionIndex: 0 }
