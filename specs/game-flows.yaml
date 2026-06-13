@@ -583,7 +583,7 @@ slices:
     steps:
       - e: Game / GuessSubmitted
       - v: Todo / Outstanding guesses
-      - t: System / Score question
+      - t: ⚙️ System / Score question
       - c: ScoreQuestion
         props:
           gameId: Guid
@@ -735,7 +735,7 @@ slices:
   Ask Next Question:
     - e: Game / QuestionAnswered
     - v: Todo / Game progress
-    - t: System / Ask next question
+    - t: ⚙️ System / Ask next question
     - c: AskNextQuestion
       props:
         gameId: Guid
@@ -752,7 +752,7 @@ slices:
   End Game:
     - e: Game / QuestionAnswered
     - v: Todo / Game progress
-    - t: System / End game
+    - t: ⚙️ System / End game
     - c: EndGame
       props:
         gameId: Guid

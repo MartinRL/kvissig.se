@@ -90,6 +90,19 @@ Two user roles + System. Events live on the `Game` stream; views are bare.
   one exception is a plain UI entry point with no backing read model — the
   `Player / Join form` (you type a join code before any game state exists for you).
   `System / ...` triggers name the policy.
+- **`⚙️ System / ...` triggers carry a gear-emoji prefix.** Rationale: in canonical
+  Event Modeling a processor is drawn as a **gear icon in the initiator lane** — it sits
+  where a human's UI wireframe would sit, above the command it fires (see the hotel
+  example's "Checkout Processor" / "Payment Processor" gears). emlang has no cog element
+  and renders a trigger as `Role → swimlane` + `Name → box`, so prefixing the System
+  trigger's role (`⚙️ System`) puts the gear in the **initiator lane** — the faithful
+  analog of that gear icon, NOT a slice-name marker. It parses as plain UTF-8 (lint does
+  not validate name content) and renders on the `⚙️ System` swimlane label. Apply it
+  CONSISTENTLY to all three System processors (`⚙️ System / Score question`,
+  `⚙️ System / Ask next question`, `⚙️ System / End game`) — never a subset, or the
+  swimlane labels disagree. The three System processors share ONE `System` initiator
+  lane (distinguished by box name), a simplification of the canonical per-processor gear.
+  Human-role triggers (`GameMaster /`, `Player /`) stay bare.
 - **Commands are bare**: `OpenLobby`, `SubmitGuess`.
 - **Events carry the stream**: `Game / LobbyOpened`.
 - **Exceptions are bare**: `GameNotFound`.
