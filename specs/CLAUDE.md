@@ -219,6 +219,15 @@ Notes:
   `Player { playerId: Guid, name: string, isHost: bool }`,
   `PlayerScore { playerId: Guid, roundScore: int, totalScore: int }`,
   `ScoreboardEntry { playerId: Guid, playerName: string, totalScore: int }`.
+- **`State / Game` folds the whole deck as `questions: IReadOnlyList<QuestionRound>`** —
+  the game loads all questions up front and each player's guess folds into its question.
+  `QuestionRound { card: Question, guesses: IReadOnlyDictionary<Guid, Guess>,
+  correctDirection: Direction?, correctDifference: int?, roundScores:
+  IReadOnlyDictionary<Guid, int>, scored: bool }`. Progress is DERIVED, not stored:
+  `pendingPlayerIds(i)`, `allGuessesIn(i)`, `currentQuestionScored`, `hasNextQuestion`,
+  and `totalScore(p) = Σ scored questions roundScores[p]`. `Todo / Outstanding guesses`
+  mirrors this as one row per question (`OutstandingQuestion { questionIndex,
+  pendingPlayerIds, allGuessesIn }`) — a real todo list the scorer gears on.
 
 > The current C# records (string ids, `int Guess`, single `DateTimeOffset` on
 > `OccurredAt`) are reconciled to this vocabulary in a later, separate effort.
