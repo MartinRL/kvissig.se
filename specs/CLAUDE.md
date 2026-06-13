@@ -109,6 +109,23 @@ Two user roles + System. Events live on the `Game` stream; views are bare.
 - **Views carry a view lane**: `Screen / Game lobby`, `Todo / Outstanding guesses`
   (see below).
 
+### Slice-name emoji prefix (slice TYPE marker)
+
+Every slice key carries an emoji prefix so the spec reads as colour-coded columns at a
+glance. Unlike `⚙️` (which marks the System *trigger*, an initiator gear), these mark
+the **slice's type** — one of three buckets, applied to ALL slices (never a subset):
+
+| Prefix | Slice type      | Meaning                                  | Slices |
+|--------|-----------------|------------------------------------------|--------|
+| `✍️`   | state-change    | writes the stream (command/processor)    | Open Lobby, Join Game, Start Game, Submit Guess, Score Question, Ask Next Question, End Game |
+| `👀`   | state view      | reads/shows state (screens + decider State) | Quiz Catalog, Game Lobby, Question, Waiting For Others, Round Results, Final Standings, Decision Model |
+| `📝`   | todo            | a `Todo /` read-model the gears gate on  | Outstanding Guesses, Game Progress |
+
+`✍️` (write) / `👀` (read) are a deliberate read/write duality; `📝` is the todo subset
+of read-models. A processor slice is `✍️` (it writes) AND still carries `⚙️` on its
+System trigger — the two emoji are orthogonal (slice type vs initiator gear). Prefixes
+parse as plain UTF-8 (lint ignores name content) and render on the slice heading.
+
 ### Automations (processor pattern)
 
 emlang has **no dedicated cog/gear element**. An automation is the Event-Modeling

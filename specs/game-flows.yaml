@@ -97,7 +97,7 @@ slices:
   # ASSUMPTION: the Quiz catalog is reference data, not on the Game stream.
   # Choosing to play MEM = choosing a question pack (a deck of designated
   # question-cards, e.g. "0-100"). Pack publishing/commerce is out of scope.
-  Quiz Catalog:
+  👀 Quiz Catalog:
     - v: Screen / Quiz catalog
       props:
         packs: QuestionPack[]   # { packId: Guid, name: string, questionCount: int }
@@ -112,7 +112,7 @@ slices:
   #   question0 = Question { questionText: question0, optionA: question0A, optionB: question0B, valueA: 100, valueB: 60 }  # ScoreQuestion derives -> mer,    40
   #   question1 = Question { questionText: question1, optionA: question1A, optionB: question1B, valueA: 80,  valueB: 100 } # ScoreQuestion derives -> mindre, 20
   #   host hostName = Martin ; minted joinCode = joinCode
-  Open Lobby:
+  ✍️ Open Lobby:
     steps:
       - t: GameMaster / Quiz catalog
       - c: OpenLobby
@@ -151,7 +151,7 @@ slices:
         then:
           - x: QuestionPackNotFound
 
-  Game Lobby:
+  👀 Game Lobby:
     - v: Screen / Game lobby
       props:
         gameId: Guid
@@ -168,7 +168,7 @@ slices:
   # ASSUMPTION: duplicate joins are detected by playerName within a game (the
   #   command carries no playerId), so NameAlreadyTaken guards a name already
   #   present in the lobby — including the host's name (the GM is the first player).
-  Join Game:
+  ✍️ Join Game:
     steps:
       - t: Player / Join form
       - c: JoinGame
@@ -245,7 +245,7 @@ slices:
   #   otherwise NotEnoughPlayers. GameAlreadyStarted is NOT guarded here (already
   #   guarded on Join Game); host-only (NotGameHost) would need requestingPlayerId
   #   on the command and is deferred.
-  Start Game:
+  ✍️ Start Game:
     steps:
       - t: GameMaster / Game lobby
       - c: StartGame
@@ -294,7 +294,7 @@ slices:
         then:
           - x: NotEnoughPlayers
 
-  Question:
+  👀 Question:
     - v: Screen / Question
       props:
         gameId: Guid
@@ -317,7 +317,7 @@ slices:
   #   bad input is a web/model-binding concern in the imperative shell, not a slice.
   # The guess targets the current question by folded state, so SubmitGuess carries no
   # questionIndex; GuessSubmitted stamps the resolved questionIndex.
-  Submit Guess:
+  ✍️ Submit Guess:
     steps:
       - t: Player / Question
       - c: SubmitGuess
@@ -418,7 +418,7 @@ slices:
         then:
           - x: DifferenceOutOfRange
 
-  Waiting For Others:
+  👀 Waiting For Others:
     - v: Screen / Waiting for others
       props:
         gameId: Guid
@@ -439,7 +439,7 @@ slices:
   # SEPARATE from State / Game — re-validation of the gate (QuestionAlreadyScored) lives
   # on State (questions[i].scored), keeping these rows minimal. The GT below proves the
   # per-question projection, including independent check-off across questions.
-  Outstanding Guesses:
+  📝 Outstanding Guesses:
     steps:
       - v: Todo / Outstanding guesses
         props:
@@ -527,7 +527,7 @@ slices:
   # always emits N QuestionScored (one per player) — the happy cases are multi-player.
   # 'lowest score wins' is winner determination and lives on End Game, not here.
   # Fixtures: question0 = {mer, 40}, question1 = {mindre, 20}; host = martinId, Nils = nilsId.
-  Score Question:
+  ✍️ Score Question:
     steps:
       - e: Game / GuessSubmitted
       - v: Todo / Outstanding guesses
@@ -656,7 +656,7 @@ slices:
         then:
           - x: QuestionAlreadyScored
 
-  Round Results:
+  👀 Round Results:
     - v: Screen / Round results
       props:
         gameId: Guid
@@ -672,7 +672,7 @@ slices:
   # scoredQuestionCount / hasNextQuestion are projected as each question is answered.
   # hasNextQuestion is the gate: true -> ⚙️ Ask next question, false -> ⚙️ End game
   # (mutually exclusive). SEPARATE from State / Game, kept minimal. GT below proves it.
-  Game Progress:
+  📝 Game Progress:
     steps:
       - v: Todo / Game progress
         props:
@@ -705,7 +705,7 @@ slices:
 
   # Maps the lilac "möjliggör / ställ nästa fråga" on the board. Fires when
   # Game progress shows hasNextQuestion. Presents the next question by index.
-  Ask Next Question:
+  ✍️ Ask Next Question:
     steps:
       - e: Game / QuestionAnswered
       - v: Todo / Game progress
@@ -742,7 +742,7 @@ slices:
 
   # Fires when Game progress shows NOT hasNextQuestion (mutually exclusive with
   # AskNextQuestion). Both react to QuestionAnswered.
-  End Game:
+  ✍️ End Game:
     - e: Game / QuestionAnswered
     - v: Todo / Game progress
     - t: ⚙️ System / End game
@@ -757,7 +757,7 @@ slices:
         endedAt: DateTimeOffset
     - v: Screen / Final standings
 
-  Final Standings:
+  👀 Final Standings:
     - v: Screen / Final standings
       props:
         gameId: Guid
@@ -798,7 +798,7 @@ slices:
   #   hostMartin = { playerId: martinId, name: Martin, isHost: true }
   #   playerNils = { playerId: nilsId,   name: Nils,   isHost: false }
   #   playerSven = { playerId: svenId,   name: Sven,   isHost: false }
-  Decision Model:
+  👀 Decision Model:
     steps:
       - v: State / Game
         props:
