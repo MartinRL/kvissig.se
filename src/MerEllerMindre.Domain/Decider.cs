@@ -75,9 +75,11 @@ public static class Decider
                 CurrentQuestionIndex = e.QuestionIndex
             },
 
-            GameEnded => state with
+            GameEnded e => state with
             {
-                Phase = GamePhase.Ended
+                Phase = GamePhase.Ended,
+                FinalScoreboard = e.FinalScoreboard,
+                WinnerIds = e.WinnerIds
             }
         };
 

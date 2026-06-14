@@ -89,6 +89,11 @@ public record GameState
     public int CurrentQuestionIndex { get; init; } = -1;
     public IReadOnlyList<QuestionRound> Questions { get; init; } = [];
 
+    // Folded from GameEnded so the Final Standings projection passes them straight
+    // through (the scoreboard is computed in Decide/EndGame; Evolve just records it).
+    public IReadOnlyList<ScoreboardEntry> FinalScoreboard { get; init; } = [];
+    public IReadOnlyList<Guid> WinnerIds { get; init; } = [];
+
     public static GameState Initial => new();
 
     /// <summary>Players who have not yet guessed question i.</summary>

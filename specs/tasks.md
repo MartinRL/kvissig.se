@@ -65,10 +65,16 @@
 - [ ] Implement `Execute` (Decide + append events)
 
 ## Phase 6: Read Models (Projections)
-- [ ] `LobbyView` — players waiting, join code
-- [ ] `QuestionView` — current question, who has answered
-- [ ] `ResultsView` — guesses, scores, breakdown per player
-- [ ] `ScoreboardView` — running totals, sorted by score (lowest first)
+Pure `GameState → View` functions in the Domain (one per spec view slice). Quiz Catalog
+is NOT here — it is Web-only reference data read straight from the CSV catalog (no event
+source, no GT).
+- [x] `GameLobbyView` — gameId, joinCode, players (host first, then joins)
+- [x] `QuestionView` — current card by index (text/items, NOT raw values) + progress
+- [x] `WaitingForOthersView` — submitted vs pending player ids for the current question
+- [x] `RoundResultsView` — revealed answer + per-player round + running total
+- [x] `FinalStandingsView` — final scoreboard + winner(s) (folded from GameEnded)
+- [x] `OutstandingGuessesView` — one `OutstandingQuestion` row per question (todo list)
+- [x] `GameProgressView` — index, totals, scoredQuestionCount, hasNextQuestion (todo)
 
 ## Phase 7: Web Endpoints
 - [ ] `POST /games` — create game
