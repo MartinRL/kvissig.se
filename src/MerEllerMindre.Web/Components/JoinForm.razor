@@ -9,7 +9,7 @@
 
         <div class="card">
             <h1>Gå med i omgången</h1>
-            <p class="sub">Värd @Model.HostName</p>
+            <p class="sub">@Model.HostName (värd)</p>
 
             <form hx-post="@($"/games/{Model.JoinCode:N}/join")" hx-swap="none">
                 <input type="hidden" name="__RequestVerificationToken" value="@Model.AntiforgeryToken" />

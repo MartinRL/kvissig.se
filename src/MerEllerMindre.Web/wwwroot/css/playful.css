@@ -198,3 +198,10 @@ input[type=text]:focus { outline: none; border-color: var(--accent); }
   .wrap { padding-top: 2rem; }
   h1 { font-size: 1.9rem; }
 }
+
+/* ---- global htmx error banner ---- */
+.error-banner {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  padding: .9rem 1.25rem; text-align: center;
+  background: #c0392b; color: #fff; font-weight: 600;
+}

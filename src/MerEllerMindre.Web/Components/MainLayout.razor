@@ -12,7 +12,15 @@
     <script src="/js/htmx.min.js" defer></script>
 </head>
 <body>
+    <div id="error-banner" class="error-banner" hidden></div>
     @ChildContent
+    <script>
+        document.body.addEventListener('htmx:responseError', e => {
+            const b = document.getElementById('error-banner');
+            b.textContent = e.detail.xhr.responseText || 'Något gick fel.';
+            b.hidden = false;
+        });
+    </script>
 </body>
 </html>
 
