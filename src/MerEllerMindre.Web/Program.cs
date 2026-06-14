@@ -1,5 +1,6 @@
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
+using Microsoft.AspNetCore.HttpOverrides;
 using MerEllerMindre.Web;
 using MerEllerMindre.Web.Infrastructure;
 
@@ -33,11 +34,21 @@ builder.Services.AddAntiforgery();
 
 var app = builder.Build();
 
+// Behind fly's edge proxy: honour X-Forwarded-Proto/-For so the app sees https
+// (secure cookies + antiforgery). fly terminates TLS and forwards plain http internally.
+app.UseForwardedHeaders(new ForwardedHeadersOptions
+{
+    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto,
+});
+
 app.UseStaticFiles();
 app.UseAntiforgery();
 
 // Browsers auto-request /favicon.ico; answer 204 so it doesn't surface as a stray 404.
 app.MapGet("/favicon.ico", () => Results.NoContent());
+
+// Liveness probe for fly's health check.
+app.MapGet("/healthz", () => Results.Ok("ok"));
 
 app.MapGameEndpoints();
 

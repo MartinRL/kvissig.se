@@ -1,0 +1,20 @@
+app = "kvissig"
+primary_region = "arn"   # Stockholm
+
+[build]
+  dockerfile = "src/MerEllerMindre.Web/Dockerfile"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = false      # in-memory state must NOT sleep
+  auto_start_machines = true
+  min_machines_running = 1        # exactly 1 instance (in-memory event store + DP keys)
+
+  [[http_service.checks]]
+    method = "get"
+    path = "/healthz"
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "256mb"
