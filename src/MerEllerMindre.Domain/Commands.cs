@@ -1,27 +1,50 @@
 namespace MerEllerMindre.Domain;
 
 /// <summary>
-/// Commands represent player intentions - things players want to do.
-/// Derived from command (`c:`) elements in specs/game-flows.yaml
+/// Commands represent player/system intentions. Modeled as a native C# 15 union
+/// (closed, exhaustive switches, no default arm). Derived from command (`c:`)
+/// elements in specs/game-flows.yaml.
 /// </summary>
-public abstract record GameCommand;
-
-public record CreateGame(
+public record OpenLobby(
     string HostName,
     string QuestionPackId
-) : GameCommand;
+);
 
 public record JoinGame(
-    string JoinCode,
+    Guid JoinCode,
     string PlayerName
-) : GameCommand;
+);
 
 public record StartGame(
-    string GameId
-) : GameCommand;
+    Guid GameId
+);
 
 public record SubmitGuess(
-    string GameId,
-    string PlayerId,
-    int Guess
-) : GameCommand;
+    Guid GameId,
+    Guid PlayerId,
+    Direction Direction,
+    decimal GuessedDifference
+);
+
+public record ScoreQuestion(
+    Guid GameId,
+    int QuestionIndex
+);
+
+public record AskNextQuestion(
+    Guid GameId
+);
+
+public record EndGame(
+    Guid GameId
+);
+
+public union GameCommand(
+    OpenLobby,
+    JoinGame,
+    StartGame,
+    SubmitGuess,
+    ScoreQuestion,
+    AskNextQuestion,
+    EndGame
+);

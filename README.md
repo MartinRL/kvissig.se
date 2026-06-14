@@ -37,4 +37,4 @@ dotnet run --project src/MerEllerMindre.Web
 
 ## Licens
 
-MIT med icke-kommersiell klausul
+Proprietär — all rights reserved (se LICENSE)

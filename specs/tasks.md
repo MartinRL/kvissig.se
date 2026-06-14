@@ -1,18 +1,18 @@
 # Implementation Tasks
 
 ## Phase 1: Domain Types (from spec)
-- [ ] Create `Direction` enum (Mer, Mindre)
-- [ ] Create `Commands.cs` with all command records
-- [ ] Create `Events.cs` with all event records
-- [ ] Create `Errors.cs` with all error records
-- [ ] Create `State.cs` with `GameState` record
-- [ ] Create `PlayerScore` record for scoring breakdown
+- [x] Create `Direction` enum (Mer, Mindre)
+- [x] Create `Commands.cs` with all command records (`union GameCommand`)
+- [x] Create `Events.cs` with all event records (`union GameEvent`)
+- [x] Create `Errors.cs` with all error records (`union GameError`)
+- [x] Create `State.cs` with `GameState` record (QuestionRound deck + derived members)
+- [x] Create `PlayerScore` record for scoring breakdown
 
 ## Phase 2: Decider Implementation
-- [ ] Implement `Evolve` function with pattern matching
-- [ ] Implement `Decide` function with pattern matching
-- [ ] Implement scoring logic: diff + bonus calculation
-- [ ] Add `Result<T>` type for error handling
+- [x] Implement `Evolve` function with pattern matching
+- [x] Implement `Decide` function with pattern matching (`GameContext.FindPack`)
+- [x] Implement scoring logic: diff + bonus calculation (normalize + clamp in ScoreQuestion)
+- [x] Add `Result<T>` type for error handling
 
 ## Phase 3: GWT Tests (from spec)
 

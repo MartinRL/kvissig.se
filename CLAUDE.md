@@ -100,6 +100,12 @@ See `specs/CLAUDE.md` for the full cheat-sheet.
 
 ## Naming
 
-- Commands: verb noun (`CreateGame`, `SubmitGuess`)
-- Events: noun past-tense (`GameCreated`, `GuessSubmitted`)
-- Errors: descriptive (`GameNotFound`, `InvalidDirection`)
+- Commands: verb noun (`OpenLobby`, `SubmitGuess`)
+- Events: noun past-tense (`LobbyOpened`, `GuessSubmitted`)
+- Errors: descriptive (`GameNotFound`, `DifferenceOutOfRange`)
+
+## Plans
+
+Plans live in `~/.claude/plans/`; the user reads/edits them in Obsidian. ALWAYS end any
+plan-related message with the plan's file name (e.g. `logical-questing-teapot.md`) on the
+last line so it's easy to find/open in Obsidian.

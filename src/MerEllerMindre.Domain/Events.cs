@@ -1,59 +1,83 @@
 namespace MerEllerMindre.Domain;
 
 /// <summary>
-/// Events represent facts that happened - immutable history.
-/// Derived from event (`e:`) elements in specs/game-flows.yaml
+/// Events represent facts that happened — immutable history. Modeled as a native C# 15
+/// union (closed, exhaustive switches, no default arm). Each event carries its own
+/// explicit timestamp (*At) per spec. Derived from event (`e:`) elements in
+/// specs/game-flows.yaml.
 /// </summary>
-public abstract record GameEvent
-{
-    public DateTimeOffset OccurredAt { get; init; } = DateTimeOffset.UtcNow;
-}
-
-public record GameCreated(
-    string GameId,
-    string HostPlayerId,
-    string JoinCode,
-    string QuestionPackId
-) : GameEvent;
+public record LobbyOpened(
+    Guid GameId,
+    Guid HostPlayerId,
+    string HostName,
+    Guid JoinCode,
+    string QuestionPackId,
+    IReadOnlyList<Question> Questions,
+    DateTimeOffset CreatedAt
+);
 
 public record PlayerJoined(
-    string GameId,
-    string PlayerId,
-    string PlayerName
-) : GameEvent;
+    Guid GameId,
+    Guid PlayerId,
+    string PlayerName,
+    DateTimeOffset JoinedAt
+);
 
 public record GameStarted(
-    string GameId,
-    int FirstQuestionIndex
-) : GameEvent;
+    Guid GameId,
+    int FirstQuestionIndex,
+    DateTimeOffset StartedAt
+);
 
 public record GuessSubmitted(
-    string GameId,
-    string PlayerId,
-    int Guess,
-    int QuestionIndex
-) : GameEvent;
+    Guid GameId,
+    Guid PlayerId,
+    int QuestionIndex,
+    Direction Direction,
+    decimal GuessedDifference,
+    DateTimeOffset SubmittedAt
+);
 
-public record AllGuessesSubmitted(
-    string GameId,
-    int QuestionIndex
-) : GameEvent;
+public record QuestionAnswered(
+    Guid GameId,
+    int QuestionIndex,
+    Direction CorrectDirection,
+    byte CorrectDifference
+);
 
 public record QuestionScored(
-    string GameId,
+    Guid GameId,
     int QuestionIndex,
-    int CorrectAnswer,
-    IReadOnlyDictionary<string, int> Scores,
-    string? WinnerId
-) : GameEvent;
+    Guid PlayerId,
+    Direction GuessedDirection,
+    decimal GuessedDifference,
+    byte GuessedDifferenceNormalized,
+    bool DirectionCorrect,
+    byte DifferencePoints,
+    int BonusPoints,
+    int RoundScore,
+    int TotalScore
+);
 
 public record NextQuestionStarted(
-    string GameId,
+    Guid GameId,
     int QuestionIndex
-) : GameEvent;
+);
 
 public record GameEnded(
-    string GameId,
-    IReadOnlyDictionary<string, int> FinalScoreboard,
-    string WinnerId
-) : GameEvent;
+    Guid GameId,
+    IReadOnlyList<ScoreboardEntry> FinalScoreboard,
+    IReadOnlyList<Guid> WinnerIds,
+    DateTimeOffset EndedAt
+);
+
+public union GameEvent(
+    LobbyOpened,
+    PlayerJoined,
+    GameStarted,
+    GuessSubmitted,
+    QuestionAnswered,
+    QuestionScored,
+    NextQuestionStarted,
+    GameEnded
+);
