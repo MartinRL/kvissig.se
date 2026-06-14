@@ -84,7 +84,7 @@ public static class GameEndpoints
         {
             if (Resolve(svc, code) is not var (gameId, state))
                 return Results.NotFound("Spelet hittades inte.");
-            return RenderState(state, identity.GetPlayer(http, gameId), antiforgery.GetAndStoreTokens(http).RequestToken!);
+            return RenderState(state, identity.GetPlayer(http, gameId), antiforgery.GetAndStoreTokens(http).RequestToken!, AbsoluteJoinUrl(http, state.JoinCode));
         });
 
         app.MapPost("/games/{code}/start", (string code, GameApplicationService svc, PlayerIdentity identity, IAntiforgery antiforgery, HttpContext http) =>
@@ -93,7 +93,8 @@ public static class GameEndpoints
                 return Results.NotFound("Spelet hittades inte.");
 
             svc.Execute(gameId, new StartGame(gameId));
-            return RenderState(svc.Load(gameId), identity.GetPlayer(http, gameId), antiforgery.GetAndStoreTokens(http).RequestToken!);
+            var state = svc.Load(gameId);
+            return RenderState(state, identity.GetPlayer(http, gameId), antiforgery.GetAndStoreTokens(http).RequestToken!, AbsoluteJoinUrl(http, state.JoinCode));
         });
 
         app.MapPost("/games/{code}/guess", (
@@ -117,7 +118,8 @@ public static class GameEndpoints
                 svc.RunScoreGear(gameId);
             }
 
-            return RenderState(svc.Load(gameId), viewer, antiforgery.GetAndStoreTokens(http).RequestToken!);
+            var scored = svc.Load(gameId);
+            return RenderState(scored, viewer, antiforgery.GetAndStoreTokens(http).RequestToken!, AbsoluteJoinUrl(http, scored.JoinCode));
         });
 
         app.MapPost("/games/{code}/next", (string code, GameApplicationService svc, PlayerIdentity identity, IAntiforgery antiforgery, HttpContext http) =>
@@ -126,15 +128,23 @@ public static class GameEndpoints
                 return Results.NotFound("Spelet hittades inte.");
 
             svc.RunProgressionGear(gameId);
-            return RenderState(svc.Load(gameId), identity.GetPlayer(http, gameId), antiforgery.GetAndStoreTokens(http).RequestToken!);
+            var state = svc.Load(gameId);
+            return RenderState(state, identity.GetPlayer(http, gameId), antiforgery.GetAndStoreTokens(http).RequestToken!, AbsoluteJoinUrl(http, state.JoinCode));
         });
     }
 
-    private static IResult RenderState(GameState state, Guid? viewer, string token) =>
+    /// <summary>
+    /// The absolute join URL the host's QR encodes. Behind fly's edge ForwardedHeaders makes
+    /// Scheme=https and Host the public hostname, so the QR is scannable over the internet.
+    /// </summary>
+    private static string AbsoluteJoinUrl(HttpContext http, Guid joinCode) =>
+        $"{http.Request.Scheme}://{http.Request.Host}/games/{joinCode:N}/join";
+
+    private static IResult RenderState(GameState state, Guid? viewer, string token, string joinUrl) =>
         GameScreens.Select(state, viewer) switch
         {
-            ScreenKind.LobbyHost => new RazorComponentResult<LobbyHostScreen>(new { Model = GameScreens.Lobby(state, viewer, token) }),
-            ScreenKind.LobbyPlayer => new RazorComponentResult<LobbyPlayerScreen>(new { Model = GameScreens.Lobby(state, viewer, token) }),
+            ScreenKind.LobbyHost => new RazorComponentResult<LobbyHostScreen>(new { Model = GameScreens.Lobby(state, viewer, token, joinUrl) }),
+            ScreenKind.LobbyPlayer => new RazorComponentResult<LobbyPlayerScreen>(new { Model = GameScreens.Lobby(state, viewer, token, joinUrl) }),
             ScreenKind.Question => new RazorComponentResult<QuestionScreen>(new { Model = GameScreens.Question(state, token) }),
             ScreenKind.Waiting => new RazorComponentResult<WaitingScreen>(new { Model = GameScreens.Waiting(state, viewer) }),
             ScreenKind.Results => new RazorComponentResult<ResultsScreen>(new { Model = GameScreens.Results(state, viewer, token) }),

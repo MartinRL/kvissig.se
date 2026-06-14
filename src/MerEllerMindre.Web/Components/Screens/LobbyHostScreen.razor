@@ -2,10 +2,11 @@
    Start button (enabled at 2+ players). Polls every 2 s to pick up joiners and the start. *@
 <div hx-get="@StatePath" hx-trigger="every 2s" hx-target="#screen" hx-swap="innerHTML">
     <div class="card center">
-        <h1>Bjud in spelare</h1>
-        <p class="sub">Dela koden eller länken. Spelarna går med på sin telefon.</p>
+        <h1>Skanna för att gå med</h1>
+        <p class="sub">Visa den här skärmen för spelarna. De skannar med sin telefon.</p>
+        <div class="qr">@((MarkupString)Model.QrSvg)</div>
         <p class="joincode">@Model.JoinCode.ToString("N")[..6].ToUpperInvariant()</p>
-        <p class="muted">Gå till <strong>@JoinPath</strong></p>
+        <p class="muted">…eller gå till <strong>@Model.JoinUrl</strong></p>
     </div>
 
     <div class="card">
@@ -38,5 +39,4 @@
 @code {
     [Parameter] public required LobbyVm Model { get; set; }
     private string StatePath => $"/games/{Model.JoinCode:N}/state";
-    private string JoinPath => $"/games/{Model.JoinCode:N}/join";
 }

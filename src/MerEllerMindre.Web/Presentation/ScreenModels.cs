@@ -20,6 +20,8 @@ public sealed record LobbyPlayerVm(string Name, bool IsHost, bool IsYou);
 public sealed record LobbyVm(
     Guid JoinCode,
     string HostName,
+    string JoinUrl,
+    string QrSvg,
     IReadOnlyList<LobbyPlayerVm> Players,
     bool ViewerIsHost,
     bool CanStart,

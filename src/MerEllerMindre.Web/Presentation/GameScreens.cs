@@ -40,7 +40,7 @@ public static class GameScreens
         return ScreenKind.Question;
     }
 
-    public static LobbyVm Lobby(GameState state, Guid? viewer, string token)
+    public static LobbyVm Lobby(GameState state, Guid? viewer, string token, string joinUrl)
     {
         var players = state.Players
             .Select(p => new LobbyPlayerVm(p.Name, p.IsHost, p.PlayerId == viewer))
@@ -48,6 +48,8 @@ public static class GameScreens
         return new LobbyVm(
             state.JoinCode,
             state.Players.FirstOrDefault(p => p.IsHost)?.Name ?? "",
+            joinUrl,
+            QrCode.SvgFor(joinUrl),
             players,
             ViewerIsHost: viewer == state.HostPlayerId,
             CanStart: state.Players.Count >= 2,

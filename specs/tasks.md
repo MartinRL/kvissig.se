@@ -87,6 +87,7 @@ source, no GT).
 ## Phase 8: Razor Pages + HTMX
 - [x] Home page (Quiz catalog) with "Create Game" form per pack
 - [x] Lobby pages (host + player) with join code/link and player list
+- [x] Host lobby renders a scannable QR (server-side inline SVG via QRCoder) encoding the absolute `/games/{code}/join` URL
 - [x] Question page with mer/mindre buttons + unit difference slider (0→max(A,B), live two-bars)
 - [x] Waiting page (submitted vs pending) while others guess
 - [x] Results page with answer revealed (raw values + normalized facit) + per-player score breakdown
@@ -97,4 +98,4 @@ source, no GT).
 - [ ] PWA manifest
 - [ ] Error handling UI
 - [ ] Loading states
-- [x] favicon (GET /favicon.ico → 204 No Content; no stray browser 404)
+- [ ] create favicon 
