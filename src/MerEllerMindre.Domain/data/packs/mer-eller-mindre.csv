@@ -1,11 +1,11 @@
-fråga;sakA;sakB;värdeA;värdeB;enhet
-Har Danmark större eller mindre befolkning än Norge?;Danmark;Norge;5,9;5,5;miljoner invånare
-Är Sveriges yta större eller mindre än Norges?;Sverige;Norge;450295;385207;km²
-Är Finlands befolkning större eller mindre än Danmarks?;Finland;Danmark;5,6;5,9;miljoner invånare
-Är Mount Everest högre eller lägre än Kilimanjaro?;Mount Everest;Kilimanjaro;8849;5895;meter
-Är Östersjön större eller mindre än Medelhavet till ytan?;Östersjön;Medelhavet;377000;2500000;km²
-Väger en afrikansk elefant mer eller mindre än en blåval?;Afrikansk elefant;Blåval;6000;150000;kilo
-Är Nilen längre eller kortare än Donau?;Nilen;Donau;6650;2850;kilometer
-Lever en grönlandshaj längre eller kortare än en människa?;Grönlandshaj;Människa;300;73;år
-Är Eiffeltornet högre eller lägre än Frihetsgudinnan?;Eiffeltornet;Frihetsgudinnan;330;93;meter
-Är Portugals befolkning större eller mindre än Sveriges?;Portugal;Sverige;10,3;10,5;miljoner invånare
+fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Har Danmark större eller mindre befolkning än Norge?;Danmark;Norge;5,9;5,5;miljoner invånare;Hur många miljoner invånare skiljer det?
+Är Sveriges yta större eller mindre än Norges?;Sverige;Norge;450295;385207;km²;Hur många km² skiljer det?
+Är Finlands befolkning större eller mindre än Danmarks?;Finland;Danmark;5,6;5,9;miljoner invånare;Hur många miljoner invånare skiljer det?
+Är Mount Everest högre eller lägre än Kilimanjaro?;Mount Everest;Kilimanjaro;8849;5895;meter;Hur många meter skiljer det?
+Är Östersjön större eller mindre än Medelhavet till ytan?;Östersjön;Medelhavet;377000;2500000;km²;Hur många km² skiljer det?
+Väger en afrikansk elefant mer eller mindre än en blåval?;Afrikansk elefant;Blåval;6000;150000;kilo;Hur många kilo skiljer det?
+Är Nilen längre eller kortare än Donau?;Nilen;Donau;6650;2850;kilometer;Hur många kilometer skiljer det?
+Lever en grönlandshaj längre eller kortare än en människa?;Grönlandshaj;Människa;300;73;år;Hur många år skiljer det?
+Är Eiffeltornet högre eller lägre än Frihetsgudinnan?;Eiffeltornet;Frihetsgudinnan;330;93;meter;Hur många meter skiljer det?
+Är Portugals befolkning större eller mindre än Sveriges?;Portugal;Sverige;10,3;10,5;miljoner invånare;Hur många miljoner invånare skiljer det?

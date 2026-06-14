@@ -36,17 +36,28 @@
 # future possibility only).
 #
 # Scoring (see ScoreQuestion / QuestionScored):
-#   roundScore = |guessedDifference - correctDifference| + (directionCorrect ? -10 : 0)
+#   roundScore = |guessedDifferenceNormalized - correctDifference| + (directionCorrect ? -10 : 0)
 #   lowest total score wins; negative scores possible (exact difference + right
 #   direction = -10, the best possible round).
 #
-#   The guessedDifference players submit is a 0-100 slider value. The question card
-#   stores the two RAW absolute values (valueA, valueB) — never a 0-100 number — so the
-#   author just types the real figures, no mental arithmetic. ScoreQuestion balances
-#   them onto 0-100: it derives correctDirection (whichever value is larger) and reveals
-#   correctDifference = |A-B| / max(A,B) * 100. Picture the two values as two bars side
-#   by side; the difference is how much taller the tall bar is, as a share of the tall
-#   bar itself:
+#   The player does NOT pick a 0-100 number. They guess the RAW absolute difference in
+#   the card's own unit (e.g. 0,3 miljoner invånare, 220 km) — answering the card's
+#   differencePrompt — and the SYSTEM normalizes that guess onto 0-100 server-side, so
+#   scoring happens "as in the game 0-100". The client never sees the hidden values, so
+#   it cannot normalize: SubmitGuess carries the RAW guessedDifference and ScoreQuestion
+#   (which holds the card) does the maths. With mx = max(valueA, valueB):
+#     correctDifference           = round(|valueA - valueB| / mx * 100)          (0-100, byte)
+#     guessedDifferenceNormalized = min(100, round(guessedDifference / mx * 100)) (0-100, byte, CLAMPED)
+#   Same mx for guess and answer, so both land on one scale. A wildly-too-large raw guess
+#   is clamped at 100 (no overshoot); a negative raw guess is rejected up front
+#   (DifferenceOutOfRange). There is NO upper bound on the raw guess itself.
+#
+#   The question card stores the two RAW absolute values (valueA, valueB; decimal) —
+#   never a 0-100 number — so the author just types the real figures, no mental
+#   arithmetic. ScoreQuestion balances them onto 0-100: it derives correctDirection
+#   (whichever value is larger) and reveals correctDifference. Picture the two values as
+#   two bars side by side; correctDifference is how much taller the tall bar is, as a
+#   share of the tall bar itself:
 #     equal bars            -> 0
 #     short bar = half tall -> 50
 #     short bar = a tenth   -> 90
@@ -58,10 +69,11 @@
 #
 #   correctDirection/correctDifference are derived by ScoreQuestion and revealed once
 #   per question on Game / QuestionAnswered; per-player scoring is one
-#   Game / QuestionScored each.
+#   Game / QuestionScored each (carrying both the raw guessedDifference and the derived
+#   guessedDifferenceNormalized).
 #
 # ASSUMPTION: the board's two guess screens (direction, then difference) are modeled
-# as a single SubmitGuess {direction, difference} command, matching the C# domain.
+# as a single SubmitGuess {direction, guessedDifference} command, matching the C# domain.
 # Split into two commands only if the board later demands it.
 #
 # ASSUMPTION: question-card content (text, item labels, the unit, and the two RAW values
@@ -81,10 +93,15 @@
 #                                         keys packs by slug, not Guid — see specs/CLAUDE.md)
 #   timestamps (*At)       DateTimeOffset
 #   direction              Direction (mer|mindre)  — enum
-#   difference family      int (0-100)   (difference, guessedDifference, and the
-#                                         derived correctDifference — never on the card)
-#   raw card values        double        (valueA, valueB — real magnitudes, any unit)
-#   points/scores          int           (may be negative per scoring rule)
+#   raw guessed difference decimal       (guessedDifference — the player's RAW absolute
+#                                         guess in the card's unit, >= 0; NOT 0-100)
+#   normalized difference  byte (0-100)  (correctDifference and guessedDifferenceNormalized,
+#                                         both DERIVED by ScoreQuestion; never on the card)
+#   difference points      byte (0-100)  (differencePoints — non-negative gap |norm - correct|)
+#   raw card values        decimal       (valueA, valueB — real magnitudes, any unit;
+#                                         exact author figures, clean sv-SE display)
+#   points/scores          int           (bonusPoints, roundScore, totalScore — signed,
+#                                         may be negative per scoring rule)
 #   index/count            int
 #   per-player State maps   IReadOnlyDictionary<Guid, T>  (each QuestionRound's
 #                                                          guesses and roundScores)
@@ -108,7 +125,7 @@ slices:
   👀 Quiz Catalog:
     - v: Screen / Quiz catalog
       props:
-        packs: QuestionPack[]   # { packId: string (slug), name: string, questionCount: int }
+        packs: QuestionPack[]   # { packId: string (slug), name: string, questionCount: int } — each card also carries a differencePrompt (string)
 
   # OpenLobby resolves {questionPackId} to a pack via a GameContext dependency
   # (same pattern that stamps gameId/joinCode/createdAt) and snapshots the full
@@ -117,8 +134,10 @@ slices:
   #
   # Test fixtures (referenced by name in the cases below):
   #   pack mer-eller-mindre = [ question0, question1 ]  (the default deck)
-  #   question0 = Question { questionText: question0, itemA: question0A, itemB: question0B, valueA: 100, valueB: 60, unit: question0U }  # ScoreQuestion derives -> mer,    40
-  #   question1 = Question { questionText: question1, itemA: question1A, itemB: question1B, valueA: 80,  valueB: 100, unit: question1U } # ScoreQuestion derives -> mindre, 20
+  #   question0 = Question { questionText: question0, itemA: question0A, itemB: question0B, valueA: 100, valueB: 60, unit: question0U, differencePrompt: question0D }  # ScoreQuestion derives -> mer,    40 (mx=100)
+  #   question1 = Question { questionText: question1, itemA: question1A, itemB: question1B, valueA: 80,  valueB: 100, unit: question1U, differencePrompt: question1D } # ScoreQuestion derives -> mindre, 20 (mx=100)
+  #   Both fixture cards have mx=100, so a raw guessedDifference d (0<=d<=100) normalizes
+  #   to itself (guessedDifferenceNormalized = d) — the GWT numbers below read raw == normalized.
   #   host hostName = Martin ; minted joinCode = joinCode
   ✍️ Open Lobby:
     steps:
@@ -135,7 +154,7 @@ slices:
           hostName: string        # the host is the first player; their name lives here (never goes through JoinGame)
           joinCode: Guid
           questionPackId: string  # slug of the chosen pack (audit reference)
-          questions: Question[]   # { questionText: string, itemA: string, itemB: string, valueA: double, valueB: double, unit: string } — raw values; no precomputed answer
+          questions: Question[]   # { questionText: string, itemA: string, itemB: string, valueA: decimal, valueB: decimal, unit: string, differencePrompt: string } — raw values; no precomputed answer
           createdAt: DateTimeOffset
       - v: Screen / Game lobby
     tests:
@@ -356,7 +375,8 @@ slices:
   #   x: GameNotStarted        — still in the lobby; no question is presented yet.
   #   x: PlayerNotInGame       — playerId never joined this game.
   #   x: AlreadyGuessed        — this player already guessed the current question.
-  #   x: DifferenceOutOfRange  — difference is outside 0-100.
+  #   x: DifferenceOutOfRange  — the raw guessedDifference is negative (< 0). There is NO
+  #                              upper bound: a too-large guess is clamped at 100 when scored.
   # NOTE: "invalid direction" is NOT modeled — direction is a typed Direction
   #   (mer|mindre) enum, so an invalid value is unrepresentable in the decider; any
   #   bad input is a web/model-binding concern in the imperative shell, not a slice.
@@ -370,7 +390,7 @@ slices:
           gameId: Guid
           playerId: Guid
           direction: Direction (mer|mindre)
-          difference: int (0-100)
+          guessedDifference: decimal   # RAW absolute guess in the card's unit, >= 0 (NOT 0-100)
       - x: GameNotFound
       - x: GameNotStarted
       - x: PlayerNotInGame
@@ -382,13 +402,14 @@ slices:
           playerId: Guid
           questionIndex: int
           direction: Direction (mer|mindre)
-          difference: int (0-100)
+          guessedDifference: decimal   # RAW absolute guess in the card's unit, >= 0
           submittedAt: DateTimeOffset
       - v: Screen / Waiting for others
     # Decider-true GWT: given the folded State / Game props `decide` reads — phase
     # (GameNotStarted), players (PlayerNotInGame), the current question's guesses
-    # (AlreadyGuessed) — when SubmitGuess, then GuessSubmitted | rejection. The 0-100
-    # range is a command-value guard (DifferenceOutOfRange). GameNotFound = empty stream.
+    # (AlreadyGuessed) — when SubmitGuess, then GuessSubmitted | rejection. A negative raw
+    # guess is a command-value guard (DifferenceOutOfRange); there is no upper bound — a
+    # too-large guess is clamped at 100 when scored. GameNotFound = empty stream.
     tests:
       guess submitted successfully:
         given:
@@ -401,15 +422,15 @@ slices:
                 - { card: question0, guesses: {}, scored: false }
         when:
           - c: SubmitGuess
-            props: { gameId: gameId, playerId: nilsId, direction: mer, difference: 30 }
+            props: { gameId: gameId, playerId: nilsId, direction: mer, guessedDifference: 30 }
         then:
           - e: Game / GuessSubmitted
-            props: { playerId: nilsId, questionIndex: 0, direction: mer, difference: 30, submittedAt: submittedAt }
+            props: { playerId: nilsId, questionIndex: 0, direction: mer, guessedDifference: 30, submittedAt: submittedAt }
       cannot guess in nonexistent game:
         given: []
         when:
           - c: SubmitGuess
-            props: { gameId: unknown, playerId: nilsId, direction: mer, difference: 30 }
+            props: { gameId: unknown, playerId: nilsId, direction: mer, guessedDifference: 30 }
         then:
           - x: GameNotFound
       cannot guess before game starts:
@@ -420,7 +441,7 @@ slices:
               players: [hostMartin, playerNils]
         when:
           - c: SubmitGuess
-            props: { gameId: gameId, playerId: nilsId, direction: mer, difference: 30 }
+            props: { gameId: gameId, playerId: nilsId, direction: mer, guessedDifference: 30 }
         then:
           - x: GameNotStarted
       cannot guess as non-member:
@@ -431,7 +452,7 @@ slices:
               players: [hostMartin, playerNils]
         when:
           - c: SubmitGuess
-            props: { gameId: gameId, playerId: svenId, direction: mer, difference: 30 }
+            props: { gameId: gameId, playerId: svenId, direction: mer, guessedDifference: 30 }
         then:
           - x: PlayerNotInGame
       cannot guess again on same question:
@@ -445,10 +466,10 @@ slices:
                 - { card: question0, guesses: { nilsId: guessMer30 }, scored: false }
         when:
           - c: SubmitGuess
-            props: { gameId: gameId, playerId: nilsId, direction: mindre, difference: 20 }
+            props: { gameId: gameId, playerId: nilsId, direction: mindre, guessedDifference: 20 }
         then:
           - x: AlreadyGuessed
-      difference out of range rejected:
+      negative difference rejected:
         given:
           - v: State / Game
             props:
@@ -459,7 +480,7 @@ slices:
                 - { card: question0, guesses: {}, scored: false }
         when:
           - c: SubmitGuess
-            props: { gameId: gameId, playerId: nilsId, direction: mer, difference: 150 }
+            props: { gameId: gameId, playerId: nilsId, direction: mer, guessedDifference: -5 }   # raw guess < 0; a too-LARGE guess is clamped at 100, never rejected
         then:
           - x: DifferenceOutOfRange
 
@@ -483,7 +504,7 @@ slices:
             props: { playerId: nilsId, playerName: Nils }
           - e: Game / GameStarted
           - e: Game / GuessSubmitted
-            props: { playerId: martinId, questionIndex: 0, direction: mer, difference: 30 }
+            props: { playerId: martinId, questionIndex: 0, direction: mer, guessedDifference: 30 }
         then:
           - v: Screen / Waiting for others
             props:
@@ -532,7 +553,7 @@ slices:
             props: { playerId: nilsId, playerName: Nils }
           - e: Game / GameStarted
           - e: Game / GuessSubmitted
-            props: { playerId: martinId, questionIndex: 0, direction: mer, difference: 30 }
+            props: { playerId: martinId, questionIndex: 0, direction: mer, guessedDifference: 30 }
         then:
           - v: Todo / Outstanding guesses
             props:
@@ -547,9 +568,9 @@ slices:
             props: { playerId: nilsId, playerName: Nils }
           - e: Game / GameStarted
           - e: Game / GuessSubmitted
-            props: { playerId: martinId, questionIndex: 0, direction: mer, difference: 30 }
+            props: { playerId: martinId, questionIndex: 0, direction: mer, guessedDifference: 30 }
           - e: Game / GuessSubmitted
-            props: { playerId: nilsId, questionIndex: 0, direction: mindre, difference: 50 }
+            props: { playerId: nilsId, questionIndex: 0, direction: mindre, guessedDifference: 50 }
         then:
           - v: Todo / Outstanding guesses
             props:
@@ -564,15 +585,15 @@ slices:
             props: { playerId: nilsId, playerName: Nils }
           - e: Game / GameStarted
           - e: Game / GuessSubmitted
-            props: { playerId: martinId, questionIndex: 0, direction: mer, difference: 30 }
+            props: { playerId: martinId, questionIndex: 0, direction: mer, guessedDifference: 30 }
           - e: Game / GuessSubmitted
-            props: { playerId: nilsId, questionIndex: 0, direction: mindre, difference: 50 }
+            props: { playerId: nilsId, questionIndex: 0, direction: mindre, guessedDifference: 50 }
           - e: Game / QuestionAnswered
             props: { questionIndex: 0, correctDirection: mer, correctDifference: 40 }
           - e: Game / NextQuestionStarted
             props: { questionIndex: 1 }
           - e: Game / GuessSubmitted
-            props: { playerId: martinId, questionIndex: 1, direction: mindre, difference: 25 }
+            props: { playerId: martinId, questionIndex: 1, direction: mindre, guessedDifference: 25 }
         then:
           - v: Todo / Outstanding guesses
             props:
@@ -608,19 +629,20 @@ slices:
           gameId: Guid
           questionIndex: int
           correctDirection: Direction (mer|mindre)
-          correctDifference: int (0-100)
+          correctDifference: byte (0-100)              # derived = round(|A-B|/max(A,B)*100)
       - e: Game / QuestionScored       # one per player
         props:
           gameId: Guid
           questionIndex: int
           playerId: Guid
           guessedDirection: Direction (mer|mindre)
-          guessedDifference: int (0-100)
+          guessedDifference: decimal                   # the RAW guess the player submitted (card's unit)
+          guessedDifferenceNormalized: byte (0-100)    # derived = min(100, round(guessedDifference/max(A,B)*100))
           directionCorrect: bool
-          differencePoints: int
-          bonusPoints: int
-          roundScore: int
-          totalScore: int
+          differencePoints: byte (0-100)               # = |guessedDifferenceNormalized - correctDifference|
+          bonusPoints: int                             # directionCorrect ? -10 : 0
+          roundScore: int                              # differencePoints + bonusPoints (signed)
+          totalScore: int                              # running sum over scored questions (signed)
       - v: Screen / Round results
     # Decider-true GWT: given the folded State / Game (the props `decide` reads),
     # when ScoreQuestion, then the events | rejection. No event-replay in given —
@@ -646,9 +668,9 @@ slices:
           - e: Game / QuestionAnswered
             props: { questionIndex: 0, correctDirection: mer, correctDifference: 40 }
           - e: Game / QuestionScored
-            props: { playerId: martinId, guessedDirection: mer, guessedDifference: 30, directionCorrect: true, differencePoints: 10, bonusPoints: -10, roundScore: 0, totalScore: 0 }
+            props: { playerId: martinId, guessedDirection: mer, guessedDifference: 30, guessedDifferenceNormalized: 30, directionCorrect: true, differencePoints: 10, bonusPoints: -10, roundScore: 0, totalScore: 0 }
           - e: Game / QuestionScored
-            props: { playerId: nilsId, guessedDirection: mindre, guessedDifference: 50, directionCorrect: false, differencePoints: 10, bonusPoints: 0, roundScore: 10, totalScore: 10 }
+            props: { playerId: nilsId, guessedDirection: mindre, guessedDifference: 50, guessedDifferenceNormalized: 50, directionCorrect: false, differencePoints: 10, bonusPoints: 0, roundScore: 10, totalScore: 10 }
       exact difference with correct direction:
         given:
           - v: State / Game
@@ -666,9 +688,9 @@ slices:
           - e: Game / QuestionAnswered
             props: { questionIndex: 0, correctDirection: mer, correctDifference: 40 }
           - e: Game / QuestionScored
-            props: { playerId: martinId, guessedDirection: mer, guessedDifference: 40, directionCorrect: true, differencePoints: 0, bonusPoints: -10, roundScore: -10, totalScore: -10 }
+            props: { playerId: martinId, guessedDirection: mer, guessedDifference: 40, guessedDifferenceNormalized: 40, directionCorrect: true, differencePoints: 0, bonusPoints: -10, roundScore: -10, totalScore: -10 }
           - e: Game / QuestionScored
-            props: { playerId: nilsId, guessedDirection: mindre, guessedDifference: 50, directionCorrect: false, differencePoints: 10, bonusPoints: 0, roundScore: 10, totalScore: 10 }
+            props: { playerId: nilsId, guessedDirection: mindre, guessedDifference: 50, guessedDifferenceNormalized: 50, directionCorrect: false, differencePoints: 10, bonusPoints: 0, roundScore: 10, totalScore: 10 }
       scores accumulate across rounds:
         given:
           - v: State / Game
@@ -687,9 +709,9 @@ slices:
           - e: Game / QuestionAnswered
             props: { questionIndex: 1, correctDirection: mindre, correctDifference: 20 }
           - e: Game / QuestionScored
-            props: { playerId: martinId, guessedDifference: 25, directionCorrect: true, differencePoints: 5, bonusPoints: -10, roundScore: -5, totalScore: -5 }
+            props: { playerId: martinId, guessedDifference: 25, guessedDifferenceNormalized: 25, directionCorrect: true, differencePoints: 5, bonusPoints: -10, roundScore: -5, totalScore: -5 }
           - e: Game / QuestionScored
-            props: { playerId: nilsId, guessedDifference: 20, directionCorrect: true, differencePoints: 0, bonusPoints: -10, roundScore: -10, totalScore: 0 }
+            props: { playerId: nilsId, guessedDifference: 20, guessedDifferenceNormalized: 20, directionCorrect: true, differencePoints: 0, bonusPoints: -10, roundScore: -10, totalScore: 0 }
       cannot score before all guesses in:
         given:
           - v: State / Game
@@ -728,7 +750,7 @@ slices:
           gameId: Guid
           questionIndex: int
           correctDirection: Direction (mer|mindre)   # from QuestionAnswered
-          correctDifference: int (0-100)             # from QuestionAnswered
+          correctDifference: byte (0-100)            # from QuestionAnswered
           playerScores: PlayerScore[]  # { playerId: Guid, roundScore: int, totalScore: int } from per-player QuestionScored
     # Projection GT: given the question scored (the answer reveal + one QuestionScored per
     # player), then the results screen shows the revealed answer and each player's round +
@@ -743,9 +765,9 @@ slices:
             props: { playerId: nilsId, playerName: Nils }
           - e: Game / GameStarted
           - e: Game / GuessSubmitted
-            props: { playerId: martinId, questionIndex: 0, direction: mer, difference: 30 }
+            props: { playerId: martinId, questionIndex: 0, direction: mer, guessedDifference: 30 }
           - e: Game / GuessSubmitted
-            props: { playerId: nilsId, questionIndex: 0, direction: mindre, difference: 50 }
+            props: { playerId: nilsId, questionIndex: 0, direction: mindre, guessedDifference: 50 }
           - e: Game / QuestionAnswered
             props: { questionIndex: 0, correctDirection: mer, correctDifference: 40 }
           - e: Game / QuestionScored
@@ -787,9 +809,9 @@ slices:
             props: { playerId: nilsId, playerName: Nils }
           - e: Game / GameStarted
           - e: Game / GuessSubmitted
-            props: { playerId: martinId, questionIndex: 0, direction: mer, difference: 30 }
+            props: { playerId: martinId, questionIndex: 0, direction: mer, guessedDifference: 30 }
           - e: Game / GuessSubmitted
-            props: { playerId: nilsId, questionIndex: 0, direction: mindre, difference: 50 }
+            props: { playerId: nilsId, questionIndex: 0, direction: mindre, guessedDifference: 50 }
           - e: Game / QuestionAnswered
             props: { questionIndex: 0, correctDirection: mer, correctDifference: 40 }
           - e: Game / QuestionScored
@@ -807,9 +829,9 @@ slices:
             props: { playerId: nilsId, playerName: Nils }
           - e: Game / GameStarted
           - e: Game / GuessSubmitted
-            props: { playerId: martinId, questionIndex: 0, direction: mer, difference: 30 }
+            props: { playerId: martinId, questionIndex: 0, direction: mer, guessedDifference: 30 }
           - e: Game / GuessSubmitted
-            props: { playerId: nilsId, questionIndex: 0, direction: mindre, difference: 50 }
+            props: { playerId: nilsId, questionIndex: 0, direction: mindre, guessedDifference: 50 }
           - e: Game / QuestionAnswered
             props: { questionIndex: 0, correctDirection: mer, correctDifference: 40 }
           - e: Game / QuestionScored
@@ -819,9 +841,9 @@ slices:
           - e: Game / NextQuestionStarted
             props: { questionIndex: 1 }
           - e: Game / GuessSubmitted
-            props: { playerId: martinId, questionIndex: 1, direction: mindre, difference: 25 }
+            props: { playerId: martinId, questionIndex: 1, direction: mindre, guessedDifference: 25 }
           - e: Game / GuessSubmitted
-            props: { playerId: nilsId, questionIndex: 1, direction: mindre, difference: 20 }
+            props: { playerId: nilsId, questionIndex: 1, direction: mindre, guessedDifference: 20 }
           - e: Game / QuestionAnswered
             props: { questionIndex: 1, correctDirection: mindre, correctDifference: 20 }
           - e: Game / QuestionScored
@@ -986,11 +1008,13 @@ slices:
   # QuestionRound fixtures (card = a Question fixture; guesses/roundScores are maps keyed
   # by playerId; value objects never repeat the key). Tests build rounds inline as
   # flow-maps, e.g. { card: question0, guesses: { martinId: guessMer30 }, scored: false }:
-  #   guessMer30     = { direction: mer,    difference: 30 }
-  #   guessMer40     = { direction: mer,    difference: 40 }
-  #   guessMindre25  = { direction: mindre, difference: 25 }
-  #   guessMindre50  = { direction: mindre, difference: 50 }
-  #   guessMindre20  = { direction: mindre, difference: 20 }
+  #   guessMer30     = { direction: mer,    guessedDifference: 30 }   # RAW guess in the card's unit
+  #   guessMer40     = { direction: mer,    guessedDifference: 40 }
+  #   guessMindre25  = { direction: mindre, guessedDifference: 25 }
+  #   guessMindre50  = { direction: mindre, guessedDifference: 50 }
+  #   guessMindre20  = { direction: mindre, guessedDifference: 20 }
+  # All raw decimals in question0/question1's unit; both cards have mx=100, so each guess
+  # normalizes to itself (guessedDifferenceNormalized == the raw value above).
   #
   # Player fixtures (Player = { playerId: Guid, name: string, isHost: bool }), reused by
   # the Join / Start / Submit Guess GWTs:
@@ -1009,10 +1033,10 @@ slices:
           currentQuestionIndex: int
           questions: IReadOnlyList<QuestionRound>   # the fixed deck loaded up front + how each is being answered
           # QuestionRound = {
-          #   card: Question,                                 # immutable card from LobbyOpened: { questionText, itemA, itemB: string; valueA, valueB: double; unit: string } — raw values, no precomputed answer
-          #   guesses: IReadOnlyDictionary<Guid, Guess>,      # THIS question's guesses; key=playerId, Guess = { direction: Direction (mer|mindre), difference: int (0-100) }
+          #   card: Question,                                 # immutable card from LobbyOpened: { questionText, itemA, itemB: string; valueA, valueB: decimal; unit, differencePrompt: string } — raw values, no precomputed answer
+          #   guesses: IReadOnlyDictionary<Guid, Guess>,      # THIS question's guesses; key=playerId, Guess = { direction: Direction (mer|mindre), guessedDifference: decimal } — the RAW guess in the card's unit, >= 0
           #   correctDirection: Direction? (mer|mindre),      # revealed when scored (null before)
-          #   correctDifference: int? (0-100),                # revealed when scored (null before)
+          #   correctDifference: byte? (0-100),               # revealed when scored (null before); derived from the raw card values
           #   roundScores: IReadOnlyDictionary<Guid, int>,    # per-player round score, set when scored; key=playerId
           #   scored: bool }
           # DERIVED (computed, NOT stored — single source of truth in questions + players):
@@ -1030,7 +1054,7 @@ slices:
             props: { playerId: nilsId, playerName: Nils }
           - e: Game / GameStarted
           - e: Game / GuessSubmitted
-            props: { playerId: martinId, questionIndex: 0, direction: mer, difference: 30 }
+            props: { playerId: martinId, questionIndex: 0, direction: mer, guessedDifference: 30 }
         then:
           - v: State / Game
             props:
@@ -1048,9 +1072,9 @@ slices:
             props: { playerId: nilsId, playerName: Nils }
           - e: Game / GameStarted
           - e: Game / GuessSubmitted
-            props: { playerId: martinId, questionIndex: 0, direction: mer, difference: 30 }
+            props: { playerId: martinId, questionIndex: 0, direction: mer, guessedDifference: 30 }
           - e: Game / GuessSubmitted
-            props: { playerId: nilsId, questionIndex: 0, direction: mindre, difference: 50 }
+            props: { playerId: nilsId, questionIndex: 0, direction: mindre, guessedDifference: 50 }
           - e: Game / QuestionAnswered
             props: { questionIndex: 0, correctDirection: mer, correctDifference: 40 }
           - e: Game / QuestionScored

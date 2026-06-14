@@ -216,11 +216,14 @@ this spec is the single source of truth the C# domain maps to 1:1, so the annota
 | `joinCode`                                    | `Guid`                  |
 | `*At` (created/joined/started/submitted/ended)| `DateTimeOffset`        |
 | `direction` `correctDirection` `guessedDirection` | `Direction (mer\|mindre)` |
-| `difference` `correctDifference` `guessedDifference` | `int (0-100)`    |
-| `differencePoints` `bonusPoints` `roundScore` `totalScore` | `int` (may be negative) |
+| `guessedDifference` (the player's RAW absolute guess in the card's unit, `>= 0`) | `decimal` |
+| `correctDifference` `guessedDifferenceNormalized` (DERIVED 0-100; never on the card) | `byte (0-100)` |
+| `differencePoints` (non-negative gap `\|norm - correct\|`)        | `byte (0-100)` |
+| `bonusPoints` `roundScore` `totalScore`                          | `int` (signed, may be negative) |
+| `valueA` `valueB` (raw card magnitudes, any unit)                | `decimal` |
 | index/count (`questionIndex`, `totalQuestions`, `questionCount`, …) | `int`  |
 | `allGuessesIn` `hasNextQuestion` `directionCorrect` `isHost` | `bool`      |
-| names/text (`hostName`, `playerName`, `questionText`, `itemA/B`, `unit`, `name`) | `string` |
+| names/text (`hostName`, `playerName`, `questionText`, `itemA/B`, `unit`, `differencePrompt`, `name`) | `string` |
 
 Notes:
 
@@ -228,6 +231,17 @@ Notes:
   `Direction (mer|mindre)` on the `SubmitGuess` command **and** on the events
   (`GuessSubmitted`, `QuestionAnswered.correctDirection`,
   `QuestionScored.guessedDirection`) — the event types are not weaker than the command.
+- **The difference family is split by raw-vs-normalized (NOT all `int (0-100)`).** The
+  player guesses the **RAW** absolute difference in the card's own unit — `decimal`,
+  `>= 0`, answering the card's `differencePrompt` — carried on `SubmitGuess` /
+  `GuessSubmitted` as `guessedDifference`. The client never sees the hidden values, so
+  the **system** normalizes server-side in `ScoreQuestion` with `mx = max(valueA,
+  valueB)`: `correctDifference = round(|A-B|/mx*100)` and `guessedDifferenceNormalized =
+  min(100, round(guessedDifference/mx*100))` (CLAMPED at 100; same `mx` for both). Both
+  normalized values are `byte (0-100)` and DERIVED — never on the card. `differencePoints
+  = |guessedDifferenceNormalized - correctDifference|` is `byte`; `bonusPoints`,
+  `roundScore`, `totalScore` are signed `int` (carry the −10 bonus). `DifferenceOutOfRange`
+  guards a **negative** raw guess only — there is no upper bound (too-large clamps at 100).
 - **`joinCode` is a `Guid`** — a minted join token, distinct from `gameId`.
 - **Timestamps are `DateTimeOffset`** (unambiguous instant; survives serialization
   without `DateTime.Kind` loss; matches `GameEvent.OccurredAt` / `GameContext.Now`).
@@ -239,8 +253,9 @@ Notes:
 - **`State / Game` folds the whole deck as `questions: IReadOnlyList<QuestionRound>`** —
   the game loads all questions up front and each player's guess folds into its question.
   `QuestionRound { card: Question, guesses: IReadOnlyDictionary<Guid, Guess>,
-  correctDirection: Direction?, correctDifference: int?, roundScores:
-  IReadOnlyDictionary<Guid, int>, scored: bool }`. Progress is DERIVED, not stored:
+  correctDirection: Direction?, correctDifference: byte?, roundScores:
+  IReadOnlyDictionary<Guid, int>, scored: bool }` (`Guess { direction, guessedDifference:
+  decimal }` — the raw guess). Progress is DERIVED, not stored:
   `pendingPlayerIds(i)`, `allGuessesIn(i)`, `currentQuestionScored`, `hasNextQuestion`,
   and `totalScore(p) = Σ scored questions roundScores[p]`. `Todo / Outstanding guesses`
   mirrors this as one row per question (`OutstandingQuestion { questionIndex,
@@ -274,10 +289,12 @@ Notes:
 `quizId`. The catalog is reference data, not on the `Game` stream.
 
 **Question** (frågekort) compares two things (`itemA`, `itemB`), each with a hidden raw
-`double` value (`valueA`, `valueB`) and a shared `unit`. `questionText` is a complete,
+`decimal` value (`valueA`, `valueB`) and a shared `unit`. `questionText` is a complete,
 natural Swedish sentence the author writes (full control of the grammar; convention:
-**Mer = `itemA` has the larger value**). The card carries NO precomputed answer —
-`ScoreQuestion` derives direction + normalized difference from the raw values at reveal.
+**Mer = `itemA` has the larger value**). `differencePrompt` is the per-card wording for
+the raw-difference guess (e.g. "Hur många miljoner invånare skiljer det?") — the player
+answers it in the card's unit. The card carries NO precomputed answer — `ScoreQuestion`
+derives direction + normalized difference from the raw values at reveal.
 
 **File-based CSV catalog**: the catalog is domain reference data stored as plain CSV files
 on disk — one pack = one `*.csv`, edited by the author in Excel / Google Sheets (no DB, no
@@ -292,8 +309,9 @@ mindre"). Files use the **Swedish Excel dialect** (`;` separator, `,` decimal, s
 |-----------------|--------------|
 | `fråga`         | `questionText` |
 | `sakA` / `sakB` | `itemA` / `itemB` |
-| `värdeA` / `värdeB` | `valueA` / `valueB` (double) |
+| `värdeA` / `värdeB` | `valueA` / `valueB` (decimal) |
 | `enhet`         | `unit` |
+| `differensfråga`| `differencePrompt` |
 
 ## Iterative workflow
 

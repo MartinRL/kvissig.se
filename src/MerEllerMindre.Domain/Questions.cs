@@ -8,14 +8,18 @@ namespace MerEllerMindre.Domain;
 /// raw value (ValueA, ValueB) on a shared Unit. Carries NO precomputed answer —
 /// ScoreQuestion derives direction + normalized difference from the raw values.
 /// Convention: Mer = ItemA holds the larger value (the author phrases the sentence so).
+/// DifferencePrompt is the per-card wording for the raw-difference guess (e.g.
+/// "Hur många miljoner invånare skiljer det?") — the player answers it in the card's unit.
+/// Raw values are decimal so the author's exact figures round-trip without binary drift.
 /// </summary>
 public record Question(
     string QuestionText,
     string ItemA,
     string ItemB,
-    double ValueA,
-    double ValueB,
-    string Unit
+    decimal ValueA,
+    decimal ValueB,
+    string Unit,
+    string DifferencePrompt
 );
 
 /// <summary>
@@ -46,6 +50,7 @@ public static class QuestionPackCsvParser
     private const string ColValueA = "värdeA";
     private const string ColValueB = "värdeB";
     private const string ColUnit = "enhet";
+    private const string ColDifferencePrompt = "differensfråga";
 
     public static QuestionPack Parse(string slug, string text)
     {
@@ -69,7 +74,8 @@ public static class QuestionPackCsvParser
                 ItemB: Field(slug, fields, index, ColItemB, r),
                 ValueA: ParseValue(slug, Field(slug, fields, index, ColValueA, r), ColValueA, r),
                 ValueB: ParseValue(slug, Field(slug, fields, index, ColValueB, r), ColValueB, r),
-                Unit: Field(slug, fields, index, ColUnit, r)
+                Unit: Field(slug, fields, index, ColUnit, r),
+                DifferencePrompt: Field(slug, fields, index, ColDifferencePrompt, r)
             ));
         }
 
@@ -85,12 +91,12 @@ public static class QuestionPackCsvParser
         for (var i = 0; i < header.Count; i++)
             index[header[i].Trim()] = i;
 
-        foreach (var required in new[] { ColQuestion, ColItemA, ColItemB, ColValueA, ColValueB, ColUnit })
+        foreach (var required in new[] { ColQuestion, ColItemA, ColItemB, ColValueA, ColValueB, ColUnit, ColDifferencePrompt })
         {
             if (!index.ContainsKey(required))
                 throw new FormatException(
                     $"Question pack '{slug}' is missing required column '{required}'. " +
-                    $"Expected headers: {ColQuestion};{ColItemA};{ColItemB};{ColValueA};{ColValueB};{ColUnit}");
+                    $"Expected headers: {ColQuestion};{ColItemA};{ColItemB};{ColValueA};{ColValueB};{ColUnit};{ColDifferencePrompt}");
         }
 
         return index;
@@ -104,9 +110,9 @@ public static class QuestionPackCsvParser
         return fields[col].Trim();
     }
 
-    private static double ParseValue(string slug, string raw, string column, int row)
+    private static decimal ParseValue(string slug, string raw, string column, int row)
     {
-        if (double.TryParse(raw, NumberStyles.Float, SvSe, out var value))
+        if (decimal.TryParse(raw, NumberStyles.Number, SvSe, out var value))
             return value;
         throw new FormatException(
             $"Question pack '{slug}' row {row} column '{column}' has an unparseable number '{raw}' (expected sv-SE decimal, e.g. 5,9).");
