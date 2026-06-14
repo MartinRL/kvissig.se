@@ -36,6 +36,9 @@ var app = builder.Build();
 app.UseStaticFiles();
 app.UseAntiforgery();
 
+// Browsers auto-request /favicon.ico; answer 204 so it doesn't surface as a stray 404.
+app.MapGet("/favicon.ico", () => Results.NoContent());
+
 app.MapGameEndpoints();
 
 app.Run();

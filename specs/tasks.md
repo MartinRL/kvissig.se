@@ -97,3 +97,4 @@ source, no GT).
 - [ ] PWA manifest
 - [ ] Error handling UI
 - [ ] Loading states
+- [x] favicon (GET /favicon.ico → 204 No Content; no stray browser 404)
