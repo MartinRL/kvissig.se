@@ -40,7 +40,7 @@ public class GameEndpointsTests : IClassFixture<WebApplicationFactory<Program>>
 
     private static async Task<string> CreateGame(HttpClient host)
     {
-        var token = Token(await (await host.GetAsync("/")).Content.ReadAsStringAsync());
+        var token = Token(await (await host.GetAsync("/games/new/mer-eller-mindre")).Content.ReadAsStringAsync());
         var resp = await host.PostAsync("/games", Form(token,
             ("questionPackId", "mer-eller-mindre"), ("hostName", "Martin")));
         resp.StatusCode.Should().Be(HttpStatusCode.OK);
@@ -66,7 +66,24 @@ public class GameEndpointsTests : IClassFixture<WebApplicationFactory<Program>>
         var html = await (await NewClient().GetAsync("/")).Content.ReadAsStringAsync();
 
         html.Should().Contain("Mer eller mindre");
-        html.Should().Contain("hx-post=\"/games\"");
+        html.Should().Contain("/games/new/mer-eller-mindre");
+    }
+
+    [Fact]
+    public async Task HostForm_ShowsANameInputForTheChosenPack()
+    {
+        var html = await (await NewClient().GetAsync("/games/new/mer-eller-mindre")).Content.ReadAsStringAsync();
+
+        html.Should().Contain("Mer eller mindre");
+        html.Should().Contain("name=\"hostName\"");
+    }
+
+    [Fact]
+    public async Task HostForm_UnknownPackReturnsNotFound()
+    {
+        var resp = await NewClient().GetAsync("/games/new/bogus");
+
+        resp.StatusCode.Should().Be(HttpStatusCode.NotFound);
     }
 
     [Fact]

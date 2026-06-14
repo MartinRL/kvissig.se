@@ -11,7 +11,9 @@ namespace MerEllerMindre.Web.Presentation;
 /// </summary>
 public sealed record PackVm(string PackId, string Name, int QuestionCount);
 
-public sealed record CatalogVm(IReadOnlyList<PackVm> Packs, string AntiforgeryToken);
+public sealed record CatalogVm(IReadOnlyList<PackVm> Packs);
+
+public sealed record HostFormVm(string PackId, string PackName, string AntiforgeryToken);
 
 public sealed record JoinVm(Guid JoinCode, string HostName, string AntiforgeryToken);
 
@@ -55,8 +57,9 @@ public sealed record ResultRowVm(
     int Rank,
     string Name,
     bool IsYou,
+    bool IsHost,
     Direction GuessedDirection,
-    decimal GuessedDifference,
+    byte GuessedDifferenceNormalized,
     int RoundScore,
     int TotalScore);
 
@@ -78,7 +81,7 @@ public sealed record ResultsVm(
     bool HasNextQuestion,
     string AntiforgeryToken);
 
-public sealed record StandingRowVm(int Rank, string Name, bool IsYou, int TotalScore, bool IsWinner);
+public sealed record StandingRowVm(int Rank, string Name, bool IsYou, bool IsHost, int TotalScore, bool IsWinner);
 
 public sealed record StandingsVm(
     Guid JoinCode,

@@ -27,8 +27,8 @@
                 {
                     <tr>
                         <td class="rank">@r.Rank</td>
-                        <td class="who">@r.Name @if (r.IsYou) { <small class="muted">(du)</small> }</td>
-                        <td class="round">@(r.GuessedDirection == Direction.Mer ? "mer" : "mindre"), @Fmt(r.GuessedDifference)</td>
+                        <td class="who">@r.Name@(r.IsHost ? " (värd)" : "") @if (r.IsYou) { <small class="muted">(du)</small> }</td>
+                        <td class="round">@(r.GuessedDirection == Direction.Mer ? "mer" : "mindre"), @r.GuessedDifferenceNormalized</td>
                         <td class="round">@Signed(r.RoundScore)</td>
                         <td class="total">@r.TotalScore</td>
                     </tr>

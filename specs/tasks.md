@@ -99,3 +99,12 @@ source, no GT).
 - [ ] Error handling UI
 - [ ] Loading states
 - [ ] create favicon 
+
+## Phase 10: deploy
+- [ ] deploy to fly.io from github actions
+- [ ] buy kvissig.se 
+- [ ] make kvissig.se work, ie the url (incl. www.kvissig.se) works on the internet
+
+## Phase 11: review by reviewers
+
+## Phase 12: product-led growth

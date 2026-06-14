@@ -1,0 +1,28 @@
+@* GET /games/new/{packId} — the host enters their name before the game is created. Posting
+   creates the game (OpenLobby via POST /games) and the server HX-Redirects to the lobby shell.
+   Full page (mirrors JoinForm). *@
+<MainLayout Title="Mer eller Mindre — Skapa spel">
+    <div class="wrap">
+        <div class="brand">
+            <div class="logo"><span class="mer">Mer</span> eller <span class="mindre">Mindre</span></div>
+            <span class="pill soft">Spelledare</span>
+        </div>
+
+        <div class="card">
+            <h1>Skapa spel</h1>
+            <p class="sub">@Model.PackName</p>
+
+            <form hx-post="/games" hx-swap="none">
+                <input type="hidden" name="__RequestVerificationToken" value="@Model.AntiforgeryToken" />
+                <input type="hidden" name="questionPackId" value="@Model.PackId" />
+                <label for="name">Ditt namn</label>
+                <input type="text" id="name" name="hostName" placeholder="Skriv ditt namn" autofocus required />
+                <button type="submit" class="btn">Skapa spel</button>
+            </form>
+        </div>
+    </div>
+</MainLayout>
+
+@code {
+    [Parameter] public required HostFormVm Model { get; set; }
+}

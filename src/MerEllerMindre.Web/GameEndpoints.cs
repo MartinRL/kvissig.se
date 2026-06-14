@@ -21,11 +21,19 @@ public static class GameEndpoints
 {
     public static void MapGameEndpoints(this WebApplication app)
     {
-        app.MapGet("/", (FileSystemQuestionPackCatalog catalog, IAntiforgery antiforgery, HttpContext http) =>
+        app.MapGet("/", (FileSystemQuestionPackCatalog catalog) =>
         {
-            var token = antiforgery.GetAndStoreTokens(http).RequestToken!;
             var packs = catalog.Packs.Select(p => new PackVm(p.PackId, p.Name, p.QuestionCount)).ToList();
-            return new RazorComponentResult<QuizCatalog>(new { Model = new CatalogVm(packs, token) });
+            return new RazorComponentResult<QuizCatalog>(new { Model = new CatalogVm(packs) });
+        });
+
+        app.MapGet("/games/new/{packId}", (string packId, FileSystemQuestionPackCatalog catalog, IAntiforgery antiforgery, HttpContext http) =>
+        {
+            if (catalog.Find(packId) is not { } pack)
+                return Results.NotFound("Frågepaketet hittades inte.");
+
+            var token = antiforgery.GetAndStoreTokens(http).RequestToken!;
+            return new RazorComponentResult<HostForm>(new { Model = new HostFormVm(pack.PackId, pack.Name, token) });
         });
 
         app.MapPost("/games", (

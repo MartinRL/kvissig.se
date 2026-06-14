@@ -1,5 +1,5 @@
-@* GET / — the Quiz Catalog. The GM picks a pack; posting creates the game (OpenLobby) and
-   the server HX-Redirects to the lobby shell. Full page (wraps MainLayout). *@
+@* GET / — the Quiz Catalog. The GM picks a pack; "Spela" links to /games/new/{packId} where
+   the host enters their name before the game is created. Full page (wraps MainLayout). *@
 <MainLayout Title="Mer eller Mindre — Välj kviss">
     <div class="wrap">
         <div class="brand">
@@ -18,12 +18,7 @@
                         <div class="name">@pack.Name</div>
                         <div class="count">@pack.QuestionCount frågor</div>
                     </div>
-                    <form hx-post="/games" hx-swap="none">
-                        <input type="hidden" name="__RequestVerificationToken" value="@Model.AntiforgeryToken" />
-                        <input type="hidden" name="questionPackId" value="@pack.PackId" />
-                        <input type="hidden" name="hostName" value="Värd" />
-                        <button type="submit" class="btn">Spela</button>
-                    </form>
+                    <a class="btn" href="/games/new/@pack.PackId">Spela</a>
                 </div>
             </div>
         }

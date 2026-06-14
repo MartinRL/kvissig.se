@@ -108,8 +108,9 @@ public static class GameScreens
                     Rank: 0,
                     p.Name,
                     p.PlayerId == viewer,
+                    p.PlayerId == state.HostPlayerId,
                     guess.Direction,
-                    guess.GuessedDifference,
+                    Decider.NormalizeDifference(guess.GuessedDifference, largerValue),
                     round.RoundScores[p.PlayerId],
                     state.TotalScore(p.PlayerId));
             })
@@ -142,7 +143,7 @@ public static class GameScreens
         var names = state.Players.ToDictionary(p => p.PlayerId, p => p.Name);
         var rows = state.FinalScoreboard
             .OrderBy(e => e.TotalScore)
-            .Select((e, idx) => new StandingRowVm(idx + 1, e.PlayerName, e.PlayerId == viewer, e.TotalScore, winners.Contains(e.PlayerId)))
+            .Select((e, idx) => new StandingRowVm(idx + 1, e.PlayerName, e.PlayerId == viewer, e.PlayerId == state.HostPlayerId, e.TotalScore, winners.Contains(e.PlayerId)))
             .ToList();
         var winnerNames = state.WinnerIds
             .Select(id => names.TryGetValue(id, out var n) ? n : "")

@@ -16,8 +16,8 @@
             {
                 <li>
                     <span class="dot"></span>
-                    <span class="who">@p.Name</span>
-                    <span class="tag">@(p.IsHost ? (p.IsYou ? "värd · du" : "värd") : (p.IsYou ? "du" : "med"))</span>
+                    <span class="who">@p.Name@(p.IsHost ? " (värd)" : "")</span>
+                    <span class="tag">@(p.IsYou ? "du" : "med")</span>
                 </li>
             }
         </ul>

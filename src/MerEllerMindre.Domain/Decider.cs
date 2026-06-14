@@ -167,6 +167,15 @@ public static class Decider
         ]);
     }
 
+    /// <summary>
+    /// Normalizes a raw difference into the 0-100 scale used for scoring, clamped at 100.
+    /// Shared by the facit and per-guess normalization so the results screen can show the
+    /// same integer the scoring used.
+    /// </summary>
+    public static byte NormalizeDifference(decimal value, decimal mx) =>
+        mx <= 0 ? (byte)0
+        : (byte)Math.Min(100m, Math.Round(value / mx * 100, MidpointRounding.AwayFromZero));
+
     private static Result<GameEvent[]> DecideScoreQuestion(GameState state, ScoreQuestion command)
     {
         if (!state.AllGuessesIn(command.QuestionIndex))
@@ -181,7 +190,7 @@ public static class Decider
         var mx = Math.Max(a, b);
 
         var correctDirection = a >= b ? Direction.Mer : Direction.Mindre;
-        var correctDifference = (byte)Math.Round(Math.Abs(a - b) / mx * 100, MidpointRounding.AwayFromZero);
+        var correctDifference = NormalizeDifference(Math.Abs(a - b), mx);
 
         var events = new List<GameEvent>
         {
@@ -191,7 +200,7 @@ public static class Decider
         foreach (var player in state.Players)
         {
             var guess = round.Guesses[player.PlayerId];
-            var normalized = (byte)Math.Min(100m, Math.Round(guess.GuessedDifference / mx * 100, MidpointRounding.AwayFromZero));
+            var normalized = NormalizeDifference(guess.GuessedDifference, mx);
             var directionCorrect = guess.Direction == correctDirection;
             var differencePoints = (byte)Math.Abs(normalized - correctDifference);
             var bonus = directionCorrect ? -10 : 0;
