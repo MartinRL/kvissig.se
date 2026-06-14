@@ -1,0 +1,35 @@
+@* GET / — the Quiz Catalog. The GM picks a pack; posting creates the game (OpenLobby) and
+   the server HX-Redirects to the lobby shell. Full page (wraps MainLayout). *@
+<MainLayout Title="Mer eller Mindre — Välj kviss">
+    <div class="wrap">
+        <div class="brand">
+            <div class="logo"><span class="mer">Mer</span> eller <span class="mindre">Mindre</span></div>
+            <span class="pill soft">Spelledare</span>
+        </div>
+
+        <h1>Välj kviss</h1>
+        <p class="sub">Ett frågepaket är en kortlek. Du blir värd och första spelaren.</p>
+
+        @foreach (var pack in Model.Packs)
+        {
+            <div class="card">
+                <div class="pack">
+                    <div class="info">
+                        <div class="name">@pack.Name</div>
+                        <div class="count">@pack.QuestionCount frågor</div>
+                    </div>
+                    <form hx-post="/games" hx-swap="none">
+                        <input type="hidden" name="__RequestVerificationToken" value="@Model.AntiforgeryToken" />
+                        <input type="hidden" name="questionPackId" value="@pack.PackId" />
+                        <input type="hidden" name="hostName" value="Värd" />
+                        <button type="submit" class="btn">Spela</button>
+                    </form>
+                </div>
+            </div>
+        }
+    </div>
+</MainLayout>
+
+@code {
+    [Parameter] public required CatalogVm Model { get; set; }
+}

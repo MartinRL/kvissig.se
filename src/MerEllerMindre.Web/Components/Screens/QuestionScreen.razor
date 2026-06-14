@@ -1,0 +1,89 @@
+@* The Question screen (plan Del 1). Step 1: pick which item is MER. Step 2: a slider in the
+   card's OWN unit (0 → max(A,B)), answering the card's differensfråga. The two-bars are a LIVE
+   preview only (mer-bar full, mindre-bar = (100 − norm)%); NO raw values / facit appear here —
+   those are revealed on the results screen. Interactive, so it does NOT poll: submitting the
+   guess swaps in the Waiting screen. *@
+<div class="card">
+    <div class="brand" style="margin-bottom:1rem">
+        <span class="pill">Fråga @Model.QuestionNumber / @Model.TotalQuestions</span>
+    </div>
+    <h1>@Model.QuestionText</h1>
+
+    <form hx-post="@($"/games/{Model.JoinCode:N}/guess")" hx-target="#screen" hx-swap="innerHTML">
+        <input type="hidden" name="__RequestVerificationToken" value="@Model.AntiforgeryToken" />
+        <input type="hidden" name="direction" id="dirInput" value="Mer" />
+        <input type="hidden" name="guessedDifference" id="diffInput" value="0" />
+
+        <p class="steplabel">1 · Vilken är mer?</p>
+        <div class="direction" role="group" aria-label="Riktning">
+            <button type="button" class="dirbtn" data-dir="Mer" aria-pressed="true">
+                <span class="arrow">▲</span> @Model.ItemA
+            </button>
+            <button type="button" class="dirbtn" data-dir="Mindre" aria-pressed="false">
+                <span class="arrow">▼</span> @Model.ItemB
+            </button>
+        </div>
+
+        <p class="steplabel">2 · @Model.DifferencePrompt</p>
+        <div class="diffwrap">
+            <div class="diffout"><span id="diffOut">0</span> @Model.Unit</div>
+            <input type="range" id="diff" min="0" max="@MaxStr" value="0" step="@StepStr" />
+            <div class="scale"><span>0 @Model.Unit</span><span>@MaxStr @Model.Unit</span></div>
+        </div>
+
+        <div class="twobars" aria-hidden="true">
+            <div class="bar is-mer" id="barA" style="height:100%"><span class="barcap">@Model.ItemA</span></div>
+            <div class="bar is-mindre" id="barB" style="height:100%"><span class="barcap">@Model.ItemB</span></div>
+        </div>
+
+        <button type="submit" class="btn" style="margin-top:1.75rem">Gissa!</button>
+    </form>
+</div>
+
+<script>
+    (function () {
+        const max = @MaxStr;
+        const out = document.getElementById('diffOut');
+        const range = document.getElementById('diff');
+        const dirInput = document.getElementById('dirInput');
+        const diffInput = document.getElementById('diffInput');
+        const barA = document.getElementById('barA');
+        const barB = document.getElementById('barB');
+        const buttons = document.querySelectorAll('.direction button');
+
+        function norm(v) { return max > 0 ? Math.min(100, Math.round(v / max * 100)) : 0; }
+
+        function render() {
+            const v = Number(range.value);
+            out.textContent = range.value;
+            diffInput.value = range.value;
+            const n = norm(v);
+            range.style.background = `linear-gradient(90deg, var(--accent) ${n}%, var(--line) ${n}%)`;
+            const merIsA = dirInput.value === 'Mer';
+            const tall = merIsA ? barA : barB;
+            const short = merIsA ? barB : barA;
+            tall.classList.add('is-mer'); tall.classList.remove('is-mindre');
+            short.classList.add('is-mindre'); short.classList.remove('is-mer');
+            tall.style.height = '100%';
+            short.style.height = (100 - n) + '%';
+        }
+
+        range.addEventListener('input', render);
+        buttons.forEach(btn => btn.addEventListener('click', () => {
+            buttons.forEach(b => {
+                const pressed = b === btn;
+                b.setAttribute('aria-pressed', pressed ? 'true' : 'false');
+                b.querySelector('.arrow').textContent = pressed ? '▲' : '▼';
+            });
+            dirInput.value = btn.dataset.dir;
+            render();
+        }));
+        render();
+    })();
+</script>
+
+@code {
+    [Parameter] public required QuestionVm Model { get; set; }
+    private string MaxStr => Model.SliderMax.ToString(CultureInfo.InvariantCulture);
+    private string StepStr => Model.SliderStep.ToString(CultureInfo.InvariantCulture);
+}

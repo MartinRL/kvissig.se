@@ -1,0 +1,28 @@
+@* Lobby as a joined player sees it: waiting for the host to start. Polls every 2 s so the
+   first question appears automatically the moment the host starts. *@
+<div hx-get="@StatePath" hx-trigger="every 2s" hx-target="#screen" hx-swap="innerHTML">
+    <div class="card center">
+        <h1>Du är med! 🎉</h1>
+        <p class="sub">Väntar på att @Model.HostName startar omgången…</p>
+        <p class="busy">Inväntar start</p>
+    </div>
+
+    <div class="card">
+        <div class="cardhead">Spelare <span class="pill">@Model.Players.Count med</span></div>
+        <ul class="players">
+            @foreach (var p in Model.Players)
+            {
+                <li>
+                    <span class="dot"></span>
+                    <span class="who">@p.Name</span>
+                    <span class="tag">@(p.IsHost ? "värd" : (p.IsYou ? "du" : "med"))</span>
+                </li>
+            }
+        </ul>
+    </div>
+</div>
+
+@code {
+    [Parameter] public required LobbyVm Model { get; set; }
+    private string StatePath => $"/games/{Model.JoinCode:N}/state";
+}

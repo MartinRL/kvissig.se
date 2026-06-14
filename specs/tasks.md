@@ -60,9 +60,9 @@
 - [x] Add first real pack `data/packs/mer-eller-mindre.csv` (10 Swedish cards)
 
 ## Phase 5: Game Repository
-- [ ] Create `GameRepository` (in-memory event store per game)
-- [ ] Implement `GetState` (fold events through Evolve)
-- [ ] Implement `Execute` (Decide + append events)
+- [x] Create `GameRepository` (in-memory event store + joinCode→gameId index)
+- [x] Implement `Load` (fold events through `Decider.Fold`)
+- [x] Implement `GameApplicationService` (Decide + append events; Open/Execute + score/progression gears)
 
 ## Phase 6: Read Models (Projections)
 Pure `GameState → View` functions in the Domain (one per spec view slice). Quiz Catalog
@@ -77,19 +77,20 @@ source, no GT).
 - [x] `GameProgressView` — index, totals, scoredQuestionCount, hasNextQuestion (todo)
 
 ## Phase 7: Web Endpoints
-- [ ] `POST /games` — create game
-- [ ] `POST /games/{code}/join` — join game
-- [ ] `POST /games/{code}/start` — start game (host only)
-- [ ] `POST /games/{code}/guess` — submit guess (direction + difference)
-- [ ] `POST /games/{code}/next` — next question (host only)
-- [ ] `GET /games/{code}/state` — polling endpoint
+- [x] `POST /games` — create game (HX-Redirect to lobby shell)
+- [x] `POST /games/{code}/join` — join game (HX-Redirect to lobby shell)
+- [x] `POST /games/{code}/start` — start game (host only)
+- [x] `POST /games/{code}/guess` — submit guess (direction + raw difference); score gear fires on allGuessesIn
+- [x] `POST /games/{code}/next` — next question / end game (host progression gear)
+- [x] `GET /games/{code}/state` — polling endpoint (renders the per-viewer screen fragment)
 
 ## Phase 8: Razor Pages + HTMX
-- [ ] Home page with "Create Game" button
-- [ ] Lobby page with QR code and player list
-- [ ] Question page with mer/mindre buttons + difference slider
-- [ ] Results page with answers revealed + score breakdown
-- [ ] Final scoreboard page
+- [x] Home page (Quiz catalog) with "Create Game" form per pack
+- [x] Lobby pages (host + player) with join code/link and player list
+- [x] Question page with mer/mindre buttons + unit difference slider (0→max(A,B), live two-bars)
+- [x] Waiting page (submitted vs pending) while others guess
+- [x] Results page with answer revealed (raw values + normalized facit) + per-player score breakdown
+- [x] Final standings page (winner banner, lowest-total-wins scoreboard)
 
 ## Phase 9: Polish
 - [ ] Mobile-friendly CSS

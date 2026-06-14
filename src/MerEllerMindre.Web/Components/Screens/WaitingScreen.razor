@@ -1,0 +1,41 @@
+@* After a player submits a guess: their guess is locked in and they wait. Polls every 2 s so
+   the results appear automatically once the scoring gear fires (all guesses in). *@
+<div hx-get="@StatePath" hx-trigger="every 2s" hx-target="#screen" hx-swap="innerHTML">
+    <div class="card center">
+        <span class="pill">Fråga @Model.QuestionNumber / @Model.TotalQuestions</span>
+        <h1 style="margin-top:.6rem">Din gissning är ställd ✓</h1>
+        <p class="sub">Systemet rättar automatiskt när alla gissat.</p>
+        <p class="busy">@Model.DoneCount av @Model.TotalCount klara</p>
+    </div>
+
+    @if (Model.Done.Count > 0)
+    {
+        <div class="card">
+            <div class="cardhead">Klara</div>
+            <ul class="players">
+                @foreach (var p in Model.Done)
+                {
+                    <li><span class="dot"></span><span class="who">@p.Name</span><span class="tag">@(p.IsYou ? "du · klar" : "klar")</span></li>
+                }
+            </ul>
+        </div>
+    }
+
+    @if (Model.Pending.Count > 0)
+    {
+        <div class="card">
+            <div class="cardhead">Väntar på</div>
+            <ul class="players">
+                @foreach (var p in Model.Pending)
+                {
+                    <li><span class="dot pending"></span><span class="who">@p.Name</span><span class="tag">gissar…</span></li>
+                }
+            </ul>
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter] public required WaitingVm Model { get; set; }
+    private string StatePath => $"/games/{Model.JoinCode:N}/state";
+}

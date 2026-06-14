@@ -1,0 +1,22 @@
+@* Shared full-page shell for static-SSR screens. Full-page components (QuizCatalog,
+   GameLobby) wrap their markup in <MainLayout>…</MainLayout>; fragment components
+   (PlayersList, OpenLobbyForm) render bare markup and do NOT use this. Google Fonts arrive
+   via playful.css's own @@import. *@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@Title</title>
+    <link rel="stylesheet" href="/css/playful.css" />
+    <script src="/js/htmx.min.js" defer></script>
+</head>
+<body>
+    @ChildContent
+</body>
+</html>
+
+@code {
+    [Parameter] public string Title { get; set; } = "Mer eller Mindre";
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+}

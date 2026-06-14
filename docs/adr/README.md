@@ -8,3 +8,4 @@
 | [004](004-emlang-specification.md) | emlang for Behavior Specification | Accepted |
 | [005](005-csv-questions.md) | CSV File for Questions | Accepted |
 | [006](006-result-railway-oriented.md) | Error Handling via Result / Railway Oriented Programming | Accepted |
+| [007](007-razor-components-static-ssr.md) | Razor Components in Static SSR as the Renderer | Accepted |

@@ -9,5 +9,6 @@
     <Project Path="src/MerEllerMindre.Domain.Tests/MerEllerMindre.Domain.Tests.csproj" />
     <Project Path="src/MerEllerMindre.Domain/MerEllerMindre.Domain.csproj" />
     <Project Path="src/MerEllerMindre.Web/MerEllerMindre.Web.csproj" />
+    <Project Path="src/MerEllerMindre.Web.Tests/MerEllerMindre.Web.Tests.csproj" />
   </Folder>
 </Solution>

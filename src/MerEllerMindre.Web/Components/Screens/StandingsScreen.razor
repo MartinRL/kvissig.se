@@ -1,0 +1,29 @@
+@* Final standings: winner banner + final scoreboard (lowest total wins; ties share the win).
+   Terminal screen — no polling. *@
+<div>
+    <div class="card center">
+        <h1>Slutställning</h1>
+        <p class="winner-banner"><span class="name">@WinnerText</span> @(Model.WinnerNames.Count > 1 ? "delar segern!" : "vann!") 🏆</p>
+        <p class="muted">Lägst total poäng vinner.</p>
+
+        <table class="scoreboard" style="margin-top:1rem">
+            <tbody>
+                @foreach (var r in Model.Rows)
+                {
+                    <tr class="@(r.IsWinner ? "winner" : null)">
+                        <td class="rank">@r.Rank</td>
+                        <td class="who">@r.Name @if (r.IsYou) { <small class="muted">(du)</small> }</td>
+                        <td class="total">@r.TotalScore</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <a class="btn" href="/">Spela igen</a>
+</div>
+
+@code {
+    [Parameter] public required StandingsVm Model { get; set; }
+    private string WinnerText => string.Join(" & ", Model.WinnerNames);
+}

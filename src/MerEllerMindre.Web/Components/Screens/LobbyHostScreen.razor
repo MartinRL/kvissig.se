@@ -1,0 +1,42 @@
+@* Lobby as the host sees it: the join code/link to share, the live player list, and the
+   Start button (enabled at 2+ players). Polls every 2 s to pick up joiners and the start. *@
+<div hx-get="@StatePath" hx-trigger="every 2s" hx-target="#screen" hx-swap="innerHTML">
+    <div class="card center">
+        <h1>Bjud in spelare</h1>
+        <p class="sub">Dela koden eller länken. Spelarna går med på sin telefon.</p>
+        <p class="joincode">@Model.JoinCode.ToString("N")[..6].ToUpperInvariant()</p>
+        <p class="muted">Gå till <strong>@JoinPath</strong></p>
+    </div>
+
+    <div class="card">
+        <div class="cardhead">Spelare <span class="pill">@Model.Players.Count med</span></div>
+        <ul class="players">
+            @foreach (var p in Model.Players)
+            {
+                <li>
+                    <span class="dot"></span>
+                    <span class="who">@p.Name</span>
+                    <span class="tag">@(p.IsHost ? (p.IsYou ? "värd · du" : "värd") : (p.IsYou ? "du" : "med"))</span>
+                </li>
+            }
+        </ul>
+    </div>
+
+    @if (Model.CanStart)
+    {
+        <form hx-post="@($"/games/{Model.JoinCode:N}/start")" hx-target="#screen" hx-swap="innerHTML">
+            <input type="hidden" name="__RequestVerificationToken" value="@Model.AntiforgeryToken" />
+            <button type="submit" class="btn">Starta omgång</button>
+        </form>
+    }
+    else
+    {
+        <p class="muted center">Behöver minst 2 spelare · @Model.Players.Count ansluten(a)</p>
+    }
+</div>
+
+@code {
+    [Parameter] public required LobbyVm Model { get; set; }
+    private string StatePath => $"/games/{Model.JoinCode:N}/state";
+    private string JoinPath => $"/games/{Model.JoinCode:N}/join";
+}

@@ -1,0 +1,26 @@
+@* GET /games/{code}/join — a player enters their name. Posting joins the lobby (JoinGame)
+   and the server HX-Redirects to the lobby shell. Full page. *@
+<MainLayout Title="Mer eller Mindre — Gå med">
+    <div class="wrap">
+        <div class="brand">
+            <div class="logo"><span class="mer">Mer</span> eller <span class="mindre">Mindre</span></div>
+            <span class="pill soft">Gå med</span>
+        </div>
+
+        <div class="card">
+            <h1>Gå med i omgången</h1>
+            <p class="sub">Värd @Model.HostName</p>
+
+            <form hx-post="@($"/games/{Model.JoinCode:N}/join")" hx-swap="none">
+                <input type="hidden" name="__RequestVerificationToken" value="@Model.AntiforgeryToken" />
+                <label for="name">Ditt namn</label>
+                <input type="text" id="name" name="playerName" placeholder="Skriv ditt namn" autofocus required />
+                <button type="submit" class="btn">Gå med</button>
+            </form>
+        </div>
+    </div>
+</MainLayout>
+
+@code {
+    [Parameter] public required JoinVm Model { get; set; }
+}

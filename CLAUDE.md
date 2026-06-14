@@ -87,7 +87,9 @@ See `specs/CLAUDE.md` for the full cheat-sheet.
 **Forbidden:**
 - SignalR, WebSockets, SSE
 - Entity Framework, databases
-- Blazor
+- Blazor Server & interactive render modes (WebSocket-circuit). Static SSR with Razor
+  Components (`RazorComponentResult<T>`, no `@rendermode`, no `blazor.web.js`) is the chosen
+  renderer — see ADR 007.
 - `dynamic` or reflection in domain
 
 ## Workflow
