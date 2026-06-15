@@ -101,9 +101,12 @@ source, no GT).
 - [ ] create favicon 
 
 ## Phase 10: deploy
-- [ ] deploy to fly.io from github actions
-- [ ] buy kvissig.se 
-- [ ] make kvissig.se work, ie the url (incl. www.kvissig.se) works on the internet
+- [x] deploy to fly.io from github actions (live på https://kvissig.fly.dev, CI Deploy grön, single-instance)
+- [x] buy kvissig.se (Loopia)
+- [x] make kvissig.se work, ie the url (incl. www.kvissig.se) works on the internet
+  - [x] fly certs add kvissig.se + www.kvissig.se
+  - [x] Cloudflare DNS: A/AAAA på apex + www → fly-IP (66.241.125.165, 2a09:8280:1::12a:1486:0)
+  - [x] verifiera cert issued + https på båda värdnamnen (båda 200 ok, rätt CN)
 
 ## Phase 11: review by reviewers
 
