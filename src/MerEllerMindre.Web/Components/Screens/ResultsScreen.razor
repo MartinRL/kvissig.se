@@ -9,8 +9,12 @@
         <p class="answer"><span class="mer">@Model.LargerItem</span> är <span class="mer">MER</span></p>
 
         <div class="twobars" aria-hidden="true">
-            <div class="bar a" style="height:100%"><span>@Fmt(Model.LargerValue)</span><span class="barcap">@Model.LargerItem · @Fmt(Model.LargerValue) @Model.Unit</span></div>
-            <div class="bar b" style="height:@Model.SmallerBarPercent%"><span>@Fmt(Model.SmallerValue)</span><span class="barcap">@Model.SmallerItem · @Fmt(Model.SmallerValue) @Model.Unit</span></div>
+            <div class="bar a" style="height:100%"><span>@Fmt(Model.LargerValue)</span></div>
+            <div class="bar b" style="height:@Model.SmallerBarPercent%"><span>@Fmt(Model.SmallerValue)</span></div>
+        </div>
+        <div class="twobars-legend">
+            <span>@Model.LargerItem · @Fmt(Model.LargerValue) @Model.Unit</span>
+            <span>@Model.SmallerItem · @Fmt(Model.SmallerValue) @Model.Unit</span>
         </div>
 
         <p style="margin-top:2.2rem">Normaliserad skillnad <span class="diffnum">@Model.CorrectDifference</span> / 100</p>
