@@ -109,5 +109,6 @@ source, no GT).
   - [x] verifiera cert issued + https på båda värdnamnen (båda 200 ok, rätt CN)
 
 ## Phase 11: review by reviewers
+- [ ] inga värden, bara förhållandet och enheten. nu kan kan man lätt förstå att maxvärdet är maxvärdet av "mest". exempelvis blir frågan vikten av haj vs. människa lätt att gissa sig till då de flest ju vet vikten av en människa. detta lägger ytterligare vikt vid spelets unika attribut: en slider som får två staplar att röra sig upp och ned. annorlunda an traditionellt quiz / kviss och inte något som går att replikera på papperskort.
 
 ## Phase 12: product-led growth
