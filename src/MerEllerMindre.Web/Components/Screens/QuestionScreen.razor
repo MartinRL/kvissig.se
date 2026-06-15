@@ -25,10 +25,12 @@
         </div>
 
         <p class="steplabel">2 · @Model.DifferencePrompt</p>
+        @* ponytail: max stays in the DOM (max="5.9") — accepted view-source ceiling for a
+           co-located party game; only the *displayed* value is hidden. Upgrade path if true
+           hiding is ever needed: post a 0–100 proportion instead of the raw value. *@
         <div class="diffwrap">
-            <div class="diffout"><span id="diffOut">0</span> @Model.Unit</div>
-            <input type="range" id="diff" min="0" max="@MaxStr" value="0" step="@StepStr" />
-            <div class="scale"><span>0 @Model.Unit</span><span>@MaxStr @Model.Unit</span></div>
+            <input type="range" id="diff" min="0" max="@MaxStr" value="0" step="@StepStr" aria-label="@Model.Unit" />
+            <div class="unit">@Model.Unit</div>
         </div>
 
         <div class="twobars" aria-hidden="true">
@@ -43,7 +45,6 @@
 <script>
     (function () {
         const max = @MaxStr;
-        const out = document.getElementById('diffOut');
         const range = document.getElementById('diff');
         const dirInput = document.getElementById('dirInput');
         const diffInput = document.getElementById('diffInput');
@@ -55,7 +56,6 @@
 
         function render() {
             const v = Number(range.value);
-            out.textContent = range.value;
             diffInput.value = range.value;
             const n = norm(v);
             range.style.background = `linear-gradient(90deg, var(--accent) ${n}%, var(--line) ${n}%)`;

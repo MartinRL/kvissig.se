@@ -104,7 +104,7 @@ h2 { font-family: var(--display); font-weight: 700; font-size: 1.3rem; margin: 0
 
 /* ---- difference slider ---- */
 .diffwrap { text-align: center; margin-bottom: 1.25rem; }
-.diffout { font-family: var(--display); font-weight: 800; font-size: 3.2rem; line-height: 1; color: var(--accent); }
+.unit { color: var(--ink-soft); font-size: .8rem; }
 input[type=range] {
   -webkit-appearance: none; appearance: none; width: 100%; height: 14px;
   border-radius: 999px; background: linear-gradient(90deg, var(--accent) 30%, var(--line) 30%);
@@ -118,7 +118,6 @@ input[type=range]::-moz-range-thumb {
   width: 30px; height: 30px; border-radius: 50%;
   background: #fff; border: 4px solid var(--accent); box-shadow: 0 3px 8px rgba(0, 0, 0, .2); cursor: grab;
 }
-.scale { display: flex; justify-content: space-between; color: var(--ink-soft); font-size: .75rem; }
 
 /* ---- two-bars viz ---- */
 .twobars { display: flex; gap: 1.5rem; align-items: flex-end; justify-content: center; height: 150px; margin: 1.5rem 0 .4rem; position: relative; }
