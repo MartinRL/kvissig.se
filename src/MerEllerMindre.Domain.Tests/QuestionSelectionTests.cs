@@ -1,0 +1,69 @@
+using AwesomeAssertions;
+using Xunit;
+
+namespace MerEllerMindre.Domain.Tests;
+
+/// <summary>
+/// Tests for the pure balanced-selection algorithm. RNG is a deterministic stub
+/// (next => 0) so the band histogram (shuffle-invariant) is asserted exactly.
+/// </summary>
+public class QuestionSelectionTests
+{
+    // mx is always 100 here, so norm == |A - B|. Pick A=100, B=100-norm to land a band.
+    private static Question Card(int norm, int id) =>
+        new($"q{id}", "A", "B", 100m, 100m - norm, "u", "d");
+
+    private static int Band(Question q)
+    {
+        var norm = Decider.NormalizeDifference(Math.Abs(q.ValueA - q.ValueB), Math.Max(q.ValueA, q.ValueB));
+        return norm switch { <= 20 => 0, <= 60 => 1, <= 85 => 2, _ => 3 };
+    }
+
+    [Fact]
+    public void SmallPoolIsReturnedAsIs()
+    {
+        var pool = new List<Question> { Card(10, 0), Card(40, 1), Card(70, 2) };
+
+        var selected = QuestionSelection.PickBalanced(pool, Decider.QuestionsPerGame, _ => 0);
+
+        selected.Should().BeSameAs(pool);
+    }
+
+    [Fact]
+    public void FullPoolHitsTheBandQuota()
+    {
+        var pool = new List<Question>();
+        var id = 0;
+        foreach (var norm in new[] { 10, 40, 70, 95 }) // one norm per band
+            for (var k = 0; k < 25; k++)
+                pool.Add(Card(norm, id++));
+
+        var selected = QuestionSelection.PickBalanced(pool, 21, _ => 0);
+
+        selected.Should().HaveCount(21);
+        selected.Distinct().Should().HaveCount(21);
+
+        var hist = selected.GroupBy(Band).ToDictionary(g => g.Key, g => g.Count());
+        hist[0].Should().Be(3);
+        hist[1].Should().Be(9);
+        hist[2].Should().Be(6);
+        hist[3].Should().Be(3);
+    }
+
+    [Fact]
+    public void UnderfullBandDeficitIsFilledFromLeftover()
+    {
+        var pool = new List<Question>();
+        var id = 0;
+        pool.Add(Card(10, id++)); // band 0: only 1 card, quota is 3 -> deficit 2
+        for (var k = 0; k < 50; k++) pool.Add(Card(40, id++)); // band 1
+        for (var k = 0; k < 50; k++) pool.Add(Card(70, id++)); // band 2
+        for (var k = 0; k < 50; k++) pool.Add(Card(95, id++)); // band 3
+
+        var selected = QuestionSelection.PickBalanced(pool, 21, _ => 0);
+
+        selected.Should().HaveCount(21);
+        selected.Distinct().Should().HaveCount(21);
+        selected.Count(q => Band(q) == 0).Should().Be(1); // band 0 exhausted, no overdraw
+    }
+}

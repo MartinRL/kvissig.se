@@ -21,7 +21,7 @@ public sealed class GameApplicationService
     public GameApplicationService(GameRepository repo, FileSystemQuestionPackCatalog catalog)
     {
         _repo = repo;
-        _context = new GameContext(Guid.NewGuid, () => DateTimeOffset.UtcNow, catalog.Find);
+        _context = new GameContext(Guid.NewGuid, () => DateTimeOffset.UtcNow, catalog.Find, Random.Shared.Next);
     }
 
     public GameState Load(Guid gameId) => _repo.Load(gameId);

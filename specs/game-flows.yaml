@@ -128,9 +128,14 @@ slices:
         packs: QuestionPack[]   # { packId: string (slug), name: string, questionCount: int } — each card also carries a differencePrompt (string)
 
   # OpenLobby resolves {questionPackId} to a pack via a GameContext dependency
-  # (same pattern that stamps gameId/joinCode/createdAt) and snapshots the full
-  # question set onto LobbyOpened. The host is the first player (hostPlayerId), so a
-  # game is never empty. x: QuestionPackNotFound when the id resolves to no pack.
+  # (same pattern that stamps gameId/joinCode/createdAt) and snapshots a BALANCED
+  # selection of N=21 cards onto LobbyOpened — NOT the full pack (a pack with <= 21
+  # cards is used whole). The host is the first player (hostPlayerId), so a game is
+  # never empty. x: QuestionPackNotFound when the id resolves to no pack.
+  # ASSUMPTION: "balanced" = difficulty-band quotas from specs/question-style-guide.md
+  # (band = round(|A-B|/max(A,B)*100); [0-20]/[20-60]/[60-85]/[85-100] ~ 3/9/6/3 of 21),
+  # shuffled order, RNG injected via GameContext.NextRandom. The 21 are frozen on
+  # LobbyOpened so Evolve replays the stored deck and never re-selects.
   #
   # Test fixtures (referenced by name in the cases below):
   #   pack mer-eller-mindre = [ question0, question1 ]  (the default deck)

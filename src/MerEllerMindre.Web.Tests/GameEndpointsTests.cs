@@ -12,11 +12,11 @@ namespace MerEllerMindre.Web.Tests;
 /// screen (the per-client cookie jar carries the matching antiforgery + identity cookies).
 /// One HttpClient per participant = one device.
 /// </summary>
-public class GameEndpointsTests : IClassFixture<WebApplicationFactory<Program>>
+public class GameEndpointsTests : IClassFixture<TestAppFactory>
 {
-    private readonly WebApplicationFactory<Program> _factory;
+    private readonly TestAppFactory _factory;
 
-    public GameEndpointsTests(WebApplicationFactory<Program> factory) => _factory = factory;
+    public GameEndpointsTests(TestAppFactory factory) => _factory = factory;
 
     private HttpClient NewClient() =>
         _factory.CreateClient(new WebApplicationFactoryClientOptions { AllowAutoRedirect = false });

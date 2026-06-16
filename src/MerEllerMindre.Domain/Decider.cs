@@ -11,6 +11,12 @@ namespace MerEllerMindre.Domain;
 public static class Decider
 {
     /// <summary>
+    /// Number of question cards a single game plays, drawn balanced from the pack.
+    /// </summary>
+    // ponytail: fixed 21, lift to config only if a pack ever needs a different N
+    public const int QuestionsPerGame = 21;
+
+    /// <summary>
     /// Evolve applies an event to produce new state. Pure, no side effects.
     /// </summary>
     public static GameState Evolve(GameState state, GameEvent @event) =>
@@ -109,8 +115,10 @@ public static class Decider
         var hostPlayerId = context.NewGuid();
         var joinCode = context.NewGuid();
 
+        var questions = QuestionSelection.PickBalanced(pack.Questions, QuestionsPerGame, context.NextRandom);
+
         return new Ok<GameEvent[]>([
-            new LobbyOpened(gameId, hostPlayerId, command.HostName, joinCode, command.QuestionPackId, pack.Questions, context.Now())
+            new LobbyOpened(gameId, hostPlayerId, command.HostName, joinCode, command.QuestionPackId, questions, context.Now())
         ]);
     }
 
@@ -267,14 +275,112 @@ public static class Decider
 public record GameContext(
     Func<Guid> NewGuid,
     Func<DateTimeOffset> Now,
-    Func<string, QuestionPack?> FindPack
+    Func<string, QuestionPack?> FindPack,
+    Func<int, int> NextRandom
 )
 {
     public static GameContext Default => new(
         NewGuid: Guid.NewGuid,
         Now: () => DateTimeOffset.UtcNow,
-        FindPack: _ => null
+        FindPack: _ => null,
+        NextRandom: Random.Shared.Next
     );
+}
+
+/// <summary>
+/// Picks a difficulty-band-balanced subset of question cards for a single game. Balance is
+/// on the difficulty band ONLY (band = NormalizeDifference(|A-B|, max(A,B)), the same math
+/// ScoreQuestion uses); direction/unit spread is expected to fall out of a well-authored
+/// pool. Final order is shuffled so bands don't cluster. Pure: RNG is injected as `next`
+/// (an exclusive-upper-bound generator, like Random.Next(n)).
+/// </summary>
+public static class QuestionSelection
+{
+    // Target band distribution from specs/question-style-guide.md:
+    // [0-20]=15%, (20-60]=40%, (60-85]=30%, (85-100]=15%.
+    private static readonly int[] BandWeights = [15, 40, 30, 15];
+
+    public static IReadOnlyList<Question> PickBalanced(
+        IReadOnlyList<Question> pool, int count, Func<int, int> next)
+    {
+        // ponytail: small pool = use all, as-is (keeps the current 10-card pack and the
+        // 2-card test fixtures byte-identical until the pool exceeds count).
+        if (pool.Count <= count)
+            return pool;
+
+        var bands = new List<Question>[BandWeights.Length];
+        for (var b = 0; b < bands.Length; b++)
+            bands[b] = [];
+        foreach (var q in pool)
+            bands[BandOf(q)].Add(q);
+
+        var quotas = Apportion(count, BandWeights);
+
+        var picked = new List<Question>();
+        var leftover = new List<Question>();
+        for (var b = 0; b < bands.Length; b++)
+        {
+            Shuffle(bands[b], next);
+            var take = Math.Min(quotas[b], bands[b].Count);
+            picked.AddRange(bands[b].Take(take));
+            leftover.AddRange(bands[b].Skip(take));
+        }
+
+        // Any band that was short leaves a deficit; fill it from the leftover pool (shuffled).
+        Shuffle(leftover, next);
+        picked.AddRange(leftover.Take(count - picked.Count));
+
+        // Shuffle the final selection so bands don't cluster in play order.
+        Shuffle(picked, next);
+        return picked;
+    }
+
+    private static int BandOf(Question q)
+    {
+        var norm = Decider.NormalizeDifference(Math.Abs(q.ValueA - q.ValueB), Math.Max(q.ValueA, q.ValueB));
+        return norm switch
+        {
+            <= 20 => 0,
+            <= 60 => 1,
+            <= 85 => 2,
+            _ => 3
+        };
+    }
+
+    // Largest-remainder apportionment of `count` seats over the integer weights.
+    private static int[] Apportion(int count, int[] weights)
+    {
+        var totalWeight = weights.Sum();
+        var quotas = new int[weights.Length];
+        var remainders = new decimal[weights.Length];
+        var assigned = 0;
+        for (var i = 0; i < weights.Length; i++)
+        {
+            var exact = (decimal)count * weights[i] / totalWeight;
+            quotas[i] = (int)Math.Floor(exact);
+            remainders[i] = exact - quotas[i];
+            assigned += quotas[i];
+        }
+
+        foreach (var i in Enumerable.Range(0, weights.Length).OrderByDescending(i => remainders[i]))
+        {
+            if (assigned >= count)
+                break;
+            quotas[i]++;
+            assigned++;
+        }
+
+        return quotas;
+    }
+
+    private static void Shuffle<T>(IList<T> list, Func<int, int> next)
+    {
+        for (var i = list.Count - 1; i > 0; i--)
+        {
+            var j = next(i + 1);
+            (list[i], list[j]) = (list[j], list[i]);
+        }
+    }
 }
 
 /// <summary>

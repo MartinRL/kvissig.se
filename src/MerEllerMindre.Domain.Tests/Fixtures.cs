@@ -43,7 +43,8 @@ public static class Fixtures
     public static readonly GameContext Context = new(
         NewGuid: Guid.NewGuid,
         Now: () => DateTimeOffset.UtcNow,
-        FindPack: slug => slug == "mer-eller-mindre" ? Pack : null
+        FindPack: slug => slug == "mer-eller-mindre" ? Pack : null,
+        NextRandom: Random.Shared.Next
     );
 }
 
