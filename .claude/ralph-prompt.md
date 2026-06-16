@@ -41,6 +41,8 @@ har dem i kontext. Följ dem exakt.
 - Gör nästa minsta meningsfulla steg mot målet. Överarbeta inte.
 - Kör `dotnet build` och `dotnet test`. Om något fallerar: fixa rotorsaken, fortsätt
   loopen. Bypassa ALDRIG (`--no-verify`, skippade tester etc.).
+- `ArchitectureTests` (fitness functions) röda = arkitekturbrott i din kod. Fixa koden —
+  försvaga ALDRIG testerna.
 - Bocka av relevant punkt i `specs/tasks.md` när den är klar.
 
 ### DONE-villkor (skriv exakt `RALPH-DONE` först när ALLT nedan stämmer)
