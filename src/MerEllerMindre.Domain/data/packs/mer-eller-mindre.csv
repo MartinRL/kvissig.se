@@ -1,133 +1,4 @@
 ﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
-Har Danmark större eller mindre befolkning än Norge?;Danmark;Norge;5,9;5,5;miljoner invånare;Hur många miljoner invånare skiljer det?
-Är Sveriges yta större eller mindre än Norges?;Sverige;Norge;450295;385207;km²;Hur många km² skiljer det?
-Är Finlands befolkning större eller mindre än Danmarks?;Finland;Danmark;5,6;5,9;miljoner invånare;Hur många miljoner invånare skiljer det?
-Är Mount Everest högre eller lägre än Kilimanjaro?;Mount Everest;Kilimanjaro;8849;5895;meter;Hur många meter skiljer det?
-Är Östersjön större eller mindre än Medelhavet till ytan?;Östersjön;Medelhavet;377000;2500000;km²;Hur många km² skiljer det?
-Väger en afrikansk elefant mer eller mindre än en blåval?;Afrikansk elefant;Blåval;6000;150000;kilo;Hur många kilo skiljer det?
-Är Nilen längre eller kortare än Donau?;Nilen;Donau;6650;2850;kilometer;Hur många kilometer skiljer det?
-Lever en grönlandshaj längre eller kortare än en människa?;Grönlandshaj;Människa;300;73;år;Hur många år skiljer det?
-Är Eiffeltornet högre eller lägre än Frihetsgudinnan?;Eiffeltornet;Frihetsgudinnan;330;93;meter;Hur många meter skiljer det?
-Är Portugals befolkning större eller mindre än Sveriges?;Portugal;Sverige;10,3;10,5;miljoner invånare;Hur många miljoner invånare skiljer det?
-Har Venus en större eller mindre diameter än jorden?;Venus;Jorden;12104;12756;km;Hur många km skiljer det i diameter?
-Har Eris en större eller mindre diameter än Pluto?;Eris;Pluto;2326;2377;km;Hur många km skiljer det i diameter?
-Är månen Io större eller mindre i diameter än jordens måne?;Io;Månen;3640;3474;km;Hur många km skiljer det i diameter?
-Har Neptunus en större eller mindre diameter än Uranus?;Neptunus;Uranus;49528;51118;km;Hur många km skiljer det i diameter?
-Är Ganymedes större eller mindre i diameter än Titan?;Ganymedes;Titan;5262;5150;km;Hur många km skiljer det i diameter?
-Har Saturnus en större eller mindre diameter än Jupiter?;Saturnus;Jupiter;120536;142984;km;Hur många km skiljer det i diameter?
-Har Mars en större eller mindre diameter än Merkurius?;Mars;Merkurius;6792;4879;km;Hur många km skiljer det i diameter?
-Är Callisto större eller mindre i diameter än Io?;Callisto;Io;4821;3640;km;Hur många km skiljer det i diameter?
-Har Venus ett längre eller kortare omloppsår än jorden?;Venus;Jorden;225;365;dygn;Hur många dygn skiljer det i omloppstid?
-Ligger Mars längre bort eller närmare solen än jorden?;Mars;Jorden;227,9;149,6;miljoner km;Hur många miljoner km skiljer det i avstånd till solen?
-Ligger Venus längre bort eller närmare solen än Merkurius?;Venus;Merkurius;108,2;57,9;miljoner km;Hur många miljoner km skiljer det i avstånd till solen?
-Har Uranus en större eller mindre diameter än Saturnus?;Uranus;Saturnus;51118;120536;km;Hur många km skiljer det i diameter?
-Ligger Neptunus längre bort eller närmare solen än Uranus?;Neptunus;Uranus;4497;2873;miljoner km;Hur många miljoner km skiljer det i avstånd till solen?
-Har Saturnus ett längre eller kortare omloppsår än Jupiter?;Saturnus;Jupiter;10759;4333;dygn;Hur många dygn skiljer det i omloppstid?
-Är Olympus Mons på Mars högre eller lägre än Mount Everest?;Olympus Mons;Mount Everest;21;8,8;km;Hur många km skiljer det i höjd?
-Har Mars ett längre eller kortare omloppsår än jorden?;Mars;Jorden;687;365;dygn;Hur många dygn skiljer det i omloppstid?
-Har Venus en större eller mindre diameter än Mars?;Venus;Mars;12104;6792;km;Hur många km skiljer det i diameter?
-Har jorden en större eller mindre diameter än Merkurius?;Jorden;Merkurius;12756;4879;km;Hur många km skiljer det i diameter?
-Har Merkurius ett längre eller kortare omloppsår än jorden?;Merkurius;Jorden;88;365;dygn;Hur många dygn skiljer det i omloppstid?
-Har Jupiter en större eller mindre diameter än Uranus?;Jupiter;Uranus;142984;51118;km;Hur många km skiljer det i diameter?
-Ligger Mars längre bort eller närmare solen än Jupiter?;Mars;Jupiter;227,9;778;miljoner km;Hur många miljoner km skiljer det i avstånd till solen?
-Har Venus en större eller mindre diameter än Neptunus?;Venus;Neptunus;12104;49528;km;Hur många km skiljer det i diameter?
-Har Venus ett längre eller kortare omloppsår än Mars?;Venus;Mars;225;687;dygn;Hur många dygn skiljer det i omloppstid?
-Ligger Merkurius längre bort eller närmare solen än jorden?;Merkurius;Jorden;57,9;149,6;miljoner km;Hur många miljoner km skiljer det i avstånd till solen?
-Har Uranus en större eller mindre diameter än jorden?;Uranus;Jorden;51118;12756;km;Hur många km skiljer det i diameter?
-Har Venus en längre eller kortare rotationstid än Merkurius?;Venus;Merkurius;243;58,6;dygn;Hur många dygn skiljer det i rotationstid?
-Har jorden en större eller mindre diameter än Saturnus?;Jorden;Saturnus;12756;120536;km;Hur många km skiljer det i diameter?
-Har Saturnus ett längre eller kortare omloppsår än Mars?;Saturnus;Mars;10759;687;dygn;Hur många dygn skiljer det i omloppstid?
-Ligger jorden längre bort eller närmare solen än Saturnus?;Jorden;Saturnus;149,6;1432;miljoner km;Hur många miljoner km skiljer det i avstånd till solen?
-Har Mars en större eller mindre diameter än Uranus?;Mars;Uranus;6792;51118;km;Hur många km skiljer det i diameter?
-Är Empire State Building högre eller lägre än Eiffeltornet?;Empire State Building;Eiffeltornet;443,2;330;meter;Hur många meter skiljer det?
-Är Shanghai Tower högre eller lägre än Tokyo Skytree?;Shanghai Tower;Tokyo Skytree;632;634;meter;Hur många meter skiljer det?
-Är Petronas Towers högre eller lägre än Empire State Building?;Petronas Towers;Empire State Building;451,9;443,2;meter;Hur många meter skiljer det?
-Är Frihetsgudinnan högre eller lägre än Burj Khalifa?;Frihetsgudinnan;Burj Khalifa;93;828;meter;Hur många meter skiljer det?
-Är Burj Khalifa högre eller lägre än Eiffeltornet?;Burj Khalifa;Eiffeltornet;828;330;meter;Hur många meter skiljer det?
-Är CN Tower högre eller lägre än Globen?;CN Tower;Globen;553;85;meter;Hur många meter skiljer det?
-Är Tokyo Skytree högre eller lägre än Eiffeltornet?;Tokyo Skytree;Eiffeltornet;634;330;meter;Hur många meter skiljer det?
-Är Kölnerdomen högre eller lägre än Sagrada Família?;Kölnerdomen;Sagrada Família;157;162,9;meter;Hur många meter skiljer det?
-Är Ulms domkyrka högre eller lägre än Big Ben?;Ulms domkyrka;Big Ben;161,5;96;meter;Hur många meter skiljer det?
-Är lutande tornet i Pisa högre eller lägre än Big Ben?;Lutande tornet i Pisa;Big Ben;56,7;96;meter;Hur många meter skiljer det?
-Är Washingtonmonumentet högre eller lägre än Space Needle?;Washingtonmonumentet;Space Needle;169;184,4;meter;Hur många meter skiljer det?
-Är Washingtonmonumentet högre eller lägre än Big Ben?;Washingtonmonumentet;Big Ben;169;96;meter;Hur många meter skiljer det?
-Är Kristusstatyn i Rio högre eller lägre än Frihetsgudinnan?;Kristusstatyn i Rio;Frihetsgudinnan;38;93;meter;Hur många meter skiljer det?
-Är Cheopspyramiden högre eller lägre än Kristusstatyn i Rio?;Cheopspyramiden;Kristusstatyn i Rio;146,6;38;meter;Hur många meter skiljer det?
-Är Globen högre eller lägre än Burj Khalifa?;Globen;Burj Khalifa;85;828;meter;Hur många meter skiljer det?
-Är Globen högre eller lägre än Kaknästornet?;Globen;Kaknästornet;85;170;meter;Hur många meter skiljer det?
-Har Akashi Kaikyo-bron längre eller kortare huvudspann än Golden Gate-bron?;Akashi Kaikyo-bron;Golden Gate-bron;1991;1280;meter;Hur många meter skiljer det?
-Har Öresundsbron längre eller kortare huvudspann än Golden Gate-bron?;Öresundsbron;Golden Gate-bron;490;1280;meter;Hur många meter skiljer det?
-Har Öresundsbron längre eller kortare huvudspann än Akashi Kaikyo-bron?;Öresundsbron;Akashi Kaikyo-bron;490;1991;meter;Hur många meter skiljer det?
-Är Gotthards bastunnel längre eller kortare än Öresundsbron?;Gotthards bastunnel;Öresundsbron;57,1;7,8;kilometer;Hur många kilometer skiljer det?
-Är Seikantunneln längre eller kortare än Kanaltunneln?;Seikantunneln;Kanaltunneln;53,9;50,5;kilometer;Hur många kilometer skiljer det?
-Är Three Gorges-dammen högre eller lägre än Hooverdammen?;Three Gorges-dammen;Hooverdammen;181;221;meter;Hur många meter skiljer det?
-Har Hooverdammen längre eller kortare krön än Three Gorges-dammen?;Hooverdammen;Three Gorges-dammen;379;2335;meter;Hur många meter skiljer det?
-Är Three Gorges-dammen längre eller kortare än Öresundsbron?;Three Gorges-dammen;Öresundsbron;2335;7845;meter;Hur många meter skiljer det?
-Är Kinesiska muren längre eller kortare än Öresundsbron?;Kinesiska muren;Öresundsbron;21196;7,8;kilometer;Hur många kilometer skiljer det?
-Är Stonehenge äldre eller yngre än Colosseum?;Stonehenge;Colosseum;5000;1946;år;Hur många år skiljer det?
-Är Notre-Dame i Paris äldre eller yngre än Colosseum?;Notre-Dame i Paris;Colosseum;681;1946;år;Hur många år skiljer det?
-Är Eiffeltornet äldre eller yngre än Notre-Dame i Paris?;Eiffeltornet;Notre-Dame i Paris;137;681;år;Hur många år skiljer det?
-Är Cheopspyramiden äldre eller yngre än Colosseum?;Cheopspyramiden;Colosseum;4586;1946;år;Hur många år skiljer det?
-Har Sydneyoperan högre eller lägre tak än Kristusstatyn i Rio?;Sydneyoperan;Kristusstatyn i Rio;67;38;meter;Hur många meter skiljer det?
-Väger en blåval mer eller mindre än en afrikansk elefant?;Blåval;Afrikansk elefant;150000;6000;kilo;Hur många kilo skiljer det?
-Väger en flodhäst mer eller mindre än en giraff?;Flodhäst;Giraff;1500;1200;kilo;Hur många kilo skiljer det?
-Väger en isbjörn mer eller mindre än en flodhäst?;Isbjörn;Flodhäst;500;1500;kilo;Hur många kilo skiljer det?
-Väger en rödräv mer eller mindre än en grävling?;Rödräv;Grävling;6;12;kilo;Hur många kilo skiljer det?
-Väger en huskatt mer eller mindre än en rödräv?;Huskatt;Rödräv;4;6;kilo;Hur många kilo skiljer det?
-Är en gepard snabbare eller långsammare än en pilgrimsfalk i störtdykning?;Gepard;Pilgrimsfalk;110;350;km/h;Hur många km/h skiljer det?
-Springer en gaffelbock fortare eller långsammare än en gepard?;Gaffelbock;Gepard;88;110;km/h;Hur många km/h skiljer det?
-Väger en blåvals tunga mer eller mindre än en människa?;Blåvalstunga;Människa;3600;70;kilo;Hur många kilo skiljer det?
-Springer en greyhound fortare eller långsammare än en gaffelbock?;Greyhound;Gaffelbock;69;88;km/h;Hur många km/h skiljer det?
-Lever en galapagossköldpadda längre eller kortare än en grönlandshaj?;Galapagossköldpadda;Grönlandshaj;180;390;år;Hur många år skiljer det?
-Lever en elefant längre eller kortare än en grönlandsval?;Elefant;Grönlandsval;70;200;år;Hur många år skiljer det?
-Lever en hund längre eller kortare än en huskatt?;Hund;Huskatt;13;16;år;Hur många år skiljer det?
-Lever en galapagossköldpadda längre eller kortare än en grönlandsval?;Galapagossköldpadda;Grönlandsval;180;200;år;Hur många år skiljer det?
-Är dräktighetstiden för en giraff längre eller kortare än för en afrikansk elefant?;Giraff;Afrikansk elefant;450;645;dygn;Hur många dygn skiljer det?
-Är dräktighetstiden för en människa längre eller kortare än för en hund?;Människa;Hund;266;63;dygn;Hur många dygn skiljer det?
-Väger ett strutsägg mer eller mindre än ett hönsägg?;Strutsägg;Hönsägg;1400;60;gram;Hur många gram skiljer det?
-Är dräktighetstiden för en mus längre eller kortare än för en människa?;Mus;Människa;19;266;dygn;Hur många dygn skiljer det?
-Är en valhaj längre eller kortare än en saltvattenskrokodil?;Valhaj;Saltvattenskrokodil;18;5;meter;Hur många meter skiljer det?
-Är en valhaj längre eller kortare än en vithaj?;Valhaj;Vithaj;18;6;meter;Hur många meter skiljer det?
-Är en vithaj längre eller kortare än en saltvattenskrokodil?;Vithaj;Saltvattenskrokodil;6;5;meter;Hur många meter skiljer det?
-Har en vandringsalbatross större eller mindre vingspann än en andinsk kondor?;Vandringsalbatross;Andinsk kondor;3,6;3,2;meter;Hur många meter skiljer det?
-Har en kungsörn större eller mindre vingspann än en vandringsalbatross?;Kungsörn;Vandringsalbatross;2,2;3,6;meter;Hur många meter skiljer det?
-Väger ett emuägg mer eller mindre än ett strutsägg?;Emuägg;Strutsägg;550;1400;gram;Hur många gram skiljer det?
-Väger en giraff mer eller mindre än en isbjörn?;Giraff;Isbjörn;1200;500;kilo;Hur många kilo skiljer det?
-Springer en gepard fortare eller långsammare än en greyhound?;Gepard;Greyhound;110;69;km/h;Hur många km/h skiljer det?
-Lever en grönlandshaj längre eller kortare än en grönlandsval?;Grönlandshaj;Grönlandsval;390;200;år;Hur många år skiljer det?
-Är en blåval längre eller kortare än en valhaj?;Blåval;Valhaj;30;18;meter;Hur många meter skiljer det?
-Väger en struts mer eller mindre än en kejsarpingvin?;Struts;Kejsarpingvin;130;35;kilo;Hur många kilo skiljer det?
-Väger en grävling mer eller mindre än en huskatt?;Grävling;Huskatt;12;4;kilo;Hur många kilo skiljer det?
-Var rekordträdet Hyperion (en kustsekvoja) högre eller lägre än den fällda jättedouglasgranen Mineral Tree?;Hyperion;Mineral-douglasgranen;116;119;meter;Hur många meter skiljer det?
-Är tallen Methuselah äldre eller yngre än den äldsta kända bristleconetallen?;Methuselah;Äldsta bristleconetallen;4850;5060;år;Hur många år skiljer det?
-Är Tugelafallen i Sydafrika högre eller lägre än Angelfallen i Venezuela?;Tugelafallen;Angelfallen;948;979;meter;Hur många meter skiljer det?
-Är Bajkalsjön djupare eller grundare än Tanganyikasjön?;Bajkalsjön;Tanganyikasjön;1642;1470;meter;Hur många meter skiljer det?
-Är olivträdet i Vouves äldre eller yngre än idegranen i Llangernyw?;Olivträdet i Vouves;Llangernyw-idegranen;3000;4000;år;Hur många år skiljer det?
-Är Fuji högre eller lägre än Kilimanjaro?;Fuji;Kilimanjaro;3776;5895;meter;Hur många meter skiljer det?
-Blir en gran i regel äldre eller yngre än en tall?;Gran;Tall;350;600;år;Hur många år skiljer det?
-Är jättesekvojan General Sherman högre eller lägre än rekordsekvojan Hyperion?;General Sherman;Hyperion;84;116;meter;Hur många meter skiljer det?
-Blir ett olivträd i regel äldre eller yngre än en av de äldsta bristleconetallarna?;Gammalt olivträd;Bristleconetall;3000;5000;år;Hur många år skiljer det?
-Blir ett äppelträd i regel äldre eller yngre än en björk?;Äppelträd;Björk;100;50;år;Hur många år skiljer det?
-Är en fullvuxen ek högre eller lägre än jättesekvojan General Sherman?;Fullvuxen ek;General Sherman;20;84;meter;Hur många meter skiljer det?
-Är Vättern djupare eller grundare än Hornavan, Sveriges djupaste sjö?;Vättern;Hornavan;128;221;meter;Hur många meter skiljer det?
-Är en saguarokaktus högre eller lägre än en fullvuxen ek?;Saguarokaktus;Fullvuxen ek;12;20;meter;Hur många meter skiljer det?
-Är Mauna Loa högre eller lägre än Kilimanjaro?;Mauna Loa;Kilimanjaro;4169;5895;meter;Hur många meter skiljer det?
-Är Kaspiska havet djupare eller grundare än Tanganyikasjön?;Kaspiska havet;Tanganyikasjön;1025;1470;meter;Hur många meter skiljer det?
-Blir en ek i regel äldre eller yngre än en tall?;Ek;Tall;300;600;år;Hur många år skiljer det?
-Är en kustsekvoja som Hyperion högre eller lägre än en fullvuxen ek?;Kustsekvoja (Hyperion);Fullvuxen ek;116;40;meter;Hur många meter skiljer det?
-Blir en ek i regel äldre eller yngre än en av de äldsta bristleconetallarna?;Ek;Bristleconetall;1000;5000;år;Hur många år skiljer det?
-Är Fuji högre eller lägre än Vesuvius?;Fuji;Vesuvius;3776;1281;meter;Hur många meter skiljer det?
-Är Vesuvius högre eller lägre än Etna?;Vesuvius;Etna;1281;3403;meter;Hur många meter skiljer det?
-Är Vesuvius högre eller lägre än Kilimanjaro?;Vesuvius;Kilimanjaro;1281;5895;meter;Hur många meter skiljer det?
-Blir ett olivträd som det i Vouves äldre eller yngre än en ek?;Olivträdet i Vouves;Ek;3000;1000;år;Hur många år skiljer det?
-Blir en ek i regel äldre eller yngre än ett äppelträd?;Ek;Äppelträd;300;100;år;Hur många år skiljer det?
-Är Etna högre eller lägre än Fuji?;Etna;Fuji;3403;3776;meter;Hur många meter skiljer det?
-Är Mauna Loa högre eller lägre än Vesuvius?;Mauna Loa;Vesuvius;4169;1281;meter;Hur många meter skiljer det?
-Är Angelfallen högre eller lägre än Niagarafallen?;Angelfallen;Niagarafallen;979;57;meter;Hur många meter skiljer det?
-Är Tugelafallen högre eller lägre än Niagarafallen?;Tugelafallen;Niagarafallen;948;57;meter;Hur många meter skiljer det?
-Är Bajkalsjön djupare eller grundare än Vänern?;Bajkalsjön;Vänern;1642;106;meter;Hur många meter skiljer det?
-Blir en tall i regel äldre eller yngre än en björk?;Tall;Björk;1000;50;år;Hur många år skiljer det?
-Blir en bristleconetall i regel äldre eller yngre än ett äppelträd?;Bristleconetall;Äppelträd;5000;100;år;Hur många år skiljer det?
 Är Mount Everest högre eller lägre än K2?;Mount Everest;K2;8849;8611;meter;Hur många meter skiljer det?
 Är Nilen längre eller kortare än Amazonfloden?;Nilen;Amazonfloden;6650;6400;kilometer;Hur många kilometer skiljer det?
 Har Vietnam större eller mindre yta än Japan?;Vietnam;Japan;331212;377973;kvadratkilometer;Hur många kvadratkilometer skiljer det?
@@ -158,6 +29,422 @@ Har Arabiska öknen större eller mindre yta än Gobiöknen?;Arabiska öknen;Gob
 Har Gotland större eller mindre yta än Sicilien?;Gotland;Sicilien;2994;25662;kvadratkilometer;Hur många kvadratkilometer skiljer det?
 Har Island större eller mindre yta än Grönland?;Island;Grönland;101826;2166086;kvadratkilometer;Hur många kvadratkilometer skiljer det?
 Är Angel Falls högre eller lägre än Niagarafallen?;Angel Falls;Niagarafallen;979;51;meter;Hur många meter skiljer det?
+Är Bajkalsjön djupare eller grundare än Tanganyikasjön?;Bajkalsjön;Tanganyikasjön;1642;1470;meter;Hur många meter skiljer det?
+Är Tanganyikasjön djupare eller grundare än Kaspiska havet?;Tanganyikasjön;Kaspiska havet;1470;1025;meter;Hur många meter skiljer det?
+Har Stilla havet större eller mindre yta än Atlanten?;Stilla havet;Atlanten;165250000;85133000;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Indiska oceanen större eller mindre yta än Norra ishavet?;Indiska oceanen;Norra ishavet;68536000;15558000;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Är Matterhorn högre eller lägre än Eiger?;Matterhorn;Eiger;4478;3967;meter;Hur många meter skiljer det?
+Är Jungfrau högre eller lägre än Grossglockner?;Jungfrau;Grossglockner;4158;3798;meter;Hur många meter skiljer det?
+Är Zugspitze högre eller lägre än Galdhøpiggen?;Zugspitze;Galdhøpiggen;2962;2469;meter;Hur många meter skiljer det?
+Är Volga längre eller kortare än Eufrat?;Volga;Eufrat;3645;3596;kilometer;Hur många kilometer skiljer det?
+Är Mekong längre eller kortare än Niger?;Mekong;Niger;4350;4200;kilometer;Hur många kilometer skiljer det?
+Är Zambezi längre eller kortare än Seine?;Zambezi;Seine;2693;777;kilometer;Hur många kilometer skiljer det?
+Är Tugelafallen högre eller lägre än Yosemitefallen?;Tugelafallen;Yosemitefallen;948;739;meter;Hur många meter skiljer det?
+Har Nya Guinea större eller mindre yta än Sumatra?;Nya Guinea;Sumatra;785753;443066;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Honshu större eller mindre yta än Storbritannien?;Honshu;Storbritannien;227898;209331;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Java större eller mindre yta än Sulawesi?;Java;Sulawesi;138794;180681;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Medelhavet större eller mindre yta än Karibiska havet?;Medelhavet;Karibiska havet;2500000;2754000;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Östersjön större eller mindre yta än Svarta havet?;Östersjön;Svarta havet;392000;422000;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Röda havet större eller mindre yta än Nordsjön?;Röda havet;Nordsjön;438000;570000;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Kalahariöknen större eller mindre yta än Patagoniska öknen?;Kalahariöknen;Patagoniska öknen;930000;673000;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Stora Victoriaöknen större eller mindre yta än Syriska öknen?;Stora Victoriaöknen;Syriska öknen;647000;500000;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Karakumöknen större eller mindre yta än Stora Victoriaöknen?;Karakumöknen;Stora Victoriaöknen;350000;647000;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Polen större eller mindre befolkning än Portugal? (2024);Polen;Portugal;37,5;10,75;miljoner invånare;Hur många miljoner invånare skiljer det?
+Har Sverige större eller mindre befolkning än Grekland? (2024);Sverige;Grekland;10,6;10,05;miljoner invånare;Hur många miljoner invånare skiljer det?
+Har Norge större eller mindre befolkning än Finland? (2024);Norge;Finland;5,5;5,65;miljoner invånare;Hur många miljoner invånare skiljer det?
+Har Atlanten större eller mindre yta än Indiska oceanen?;Atlanten;Indiska oceanen;85133000;68536000;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Stilla havet större eller mindre yta än Norra ishavet?;Stilla havet;Norra ishavet;165250000;15558000;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Är Galdhøpiggen högre eller lägre än Kebnekaise?;Galdhøpiggen;Kebnekaise;2469;2097;meter;Hur många meter skiljer det?
+Är Kaspiska havet djupare eller grundare än Bajkalsjön?;Kaspiska havet;Bajkalsjön;1025;1642;meter;Hur många meter skiljer det?
+Har Sumatra större eller mindre yta än Honshu?;Sumatra;Honshu;443066;227898;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Är Niger längre eller kortare än Volga?;Niger;Volga;4200;3645;kilometer;Hur många kilometer skiljer det?
+Har Storbritannien större eller mindre yta än Java?;Storbritannien;Java;209331;138794;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Ukraina större eller mindre yta än Frankrike?;Ukraina;Frankrike;603500;543941;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Italien större eller mindre yta än Tyskland?;Italien;Tyskland;301958;357581;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Storbritannien större eller mindre yta än Polen?;Storbritannien;Polen;244381;312679;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Frankrike större eller mindre yta än Tyskland?;Frankrike;Tyskland;543941;357581;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Italien större eller mindre yta än Ukraina?;Italien;Ukraina;301958;603500;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Är Mount Cook högre eller lägre än Mount Fuji?;Mount Cook;Mount Fuji;3724;3776;meter;Hur många meter skiljer det?
+Är Mount Kenya högre eller lägre än Pico de Orizaba?;Mount Kenya;Pico de Orizaba;5199;5636;meter;Hur många meter skiljer det?
+Är Mont Blanc högre eller lägre än Mount Kenya?;Mont Blanc;Mount Kenya;4808;5199;meter;Hur många meter skiljer det?
+Är Olympos högre eller lägre än Zugspitze?;Olympos;Zugspitze;2917;2962;meter;Hur många meter skiljer det?
+Är Pico de Orizaba högre eller lägre än Mount Fuji?;Pico de Orizaba;Mount Fuji;5636;3776;meter;Hur många meter skiljer det?
+Har Victoriasjön större eller mindre yta än Tanganyikasjön?;Victoriasjön;Tanganyikasjön;59947;32900;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Vänern större eller mindre yta än Ladogasjön?;Vänern;Ladogasjön;5580;17891;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Övre sjön större eller mindre yta än Kaspiska havet?;Övre sjön;Kaspiska havet;82100;374000;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Är Gula floden längre eller kortare än Jenisej?;Gula floden;Jenisej;5464;5539;kilometer;Hur många kilometer skiljer det?
+Är Lena längre eller kortare än Ob?;Lena;Ob;4400;5410;kilometer;Hur många kilometer skiljer det?
+Är Indus längre eller kortare än Kongofloden?;Indus;Kongofloden;3180;4700;kilometer;Hur många kilometer skiljer det?
+Är Brahmaputra längre eller kortare än Gula floden?;Brahmaputra;Gula floden;2948;5464;kilometer;Hur många kilometer skiljer det?
+Är Murray längre eller kortare än Indus?;Murray;Indus;3672;3180;kilometer;Hur många kilometer skiljer det?
+Har Egypten större eller mindre befolkning än Turkiet? (2024);Egypten;Turkiet;107;85,6;miljoner invånare;Hur många miljoner invånare skiljer det?
+Har Tyskland större eller mindre befolkning än Frankrike? (2024);Tyskland;Frankrike;84,5;65,9;miljoner invånare;Hur många miljoner invånare skiljer det?
+Har Italien större eller mindre befolkning än Spanien? (2024);Italien;Spanien;58,8;48,4;miljoner invånare;Hur många miljoner invånare skiljer det?
+Har Kenya större eller mindre befolkning än Kanada? (2024);Kenya;Kanada;51,5;39,9;miljoner invånare;Hur många miljoner invånare skiljer det?
+Har Kanada större eller mindre befolkning än Egypten? (2024);Kanada;Egypten;39,9;107;miljoner invånare;Hur många miljoner invånare skiljer det?
+Har Australien större eller mindre befolkning än Kanada? (2024);Australien;Kanada;27,2;39,9;miljoner invånare;Hur många miljoner invånare skiljer det?
+Är Elbrus högre eller lägre än Vinson Massif?;Elbrus;Vinson Massif;5642;4892;meter;Hur många meter skiljer det?
+Är Vinson Massif högre eller lägre än Puncak Jaya?;Vinson Massif;Puncak Jaya;4892;4884;meter;Hur många meter skiljer det?
+Är Denali högre eller lägre än Elbrus?;Denali;Elbrus;6190;5642;meter;Hur många meter skiljer det?
+Är Kilimanjaro högre eller lägre än Elbrus?;Kilimanjaro;Elbrus;5895;5642;meter;Hur många meter skiljer det?
+Är Puncak Jaya högre eller lägre än Mont Blanc?;Puncak Jaya;Mont Blanc;4884;4808;meter;Hur många meter skiljer det?
+Är Aconcagua högre eller lägre än Kilimanjaro?;Aconcagua;Kilimanjaro;6961;5895;meter;Hur många meter skiljer det?
+Har Island större eller mindre yta än Irland?;Island;Irland;103001;70273;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Portugal större eller mindre yta än Grekland?;Portugal;Grekland;92090;131990;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Österrike större eller mindre yta än Schweiz?;Österrike;Schweiz;83871;41293;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Nederländerna större eller mindre yta än Belgien?;Nederländerna;Belgien;41545;30689;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Danmark större eller mindre yta än Schweiz?;Danmark;Schweiz;42943;41293;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Irland större eller mindre yta än Island?;Irland;Island;70273;103001;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Hispaniola större eller mindre yta än Hokkaido?;Hispaniola;Hokkaido;76480;78719;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Tasmanien större eller mindre yta än Sri Lanka?;Tasmanien;Sri Lanka;64519;65268;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Sardinien större eller mindre yta än Sicilien?;Sardinien;Sicilien;24090;25662;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Korsika större eller mindre yta än Cypern?;Korsika;Cypern;8741;9251;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Kreta större eller mindre yta än Korsika?;Kreta;Korsika;8450;8741;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Cypern större eller mindre yta än Sardinien?;Cypern;Sardinien;9251;24090;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Hispaniola större eller mindre yta än Sri Lanka?;Hispaniola;Sri Lanka;76480;65268;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Tasmanien större eller mindre yta än Sicilien?;Tasmanien;Sicilien;64519;25662;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Är Dalälven längre eller kortare än Torne älv?;Dalälven;Torne älv;557;545;kilometer;Hur många kilometer skiljer det?
+Är Klarälven längre eller kortare än Torne älv?;Klarälven;Torne älv;460;545;kilometer;Hur många kilometer skiljer det?
+Är Klarälven längre eller kortare än Göta älv?;Klarälven;Göta älv;460;93;kilometer;Hur många kilometer skiljer det?
+Har Vättern större eller mindre yta än Mälaren?;Vättern;Mälaren;1886;1090;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Mälaren större eller mindre yta än Hjälmaren?;Mälaren;Hjälmaren;1090;477;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Hjälmaren större eller mindre yta än Storsjön?;Hjälmaren;Storsjön;477;456;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Är Vättern djupare eller grundare än Övre sjön?;Vättern;Övre sjön;128;406;meter;Hur många meter skiljer det?
+Är Övre sjön djupare eller grundare än Bajkalsjön?;Övre sjön;Bajkalsjön;406;1642;meter;Hur många meter skiljer det?
+Har Grekland större eller mindre yta än Österrike?;Grekland;Österrike;131990;83871;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Portugal större eller mindre yta än Irland?;Portugal;Irland;92090;70273;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Belgien större eller mindre yta än Danmark?;Belgien;Danmark;30689;42943;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Schweiz större eller mindre yta än Nederländerna?;Schweiz;Nederländerna;41293;41545;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Sicilien större eller mindre yta än Tasmanien?;Sicilien;Tasmanien;25662;64519;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Island större eller mindre yta än Portugal?;Island;Portugal;103001;92090;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Sri Lanka större eller mindre yta än Island?;Sri Lanka;Island;65268;103001;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Är K2 högre eller lägre än Kangchenjunga?;K2;Kangchenjunga;8611;8586;meter;Hur många meter skiljer det?
+Är Lhotse högre eller lägre än Kangchenjunga?;Lhotse;Kangchenjunga;8516;8586;meter;Hur många meter skiljer det?
+Är Lhotse högre eller lägre än Makalu?;Lhotse;Makalu;8516;8485;meter;Hur många meter skiljer det?
+Är Cho Oyu högre eller lägre än Makalu?;Cho Oyu;Makalu;8188;8485;meter;Hur många meter skiljer det?
+Är Cho Oyu högre eller lägre än Dhaulagiri?;Cho Oyu;Dhaulagiri;8188;8167;meter;Hur många meter skiljer det?
+Är Manaslu högre eller lägre än Dhaulagiri?;Manaslu;Dhaulagiri;8163;8167;meter;Hur många meter skiljer det?
+Är Nanga Parbat högre eller lägre än Annapurna?;Nanga Parbat;Annapurna;8126;8091;meter;Hur många meter skiljer det?
+Är Gasherbrum I högre eller lägre än Annapurna?;Gasherbrum I;Annapurna;8080;8091;meter;Hur många meter skiljer det?
+Är Cho Oyu högre eller lägre än Kangchenjunga?;Cho Oyu;Kangchenjunga;8188;8586;meter;Hur många meter skiljer det?
+Är Paraná längre eller kortare än São Francisco?;Paraná;São Francisco;4880;3180;kilometer;Hur många kilometer skiljer det?
+Är Orinoco längre eller kortare än Rio Grande?;Orinoco;Rio Grande;3010;3057;kilometer;Hur många kilometer skiljer det?
+Är Yukon längre eller kortare än Saint Lawrence-floden?;Yukon;Saint Lawrence-floden;3185;3058;kilometer;Hur många kilometer skiljer det?
+Är Orinoco längre eller kortare än São Francisco?;Orinoco;São Francisco;3010;3180;kilometer;Hur många kilometer skiljer det?
+Är Paraná längre eller kortare än Yukon?;Paraná;Yukon;4880;3185;kilometer;Hur många kilometer skiljer det?
+Är Rio Grande längre eller kortare än Paraná?;Rio Grande;Paraná;3057;4880;kilometer;Hur många kilometer skiljer det?
+Är Lhotse högre eller lägre än Mont Blanc?;Lhotse;Mont Blanc;8516;4808;meter;Hur många meter skiljer det?
+Är K2 högre eller lägre än Kilimanjaro?;K2;Kilimanjaro;8611;5895;meter;Hur många meter skiljer det?
+Är Denali högre eller lägre än Makalu?;Denali;Makalu;6190;8485;meter;Hur många meter skiljer det?
+Är Annapurna högre eller lägre än Aconcagua?;Annapurna;Aconcagua;8091;6961;meter;Hur många meter skiljer det?
+Är Matterhorn högre eller lägre än Manaslu?;Matterhorn;Manaslu;4478;8163;meter;Hur många meter skiljer det?
+Har Sahara större eller mindre yta än Kalahariöknen?;Sahara;Kalahariöknen;9200000;930000;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Kalahariöknen större eller mindre yta än Gobiöknen?;Kalahariöknen;Gobiöknen;930000;1300000;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Patagoniska öknen större eller mindre yta än Karakumöknen?;Patagoniska öknen;Karakumöknen;673000;350000;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Medelhavet större eller mindre yta än Stilla havet?;Medelhavet;Stilla havet;2500000;165250000;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Atlanten större eller mindre yta än Östersjön?;Atlanten;Östersjön;85133000;392000;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Vänern större eller mindre yta än Victoriasjön?;Vänern;Victoriasjön;5519;59947;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Är Bajkalsjön djupare eller grundare än Vättern?;Bajkalsjön;Vättern;1642;128;meter;Hur många meter skiljer det?
+Har Island större eller mindre yta än Nya Guinea?;Island;Nya Guinea;103001;785753;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Borneo större eller mindre yta än Sumatra?;Borneo;Sumatra;748168;443066;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Arabiska öknen större eller mindre yta än Sahara?;Arabiska öknen;Sahara;2330000;9200000;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Ryssland större eller mindre yta än Kanada?;Ryssland;Kanada;17098242;9984670;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har USA större eller mindre yta än Kanada?;USA;Kanada;9525067;9984670;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Kina större eller mindre yta än USA?;Kina;USA;9596960;9525067;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Australien större eller mindre yta än Brasilien?;Australien;Brasilien;7692024;8515767;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Indien större eller mindre yta än Argentina?;Indien;Argentina;3287263;2780400;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Kazakstan större eller mindre yta än Argentina?;Kazakstan;Argentina;2724900;2780400;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Kazakstan större eller mindre yta än Algeriet?;Kazakstan;Algeriet;2724900;2381741;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Australien större eller mindre yta än Ryssland?;Australien;Ryssland;7692024;17098242;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har USA större eller mindre yta än Indien?;USA;Indien;9525067;3287263;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Algeriet större eller mindre yta än Indien?;Algeriet;Indien;2381741;3287263;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Indien större eller mindre befolkning än Kina? (2024);Indien;Kina;1457;1418;miljoner invånare;Hur många miljoner invånare skiljer det?
+Har Indonesien större eller mindre befolkning än USA? (2024);Indonesien;USA;285;346;miljoner invånare;Hur många miljoner invånare skiljer det?
+Har Pakistan större eller mindre befolkning än Nigeria? (2024);Pakistan;Nigeria;274;235;miljoner invånare;Hur många miljoner invånare skiljer det?
+Har Ryssland större eller mindre befolkning än Brasilien? (2024);Ryssland;Brasilien;144;212;miljoner invånare;Hur många miljoner invånare skiljer det?
+Har Mexiko större eller mindre befolkning än Japan? (2024);Mexiko;Japan;131;123;miljoner invånare;Hur många miljoner invånare skiljer det?
+Har Brasilien större eller mindre befolkning än Nigeria? (2024);Brasilien;Nigeria;212;235;miljoner invånare;Hur många miljoner invånare skiljer det?
+Har Indonesien större eller mindre befolkning än Pakistan? (2024);Indonesien;Pakistan;285;274;miljoner invånare;Hur många miljoner invånare skiljer det?
+Har USA större eller mindre befolkning än Kina? (2024);USA;Kina;346;1418;miljoner invånare;Hur många miljoner invånare skiljer det?
+Är Teide högre eller lägre än Etna?;Teide;Etna;3718;3403;meter;Hur många meter skiljer det?
+Är Teide högre eller lägre än Cotopaxi?;Teide;Cotopaxi;3718;5897;meter;Hur många meter skiljer det?
+Är Cotopaxi högre eller lägre än Mauna Kea?;Cotopaxi;Mauna Kea;5897;4205;meter;Hur många meter skiljer det?
+Är Etna högre eller lägre än Mount Rainier?;Etna;Mount Rainier;3403;4390;meter;Hur många meter skiljer det?
+Är Etna högre eller lägre än Vesuvius?;Etna;Vesuvius;3403;1281;meter;Hur många meter skiljer det?
+Är Mauna Kea högre eller lägre än Mount Rainier?;Mauna Kea;Mount Rainier;4205;4390;meter;Hur många meter skiljer det?
+Har Luzon större eller mindre yta än Kuba?;Luzon;Kuba;109965;105806;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Mindanao större eller mindre yta än Newfoundland?;Mindanao;Newfoundland;97530;108860;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Kuba större eller mindre yta än Hokkaido?;Kuba;Hokkaido;105806;78719;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Kyushu större eller mindre yta än Mindanao?;Kyushu;Mindanao;36782;97530;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Kyushu större eller mindre yta än Taiwan?;Kyushu;Taiwan;36782;35808;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Taiwan större eller mindre yta än Luzon?;Taiwan;Luzon;35808;109965;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Väger en blåval mer eller mindre än en afrikansk elefant?;Blåval;Afrikansk elefant;150000;6000;kilo;Hur många kilo skiljer det?
+Väger en flodhäst mer eller mindre än en giraff?;Flodhäst;Giraff;1500;1200;kilo;Hur många kilo skiljer det?
+Väger en isbjörn mer eller mindre än en flodhäst?;Isbjörn;Flodhäst;500;1500;kilo;Hur många kilo skiljer det?
+Väger en rödräv mer eller mindre än en grävling?;Rödräv;Grävling;6;12;kilo;Hur många kilo skiljer det?
+Väger en huskatt mer eller mindre än en rödräv?;Huskatt;Rödräv;4;6;kilo;Hur många kilo skiljer det?
+Är en gepard snabbare eller långsammare än en pilgrimsfalk i störtdykning?;Gepard;Pilgrimsfalk;110;350;km/h;Hur många km/h skiljer det?
+Springer en gaffelbock fortare eller långsammare än en gepard?;Gaffelbock;Gepard;88;110;km/h;Hur många km/h skiljer det?
+Väger en blåvals tunga mer eller mindre än en människa?;Blåvalstunga;Människa;3600;70;kilo;Hur många kilo skiljer det?
+Springer en greyhound fortare eller långsammare än en gaffelbock?;Greyhound;Gaffelbock;69;88;km/h;Hur många km/h skiljer det?
+Lever en galapagossköldpadda längre eller kortare än en grönlandshaj?;Galapagossköldpadda;Grönlandshaj;180;390;år;Hur många år skiljer det?
+Lever en elefant längre eller kortare än en grönlandsval?;Elefant;Grönlandsval;70;200;år;Hur många år skiljer det?
+Lever en hund längre eller kortare än en huskatt?;Hund;Huskatt;13;16;år;Hur många år skiljer det?
+Lever en galapagossköldpadda längre eller kortare än en grönlandsval?;Galapagossköldpadda;Grönlandsval;180;200;år;Hur många år skiljer det?
+Är dräktighetstiden för en giraff längre eller kortare än för en afrikansk elefant?;Giraff;Afrikansk elefant;450;645;dygn;Hur många dygn skiljer det?
+Är dräktighetstiden för en människa längre eller kortare än för en hund?;Människa;Hund;266;63;dygn;Hur många dygn skiljer det?
+Väger ett strutsägg mer eller mindre än ett hönsägg?;Strutsägg;Hönsägg;1400;60;gram;Hur många gram skiljer det?
+Är dräktighetstiden för en mus längre eller kortare än för en människa?;Mus;Människa;19;266;dygn;Hur många dygn skiljer det?
+Är en valhaj längre eller kortare än en saltvattenskrokodil?;Valhaj;Saltvattenskrokodil;18;5;meter;Hur många meter skiljer det?
+Är en valhaj längre eller kortare än en vithaj?;Valhaj;Vithaj;18;6;meter;Hur många meter skiljer det?
+Är en vithaj längre eller kortare än en saltvattenskrokodil?;Vithaj;Saltvattenskrokodil;6;5;meter;Hur många meter skiljer det?
+Har en vandringsalbatross större eller mindre vingspann än en andinsk kondor?;Vandringsalbatross;Andinsk kondor;3,6;3,2;meter;Hur många meter skiljer det?
+Har en kungsörn större eller mindre vingspann än en vandringsalbatross?;Kungsörn;Vandringsalbatross;2,2;3,6;meter;Hur många meter skiljer det?
+Väger ett emuägg mer eller mindre än ett strutsägg?;Emuägg;Strutsägg;550;1400;gram;Hur många gram skiljer det?
+Väger en giraff mer eller mindre än en isbjörn?;Giraff;Isbjörn;1200;500;kilo;Hur många kilo skiljer det?
+Springer en gepard fortare eller långsammare än en greyhound?;Gepard;Greyhound;110;69;km/h;Hur många km/h skiljer det?
+Lever en grönlandshaj längre eller kortare än en grönlandsval?;Grönlandshaj;Grönlandsval;390;200;år;Hur många år skiljer det?
+Är en blåval längre eller kortare än en valhaj?;Blåval;Valhaj;30;18;meter;Hur många meter skiljer det?
+Väger en struts mer eller mindre än en kejsarpingvin?;Struts;Kejsarpingvin;130;35;kilo;Hur många kilo skiljer det?
+Väger en grävling mer eller mindre än en huskatt?;Grävling;Huskatt;12;4;kilo;Hur många kilo skiljer det?
+Väger en tiger mer eller mindre än ett lejon?;Tiger;Lejon;250;200;kilo;Hur många kilo skiljer det?
+Väger en gorilla mer eller mindre än en schimpans?;Gorilla;Schimpans;160;50;kilo;Hur många kilo skiljer det?
+Väger en älg mer eller mindre än en ren?;Älg;Ren;500;150;kilo;Hur många kilo skiljer det?
+Väger en noshörning mer eller mindre än en afrikansk elefant?;Noshörning;Afrikansk elefant;2300;6000;kilo;Hur många kilo skiljer det?
+Väger en brunbjörn mer eller mindre än en varg?;Brunbjörn;Varg;200;45;kilo;Hur många kilo skiljer det?
+Är en kaskelot längre eller kortare än en blåval?;Kaskelot;Blåval;18;30;meter;Hur många meter skiljer det?
+Är en nätpyton längre eller kortare än en kungskobra?;Nätpyton;Kungskobra;8;5,5;meter;Hur många meter skiljer det?
+Är en jättebläckfisk längre eller kortare än en kolossbläckfisk?;Jättebläckfisk;Kolossbläckfisk;13;10;meter;Hur många meter skiljer det?
+Springer ett lejon fortare eller långsammare än en gepard?;Lejon;Gepard;80;110;km/h;Hur många km/h skiljer det?
+Springer en struts fortare eller långsammare än en emu?;Struts;Emu;70;50;km/h;Hur många km/h skiljer det?
+Lever en ara längre eller kortare än en galapagossköldpadda?;Ara;Galapagossköldpadda;60;150;år;Hur många år skiljer det?
+Lever en arbetsbi längre eller kortare än en bidrottning?;Arbetsbi;Bidrottning;35;1095;dygn;Hur många dygn skiljer det?
+Lever en husfluga längre eller kortare än en dagslända som vuxen?;Husfluga;Dagslända;28;1;dygn;Hur många dygn skiljer det?
+Väger en blåvals hjärta mer eller mindre än en människohjärna?;Blåvalshjärta;Människohjärna;180;1,4;kilo;Hur många kilo skiljer det?
+Är dräktighetstiden för en afrikansk elefant längre eller kortare än för en blåval?;Afrikansk elefant;Blåval;645;340;dygn;Hur många dygn skiljer det?
+Springer en huskatt fortare eller långsammare än en tamgris?;Huskatt;Tamgris;48;17;km/h;Hur många km/h skiljer det?
+Väger en jaguar mer eller mindre än en leopard?;Jaguar;Leopard;90;60;kilo;Hur många kilo skiljer det?
+Springer en kvarthäst fortare eller långsammare än en greyhound?;Kvarthäst;Greyhound;88;69;km/h;Hur många km/h skiljer det?
+Är en giraff högre eller lägre än en afrikansk elefant?;Giraff;Afrikansk elefant;5,5;3,5;meter;Hur många meter skiljer det?
+Väger en späckhuggare mer eller mindre än en vithaj?;Späckhuggare;Vithaj;5000;700;kilo;Hur många kilo skiljer det?
+Väger en sjöelefant mer eller mindre än en valross?;Sjöelefant;Valross;4000;1500;kilo;Hur många kilo skiljer det?
+Är dräktighetstiden för en kamel längre eller kortare än för en häst?;Kamel;Häst;390;335;dygn;Hur många dygn skiljer det?
+Har en kungsörn större eller mindre vingspann än en havsörn?;Kungsörn;Havsörn;2,1;2;meter;Hur många meter skiljer det?
+Väger en humla mer eller mindre än ett honungsbi?;Humla;Honungsbi;0,6;0,1;gram;Hur många gram skiljer det?
+Väger en saltvattenskrokodil mer eller mindre än en komodovaran?;Saltvattenskrokodil;Komodovaran;1000;90;kilo;Hur många kilo skiljer det?
+Väger en gråsparv mer eller mindre än en kolibri?;Gråsparv;Kolibri;30;4;gram;Hur många gram skiljer det?
+Flyger en tornseglare fortare eller långsammare än en pilgrimsfalk i planflykt?;Tornseglare;Pilgrimsfalk;112;90;km/h;Hur många km/h skiljer det?
+Väger en flasknosdelfin mer eller mindre än en tumlare?;Flasknosdelfin;Tumlare;200;60;kilo;Hur många kilo skiljer det?
+Är silvertärnans årliga flyttsträcka längre eller kortare än myrspovens?;Silvertärna;Myrspov;70000;29000;km;Hur många km skiljer det?
+Väger en giraffs hjärta mer eller mindre än en människas hjärta?;Giraffhjärta;Människohjärta;11;0,28;kilo;Hur många kilo skiljer det?
+Är en människas vilopuls högre eller lägre än en elefants?;Människa;Elefant;70;30;slag per minut;Hur många slag per minut skiljer det?
+Har en hund fler eller färre tänder än en människa?;Hund;Människa;42;32;tänder;Hur många tänder skiljer det?
+Väger en leopard mer eller mindre än en gepard?;Leopard;Gepard;65;54;kilo;Hur många kilo skiljer det?
+Simmar en segelfisk fortare eller långsammare än en marlin?;Segelfisk;Marlin;110;80;km/h;Hur många km/h skiljer det?
+Väger en kapybara mer eller mindre än en bäver?;Kapybara;Bäver;55;25;kilo;Hur många kilo skiljer det?
+Är en flamingo högre eller lägre än en gråhäger?;Flamingo;Gråhäger;130;95;centimeter;Hur många centimeter skiljer det?
+Väger en isbjörn mer eller mindre än en brunbjörn?;Isbjörn;Brunbjörn;500;200;kilo;Hur många kilo skiljer det?
+Lever en albatross längre eller kortare än en svan i det vilda?;Albatross;Svan;50;40;år;Hur många år skiljer det?
+Väger en anakonda mer eller mindre än en nätpyton?;Anakonda;Nätpyton;200;90;kilo;Hur många kilo skiljer det?
+Har en elefantsnabel fler eller färre muskler än hela människokroppen?;Elefantsnabel;Människokroppen;40000;600;muskler;Hur många muskler skiljer det?
+Är en kejsarpingvin högre eller lägre än en kungspingvin?;Kejsarpingvin;Kungspingvin;115;95;centimeter;Hur många centimeter skiljer det?
+Är en narvals bete längre eller kortare än en afrikansk elefants bete?;Narvalsbete;Elefantbete;2,5;3,3;meter;Hur många meter skiljer det?
+Är en manta bredare eller smalare än en spjutrocka?;Manta;Spjutrocka;7;1,5;meter;Hur många meter skiljer det?
+Väger en bison mer eller mindre än en tamko?;Bison;Tamko;900;750;kilo;Hur många kilo skiljer det?
+Väger en orangutang mer eller mindre än en babian?;Orangutang;Babian;100;30;kilo;Hur många kilo skiljer det?
+Väger en järv mer eller mindre än ett lodjur?;Järv;Lodjur;14;25;kilo;Hur många kilo skiljer det?
+Lever en nilkrokodil längre eller kortare än en jättesköldpadda?;Nilkrokodil;Jättesköldpadda;100;200;år;Hur många år skiljer det?
+Springer en afrikansk vildhund fortare eller långsammare än en hyena?;Afrikansk vildhund;Hyena;70;60;km/h;Hur många km/h skiljer det?
+Har en berguv större eller mindre vingspann än en fjälluggla?;Berguv;Fjälluggla;1,8;1,5;meter;Hur många meter skiljer det?
+Är en rens horn längre eller kortare än en kronhjorts?;Renshorn;Kronhjortshorn;120;90;centimeter;Hur många centimeter skiljer det?
+Är dräktighetstiden för ett lejon längre eller kortare än för en gepard?;Lejon;Gepard;105;93;dygn;Hur många dygn skiljer det?
+Lever en sengångare längre eller kortare än en koala i det vilda?;Sengångare;Koala;25;12;år;Hur många år skiljer det?
+Väger en goliatbagge mer eller mindre än en ekoxe?;Goliatbagge;Ekoxe;50;20;gram;Hur många gram skiljer det?
+Väger en flyghund mer eller mindre än en vampyrfladdermus?;Flyghund;Vampyrfladdermus;1000;40;gram;Hur många gram skiljer det?
+Lägger en anka fler eller färre ägg per år än en höna?;Anka;Höna;320;290;ägg;Hur många ägg skiljer det?
+Äter en blåval mer eller mindre mat per dag än en afrikansk elefant?;Blåval;Afrikansk elefant;3600;200;kilo;Hur många kilo skiljer det?
+Är en nyfödd giraffkalv högre eller lägre än en vuxen människa?;Giraffkalv;Människa;1,9;1,7;meter;Hur många meter skiljer det?
+Har en saltvattenskrokodil starkare eller svagare bett än ett lejon?;Saltvattenskrokodil;Lejon;3700;1000;PSI;Hur många PSI skiljer det?
+Har en bläckfisk fler eller färre armar och tentakler än en tioarmad bläckfisk?;Bläckfisk;Tioarmad bläckfisk;8;10;armar;Hur många skiljer det?
+Är Empire State Building högre eller lägre än Eiffeltornet?;Empire State Building;Eiffeltornet;443,2;330;meter;Hur många meter skiljer det?
+Är Shanghai Tower högre eller lägre än Tokyo Skytree?;Shanghai Tower;Tokyo Skytree;632;634;meter;Hur många meter skiljer det?
+Är Petronas Towers högre eller lägre än Empire State Building?;Petronas Towers;Empire State Building;451,9;443,2;meter;Hur många meter skiljer det?
+Är Frihetsgudinnan högre eller lägre än Burj Khalifa?;Frihetsgudinnan;Burj Khalifa;93;828;meter;Hur många meter skiljer det?
+Är Burj Khalifa högre eller lägre än Eiffeltornet?;Burj Khalifa;Eiffeltornet;828;330;meter;Hur många meter skiljer det?
+Är CN Tower högre eller lägre än Globen?;CN Tower;Globen;553;85;meter;Hur många meter skiljer det?
+Är Tokyo Skytree högre eller lägre än Eiffeltornet?;Tokyo Skytree;Eiffeltornet;634;330;meter;Hur många meter skiljer det?
+Är Kölnerdomen högre eller lägre än Sagrada Família?;Kölnerdomen;Sagrada Família;157;162,9;meter;Hur många meter skiljer det?
+Är Ulms domkyrka högre eller lägre än Big Ben?;Ulms domkyrka;Big Ben;161,5;96;meter;Hur många meter skiljer det?
+Är lutande tornet i Pisa högre eller lägre än Big Ben?;Lutande tornet i Pisa;Big Ben;56,7;96;meter;Hur många meter skiljer det?
+Är Washingtonmonumentet högre eller lägre än Space Needle?;Washingtonmonumentet;Space Needle;169;184,4;meter;Hur många meter skiljer det?
+Är Washingtonmonumentet högre eller lägre än Big Ben?;Washingtonmonumentet;Big Ben;169;96;meter;Hur många meter skiljer det?
+Är Kristusstatyn i Rio högre eller lägre än Frihetsgudinnan?;Kristusstatyn i Rio;Frihetsgudinnan;38;93;meter;Hur många meter skiljer det?
+Är Cheopspyramiden högre eller lägre än Kristusstatyn i Rio?;Cheopspyramiden;Kristusstatyn i Rio;146,6;38;meter;Hur många meter skiljer det?
+Är Globen högre eller lägre än Burj Khalifa?;Globen;Burj Khalifa;85;828;meter;Hur många meter skiljer det?
+Är Globen högre eller lägre än Kaknästornet?;Globen;Kaknästornet;85;170;meter;Hur många meter skiljer det?
+Har Akashi Kaikyo-bron längre eller kortare huvudspann än Golden Gate-bron?;Akashi Kaikyo-bron;Golden Gate-bron;1991;1280;meter;Hur många meter skiljer det?
+Har Öresundsbron längre eller kortare huvudspann än Golden Gate-bron?;Öresundsbron;Golden Gate-bron;490;1280;meter;Hur många meter skiljer det?
+Har Öresundsbron längre eller kortare huvudspann än Akashi Kaikyo-bron?;Öresundsbron;Akashi Kaikyo-bron;490;1991;meter;Hur många meter skiljer det?
+Är Gotthards bastunnel längre eller kortare än Öresundsbron?;Gotthards bastunnel;Öresundsbron;57,1;7,8;kilometer;Hur många kilometer skiljer det?
+Är Seikantunneln längre eller kortare än Kanaltunneln?;Seikantunneln;Kanaltunneln;53,9;50,5;kilometer;Hur många kilometer skiljer det?
+Är Three Gorges-dammen högre eller lägre än Hooverdammen?;Three Gorges-dammen;Hooverdammen;181;221;meter;Hur många meter skiljer det?
+Har Hooverdammen längre eller kortare krön än Three Gorges-dammen?;Hooverdammen;Three Gorges-dammen;379;2335;meter;Hur många meter skiljer det?
+Är Three Gorges-dammen längre eller kortare än Öresundsbron?;Three Gorges-dammen;Öresundsbron;2335;7845;meter;Hur många meter skiljer det?
+Är Kinesiska muren längre eller kortare än Öresundsbron?;Kinesiska muren;Öresundsbron;21196;7,8;kilometer;Hur många kilometer skiljer det?
+Är Stonehenge äldre eller yngre än Colosseum?;Stonehenge;Colosseum;5000;1946;år;Hur många år skiljer det?
+Är Notre-Dame i Paris äldre eller yngre än Colosseum?;Notre-Dame i Paris;Colosseum;681;1946;år;Hur många år skiljer det?
+Är Eiffeltornet äldre eller yngre än Notre-Dame i Paris?;Eiffeltornet;Notre-Dame i Paris;137;681;år;Hur många år skiljer det?
+Är Cheopspyramiden äldre eller yngre än Colosseum?;Cheopspyramiden;Colosseum;4586;1946;år;Hur många år skiljer det?
+Har Sydneyoperan högre eller lägre tak än Kristusstatyn i Rio?;Sydneyoperan;Kristusstatyn i Rio;67;38;meter;Hur många meter skiljer det?
+Har Venus en större eller mindre diameter än jorden?;Venus;Jorden;12104;12756;km;Hur många km skiljer det i diameter?
+Har Eris en större eller mindre diameter än Pluto?;Eris;Pluto;2326;2377;km;Hur många km skiljer det i diameter?
+Är månen Io större eller mindre i diameter än jordens måne?;Io;Månen;3640;3474;km;Hur många km skiljer det i diameter?
+Har Neptunus en större eller mindre diameter än Uranus?;Neptunus;Uranus;49528;51118;km;Hur många km skiljer det i diameter?
+Är Ganymedes större eller mindre i diameter än Titan?;Ganymedes;Titan;5262;5150;km;Hur många km skiljer det i diameter?
+Har Saturnus en större eller mindre diameter än Jupiter?;Saturnus;Jupiter;120536;142984;km;Hur många km skiljer det i diameter?
+Har Mars en större eller mindre diameter än Merkurius?;Mars;Merkurius;6792;4879;km;Hur många km skiljer det i diameter?
+Är Callisto större eller mindre i diameter än Io?;Callisto;Io;4821;3640;km;Hur många km skiljer det i diameter?
+Har Venus ett längre eller kortare omloppsår än jorden?;Venus;Jorden;225;365;dygn;Hur många dygn skiljer det i omloppstid?
+Ligger Mars längre bort eller närmare solen än jorden?;Mars;Jorden;227,9;149,6;miljoner km;Hur många miljoner km skiljer det i avstånd till solen?
+Ligger Venus längre bort eller närmare solen än Merkurius?;Venus;Merkurius;108,2;57,9;miljoner km;Hur många miljoner km skiljer det i avstånd till solen?
+Har Uranus en större eller mindre diameter än Saturnus?;Uranus;Saturnus;51118;120536;km;Hur många km skiljer det i diameter?
+Ligger Neptunus längre bort eller närmare solen än Uranus?;Neptunus;Uranus;4497;2873;miljoner km;Hur många miljoner km skiljer det i avstånd till solen?
+Har Saturnus ett längre eller kortare omloppsår än Jupiter?;Saturnus;Jupiter;10759;4333;dygn;Hur många dygn skiljer det i omloppstid?
+Är Olympus Mons på Mars högre eller lägre än Mount Everest?;Olympus Mons;Mount Everest;21;8,8;km;Hur många km skiljer det i höjd?
+Har Mars ett längre eller kortare omloppsår än jorden?;Mars;Jorden;687;365;dygn;Hur många dygn skiljer det i omloppstid?
+Har Venus en större eller mindre diameter än Mars?;Venus;Mars;12104;6792;km;Hur många km skiljer det i diameter?
+Har jorden en större eller mindre diameter än Merkurius?;Jorden;Merkurius;12756;4879;km;Hur många km skiljer det i diameter?
+Har Merkurius ett längre eller kortare omloppsår än jorden?;Merkurius;Jorden;88;365;dygn;Hur många dygn skiljer det i omloppstid?
+Har Jupiter en större eller mindre diameter än Uranus?;Jupiter;Uranus;142984;51118;km;Hur många km skiljer det i diameter?
+Ligger Mars längre bort eller närmare solen än Jupiter?;Mars;Jupiter;227,9;778;miljoner km;Hur många miljoner km skiljer det i avstånd till solen?
+Har Venus en större eller mindre diameter än Neptunus?;Venus;Neptunus;12104;49528;km;Hur många km skiljer det i diameter?
+Har Venus ett längre eller kortare omloppsår än Mars?;Venus;Mars;225;687;dygn;Hur många dygn skiljer det i omloppstid?
+Ligger Merkurius längre bort eller närmare solen än jorden?;Merkurius;Jorden;57,9;149,6;miljoner km;Hur många miljoner km skiljer det i avstånd till solen?
+Har Uranus en större eller mindre diameter än jorden?;Uranus;Jorden;51118;12756;km;Hur många km skiljer det i diameter?
+Har Venus en längre eller kortare rotationstid än Merkurius?;Venus;Merkurius;243;58,6;dygn;Hur många dygn skiljer det i rotationstid?
+Har jorden en större eller mindre diameter än Saturnus?;Jorden;Saturnus;12756;120536;km;Hur många km skiljer det i diameter?
+Har Saturnus ett längre eller kortare omloppsår än Mars?;Saturnus;Mars;10759;687;dygn;Hur många dygn skiljer det i omloppstid?
+Ligger jorden längre bort eller närmare solen än Saturnus?;Jorden;Saturnus;149,6;1432;miljoner km;Hur många miljoner km skiljer det i avstånd till solen?
+Har Mars en större eller mindre diameter än Uranus?;Mars;Uranus;6792;51118;km;Hur många km skiljer det i diameter?
+Har Triton en större eller mindre diameter än Europa?;Triton;Europa;2707;3122;km;Hur många km skiljer det i diameter?
+Är Oberon större eller mindre i diameter än Titania?;Oberon;Titania;1523;1577;km;Hur många km skiljer det i diameter?
+Har Iapetus en större eller mindre diameter än Rhea?;Iapetus;Rhea;1469;1528;km;Hur många km skiljer det i diameter?
+Har Quaoar en större eller mindre diameter än Charon?;Quaoar;Charon;1080;1212;km;Hur många km skiljer det i diameter?
+Har Haumea en större eller mindre diameter än Eris?;Haumea;Eris;1931;2326;km;Hur många km skiljer det i diameter?
+Har Ceres en större eller mindre diameter än Orcus?;Ceres;Orcus;946;960;km;Hur många km skiljer det i diameter?
+Har Charon en större eller mindre diameter än Gonggong?;Charon;Gonggong;1212;1230;km;Hur många km skiljer det i diameter?
+Har Tethys en större eller mindre diameter än Dione?;Tethys;Dione;1062;1123;km;Hur många km skiljer det i diameter?
+Har Pluto en större eller mindre diameter än Triton?;Pluto;Triton;2376;2707;km;Hur många km skiljer det i diameter?
+Har Charon en större eller mindre diameter än Makemake?;Charon;Makemake;1212;1426;km;Hur många km skiljer det i diameter?
+Har Mimas en större eller mindre diameter än Enceladus?;Mimas;Enceladus;396;504;km;Hur många km skiljer det i diameter?
+Har Pluto en större eller mindre diameter än Europa?;Pluto;Europa;2376;3122;km;Hur många km skiljer det i diameter?
+Har Makemake en större eller mindre diameter än Haumea?;Makemake;Haumea;1426;1931;km;Hur många km skiljer det i diameter?
+Har Tethys en större eller mindre diameter än Iapetus?;Tethys;Iapetus;1062;1469;km;Hur många km skiljer det i diameter?
+Har Charon en större eller mindre diameter än Rhea?;Charon;Rhea;1212;1528;km;Hur många km skiljer det i diameter?
+Har Makemake en större eller mindre diameter än Triton?;Makemake;Triton;1426;2707;km;Hur många km skiljer det i diameter?
+Har Ceres en större eller mindre diameter än Eris?;Ceres;Eris;946;2326;km;Hur många km skiljer det i diameter?
+Har Enceladus en större eller mindre diameter än Ceres?;Enceladus;Ceres;504;946;km;Hur många km skiljer det i diameter?
+Har Ceres en större eller mindre diameter än Europa?;Ceres;Europa;946;3122;km;Hur många km skiljer det i diameter?
+Har Ceres en större eller mindre diameter än Triton?;Ceres;Triton;946;2707;km;Hur många km skiljer det i diameter?
+Har Mimas en större eller mindre diameter än Pluto?;Mimas;Pluto;396;2376;km;Hur många km skiljer det i diameter?
+Har Enceladus en större eller mindre diameter än Triton?;Enceladus;Triton;504;2707;km;Hur många km skiljer det i diameter?
+Har Mimas en större eller mindre diameter än Europa?;Mimas;Europa;396;3122;km;Hur många km skiljer det i diameter?
+Har Merkurius en större eller mindre diameter än Ganymedes?;Merkurius;Ganymedes;4879;5268;km;Hur många km skiljer det i diameter?
+Har Venus en högre eller lägre ytgravitation än Saturnus?;Venus;Saturnus;8,9;9,0;m/s²;Hur stor är skillnaden i ytgravitation?
+Har jorden en högre eller lägre ytgravitation än Neptunus?;Jorden;Neptunus;9,8;11,0;m/s²;Hur stor är skillnaden i ytgravitation?
+Har Neptunus en högre eller lägre ytgravitation än Jupiter?;Neptunus;Jupiter;11,0;23,1;m/s²;Hur stor är skillnaden i ytgravitation?
+Har jorden en högre eller lägre ytgravitation än Mars?;Jorden;Mars;9,8;3,7;m/s²;Hur stor är skillnaden i ytgravitation?
+Har Jupiter en högre eller lägre ytgravitation än månen?;Jupiter;Månen;23,1;1,6;m/s²;Hur stor är skillnaden i ytgravitation?
+Har jorden en högre eller lägre ytgravitation än Pluto?;Jorden;Pluto;9,8;0,7;m/s²;Hur stor är skillnaden i ytgravitation?
+Ligger Jupiter längre bort eller närmare solen än Saturnus?;Jupiter;Saturnus;778;1432;miljoner km;Hur många miljoner km skiljer det i avstånd till solen?
+Ligger Saturnus längre bort eller närmare solen än Uranus?;Saturnus;Uranus;1432;2873;miljoner km;Hur många miljoner km skiljer det i avstånd till solen?
+Ligger Merkurius längre bort eller närmare solen än Neptunus?;Merkurius;Neptunus;57,9;4497;miljoner km;Hur många miljoner km skiljer det i avstånd till solen?
+Ligger Venus längre bort eller närmare solen än Jupiter?;Venus;Jupiter;108,2;778;miljoner km;Hur många miljoner km skiljer det i avstånd till solen?
+Ligger Proxima Centauri längre bort eller närmare än Alfa Centauri?;Proxima Centauri;Alfa Centauri;4,2;4,35;ljusår;Hur många ljusår skiljer det i avstånd?
+Ligger Sirius längre bort eller närmare än Barnards stjärna?;Sirius;Barnards stjärna;8,6;5,96;ljusår;Hur många ljusår skiljer det i avstånd?
+Ligger Vega längre bort eller närmare än Sirius?;Vega;Sirius;25;8,6;ljusår;Hur många ljusår skiljer det i avstånd?
+Ligger Betelgeuse längre bort eller närmare än Polstjärnan?;Betelgeuse;Polstjärnan;430;433;ljusår;Hur många ljusår skiljer det i avstånd?
+Ligger Polstjärnan längre bort eller närmare än Vega?;Polstjärnan;Vega;433;25;ljusår;Hur många ljusår skiljer det i avstånd?
+Ligger Sirius längre bort eller närmare än Proxima Centauri?;Sirius;Proxima Centauri;8,6;4,2;ljusår;Hur många ljusår skiljer det i avstånd?
+Har jorden en större eller mindre massa än Venus?;Jorden;Venus;5,97;4,87;10^24 kg;Hur stor är skillnaden i massa?
+Har Neptunus en större eller mindre massa än Uranus?;Neptunus;Uranus;102;86,8;10^24 kg;Hur stor är skillnaden i massa?
+Har Saturnus en större eller mindre massa än Neptunus?;Saturnus;Neptunus;568;102;10^24 kg;Hur stor är skillnaden i massa?
+Har Jupiter en större eller mindre massa än Saturnus?;Jupiter;Saturnus;1898;568;10^24 kg;Hur stor är skillnaden i massa?
+Har jorden en större eller mindre massa än Mars?;Jorden;Mars;5,97;0,642;10^24 kg;Hur stor är skillnaden i massa?
+Har Uranus en större eller mindre massa än jorden?;Uranus;Jorden;86,8;5,97;10^24 kg;Hur stor är skillnaden i massa?
+Har Mars en större eller mindre massa än Merkurius?;Mars;Merkurius;0,642;0,33;10^24 kg;Hur stor är skillnaden i massa?
+Har Saturnus en större eller mindre massa än Uranus?;Saturnus;Uranus;568;86,8;10^24 kg;Hur stor är skillnaden i massa?
+Har Jupiter en längre eller kortare rotationstid än Saturnus?;Jupiter;Saturnus;9,9;10,7;timmar;Hur många timmar skiljer det i rotationstid?
+Har Saturnus en längre eller kortare rotationstid än Neptunus?;Saturnus;Neptunus;10,7;16,1;timmar;Hur många timmar skiljer det i rotationstid?
+Har Uranus en längre eller kortare rotationstid än Neptunus?;Uranus;Neptunus;17,2;16,1;timmar;Hur många timmar skiljer det i rotationstid?
+Har jorden en längre eller kortare rotationstid än Mars?;Jorden;Mars;23,9;24,6;timmar;Hur många timmar skiljer det i rotationstid?
+Har Mars en längre eller kortare rotationstid än Jupiter?;Mars;Jupiter;24,6;9,9;timmar;Hur många timmar skiljer det i rotationstid?
+Ligger Vega längre bort eller närmare än Barnards stjärna?;Vega;Barnards stjärna;25;5,96;ljusår;Hur många ljusår skiljer det i avstånd?
+Har Merkurius en längre eller kortare rotationstid än jorden?;Merkurius;Jorden;1408;23,9;timmar;Hur många timmar skiljer det i rotationstid?
+Har Uranus fler eller färre kända månar än Neptunus? (2024);Uranus;Neptunus;28;16;månar;Hur många månar skiljer det?
+Har Mars fler eller färre månar än jorden?;Mars;Jorden;2;1;månar;Hur många månar skiljer det?
+Har Saturnus en längre eller kortare omloppstid än Uranus?;Saturnus;Uranus;29,5;84;år;Hur många år skiljer det i omloppstid?
+Har Neptunus en längre eller kortare omloppstid än Uranus?;Neptunus;Uranus;164,8;84;år;Hur många år skiljer det i omloppstid?
+Har Pluto en längre eller kortare omloppstid än Neptunus?;Pluto;Neptunus;248;164,8;år;Hur många år skiljer det i omloppstid?
+Har Saturnus en högre eller lägre flykthastighet än Neptunus?;Saturnus;Neptunus;35,5;23,5;km/s;Hur stor är skillnaden i flykthastighet?
+Har Jupiter en högre eller lägre flykthastighet än Saturnus?;Jupiter;Saturnus;59,5;35,5;km/s;Hur stor är skillnaden i flykthastighet?
+Har jorden en högre eller lägre flykthastighet än Mars?;Jorden;Mars;11,2;5,0;km/s;Hur stor är skillnaden i flykthastighet?
+Har Jupiter en högre eller lägre flykthastighet än jorden?;Jupiter;Jorden;59,5;11,2;km/s;Hur stor är skillnaden i flykthastighet?
+Har jorden en högre eller lägre flykthastighet än månen?;Jorden;Månen;11,2;2,4;km/s;Hur stor är skillnaden i flykthastighet?
+Har Jupiter en högre eller lägre flykthastighet än Pluto?;Jupiter;Pluto;59,5;1,3;km/s;Hur stor är skillnaden i flykthastighet?
+Har Neptunus en högre eller lägre flykthastighet än Uranus?;Neptunus;Uranus;23,5;21,3;km/s;Hur stor är skillnaden i flykthastighet?
+Tar det längre eller kortare tid för Europa än Io att gå runt Jupiter?;Europa;Io;3,55;1,77;dygn;Hur många dygn skiljer det i omloppstid?
+Tar det längre eller kortare tid för Ganymedes än Europa att gå runt Jupiter?;Ganymedes;Europa;7,15;3,55;dygn;Hur många dygn skiljer det i omloppstid?
+Tar det längre eller kortare tid för Callisto än Ganymedes att gå runt Jupiter?;Callisto;Ganymedes;16,69;7,15;dygn;Hur många dygn skiljer det i omloppstid?
+Tar det längre eller kortare tid för Titan att gå runt Saturnus än för Callisto runt Jupiter?;Titan;Callisto;15,95;16,69;dygn;Hur många dygn skiljer det i omloppstid?
+Tar det längre eller kortare tid för månen att gå runt jorden än för Callisto runt Jupiter?;Månen;Callisto;27,3;16,69;dygn;Hur många dygn skiljer det i omloppstid?
+Tar det längre eller kortare tid för månen att gå runt jorden än för Io runt Jupiter?;Månen;Io;27,3;1,77;dygn;Hur många dygn skiljer det i omloppstid?
+Tar det längre eller kortare tid för Triton att gå runt Neptunus än för Europa runt Jupiter?;Triton;Europa;5,88;3,55;dygn;Hur många dygn skiljer det i omloppstid?
+Tar det längre eller kortare tid för Phobos än Deimos att gå runt Mars?;Phobos;Deimos;7,65;30,3;timmar;Hur många timmar skiljer det i omloppstid?
+Har Callisto en större eller mindre diameter än Ganymedes?;Callisto;Ganymedes;4821;5268;km;Hur många km skiljer det i diameter?
+Har Titan en större eller mindre diameter än Callisto?;Titan;Callisto;5150;4821;km;Hur många km skiljer det i diameter?
+Har Io en större eller mindre diameter än Europa?;Io;Europa;3640;3122;km;Hur många km skiljer det i diameter?
+Har månen en större eller mindre diameter än Europa?;Månen;Europa;3474;3122;km;Hur många km skiljer det i diameter?
+Har Callisto en större eller mindre diameter än månen?;Callisto;Månen;4821;3474;km;Hur många km skiljer det i diameter?
+Har Ganymedes en större eller mindre diameter än Europa?;Ganymedes;Europa;5268;3122;km;Hur många km skiljer det i diameter?
+Har Titan en större eller mindre diameter än Triton?;Titan;Triton;5150;2707;km;Hur många km skiljer det i diameter?
+Har Ganymedes en större eller mindre diameter än Triton?;Ganymedes;Triton;5268;2707;km;Hur många km skiljer det i diameter?
+Har Titan en större eller mindre diameter än månen?;Titan;Månen;5150;3474;km;Hur många km skiljer det i diameter?
+Har Saturnus en längre eller kortare omloppstid än Neptunus?;Saturnus;Neptunus;29,5;164,8;år;Hur många år skiljer det i omloppstid?
+Har Uranus en längre eller kortare omloppstid än Pluto?;Uranus;Pluto;84;248;år;Hur många år skiljer det i omloppstid?
+Har Halleys komet en längre eller kortare omloppstid än Pluto?;Halleys komet;Pluto;75;248;år;Hur många år skiljer det i omloppstid?
+Har Jupiter en längre eller kortare omloppstid än Neptunus?;Jupiter;Neptunus;11,9;164,8;år;Hur många år skiljer det i omloppstid?
+Har Ganymedes en större eller mindre massa än månen?;Ganymedes;Månen;0,148;0,0735;10^24 kg;Hur stor är skillnaden i massa?
+Har Pluto en större eller mindre massa än månen?;Pluto;Månen;0,0130;0,0735;10^24 kg;Hur stor är skillnaden i massa?
+Var rekordträdet Hyperion (en kustsekvoja) högre eller lägre än den fällda jättedouglasgranen Mineral Tree?;Hyperion;Mineral-douglasgranen;116;119;meter;Hur många meter skiljer det?
+Är tallen Methuselah äldre eller yngre än den äldsta kända bristleconetallen?;Methuselah;Äldsta bristleconetallen;4850;5060;år;Hur många år skiljer det?
+Är Tugelafallen i Sydafrika högre eller lägre än Angelfallen i Venezuela?;Tugelafallen;Angelfallen;948;979;meter;Hur många meter skiljer det?
+Är olivträdet i Vouves äldre eller yngre än idegranen i Llangernyw?;Olivträdet i Vouves;Llangernyw-idegranen;3000;4000;år;Hur många år skiljer det?
+Är Fuji högre eller lägre än Kilimanjaro?;Fuji;Kilimanjaro;3776;5895;meter;Hur många meter skiljer det?
+Blir en gran i regel äldre eller yngre än en tall?;Gran;Tall;350;600;år;Hur många år skiljer det?
+Är jättesekvojan General Sherman högre eller lägre än rekordsekvojan Hyperion?;General Sherman;Hyperion;84;116;meter;Hur många meter skiljer det?
+Blir ett olivträd i regel äldre eller yngre än en av de äldsta bristleconetallarna?;Gammalt olivträd;Bristleconetall;3000;5000;år;Hur många år skiljer det?
+Blir ett äppelträd i regel äldre eller yngre än en björk?;Äppelträd;Björk;100;50;år;Hur många år skiljer det?
+Är en fullvuxen ek högre eller lägre än jättesekvojan General Sherman?;Fullvuxen ek;General Sherman;20;84;meter;Hur många meter skiljer det?
+Är Vättern djupare eller grundare än Hornavan, Sveriges djupaste sjö?;Vättern;Hornavan;128;221;meter;Hur många meter skiljer det?
+Är en saguarokaktus högre eller lägre än en fullvuxen ek?;Saguarokaktus;Fullvuxen ek;12;20;meter;Hur många meter skiljer det?
+Är Mauna Loa högre eller lägre än Kilimanjaro?;Mauna Loa;Kilimanjaro;4169;5895;meter;Hur många meter skiljer det?
+Är Kaspiska havet djupare eller grundare än Tanganyikasjön?;Kaspiska havet;Tanganyikasjön;1025;1470;meter;Hur många meter skiljer det?
+Blir en ek i regel äldre eller yngre än en tall?;Ek;Tall;300;600;år;Hur många år skiljer det?
+Är en kustsekvoja som Hyperion högre eller lägre än en fullvuxen ek?;Kustsekvoja (Hyperion);Fullvuxen ek;116;40;meter;Hur många meter skiljer det?
+Blir en ek i regel äldre eller yngre än en av de äldsta bristleconetallarna?;Ek;Bristleconetall;1000;5000;år;Hur många år skiljer det?
+Är Fuji högre eller lägre än Vesuvius?;Fuji;Vesuvius;3776;1281;meter;Hur många meter skiljer det?
+Är Vesuvius högre eller lägre än Etna?;Vesuvius;Etna;1281;3403;meter;Hur många meter skiljer det?
+Är Vesuvius högre eller lägre än Kilimanjaro?;Vesuvius;Kilimanjaro;1281;5895;meter;Hur många meter skiljer det?
+Blir ett olivträd som det i Vouves äldre eller yngre än en ek?;Olivträdet i Vouves;Ek;3000;1000;år;Hur många år skiljer det?
+Blir en ek i regel äldre eller yngre än ett äppelträd?;Ek;Äppelträd;300;100;år;Hur många år skiljer det?
+Är Etna högre eller lägre än Fuji?;Etna;Fuji;3403;3776;meter;Hur många meter skiljer det?
+Är Mauna Loa högre eller lägre än Vesuvius?;Mauna Loa;Vesuvius;4169;1281;meter;Hur många meter skiljer det?
+Är Angelfallen högre eller lägre än Niagarafallen?;Angelfallen;Niagarafallen;979;57;meter;Hur många meter skiljer det?
+Är Tugelafallen högre eller lägre än Niagarafallen?;Tugelafallen;Niagarafallen;948;57;meter;Hur många meter skiljer det?
+Är Bajkalsjön djupare eller grundare än Vänern?;Bajkalsjön;Vänern;1642;106;meter;Hur många meter skiljer det?
+Blir en tall i regel äldre eller yngre än en björk?;Tall;Björk;1000;50;år;Hur många år skiljer det?
+Blir en bristleconetall i regel äldre eller yngre än ett äppelträd?;Bristleconetall;Äppelträd;5000;100;år;Hur många år skiljer det?
 Invigdes Eiffeltornet före eller efter Frihetsgudinnan i New York?;Eiffeltornet;Frihetsgudinnan;1889;1886;år;Hur många år skiljer det?
 Uppfanns telefonen före eller efter glödlampan?;Telefonen;Glödlampan;1876;1879;år;Hur många år skiljer det?
 Föll Berlinmuren före eller efter att Sovjetunionen upplöstes?;Berlinmurens fall;Sovjetunionens upplösning;1989;1991;år;Hur många år skiljer det?
@@ -188,125 +475,6 @@ Bröt franska revolutionen ut före eller efter att Hagia Sofia stod färdig?;Fr
 Stod Colosseum färdigt före eller efter att Eiffeltornet invigdes?;Colosseum;Eiffeltornet;80;1889;år;Hur många år skiljer det?
 Uppfann Gutenberg boktryckarkonsten före eller efter att Colosseum stod färdigt?;Gutenbergs boktryckarkonst;Colosseum;1450;80;år;Hur många år skiljer det?
 Upptäckte Columbus Amerika före eller efter att Colosseum stod färdigt?;Columbus upptäcker Amerika;Colosseum;1492;80;år;Hur många år skiljer det?
-Väger lungorna mer eller mindre än hjärnan?;Lungorna;Hjärnan;1300;1336;gram;Hur många gram skiljer det?
-Väger hjärnan mer eller mindre än levern?;Hjärnan;Levern;1336;1500;gram;Hur många gram skiljer det?
-Väger levern mer eller mindre än lungorna?;Levern;Lungorna;1500;1300;gram;Hur många gram skiljer det?
-Har en vuxen fler eller färre tänder än antalet ryggkotor?;Tänder hos vuxen;Ryggkotor;32;33;stycken;Hur många stycken skiljer det?
-Har en hand fler eller färre ben än skallen?;Ben i en hand;Ben i skallen;27;22;stycken;Hur många stycken skiljer det?
-Har en vuxen fler eller färre ben än en nyfödd?;Ben hos vuxen;Ben hos nyfödd;206;300;stycken;Hur många stycken skiljer det?
-Har ett barn fler eller färre mjölktänder än en vuxen har tänder?;Mjölktänder hos barn;Tänder hos vuxen;20;32;stycken;Hur många stycken skiljer det?
-Är lårbenet längre eller kortare än överarmsbenet?;Lårbenet;Överarmsbenet;48;30;centimeter;Hur många centimeter skiljer det?
-Har en vuxen fler eller färre tänder än antalet kromosomer i en cell?;Tänder hos vuxen;Kromosomer i en cell;32;46;stycken;Hur många stycken skiljer det?
-Har en nyfödd fler eller färre ben än antalet muskler i kroppen?;Ben hos nyfödd;Muskler i kroppen;300;639;stycken;Hur många stycken skiljer det?
-Är en graviditet längre eller kortare än en röd blodkropps livslängd?;En graviditet;En röd blodkropps livslängd;280;120;dagar;Hur många dagar skiljer det?
-Är vilopulsens slag per minut fler eller färre än antalet spinala nervpar?;Vilopuls per minut;Spinala nervpar;70;31;stycken;Hur många stycken skiljer det?
-Har skallen fler eller färre ben än antalet kromosomer i en cell?;Ben i skallen;Kromosomer i en cell;22;46;stycken;Hur många stycken skiljer det?
-Väger levern mer eller mindre än mjälten?;Levern;Mjälten;1500;150;gram;Hur många gram skiljer det?
-Finns det fler eller färre muskler i kroppen än antalet dagar en graviditet varar?;Muskler i kroppen;Dagar en graviditet varar;639;280;stycken;Hur många stycken skiljer det?
-Tar man fler eller färre andetag per minut än antalet spinala nervpar?;Andetag per minut;Spinala nervpar;16;31;stycken;Hur många stycken skiljer det?
-Finns det fler eller färre kromosomer i en cell än vilopulsens slag per minut?;Kromosomer i en cell;Vilopuls per minut;46;70;stycken;Hur många stycken skiljer det?
-Har en vuxen fler eller färre ben än antalet muskler i kroppen?;Ben hos vuxen;Muskler i kroppen;206;639;stycken;Hur många stycken skiljer det?
-Är tunntarmen längre eller kortare än tjocktarmen?;Tunntarmen;Tjocktarmen;7;1,5;meter;Hur många meter skiljer det?
-Väger hjärtat mer eller mindre än hjärnan?;Hjärtat;Hjärnan;300;1336;gram;Hur många gram skiljer det?
-Väger levern mer eller mindre än båda njurarna tillsammans?;Levern;Båda njurarna;1500;270;gram;Hur många gram skiljer det?
-Tar man fler eller färre andetag per minut än vilopulsens antal slag per minut?;Andetag per minut;Vilopuls per minut;16;70;stycken;Hur många stycken skiljer det?
-Är vilopulsens slag per minut fler eller färre än antalet mjölktänder hos ett barn?;Vilopuls per minut;Mjölktänder hos barn;70;20;stycken;Hur många stycken skiljer det?
-Väger båda njurarna tillsammans mer eller mindre än lungorna?;Båda njurarna;Lungorna;270;1300;gram;Hur många gram skiljer det?
-Väger hjärnan mer eller mindre än båda njurarna tillsammans?;Hjärnan;Båda njurarna;1336;270;gram;Hur många gram skiljer det?
-Väger levern mer eller mindre än hjärtat?;Levern;Hjärtat;1500;300;gram;Hur många gram skiljer det?
-Finns det fler eller färre muskler i kroppen än antalet hjärtslag i vilopuls per minut?;Muskler i kroppen;Vilopuls per minut;639;70;stycken;Hur många stycken skiljer det?
-Väger mjälten mer eller mindre än bukspottkörteln?;Mjälten;Bukspottkörteln;150;90;gram;Hur många gram skiljer det?
-Väger hjärnan mer eller mindre än bukspottkörteln?;Hjärnan;Bukspottkörteln;1336;90;gram;Hur många gram skiljer det?
-Har en nyfödd fler eller färre ben än antalet spinala nervpar?;Ben hos nyfödd;Spinala nervpar;300;31;stycken;Hur många stycken skiljer det?
-Har vit choklad fler eller färre kalorier än mjölkchoklad?;Vit choklad;Mjölkchoklad;539;535;kcal per 100 g;Hur många kcal skiljer det?
-Har gurka fler eller färre kalorier än cashewnötter?;Gurka;Cashewnötter;15;553;kcal per 100 g;Hur många kcal skiljer det?
-Har selleri fler eller färre kalorier än en avokado?;Selleri;Avokado;14;160;kcal per 100 g;Hur många kcal skiljer det?
-Har cheddar fler eller färre kalorier än gouda?;Cheddar;Gouda;404;356;kcal per 100 g;Hur många kcal skiljer det?
-Har ett äpple fler eller färre kalorier än en avokado?;Äpple;Avokado;52;160;kcal per 100 g;Hur många kcal skiljer det?
-Innehåller Coca-Cola mer eller mindre socker än apelsinjuice?;Coca-Cola;Apelsinjuice;10,6;9;gram per 100 ml;Hur många gram skiljer det?
-Har en banan fler eller färre kalorier än ett äpple?;Banan;Äpple;89;52;kcal per 100 g;Hur många kcal skiljer det?
-Innehåller kycklingbröst mer eller mindre protein än lax?;Kycklingbröst;Lax;23;20;gram per 100 g;Hur många gram skiljer det?
-Har vitt bröd fler eller färre kalorier än kokt ris?;Vitt bröd;Kokt ris;265;130;kcal per 100 g;Hur många kcal skiljer det?
-Producerades det mer eller mindre kaffe än te i världen 2023?;Kaffe;Te;10,1;6,7;miljoner ton;Hur många miljoner ton skiljer det?
-Producerades det fler eller färre ton bananer än äpplen i världen 2023?;Bananer;Äpplen;139;97;miljoner ton;Hur många miljoner ton skiljer det?
-Har mörk choklad fler eller färre kalorier än vitt bröd?;Mörk choklad;Vitt bröd;600;265;kcal per 100 g;Hur många kcal skiljer det?
-Innehåller tofu mer eller mindre protein än linser?;Tofu;Linser;16;9;gram per 100 g;Hur många gram skiljer det?
-Producerades det fler eller färre ton olivolja än honung i världen 2023?;Olivolja;Honung;2,6;1,9;miljoner ton;Hur många miljoner ton skiljer det?
-Har popcorn fler eller färre kalorier än valnötter?;Popcorn;Valnötter;387;654;kcal per 100 g;Hur många kcal skiljer det?
-Innehåller standardmjölk mer eller mindre socker än Coca-Cola?;Standardmjölk;Coca-Cola;4,8;10,6;gram per 100 ml;Hur många gram skiljer det?
-Innehåller ett ägg mer eller mindre protein än cheddar?;Ägg;Cheddar;13;23;gram per 100 g;Hur många gram skiljer det?
-Har en avokado fler eller färre kalorier än en banan?;Avokado;Banan;160;89;kcal per 100 g;Hur många kcal skiljer det?
-Producerades det fler eller färre ton bananer än potatis i världen 2023?;Bananer;Potatis;139;383;miljoner ton;Hur många miljoner ton skiljer det?
-Innehåller Coca-Cola mer eller mindre koffein än filterkaffe?;Coca-Cola;Filterkaffe;10;80;mg per 100 ml;Hur många mg skiljer det?
-Har en avokado fler eller färre kalorier än olivolja?;Avokado;Olivolja;160;884;kcal per 100 g;Hur många kcal skiljer det?
-Producerades det fler eller färre liter vin än öl i världen 2023?;Vin;Öl;23,7;188,4;miljarder liter;Hur många miljarder liter skiljer det?
-Producerades det fler eller färre ton vete än potatis i världen 2023?;Vete;Potatis;799;383;miljoner ton;Hur många miljoner ton skiljer det?
-Har olivolja fler eller färre kalorier än smör?;Olivolja;Smör;884;717;kcal per 100 g;Hur många kcal skiljer det?
-Innehåller en apelsin mer eller mindre kalium än en banan?;Apelsin;Banan;181;358;mg per 100 g;Hur många mg skiljer det?
-Har lättmjölk fler eller färre kalorier än vispgrädde?;Lättmjölk;Vispgrädde;42;340;kcal per 100 g;Hur många kcal skiljer det?
-Innehåller en kopp svart te mer eller mindre koffein än en espresso?;Svart te;Espresso;20;212;mg per 100 ml;Hur många mg skiljer det?
-Väger en Big Mac mer eller mindre än en standardpizza Margherita?;Big Mac;Pizza Margherita;215;420;gram;Hur många gram skiljer det?
-Väger ett hönsägg mer eller mindre än ett strutsägg?;Hönsägg;Strutsägg;58;1400;gram;Hur många gram skiljer det?
-Tar världsrekordet på 100 meter kortare eller längre tid än rekordet på 200 meter?;100 meter (herrar);200 meter (herrar);9,58;19,19;sekunder;Hur många sekunder skiljer det?
-Är en fotbollsplan längre än den är bred (proffsmått)?;Längd;Bredd;105;68;meter;Hur många meter skiljer det?
-Är en NBA-plan kortare eller längre än en olympisk simbassäng?;NBA-plan;Olympisk bassäng;28,65;50;meter;Hur många meter skiljer det?
-Rymmer Wembley fler eller färre åskådare än Camp Nou?;Wembley;Camp Nou;90000;99354;åskådare;Hur många åskådare skiljer det?
-Sitter ett volleybollnät (herrar) högre eller lägre än en basketkorg?;Volleybollnät;Basketkorg;2,43;3,05;meter;Hur många meter skiljer det?
-Väger en fotboll mer eller mindre än en NBA-basketboll?;Fotboll;Basketboll;430;624;gram;Hur många gram skiljer det?
-Är en NHL-rink längre eller kortare än en tennisbana?;NHL-rink;Tennisbana;61;23,77;meter;Hur många meter skiljer det?
-Är en golfboll mindre eller större i diameter än ett golfhål?;Golfboll;Golfhål;42,67;108;millimeter;Hur många millimeter skiljer det?
-Är det snabbaste basebollkastet snabbare eller långsammare än den snabbaste tennisserven?;Snabbaste basebollkast;Snabbaste tennisserve;170;263;km/h;Hur många km/h skiljer det?
-Är en bowlingbana längre eller kortare än kastlinjen i dart?;Bowlingbana;Dart-oche;18,29;2,37;meter;Hur många meter skiljer det?
-Är världsrekordet i höjdhopp högre eller lägre än rekordet i stavhopp?;Höjdhopp (rekord);Stavhopp (rekord);2,45;6,31;meter;Hur många meter skiljer det?
-Är världsrekordet i längdhopp kortare eller längre än rekordet i tresteg?;Längdhopp (rekord);Tresteg (rekord);8,95;18,29;meter;Hur många meter skiljer det?
-Är ett Tour de France längre eller kortare än ett maratonlopp?;Tour de France 2024;Maraton;3498;42,195;kilometer;Hur många kilometer skiljer det?
-Är ett tennisnät högre vid mitten eller vid stolparna?;Mitten;Stolparna;0,914;1,07;meter;Hur många meter skiljer det?
-Är en fotbollsplan bredare eller smalare än en basketplan?;Fotbollsplan (bredd);Basketplan (bredd);68;15,24;meter;Hur många meter skiljer det?
-Sitter ett volleybollnät för damer högre eller lägre än för herrar?;Damnät;Herrnät;2,24;2,43;meter;Hur många meter skiljer det?
-Är en tennisbana kortare eller längre än en NBA-plan?;Tennisbana;NBA-plan;23,77;28,65;meter;Hur många meter skiljer det?
-Är ett maratonlopp längre eller kortare än ett 5000-meterslopp?;Maraton;5000 meter;42,195;5;kilometer;Hur många kilometer skiljer det?
-Är en volleybollplan längre än den är bred?;Längd;Bredd;18;9;meter;Hur många meter skiljer det?
-Spelas en fotbollsmatch under fler eller färre minuter än en NBA-match?;Fotbollsmatch;NBA-match;90;48;minuter;Hur många minuter skiljer det?
-Är en fotbollshalvlek längre eller kortare än en period i ishockey?;Fotbollshalvlek;Ishockeyperiod;45;20;minuter;Hur många minuter skiljer det?
-Avgörs en proffs-VM-match i boxning över fler eller färre ronder än en amatörmatch?;VM-match;Amatörmatch;12;3;ronder;Hur många ronder skiljer det?
-Spelar ett rugbylag (union) med fler eller färre spelare än ett fotbollslag?;Rugbylag;Fotbollslag;15;11;spelare;Hur många spelare skiljer det?
-Är ett 10 000-meterslopp kortare eller längre än ett maraton?;10 000 meter;Maraton;10;42,195;kilometer;Hur många kilometer skiljer det?
-Väger en tennisboll mer eller mindre än en golfboll?;Tennisboll;Golfboll;58;45,93;gram;Hur många gram skiljer det?
-Är ett ishockeymål smalare eller bredare än ett fotbollsmål?;Ishockeymål;Fotbollsmål;1,83;7,32;meter;Hur många meter skiljer det?
-Är ett fotbollsmål bredare eller smalare än ett handbollsmål?;Fotbollsmål;Handbollsmål;7,32;3;meter;Hur många meter skiljer det?
-Är ett golfhål mindre eller större i diameter än en basketring?;Golfhål;Basketring;10,8;45,7;centimeter;Hur många centimeter skiljer det?
-Är ett varv på en löparbana kortare eller längre än ett maraton?;Löparvarv;Maraton;0,4;42,195;kilometer;Hur många kilometer skiljer det?
-Är en basketrings diameter mindre eller större än omkretsen på en fotboll?;Basketring;Fotboll (omkrets);45,7;69;centimeter;Hur många centimeter skiljer det?
-Har Vänern större eller mindre yta än Mälaren?;Vänern;Mälaren;5650;1078;kvadratkilometer;Hur många kvadratkilometer skiljer det?
-Har Mälaren större eller mindre yta än Vättern?;Mälaren;Vättern;1078;1893;kvadratkilometer;Hur många kvadratkilometer skiljer det?
-Har Hjälmaren större eller mindre yta än Storsjön?;Hjälmaren;Storsjön;483;464;kvadratkilometer;Hur många kvadratkilometer skiljer det?
-Har Siljan större eller mindre yta än Torneträsk?;Siljan;Torneträsk;290;332;kvadratkilometer;Hur många kvadratkilometer skiljer det?
-Har Mälaren större eller mindre yta än Hjälmaren?;Mälaren;Hjälmaren;1078;483;kvadratkilometer;Hur många kvadratkilometer skiljer det?
-Har Hjälmaren större eller mindre yta än Vänern?;Hjälmaren;Vänern;483;5650;kvadratkilometer;Hur många kvadratkilometer skiljer det?
-Har Malmö större eller mindre folkmängd än Göteborg? (2024);Malmö;Göteborg;365644;608993;invånare;Hur många invånare skiljer det?
-Har Uppsala större eller mindre folkmängd än Linköping? (2024);Uppsala;Linköping;248016;168035;invånare;Hur många invånare skiljer det?
-Har Malmö större eller mindre folkmängd än Linköping? (2024);Malmö;Linköping;365644;168035;invånare;Hur många invånare skiljer det?
-Har Göteborg större eller mindre folkmängd än Stockholm? (2024);Göteborg;Stockholm;608993;995574;invånare;Hur många invånare skiljer det?
-Har Stockholm större eller mindre folkmängd än Malmö? (2024);Stockholm;Malmö;995574;365644;invånare;Hur många invånare skiljer det?
-Har Linköping större eller mindre folkmängd än Uppsala? (2024);Linköping;Uppsala;168035;248016;invånare;Hur många invånare skiljer det?
-Är Öresundsbron längre eller kortare än Ölandsbron?;Öresundsbron;Ölandsbron;7845;6072;meter;Hur många meter skiljer det?
-Är Hisingsbron längre eller kortare än Götaälvbron?;Hisingsbron;Götaälvbron;440;927;meter;Hur många meter skiljer det?
-Är Götaälvbron längre eller kortare än Ölandsbron?;Götaälvbron;Ölandsbron;927;6072;meter;Hur många meter skiljer det?
-Är Öresundsbron längre eller kortare än Götaälvbron?;Öresundsbron;Götaälvbron;7845;927;meter;Hur många meter skiljer det?
-Är Kista Science Tower högre eller lägre än Turning Torso?;Kista Science Tower;Turning Torso;124;190;meter;Hur många meter skiljer det?
-Är Karlatornet högre eller lägre än Globen?;Karlatornet;Globen;246;85;meter;Hur många meter skiljer det?
-Är Kaknästornet högre eller lägre än Globen?;Kaknästornet;Globen;155;85;meter;Hur många meter skiljer det?
-Är Globen högre eller lägre än Turning Torso?;Globen;Turning Torso;85;190;meter;Hur många meter skiljer det?
-Är Kaknästornet högre eller lägre än Turning Torso?;Kaknästornet;Turning Torso;155;190;meter;Hur många meter skiljer det?
-Har Öland större eller mindre yta än Gotland?;Öland;Gotland;1342;2994;kvadratkilometer;Hur många kvadratkilometer skiljer det?
-Har Öland större eller mindre yta än Orust?;Öland;Orust;1342;346;kvadratkilometer;Hur många kvadratkilometer skiljer det?
-Har Orust större eller mindre yta än Gotland?;Orust;Gotland;346;2994;kvadratkilometer;Hur många kvadratkilometer skiljer det?
-Är Kebnekaise högre eller lägre än Sarektjåkkå?;Kebnekaise;Sarektjåkkå;2097;2089;meter;Hur många meter skiljer det?
-Är Helagsfjället högre eller lägre än Kebnekaise?;Helagsfjället;Kebnekaise;1797;2097;meter;Hur många meter skiljer det?
-Är avståndet Stockholm–Göteborg längre eller kortare än Stockholm–Malmö?;Stockholm–Göteborg;Stockholm–Malmö;397;513;kilometer;Hur många kilometer skiljer det?
-Är avståndet Malmö–Kiruna längre eller kortare än Göteborg–Malmö?;Malmö–Kiruna;Göteborg–Malmö;1412;242;kilometer;Hur många kilometer skiljer det?
-Är avståndet Stockholm–Kiruna längre eller kortare än Göteborg–Malmö?;Stockholm–Kiruna;Göteborg–Malmö;954;242;kilometer;Hur många kilometer skiljer det?
-Är avståndet Göteborg–Malmö längre eller kortare än Stockholm–Göteborg?;Göteborg–Malmö;Stockholm–Göteborg;242;397;kilometer;Hur många kilometer skiljer det?
 Har en Bugatti Chiron högre eller lägre toppfart än en Koenigsegg Jesko Absolut?;Bugatti Chiron Super Sport;Koenigsegg Jesko Absolut;490;500;km/h;Hur många km/h skiljer toppfarten?
 Har en Tesla Model S Plaid mer eller mindre effekt än en Ferrari SF90?;Tesla Model S Plaid;Ferrari SF90 Stradale;1020;990;hk;Hur många hk skiljer det?
 Är Eiffeltornet högre eller lägre än Empire State Building?;Eiffeltornet;Empire State Building;330;381;meter;Hur många meter skiljer höjden?
@@ -337,6 +505,304 @@ Hade Wright Flyer högre eller lägre toppfart än en Spitfire?;Wright Flyer;Spi
 Hade en Ford Model T mer eller mindre effekt än en Bugatti Chiron?;Ford Model T;Bugatti Chiron;20;1500;hk;Hur många hk skiljer effekten?
 Väger Apollos kommandomodul mer eller mindre än rymdstationen ISS?;Apollos kommandomodul (CSM);Internationella rymdstationen (ISS);30;420;ton;Hur många ton skiljer vikten?
 Flyger rymdsonden Parker Solar Probe snabbare eller långsammare än Voyager 1?;Parker Solar Probe;Voyager 1;690000;61000;km/h;Hur många km/h skiljer farten?
+Tar världsrekordet på 100 meter kortare eller längre tid än rekordet på 200 meter?;100 meter (herrar);200 meter (herrar);9,58;19,19;sekunder;Hur många sekunder skiljer det?
+Är en fotbollsplan längre än den är bred (proffsmått)?;Längd;Bredd;105;68;meter;Hur många meter skiljer det?
+Är en NBA-plan kortare eller längre än en olympisk simbassäng?;NBA-plan;Olympisk bassäng;28,65;50;meter;Hur många meter skiljer det?
+Rymmer Wembley fler eller färre åskådare än Camp Nou?;Wembley;Camp Nou;90000;99354;åskådare;Hur många åskådare skiljer det?
+Sitter ett volleybollnät (herrar) högre eller lägre än en basketkorg?;Volleybollnät;Basketkorg;2,43;3,05;meter;Hur många meter skiljer det?
+Väger en fotboll mer eller mindre än en NBA-basketboll?;Fotboll;Basketboll;430;624;gram;Hur många gram skiljer det?
+Är en NHL-rink längre eller kortare än en tennisbana?;NHL-rink;Tennisbana;61;23,77;meter;Hur många meter skiljer det?
+Är en golfboll mindre eller större i diameter än ett golfhål?;Golfboll;Golfhål;42,67;108;millimeter;Hur många millimeter skiljer det?
+Är det snabbaste basebollkastet snabbare eller långsammare än den snabbaste tennisserven?;Snabbaste basebollkast;Snabbaste tennisserve;170;263;km/h;Hur många km/h skiljer det?
+Är en bowlingbana längre eller kortare än kastlinjen i dart?;Bowlingbana;Dart-oche;18,29;2,37;meter;Hur många meter skiljer det?
+Är världsrekordet i höjdhopp högre eller lägre än rekordet i stavhopp?;Höjdhopp (rekord);Stavhopp (rekord);2,45;6,31;meter;Hur många meter skiljer det?
+Är världsrekordet i längdhopp kortare eller längre än rekordet i tresteg?;Längdhopp (rekord);Tresteg (rekord);8,95;18,29;meter;Hur många meter skiljer det?
+Är ett Tour de France längre eller kortare än ett maratonlopp?;Tour de France 2024;Maraton;3498;42,195;kilometer;Hur många kilometer skiljer det?
+Är ett tennisnät högre vid mitten eller vid stolparna?;Mitten;Stolparna;0,914;1,07;meter;Hur många meter skiljer det?
+Är en fotbollsplan bredare eller smalare än en basketplan?;Fotbollsplan (bredd);Basketplan (bredd);68;15,24;meter;Hur många meter skiljer det?
+Sitter ett volleybollnät för damer högre eller lägre än för herrar?;Damnät;Herrnät;2,24;2,43;meter;Hur många meter skiljer det?
+Är en tennisbana kortare eller längre än en NBA-plan?;Tennisbana;NBA-plan;23,77;28,65;meter;Hur många meter skiljer det?
+Är ett maratonlopp längre eller kortare än ett 5000-meterslopp?;Maraton;5000 meter;42,195;5;kilometer;Hur många kilometer skiljer det?
+Är en volleybollplan längre än den är bred?;Längd;Bredd;18;9;meter;Hur många meter skiljer det?
+Spelas en fotbollsmatch under fler eller färre minuter än en NBA-match?;Fotbollsmatch;NBA-match;90;48;minuter;Hur många minuter skiljer det?
+Är en fotbollshalvlek längre eller kortare än en period i ishockey?;Fotbollshalvlek;Ishockeyperiod;45;20;minuter;Hur många minuter skiljer det?
+Avgörs en proffs-VM-match i boxning över fler eller färre ronder än en amatörmatch?;VM-match;Amatörmatch;12;3;ronder;Hur många ronder skiljer det?
+Spelar ett rugbylag (union) med fler eller färre spelare än ett fotbollslag?;Rugbylag;Fotbollslag;15;11;spelare;Hur många spelare skiljer det?
+Är ett 10 000-meterslopp kortare eller längre än ett maraton?;10 000 meter;Maraton;10;42,195;kilometer;Hur många kilometer skiljer det?
+Väger en tennisboll mer eller mindre än en golfboll?;Tennisboll;Golfboll;58;45,93;gram;Hur många gram skiljer det?
+Är ett ishockeymål smalare eller bredare än ett fotbollsmål?;Ishockeymål;Fotbollsmål;1,83;7,32;meter;Hur många meter skiljer det?
+Är ett fotbollsmål bredare eller smalare än ett handbollsmål?;Fotbollsmål;Handbollsmål;7,32;3;meter;Hur många meter skiljer det?
+Är ett golfhål mindre eller större i diameter än en basketring?;Golfhål;Basketring;10,8;45,7;centimeter;Hur många centimeter skiljer det?
+Är ett varv på en löparbana kortare eller längre än ett maraton?;Löparvarv;Maraton;0,4;42,195;kilometer;Hur många kilometer skiljer det?
+Är en basketrings diameter mindre eller större än omkretsen på en fotboll?;Basketring;Fotboll (omkrets);45,7;69;centimeter;Hur många centimeter skiljer det?
+Tar världsrekordet på 800 meter (herrar) kortare eller längre tid än rekordet på 400 meter?;800 meter;400 meter;100,91;43,03;sekunder;Hur många sekunder skiljer det?
+Tar världsrekordet på 1500 meter (herrar) kortare eller längre tid än rekordet på 800 meter?;1500 meter;800 meter;206;100,91;sekunder;Hur många sekunder skiljer det?
+Tar världsrekordet på 5000 meter (herrar) kortare eller längre tid än rekordet på 1500 meter?;5000 meter;1500 meter;755,36;206;sekunder;Hur många sekunder skiljer det?
+Tar världsrekordet på 200 meter (herrar) kortare eller längre tid än damrekordet på 100 meter?;200 meter herrar;100 meter damer;19,19;10,49;sekunder;Hur många sekunder skiljer det?
+Är damernas världsrekord på 100 meter snabbare eller långsammare än herrarnas?;100 meter damer;100 meter herrar;10,49;9,58;sekunder;Hur många sekunder skiljer det?
+Kastas herrarnas spjut längre eller kortare än rekordet i diskus?;Spjut (rekord);Diskus (rekord);98,48;74,08;meter;Hur många meter skiljer det?
+Kastas herrarnas slägga längre eller kortare än rekordet i diskus?;Slägga (rekord);Diskus (rekord);86,74;74,08;meter;Hur många meter skiljer det?
+Stöts herrarnas kula längre eller kortare än rekordet i släggkast?;Kula (rekord);Slägga (rekord);23,56;86,74;meter;Hur många meter skiljer det?
+Är världsrekordet i stavhopp högre eller lägre än längden på en ishockeyrink?;Stavhopp (rekord);Ishockeyrink;6,31;61;meter;Hur många meter skiljer det?
+Är det längsta skidflygningshoppet längre eller kortare än rekordet i längdhopp?;Skidflygning (rekord);Längdhopp (rekord);253,5;8,95;meter;Hur många meter skiljer det?
+Väger en herrkula mer eller mindre än ett herrspjut?;Kula (herrar);Spjut (herrar);7,26;0,8;kilo;Hur många kilo skiljer det?
+Väger en herrslägga mer eller mindre än en herrdiskus?;Slägga (herrar);Diskus (herrar);7,26;2;kilo;Hur många kilo skiljer det?
+Väger en damkula mer eller mindre än en damdiskus?;Kula (damer);Diskus (damer);4;1;kilo;Hur många kilo skiljer det?
+Väger ett herrspjut mer eller mindre än ett damspjut?;Spjut (herrar);Spjut (damer);0,8;0,6;kilo;Hur många kilo skiljer det?
+Är ett cricketwicket (pitch) längre eller kortare än en ishockeyrink?;Cricketpitch;Ishockeyrink;20,12;61;meter;Hur många meter skiljer det?
+Rymmer Indianapolis Motor Speedway fler eller färre åskådare än Camp Nou?;Indianapolis Motor Speedway;Camp Nou;235000;99354;åskådare;Hur många åskådare skiljer det?
+Rymmer Rungrado-stadion i Pyongyang fler eller färre åskådare än Wembley?;Rungrado;Wembley;114000;90000;åskådare;Hur många åskådare skiljer det?
+Rymmer Michigan Stadium fler eller färre åskådare än Madison Square Garden?;Michigan Stadium;Madison Square Garden;107601;19812;åskådare;Hur många åskådare skiljer det?
+Rymmer Daytona International Speedway fler eller färre åskådare än Allianz Arena?;Daytona;Allianz Arena;101500;75000;åskådare;Hur många åskådare skiljer det?
+Rymmer Camp Nou fler eller färre åskådare än Melbourne Cricket Ground?;Camp Nou;Melbourne Cricket Ground;99354;100024;åskådare;Hur många åskådare skiljer det?
+Är NBA:s trepoängslinje längre eller kortare bort än ett cricketwicket (pitch)?;NBA trepoäng;Cricketpitch;7,24;20,12;meter;Hur många meter skiljer det?
+Är en frikastlinje i basket längre eller kortare bort än en straffpunkt i fotboll?;Frikast (basket);Straffpunkt (fotboll);4,6;11;meter;Hur många meter skiljer det?
+Är en curlingbana längre eller kortare än en bowlingbana?;Curlingbana;Bowlingbana;45,72;18,29;meter;Hur många meter skiljer det?
+Är en boulebana längre eller kortare än en ishockeyrink?;Boulebana;Ishockeyrink;15;61;meter;Hur många meter skiljer det?
+Är en squashbana längre eller kortare än en boulebana?;Squashbana;Boulebana;9,75;15;meter;Hur många meter skiljer det?
+Är en curlingbana längre eller kortare än en ishockeyrink?;Curlingbana;Ishockeyrink;45,72;61;meter;Hur många meter skiljer det?
+Är en simbassäng (olympisk) längre eller kortare än en NHL-rink?;Olympisk bassäng;NHL-rink;50;61;meter;Hur många meter skiljer det?
+Är topphastigheten för en F1-bil högre eller lägre än för en MotoGP-motorcykel?;F1-bil;MotoGP;372;366;km/h;Hur många km/h skiljer det?
+Är den snabbaste tennisserven snabbare eller långsammare än topphastigheten för en MotoGP-motorcykel?;Snabbaste tennisserve;MotoGP;263;366;km/h;Hur många km/h skiljer det?
+Är den snabbaste tennisserven snabbare eller långsammare än det snabbaste basebollkastet?;Snabbaste tennisserve;Snabbaste basebollkast;263;170;km/h;Hur många km/h skiljer det?
+Är en olympisk höjdhoppsplattform (svikt) högre eller lägre än ett stavhoppsrekord?;Höjdhoppsplattform (10 m);Stavhopp (rekord);10;6,31;meter;Hur många meter skiljer det?
+Är Eiffeltornet högre eller lägre än en olympisk höjdhoppsplattform?;Eiffeltornet;Höjdhoppsplattform;330;10;meter;Hur många meter skiljer det?
+Är ett snookerbord längre eller kortare än ett poolbord (spelyta)?;Snookerbord;Poolbord;3,57;2,54;meter;Hur många meter skiljer det?
+Väger en damkula mer eller mindre än en herrkula?;Kula (damer);Kula (herrar);4;7,26;kilo;Hur många kilo skiljer det?
+Är världsrekordet i tresteg längre eller kortare än längden på en simbassäng?;Tresteg (rekord);Olympisk bassäng;18,29;50;meter;Hur många meter skiljer det?
+Är ett varv på en inomhusbana (200 m) längre eller kortare än ett varv utomhus (400 m)?;Inomhusvarv;Utomhusvarv;200;400;meter;Hur många meter skiljer det?
+Är en handbollsplan längre eller kortare än en fotbollsplan?;Handbollsplan;Fotbollsplan;40;105;meter;Hur många meter skiljer det?
+Är en handbollsplan längre eller kortare än en basketplan?;Handbollsplan;Basketplan;40;28,65;meter;Hur många meter skiljer det?
+Är en badmintonbana längre eller kortare än en NHL-rink?;Badmintonbana;NHL-rink;13,4;61;meter;Hur många meter skiljer det?
+Är ett bordtennisbord längre eller kortare än en badmintonbana?;Bordtennisbord;Badmintonbana;2,74;13,4;meter;Hur många meter skiljer det?
+Väger en bordtennisboll mer eller mindre än en golfboll?;Bordtennisboll;Golfboll;2,7;45,93;gram;Hur många gram skiljer det?
+Väger en handboll (herrar) mer eller mindre än en fotboll?;Handboll (herrar);Fotboll;450;430;gram;Hur många gram skiljer det?
+Väger en basketboll (NBA) mer eller mindre än en bordtennisboll?;Basketboll;Bordtennisboll;624;2,7;gram;Hur många gram skiljer det?
+Väger en bowlingklot (max) mer eller mindre än en basketboll?;Bowlingklot (max);Basketboll;7260;624;gram;Hur många gram skiljer det?
+Väger en boxningshandske (proffs) mer eller mindre än en fotboll?;Boxningshandske;Fotboll;284;430;gram;Hur många gram skiljer det?
+Är diametern på en basketboll större eller mindre än diametern på en golfboll?;Basketboll;Golfboll;24,6;4,27;centimeter;Hur många centimeter skiljer det?
+Är ett dartavstånd (oche) längre eller kortare än en frikastlinje i basket?;Dart-oche;Frikast (basket);2,37;4,6;meter;Hur många meter skiljer det?
+Är ett fält i amerikansk fotboll längre eller kortare än en fotbollsplan?;Amerikansk fotboll;Fotbollsplan;91,44;105;meter;Hur många meter skiljer det?
+Är ett maratonlopp längre eller kortare än ett 100-meterslopp?;Maraton;100 meter;42195;100;meter;Hur många meter skiljer det?
+Är en basketkorg högre eller lägre än ett fotbollsmåls överliggare?;Basketkorg;Fotbollsmål (höjd);3,05;2,44;meter;Hur många meter skiljer det?
+Var Giro d'Italia 2024 längre eller kortare än Tour de France 2024?;Giro d'Italia 2024;Tour de France 2024;3400,8;3498;kilometer;Hur många kilometer skiljer det?
+Är ett halvmaraton längre eller kortare än ett 10 km-lopp?;Halvmaraton;10 km;21,0975;10;kilometer;Hur många kilometer skiljer det?
+Är ett halvmaraton längre eller kortare än ett helt maraton?;Halvmaraton;Maraton;21,0975;42,195;kilometer;Hur många kilometer skiljer det?
+Är ett 3000 meter hinder längre eller kortare än ett 1500-meterslopp?;3000 meter hinder;1500 meter;3;1,5;kilometer;Hur många kilometer skiljer det?
+Är längden på en olympisk roddbana längre eller kortare än ett maraton?;Roddbana (2000 m);Maraton;2;42,195;kilometer;Hur många kilometer skiljer det?
+Tar en period i ishockey kortare eller längre tid än en hel fotbollsmatch?;Ishockeyperiod;Fotbollsmatch;20;90;minuter;Hur många minuter skiljer det?
+Spelas en basketmatch (NBA) under fler eller färre minuter än en ishockeymatch?;NBA-match;Ishockeymatch;48;60;minuter;Hur många minuter skiljer det?
+Spelas en handbollsmatch under fler eller färre minuter än en fotbollsmatch?;Handbollsmatch;Fotbollsmatch;60;90;minuter;Hur många minuter skiljer det?
+Spelas en fjärdedel (quarter) i NBA under fler eller färre minuter än en period i ishockey?;NBA-quarter;Ishockeyperiod;12;20;minuter;Hur många minuter skiljer det?
+Väger en ishockeypuck mer eller mindre än en golfboll?;Ishockeypuck;Golfboll;170;45,93;gram;Hur många gram skiljer det?
+Har ett baseboll-lag fler eller färre spelare på plan än ett amerikansk fotbollslag?;Baseboll;Amerikansk fotboll;9;11;spelare;Hur många spelare skiljer det?
+Har ett vattenpololag fler eller färre spelare i vattnet än ett basketlag på planen?;Vattenpolo;Basket;7;5;spelare;Hur många spelare skiljer det?
+Är avståndet från pitchern till home plate i baseboll längre eller kortare än en frikastlinje i basket?;Pitcheravstånd (baseboll);Frikast (basket);18,44;4,6;meter;Hur många meter skiljer det?
+Har ett rugby league-lag fler eller färre spelare än ett rugby union-lag?;Rugby league;Rugby union;13;15;spelare;Hur många spelare skiljer det?
+Är diametern på en bordtennisboll mindre eller större än en fotboll?;Bordtennisboll;Fotboll;40;220;millimeter;Hur många millimeter skiljer det?
+Är diametern på en tennisboll större eller mindre än en bordtennisboll?;Tennisboll;Bordtennisboll;67;40;millimeter;Hur många millimeter skiljer det?
+Är diametern på ett golfhål större eller mindre än en tennisbolls diameter?;Golfhål;Tennisboll;108;67;millimeter;Hur många millimeter skiljer det?
+Avgörs en tiebreak i tennis vid fler eller färre poäng än ett game (vanligt)?;Tiebreak;Game;7;4;poäng;Hur många poäng skiljer det?
+Är ett snookerbord längre eller kortare än ett bordtennisbord?;Snookerbord;Bordtennisbord;3,57;2,74;meter;Hur många meter skiljer det?
+Hoppar en längdhoppare ett världsrekord längre eller kortare än bredden på en fotbollsplan?;Längdhopp (rekord);Fotbollsplan (bredd);8,95;68;meter;Hur många meter skiljer det?
+Väger lungorna mer eller mindre än hjärnan?;Lungorna;Hjärnan;1300;1336;gram;Hur många gram skiljer det?
+Väger hjärnan mer eller mindre än levern?;Hjärnan;Levern;1336;1500;gram;Hur många gram skiljer det?
+Väger levern mer eller mindre än lungorna?;Levern;Lungorna;1500;1300;gram;Hur många gram skiljer det?
+Har en vuxen fler eller färre tänder än antalet ryggkotor?;Tänder hos vuxen;Ryggkotor;32;33;stycken;Hur många stycken skiljer det?
+Har en hand fler eller färre ben än skallen?;Ben i en hand;Ben i skallen;27;22;stycken;Hur många stycken skiljer det?
+Har en vuxen fler eller färre ben än en nyfödd?;Ben hos vuxen;Ben hos nyfödd;206;300;stycken;Hur många stycken skiljer det?
+Har ett barn fler eller färre mjölktänder än en vuxen har tänder?;Mjölktänder hos barn;Tänder hos vuxen;20;32;stycken;Hur många stycken skiljer det?
+Är lårbenet längre eller kortare än överarmsbenet?;Lårbenet;Överarmsbenet;48;30;centimeter;Hur många centimeter skiljer det?
+Har en vuxen fler eller färre tänder än antalet kromosomer i en cell?;Tänder hos vuxen;Kromosomer i en cell;32;46;stycken;Hur många stycken skiljer det?
+Har en nyfödd fler eller färre ben än antalet muskler i kroppen?;Ben hos nyfödd;Muskler i kroppen;300;639;stycken;Hur många stycken skiljer det?
+Är en graviditet längre eller kortare än en röd blodkropps livslängd?;En graviditet;En röd blodkropps livslängd;280;120;dagar;Hur många dagar skiljer det?
+Är vilopulsens slag per minut fler eller färre än antalet spinala nervpar?;Vilopuls per minut;Spinala nervpar;70;31;stycken;Hur många stycken skiljer det?
+Har skallen fler eller färre ben än antalet kromosomer i en cell?;Ben i skallen;Kromosomer i en cell;22;46;stycken;Hur många stycken skiljer det?
+Väger levern mer eller mindre än mjälten?;Levern;Mjälten;1500;150;gram;Hur många gram skiljer det?
+Finns det fler eller färre muskler i kroppen än antalet dagar en graviditet varar?;Muskler i kroppen;Dagar en graviditet varar;639;280;stycken;Hur många stycken skiljer det?
+Tar man fler eller färre andetag per minut än antalet spinala nervpar?;Andetag per minut;Spinala nervpar;16;31;stycken;Hur många stycken skiljer det?
+Finns det fler eller färre kromosomer i en cell än vilopulsens slag per minut?;Kromosomer i en cell;Vilopuls per minut;46;70;stycken;Hur många stycken skiljer det?
+Har en vuxen fler eller färre ben än antalet muskler i kroppen?;Ben hos vuxen;Muskler i kroppen;206;639;stycken;Hur många stycken skiljer det?
+Är tunntarmen längre eller kortare än tjocktarmen?;Tunntarmen;Tjocktarmen;7;1,5;meter;Hur många meter skiljer det?
+Väger hjärtat mer eller mindre än hjärnan?;Hjärtat;Hjärnan;300;1336;gram;Hur många gram skiljer det?
+Väger levern mer eller mindre än båda njurarna tillsammans?;Levern;Båda njurarna;1500;270;gram;Hur många gram skiljer det?
+Tar man fler eller färre andetag per minut än vilopulsens antal slag per minut?;Andetag per minut;Vilopuls per minut;16;70;stycken;Hur många stycken skiljer det?
+Är vilopulsens slag per minut fler eller färre än antalet mjölktänder hos ett barn?;Vilopuls per minut;Mjölktänder hos barn;70;20;stycken;Hur många stycken skiljer det?
+Väger båda njurarna tillsammans mer eller mindre än lungorna?;Båda njurarna;Lungorna;270;1300;gram;Hur många gram skiljer det?
+Väger hjärnan mer eller mindre än båda njurarna tillsammans?;Hjärnan;Båda njurarna;1336;270;gram;Hur många gram skiljer det?
+Väger levern mer eller mindre än hjärtat?;Levern;Hjärtat;1500;300;gram;Hur många gram skiljer det?
+Finns det fler eller färre muskler i kroppen än antalet hjärtslag i vilopuls per minut?;Muskler i kroppen;Vilopuls per minut;639;70;stycken;Hur många stycken skiljer det?
+Väger mjälten mer eller mindre än bukspottkörteln?;Mjälten;Bukspottkörteln;150;90;gram;Hur många gram skiljer det?
+Väger hjärnan mer eller mindre än bukspottkörteln?;Hjärnan;Bukspottkörteln;1336;90;gram;Hur många gram skiljer det?
+Har en nyfödd fler eller färre ben än antalet spinala nervpar?;Ben hos nyfödd;Spinala nervpar;300;31;stycken;Hur många stycken skiljer det?
+Har en fot fler eller färre ben än en hand?;Ben i en fot;Ben i en hand;26;27;stycken;Hur många stycken skiljer det?
+Tar man fler eller färre andetag än hjärtslag på en hel dag?;Andetag per dygn;Hjärtslag per dygn;21600;100800;stycken;Hur många stycken skiljer det?
+Är ett mänskligt öga större eller mindre i diameter än ögats lins?;Ögat;Ögats lins;24;10;millimeter;Hur många millimeter skiljer det?
+Har en vuxen fler eller färre kranialnervspar än ryggkotor?;Kranialnervspar;Ryggkotor;12;26;stycken;Hur många stycken skiljer det?
+Är matstrupen längre eller kortare än ryggmärgen?;Matstrupen;Ryggmärgen;25;45;centimeter;Hur många centimeter skiljer det?
+Lever en röd blodkropp längre eller kortare tid än en smakcell på tungan?;En röd blodkropps livslängd;En smakcells livslängd;120;10;dagar;Hur många dagar skiljer det?
+Är luftstrupen längre eller kortare än matstrupen?;Luftstrupen;Matstrupen;11;25;centimeter;Hur många centimeter skiljer det?
+Är skenbenet längre eller kortare än lårbenet?;Skenbenet;Lårbenet;36;48;centimeter;Hur många centimeter skiljer det?
+Är luftstrupen längre eller kortare än ryggmärgen?;Luftstrupen;Ryggmärgen;11;45;centimeter;Hur många centimeter skiljer det?
+Väger mjälten mer eller mindre än hjärtat?;Mjälten;Hjärtat;150;300;gram;Hur många gram skiljer det?
+Är ett nyfött barns kroppsvatten en högre eller lägre andel än en vuxens?;Kroppsvatten hos nyfödd;Kroppsvatten hos vuxen;75;60;procent;Hur många procentenheter skiljer det?
+Är överarmsbenet längre eller kortare än matstrupen?;Överarmsbenet;Matstrupen;30;25;centimeter;Hur många centimeter skiljer det?
+Lever en hudcell i överhuden längre eller kortare tid än en magslemhinnecell?;En hudcells livslängd;En magslemhinnecells livslängd;28;5;dagar;Hur många dagar skiljer det?
+Väger båda njurarna tillsammans mer eller mindre än hjärtat?;Båda njurarna;Hjärtat;270;300;gram;Hur många gram skiljer det?
+Är en mans urinrör längre eller kortare än luftstrupen?;Mannens urinrör;Luftstrupen;20;11;centimeter;Hur många centimeter skiljer det?
+Blinkar ögat fler eller färre gånger än man tar andetag på en hel dag?;Blinkningar per dygn;Andetag per dygn;16320;21600;stycken;Hur många stycken skiljer det?
+Växer en fingernagel snabbare eller långsammare än en tånagel?;En fingernagel per månad;En tånagel per månad;3;1;millimeter;Hur många millimeter skiljer det?
+Lever en röd blodkropp längre eller kortare tid än en hudcell i överhuden?;En röd blodkropps livslängd;En hudcells livslängd;120;28;dagar;Hur många dagar skiljer det?
+Är lårbenet längre eller kortare än ryggmärgen?;Lårbenet;Ryggmärgen;48;45;centimeter;Hur många centimeter skiljer det?
+Väger mjälten mer eller mindre än båda njurarna tillsammans?;Mjälten;Båda njurarna;150;270;gram;Hur många gram skiljer det?
+Är matstrupen längre eller kortare än skenbenet?;Matstrupen;Skenbenet;25;36;centimeter;Hur många centimeter skiljer det?
+Har tungan fler eller färre smaklökar än näsan har lukttyper den känner?;Smaklökar;Lukttyper;5000;350;stycken;Hur många stycken skiljer det?
+Är överarmsbenet längre eller kortare än skenbenet?;Överarmsbenet;Skenbenet;30;36;centimeter;Hur många centimeter skiljer det?
+Lever en smakcell på tungan längre eller kortare tid än en magslemhinnecell?;En smakcells livslängd;En magslemhinnecells livslängd;10;5;dagar;Hur många dagar skiljer det?
+Väger levern mer eller mindre än mjälten och hjärtat tillsammans?;Levern;Mjälten och hjärtat;1500;450;gram;Hur många gram skiljer det?
+Är en mans urinrör längre eller kortare än en kvinnas?;Mannens urinrör;Kvinnans urinrör;20;4;centimeter;Hur många centimeter skiljer det?
+Är stigbygeln, kroppens minsta ben, större eller mindre i längd än ögats diameter?;Stigbygeln;Ögat;3;24;millimeter;Hur många millimeter skiljer det?
+Har skallen fler eller färre ben i ansiktet än i hjärnskålen?;Ansiktsben;Kranieben;14;8;stycken;Hur många stycken skiljer det?
+Lever en hudcell i överhuden längre eller kortare tid än en smakcell på tungan?;En hudcells livslängd;En smakcells livslängd;28;10;dagar;Hur många dagar skiljer det?
+Väger hjärnan mer eller mindre än levern och hjärtat tillsammans?;Hjärnan;Levern och hjärtat;1336;1800;gram;Hur många gram skiljer det?
+Är ryggmärgen längre eller kortare än matstrupen och luftstrupen tillsammans?;Ryggmärgen;Matstrupen och luftstrupen;45;36;centimeter;Hur många centimeter skiljer det?
+Har en vuxen fler eller färre ben än antalet smaklökar på tungan?;Ben hos vuxen;Smaklökar;206;5000;stycken;Hur många stycken skiljer det?
+Är luftstrupens diameter större eller mindre än ögats diameter?;Luftstrupens diameter;Ögat;20;24;millimeter;Hur många millimeter skiljer det?
+Väger mjälten mer eller mindre än hjärnan?;Mjälten;Hjärnan;150;1336;gram;Hur många gram skiljer det?
+Lever en röd blodkropp längre eller kortare tid än en magslemhinnecell?;En röd blodkropps livslängd;En magslemhinnecells livslängd;120;5;dagar;Hur många dagar skiljer det?
+Är en mans urinrör längre eller kortare än matstrupen?;Mannens urinrör;Matstrupen;20;25;centimeter;Hur många centimeter skiljer det?
+Har en hand fler eller färre ben än antalet tänder hos en vuxen?;Ben i en hand;Tänder hos vuxen;27;32;stycken;Hur många stycken skiljer det?
+Är aortans diameter större eller mindre än luftstrupens diameter?;Aortans diameter;Luftstrupens diameter;30;20;millimeter;Hur många millimeter skiljer det?
+Väger bukspottkörteln mer eller mindre än båda njurarna tillsammans?;Bukspottkörteln;Båda njurarna;90;270;gram;Hur många gram skiljer det?
+Är överarmsbenet längre eller kortare än luftstrupen?;Överarmsbenet;Luftstrupen;30;11;centimeter;Hur många centimeter skiljer det?
+Har tungan fler eller färre smaklökar än kroppen har svettkörtlar?;Smaklökar;Svettkörtlar;5000;3000000;stycken;Hur många stycken skiljer det?
+Har en vuxen fler eller färre ben i skallen än muskler i tungan?;Ben i skallen;Muskler i tungan;22;8;stycken;Hur många stycken skiljer det?
+Är ögats lins större eller mindre i diameter än aortan?;Ögats lins;Aortans diameter;10;30;millimeter;Hur många millimeter skiljer det?
+Har en vuxen fler eller färre ben än antalet alveoler i lungorna?;Ben hos vuxen;Alveoler i lungorna;206;480000000;stycken;Hur många stycken skiljer det?
+Är en kvinnas urinrör längre eller kortare än den minsta hörselbenets längd?;Kvinnans urinrör;Stigbygeln;40;3;millimeter;Hur många millimeter skiljer det?
+Tar hjärtat fler eller färre slag än ögat blinkar på en hel dag?;Hjärtslag per dygn;Blinkningar per dygn;100800;16320;stycken;Hur många stycken skiljer det?
+Växer håret snabbare eller långsammare per månad än en fingernagel?;Hår per månad;En fingernagel per månad;10;3;millimeter;Hur många millimeter skiljer det?
+Är matstrupen längre eller kortare än luftstrupen och en mans urinrör tillsammans?;Matstrupen;Luftstrupen och urinröret;25;31;centimeter;Hur många centimeter skiljer det?
+Har kroppen fler eller färre svettkörtlar än alveoler i lungorna?;Svettkörtlar;Alveoler i lungorna;3000000;480000000;stycken;Hur många stycken skiljer det?
+Har en vuxen fler eller färre ben i hjärnskålen än kranialnervspar?;Kranieben;Kranialnervspar;8;12;stycken;Hur många stycken skiljer det?
+Väger hjärnan mer eller mindre än mjälten och bukspottkörteln tillsammans?;Hjärnan;Mjälten och bukspottkörteln;1336;240;gram;Hur många gram skiljer det?
+Är ryggmärgen längre eller kortare än en mans urinrör?;Ryggmärgen;Mannens urinrör;45;20;centimeter;Hur många centimeter skiljer det?
+Har kroppen fler eller färre muskler än tungan har smaklökar?;Muskler i kroppen;Smaklökar;639;5000;stycken;Hur många stycken skiljer det?
+Är ögat större eller mindre i diameter än aortan?;Ögat;Aortans diameter;24;30;millimeter;Hur många millimeter skiljer det?
+Väger levern mer eller mindre än hjärnan, hjärtat och mjälten tillsammans?;Levern;Hjärnan, hjärtat och mjälten;1500;1786;gram;Hur många gram skiljer det?
+Har kroppen fler eller färre svettkörtlar än röda blodkroppar bildas per sekund?;Svettkörtlar;Röda blodkroppar per sekund;3000000;2400000;stycken;Hur många stycken skiljer det?
+Är lårbenet längre eller kortare än matstrupen och luftstrupen tillsammans?;Lårbenet;Matstrupen och luftstrupen;48;36;centimeter;Hur många centimeter skiljer det?
+Är ryggmärgen längre eller kortare än skenbenet?;Ryggmärgen;Skenbenet;45;36;centimeter;Hur många centimeter skiljer det?
+Är skenbenet längre eller kortare än en mans urinrör?;Skenbenet;Mannens urinrör;36;20;centimeter;Hur många centimeter skiljer det?
+Är en kvinnas urinrör längre eller kortare än ögats diameter?;Kvinnans urinrör;Ögat;40;24;millimeter;Hur många millimeter skiljer det?
+Har Vänern större eller mindre yta än Mälaren?;Vänern;Mälaren;5650;1078;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Mälaren större eller mindre yta än Vättern?;Mälaren;Vättern;1078;1893;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Siljan större eller mindre yta än Torneträsk?;Siljan;Torneträsk;290;332;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Hjälmaren större eller mindre yta än Vänern?;Hjälmaren;Vänern;483;5650;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Malmö större eller mindre folkmängd än Göteborg? (2024);Malmö;Göteborg;365644;608993;invånare;Hur många invånare skiljer det?
+Har Uppsala större eller mindre folkmängd än Linköping? (2024);Uppsala;Linköping;248016;168035;invånare;Hur många invånare skiljer det?
+Har Malmö större eller mindre folkmängd än Linköping? (2024);Malmö;Linköping;365644;168035;invånare;Hur många invånare skiljer det?
+Har Göteborg större eller mindre folkmängd än Stockholm? (2024);Göteborg;Stockholm;608993;995574;invånare;Hur många invånare skiljer det?
+Har Stockholm större eller mindre folkmängd än Malmö? (2024);Stockholm;Malmö;995574;365644;invånare;Hur många invånare skiljer det?
+Har Linköping större eller mindre folkmängd än Uppsala? (2024);Linköping;Uppsala;168035;248016;invånare;Hur många invånare skiljer det?
+Är Öresundsbron längre eller kortare än Ölandsbron?;Öresundsbron;Ölandsbron;7845;6072;meter;Hur många meter skiljer det?
+Är Hisingsbron längre eller kortare än Götaälvbron?;Hisingsbron;Götaälvbron;440;927;meter;Hur många meter skiljer det?
+Är Götaälvbron längre eller kortare än Ölandsbron?;Götaälvbron;Ölandsbron;927;6072;meter;Hur många meter skiljer det?
+Är Öresundsbron längre eller kortare än Götaälvbron?;Öresundsbron;Götaälvbron;7845;927;meter;Hur många meter skiljer det?
+Är Kista Science Tower högre eller lägre än Turning Torso?;Kista Science Tower;Turning Torso;124;190;meter;Hur många meter skiljer det?
+Är Karlatornet högre eller lägre än Globen?;Karlatornet;Globen;246;85;meter;Hur många meter skiljer det?
+Är Kaknästornet högre eller lägre än Globen?;Kaknästornet;Globen;155;85;meter;Hur många meter skiljer det?
+Är Globen högre eller lägre än Turning Torso?;Globen;Turning Torso;85;190;meter;Hur många meter skiljer det?
+Är Kaknästornet högre eller lägre än Turning Torso?;Kaknästornet;Turning Torso;155;190;meter;Hur många meter skiljer det?
+Har Öland större eller mindre yta än Gotland?;Öland;Gotland;1342;2994;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Öland större eller mindre yta än Orust?;Öland;Orust;1342;346;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Orust större eller mindre yta än Gotland?;Orust;Gotland;346;2994;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Är Kebnekaise högre eller lägre än Sarektjåkkå?;Kebnekaise;Sarektjåkkå;2097;2089;meter;Hur många meter skiljer det?
+Är Helagsfjället högre eller lägre än Kebnekaise?;Helagsfjället;Kebnekaise;1797;2097;meter;Hur många meter skiljer det?
+Är avståndet Stockholm–Göteborg längre eller kortare än Stockholm–Malmö?;Stockholm–Göteborg;Stockholm–Malmö;397;513;kilometer;Hur många kilometer skiljer det?
+Är avståndet Malmö–Kiruna längre eller kortare än Göteborg–Malmö?;Malmö–Kiruna;Göteborg–Malmö;1412;242;kilometer;Hur många kilometer skiljer det?
+Är avståndet Stockholm–Kiruna längre eller kortare än Göteborg–Malmö?;Stockholm–Kiruna;Göteborg–Malmö;954;242;kilometer;Hur många kilometer skiljer det?
+Är avståndet Göteborg–Malmö längre eller kortare än Stockholm–Göteborg?;Göteborg–Malmö;Stockholm–Göteborg;242;397;kilometer;Hur många kilometer skiljer det?
+Har vit choklad fler eller färre kalorier än mjölkchoklad?;Vit choklad;Mjölkchoklad;539;535;kcal per 100 g;Hur många kcal skiljer det?
+Har gurka fler eller färre kalorier än cashewnötter?;Gurka;Cashewnötter;15;553;kcal per 100 g;Hur många kcal skiljer det?
+Har selleri fler eller färre kalorier än en avokado?;Selleri;Avokado;14;160;kcal per 100 g;Hur många kcal skiljer det?
+Har cheddar fler eller färre kalorier än gouda?;Cheddar;Gouda;404;356;kcal per 100 g;Hur många kcal skiljer det?
+Har ett äpple fler eller färre kalorier än en avokado?;Äpple;Avokado;52;160;kcal per 100 g;Hur många kcal skiljer det?
+Innehåller Coca-Cola mer eller mindre socker än apelsinjuice?;Coca-Cola;Apelsinjuice;10,6;9;gram per 100 ml;Hur många gram skiljer det?
+Har en banan fler eller färre kalorier än ett äpple?;Banan;Äpple;89;52;kcal per 100 g;Hur många kcal skiljer det?
+Innehåller kycklingbröst mer eller mindre protein än lax?;Kycklingbröst;Lax;23;20;gram per 100 g;Hur många gram skiljer det?
+Har vitt bröd fler eller färre kalorier än kokt ris?;Vitt bröd;Kokt ris;265;130;kcal per 100 g;Hur många kcal skiljer det?
+Producerades det mer eller mindre kaffe än te i världen 2023?;Kaffe;Te;10,1;6,7;miljoner ton;Hur många miljoner ton skiljer det?
+Producerades det fler eller färre ton bananer än äpplen i världen 2023?;Bananer;Äpplen;139;97;miljoner ton;Hur många miljoner ton skiljer det?
+Har mörk choklad fler eller färre kalorier än vitt bröd?;Mörk choklad;Vitt bröd;600;265;kcal per 100 g;Hur många kcal skiljer det?
+Innehåller tofu mer eller mindre protein än linser?;Tofu;Linser;16;9;gram per 100 g;Hur många gram skiljer det?
+Producerades det fler eller färre ton olivolja än honung i världen 2023?;Olivolja;Honung;2,6;1,9;miljoner ton;Hur många miljoner ton skiljer det?
+Har popcorn fler eller färre kalorier än valnötter?;Popcorn;Valnötter;387;654;kcal per 100 g;Hur många kcal skiljer det?
+Innehåller standardmjölk mer eller mindre socker än Coca-Cola?;Standardmjölk;Coca-Cola;4,8;10,6;gram per 100 ml;Hur många gram skiljer det?
+Innehåller ett ägg mer eller mindre protein än cheddar?;Ägg;Cheddar;13;23;gram per 100 g;Hur många gram skiljer det?
+Har en avokado fler eller färre kalorier än en banan?;Avokado;Banan;160;89;kcal per 100 g;Hur många kcal skiljer det?
+Producerades det fler eller färre ton bananer än potatis i världen 2023?;Bananer;Potatis;139;383;miljoner ton;Hur många miljoner ton skiljer det?
+Innehåller Coca-Cola mer eller mindre koffein än filterkaffe?;Coca-Cola;Filterkaffe;10;80;mg per 100 ml;Hur många mg skiljer det?
+Har en avokado fler eller färre kalorier än olivolja?;Avokado;Olivolja;160;884;kcal per 100 g;Hur många kcal skiljer det?
+Producerades det fler eller färre liter vin än öl i världen 2023?;Vin;Öl;23,7;188,4;miljarder liter;Hur många miljarder liter skiljer det?
+Producerades det fler eller färre ton vete än potatis i världen 2023?;Vete;Potatis;799;383;miljoner ton;Hur många miljoner ton skiljer det?
+Har olivolja fler eller färre kalorier än smör?;Olivolja;Smör;884;717;kcal per 100 g;Hur många kcal skiljer det?
+Innehåller en apelsin mer eller mindre kalium än en banan?;Apelsin;Banan;181;358;mg per 100 g;Hur många mg skiljer det?
+Har lättmjölk fler eller färre kalorier än vispgrädde?;Lättmjölk;Vispgrädde;42;340;kcal per 100 g;Hur många kcal skiljer det?
+Innehåller en kopp svart te mer eller mindre koffein än en espresso?;Svart te;Espresso;20;212;mg per 100 ml;Hur många mg skiljer det?
+Väger en Big Mac mer eller mindre än en standardpizza Margherita?;Big Mac;Pizza Margherita;215;420;gram;Hur många gram skiljer det?
+Väger ett hönsägg mer eller mindre än ett strutsägg?;Hönsägg;Strutsägg;58;1400;gram;Hur många gram skiljer det?
+Har mandel fler eller färre kalorier än jordnötter?;Mandel;Jordnötter;579;567;kcal per 100 g;Hur många kcal skiljer det?
+Har cashewnötter fler eller färre kalorier än pistagenötter?;Cashewnötter;Pistagenötter;553;560;kcal per 100 g;Hur många kcal skiljer det?
+Har olivolja fler eller färre kalorier än kokosolja?;Olivolja;Kokosolja;884;892;kcal per 100 g;Hur många kcal skiljer det?
+Har kokt vitt ris fler eller färre kalorier än kokt fullkornsris?;Vitt ris;Fullkornsris;129;122;kcal per 100 g;Hur många kcal skiljer det?
+Innehåller gurka mer eller mindre vatten än vattenmelon?;Gurka;Vattenmelon;96,7;92;procent vatten;Hur många procentenheter skiljer det?
+Innehåller en citron mer eller mindre C-vitamin än apelsinjuice?;Citron;Apelsinjuice;53;50;mg per 100 g;Hur många mg skiljer det?
+Innehåller Coca-Cola mer eller mindre socker än Red Bull?;Coca-Cola;Red Bull;10,6;11;gram per 100 ml;Hur många gram skiljer det?
+Innehåller en banan mer eller mindre kalium än en potatis?;Banan;Potatis;358;421;mg per 100 g;Hur många mg skiljer det?
+Har en morot fler eller färre kalorier än broccoli?;Morot;Broccoli;41;34;kcal per 100 g;Hur många kcal skiljer det?
+Har feta fler eller färre kalorier än mozzarella?;Feta;Mozzarella;264;318;kcal per 100 g;Hur många kcal skiljer det?
+Innehåller en mango mer eller mindre socker än ananas?;Mango;Ananas;13,7;9,9;gram per 100 g;Hur många gram skiljer det?
+Innehåller ett äpple mer eller mindre fiber än ett päron?;Äpple;Päron;2,4;3,1;gram per 100 g;Hur många gram skiljer det?
+Innehåller honung mer eller mindre socker än lönnsirap?;Honung;Lönnsirap;82;60,5;gram per 100 g;Hur många gram skiljer det?
+Innehåller helmjölk mer eller mindre fett än grekisk yoghurt?;Helmjölk;Grekisk yoghurt;3,3;5;gram per 100 g;Hur många gram skiljer det?
+Har lönnsirap fler eller färre kalorier än strösocker?;Lönnsirap;Strösocker;261;387;kcal per 100 g;Hur många kcal skiljer det?
+Har cheddar fler eller färre kalorier än feta?;Cheddar;Feta;404;264;kcal per 100 g;Hur många kcal skiljer det?
+Har druvor fler eller färre kalorier än en apelsin?;Druvor;Apelsin;69;47;kcal per 100 g;Hur många kcal skiljer det?
+Innehåller jordgubbar mer eller mindre C-vitamin än kiwi?;Jordgubbar;Kiwi;59,6;93;mg per 100 g;Hur många mg skiljer det?
+Har nötfärs fler eller färre kalorier än kycklingbröst?;Nötfärs;Kycklingbröst;254;150;kcal per 100 g;Hur många kcal skiljer det?
+Har pommes frites fler eller färre kalorier än potatischips?;Pommes frites;Potatischips;312;547;kcal per 100 g;Hur många kcal skiljer det?
+Har blåbär fler eller färre kalorier än jordgubbar?;Blåbär;Jordgubbar;57;32;kcal per 100 g;Hur många kcal skiljer det?
+Har kokt pasta fler eller färre kalorier än kokt potatis?;Kokt pasta;Kokt potatis;158;87;kcal per 100 g;Hur många kcal skiljer det?
+Innehåller mörk choklad mer eller mindre socker än mjölkchoklad?;Mörk choklad;Mjölkchoklad;24;50;gram per 100 g;Hur många gram skiljer det?
+Innehåller kokta linser mer eller mindre protein än kokta kikärter?;Kokta linser;Kokta kikärter;18;8,9;gram per 100 g;Hur många gram skiljer det?
+Har bacon fler eller färre kalorier än nötfärs?;Bacon;Nötfärs;541;254;kcal per 100 g;Hur många kcal skiljer det?
+Har en croissant fler eller färre kalorier än en bagel?;Croissant;Bagel;406;250;kcal per 100 g;Hur många kcal skiljer det?
+Har en tomat fler eller färre kalorier än röd paprika?;Tomat;Röd paprika;18;26;kcal per 100 g;Hur många kcal skiljer det?
+Har kokta äggnudlar fler eller färre kalorier än kokt couscous?;Kokta äggnudlar;Kokt couscous;138;112;kcal per 100 g;Hur många kcal skiljer det?
+Har en avokado fler eller färre kalorier än kokt pasta?;Avokado;Kokt pasta;160;158;kcal per 100 g;Hur många kcal skiljer det?
+Har gouda fler eller färre kalorier än brie?;Gouda;Brie;356;334;kcal per 100 g;Hur många kcal skiljer det?
+Innehåller en kopp grönt te mer eller mindre koffein än filterkaffe?;Grönt te;Filterkaffe;20;80;mg per 100 ml;Hur många mg skiljer det?
+Innehåller parmesan mer eller mindre protein än ett ägg?;Parmesan;Ägg;35,7;12,6;gram per 100 g;Hur många gram skiljer det?
+Innehåller Red Bull mer eller mindre koffein än en Monster?;Red Bull;Monster;32;33,8;mg per 100 ml;Hur många mg skiljer det?
+Har popcorn fler eller färre kalorier än potatischips?;Popcorn;Potatischips;387;547;kcal per 100 g;Hur många kcal skiljer det?
+Innehåller en banan mer eller mindre C-vitamin än en kiwi?;Banan;Kiwi;8,7;93;mg per 100 g;Hur många mg skiljer det?
+Innehåller spenat mer eller mindre järn än nötkött?;Spenat;Nötkött;2,7;5,5;mg per 100 g;Hur många mg skiljer det?
+Har en banan fler eller färre kalorier än vindruvor?;Banan;Vindruvor;89;69;kcal per 100 g;Hur många kcal skiljer det?
+Har Whopper fler eller färre kalorier än en Big Mac?;Whopper;Big Mac;660;580;kcal;Hur många kcal skiljer det?
+Har jordnötssmör fler eller färre kalorier än Nutella?;Jordnötssmör;Nutella;590;530;kcal per 100 g;Hur många kcal skiljer det?
+Innehåller cheddar mer eller mindre protein än mandel?;Cheddar;Mandel;25;21;gram per 100 g;Hur många gram skiljer det?
+Har vaniljglass fler eller färre kalorier än grekisk yoghurt?;Vaniljglass;Grekisk yoghurt;207;97;kcal per 100 g;Hur många kcal skiljer det?
+Innehåller en kopp svart te mer eller mindre koffein än grönt te?;Svart te;Grönt te;25;20;mg per 100 ml;Hur många mg skiljer det?
+Har russin fler eller färre kalorier än färska vindruvor?;Russin;Vindruvor;299;69;kcal per 100 g;Hur många kcal skiljer det?
+Innehåller russin mer eller mindre socker än färska vindruvor?;Russin;Vindruvor;65,2;15,5;gram per 100 g;Hur många gram skiljer det?
+Innehåller en espresso mer eller mindre koffein än Coca-Cola?;Espresso;Coca-Cola;212;10;mg per 100 ml;Hur många mg skiljer det?
+Har olivolja fler eller färre kalorier än kokt potatis?;Olivolja;Kokt potatis;884;87;kcal per 100 g;Hur många kcal skiljer det?
+Väger ett hönsägg mer eller mindre än ett vaktelägg?;Hönsägg;Vaktelägg;58;9;gram;Hur många gram skiljer det?
+Har vispgrädde fler eller färre kalorier än lättmjölk?;Vispgrädde;Lättmjölk;340;42;kcal per 100 g;Hur många kcal skiljer det?
+Innehåller smör mer eller mindre fett än olivolja?;Smör;Olivolja;81;100;gram per 100 g;Hur många gram skiljer det?
+Har vodka fler eller färre kalorier än öl?;Vodka;Öl;231;42;kcal per 100 ml;Hur många kcal skiljer det?
+Innehåller mörk choklad mer eller mindre koffein än mjölkchoklad?;Mörk choklad;Mjölkchoklad;43;20;mg per 100 g;Hur många mg skiljer det?
 Hade Norge fler eller färre invånare än Finland 2024?;Norge;Finland;5,57;5,62;miljoner invånare;Hur många miljoner invånare skiljer det?
 Drog Barbie in mer eller mindre än Super Mario Bros-filmen i biljettintäkter (2023)?;Barbie;Super Mario Bros-filmen;1360;1350;miljoner dollar;Hur många miljoner dollar skiljer det?
 Hade Instagram fler eller färre månadsanvändare än TikTok 2024?;Instagram;TikTok;2,0;1,58;miljarder användare;Hur många miljarder användare skiljer det?
@@ -365,3 +831,55 @@ Hade Indien fler eller färre invånare än Sverige 2024?;Indien;Sverige;1451;10
 Hade Danmark fler eller färre invånare än Finland 2024?;Danmark;Finland;5,96;5,62;miljoner invånare;Hur många miljoner invånare skiljer det?
 Sålde Hogwarts Legacy fler eller färre exemplar än Zelda: Tears of the Kingdom under 2023?;Hogwarts Legacy;Zelda: Tears of the Kingdom;22;20,28;miljoner exemplar;Hur många miljoner exemplar skiljer det?
 Hade MrBeast fler eller färre YouTube-prenumeranter än Cristiano Ronaldo hade Instagram-följare (2024)?;MrBeast;Cristiano Ronaldo;334;632;miljoner;Hur många miljoner skiljer det?
+Hade Tyskland fler eller färre invånare än Frankrike 2024?;Tyskland;Frankrike;83,6;64,9;miljoner invånare;Hur många miljoner invånare skiljer det?
+Hade Nigeria fler eller färre invånare än Brasilien 2024?;Nigeria;Brasilien;232,7;212;miljoner invånare;Hur många miljoner invånare skiljer det?
+Hade Japan fler eller färre invånare än Mexiko 2024?;Japan;Mexiko;124;131;miljoner invånare;Hur många miljoner invånare skiljer det?
+Hade Egypten fler eller färre invånare än Tyskland 2024?;Egypten;Tyskland;116,5;83,6;miljoner invånare;Hur många miljoner invånare skiljer det?
+Hade Sydkorea fler eller färre invånare än Spanien 2024?;Sydkorea;Spanien;51,74;48,62;miljoner invånare;Hur många miljoner invånare skiljer det?
+Hade Australien fler eller färre invånare än Taiwan 2024?;Australien;Taiwan;27,2;23,95;miljoner invånare;Hur många miljoner invånare skiljer det?
+Hade Tokyos storstadsområde fler eller färre invånare än Delhis 2024?;Tokyo;Delhi;37,1;33,8;miljoner invånare;Hur många miljoner invånare skiljer det?
+Hade Saudiarabien fler eller färre invånare än Sverige 2024?;Saudiarabien;Sverige;35,3;10,59;miljoner invånare;Hur många miljoner invånare skiljer det?
+Hade Kina en större eller mindre BNP än USA 2024?;Kina;USA;18,74;29,18;biljoner dollar;Hur många biljoner dollar skiljer det?
+Hade Indien en större eller mindre BNP än Japan 2024?;Indien;Japan;3,91;4,03;biljoner dollar;Hur många biljoner dollar skiljer det?
+Hade Sverige en större eller mindre BNP än Norge 2024?;Sverige;Norge;610;484;miljarder dollar;Hur många miljarder dollar skiljer det?
+Hade Indonesien en större eller mindre BNP än Nederländerna 2024?;Indonesien;Nederländerna;1396;1228;miljarder dollar;Hur många miljarder dollar skiljer det?
+Hade Schweiz en större eller mindre BNP än Saudiarabien 2024?;Schweiz;Saudiarabien;937;1238;miljarder dollar;Hur många miljarder dollar skiljer det?
+Hade Nvidia en större eller mindre årsomsättning än Apple räkenskapsåret 2024/2025?;Nvidia;Apple;130,5;391;miljarder dollar;Hur många miljarder dollar skiljer det?
+Drog Lilo & Stitch in mer eller mindre än A Minecraft Movie i biljettintäkter (2025)?;Lilo & Stitch;A Minecraft Movie;1038;955;miljoner dollar;Hur många miljoner dollar skiljer det?
+Drog Insidan ut 2 in mer eller mindre än Lejonkungen (2019) i biljettintäkter totalt?;Insidan ut 2;Lejonkungen (2019);1687;1657;miljoner dollar;Hur många miljoner dollar skiljer det?
+Drog Vaiana 2 in mer eller mindre än Wicked i biljettintäkter (2024)?;Vaiana 2;Wicked;904;465;miljoner dollar;Hur många miljoner dollar skiljer det?
+Drog Avatar (2009) in mer eller mindre än Titanic i biljettintäkter totalt?;Avatar (2009);Titanic;2920;2242;miljoner dollar;Hur många miljoner dollar skiljer det?
+Hade Taylor Swift fler eller färre månadslyssnare på Spotify än Drake (2024)?;Taylor Swift;Drake;91,7;73,3;miljoner månadslyssnare;Hur många miljoner månadslyssnare skiljer det?
+Hade Neymar fler eller färre följare på Instagram än Kylian Mbappé (2024)?;Neymar;Kylian Mbappé;234;118;miljoner följare;Hur många miljoner följare skiljer det?
+Sålde Nintendo Switch fler eller färre konsoler totalt än PlayStation 4 (2024)?;Nintendo Switch;PlayStation 4;153;117;miljoner sålda;Hur många miljoner skiljer det?
+Sålde BYD fler eller färre bilar totalt än Tesla under 2024?;BYD;Tesla;4,27;1,79;miljoner bilar;Hur många miljoner bilar skiljer det?
+Hade Real Madrid större eller mindre intäkter än Manchester City säsongen 2023/24?;Real Madrid;Manchester City;1045;838;miljoner euro;Hur många miljoner euro skiljer det?
+Hade Apple ett större eller mindre börsvärde än Nintendo (2024)?;Apple;Nintendo;3400;52;miljarder dollar;Hur många miljarder dollar skiljer det?
+Hade Walmart en större eller mindre årsomsättning än Spotify räkenskapsåret 2024/2025?;Walmart;Spotify;681;16;miljarder dollar;Hur många miljarder dollar skiljer det?
+Hade Kina fler eller färre invånare än USA 2024?;Kina;USA;1420;345;miljoner invånare;Hur många miljoner invånare skiljer det?
+Hade Vietnam fler eller färre invånare än Iran 2024?;Vietnam;Iran;100,99;91,57;miljoner invånare;Hur många miljoner invånare skiljer det?
+Hade Kanada en större eller mindre BNP än Ryssland 2024?;Kanada;Ryssland;2244;2174;miljarder dollar;Hur många miljarder dollar skiljer det?
+Hade Italien en större eller mindre BNP än Brasilien 2024?;Italien;Brasilien;2373;2179;miljarder dollar;Hur många miljarder dollar skiljer det?
+Hade Facebook fler eller färre månadsanvändare än YouTube 2024?;Facebook;YouTube;3,07;2,5;miljarder användare;Hur många miljarder användare skiljer det?
+Hade WhatsApp fler eller färre månadsanvändare än WeChat 2024?;WhatsApp;WeChat;3,0;1,43;miljarder användare;Hur många miljarder användare skiljer det?
+Drog Avengers: Endgame in mer eller mindre än Star Wars: The Force Awakens i biljettintäkter totalt?;Avengers: Endgame;Star Wars: The Force Awakens;2189;2068;miljoner dollar;Hur många miljoner dollar skiljer det?
+Sålde Minecraft fler eller färre exemplar totalt än Grand Theft Auto V (2024)?;Minecraft;Grand Theft Auto V;300;200;miljoner exemplar;Hur många miljoner exemplar skiljer det?
+Hade Microsoft en större eller mindre årsomsättning än Samsung räkenskapsåret 2024?;Microsoft;Samsung;245;207;miljarder dollar;Hur många miljarder dollar skiljer det?
+Hade Dallas Cowboys ett större eller mindre marknadsvärde än Real Madrid 2024?;Dallas Cowboys;Real Madrid;10,1;6,6;miljarder dollar;Hur många miljarder dollar skiljer det?
+Hade Amazon en större eller mindre årsomsättning än Netflix 2024?;Amazon;Netflix;638;38,8;miljarder dollar;Hur många miljarder dollar skiljer det?
+Hade Argentina fler eller färre invånare än Colombia 2024?;Argentina;Colombia;45,7;52,9;miljoner invånare;Hur många miljoner invånare skiljer det?
+Drog Jurassic World in mer eller mindre än The Avengers (2012) i biljettintäkter totalt?;Jurassic World;The Avengers (2012);1670;1519;miljoner dollar;Hur många miljoner dollar skiljer det?
+Hade Irland en större eller mindre BNP än Danmark 2024?;Irland;Danmark;561;429;miljarder dollar;Hur många miljarder dollar skiljer det?
+Hade Pakistan fler eller färre invånare än Indonesien 2024?;Pakistan;Indonesien;251,27;283,49;miljoner invånare;Hur många miljoner invånare skiljer det?
+Hade Toyota en större eller mindre årsomsättning än Volkswagen 2024?;Toyota;Volkswagen;311;353;miljarder dollar;Hur många miljarder dollar skiljer det?
+Hade The Weeknds Blinding Lights fler eller färre Spotify-streams än Ed Sheerans Shape of You (2025)?;Blinding Lights;Shape of You;5,0;4,0;miljarder streams;Hur många miljarder streams skiljer det?
+Hade Filippinerna fler eller färre invånare än Etiopien 2024?;Filippinerna;Etiopien;112,7;132,1;miljoner invånare;Hur många miljoner invånare skiljer det?
+Hade Disney en större eller mindre årsomsättning än Netflix räkenskapsåret 2024?;Disney;Netflix;91,4;38,8;miljarder dollar;Hur många miljarder dollar skiljer det?
+Drog Barbie in mer eller mindre än Frost 2 i biljettintäkter totalt?;Barbie;Frost 2;1380;1453;miljoner dollar;Hur många miljoner dollar skiljer det?
+Hade Storbritannien fler eller färre invånare än Thailand 2024?;Storbritannien;Thailand;69,3;70,27;miljoner invånare;Hur många miljoner invånare skiljer det?
+Hade Förenade Arabemiraten en större eller mindre BNP än Israel 2024?;Förenade Arabemiraten;Israel;537;565;miljarder dollar;Hur många miljarder dollar skiljer det?
+Hade Iran fler eller färre invånare än Turkiet 2024?;Iran;Turkiet;91,57;85,52;miljoner invånare;Hur många miljoner invånare skiljer det?
+Hade Grekland en större eller mindre BNP än Portugal 2024?;Grekland;Portugal;253;308,68;miljarder dollar;Hur många miljarder dollar skiljer det?
+Hade Saudi Aramco en större eller mindre årsomsättning än Apple 2024?;Saudi Aramco;Apple;480,57;391;miljarder dollar;Hur många miljarder dollar skiljer det?
+Hade Spotify fler eller färre månadsanvändare än Netflix hade abonnenter i slutet av 2024?;Spotify;Netflix;678;301;miljoner;Hur många miljoner skiljer det?
+Hade Egypten en större eller mindre BNP än Norge 2024?;Egypten;Norge;389;484;miljarder dollar;Hur många miljarder dollar skiljer det?

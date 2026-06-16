@@ -146,17 +146,17 @@ public class QuestionPackCsvParserTests
         var pack = QuestionPackCsvParser.Parse("mer-eller-mindre", text);
 
         pack.Name.Should().Be("Mer eller mindre");
-        pack.QuestionCount.Should().Be(366);
+        pack.QuestionCount.Should().Be(884);
 
-        // First card: Danmark vs Norge. Convention: Mer = sakA holds the larger value.
+        // First card: Mount Everest vs K2. Convention: Mer = sakA holds the larger value.
         var first = pack.Questions[0];
-        first.QuestionText.Should().Be("Har Danmark större eller mindre befolkning än Norge?");
-        first.ItemA.Should().Be("Danmark");
-        first.ItemB.Should().Be("Norge");
-        first.ValueA.Should().Be(5.9m);
-        first.ValueB.Should().Be(5.5m);
-        first.Unit.Should().Be("miljoner invånare");
-        first.DifferencePrompt.Should().Be("Hur många miljoner invånare skiljer det?");
+        first.QuestionText.Should().Be("Är Mount Everest högre eller lägre än K2?");
+        first.ItemA.Should().Be("Mount Everest");
+        first.ItemB.Should().Be("K2");
+        first.ValueA.Should().Be(8849m);
+        first.ValueB.Should().Be(8611m);
+        first.Unit.Should().Be("meter");
+        first.DifferencePrompt.Should().Be("Hur många meter skiljer det?");
         first.ValueA.Should().BeGreaterThan(first.ValueB, "Mer = sakA holds the larger value");
 
         pack.Questions.Should().OnlyContain(q =>
