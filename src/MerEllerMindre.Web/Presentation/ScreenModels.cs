@@ -29,6 +29,13 @@ public sealed record LobbyVm(
     bool CanStart,
     string AntiforgeryToken);
 
+/// <summary>Which half of the tvåstegsraket a question screen renders.</summary>
+public enum QuestionStage
+{
+    Direction,
+    Difference
+}
+
 public sealed record QuestionVm(
     Guid JoinCode,
     int QuestionNumber,
@@ -40,6 +47,29 @@ public sealed record QuestionVm(
     string Unit,
     decimal SliderMax,
     decimal SliderStep,
+    QuestionStage Stage,
+    // Stage 2 only: the now-revealed direction so the slider fixes the taller (MER) bar.
+    Direction? RevealedDirection,
+    string AntiforgeryToken);
+
+public sealed record DirectionResultRowVm(
+    string Name,
+    bool IsYou,
+    bool IsHost,
+    Direction GuessedDirection,
+    bool DirectionCorrect,
+    int BonusPoints,
+    int TotalSoFar);
+
+public sealed record DirectionResultsVm(
+    Guid JoinCode,
+    int QuestionNumber,
+    int TotalQuestions,
+    string QuestionText,
+    string MerItem,
+    string MindreItem,
+    Direction CorrectDirection,
+    IReadOnlyList<DirectionResultRowVm> Rows,
     string AntiforgeryToken);
 
 public sealed record WaitingPlayerVm(string Name, bool IsYou);

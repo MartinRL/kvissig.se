@@ -105,25 +105,59 @@ public static class GameEndpoints
             return RenderState(state, identity.GetPlayer(http, gameId), antiforgery.GetAndStoreTokens(http).RequestToken!, AbsoluteJoinUrl(http, state.JoinCode));
         });
 
-        app.MapPost("/games/{code}/guess", (
+        app.MapPost("/games/{code}/direction", (
             string code,
             [FromForm] string direction,
+            GameApplicationService svc,
+            PlayerIdentity identity,
+            IAntiforgery antiforgery,
+            HttpContext http) =>
+        {
+            if (Resolve(svc, code) is not var (gameId, _))
+                return Results.NotFound("Spelet hittades inte.");
+
+            var viewer = identity.GetPlayer(http, gameId);
+            if (viewer is { } playerId && Enum.TryParse<Direction>(direction, out var dir))
+            {
+                svc.Execute(gameId, new SubmitDirection(gameId, playerId, dir));
+                svc.RunRevealDirectionGear(gameId);
+            }
+
+            var next = svc.Load(gameId);
+            return RenderState(next, viewer, antiforgery.GetAndStoreTokens(http).RequestToken!, AbsoluteJoinUrl(http, next.JoinCode));
+        });
+
+        // Mellansteg → slider: render the stage-2 question once the direction is revealed.
+        app.MapGet("/games/{code}/difference", (string code, GameApplicationService svc, IAntiforgery antiforgery, HttpContext http) =>
+        {
+            if (Resolve(svc, code) is not var (gameId, state))
+                return Results.NotFound("Spelet hittades inte.");
+
+            var i = state.CurrentQuestionIndex;
+            if (state.Phase != GamePhase.Started || !state.DirectionRevealed(i) || state.Questions[i].Scored)
+                return RenderState(state, viewer: null, antiforgery.GetAndStoreTokens(http).RequestToken!, AbsoluteJoinUrl(http, state.JoinCode));
+
+            var token = antiforgery.GetAndStoreTokens(http).RequestToken!;
+            return new RazorComponentResult<QuestionScreen>(new { Model = GameScreens.Question(state, token, QuestionStage.Difference) });
+        });
+
+        app.MapPost("/games/{code}/difference", (
+            string code,
             [FromForm] string guessedDifference,
             GameApplicationService svc,
             PlayerIdentity identity,
             IAntiforgery antiforgery,
             HttpContext http) =>
         {
-            if (Resolve(svc, code) is not var (gameId, state))
+            if (Resolve(svc, code) is not var (gameId, _))
                 return Results.NotFound("Spelet hittades inte.");
 
             var viewer = identity.GetPlayer(http, gameId);
             if (viewer is { } playerId
-                && Enum.TryParse<Direction>(direction, out var dir)
                 && decimal.TryParse(guessedDifference, NumberStyles.Number, CultureInfo.InvariantCulture, out var diff))
             {
-                svc.Execute(gameId, new SubmitGuess(gameId, playerId, dir, diff));
-                svc.RunScoreGear(gameId);
+                svc.Execute(gameId, new SubmitDifference(gameId, playerId, diff));
+                svc.RunScoreDifferenceGear(gameId);
             }
 
             var scored = svc.Load(gameId);
@@ -153,8 +187,9 @@ public static class GameEndpoints
         {
             ScreenKind.LobbyHost => new RazorComponentResult<LobbyHostScreen>(new { Model = GameScreens.Lobby(state, viewer, token, joinUrl) }),
             ScreenKind.LobbyPlayer => new RazorComponentResult<LobbyPlayerScreen>(new { Model = GameScreens.Lobby(state, viewer, token, joinUrl) }),
-            ScreenKind.Question => new RazorComponentResult<QuestionScreen>(new { Model = GameScreens.Question(state, token) }),
+            ScreenKind.Question => new RazorComponentResult<QuestionScreen>(new { Model = GameScreens.Question(state, token, QuestionStage.Direction) }),
             ScreenKind.Waiting => new RazorComponentResult<WaitingScreen>(new { Model = GameScreens.Waiting(state, viewer) }),
+            ScreenKind.DirectionResults => new RazorComponentResult<DirectionResultsScreen>(new { Model = GameScreens.DirectionResults(state, viewer) }),
             ScreenKind.Results => new RazorComponentResult<ResultsScreen>(new { Model = GameScreens.Results(state, viewer, token) }),
             ScreenKind.Standings => new RazorComponentResult<StandingsScreen>(new { Model = GameScreens.Standings(state, viewer) }),
             _ => throw new InvalidOperationException($"Unhandled screen kind for game {state.GameId}.")
@@ -177,9 +212,13 @@ public static class GameEndpoints
         QuestionPackNotFound => "Frågepaketet hittades inte.",
         GameNotStarted => "Omgången har inte startat.",
         PlayerNotInGame => "Du är inte med i spelet.",
-        AlreadyGuessed => "Du har redan gissat.",
+        AlreadySubmittedDirection => "Du har redan valt riktning.",
+        AlreadySubmittedDifference => "Du har redan gissat skillnaden.",
+        DirectionNotRevealed => "Riktningen är inte avslöjad än.",
         DifferenceOutOfRange => "Ogiltig gissning.",
-        NotAllGuessesIn => "Alla har inte gissat än.",
+        NotAllDirectionsIn => "Alla har inte valt riktning än.",
+        DirectionAlreadyRevealed => "Riktningen är redan avslöjad.",
+        NotAllDifferencesIn => "Alla har inte gissat än.",
         QuestionAlreadyScored => "Frågan är redan rättad."
     };
 }

@@ -9,6 +9,7 @@ public enum ScreenKind
     LobbyPlayer,
     Question,
     Waiting,
+    DirectionResults,
     Results,
     Standings
 }
@@ -33,11 +34,23 @@ public static class GameScreens
     private static ScreenKind SelectStarted(GameState state, Guid? viewer)
     {
         var i = state.CurrentQuestionIndex;
-        if (state.Questions[i].Scored)
+        var round = state.Questions[i];
+        if (round.Scored)
             return ScreenKind.Results;
-        if (viewer is { } id && state.Questions[i].Guesses.ContainsKey(id))
+
+        if (!state.DirectionRevealed(i))
+        {
+            // Stage 1: pick a direction, then wait for the rest.
+            if (viewer is { } id && round.Directions.ContainsKey(id))
+                return ScreenKind.Waiting;
+            return ScreenKind.Question;
+        }
+
+        // Stage 2: direction revealed. Once a player has sized the difference they wait;
+        // otherwise they sit on the mellansteg until they tap through to the slider.
+        if (viewer is { } pid && round.Differences.ContainsKey(pid))
             return ScreenKind.Waiting;
-        return ScreenKind.Question;
+        return ScreenKind.DirectionResults;
     }
 
     public static LobbyVm Lobby(GameState state, Guid? viewer, string token, string joinUrl)
@@ -56,7 +69,7 @@ public static class GameScreens
             token);
     }
 
-    public static QuestionVm Question(GameState state, string token)
+    public static QuestionVm Question(GameState state, string token, QuestionStage stage)
     {
         var i = state.CurrentQuestionIndex;
         var card = state.Questions[i].Card;
@@ -72,19 +85,61 @@ public static class GameScreens
             card.Unit,
             sliderMax,
             SliderStep(sliderMax),
+            stage,
+            RevealedDirection: stage == QuestionStage.Difference ? state.Questions[i].CorrectDirection : null,
             token);
+    }
+
+    public static DirectionResultsVm DirectionResults(GameState state, Guid? viewer)
+    {
+        var i = state.CurrentQuestionIndex;
+        var round = state.Questions[i];
+        var card = round.Card;
+        var correct = round.CorrectDirection!.Value;
+
+        var rows = state.Players
+            .Select(p =>
+            {
+                var guessed = round.Directions[p.PlayerId];
+                var bonus = round.DirectionScores[p.PlayerId];
+                return new DirectionResultRowVm(
+                    p.Name,
+                    p.PlayerId == viewer,
+                    p.PlayerId == state.HostPlayerId,
+                    guessed,
+                    guessed == correct,
+                    bonus,
+                    state.TotalScore(p.PlayerId) + bonus);
+            })
+            .ToList();
+
+        return new DirectionResultsVm(
+            state.JoinCode,
+            QuestionNumber: i + 1,
+            TotalQuestions: state.Questions.Count,
+            card.QuestionText,
+            MerItem: correct == Direction.Mer ? card.ItemA : card.ItemB,
+            MindreItem: correct == Direction.Mer ? card.ItemB : card.ItemA,
+            correct,
+            rows,
+            // No token needed: the only action is a GET to the slider screen.
+            AntiforgeryToken: "");
     }
 
     public static WaitingVm Waiting(GameState state, Guid? viewer)
     {
         var i = state.CurrentQuestionIndex;
-        var guesses = state.Questions[i].Guesses;
+        var round = state.Questions[i];
+        // Pending follows the active stage: directions before the reveal, differences after.
+        var submitted = state.DirectionRevealed(i)
+            ? (IReadOnlySet<Guid>)round.Differences.Keys.ToHashSet()
+            : round.Directions.Keys.ToHashSet();
         var done = state.Players
-            .Where(p => guesses.ContainsKey(p.PlayerId))
+            .Where(p => submitted.Contains(p.PlayerId))
             .Select(p => new WaitingPlayerVm(p.Name, p.PlayerId == viewer))
             .ToList();
         var pending = state.Players
-            .Where(p => !guesses.ContainsKey(p.PlayerId))
+            .Where(p => !submitted.Contains(p.PlayerId))
             .Select(p => new WaitingPlayerVm(p.Name, p.PlayerId == viewer))
             .ToList();
         return new WaitingVm(state.JoinCode, i + 1, state.Questions.Count, done.Count, state.Players.Count, done, pending);
@@ -102,18 +157,15 @@ public static class GameScreens
 
         var rows = state.Players
             .Select(p =>
-            {
-                var guess = round.Guesses[p.PlayerId];
-                return new ResultRowVm(
+                new ResultRowVm(
                     Rank: 0,
                     p.Name,
                     p.PlayerId == viewer,
                     p.PlayerId == state.HostPlayerId,
-                    guess.Direction,
-                    Decider.NormalizeDifference(guess.GuessedDifference, largerValue),
+                    round.Directions[p.PlayerId],
+                    Decider.NormalizeDifference(round.Differences[p.PlayerId], largerValue),
                     round.RoundScores[p.PlayerId],
-                    state.TotalScore(p.PlayerId));
-            })
+                    state.TotalScore(p.PlayerId)))
             .OrderBy(r => r.TotalScore)
             .Select((r, idx) => r with { Rank = idx + 1 })
             .ToList();

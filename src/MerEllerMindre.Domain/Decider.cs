@@ -44,28 +44,57 @@ public static class Decider
                 CurrentQuestionIndex = e.FirstQuestionIndex
             },
 
-            GuessSubmitted e => state with
+            DirectionSubmitted e => state with
             {
                 Questions = MapQuestion(state.Questions, e.QuestionIndex, q => q with
                 {
-                    Guesses = new Dictionary<Guid, Guess>(q.Guesses)
+                    Directions = new Dictionary<Guid, Direction>(q.Directions)
                     {
-                        [e.PlayerId] = new Guess(e.Direction, e.GuessedDifference)
+                        [e.PlayerId] = e.Direction
                     }
                 })
             },
 
-            QuestionAnswered e => state with
+            QuestionDirectionRevealed e => state with
             {
                 Questions = MapQuestion(state.Questions, e.QuestionIndex, q => q with
                 {
-                    CorrectDirection = e.CorrectDirection,
+                    CorrectDirection = e.CorrectDirection
+                })
+            },
+
+            DirectionScored e => state with
+            {
+                Questions = MapQuestion(state.Questions, e.QuestionIndex, q => q with
+                {
+                    DirectionScores = new Dictionary<Guid, int>(q.DirectionScores)
+                    {
+                        [e.PlayerId] = e.BonusPoints
+                    }
+                })
+            },
+
+            DifferenceSubmitted e => state with
+            {
+                Questions = MapQuestion(state.Questions, e.QuestionIndex, q => q with
+                {
+                    Differences = new Dictionary<Guid, decimal>(q.Differences)
+                    {
+                        [e.PlayerId] = e.GuessedDifference
+                    }
+                })
+            },
+
+            QuestionDifferenceRevealed e => state with
+            {
+                Questions = MapQuestion(state.Questions, e.QuestionIndex, q => q with
+                {
                     CorrectDifference = e.CorrectDifference,
                     Scored = true
                 })
             },
 
-            QuestionScored e => state with
+            DifferenceScored e => state with
             {
                 Questions = MapQuestion(state.Questions, e.QuestionIndex, q => q with
                 {
@@ -99,8 +128,10 @@ public static class Decider
             OpenLobby c => DecideOpenLobby(c, context),
             JoinGame c => DecideJoinGame(state, c, context),
             StartGame c => DecideStartGame(state, c, context),
-            SubmitGuess c => DecideSubmitGuess(state, c, context),
-            ScoreQuestion c => DecideScoreQuestion(state, c),
+            SubmitDirection c => DecideSubmitDirection(state, c, context),
+            RevealDirection c => DecideRevealDirection(state, c),
+            SubmitDifference c => DecideSubmitDifference(state, c, context),
+            ScoreDifference c => DecideScoreDifference(state, c),
             AskNextQuestion c => DecideAskNextQuestion(state, c),
             EndGame c => DecideEndGame(state, c, context)
         };
@@ -153,7 +184,7 @@ public static class Decider
         ]);
     }
 
-    private static Result<GameEvent[]> DecideSubmitGuess(GameState state, SubmitGuess command, GameContext context)
+    private static Result<GameEvent[]> DecideSubmitDirection(GameState state, SubmitDirection command, GameContext context)
     {
         if (state.Phase == GamePhase.NotCreated)
             return new Err(new GameNotFound());
@@ -164,14 +195,70 @@ public static class Decider
         if (!state.Players.Any(p => p.PlayerId == command.PlayerId))
             return new Err(new PlayerNotInGame());
 
-        if (state.Questions[state.CurrentQuestionIndex].Guesses.ContainsKey(command.PlayerId))
-            return new Err(new AlreadyGuessed());
+        if (state.Questions[state.CurrentQuestionIndex].Directions.ContainsKey(command.PlayerId))
+            return new Err(new AlreadySubmittedDirection());
+
+        return new Ok<GameEvent[]>([
+            new DirectionSubmitted(state.GameId, command.PlayerId, state.CurrentQuestionIndex, command.Direction, context.Now())
+        ]);
+    }
+
+    private static Result<GameEvent[]> DecideRevealDirection(GameState state, RevealDirection command)
+    {
+        if (!state.AllDirectionsIn(command.QuestionIndex))
+            return new Err(new NotAllDirectionsIn());
+
+        if (state.DirectionRevealed(command.QuestionIndex))
+            return new Err(new DirectionAlreadyRevealed());
+
+        var round = state.Questions[command.QuestionIndex];
+        var correctDirection = round.Card.ValueA >= round.Card.ValueB ? Direction.Mer : Direction.Mindre;
+
+        var events = new List<GameEvent>
+        {
+            new QuestionDirectionRevealed(state.GameId, command.QuestionIndex, correctDirection)
+        };
+
+        foreach (var player in state.Players)
+        {
+            var guessed = round.Directions[player.PlayerId];
+            var directionCorrect = guessed == correctDirection;
+            var bonus = directionCorrect ? -10 : 0;
+
+            events.Add(new DirectionScored(
+                state.GameId,
+                command.QuestionIndex,
+                player.PlayerId,
+                guessed,
+                directionCorrect,
+                bonus));
+        }
+
+        return new Ok<GameEvent[]>([.. events]);
+    }
+
+    private static Result<GameEvent[]> DecideSubmitDifference(GameState state, SubmitDifference command, GameContext context)
+    {
+        if (state.Phase == GamePhase.NotCreated)
+            return new Err(new GameNotFound());
+
+        if (state.Phase != GamePhase.Started)
+            return new Err(new GameNotStarted());
+
+        if (!state.Players.Any(p => p.PlayerId == command.PlayerId))
+            return new Err(new PlayerNotInGame());
+
+        if (!state.DirectionRevealed(state.CurrentQuestionIndex))
+            return new Err(new DirectionNotRevealed());
+
+        if (state.Questions[state.CurrentQuestionIndex].Differences.ContainsKey(command.PlayerId))
+            return new Err(new AlreadySubmittedDifference());
 
         if (command.GuessedDifference < 0)
             return new Err(new DifferenceOutOfRange());
 
         return new Ok<GameEvent[]>([
-            new GuessSubmitted(state.GameId, command.PlayerId, state.CurrentQuestionIndex, command.Direction, command.GuessedDifference, context.Now())
+            new DifferenceSubmitted(state.GameId, command.PlayerId, state.CurrentQuestionIndex, command.GuessedDifference, context.Now())
         ]);
     }
 
@@ -184,10 +271,10 @@ public static class Decider
         mx <= 0 ? (byte)0
         : (byte)Math.Min(100m, Math.Round(value / mx * 100, MidpointRounding.AwayFromZero));
 
-    private static Result<GameEvent[]> DecideScoreQuestion(GameState state, ScoreQuestion command)
+    private static Result<GameEvent[]> DecideScoreDifference(GameState state, ScoreDifference command)
     {
-        if (!state.AllGuessesIn(command.QuestionIndex))
-            return new Err(new NotAllGuessesIn());
+        if (!state.AllDifferencesIn(command.QuestionIndex))
+            return new Err(new NotAllDifferencesIn());
 
         if (state.Questions[command.QuestionIndex].Scored)
             return new Err(new QuestionAlreadyScored());
@@ -197,34 +284,29 @@ public static class Decider
         var b = round.Card.ValueB;
         var mx = Math.Max(a, b);
 
-        var correctDirection = a >= b ? Direction.Mer : Direction.Mindre;
         var correctDifference = NormalizeDifference(Math.Abs(a - b), mx);
 
         var events = new List<GameEvent>
         {
-            new QuestionAnswered(state.GameId, command.QuestionIndex, correctDirection, correctDifference)
+            new QuestionDifferenceRevealed(state.GameId, command.QuestionIndex, correctDifference)
         };
 
         foreach (var player in state.Players)
         {
-            var guess = round.Guesses[player.PlayerId];
-            var normalized = NormalizeDifference(guess.GuessedDifference, mx);
-            var directionCorrect = guess.Direction == correctDirection;
+            var guessedDifference = round.Differences[player.PlayerId];
+            var normalized = NormalizeDifference(guessedDifference, mx);
             var differencePoints = (byte)Math.Abs(normalized - correctDifference);
-            var bonus = directionCorrect ? -10 : 0;
+            var bonus = round.DirectionScores.TryGetValue(player.PlayerId, out var b1) ? b1 : 0;
             var roundScore = differencePoints + bonus;
             var totalScore = state.TotalScore(player.PlayerId) + roundScore;
 
-            events.Add(new QuestionScored(
+            events.Add(new DifferenceScored(
                 state.GameId,
                 command.QuestionIndex,
                 player.PlayerId,
-                guess.Direction,
-                guess.GuessedDifference,
+                guessedDifference,
                 normalized,
-                directionCorrect,
                 differencePoints,
-                bonus,
                 roundScore,
                 totalScore));
         }
@@ -290,7 +372,7 @@ public record GameContext(
 /// <summary>
 /// Picks a difficulty-band-balanced subset of question cards for a single game. Balance is
 /// on the difficulty band ONLY (band = NormalizeDifference(|A-B|, max(A,B)), the same math
-/// ScoreQuestion uses); direction/unit spread is expected to fall out of a well-authored
+/// ScoreDifference uses); direction/unit spread is expected to fall out of a well-authored
 /// pool. Final order is shuffled so bands don't cluster. Pure: RNG is injected as `next`
 /// (an exclusive-upper-bound generator, like Random.Next(n)).
 /// </summary>

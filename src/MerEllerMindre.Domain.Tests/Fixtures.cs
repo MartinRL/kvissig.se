@@ -30,12 +30,6 @@ public static class Fixtures
     public static readonly QuestionPack Pack =
         new("mer-eller-mindre", "Mer eller mindre", [Question0, Question1]);
 
-    public static readonly Guess GuessMer30 = new(Direction.Mer, 30m);
-    public static readonly Guess GuessMer40 = new(Direction.Mer, 40m);
-    public static readonly Guess GuessMindre25 = new(Direction.Mindre, 25m);
-    public static readonly Guess GuessMindre50 = new(Direction.Mindre, 50m);
-    public static readonly Guess GuessMindre20 = new(Direction.Mindre, 20m);
-
     /// <summary>
     /// Stub context: FindPack resolves the 2-card fixture pack for "mer-eller-mindre",
     /// else null. NewGuid/Now are real (minted values are asserted only by presence).
@@ -84,21 +78,39 @@ public static class ResultAssertions
         return null!;
     }
 
-    public static QuestionAnswered Answered(this GameEvent[] events)
+    public static QuestionDirectionRevealed DirectionRevealed(this GameEvent[] events)
     {
         foreach (var e in events)
-            if (e is QuestionAnswered a)
+            if (e is QuestionDirectionRevealed a)
                 return a;
-        Assert.Fail("no QuestionAnswered event");
+        Assert.Fail("no QuestionDirectionRevealed event");
         return null!;
     }
 
-    public static QuestionScored ScoredFor(this GameEvent[] events, Guid playerId)
+    public static DirectionScored DirectionScoredFor(this GameEvent[] events, Guid playerId)
     {
         foreach (var e in events)
-            if (e is QuestionScored s && s.PlayerId == playerId)
+            if (e is DirectionScored s && s.PlayerId == playerId)
                 return s;
-        Assert.Fail($"no QuestionScored for {playerId}");
+        Assert.Fail($"no DirectionScored for {playerId}");
+        return null!;
+    }
+
+    public static QuestionDifferenceRevealed DifferenceRevealed(this GameEvent[] events)
+    {
+        foreach (var e in events)
+            if (e is QuestionDifferenceRevealed a)
+                return a;
+        Assert.Fail("no QuestionDifferenceRevealed event");
+        return null!;
+    }
+
+    public static DifferenceScored DifferenceScoredFor(this GameEvent[] events, Guid playerId)
+    {
+        foreach (var e in events)
+            if (e is DifferenceScored s && s.PlayerId == playerId)
+                return s;
+        Assert.Fail($"no DifferenceScored for {playerId}");
         return null!;
     }
 

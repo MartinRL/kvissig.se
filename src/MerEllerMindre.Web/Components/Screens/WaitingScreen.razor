@@ -3,7 +3,7 @@
 <div hx-get="@StatePath" hx-trigger="every 2s" hx-target="#screen" hx-swap="innerHTML">
     <div class="card center">
         <span class="pill">Fråga @Model.QuestionNumber / @Model.TotalQuestions</span>
-        <h1 style="margin-top:.6rem">Din gissning är ställd ✓</h1>
+        <h1 style="margin-top:.6rem">Du har gissat ✓</h1>
         <p class="sub">Systemet rättar automatiskt när alla gissat.</p>
         <p class="busy">@Model.DoneCount av @Model.TotalCount klara</p>
     </div>

@@ -19,14 +19,24 @@ public record StartGame(
     Guid GameId
 );
 
-public record SubmitGuess(
+public record SubmitDirection(
     Guid GameId,
     Guid PlayerId,
-    Direction Direction,
+    Direction Direction
+);
+
+public record RevealDirection(
+    Guid GameId,
+    int QuestionIndex
+);
+
+public record SubmitDifference(
+    Guid GameId,
+    Guid PlayerId,
     decimal GuessedDifference
 );
 
-public record ScoreQuestion(
+public record ScoreDifference(
     Guid GameId,
     int QuestionIndex
 );
@@ -43,8 +53,10 @@ public union GameCommand(
     OpenLobby,
     JoinGame,
     StartGame,
-    SubmitGuess,
-    ScoreQuestion,
+    SubmitDirection,
+    RevealDirection,
+    SubmitDifference,
+    ScoreDifference,
     AskNextQuestion,
     EndGame
 );

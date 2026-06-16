@@ -1,0 +1,39 @@
+@* Mellansteget: stage 1 closed, the correct direction is revealed and the −10 bonus dealt.
+   The drama screen between the two stages — it shows who called the direction right and the
+   running total so far. Self-paced per player: tap "Fortsätt" to GET the stage-2 slider. Does
+   NOT poll; the player advances themselves. *@
+<div class="card center">
+    <span class="pill">Fråga @Model.QuestionNumber / @Model.TotalQuestions · riktning avslöjad</span>
+    <h1 style="margin-top:.6rem">@Model.QuestionText</h1>
+    <p class="answer"><span class="mer">@Model.MerItem</span> är <span class="mer">MER</span> än @Model.MindreItem</p>
+</div>
+
+<div class="card">
+    <div class="cardhead">Riktning <span class="pill soft">rätt ger −10</span></div>
+    <table class="scoreboard">
+        <thead>
+            <tr><th>Spelare</th><th class="round">Gissning</th><th class="round">Bonus</th><th class="total">Total</th></tr>
+        </thead>
+        <tbody>
+            @foreach (var r in Model.Rows)
+            {
+                <tr>
+                    <td class="who">@r.Name@(r.IsHost ? " (värd)" : "") @if (r.IsYou) { <small class="muted">(du)</small> }</td>
+                    <td class="round">@(r.GuessedDirection == Direction.Mer ? "mer" : "mindre") @(r.DirectionCorrect ? "✓" : "✗")</td>
+                    <td class="round">@Signed(r.BonusPoints)</td>
+                    <td class="total">@r.TotalSoFar</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<button class="btn" style="margin-top:1.75rem"
+        hx-get="@($"/games/{Model.JoinCode:N}/difference")" hx-target="#screen" hx-swap="innerHTML">
+    Fortsätt till skillnaden
+</button>
+
+@code {
+    [Parameter] public required DirectionResultsVm Model { get; set; }
+    private static string Signed(int n) => n > 0 ? $"+{n}" : n.ToString(CultureInfo.InvariantCulture);
+}

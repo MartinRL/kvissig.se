@@ -95,11 +95,14 @@ source, no GT).
 
 ## Phase 9: Polish
 - [x] nu när vi inte längre ser maxvärdet, utan bara hur den mindre förhåller sig till den större (mindre vs mer) så är det lämpligt att på något vis introducera %. dvs när rikting har valts och man rör slidern, så är det ju i praktiken den mindres % av mer man gissar. detta ska du ultrathink om ur ett spel- och UX-mässigt perspektiv innan lösning.
+- [ ] textöverlapp under staplarna när man svarar. ser bra ut när man har svarat och ser svaret.
+- [ ] poöngsammanställning ska visa vilken "rond" som just spelats (under spelets gång visas rond#/21)
 - [ ] Mobile-friendly CSS
 - [ ] PWA manifest
 - [ ] Error handling UI
 - [ ] Loading states
 - [ ] create favicon 
+- [ ] feedback. nu saknar spelet kontaktmöjlighet helt och hållet.  
 
 ## Phase 10: deploy
 - [x] deploy to fly.io from github actions (live på https://kvissig.fly.dev, CI Deploy grön, single-instance)
@@ -111,5 +114,12 @@ source, no GT).
 
 ## Phase 11: review by reviewers
 - [x] inga värden, bara förhållandet och enheten. nu kan kan man lätt förstå att maxvärdet är maxvärdet av "mest". exempelvis blir frågan vikten av haj vs. människa lätt att gissa sig till då de flest ju vet vikten av en människa. detta lägger ytterligare vikt vid spelets unika attribut: en slider som får två staplar att röra sig upp och ned. annorlunda an traditionellt quiz / kviss och inte något som går att replikera på papperskort.
+- [x] stor förändring ska testas: tvåstegsraket. först besvaras mer eller minde och de som gissat rätt riktning får sina -10 poäng. därefter används slidern för att precis som nu gissa %-skillnad
 
-## Phase 12: product-led growth
+## Phase 12: product-led growth and growth
+- [ ] hur får vi användare/spela att dela spelet med familj och vänner?
+- [ ] logisk nästa lokala marknad? nb. ej blott baserat på språk med land/kultur (t.ex. sverige OCH svenska)
+
+## product feature validation / lean-startup MVP'ing
+- [ ] klicka på en knapp "köp detta spel som app till en engångskostnad precis som en fysisk kortlek"
+- [ ] feature-flagging, t.ex. WIP-kortlekar

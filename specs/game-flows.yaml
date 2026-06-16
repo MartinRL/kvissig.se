@@ -4,10 +4,10 @@
 # Conventions:
 #   triggers carry the actor role + originating screen
 #                                  (GameMaster / Quiz catalog, Player / Question, System / ...)
-#   commands are bare              (OpenLobby, SubmitGuess)
+#   commands are bare              (OpenLobby, SubmitDirection)
 #   events carry the stream        (Game / LobbyOpened)
 #   exceptions are bare            (GameNotFound)
-#   views carry a view lane        (Screen / Game lobby, Todo / Outstanding guesses)
+#   views carry a view lane        (Screen / Game lobby, Todo / Outstanding directions)
 #
 # View lanes:
 #   State / ...   the decider's decision model (folded GameState); read by `decide`
@@ -29,22 +29,31 @@
 # (emlang has no cog/gear): event(s) -> Todo read-model -> System trigger -> command
 # -> event(s) -> Screen. The Todo read-model is MINIMAL (only what the gear needs to
 # see a task exists) and SEPARATE from State / Game — an event feeds many green boxes;
-# the decision model is never reused as a todo list. "All guesses in" is therefore a
-# CONDITION of a todo read-model (Todo / Outstanding guesses), not an event. The game
+# the decision model is never reused as a todo list. "All directions/differences in" is
+# therefore a CONDITION of a todo read-model (Todo / Outstanding ...), not an event. The game
 # is co-located (one room, like a board game) so automations fire on a STATE CONDITION,
 # never a clock — there are NO timeouts and no Passage-of-Time slices (a documented
 # future possibility only).
 #
-# Scoring (see ScoreQuestion / QuestionScored):
+# Scoring — the TWÅSTEGSRAKET (two-stage rocket). A question is answered in two stages,
+# each its own command/reveal/score pair, but the per-player roundScore folds to the same
+# total as the old one-shot model:
 #   roundScore = |guessedDifferenceNormalized - correctDifference| + (directionCorrect ? -10 : 0)
 #   lowest total score wins; negative scores possible (exact difference + right
 #   direction = -10, the best possible round).
 #
-#   The player does NOT pick a 0-100 number. They guess the RAW absolute difference in
-#   the card's own unit (e.g. 0,3 miljoner invånare, 220 km) — answering the card's
-#   differencePrompt — and the SYSTEM normalizes that guess onto 0-100 server-side, so
-#   scoring happens "as in the game 0-100". The client never sees the hidden values, so
-#   it cannot normalize: SubmitGuess carries the RAW guessedDifference and ScoreQuestion
+#   STAGE 1 (riktning): everyone answers mer/mindre only (SubmitDirection). Once every
+#   player is in, the System reveals the correct direction (RevealDirection ->
+#   QuestionDirectionRevealed) and deals the -10 bonus in a mellansteg of its own — one
+#   Game / DirectionScored per player (bonusPoints = directionCorrect ? -10 : 0). The
+#   reveal + the bonus drama is the whole point of splitting the rocket.
+#
+#   STAGE 2 (skillnad): everyone then guesses the magnitude (SubmitDifference), exactly
+#   as before — regardless of whether their direction was right. They do NOT pick a 0-100
+#   number; they guess the RAW absolute difference in the card's own unit (e.g. 0,3
+#   miljoner invånare, 220 km) — answering the card's differencePrompt — and the SYSTEM
+#   normalizes server-side. The client never sees the hidden values, so it cannot
+#   normalize: SubmitDifference carries the RAW guessedDifference and ScoreDifference
 #   (which holds the card) does the maths. With mx = max(valueA, valueB):
 #     correctDifference           = round(|valueA - valueB| / mx * 100)          (0-100, byte)
 #     guessedDifferenceNormalized = min(100, round(guessedDifference / mx * 100)) (0-100, byte, CLAMPED)
@@ -54,10 +63,10 @@
 #
 #   The question card stores the two RAW absolute values (valueA, valueB; decimal) —
 #   never a 0-100 number — so the author just types the real figures, no mental
-#   arithmetic. ScoreQuestion balances them onto 0-100: it derives correctDirection
-#   (whichever value is larger) and reveals correctDifference. Picture the two values as
-#   two bars side by side; correctDifference is how much taller the tall bar is, as a
-#   share of the tall bar itself:
+#   arithmetic. ScoreDifference balances them onto 0-100: it reveals correctDifference;
+#   correctDirection was already revealed in stage 1. Picture the two values as two bars
+#   side by side; correctDifference is how much taller the tall bar is, as a share of the
+#   tall bar itself:
 #     equal bars            -> 0
 #     short bar = half tall -> 50
 #     short bar = a tenth   -> 90
@@ -67,14 +76,13 @@
 #   Simplicity is the guiding star. For quantities already measured on a multiplicative
 #   scale (decibel, Richter, pH), those scale values are themselves what gets balanced.
 #
-#   correctDirection/correctDifference are derived by ScoreQuestion and revealed once
-#   per question on Game / QuestionAnswered; per-player scoring is one
-#   Game / QuestionScored each (carrying both the raw guessedDifference and the derived
-#   guessedDifferenceNormalized).
-#
-# ASSUMPTION: the board's two guess screens (direction, then difference) are modeled
-# as a single SubmitGuess {direction, guessedDifference} command, matching the C# domain.
-# Split into two commands only if the board later demands it.
+#   The roundScore is split across the two stages but folds to the same total: the -10
+#   bonus lands on Game / DirectionScored (stage 1); the difference points + the combined
+#   roundScore land on Game / DifferenceScored (stage 2). So
+#   DifferenceScored.roundScore = differencePoints + (stage-1 bonus) and its totalScore is
+#   the running sum. correctDirection is revealed once per question on
+#   Game / QuestionDirectionRevealed (stage 1); correctDifference once on
+#   Game / QuestionDifferenceRevealed (stage 2, the progression gate).
 #
 # ASSUMPTION: question-card content (text, item labels, the unit, and the two RAW values
 # valueA/valueB) is snapshotted onto Game / LobbyOpened (questions: Question[]).
@@ -104,12 +112,14 @@
 #                                         may be negative per scoring rule)
 #   index/count            int
 #   per-player State maps   IReadOnlyDictionary<Guid, T>  (each QuestionRound's
-#                                                          guesses and roundScores)
+#                                                          directions, directionScores,
+#                                                          differences and roundScores)
 #     The folded decision model keys per-player data by playerId for O(1) lookup, so
 #     these State props are maps, NOT IReadOnlyList<T> (a deliberate deviation from the
 #     constitution's collection rule for the keyed decision model). The value objects
-#     (Guess, int) NEVER repeat the key. Wire EVENTS stay flat with an explicit playerId
-#     (GuessSubmitted, QuestionScored); only the folded State is keyed.
+#     (Direction, int, decimal) NEVER repeat the key. Wire EVENTS stay flat with an
+#     explicit playerId (DirectionSubmitted, DirectionScored, DifferenceSubmitted,
+#     DifferenceScored); only the folded State is keyed.
 
 slices:
 
@@ -139,8 +149,8 @@ slices:
   #
   # Test fixtures (referenced by name in the cases below):
   #   pack mer-eller-mindre = [ question0, question1 ]  (the default deck)
-  #   question0 = Question { questionText: question0, itemA: question0A, itemB: question0B, valueA: 100, valueB: 60, unit: question0U, differencePrompt: question0D }  # ScoreQuestion derives -> mer,    40 (mx=100)
-  #   question1 = Question { questionText: question1, itemA: question1A, itemB: question1B, valueA: 80,  valueB: 100, unit: question1U, differencePrompt: question1D } # ScoreQuestion derives -> mindre, 20 (mx=100)
+  #   question0 = Question { questionText: question0, itemA: question0A, itemB: question0B, valueA: 100, valueB: 60, unit: question0U, differencePrompt: question0D }  # reveals -> mer,    40 (mx=100)
+  #   question1 = Question { questionText: question1, itemA: question1A, itemB: question1B, valueA: 80,  valueB: 100, unit: question1U, differencePrompt: question1D } # reveals -> mindre, 20 (mx=100)
   #   Both fixture cards have mx=100, so a raw guessedDifference d (0<=d<=100) normalizes
   #   to itself (guessedDifferenceNormalized = d) — the GWT numbers below read raw == normalized.
   #   host hostName = Martin ; minted joinCode = joinCode
@@ -373,50 +383,47 @@ slices:
               itemA: question0A
               itemB: question0B
 
-  # The Game Master also plays: Martin (id0) submits guesses through this same
-  # Player / slice, exactly like Nils (id1) and Sven (id2).
-  # Failures are Result failure-track values (see docs/adr/006), never thrown:
-  #   x: GameNotFound          — gameId resolves to no game (empty/unknown stream).
-  #   x: GameNotStarted        — still in the lobby; no question is presented yet.
-  #   x: PlayerNotInGame       — playerId never joined this game.
-  #   x: AlreadyGuessed        — this player already guessed the current question.
-  #   x: DifferenceOutOfRange  — the raw guessedDifference is negative (< 0). There is NO
-  #                              upper bound: a too-large guess is clamped at 100 when scored.
+  # --- Stage 1: direction (mer/mindre) -------------------------------------
+
+  # The Game Master also plays: Martin (id0) submits through this same Player / slice,
+  # like Nils (id1) and Sven (id2). Stage 1 of the twåstegsraket: pick mer/mindre only —
+  # the magnitude comes later (Submit Difference). Failures are Result failure-track values
+  # (see docs/adr/006), never thrown:
+  #   x: GameNotFound               — gameId resolves to no game (empty/unknown stream).
+  #   x: GameNotStarted             — still in the lobby; no question is presented yet.
+  #   x: PlayerNotInGame            — playerId never joined this game.
+  #   x: AlreadySubmittedDirection  — this player already picked a direction this question.
   # NOTE: "invalid direction" is NOT modeled — direction is a typed Direction
   #   (mer|mindre) enum, so an invalid value is unrepresentable in the decider; any
   #   bad input is a web/model-binding concern in the imperative shell, not a slice.
-  # The guess targets the current question by folded state, so SubmitGuess carries no
-  # questionIndex; GuessSubmitted stamps the resolved questionIndex.
-  ✍️ Submit Guess:
+  # The submission targets the current question by folded state, so SubmitDirection carries
+  # no questionIndex; DirectionSubmitted stamps the resolved questionIndex.
+  ✍️ Submit Direction:
     steps:
       - t: Player / Question
-      - c: SubmitGuess
+      - c: SubmitDirection
         props:
           gameId: Guid
           playerId: Guid
           direction: Direction (mer|mindre)
-          guessedDifference: decimal   # RAW absolute guess in the card's unit, >= 0 (NOT 0-100)
       - x: GameNotFound
       - x: GameNotStarted
       - x: PlayerNotInGame
-      - x: AlreadyGuessed
-      - x: DifferenceOutOfRange
-      - e: Game / GuessSubmitted
+      - x: AlreadySubmittedDirection
+      - e: Game / DirectionSubmitted
         props:
           gameId: Guid
           playerId: Guid
           questionIndex: int
           direction: Direction (mer|mindre)
-          guessedDifference: decimal   # RAW absolute guess in the card's unit, >= 0
           submittedAt: DateTimeOffset
       - v: Screen / Waiting for others
     # Decider-true GWT: given the folded State / Game props `decide` reads — phase
-    # (GameNotStarted), players (PlayerNotInGame), the current question's guesses
-    # (AlreadyGuessed) — when SubmitGuess, then GuessSubmitted | rejection. A negative raw
-    # guess is a command-value guard (DifferenceOutOfRange); there is no upper bound — a
-    # too-large guess is clamped at 100 when scored. GameNotFound = empty stream.
+    # (GameNotStarted), players (PlayerNotInGame), the current question's directions
+    # (AlreadySubmittedDirection) — when SubmitDirection, then DirectionSubmitted |
+    # rejection. GameNotFound = empty stream.
     tests:
-      guess submitted successfully:
+      direction submitted successfully:
         given:
           - v: State / Game
             props:
@@ -424,43 +431,43 @@ slices:
               currentQuestionIndex: 0
               players: [hostMartin, playerNils]
               questions:
-                - { card: question0, guesses: {}, scored: false }
+                - { card: question0, directions: {}, scored: false }
         when:
-          - c: SubmitGuess
-            props: { gameId: gameId, playerId: nilsId, direction: mer, guessedDifference: 30 }
+          - c: SubmitDirection
+            props: { gameId: gameId, playerId: nilsId, direction: mer }
         then:
-          - e: Game / GuessSubmitted
-            props: { playerId: nilsId, questionIndex: 0, direction: mer, guessedDifference: 30, submittedAt: submittedAt }
-      cannot guess in nonexistent game:
+          - e: Game / DirectionSubmitted
+            props: { playerId: nilsId, questionIndex: 0, direction: mer, submittedAt: submittedAt }
+      cannot submit direction in nonexistent game:
         given: []
         when:
-          - c: SubmitGuess
-            props: { gameId: unknown, playerId: nilsId, direction: mer, guessedDifference: 30 }
+          - c: SubmitDirection
+            props: { gameId: unknown, playerId: nilsId, direction: mer }
         then:
           - x: GameNotFound
-      cannot guess before game starts:
+      cannot submit direction before game starts:
         given:
           - v: State / Game
             props:
               phase: lobby
               players: [hostMartin, playerNils]
         when:
-          - c: SubmitGuess
-            props: { gameId: gameId, playerId: nilsId, direction: mer, guessedDifference: 30 }
+          - c: SubmitDirection
+            props: { gameId: gameId, playerId: nilsId, direction: mer }
         then:
           - x: GameNotStarted
-      cannot guess as non-member:
+      cannot submit direction as non-member:
         given:
           - v: State / Game
             props:
               phase: started
               players: [hostMartin, playerNils]
         when:
-          - c: SubmitGuess
-            props: { gameId: gameId, playerId: svenId, direction: mer, guessedDifference: 30 }
+          - c: SubmitDirection
+            props: { gameId: gameId, playerId: svenId, direction: mer }
         then:
           - x: PlayerNotInGame
-      cannot guess again on same question:
+      cannot submit direction twice on same question:
         given:
           - v: State / Game
             props:
@@ -468,12 +475,99 @@ slices:
               currentQuestionIndex: 0
               players: [hostMartin, playerNils]
               questions:
-                - { card: question0, guesses: { nilsId: guessMer30 }, scored: false }
+                - { card: question0, directions: { nilsId: mer }, scored: false }
         when:
-          - c: SubmitGuess
-            props: { gameId: gameId, playerId: nilsId, direction: mindre, guessedDifference: 20 }
+          - c: SubmitDirection
+            props: { gameId: gameId, playerId: nilsId, direction: mindre }
         then:
-          - x: AlreadyGuessed
+          - x: AlreadySubmittedDirection
+
+  # --- Stage 2: difference (the slider) ------------------------------------
+
+  # Stage 2 of the twåstegsraket, reached only after the direction is revealed
+  # (QuestionDirectionRevealed). Everyone guesses the magnitude — the RAW absolute
+  # difference in the card's own unit (>= 0) — regardless of whether their direction was
+  # right. Failures are Result failure-track values, never thrown:
+  #   x: GameNotFound                — gameId resolves to no game (empty/unknown stream).
+  #   x: GameNotStarted              — still in the lobby; no question is presented yet.
+  #   x: PlayerNotInGame             — playerId never joined this game.
+  #   x: DirectionNotRevealed        — stage 1 is not yet closed (cannot size before the
+  #                                    direction reveal / mellansteg).
+  #   x: AlreadySubmittedDifference  — this player already sized this question.
+  #   x: DifferenceOutOfRange        — the raw guessedDifference is negative (< 0). There is
+  #                                    NO upper bound: a too-large guess is clamped at 100.
+  # SubmitDifference carries no questionIndex; DifferenceSubmitted stamps the resolved one.
+  ✍️ Submit Difference:
+    steps:
+      - t: Player / Question
+      - c: SubmitDifference
+        props:
+          gameId: Guid
+          playerId: Guid
+          guessedDifference: decimal   # RAW absolute guess in the card's unit, >= 0 (NOT 0-100)
+      - x: GameNotFound
+      - x: GameNotStarted
+      - x: PlayerNotInGame
+      - x: DirectionNotRevealed
+      - x: AlreadySubmittedDifference
+      - x: DifferenceOutOfRange
+      - e: Game / DifferenceSubmitted
+        props:
+          gameId: Guid
+          playerId: Guid
+          questionIndex: int
+          guessedDifference: decimal   # RAW absolute guess in the card's unit, >= 0
+          submittedAt: DateTimeOffset
+      - v: Screen / Waiting for others
+    # Decider-true GWT: given the folded State / Game props `decide` reads — phase,
+    # players, the current question's correctDirection (DirectionNotRevealed) and
+    # differences (AlreadySubmittedDifference) — when SubmitDifference, then
+    # DifferenceSubmitted | rejection. A negative raw guess is a command-value guard
+    # (DifferenceOutOfRange); a too-large guess is clamped at 100 when scored.
+    tests:
+      difference submitted successfully:
+        given:
+          - v: State / Game
+            props:
+              phase: started
+              currentQuestionIndex: 0
+              players: [hostMartin, playerNils]
+              questions:
+                - { card: question0, directions: { martinId: mer, nilsId: mindre }, correctDirection: mer, directionScores: { martinId: -10, nilsId: 0 }, differences: {}, scored: false }
+        when:
+          - c: SubmitDifference
+            props: { gameId: gameId, playerId: nilsId, guessedDifference: 50 }
+        then:
+          - e: Game / DifferenceSubmitted
+            props: { playerId: nilsId, questionIndex: 0, guessedDifference: 50, submittedAt: submittedAt }
+      cannot submit difference before direction revealed:
+        given:
+          - v: State / Game
+            props:
+              phase: started
+              currentQuestionIndex: 0
+              players: [hostMartin, playerNils]
+              questions:
+                - { card: question0, directions: { martinId: mer, nilsId: mindre }, differences: {}, scored: false }   # correctDirection still null -> not revealed
+        when:
+          - c: SubmitDifference
+            props: { gameId: gameId, playerId: nilsId, guessedDifference: 50 }
+        then:
+          - x: DirectionNotRevealed
+      cannot submit difference twice on same question:
+        given:
+          - v: State / Game
+            props:
+              phase: started
+              currentQuestionIndex: 0
+              players: [hostMartin, playerNils]
+              questions:
+                - { card: question0, directions: { martinId: mer, nilsId: mindre }, correctDirection: mer, directionScores: { martinId: -10, nilsId: 0 }, differences: { nilsId: 50 }, scored: false }
+        when:
+          - c: SubmitDifference
+            props: { gameId: gameId, playerId: nilsId, guessedDifference: 20 }
+        then:
+          - x: AlreadySubmittedDifference
       negative difference rejected:
         given:
           - v: State / Game
@@ -482,10 +576,10 @@ slices:
               currentQuestionIndex: 0
               players: [hostMartin, playerNils]
               questions:
-                - { card: question0, guesses: {}, scored: false }
+                - { card: question0, directions: { martinId: mer, nilsId: mindre }, correctDirection: mer, directionScores: { martinId: -10, nilsId: 0 }, differences: {}, scored: false }
         when:
-          - c: SubmitGuess
-            props: { gameId: gameId, playerId: nilsId, direction: mer, guessedDifference: -5 }   # raw guess < 0; a too-LARGE guess is clamped at 100, never rejected
+          - c: SubmitDifference
+            props: { gameId: gameId, playerId: nilsId, guessedDifference: -5 }   # raw guess < 0; a too-LARGE guess is clamped at 100, never rejected
         then:
           - x: DifferenceOutOfRange
 
@@ -497,9 +591,10 @@ slices:
           questionIndex: int
           submittedPlayerIds: Guid[]
           pendingPlayerIds: Guid[]
-    # Projection GT: given the current question received one guess, then the screen splits
-    # players into who has submitted vs who is still pending (the guessing player's own
-    # screen after submitting). Derived from the current question's guesses keys vs players.
+    # Projection GT: given the current question received one submission, then the screen
+    # splits players into who has submitted vs who is still pending. REUSED for both stages:
+    # the pending set is derived from the ACTIVE stage — directions while stage 1 is open
+    # (before QuestionDirectionRevealed), differences after. The GT exercises stage 1.
     tests:
       shows who has guessed and who is still pending:
         given:
@@ -508,8 +603,8 @@ slices:
           - e: Game / PlayerJoined
             props: { playerId: nilsId, playerName: Nils }
           - e: Game / GameStarted
-          - e: Game / GuessSubmitted
-            props: { playerId: martinId, questionIndex: 0, direction: mer, guessedDifference: 30 }
+          - e: Game / DirectionSubmitted
+            props: { playerId: martinId, questionIndex: 0, direction: mer }
         then:
           - v: Screen / Waiting for others
             props:
@@ -519,23 +614,19 @@ slices:
 
   # --- Scoring (System processor) ------------------------------------------
 
-  # Minimal Todo read-model the scorer's gear observes — the deck rendered as a real
-  # todo list: ONE row per question { questionIndex, pendingPlayerIds, allGuessesIn }.
-  # Lifecycle: every row opens with all joined players pending (the whole deck is known
-  # from LobbyOpened); each GuessSubmitted CHECKS OFF that player in its question's row;
-  # allGuessesIn = that row's pendingPlayerIds empty. Co-located play means only the
-  # CURRENT question receives guesses, so the row that flips to allGuessesIn is always
-  # the current one — the gate the ⚙️ System / Score question processor fires on (it
-  # scores the current unscored row). Future rows simply sit "not started".
-  # SEPARATE from State / Game — re-validation of the gate (QuestionAlreadyScored) lives
-  # on State (questions[i].scored), keeping these rows minimal. The GT below proves the
-  # per-question projection, including independent check-off across questions.
-  📝 Outstanding Guesses:
+  # Two minimal Todo read-models, one per gear of the twåstegsraket. Each renders the deck
+  # as a real todo list: ONE row per question. Co-located play means only the CURRENT
+  # question receives input, so the row that flips to "all in" is always the current one.
+  #
+  # Outstanding Directions gates ⚙️ System / Reveal direction (stage 1):
+  #   { questionIndex, pendingPlayerIds, allDirectionsIn }. Each DirectionSubmitted checks
+  #   off that player; allDirectionsIn = that row's pendingPlayerIds empty.
+  📝 Outstanding Directions:
     steps:
-      - v: Todo / Outstanding guesses
+      - v: Todo / Outstanding directions
         props:
           gameId: Guid
-          questions: OutstandingQuestion[]   # one row per question; OutstandingQuestion = { questionIndex: int, pendingPlayerIds: Guid[], allGuessesIn: bool }
+          questions: OutstandingDirection[]   # one row per question; OutstandingDirection = { questionIndex: int, pendingPlayerIds: Guid[], allDirectionsIn: bool }
     tests:
       every question opens for every player when the game starts:
         given:
@@ -545,118 +636,145 @@ slices:
             props: { playerId: nilsId, playerName: Nils }
           - e: Game / GameStarted
         then:
-          - v: Todo / Outstanding guesses
+          - v: Todo / Outstanding directions
             props:
               questions:
-                - { questionIndex: 0, pendingPlayerIds: [martinId, nilsId], allGuessesIn: false }
-                - { questionIndex: 1, pendingPlayerIds: [martinId, nilsId], allGuessesIn: false }
-      a submitted guess checks off that player on its question:
+                - { questionIndex: 0, pendingPlayerIds: [martinId, nilsId], allDirectionsIn: false }
+                - { questionIndex: 1, pendingPlayerIds: [martinId, nilsId], allDirectionsIn: false }
+      a submitted direction checks off that player on its question:
         given:
           - e: Game / LobbyOpened
             props: { joinCode: joinCode, hostPlayerId: martinId, questions: [question0, question1] }
           - e: Game / PlayerJoined
             props: { playerId: nilsId, playerName: Nils }
           - e: Game / GameStarted
-          - e: Game / GuessSubmitted
-            props: { playerId: martinId, questionIndex: 0, direction: mer, guessedDifference: 30 }
+          - e: Game / DirectionSubmitted
+            props: { playerId: martinId, questionIndex: 0, direction: mer }
         then:
-          - v: Todo / Outstanding guesses
+          - v: Todo / Outstanding directions
             props:
               questions:
-                - { questionIndex: 0, pendingPlayerIds: [nilsId], allGuessesIn: false }
-                - { questionIndex: 1, pendingPlayerIds: [martinId, nilsId], allGuessesIn: false }
-      a question shows all guesses in once every player has guessed it:
+                - { questionIndex: 0, pendingPlayerIds: [nilsId], allDirectionsIn: false }
+                - { questionIndex: 1, pendingPlayerIds: [martinId, nilsId], allDirectionsIn: false }
+      a question shows all directions in once every player has answered:
         given:
           - e: Game / LobbyOpened
             props: { joinCode: joinCode, hostPlayerId: martinId, questions: [question0, question1] }
           - e: Game / PlayerJoined
             props: { playerId: nilsId, playerName: Nils }
           - e: Game / GameStarted
-          - e: Game / GuessSubmitted
-            props: { playerId: martinId, questionIndex: 0, direction: mer, guessedDifference: 30 }
-          - e: Game / GuessSubmitted
-            props: { playerId: nilsId, questionIndex: 0, direction: mindre, guessedDifference: 50 }
+          - e: Game / DirectionSubmitted
+            props: { playerId: martinId, questionIndex: 0, direction: mer }
+          - e: Game / DirectionSubmitted
+            props: { playerId: nilsId, questionIndex: 0, direction: mindre }
         then:
-          - v: Todo / Outstanding guesses
+          - v: Todo / Outstanding directions
             props:
               questions:
-                - { questionIndex: 0, pendingPlayerIds: [], allGuessesIn: true }
-                - { questionIndex: 1, pendingPlayerIds: [martinId, nilsId], allGuessesIn: false }
-      guesses are checked off per question independently:
-        given:
-          - e: Game / LobbyOpened
-            props: { joinCode: joinCode, hostPlayerId: martinId, questions: [question0, question1] }
-          - e: Game / PlayerJoined
-            props: { playerId: nilsId, playerName: Nils }
-          - e: Game / GameStarted
-          - e: Game / GuessSubmitted
-            props: { playerId: martinId, questionIndex: 0, direction: mer, guessedDifference: 30 }
-          - e: Game / GuessSubmitted
-            props: { playerId: nilsId, questionIndex: 0, direction: mindre, guessedDifference: 50 }
-          - e: Game / QuestionAnswered
-            props: { questionIndex: 0, correctDirection: mer, correctDifference: 40 }
-          - e: Game / NextQuestionStarted
-            props: { questionIndex: 1 }
-          - e: Game / GuessSubmitted
-            props: { playerId: martinId, questionIndex: 1, direction: mindre, guessedDifference: 25 }
-        then:
-          - v: Todo / Outstanding guesses
-            props:
-              questions:
-                - { questionIndex: 0, pendingPlayerIds: [], allGuessesIn: true }       # stays done
-                - { questionIndex: 1, pendingPlayerIds: [nilsId], allGuessesIn: false } # only martin checked off
+                - { questionIndex: 0, pendingPlayerIds: [], allDirectionsIn: true }
+                - { questionIndex: 1, pendingPlayerIds: [martinId, nilsId], allDirectionsIn: false }
 
-  # Processor: once Outstanding guesses shows allGuessesIn, the System scores.
-  # Balances the card's raw valueA/valueB onto 0-100: derives correctDirection (larger
-  # value) and correctDifference = |A-B|/max(A,B)*100, revealed once on QuestionAnswered,
-  # then emits one QuestionScored per player.
-  # Failures are Result failure-track values (see docs/adr/006), never thrown:
-  #   x: NotAllGuessesIn        — allGuessesIn is false (a player is still pending).
-  #   x: QuestionAlreadyScored  — this question was already revealed/scored (guards a
-  #                               double fire of the processor).
-  # Because allGuessesIn requires ALL joined players to have guessed, one ScoreQuestion
-  # always emits N QuestionScored (one per player) — the happy cases are multi-player.
-  # 'lowest score wins' is winner determination and lives on End Game, not here.
-  # Fixtures: question0 = {mer, 40}, question1 = {mindre, 20}; host = martinId, Nils = nilsId.
-  ✍️ Score Question:
+  # Outstanding Differences gates ⚙️ System / Score difference (stage 2):
+  #   { questionIndex, pendingPlayerIds, allDifferencesIn, directionRevealed }. Each
+  #   DifferenceSubmitted checks off that player; allDifferencesIn = pendingPlayerIds empty;
+  #   directionRevealed flips on QuestionDirectionRevealed (the stage-1 → stage-2 gate).
+  📝 Outstanding Differences:
     steps:
-      - e: Game / GuessSubmitted
-      - v: Todo / Outstanding guesses
-      - t: ⚙️ System / Score question
-      - c: ScoreQuestion
+      - v: Todo / Outstanding differences
+        props:
+          gameId: Guid
+          questions: OutstandingDifference[]   # one row per question; OutstandingDifference = { questionIndex: int, pendingPlayerIds: Guid[], allDifferencesIn: bool, directionRevealed: bool }
+    tests:
+      differences open only once the direction is revealed:
+        given:
+          - e: Game / LobbyOpened
+            props: { joinCode: joinCode, hostPlayerId: martinId, questions: [question0, question1] }
+          - e: Game / PlayerJoined
+            props: { playerId: nilsId, playerName: Nils }
+          - e: Game / GameStarted
+          - e: Game / DirectionSubmitted
+            props: { playerId: martinId, questionIndex: 0, direction: mer }
+          - e: Game / DirectionSubmitted
+            props: { playerId: nilsId, questionIndex: 0, direction: mindre }
+          - e: Game / QuestionDirectionRevealed
+            props: { questionIndex: 0, correctDirection: mer }
+          - e: Game / DirectionScored
+            props: { questionIndex: 0, playerId: martinId, guessedDirection: mer, directionCorrect: true, bonusPoints: -10 }
+          - e: Game / DirectionScored
+            props: { questionIndex: 0, playerId: nilsId, guessedDirection: mindre, directionCorrect: false, bonusPoints: 0 }
+          - e: Game / DifferenceSubmitted
+            props: { playerId: martinId, questionIndex: 0, guessedDifference: 40 }
+        then:
+          - v: Todo / Outstanding differences
+            props:
+              questions:
+                - { questionIndex: 0, pendingPlayerIds: [nilsId], allDifferencesIn: false, directionRevealed: true }
+                - { questionIndex: 1, pendingPlayerIds: [martinId, nilsId], allDifferencesIn: false, directionRevealed: false }
+      a question shows all differences in once every player has sized it:
+        given:
+          - e: Game / LobbyOpened
+            props: { joinCode: joinCode, hostPlayerId: martinId, questions: [question0, question1] }
+          - e: Game / PlayerJoined
+            props: { playerId: nilsId, playerName: Nils }
+          - e: Game / GameStarted
+          - e: Game / DirectionSubmitted
+            props: { playerId: martinId, questionIndex: 0, direction: mer }
+          - e: Game / DirectionSubmitted
+            props: { playerId: nilsId, questionIndex: 0, direction: mindre }
+          - e: Game / QuestionDirectionRevealed
+            props: { questionIndex: 0, correctDirection: mer }
+          - e: Game / DirectionScored
+            props: { questionIndex: 0, playerId: martinId, guessedDirection: mer, directionCorrect: true, bonusPoints: -10 }
+          - e: Game / DirectionScored
+            props: { questionIndex: 0, playerId: nilsId, guessedDirection: mindre, directionCorrect: false, bonusPoints: 0 }
+          - e: Game / DifferenceSubmitted
+            props: { playerId: martinId, questionIndex: 0, guessedDifference: 40 }
+          - e: Game / DifferenceSubmitted
+            props: { playerId: nilsId, questionIndex: 0, guessedDifference: 50 }
+        then:
+          - v: Todo / Outstanding differences
+            props:
+              questions:
+                - { questionIndex: 0, pendingPlayerIds: [], allDifferencesIn: true, directionRevealed: true }
+                - { questionIndex: 1, pendingPlayerIds: [martinId, nilsId], allDifferencesIn: false, directionRevealed: false }
+
+  # STAGE 1 processor: once Outstanding directions shows allDirectionsIn, the System
+  # reveals the correct direction (larger raw value -> mer) and deals the -10 bonus — the
+  # mellansteg. Emits one QuestionDirectionRevealed plus one DirectionScored per player.
+  # Failures are Result failure-track values (see docs/adr/006), never thrown:
+  #   x: NotAllDirectionsIn       — a player is still pending stage 1.
+  #   x: DirectionAlreadyRevealed — already revealed (guards a double fire).
+  # Fixtures: question0 reveals mer, question1 reveals mindre; host = martinId, Nils = nilsId.
+  ✍️ Reveal Direction:
+    steps:
+      - e: Game / DirectionSubmitted
+      - v: Todo / Outstanding directions
+      - t: ⚙️ System / Reveal direction
+      - c: RevealDirection
         props:
           gameId: Guid
           questionIndex: int
-      - x: NotAllGuessesIn
-      - x: QuestionAlreadyScored
-      - e: Game / QuestionAnswered
+      - x: NotAllDirectionsIn
+      - x: DirectionAlreadyRevealed
+      - e: Game / QuestionDirectionRevealed
         props:
           gameId: Guid
           questionIndex: int
-          correctDirection: Direction (mer|mindre)
-          correctDifference: byte (0-100)              # derived = round(|A-B|/max(A,B)*100)
-      - e: Game / QuestionScored       # one per player
+          correctDirection: Direction (mer|mindre)   # derived = valueA >= valueB ? mer : mindre
+      - e: Game / DirectionScored       # one per player
         props:
           gameId: Guid
           questionIndex: int
           playerId: Guid
           guessedDirection: Direction (mer|mindre)
-          guessedDifference: decimal                   # the RAW guess the player submitted (card's unit)
-          guessedDifferenceNormalized: byte (0-100)    # derived = min(100, round(guessedDifference/max(A,B)*100))
           directionCorrect: bool
-          differencePoints: byte (0-100)               # = |guessedDifferenceNormalized - correctDifference|
-          bonusPoints: int                             # directionCorrect ? -10 : 0
-          roundScore: int                              # differencePoints + bonusPoints (signed)
-          totalScore: int                              # running sum over scored questions (signed)
-      - v: Screen / Round results
-    # Decider-true GWT: given the folded State / Game (the props `decide` reads),
-    # when ScoreQuestion, then the events | rejection. No event-replay in given —
-    # the open->checked-off->scored history is verified by State / Game's and
-    # Outstanding Guesses' own GT. allGuessesIn is DERIVED: players == the current
-    # question's guesses keys. The running totalScore is DERIVED by summing roundScores
-    # across already-scored questions (see "scores accumulate" — question0 carries them).
+          bonusPoints: int                            # directionCorrect ? -10 : 0
+      - v: Screen / Direction results
+    # Decider-true GWT: given the folded State / Game, when RevealDirection, then the
+    # events | rejection. allDirectionsIn is DERIVED: players == the current question's
+    # directions keys.
     tests:
-      all guesses scored and answer revealed:
+      all directions in reveals the answer and deals the bonus:
         given:
           - v: State / Game
             props:
@@ -664,18 +782,110 @@ slices:
               currentQuestionIndex: 0
               players: [hostMartin, playerNils]
               questions:
-                - { card: question0, guesses: { martinId: guessMer30, nilsId: guessMindre50 }, scored: false }   # both guessed -> allGuessesIn derived true
-                - { card: question1, guesses: {}, scored: false }
+                - { card: question0, directions: { martinId: mer, nilsId: mindre }, scored: false }   # both in -> allDirectionsIn derived true
+                - { card: question1, directions: {}, scored: false }
         when:
-          - c: ScoreQuestion
+          - c: RevealDirection
             props: { gameId: gameId, questionIndex: 0 }
         then:
-          - e: Game / QuestionAnswered
-            props: { questionIndex: 0, correctDirection: mer, correctDifference: 40 }
-          - e: Game / QuestionScored
-            props: { playerId: martinId, guessedDirection: mer, guessedDifference: 30, guessedDifferenceNormalized: 30, directionCorrect: true, differencePoints: 10, bonusPoints: -10, roundScore: 0, totalScore: 0 }
-          - e: Game / QuestionScored
-            props: { playerId: nilsId, guessedDirection: mindre, guessedDifference: 50, guessedDifferenceNormalized: 50, directionCorrect: false, differencePoints: 10, bonusPoints: 0, roundScore: 10, totalScore: 10 }
+          - e: Game / QuestionDirectionRevealed
+            props: { questionIndex: 0, correctDirection: mer }
+          - e: Game / DirectionScored
+            props: { playerId: martinId, guessedDirection: mer, directionCorrect: true, bonusPoints: -10 }
+          - e: Game / DirectionScored
+            props: { playerId: nilsId, guessedDirection: mindre, directionCorrect: false, bonusPoints: 0 }
+      cannot reveal before all directions in:
+        given:
+          - v: State / Game
+            props:
+              phase: started
+              currentQuestionIndex: 0
+              players: [hostMartin, playerNils]
+              questions:
+                - { card: question0, directions: { martinId: mer }, scored: false }   # nilsId missing -> allDirectionsIn derived false
+                - { card: question1, directions: {}, scored: false }
+        when:
+          - c: RevealDirection
+            props: { gameId: gameId, questionIndex: 0 }
+        then:
+          - x: NotAllDirectionsIn
+      cannot reveal an already-revealed direction:
+        given:
+          - v: State / Game
+            props:
+              phase: started
+              currentQuestionIndex: 0
+              players: [hostMartin, playerNils]
+              questions:
+                - { card: question0, directions: { martinId: mer, nilsId: mindre }, correctDirection: mer, directionScores: { martinId: -10, nilsId: 0 }, scored: false }   # already revealed
+                - { card: question1, directions: {}, scored: false }
+        when:
+          - c: RevealDirection
+            props: { gameId: gameId, questionIndex: 0 }
+        then:
+          - x: DirectionAlreadyRevealed
+
+  # STAGE 2 processor: once Outstanding differences shows allDifferencesIn, the System
+  # scores the magnitude. Balances the card's raw valueA/valueB onto 0-100 (correctDifference
+  # = round(|A-B|/max(A,B)*100)), revealed once on QuestionDifferenceRevealed (the
+  # progression gate), then emits one DifferenceScored per player carrying the combined
+  # roundScore (difference points + the stage-1 bonus already in directionScores).
+  # Failures are Result failure-track values, never thrown:
+  #   x: NotAllDifferencesIn    — a player is still pending stage 2.
+  #   x: QuestionAlreadyScored  — already scored (guards a double fire).
+  # 'lowest score wins' is winner determination and lives on End Game, not here.
+  ✍️ Score Difference:
+    steps:
+      - e: Game / DifferenceSubmitted
+      - v: Todo / Outstanding differences
+      - t: ⚙️ System / Score difference
+      - c: ScoreDifference
+        props:
+          gameId: Guid
+          questionIndex: int
+      - x: NotAllDifferencesIn
+      - x: QuestionAlreadyScored
+      - e: Game / QuestionDifferenceRevealed
+        props:
+          gameId: Guid
+          questionIndex: int
+          correctDifference: byte (0-100)              # derived = round(|A-B|/max(A,B)*100)
+      - e: Game / DifferenceScored       # one per player
+        props:
+          gameId: Guid
+          questionIndex: int
+          playerId: Guid
+          guessedDifference: decimal                   # the RAW guess the player submitted (card's unit)
+          guessedDifferenceNormalized: byte (0-100)    # derived = min(100, round(guessedDifference/max(A,B)*100))
+          differencePoints: byte (0-100)               # = |guessedDifferenceNormalized - correctDifference|
+          roundScore: int                              # differencePoints + stage-1 bonus (signed)
+          totalScore: int                              # running sum over scored questions (signed)
+      - v: Screen / Round results
+    # Decider-true GWT: given the folded State / Game (directionScores carry the stage-1
+    # bonus), when ScoreDifference, then the events | rejection. allDifferencesIn is DERIVED:
+    # players == the current question's differences keys. roundScore = differencePoints +
+    # directionScores[p]; running totalScore sums roundScores across scored questions.
+    tests:
+      all differences scored and answer revealed:
+        given:
+          - v: State / Game
+            props:
+              phase: started
+              currentQuestionIndex: 0
+              players: [hostMartin, playerNils]
+              questions:
+                - { card: question0, directions: { martinId: mer, nilsId: mindre }, correctDirection: mer, directionScores: { martinId: -10, nilsId: 0 }, differences: { martinId: 30, nilsId: 50 }, scored: false }
+                - { card: question1, directions: {}, scored: false }
+        when:
+          - c: ScoreDifference
+            props: { gameId: gameId, questionIndex: 0 }
+        then:
+          - e: Game / QuestionDifferenceRevealed
+            props: { questionIndex: 0, correctDifference: 40 }
+          - e: Game / DifferenceScored
+            props: { playerId: martinId, guessedDifference: 30, guessedDifferenceNormalized: 30, differencePoints: 10, roundScore: 0, totalScore: 0 }
+          - e: Game / DifferenceScored
+            props: { playerId: nilsId, guessedDifference: 50, guessedDifferenceNormalized: 50, differencePoints: 10, roundScore: 10, totalScore: 10 }
       exact difference with correct direction:
         given:
           - v: State / Game
@@ -684,18 +894,18 @@ slices:
               currentQuestionIndex: 0
               players: [hostMartin, playerNils]
               questions:
-                - { card: question0, guesses: { martinId: guessMer40, nilsId: guessMindre50 }, scored: false }
-                - { card: question1, guesses: {}, scored: false }
+                - { card: question0, directions: { martinId: mer, nilsId: mindre }, correctDirection: mer, directionScores: { martinId: -10, nilsId: 0 }, differences: { martinId: 40, nilsId: 50 }, scored: false }
+                - { card: question1, directions: {}, scored: false }
         when:
-          - c: ScoreQuestion
+          - c: ScoreDifference
             props: { gameId: gameId, questionIndex: 0 }
         then:
-          - e: Game / QuestionAnswered
-            props: { questionIndex: 0, correctDirection: mer, correctDifference: 40 }
-          - e: Game / QuestionScored
-            props: { playerId: martinId, guessedDirection: mer, guessedDifference: 40, guessedDifferenceNormalized: 40, directionCorrect: true, differencePoints: 0, bonusPoints: -10, roundScore: -10, totalScore: -10 }
-          - e: Game / QuestionScored
-            props: { playerId: nilsId, guessedDirection: mindre, guessedDifference: 50, guessedDifferenceNormalized: 50, directionCorrect: false, differencePoints: 10, bonusPoints: 0, roundScore: 10, totalScore: 10 }
+          - e: Game / QuestionDifferenceRevealed
+            props: { questionIndex: 0, correctDifference: 40 }
+          - e: Game / DifferenceScored
+            props: { playerId: martinId, guessedDifference: 40, guessedDifferenceNormalized: 40, differencePoints: 0, roundScore: -10, totalScore: -10 }
+          - e: Game / DifferenceScored
+            props: { playerId: nilsId, guessedDifference: 50, guessedDifferenceNormalized: 50, differencePoints: 10, roundScore: 10, totalScore: 10 }
       scores accumulate across rounds:
         given:
           - v: State / Game
@@ -705,19 +915,19 @@ slices:
               players: [hostMartin, playerNils]
               questions:
                 # question0 already scored -> its roundScores are the source of the running total
-                - { card: question0, guesses: { martinId: guessMer30, nilsId: guessMindre50 }, correctDirection: mer, correctDifference: 40, roundScores: { martinId: 0, nilsId: 10 }, scored: true }
-                - { card: question1, guesses: { martinId: guessMindre25, nilsId: guessMindre20 }, scored: false }
+                - { card: question0, correctDirection: mer, correctDifference: 40, roundScores: { martinId: 0, nilsId: 10 }, scored: true }
+                - { card: question1, directions: { martinId: mindre, nilsId: mindre }, correctDirection: mindre, directionScores: { martinId: -10, nilsId: -10 }, differences: { martinId: 25, nilsId: 20 }, scored: false }
         when:
-          - c: ScoreQuestion
+          - c: ScoreDifference
             props: { gameId: gameId, questionIndex: 1 }
         then:
-          - e: Game / QuestionAnswered
-            props: { questionIndex: 1, correctDirection: mindre, correctDifference: 20 }
-          - e: Game / QuestionScored
-            props: { playerId: martinId, guessedDifference: 25, guessedDifferenceNormalized: 25, directionCorrect: true, differencePoints: 5, bonusPoints: -10, roundScore: -5, totalScore: -5 }
-          - e: Game / QuestionScored
-            props: { playerId: nilsId, guessedDifference: 20, guessedDifferenceNormalized: 20, directionCorrect: true, differencePoints: 0, bonusPoints: -10, roundScore: -10, totalScore: 0 }
-      cannot score before all guesses in:
+          - e: Game / QuestionDifferenceRevealed
+            props: { questionIndex: 1, correctDifference: 20 }
+          - e: Game / DifferenceScored
+            props: { playerId: martinId, guessedDifference: 25, guessedDifferenceNormalized: 25, differencePoints: 5, roundScore: -5, totalScore: -5 }
+          - e: Game / DifferenceScored
+            props: { playerId: nilsId, guessedDifference: 20, guessedDifferenceNormalized: 20, differencePoints: 0, roundScore: -10, totalScore: 0 }
+      cannot score before all differences in:
         given:
           - v: State / Game
             props:
@@ -725,13 +935,13 @@ slices:
               currentQuestionIndex: 0
               players: [hostMartin, playerNils]
               questions:
-                - { card: question0, guesses: { martinId: guessMer30 }, scored: false }   # nilsId missing -> allGuessesIn derived false
-                - { card: question1, guesses: {}, scored: false }
+                - { card: question0, directions: { martinId: mer, nilsId: mindre }, correctDirection: mer, directionScores: { martinId: -10, nilsId: 0 }, differences: { martinId: 30 }, scored: false }   # nilsId missing -> allDifferencesIn derived false
+                - { card: question1, directions: {}, scored: false }
         when:
-          - c: ScoreQuestion
+          - c: ScoreDifference
             props: { gameId: gameId, questionIndex: 0 }
         then:
-          - x: NotAllGuessesIn
+          - x: NotAllDifferencesIn
       cannot score an already-scored question:
         given:
           - v: State / Game
@@ -740,13 +950,54 @@ slices:
               currentQuestionIndex: 0
               players: [hostMartin, playerNils]
               questions:
-                - { card: question0, guesses: { martinId: guessMer30, nilsId: guessMindre50 }, scored: true }   # already scored -> double fire guarded
-                - { card: question1, guesses: {}, scored: false }
+                - { card: question0, correctDirection: mer, correctDifference: 40, roundScores: { martinId: 0, nilsId: 10 }, scored: true }   # already scored -> double fire guarded
+                - { card: question1, directions: {}, scored: false }
         when:
-          - c: ScoreQuestion
+          - c: ScoreDifference
             props: { gameId: gameId, questionIndex: 0 }
         then:
           - x: QuestionAlreadyScored
+
+  # The mellansteg between the two stages: stage 1 closed, direction revealed, the -10
+  # bonus dealt — shown before the slider opens. Per-player directionCorrect + bonus +
+  # the running total SO FAR (includes the just-awarded bonus, for drama).
+  👀 Direction Results:
+    steps:
+      - v: Screen / Direction results
+        props:
+          gameId: Guid
+          questionIndex: int
+          correctDirection: Direction (mer|mindre)   # from QuestionDirectionRevealed
+          playerDirections: PlayerDirectionResult[]  # { playerId: Guid, guessedDirection: Direction, directionCorrect: bool, bonusPoints: int, totalSoFar: int }
+    # Projection GT: given the direction revealed (the reveal + one DirectionScored per
+    # player), then the mellansteg shows the revealed direction and each player's bonus +
+    # running total so far. totalSoFar = Σ scored roundScores + this question's bonus.
+    tests:
+      reveals the direction and the bonus once stage 1 closes:
+        given:
+          - e: Game / LobbyOpened
+            props: { hostPlayerId: martinId, hostName: Martin, questions: [question0, question1] }
+          - e: Game / PlayerJoined
+            props: { playerId: nilsId, playerName: Nils }
+          - e: Game / GameStarted
+          - e: Game / DirectionSubmitted
+            props: { playerId: martinId, questionIndex: 0, direction: mer }
+          - e: Game / DirectionSubmitted
+            props: { playerId: nilsId, questionIndex: 0, direction: mindre }
+          - e: Game / QuestionDirectionRevealed
+            props: { questionIndex: 0, correctDirection: mer }
+          - e: Game / DirectionScored
+            props: { questionIndex: 0, playerId: martinId, guessedDirection: mer, directionCorrect: true, bonusPoints: -10 }
+          - e: Game / DirectionScored
+            props: { questionIndex: 0, playerId: nilsId, guessedDirection: mindre, directionCorrect: false, bonusPoints: 0 }
+        then:
+          - v: Screen / Direction results
+            props:
+              questionIndex: 0
+              correctDirection: mer
+              playerDirections:
+                - { playerId: martinId, guessedDirection: mer, directionCorrect: true, bonusPoints: -10, totalSoFar: -10 }
+                - { playerId: nilsId, guessedDirection: mindre, directionCorrect: false, bonusPoints: 0, totalSoFar: 0 }
 
   👀 Round Results:
     steps:
@@ -754,13 +1005,13 @@ slices:
         props:
           gameId: Guid
           questionIndex: int
-          correctDirection: Direction (mer|mindre)   # from QuestionAnswered
-          correctDifference: byte (0-100)            # from QuestionAnswered
-          playerScores: PlayerScore[]  # { playerId: Guid, roundScore: int, totalScore: int } from per-player QuestionScored
-    # Projection GT: given the question scored (the answer reveal + one QuestionScored per
-    # player), then the results screen shows the revealed answer and each player's round +
-    # running total. correctDirection/Difference come from QuestionAnswered; scores from
-    # the per-player QuestionScored events.
+          correctDirection: Direction (mer|mindre)   # from QuestionDirectionRevealed
+          correctDifference: byte (0-100)            # from QuestionDifferenceRevealed
+          playerScores: PlayerScore[]  # { playerId: Guid, roundScore: int, totalScore: int } from per-player DifferenceScored
+    # Projection GT: given the question fully scored (both reveals + per-player DirectionScored
+    # and DifferenceScored), then the results screen shows the revealed answer and each
+    # player's combined round + running total. correctDirection from QuestionDirectionRevealed,
+    # correctDifference from QuestionDifferenceRevealed; scores from DifferenceScored.
     tests:
       reveals the answer and per-player scores once scored:
         given:
@@ -769,15 +1020,25 @@ slices:
           - e: Game / PlayerJoined
             props: { playerId: nilsId, playerName: Nils }
           - e: Game / GameStarted
-          - e: Game / GuessSubmitted
-            props: { playerId: martinId, questionIndex: 0, direction: mer, guessedDifference: 30 }
-          - e: Game / GuessSubmitted
-            props: { playerId: nilsId, questionIndex: 0, direction: mindre, guessedDifference: 50 }
-          - e: Game / QuestionAnswered
-            props: { questionIndex: 0, correctDirection: mer, correctDifference: 40 }
-          - e: Game / QuestionScored
+          - e: Game / DirectionSubmitted
+            props: { playerId: martinId, questionIndex: 0, direction: mer }
+          - e: Game / DirectionSubmitted
+            props: { playerId: nilsId, questionIndex: 0, direction: mindre }
+          - e: Game / QuestionDirectionRevealed
+            props: { questionIndex: 0, correctDirection: mer }
+          - e: Game / DirectionScored
+            props: { questionIndex: 0, playerId: martinId, guessedDirection: mer, directionCorrect: true, bonusPoints: -10 }
+          - e: Game / DirectionScored
+            props: { questionIndex: 0, playerId: nilsId, guessedDirection: mindre, directionCorrect: false, bonusPoints: 0 }
+          - e: Game / DifferenceSubmitted
+            props: { playerId: martinId, questionIndex: 0, guessedDifference: 30 }
+          - e: Game / DifferenceSubmitted
+            props: { playerId: nilsId, questionIndex: 0, guessedDifference: 50 }
+          - e: Game / QuestionDifferenceRevealed
+            props: { questionIndex: 0, correctDifference: 40 }
+          - e: Game / DifferenceScored
             props: { questionIndex: 0, playerId: martinId, roundScore: 0, totalScore: 0 }
-          - e: Game / QuestionScored
+          - e: Game / DifferenceScored
             props: { questionIndex: 0, playerId: nilsId, roundScore: 10, totalScore: 10 }
         then:
           - v: Screen / Round results
@@ -813,16 +1074,10 @@ slices:
           - e: Game / PlayerJoined
             props: { playerId: nilsId, playerName: Nils }
           - e: Game / GameStarted
-          - e: Game / GuessSubmitted
-            props: { playerId: martinId, questionIndex: 0, direction: mer, guessedDifference: 30 }
-          - e: Game / GuessSubmitted
-            props: { playerId: nilsId, questionIndex: 0, direction: mindre, guessedDifference: 50 }
-          - e: Game / QuestionAnswered
-            props: { questionIndex: 0, correctDirection: mer, correctDifference: 40 }
-          - e: Game / QuestionScored
-            props: { playerId: martinId, questionIndex: 0, roundScore: 0, totalScore: 0 }
-          - e: Game / QuestionScored
-            props: { playerId: nilsId, questionIndex: 0, roundScore: 10, totalScore: 10 }
+          - e: Game / QuestionDirectionRevealed
+            props: { questionIndex: 0, correctDirection: mer }
+          - e: Game / QuestionDifferenceRevealed
+            props: { questionIndex: 0, correctDifference: 40 }
         then:
           - v: Todo / Game progress
             props: { questionIndex: 0, totalQuestions: 2, scoredQuestionCount: 1, hasNextQuestion: true }
@@ -833,28 +1088,16 @@ slices:
           - e: Game / PlayerJoined
             props: { playerId: nilsId, playerName: Nils }
           - e: Game / GameStarted
-          - e: Game / GuessSubmitted
-            props: { playerId: martinId, questionIndex: 0, direction: mer, guessedDifference: 30 }
-          - e: Game / GuessSubmitted
-            props: { playerId: nilsId, questionIndex: 0, direction: mindre, guessedDifference: 50 }
-          - e: Game / QuestionAnswered
-            props: { questionIndex: 0, correctDirection: mer, correctDifference: 40 }
-          - e: Game / QuestionScored
-            props: { playerId: martinId, questionIndex: 0, roundScore: 0, totalScore: 0 }
-          - e: Game / QuestionScored
-            props: { playerId: nilsId, questionIndex: 0, roundScore: 10, totalScore: 10 }
+          - e: Game / QuestionDirectionRevealed
+            props: { questionIndex: 0, correctDirection: mer }
+          - e: Game / QuestionDifferenceRevealed
+            props: { questionIndex: 0, correctDifference: 40 }
           - e: Game / NextQuestionStarted
             props: { questionIndex: 1 }
-          - e: Game / GuessSubmitted
-            props: { playerId: martinId, questionIndex: 1, direction: mindre, guessedDifference: 25 }
-          - e: Game / GuessSubmitted
-            props: { playerId: nilsId, questionIndex: 1, direction: mindre, guessedDifference: 20 }
-          - e: Game / QuestionAnswered
-            props: { questionIndex: 1, correctDirection: mindre, correctDifference: 20 }
-          - e: Game / QuestionScored
-            props: { playerId: martinId, questionIndex: 1, roundScore: 5, totalScore: 5 }
-          - e: Game / QuestionScored
-            props: { playerId: nilsId, questionIndex: 1, roundScore: 0, totalScore: 10 }
+          - e: Game / QuestionDirectionRevealed
+            props: { questionIndex: 1, correctDirection: mindre }
+          - e: Game / QuestionDifferenceRevealed
+            props: { questionIndex: 1, correctDifference: 20 }
         then:
           - v: Todo / Game progress
             props: { questionIndex: 1, totalQuestions: 2, scoredQuestionCount: 2, hasNextQuestion: false }
@@ -863,7 +1106,7 @@ slices:
   # Game progress shows hasNextQuestion. Presents the next question by index.
   ✍️ Ask Next Question:
     steps:
-      - e: Game / QuestionAnswered
+      - e: Game / QuestionDifferenceRevealed
       - v: Todo / Game progress
       - t: ⚙️ System / Ask next question
       - c: AskNextQuestion
@@ -885,8 +1128,8 @@ slices:
               phase: started
               currentQuestionIndex: 0
               questions:
-                - { card: question0, guesses: { martinId: guessMer30, nilsId: guessMindre50 }, correctDirection: mer, correctDifference: 40, roundScores: { martinId: 0, nilsId: 10 }, scored: true }
-                - { card: question1, guesses: {}, scored: false }
+                - { card: question0, correctDirection: mer, correctDifference: 40, roundScores: { martinId: 0, nilsId: 10 }, scored: true }
+                - { card: question1, directions: {}, scored: false }
         when:
           - c: AskNextQuestion
             props: { gameId: gameId }
@@ -897,12 +1140,12 @@ slices:
   # --- End (System processor) ----------------------------------------------
 
   # Fires when Game progress shows NOT hasNextQuestion (mutually exclusive with Ask Next
-  # Question; both react to QuestionAnswered and the gate decides which fires). Computes
-  # the final scoreboard from each player's DERIVED totalScore; winnerIds = ALL players
-  # tied at the lowest total (lowest score wins; ties share the win).
+  # Question; both react to QuestionDifferenceRevealed and the gate decides which fires).
+  # Computes the final scoreboard from each player's DERIVED totalScore; winnerIds = ALL
+  # players tied at the lowest total (lowest score wins; ties share the win).
   ✍️ End Game:
     steps:
-      - e: Game / QuestionAnswered
+      - e: Game / QuestionDifferenceRevealed
       - v: Todo / Game progress
       - t: ⚙️ System / End game
       - c: EndGame
@@ -918,7 +1161,7 @@ slices:
     # Decider-true GWT: given the folded State / Game (all questions scored, none left —
     # hasNextQuestion derived false), when EndGame, then GameEnded with the scoreboard and
     # the lowest-total winner(s). No x: — the hasNextQuestion gate makes End Game / Ask Next
-    # mutually exclusive and each fires once per QuestionAnswered.
+    # mutually exclusive and each fires once per QuestionDifferenceRevealed.
     tests:
       lowest score wins:
         given:
@@ -1010,19 +1253,15 @@ slices:
   # questions + players (see "derived" note on the props), so the fold keeps a single
   # source of truth and no redundant flags.
   #
-  # QuestionRound fixtures (card = a Question fixture; guesses/roundScores are maps keyed
-  # by playerId; value objects never repeat the key). Tests build rounds inline as
-  # flow-maps, e.g. { card: question0, guesses: { martinId: guessMer30 }, scored: false }:
-  #   guessMer30     = { direction: mer,    guessedDifference: 30 }   # RAW guess in the card's unit
-  #   guessMer40     = { direction: mer,    guessedDifference: 40 }
-  #   guessMindre25  = { direction: mindre, guessedDifference: 25 }
-  #   guessMindre50  = { direction: mindre, guessedDifference: 50 }
-  #   guessMindre20  = { direction: mindre, guessedDifference: 20 }
-  # All raw decimals in question0/question1's unit; both cards have mx=100, so each guess
-  # normalizes to itself (guessedDifferenceNormalized == the raw value above).
+  # QuestionRound fixtures (card = a Question fixture; directions/directionScores/
+  # differences/roundScores are maps keyed by playerId; value objects never repeat the key).
+  # Tests build rounds inline as flow-maps, e.g.
+  # { card: question0, directions: { martinId: mer }, scored: false }. The stage-1 map holds
+  # a bare Direction per player; the stage-2 map a raw decimal guessedDifference. Both
+  # fixture cards have mx=100, so a raw guessedDifference d (0<=d<=100) normalizes to itself.
   #
   # Player fixtures (Player = { playerId: Guid, name: string, isHost: bool }), reused by
-  # the Join / Start / Submit Guess GWTs:
+  # the Join / Start / Submit GWTs:
   #   hostMartin = { playerId: martinId, name: Martin, isHost: true }
   #   playerNils = { playerId: nilsId,   name: Nils,   isHost: false }
   #   playerSven = { playerId: svenId,   name: Sven,   isHost: false }
@@ -1039,27 +1278,32 @@ slices:
           questions: IReadOnlyList<QuestionRound>   # the fixed deck loaded up front + how each is being answered
           # QuestionRound = {
           #   card: Question,                                 # immutable card from LobbyOpened: { questionText, itemA, itemB: string; valueA, valueB: decimal; unit, differencePrompt: string } — raw values, no precomputed answer
-          #   guesses: IReadOnlyDictionary<Guid, Guess>,      # THIS question's guesses; key=playerId, Guess = { direction: Direction (mer|mindre), guessedDifference: decimal } — the RAW guess in the card's unit, >= 0
-          #   correctDirection: Direction? (mer|mindre),      # revealed when scored (null before)
-          #   correctDifference: byte? (0-100),               # revealed when scored (null before); derived from the raw card values
-          #   roundScores: IReadOnlyDictionary<Guid, int>,    # per-player round score, set when scored; key=playerId
+          #   directions: IReadOnlyDictionary<Guid, Direction>,   # STAGE 1: this question's direction guesses; key=playerId, value = mer|mindre
+          #   correctDirection: Direction? (mer|mindre),          # revealed in stage 1 (null before)
+          #   directionScores: IReadOnlyDictionary<Guid, int>,    # per-player stage-1 bonus (-10|0), set at reveal; key=playerId
+          #   differences: IReadOnlyDictionary<Guid, decimal>,    # STAGE 2: this question's RAW magnitude guesses (>= 0); key=playerId
+          #   correctDifference: byte? (0-100),                   # revealed in stage 2 (null before); derived from the raw card values
+          #   roundScores: IReadOnlyDictionary<Guid, int>,        # per-player combined round score, set when scored; key=playerId
           #   scored: bool }
           # DERIVED (computed, NOT stored — single source of truth in questions + players):
-          #   pendingPlayerIds(i)   = players.Keys − questions[i].guesses.Keys
-          #   allGuessesIn(i)       = pendingPlayerIds(i) is empty
-          #   currentQuestionScored = questions[currentQuestionIndex].scored
-          #   hasNextQuestion       = currentQuestionIndex + 1 < questions.Count
-          #   totalScore(p)         = Σ over scored questions of roundScores[p]
+          #   pendingDirectionPlayerIds(i)  = players.Keys − questions[i].directions.Keys
+          #   allDirectionsIn(i)            = pendingDirectionPlayerIds(i) is empty
+          #   directionRevealed(i)          = questions[i].correctDirection is not null
+          #   pendingDifferencePlayerIds(i) = players.Keys − questions[i].differences.Keys
+          #   allDifferencesIn(i)           = pendingDifferencePlayerIds(i) is empty
+          #   currentQuestionScored         = questions[currentQuestionIndex].scored
+          #   hasNextQuestion               = currentQuestionIndex + 1 < questions.Count
+          #   totalScore(p)                 = Σ over scored questions of roundScores[p]
     tests:
-      state folds events into the decision model:
+      state folds a direction into the decision model:
         given:
           - e: Game / LobbyOpened
             props: { joinCode: joinCode, hostPlayerId: martinId, questions: [question0, question1] }
           - e: Game / PlayerJoined
             props: { playerId: nilsId, playerName: Nils }
           - e: Game / GameStarted
-          - e: Game / GuessSubmitted
-            props: { playerId: martinId, questionIndex: 0, direction: mer, guessedDifference: 30 }
+          - e: Game / DirectionSubmitted
+            props: { playerId: martinId, questionIndex: 0, direction: mer }
         then:
           - v: State / Game
             props:
@@ -1067,33 +1311,43 @@ slices:
               hostPlayerId: martinId
               currentQuestionIndex: 0
               questions:
-                - { card: question0, guesses: { martinId: guessMer30 }, scored: false }   # nilsId still pending (derived)
-                - { card: question1, guesses: {}, scored: false }
-      scoring a question folds the answer and round scores into that question:
+                - { card: question0, directions: { martinId: mer }, scored: false }   # nilsId still pending (derived)
+                - { card: question1, directions: {}, scored: false }
+      scoring a question folds both reveals and round scores into that question:
         given:
           - e: Game / LobbyOpened
             props: { joinCode: joinCode, hostPlayerId: martinId, questions: [question0, question1] }
           - e: Game / PlayerJoined
             props: { playerId: nilsId, playerName: Nils }
           - e: Game / GameStarted
-          - e: Game / GuessSubmitted
-            props: { playerId: martinId, questionIndex: 0, direction: mer, guessedDifference: 30 }
-          - e: Game / GuessSubmitted
-            props: { playerId: nilsId, questionIndex: 0, direction: mindre, guessedDifference: 50 }
-          - e: Game / QuestionAnswered
-            props: { questionIndex: 0, correctDirection: mer, correctDifference: 40 }
-          - e: Game / QuestionScored
-            props: { playerId: martinId, questionIndex: 0, roundScore: 0, totalScore: 0 }
-          - e: Game / QuestionScored
-            props: { playerId: nilsId, questionIndex: 0, roundScore: 10, totalScore: 10 }
+          - e: Game / DirectionSubmitted
+            props: { playerId: martinId, questionIndex: 0, direction: mer }
+          - e: Game / DirectionSubmitted
+            props: { playerId: nilsId, questionIndex: 0, direction: mindre }
+          - e: Game / QuestionDirectionRevealed
+            props: { questionIndex: 0, correctDirection: mer }
+          - e: Game / DirectionScored
+            props: { questionIndex: 0, playerId: martinId, guessedDirection: mer, directionCorrect: true, bonusPoints: -10 }
+          - e: Game / DirectionScored
+            props: { questionIndex: 0, playerId: nilsId, guessedDirection: mindre, directionCorrect: false, bonusPoints: 0 }
+          - e: Game / DifferenceSubmitted
+            props: { playerId: martinId, questionIndex: 0, guessedDifference: 30 }
+          - e: Game / DifferenceSubmitted
+            props: { playerId: nilsId, questionIndex: 0, guessedDifference: 50 }
+          - e: Game / QuestionDifferenceRevealed
+            props: { questionIndex: 0, correctDifference: 40 }
+          - e: Game / DifferenceScored
+            props: { questionIndex: 0, playerId: martinId, roundScore: 0, totalScore: 0 }
+          - e: Game / DifferenceScored
+            props: { questionIndex: 0, playerId: nilsId, roundScore: 10, totalScore: 10 }
         then:
           - v: State / Game
             props:
               phase: started
               currentQuestionIndex: 0   # scoring does not advance; AskNextQuestion does
               questions:
-                # question0 fully scored: answer revealed + per-player round scores folded in
+                # question0 fully scored: both reveals + per-player round scores folded in
                 # (totalScore is DERIVED by summing roundScores across scored questions: martin 0, nils 10)
-                - { card: question0, guesses: { martinId: guessMer30, nilsId: guessMindre50 }, correctDirection: mer, correctDifference: 40, roundScores: { martinId: 0, nilsId: 10 }, scored: true }
-                - { card: question1, guesses: {}, scored: false }
+                - { card: question0, directions: { martinId: mer, nilsId: mindre }, correctDirection: mer, directionScores: { martinId: -10, nilsId: 0 }, differences: { martinId: 30, nilsId: 50 }, correctDifference: 40, roundScores: { martinId: 0, nilsId: 10 }, scored: true }
+                - { card: question1, directions: {}, scored: false }
 

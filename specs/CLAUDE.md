@@ -98,15 +98,16 @@ Two user roles + System. Events live on the `Game` stream; views are bare.
   trigger's role (`⚙️ System`) puts the gear in the **initiator lane** — the faithful
   analog of that gear icon, NOT a slice-name marker. It parses as plain UTF-8 (lint does
   not validate name content) and renders on the `⚙️ System` swimlane label. Apply it
-  CONSISTENTLY to all three System processors (`⚙️ System / Score question`,
-  `⚙️ System / Ask next question`, `⚙️ System / End game`) — never a subset, or the
-  swimlane labels disagree. The three System processors share ONE `System` initiator
-  lane (distinguished by box name), a simplification of the canonical per-processor gear.
+  CONSISTENTLY to all four System processors (`⚙️ System / Reveal direction`,
+  `⚙️ System / Score difference`, `⚙️ System / Ask next question`, `⚙️ System / End game`)
+  — never a subset, or the swimlane labels disagree. The System processors share ONE
+  `System` initiator lane (distinguished by box name), a simplification of the canonical
+  per-processor gear.
   Human-role triggers (`GameMaster /`, `Player /`) stay bare.
-- **Commands are bare**: `OpenLobby`, `SubmitGuess`.
+- **Commands are bare**: `OpenLobby`, `SubmitDirection`.
 - **Events carry the stream**: `Game / LobbyOpened`.
 - **Exceptions are bare**: `GameNotFound`.
-- **Views carry a view lane**: `Screen / Game lobby`, `Todo / Outstanding guesses`
+- **Views carry a view lane**: `Screen / Game lobby`, `Todo / Outstanding directions`
   (see below).
 
 ### Slice-name emoji prefix (slice TYPE marker)
@@ -117,9 +118,9 @@ the **slice's type** — one of three buckets, applied to ALL slices (never a su
 
 | Prefix | Slice type      | Meaning                                  | Slices |
 |--------|-----------------|------------------------------------------|--------|
-| `✍️`   | state-change    | writes the stream (command/processor)    | Open Lobby, Join Game, Start Game, Submit Guess, Score Question, Ask Next Question, End Game |
-| `👀`   | state view      | reads/shows state (screens + decider State) | Quiz Catalog, Game Lobby, Question, Waiting For Others, Round Results, Final Standings, Decision Model |
-| `📝`   | todo            | a `Todo /` read-model the gears gate on  | Outstanding Guesses, Game Progress |
+| `✍️`   | state-change    | writes the stream (command/processor)    | Open Lobby, Join Game, Start Game, Submit Direction, Submit Difference, Reveal Direction, Score Difference, Ask Next Question, End Game |
+| `👀`   | state view      | reads/shows state (screens + decider State) | Quiz Catalog, Game Lobby, Question, Waiting For Others, Direction Results, Round Results, Final Standings, Decision Model |
+| `📝`   | todo            | a `Todo /` read-model the gears gate on  | Outstanding Directions, Outstanding Differences, Game Progress |
 
 `✍️` (write) / `👀` (read) are a deliberate read/write duality; `📝` is the todo subset
 of read-models. A processor slice is `✍️` (it writes) AND still carries `⚙️` on its
@@ -137,16 +138,17 @@ event(s) → Todo read-model → System trigger (the gear) → command → event
 
 Consequences for this spec:
 
-- **"All guesses in" is a read-model condition, not an event.** It is the
-  `allGuessesIn` flag on `Todo / Outstanding guesses`; the `System / Score question`
-  processor observes it. The player count is known, so there is no
+- **"All directions/differences in" is a read-model condition, not an event.** It is the
+  `allDirectionsIn` flag on `Todo / Outstanding directions` (gates `System / Reveal
+  direction`) / the `allDifferencesIn` flag on `Todo / Outstanding differences` (gates
+  `System / Score difference`). The player count is known, so there is no
   `AllGuessesSubmitted` event.
-- **`QuestionScored` is per-player** — one event per `playerId`. A single
-  `ScoreQuestion` emits one `QuestionAnswered` (the answer reveal) plus N
-  `QuestionScored`.
-- The three System slices (`Score question`, `Ask next question`, `End game`) each
-  read a `Todo /` read-model before their trigger. `Ask next question` / `End game`
-  both react to `QuestionAnswered` and are mutually exclusive on
+- **`DirectionScored` and `DifferenceScored` are per-player** — one event per `playerId`.
+  A single `RevealDirection` emits one `QuestionDirectionRevealed` plus N `DirectionScored`;
+  a single `ScoreDifference` emits one `QuestionDifferenceRevealed` plus N `DifferenceScored`.
+- The four System slices (`Reveal direction`, `Score difference`, `Ask next question`,
+  `End game`) each read a `Todo /` read-model before their trigger. `Ask next question` /
+  `End game` both react to `QuestionDifferenceRevealed` and are mutually exclusive on
   `Todo / Game progress`'s `hasNextQuestion`.
 
 ### Views (read models)
@@ -166,14 +168,16 @@ Two view lanes distinguish human screens from processor-facing projections:
 | `Screen / Quiz catalog`       | GM browses packs (kviss) to start a game    |
 | `Screen / Game lobby`         | After open-lobby / join, waiting to start   |
 | `Screen / Question`           | A question is presented (Q0 or next)        |
-| `Screen / Waiting for others` | Player guessed, others still pending        |
+| `Screen / Waiting for others` | Player submitted, others still pending      |
+| `Screen / Direction results`  | Stage 1 closed: direction revealed + bonus  |
 | `Screen / Round results`      | Question scored, per-player round + total   |
 | `Screen / Final standings`    | Game ended, scoreboard + winner             |
 
-| View (Todo lane)              | Consumed by                                 |
-|-------------------------------|---------------------------------------------|
-| `Todo / Outstanding guesses`  | `System / Score question` (allGuessesIn)    |
-| `Todo / Game progress`        | `System / Ask next question`, `End game`    |
+| View (Todo lane)                 | Consumed by                                    |
+|----------------------------------|------------------------------------------------|
+| `Todo / Outstanding directions`  | `System / Reveal direction` (allDirectionsIn)  |
+| `Todo / Outstanding differences` | `System / Score difference` (allDifferencesIn) |
+| `Todo / Game progress`           | `System / Ask next question`, `End game`       |
 
 `Screen / Question` derives its card text/items from the chosen **question pack**
 by index; those are not carried on events.
@@ -181,24 +185,31 @@ by index; those are not carried on events.
 Roles:
 
 - `GameMaster /` — exactly one (Martin, id0): `OpenLobby`, `StartGame`.
-- `Player /` — one or more (Nils id1, Sven id2): `JoinGame`, `SubmitGuess`.
-  **The Game Master also plays** — Martin guesses through the same `Player /`
-  `SubmitGuess` slice (GM ⊃ Player).
-- `System /` — processors named by action: `System / Score question`,
-  `System / Ask next question`, `System / End game`. The GM does **not** manually
-  advance or end.
+- `Player /` — one or more (Nils id1, Sven id2): `JoinGame`, `SubmitDirection`,
+  `SubmitDifference`. **The Game Master also plays** — Martin guesses through the same
+  `Player /` slices (GM ⊃ Player).
+- `System /` — processors named by action: `System / Reveal direction`,
+  `System / Score difference`, `System / Ask next question`, `System / End game`. The GM
+  does **not** manually advance or end.
 
 ### Event vocabulary
 
-`LobbyOpened → PlayerJoined → GameStarted → GuessSubmitted → QuestionAnswered →
-QuestionScored(×players) → NextQuestionStarted → … → GameEnded`.
+`LobbyOpened → PlayerJoined → GameStarted → DirectionSubmitted →
+QuestionDirectionRevealed → DirectionScored(×players) → DifferenceSubmitted →
+QuestionDifferenceRevealed → DifferenceScored(×players) → NextQuestionStarted → … →
+GameEnded` — the twåstegsraket: stage 1 (direction) reveal + bonus, then stage 2
+(difference) reveal + score.
 
-- `QuestionAnswered {questionIndex, correctDirection, correctDifference}` — the
-  answer reveal, once per question.
-- `QuestionScored {…, playerId, …}` — **per-player** scoring, one per player.
-- No `AllGuessesSubmitted` event (it is a `Todo / Outstanding guesses` condition).
+- `QuestionDirectionRevealed {questionIndex, correctDirection}` — stage-1 reveal, once.
+- `DirectionScored {…, playerId, guessedDirection, directionCorrect, bonusPoints}` —
+  **per-player** stage-1 bonus (−10 | 0), one per player.
+- `QuestionDifferenceRevealed {questionIndex, correctDifference}` — stage-2 reveal, once;
+  the **progression gate** (`Ask next question` / `End game` react to it).
+- `DifferenceScored {…, playerId, …, roundScore, totalScore}` — **per-player** stage-2
+  score, one per player; `roundScore = differencePoints + stage-1 bonus`.
+- No `AllGuessesSubmitted` event (it is a `Todo / Outstanding ...` condition).
 
-Granularity: **behavior-based slices** (one `JoinGame`, one `SubmitGuess`), not
+Granularity: **behavior-based slices** (one `JoinGame`, one `SubmitDirection`), not
 per-player. Concrete players (Martin id0, Nils id1, Sven id2) appear as test props /
 per-player test cases, keeping the model generic to N players.
 
@@ -222,26 +233,27 @@ this spec is the single source of truth the C# domain maps to 1:1, so the annota
 | `bonusPoints` `roundScore` `totalScore`                          | `int` (signed, may be negative) |
 | `valueA` `valueB` (raw card magnitudes, any unit)                | `decimal` |
 | index/count (`questionIndex`, `totalQuestions`, `questionCount`, …) | `int`  |
-| `allGuessesIn` `hasNextQuestion` `directionCorrect` `isHost` | `bool`      |
+| `allDirectionsIn` `allDifferencesIn` `directionRevealed` `hasNextQuestion` `directionCorrect` `isHost` | `bool` |
 | names/text (`hostName`, `playerName`, `questionText`, `itemA/B`, `unit`, `differencePrompt`, `name`) | `string` |
 
 Notes:
 
 - **`direction` is a `Direction` enum** with members `mer | mindre`. Annotated
-  `Direction (mer|mindre)` on the `SubmitGuess` command **and** on the events
-  (`GuessSubmitted`, `QuestionAnswered.correctDirection`,
-  `QuestionScored.guessedDirection`) — the event types are not weaker than the command.
-- **The difference family is split by raw-vs-normalized (NOT all `int (0-100)`).** The
-  player guesses the **RAW** absolute difference in the card's own unit — `decimal`,
-  `>= 0`, answering the card's `differencePrompt` — carried on `SubmitGuess` /
-  `GuessSubmitted` as `guessedDifference`. The client never sees the hidden values, so
-  the **system** normalizes server-side in `ScoreQuestion` with `mx = max(valueA,
-  valueB)`: `correctDifference = round(|A-B|/mx*100)` and `guessedDifferenceNormalized =
-  min(100, round(guessedDifference/mx*100))` (CLAMPED at 100; same `mx` for both). Both
-  normalized values are `byte (0-100)` and DERIVED — never on the card. `differencePoints
-  = |guessedDifferenceNormalized - correctDifference|` is `byte`; `bonusPoints`,
-  `roundScore`, `totalScore` are signed `int` (carry the −10 bonus). `DifferenceOutOfRange`
-  guards a **negative** raw guess only — there is no upper bound (too-large clamps at 100).
+  `Direction (mer|mindre)` on the `SubmitDirection` command **and** on the events
+  (`DirectionSubmitted`, `QuestionDirectionRevealed.correctDirection`,
+  `DirectionScored.guessedDirection`) — the event types are not weaker than the command.
+- **The difference family is split by raw-vs-normalized (NOT all `int (0-100)`).** In
+  stage 2 the player guesses the **RAW** absolute difference in the card's own unit —
+  `decimal`, `>= 0`, answering the card's `differencePrompt` — carried on
+  `SubmitDifference` / `DifferenceSubmitted` as `guessedDifference`. The client never sees
+  the hidden values, so the **system** normalizes server-side in `ScoreDifference` with
+  `mx = max(valueA, valueB)`: `correctDifference = round(|A-B|/mx*100)` and
+  `guessedDifferenceNormalized = min(100, round(guessedDifference/mx*100))` (CLAMPED at
+  100; same `mx` for both). Both normalized values are `byte (0-100)` and DERIVED — never
+  on the card. `differencePoints = |guessedDifferenceNormalized - correctDifference|` is
+  `byte`; `bonusPoints`, `roundScore`, `totalScore` are signed `int` (carry the −10 bonus,
+  dealt on stage-1 `DirectionScored`). `DifferenceOutOfRange` guards a **negative** raw
+  guess only — there is no upper bound (too-large clamps at 100).
 - **`joinCode` is a `Guid`** — a minted join token, distinct from `gameId`.
 - **Timestamps are `DateTimeOffset`** (unambiguous instant; survives serialization
   without `DateTime.Kind` loss; matches `GameEvent.OccurredAt` / `GameContext.Now`).
@@ -251,18 +263,18 @@ Notes:
   `PlayerScore { playerId: Guid, roundScore: int, totalScore: int }`,
   `ScoreboardEntry { playerId: Guid, playerName: string, totalScore: int }`.
 - **`State / Game` folds the whole deck as `questions: IReadOnlyList<QuestionRound>`** —
-  the game loads all questions up front and each player's guess folds into its question.
-  `QuestionRound { card: Question, guesses: IReadOnlyDictionary<Guid, Guess>,
-  correctDirection: Direction?, correctDifference: byte?, roundScores:
-  IReadOnlyDictionary<Guid, int>, scored: bool }` (`Guess { direction, guessedDifference:
-  decimal }` — the raw guess). Progress is DERIVED, not stored:
-  `pendingPlayerIds(i)`, `allGuessesIn(i)`, `currentQuestionScored`, `hasNextQuestion`,
-  and `totalScore(p) = Σ scored questions roundScores[p]`. `Todo / Outstanding guesses`
-  mirrors this as one row per question (`OutstandingQuestion { questionIndex,
-  pendingPlayerIds, allGuessesIn }`) — a real todo list the scorer gears on.
-
-> The current C# records (string ids, `int Guess`, single `DateTimeOffset` on
-> `OccurredAt`) are reconciled to this vocabulary in a later, separate effort.
+  the game loads all questions up front and each player's stage-1/stage-2 guess folds into
+  its question. `QuestionRound { card: Question, directions: IReadOnlyDictionary<Guid,
+  Direction>, correctDirection: Direction?, directionScores: IReadOnlyDictionary<Guid,
+  int>, differences: IReadOnlyDictionary<Guid, decimal>, correctDifference: byte?,
+  roundScores: IReadOnlyDictionary<Guid, int>, scored: bool }`. Progress is DERIVED, not
+  stored: `pendingDirectionPlayerIds(i)`/`allDirectionsIn(i)`, `directionRevealed(i)`,
+  `pendingDifferencePlayerIds(i)`/`allDifferencesIn(i)`, `currentQuestionScored`,
+  `hasNextQuestion`, and `totalScore(p) = Σ scored questions roundScores[p]`. Two
+  `Todo /` read-models mirror this, one per gear: `Outstanding directions`
+  (`OutstandingDirection { questionIndex, pendingPlayerIds, allDirectionsIn }`) and
+  `Outstanding differences` (`OutstandingDifference { questionIndex, pendingPlayerIds,
+  allDifferencesIn, directionRevealed }`).
 
 ## SV ↔ EN glossary
 
@@ -293,8 +305,9 @@ Notes:
 natural Swedish sentence the author writes (full control of the grammar; convention:
 **Mer = `itemA` has the larger value**). `differencePrompt` is the per-card wording for
 the raw-difference guess (e.g. "Hur många miljoner invånare skiljer det?") — the player
-answers it in the card's unit. The card carries NO precomputed answer — `ScoreQuestion`
-derives direction + normalized difference from the raw values at reveal.
+answers it in the card's unit. The card carries NO precomputed answer — `RevealDirection`
+derives the direction (stage 1) and `ScoreDifference` the normalized difference (stage 2)
+from the raw values at reveal.
 
 **File-based CSV catalog**: the catalog is domain reference data stored as plain CSV files
 on disk — one pack = one `*.csv`, edited by the author in Excel / Google Sheets (no DB, no

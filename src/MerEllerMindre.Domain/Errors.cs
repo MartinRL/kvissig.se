@@ -20,11 +20,19 @@ public record GameNotStarted;
 
 public record PlayerNotInGame;
 
-public record AlreadyGuessed;
+public record AlreadySubmittedDirection;
+
+public record AlreadySubmittedDifference;
+
+public record DirectionNotRevealed;
 
 public record DifferenceOutOfRange;
 
-public record NotAllGuessesIn;
+public record NotAllDirectionsIn;
+
+public record DirectionAlreadyRevealed;
+
+public record NotAllDifferencesIn;
 
 public record QuestionAlreadyScored;
 
@@ -36,8 +44,12 @@ public union GameError(
     NotEnoughPlayers,
     GameNotStarted,
     PlayerNotInGame,
-    AlreadyGuessed,
+    AlreadySubmittedDirection,
+    AlreadySubmittedDifference,
+    DirectionNotRevealed,
     DifferenceOutOfRange,
-    NotAllGuessesIn,
+    NotAllDirectionsIn,
+    DirectionAlreadyRevealed,
+    NotAllDifferencesIn,
     QuestionAlreadyScored
 );

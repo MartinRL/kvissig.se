@@ -48,16 +48,29 @@ public sealed class GameApplicationService
         return result;
     }
 
-    /// <summary>Scoring gear: fire ScoreQuestion the moment the last guess lands.</summary>
-    public void RunScoreGear(Guid gameId)
+    /// <summary>Stage-1 reveal gear: fire RevealDirection the moment the last direction lands,
+    /// dealing the −10 bonus and opening the mellansteg.</summary>
+    public void RunRevealDirectionGear(Guid gameId)
     {
         var state = _repo.Load(gameId);
         if (state.Phase != GamePhase.Started)
             return;
 
         var i = state.CurrentQuestionIndex;
-        if (state.AllGuessesIn(i) && !state.Questions[i].Scored)
-            Execute(gameId, new ScoreQuestion(gameId, i));
+        if (state.AllDirectionsIn(i) && !state.DirectionRevealed(i))
+            Execute(gameId, new RevealDirection(gameId, i));
+    }
+
+    /// <summary>Stage-2 scoring gear: fire ScoreDifference the moment the last difference lands.</summary>
+    public void RunScoreDifferenceGear(Guid gameId)
+    {
+        var state = _repo.Load(gameId);
+        if (state.Phase != GamePhase.Started)
+            return;
+
+        var i = state.CurrentQuestionIndex;
+        if (state.AllDifferencesIn(i) && !state.Questions[i].Scored)
+            Execute(gameId, new ScoreDifference(gameId, i));
     }
 
     /// <summary>Progression gear: once the current question is scored, ask the next question

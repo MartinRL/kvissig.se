@@ -20,7 +20,7 @@ public class EvolveTests
             new LobbyOpened(GameId, MartinId, "Martin", JoinCode, "mer-eller-mindre", [Question0, Question1], At),
             new PlayerJoined(GameId, NilsId, "Nils", At),
             new GameStarted(GameId, FirstQuestionIndex: 0, At),
-            new GuessSubmitted(GameId, MartinId, QuestionIndex: 0, Direction.Mer, GuessedDifference: 30m, At)
+            new DirectionSubmitted(GameId, MartinId, QuestionIndex: 0, Direction.Mer, At)
         ]);
 
         state.Phase.Should().Be(GamePhase.Started);
@@ -30,28 +30,57 @@ public class EvolveTests
 
         state.Questions.Should().HaveCount(2);
         state.Questions[0].Card.Should().Be(Question0);
-        state.Questions[0].Guesses.Should().ContainKey(MartinId).WhoseValue.Should().Be(GuessMer30);
+        state.Questions[0].Directions.Should().ContainKey(MartinId).WhoseValue.Should().Be(Direction.Mer);
         state.Questions[0].Scored.Should().BeFalse();
-        state.Questions[1].Guesses.Should().BeEmpty();
+        state.Questions[1].Directions.Should().BeEmpty();
         state.Questions[1].Scored.Should().BeFalse();
 
-        state.PendingPlayerIds(0).Should().Equal(NilsId);
-        state.AllGuessesIn(0).Should().BeFalse();
+        state.PendingDirectionPlayerIds(0).Should().Equal(NilsId);
+        state.AllDirectionsIn(0).Should().BeFalse();
+        state.DirectionRevealed(0).Should().BeFalse();
     }
 
     [Fact]
-    public void ScoringAQuestionFoldsTheAnswerAndRoundScores()
+    public void RevealingDirectionFoldsTheCorrectDirectionAndBonus()
     {
         var state = Decider.Fold(
         [
             new LobbyOpened(GameId, MartinId, "Martin", JoinCode, "mer-eller-mindre", [Question0, Question1], At),
             new PlayerJoined(GameId, NilsId, "Nils", At),
             new GameStarted(GameId, FirstQuestionIndex: 0, At),
-            new GuessSubmitted(GameId, MartinId, 0, Direction.Mer, 30m, At),
-            new GuessSubmitted(GameId, NilsId, 0, Direction.Mindre, 50m, At),
-            new QuestionAnswered(GameId, 0, Direction.Mer, CorrectDifference: 40),
-            new QuestionScored(GameId, 0, MartinId, Direction.Mer, 30m, 30, DirectionCorrect: true, 10, -10, RoundScore: 0, TotalScore: 0),
-            new QuestionScored(GameId, 0, NilsId, Direction.Mindre, 50m, 50, DirectionCorrect: false, 10, 0, RoundScore: 10, TotalScore: 10)
+            new DirectionSubmitted(GameId, MartinId, 0, Direction.Mer, At),
+            new DirectionSubmitted(GameId, NilsId, 0, Direction.Mindre, At),
+            new QuestionDirectionRevealed(GameId, 0, Direction.Mer),
+            new DirectionScored(GameId, 0, MartinId, Direction.Mer, DirectionCorrect: true, BonusPoints: -10),
+            new DirectionScored(GameId, 0, NilsId, Direction.Mindre, DirectionCorrect: false, BonusPoints: 0)
+        ]);
+
+        var round = state.Questions[0];
+        round.CorrectDirection.Should().Be(Direction.Mer);
+        round.DirectionScores[MartinId].Should().Be(-10);
+        round.DirectionScores[NilsId].Should().Be(0);
+        round.Scored.Should().BeFalse();
+        state.DirectionRevealed(0).Should().BeTrue();
+    }
+
+    [Fact]
+    public void ScoringTheDifferenceFoldsTheAnswerAndRoundScores()
+    {
+        var state = Decider.Fold(
+        [
+            new LobbyOpened(GameId, MartinId, "Martin", JoinCode, "mer-eller-mindre", [Question0, Question1], At),
+            new PlayerJoined(GameId, NilsId, "Nils", At),
+            new GameStarted(GameId, FirstQuestionIndex: 0, At),
+            new DirectionSubmitted(GameId, MartinId, 0, Direction.Mer, At),
+            new DirectionSubmitted(GameId, NilsId, 0, Direction.Mindre, At),
+            new QuestionDirectionRevealed(GameId, 0, Direction.Mer),
+            new DirectionScored(GameId, 0, MartinId, Direction.Mer, DirectionCorrect: true, BonusPoints: -10),
+            new DirectionScored(GameId, 0, NilsId, Direction.Mindre, DirectionCorrect: false, BonusPoints: 0),
+            new DifferenceSubmitted(GameId, MartinId, 0, 30m, At),
+            new DifferenceSubmitted(GameId, NilsId, 0, 50m, At),
+            new QuestionDifferenceRevealed(GameId, 0, CorrectDifference: 40),
+            new DifferenceScored(GameId, 0, MartinId, 30m, 30, 10, RoundScore: 0, TotalScore: 0),
+            new DifferenceScored(GameId, 0, NilsId, 50m, 50, 10, RoundScore: 10, TotalScore: 10)
         ]);
 
         state.CurrentQuestionIndex.Should().Be(0);

@@ -28,6 +28,26 @@ public record WaitingForOthersView(
     IReadOnlyList<Guid> PendingPlayerIds
 );
 
+/// <summary>
+/// The mellansteg between the two stages: direction revealed + the -10 bonus dealt.
+/// Per-player directionCorrect, bonus, and the running total SO FAR (includes the just-
+/// awarded bonus, for drama).
+/// </summary>
+public record PlayerDirectionResult(
+    Guid PlayerId,
+    Direction GuessedDirection,
+    bool DirectionCorrect,
+    int BonusPoints,
+    int TotalSoFar
+);
+
+public record DirectionResultsView(
+    Guid GameId,
+    int QuestionIndex,
+    Direction CorrectDirection,
+    IReadOnlyList<PlayerDirectionResult> PlayerDirections
+);
+
 public record RoundResultsView(
     Guid GameId,
     int QuestionIndex,
@@ -43,18 +63,34 @@ public record FinalStandingsView(
 );
 
 /// <summary>
-/// One row of the Outstanding-guesses todo list: which players still owe a guess on a
-/// given question and whether the question is complete.
+/// One row of the Outstanding-directions todo list (stage-1 gear): which players still owe
+/// a direction on a given question and whether the question is complete.
 /// </summary>
-public record OutstandingQuestion(
+public record OutstandingDirection(
     int QuestionIndex,
     IReadOnlyList<Guid> PendingPlayerIds,
-    bool AllGuessesIn
+    bool AllDirectionsIn
 );
 
-public record OutstandingGuessesView(
+public record OutstandingDirectionsView(
     Guid GameId,
-    IReadOnlyList<OutstandingQuestion> Questions
+    IReadOnlyList<OutstandingDirection> Questions
+);
+
+/// <summary>
+/// One row of the Outstanding-differences todo list (stage-2 gear): which players still owe
+/// a difference on a given question, whether it is complete, and whether stage 1 closed.
+/// </summary>
+public record OutstandingDifference(
+    int QuestionIndex,
+    IReadOnlyList<Guid> PendingPlayerIds,
+    bool AllDifferencesIn,
+    bool DirectionRevealed
+);
+
+public record OutstandingDifferencesView(
+    Guid GameId,
+    IReadOnlyList<OutstandingDifference> Questions
 );
 
 public record GameProgressView(
@@ -89,12 +125,31 @@ public static class Projections
     public static WaitingForOthersView WaitingForOthers(GameState state)
     {
         var i = state.CurrentQuestionIndex;
-        var guesses = state.Questions[i].Guesses;
+        // Pending is derived from the ACTIVE stage: directions while stage 1 is open
+        // (before the reveal), differences after.
+        var (submittedSet, pending) = state.DirectionRevealed(i)
+            ? (state.Questions[i].Differences.Keys, state.PendingDifferencePlayerIds(i))
+            : (state.Questions[i].Directions.Keys, state.PendingDirectionPlayerIds(i));
         var submitted = state.Players
-            .Where(p => guesses.ContainsKey(p.PlayerId))
+            .Where(p => submittedSet.Contains(p.PlayerId))
             .Select(p => p.PlayerId)
             .ToList();
-        return new WaitingForOthersView(state.GameId, i, submitted, state.PendingPlayerIds(i));
+        return new WaitingForOthersView(state.GameId, i, submitted, pending);
+    }
+
+    public static DirectionResultsView DirectionResults(GameState state)
+    {
+        var i = state.CurrentQuestionIndex;
+        var round = state.Questions[i];
+        var playerDirections = state.Players
+            .Select(p => new PlayerDirectionResult(
+                p.PlayerId,
+                round.Directions[p.PlayerId],
+                round.CorrectDirection == round.Directions[p.PlayerId],
+                round.DirectionScores[p.PlayerId],
+                state.TotalScore(p.PlayerId) + round.DirectionScores[p.PlayerId]))
+            .ToList();
+        return new DirectionResultsView(state.GameId, i, round.CorrectDirection!.Value, playerDirections);
     }
 
     public static RoundResultsView RoundResults(GameState state)
@@ -115,12 +170,20 @@ public static class Projections
     public static FinalStandingsView FinalStandings(GameState state) =>
         new(state.GameId, state.FinalScoreboard, state.WinnerIds);
 
-    public static OutstandingGuessesView OutstandingGuesses(GameState state)
+    public static OutstandingDirectionsView OutstandingDirections(GameState state)
     {
         var questions = state.Questions
-            .Select((_, i) => new OutstandingQuestion(i, state.PendingPlayerIds(i), state.AllGuessesIn(i)))
+            .Select((_, i) => new OutstandingDirection(i, state.PendingDirectionPlayerIds(i), state.AllDirectionsIn(i)))
             .ToList();
-        return new OutstandingGuessesView(state.GameId, questions);
+        return new OutstandingDirectionsView(state.GameId, questions);
+    }
+
+    public static OutstandingDifferencesView OutstandingDifferences(GameState state)
+    {
+        var questions = state.Questions
+            .Select((_, i) => new OutstandingDifference(i, state.PendingDifferencePlayerIds(i), state.AllDifferencesIn(i), state.DirectionRevealed(i)))
+            .ToList();
+        return new OutstandingDifferencesView(state.GameId, questions);
     }
 
     public static GameProgressView GameProgress(GameState state) =>

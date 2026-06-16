@@ -60,6 +60,18 @@ public class GameEndpointsTests : IClassFixture<TestAppFactory>
     private static async Task<string> State(HttpClient client, string code) =>
         await (await client.GetAsync($"/games/{code}/state")).Content.ReadAsStringAsync();
 
+    /// <summary>Stage 1: read the direction screen and lock in a mer/mindre call.</summary>
+    private static async Task SubmitDirection(HttpClient client, string code, string direction) =>
+        await client.PostAsync($"/games/{code}/direction",
+            Form(Token(await State(client, code)), ("direction", direction)));
+
+    /// <summary>Stage 2: tap through the mellansteg to the slider, then size the difference.</summary>
+    private static async Task SubmitDifference(HttpClient client, string code, string value)
+    {
+        var slider = await (await client.GetAsync($"/games/{code}/difference")).Content.ReadAsStringAsync();
+        await client.PostAsync($"/games/{code}/difference", Form(Token(slider), ("guessedDifference", value)));
+    }
+
     [Fact]
     public async Task Catalog_ListsThePackFromTheCsvCatalog()
     {
@@ -123,7 +135,7 @@ public class GameEndpointsTests : IClassFixture<TestAppFactory>
     }
 
     [Fact]
-    public async Task QuestionScreen_ShowsAUnitSliderBoundedByTheLargerRawValue()
+    public async Task DirectionScreen_AsksWhichItemIsMerWithoutRevealingTheSlider()
     {
         var host = NewClient();
         var player = NewClient();
@@ -134,10 +146,49 @@ public class GameEndpointsTests : IClassFixture<TestAppFactory>
         await host.PostAsync($"/games/{code}/start", Form(Token(lobby)));
 
         var question = await State(player, code);
-        // Q0 = Danmark 5,9 / Norge 5,5 (miljoner invånare): slider 0 → max(A,B) in the card's unit.
-        question.Should().Contain("max=\"5.9\"");
-        question.Should().Contain("miljoner invånare");
+        // Stage 1 is direction-only: the question + items show, but no slider/unit yet.
         question.Should().Contain("Har Danmark större eller mindre befolkning än Norge?");
+        question.Should().Contain("Vilken är mer?");
+        question.Should().NotContain("max=\"5.9\"");
+    }
+
+    [Fact]
+    public async Task DifferenceScreen_ShowsAUnitSliderBoundedByTheLargerRawValueOnceDirectionRevealed()
+    {
+        var host = NewClient();
+        var player = NewClient();
+        var code = await CreateGame(host);
+        await Join(player, code, "Nils");
+        await host.PostAsync($"/games/{code}/start", Form(Token(await State(host, code))));
+
+        // Both call the direction → the reveal gear opens the mellansteg + stage 2.
+        await SubmitDirection(host, code, "Mer");
+        await SubmitDirection(player, code, "Mindre");
+
+        var slider = await (await player.GetAsync($"/games/{code}/difference")).Content.ReadAsStringAsync();
+        // Q0 = Danmark 5,9 / Norge 5,5 (miljoner invånare): slider 0 → max(A,B) in the card's unit.
+        slider.Should().Contain("max=\"5.9\"");
+        slider.Should().Contain("miljoner invånare");
+    }
+
+    [Fact]
+    public async Task Mellansteg_RevealsTheDirectionAndDealsTheBonus()
+    {
+        var host = NewClient();
+        var player = NewClient();
+        var code = await CreateGame(host);
+        await Join(player, code, "Nils");
+        await host.PostAsync($"/games/{code}/start", Form(Token(await State(host, code))));
+
+        await SubmitDirection(host, code, "Mer");      // correct → −10
+        await SubmitDirection(player, code, "Mindre");  // wrong → 0
+
+        var mellansteg = await State(host, code);
+        mellansteg.Should().Contain("riktning avslöjad");
+        mellansteg.Should().Contain("Danmark");
+        mellansteg.Should().Contain("MER");
+        mellansteg.Should().Contain("-10");                 // Martin's bonus so far
+        mellansteg.Should().Contain("Fortsätt till skillnaden");
     }
 
     [Fact]
@@ -147,19 +198,16 @@ public class GameEndpointsTests : IClassFixture<TestAppFactory>
         var player = NewClient();
         var code = await CreateGame(host);
         await Join(player, code, "Nils");
-
         await host.PostAsync($"/games/{code}/start", Form(Token(await State(host, code))));
 
-        // Martin: Mer 0,4 (correct direction, perfect diff) → roundScore -10.
-        var q1 = await State(host, code);
-        var afterHostGuess = await host.PostAsync($"/games/{code}/guess",
-            Form(Token(q1), ("direction", "Mer"), ("guessedDifference", "0.4")));
-        (await afterHostGuess.Content.ReadAsStringAsync()).Should().Contain("Din gissning är ställd");
+        // Stage 1: Martin calls Mer (correct), Nils calls Mindre (wrong) → reveal + bonus.
+        await SubmitDirection(host, code, "Mer");
+        await SubmitDirection(player, code, "Mindre");
 
-        // Nils: Mindre 0,4 (wrong direction) → roundScore +7. Last guess fires the scoring gear.
-        var q2 = await State(player, code);
-        await player.PostAsync($"/games/{code}/guess",
-            Form(Token(q2), ("direction", "Mindre"), ("guessedDifference", "0.4")));
+        // Stage 2: both size 0,4. Martin (Mer, perfect) → roundScore -10; the last difference
+        // fires the scoring gear.
+        await SubmitDifference(host, code, "0.4");
+        await SubmitDifference(player, code, "0.4");
 
         var results = await State(host, code);
         results.Should().Contain("Danmark");           // larger item revealed
@@ -178,17 +226,16 @@ public class GameEndpointsTests : IClassFixture<TestAppFactory>
         await Join(player, code, "Nils");
         await host.PostAsync($"/games/{code}/start", Form(Token(await State(host, code))));
 
-        await host.PostAsync($"/games/{code}/guess",
-            Form(Token(await State(host, code)), ("direction", "Mer"), ("guessedDifference", "0.4")));
-        await player.PostAsync($"/games/{code}/guess",
-            Form(Token(await State(player, code)), ("direction", "Mer"), ("guessedDifference", "0.4")));
+        await SubmitDirection(host, code, "Mer");
+        await SubmitDirection(player, code, "Mer");
+        await SubmitDifference(host, code, "0.4");
+        await SubmitDifference(player, code, "0.4");
 
         var results = await State(host, code);
         await host.PostAsync($"/games/{code}/next", Form(Token(results)));
 
         var q1 = await State(player, code);
-        // Q1 = Sverige 450295 / Norge 385207 (km²).
+        // Q1 = Sverige 450295 / Norge 385207 (km²) — stage-1 direction screen.
         q1.Should().Contain("Är Sveriges yta större eller mindre än Norges?");
-        q1.Should().Contain("km²");
     }
 }

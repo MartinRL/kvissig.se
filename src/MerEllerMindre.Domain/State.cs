@@ -28,28 +28,24 @@ public record Player(
 );
 
 /// <summary>
-/// A player's guess: the direction plus the RAW absolute difference in the card's own
-/// unit (>= 0, NOT 0-100). Normalization happens server-side in ScoreQuestion.
-/// </summary>
-public record Guess(
-    Direction Direction,
-    decimal GuessedDifference
-);
-
-/// <summary>
-/// The fixed card plus how it is being answered. The deck is loaded up front (one
-/// QuestionRound per card) and each guess folds into its question. correctDirection/
-/// correctDifference are revealed (non-null) once scored.
+/// The fixed card plus how it is being answered across the two-stage rocket. The deck is
+/// loaded up front (one QuestionRound per card). STAGE 1: each direction folds into
+/// Directions; correctDirection + the per-player bonus (DirectionScores) are set at the
+/// stage-1 reveal. STAGE 2: each raw magnitude folds into Differences; correctDifference +
+/// the combined RoundScores are set at the stage-2 score. Normalization happens
+/// server-side in ScoreDifference.
 ///
-/// guesses/roundScores are maps keyed by playerId — a deliberate deviation from the
+/// The per-player maps are keyed by playerId — a deliberate deviation from the
 /// constitution's IReadOnlyList&lt;T&gt; rule for the keyed decision model (see spec). The
 /// value objects never repeat the key; wire events stay flat with an explicit playerId.
 /// </summary>
 public record QuestionRound
 {
     public required Question Card { get; init; }
-    public IReadOnlyDictionary<Guid, Guess> Guesses { get; init; } = new Dictionary<Guid, Guess>();
+    public IReadOnlyDictionary<Guid, Direction> Directions { get; init; } = new Dictionary<Guid, Direction>();
     public Direction? CorrectDirection { get; init; }
+    public IReadOnlyDictionary<Guid, int> DirectionScores { get; init; } = new Dictionary<Guid, int>();
+    public IReadOnlyDictionary<Guid, decimal> Differences { get; init; } = new Dictionary<Guid, decimal>();
     public byte? CorrectDifference { get; init; }
     public IReadOnlyDictionary<Guid, int> RoundScores { get; init; } = new Dictionary<Guid, int>();
     public bool Scored { get; init; }
@@ -96,15 +92,28 @@ public record GameState
 
     public static GameState Initial => new();
 
-    /// <summary>Players who have not yet guessed question i.</summary>
-    public IReadOnlyList<Guid> PendingPlayerIds(int i) =>
+    /// <summary>Players who have not yet submitted a direction for question i (stage 1).</summary>
+    public IReadOnlyList<Guid> PendingDirectionPlayerIds(int i) =>
         Players
-            .Where(p => !Questions[i].Guesses.ContainsKey(p.PlayerId))
+            .Where(p => !Questions[i].Directions.ContainsKey(p.PlayerId))
             .Select(p => p.PlayerId)
             .ToList();
 
-    /// <summary>True once every player has guessed question i.</summary>
-    public bool AllGuessesIn(int i) => PendingPlayerIds(i).Count == 0;
+    /// <summary>True once every player has submitted a direction for question i.</summary>
+    public bool AllDirectionsIn(int i) => PendingDirectionPlayerIds(i).Count == 0;
+
+    /// <summary>True once question i's direction has been revealed (stage 1 closed).</summary>
+    public bool DirectionRevealed(int i) => Questions[i].CorrectDirection is not null;
+
+    /// <summary>Players who have not yet submitted a difference for question i (stage 2).</summary>
+    public IReadOnlyList<Guid> PendingDifferencePlayerIds(int i) =>
+        Players
+            .Where(p => !Questions[i].Differences.ContainsKey(p.PlayerId))
+            .Select(p => p.PlayerId)
+            .ToList();
+
+    /// <summary>True once every player has submitted a difference for question i.</summary>
+    public bool AllDifferencesIn(int i) => PendingDifferencePlayerIds(i).Count == 0;
 
     /// <summary>Whether the current question has been scored.</summary>
     public bool CurrentQuestionScored => Questions[CurrentQuestionIndex].Scored;

@@ -29,32 +29,54 @@ public record GameStarted(
     DateTimeOffset StartedAt
 );
 
-public record GuessSubmitted(
+// --- Stage 1: direction ---
+
+public record DirectionSubmitted(
     Guid GameId,
     Guid PlayerId,
     int QuestionIndex,
     Direction Direction,
-    decimal GuessedDifference,
     DateTimeOffset SubmittedAt
 );
 
-public record QuestionAnswered(
+public record QuestionDirectionRevealed(
     Guid GameId,
     int QuestionIndex,
-    Direction CorrectDirection,
-    byte CorrectDifference
+    Direction CorrectDirection
 );
 
-public record QuestionScored(
+public record DirectionScored(
     Guid GameId,
     int QuestionIndex,
     Guid PlayerId,
     Direction GuessedDirection,
+    bool DirectionCorrect,
+    int BonusPoints
+);
+
+// --- Stage 2: difference ---
+
+public record DifferenceSubmitted(
+    Guid GameId,
+    Guid PlayerId,
+    int QuestionIndex,
+    decimal GuessedDifference,
+    DateTimeOffset SubmittedAt
+);
+
+public record QuestionDifferenceRevealed(
+    Guid GameId,
+    int QuestionIndex,
+    byte CorrectDifference
+);
+
+public record DifferenceScored(
+    Guid GameId,
+    int QuestionIndex,
+    Guid PlayerId,
     decimal GuessedDifference,
     byte GuessedDifferenceNormalized,
-    bool DirectionCorrect,
     byte DifferencePoints,
-    int BonusPoints,
     int RoundScore,
     int TotalScore
 );
@@ -75,9 +97,12 @@ public union GameEvent(
     LobbyOpened,
     PlayerJoined,
     GameStarted,
-    GuessSubmitted,
-    QuestionAnswered,
-    QuestionScored,
+    DirectionSubmitted,
+    QuestionDirectionRevealed,
+    DirectionScored,
+    DifferenceSubmitted,
+    QuestionDifferenceRevealed,
+    DifferenceScored,
     NextQuestionStarted,
     GameEnded
 );
