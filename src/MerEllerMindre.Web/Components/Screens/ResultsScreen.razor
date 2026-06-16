@@ -10,7 +10,7 @@
 
         <div class="twobars" aria-hidden="true">
             <div class="bar a" style="height:100%"><span>@Fmt(Model.LargerValue)</span></div>
-            <div class="bar b" style="height:@Model.SmallerBarPercent%"><span>@Fmt(Model.SmallerValue)</span></div>
+            <div class="bar b" style="height:@Model.SmallerBarPercent%"><span>@Fmt(Model.SmallerValue) · @Model.SmallerBarPercent%</span></div>
         </div>
         <div class="twobars-legend">
             <span>@Model.LargerItem · @Fmt(Model.LargerValue) @Model.Unit</span>

@@ -94,6 +94,7 @@ source, no GT).
 - [x] Final standings page (winner banner, lowest-total-wins scoreboard)
 
 ## Phase 9: Polish
+- [x] nu när vi inte längre ser maxvärdet, utan bara hur den mindre förhåller sig till den större (mindre vs mer) så är det lämpligt att på något vis introducera %. dvs när rikting har valts och man rör slidern, så är det ju i praktiken den mindres % av mer man gissar. detta ska du ultrathink om ur ett spel- och UX-mässigt perspektiv innan lösning.
 - [ ] Mobile-friendly CSS
 - [ ] PWA manifest
 - [ ] Error handling UI

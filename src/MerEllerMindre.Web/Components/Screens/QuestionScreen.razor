@@ -51,6 +51,9 @@
         const barA = document.getElementById('barA');
         const barB = document.getElementById('barB');
         const buttons = document.querySelectorAll('.direction button');
+        // Read item names from the DOM, not injected Razor strings, to avoid escaping/injection.
+        const nameA = barA.querySelector('.barcap').textContent;
+        const nameB = barB.querySelector('.barcap').textContent;
 
         function norm(v) { return max > 0 ? Math.min(100, Math.round(v / max * 100)) : 0; }
 
@@ -66,6 +69,12 @@
             short.classList.add('is-mindre'); short.classList.remove('is-mer');
             tall.style.height = '100%';
             short.style.height = (100 - n) + '%';
+            const pct = 100 - n;
+            const shortName = merIsA ? nameB : nameA;
+            const tallName = merIsA ? nameA : nameB;
+            short.querySelector('.barcap').textContent = `${shortName} ≈ ${pct}%`;
+            tall.querySelector('.barcap').textContent = tallName;
+            range.setAttribute('aria-valuetext', `${shortName} ${pct} procent av ${tallName}`);
         }
 
         range.addEventListener('input', render);
