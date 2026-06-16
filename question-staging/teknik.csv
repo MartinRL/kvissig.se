@@ -1,0 +1,111 @@
+﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Har en Bugatti Chiron högre eller lägre toppfart än en Koenigsegg Jesko Absolut?;Bugatti Chiron Super Sport;Koenigsegg Jesko Absolut;490;500;km/h;Hur många km/h skiljer toppfarten?
+Har en Tesla Model S Plaid mer eller mindre effekt än en Ferrari SF90?;Tesla Model S Plaid;Ferrari SF90 Stradale;1020;990;hk;Hur många hk skiljer det?
+Är Eiffeltornet högre eller lägre än Empire State Building?;Eiffeltornet;Empire State Building;330;381;meter;Hur många meter skiljer höjden?
+Lanserades första iPhone tidigare eller senare än första Android-telefonen?;Första iPhone;HTC Dream (T-Mobile G1);2007;2008;år;Hur många år skiljer lanseringarna?
+Är Kanaltunneln längre eller kortare än Gotthardtunneln?;Kanaltunneln;Gotthards bastunnel;50,5;57,1;km;Hur många km skiljer längden?
+Väger en Airbus A380 mer eller mindre vid start än en Boeing 747-8?;Airbus A380;Boeing 747-8;575;448;ton;Hur många ton skiljer startvikten?
+Vägde Saturn V-raketen mer eller mindre vid start än rymdfärjan?;Saturn V;Rymdfärjan (hela stacken);2800;2030;ton;Hur många ton skiljer startvikten?
+Hade SR-71 Blackbird högre eller lägre toppfart än Concorde?;SR-71 Blackbird;Concorde;3530;2179;km/h;Hur många km/h skiljer toppfarten?
+Har en Bugatti Chiron mer eller mindre effekt än en Bugatti Veyron?;Bugatti Chiron;Bugatti Veyron;1500;1001;hk;Hur många hk skiljer effekten?
+Är Queen Mary 2 längre eller kortare än Titanic?;Queen Mary 2;Titanic;345;269;meter;Hur många meter skiljer längden?
+Är Suezkanalen längre eller kortare än Panamakanalen?;Suezkanalen;Panamakanalen;193;82;km;Hur många km skiljer längden?
+Har Shanghais maglevtåg högre eller lägre marschfart än ett TGV?;Shanghai Maglev;TGV;431;320;km/h;Hur många km/h skiljer farten?
+Väger Ariane 5 mer eller mindre vid start än en Falcon 9?;Ariane 5;Falcon 9;777;549;ton;Hur många ton skiljer startvikten?
+Är Burj Khalifa högre eller lägre än CN Tower?;Burj Khalifa;CN Tower;828;553;meter;Hur många meter skiljer höjden?
+Har en F1-bil mer eller mindre effekt än en Volvo-lastbil?;F1-bil;Volvo FH lastbil;1000;750;hk;Hur många hk skiljer effekten?
+Väger Apollos månlandare mer eller mindre än kommandomodulen?;Apollos månlandare (LM);Apollos kommandomodul (CSM);15;30;ton;Hur många ton skiljer vikten?
+Väger rymdteleskopet Hubble mer eller mindre än James Webb?;Hubble;James Webb;11;6,5;ton;Hur många ton skiljer vikten?
+Är Frihetsgudinnan högre eller lägre än Eiffeltornet?;Frihetsgudinnan;Eiffeltornet;93;330;meter;Hur många meter skiljer höjden?
+Hade Wright Flyer längre eller kortare vingbredd än en Boeing 747?;Wright Flyer;Boeing 747;12;68,4;meter;Hur många meter skiljer vingbredden?
+Har Golden Gate-bron längre eller kortare spann än Brooklyn Bridge?;Golden Gate-bron;Brooklyn Bridge;1280;486;meter;Hur många meter skiljer spannet?
+Väger containerfartyget Ever Given mer eller mindre än Titanic?;Ever Given;Titanic;220000;52000;ton;Hur många ton skiljer vikten?
+Är Saturn V-raketen högre eller lägre än Eiffeltornet?;Saturn V;Eiffeltornet;111;330;meter;Hur många meter skiljer höjden?
+Hade en Spitfire högre eller lägre toppfart än Concorde?;Spitfire;Concorde;582;2179;km/h;Hur många km/h skiljer toppfarten?
+Var luftskeppet Hindenburg längre eller kortare än en Boeing 747?;Hindenburg;Boeing 747-8;245;73,3;meter;Hur många meter skiljer längden?
+Väger Titanic mer eller mindre än kryssningsfartyget Symphony of the Seas?;Titanic;Symphony of the Seas;52000;228000;ton;Hur många ton skiljer vikten?
+Har en Tesla Model S Plaid mer eller mindre effekt än en Tesla Model 3?;Tesla Model S Plaid;Tesla Model 3;1020;283;hk;Hur många hk skiljer effekten?
+Hade Wright Flyer högre eller lägre toppfart än en Spitfire?;Wright Flyer;Spitfire;48;582;km/h;Hur många km/h skiljer toppfarten?
+Hade en Ford Model T mer eller mindre effekt än en Bugatti Chiron?;Ford Model T;Bugatti Chiron;20;1500;hk;Hur många hk skiljer effekten?
+Väger Apollos kommandomodul mer eller mindre än rymdstationen ISS?;Apollos kommandomodul (CSM);Internationella rymdstationen (ISS);30;420;ton;Hur många ton skiljer vikten?
+Flyger rymdsonden Parker Solar Probe snabbare eller långsammare än Voyager 1?;Parker Solar Probe;Voyager 1;690000;61000;km/h;Hur många km/h skiljer farten?
+Är SpaceX Starship högre eller lägre än Saturn V?;SpaceX Starship;Saturn V;120;111;meter;Hur många meter skiljer höjden?
+Har en Cessna 172 större eller mindre vingbredd än en Antonov An-225?;Cessna 172;Antonov An-225;11;88,4;meter;Hur många meter skiljer vingbredden?
+Har en Tesla Model 3 Long Range större eller mindre batteri än en Nissan Leaf?;Tesla Model 3 Long Range;Nissan Leaf e+;82;62;kWh;Hur många kWh skiljer batterikapaciteten?
+Har Apple Watch Ultra större eller mindre skärm än en iPhone 15 Pro Max?;Apple Watch Ultra;iPhone 15 Pro Max;1,9;6,7;tum;Hur många tum skiljer skärmstorleken?
+Är en Boeing 787-9 längre eller kortare än en Airbus A350-900?;Boeing 787-9 Dreamliner;Airbus A350-900;62,8;66,8;meter;Hur många meter skiljer längden?
+Kan en vanlig lastbil lasta mer eller mindre än gruvtrucken BelAZ 75710?;Vanlig lastbil;BelAZ 75710;40;450;ton;Hur många ton skiljer lastkapaciteten?
+Hade en Bugatti Veyron Super Sport högre eller lägre toppfart än en Tesla Model 3?;Bugatti Veyron Super Sport;Tesla Model 3;431;225;km/h;Hur många km/h skiljer toppfarten?
+Är en Cessna 172 längre eller kortare än en Boeing 747-8?;Cessna 172;Boeing 747-8;8,3;76,3;meter;Hur många meter skiljer längden?
+Har en Toyota Corolla mer eller mindre effekt än en Porsche 911 Turbo S?;Toyota Corolla;Porsche 911 Turbo S;140;650;hk;Hur många hk skiljer effekten?
+Hade en Tu-144 högre eller lägre toppfart än Concorde?;Tupolev Tu-144;Concorde;2430;2179;km/h;Hur många km/h skiljer toppfarten?
+Har en Volkswagen Golf mer eller mindre effekt än en Lamborghini Aventador SVJ?;Volkswagen Golf;Lamborghini Aventador SVJ;150;770;hk;Hur många hk skiljer effekten?
+Har en Apple Watch Ultra större eller mindre skärm än en iPad Pro 12,9 tum?;Apple Watch Ultra;iPad Pro 12,9 tum;1,9;12,9;tum;Hur många tum skiljer skärmstorleken?
+Har en GoPro Hero12 fler eller färre megapixlar än en iPhone 15 Pro huvudkamera?;GoPro Hero12;iPhone 15 Pro;27;48;megapixel;Hur många megapixlar skiljer det?
+Väger en Boeing 747-8 mer eller mindre vid start än en Antonov An-225?;Boeing 747-8;Antonov An-225;448;640;ton;Hur många ton skiljer startvikten?
+Har en Volvo EX90 längre eller kortare räckvidd än en första generationens Nissan Leaf?;Volvo EX90;Nissan Leaf (2011);600;175;kilometer;Hur många kilometer skiljer räckvidden?
+Är Japans maglevtåg L0 snabbare eller långsammare än Shanghai Maglev?;Japans L0-maglev;Shanghai Maglev;603;431;km/h;Hur många km/h skiljer rekordfarten?
+Har en Dyson V15-dammsugare mer eller mindre effekt än en Dyson Supersonic-fön?;Dyson V15;Dyson Supersonic;230;1600;watt;Hur många watt skiljer effekten?
+Har en MacBook Pro 16 tum större eller mindre skärm än en iMac 24 tum?;MacBook Pro 16 tum;iMac 24 tum;16,2;23,5;tum;Hur många tum skiljer skärmstorleken?
+Har en DJI Mavic 3-drönare längre eller kortare flygtid än en DJI Mini 4 Pro?;DJI Mavic 3;DJI Mini 4 Pro;46;34;minuter;Hur många minuter skiljer flygtiden?
+Lanserades första Nokia 3310 tidigare eller senare än första iPod?;Nokia 3310;Apple iPod;2000;2001;år;Hur många år skiljer lanseringarna?
+Har en Volkswagen Golf mer eller mindre effekt än en Volvo FH16-lastbil?;Volkswagen Golf;Volvo FH16;150;750;hk;Hur många hk skiljer effekten?
+Väger rymdteleskopet James Webb mer eller mindre än en stadsbuss?;James Webb;Stadsbuss;6,5;12;ton;Hur många ton skiljer vikten?
+Har Falcon Heavy mer eller mindre startdragkraft än Saturn V?;Falcon Heavy;Saturn V;22800;35100;kilonewton;Hur många kilonewton skiljer dragkraften?
+Har en Samsung Galaxy S24 Ultra större eller mindre skärm än en Apple Watch Ultra?;Samsung Galaxy S24 Ultra;Apple Watch Ultra;6,8;1,9;tum;Hur många tum skiljer skärmstorleken?
+Har en elsparkcykel högre eller lägre toppfart än en motorcykel?;Elsparkcykel (EU);Motorcykel;20;200;km/h;Hur många km/h skiljer toppfarten?
+Är en Ford F-150 Lightning tyngre eller lättare än en vanlig Ford F-150?;Ford F-150 Lightning;Ford F-150 (bensin);2950;2100;kilo;Hur många kilo skiljer vikten?
+Har en Rimac Nevera mer eller mindre effekt än den nya Tesla Roadster?;Rimac Nevera;Tesla Roadster (2:a gen);1914;1000;hk;Hur många hk skiljer effekten?
+Är rymdsonden Voyager 1 längre bort eller närmare jorden än New Horizons? (2024);Voyager 1;New Horizons;25,9;9;miljarder km;Hur många miljarder km skiljer avståndet?
+Är en Falcon 9 högre eller lägre än Saturn V?;Falcon 9;Saturn V;70;111;meter;Hur många meter skiljer höjden?
+Har en Samsung Galaxy S24 Ultra större eller mindre batteri än en iPhone 15 Pro Max?;Samsung Galaxy S24 Ultra;iPhone 15 Pro Max;5000;4441;mAh;Hur många mAh skiljer batteriet?
+Väger en PlayStation 5 mer eller mindre än en Xbox Series X?;PlayStation 5;Xbox Series X;4,5;4,45;kilo;Hur många kilo skiljer vikten?
+Väger en MacBook Air 13 tum mer eller mindre än en iPad Pro 12,9 tum?;MacBook Air 13 tum;iPad Pro 12,9 tum;1,24;0,68;kilo;Hur många kilo skiljer vikten?
+Har en Volvo FH Electric längre eller kortare räckvidd än en Tesla Semi?;Volvo FH Electric;Tesla Semi;600;800;kilometer;Hur många kilometer skiljer räckvidden?
+Hade en Bell 407-helikopter högre eller lägre toppfart än ett segelflygplan?;Bell 407;Segelflygplan;259;130;km/h;Hur många km/h skiljer toppfarten?
+Varvar en Formel 1-motor högre eller lägre än en vanlig personbilsmotor?;Formel 1-motor;Personbilsmotor (bensin);15000;6500;varv/min;Hur många varv/min skiljer maxvarvtalet?
+Har ett segelflygplan större eller mindre vingbredd än en Boeing 747-8?;Segelflygplan;Boeing 747-8;15;68,4;meter;Hur många meter skiljer vingbredden?
+Har en vanlig vägg-laddare till mobil mer eller mindre effekt än en snabbladdare?;Standardladdare (5W);Snabbladdare (USB-C PD);5;65;watt;Hur många watt skiljer effekten?
+Har ett havsbaserat vindkraftverk större eller mindre rotordiameter än en jumbojets vingbredd?;Havsbaserat vindkraftverk;Boeing 747 vingbredd;220;68,4;meter;Hur många meter skiljer det?
+Är en fotbollsplan längre eller kortare än containerfartyget Maersk Triple E?;Fotbollsplan;Maersk Triple E;105;400;meter;Hur många meter skiljer längden?
+Har en Tesla Model S Plaid längre eller kortare räckvidd än en Lucid Air?;Tesla Model S Plaid;Lucid Air Dream;600;830;kilometer;Hur många kilometer skiljer räckvidden?
+Väger en Formel 1-bil mer eller mindre än en MotoGP-motorcykel?;Formel 1-bil;MotoGP-motorcykel;798;157;kilo;Hur många kilo skiljer vikten?
+Har en Falcon Heavy fler eller färre motorer i första steget än en Saturn V?;Falcon Heavy;Saturn V;27;5;st;Hur många motorer skiljer det?
+Lanserades första Windows tidigare eller senare än första Macintosh?;Windows 1.0;Apple Macintosh;1985;1984;år;Hur många år skiljer lanseringarna?
+Har en vanlig personbil mer eller mindre dragvikt än en Tesla Cybertruck?;Vanlig personbil;Tesla Cybertruck;1500;5000;kilo;Hur många kilo skiljer dragvikten?
+Är en Airbus A320 längre eller kortare än en Boeing 737?;Airbus A320;Boeing 737-800;37,6;39,5;meter;Hur många meter skiljer längden?
+Har ett modernt toppgrafikkort mer eller mindre effekt än en spelkonsol?;Nvidia RTX 4090;PlayStation 5;450;200;watt;Hur många watt skiljer effektförbrukningen?
+Är ett vanligt pendeltåg snabbare eller långsammare än ett kinesiskt höghastighetståg (CR400)?;Vanligt pendeltåg;CR400 Fuxing;120;350;km/h;Hur många km/h skiljer marschfarten?
+Har en Boeing 777 längre eller kortare räckvidd än en Airbus A220?;Boeing 777-200LR;Airbus A220-300;15843;6300;kilometer;Hur många kilometer skiljer räckvidden?
+Väger en elcykel mer eller mindre än en vanlig stadscykel?;Elcykel;Vanlig stadscykel;25;15;kilo;Hur många kilo skiljer vikten?
+Har en robotdammsugare längre eller kortare batteritid än en handhållen Dyson?;Robotdammsugare;Handhållen dammsugare;120;60;minuter;Hur många minuter skiljer batteritiden?
+Har en Nikon-systemkamera fler eller färre megapixlar än en Hasselblad mellanformat?;Nikon Z8;Hasselblad X2D;45,7;100;megapixel;Hur många megapixlar skiljer det?
+Är raketen New Glenn högre eller lägre än Falcon Heavy?;New Glenn;Falcon Heavy;98;70;meter;Hur många meter skiljer höjden?
+Hade rymdfärjan högre eller lägre startdragkraft än en Ariane 5?;Rymdfärjan (hela stacken);Ariane 5;30200;13500;kilonewton;Hur många kilonewton skiljer dragkraften?
+Vägde Apollos månlandare Eagle mer eller mindre än Mars-rovern Perseverance?;Apollos månlandare Eagle;Mars-rovern Perseverance;15102;1025;kilo;Hur många kilo skiljer vikten?
+Hade Concorde högre eller lägre marschfart än ett vanligt passagerarplan?;Concorde;Vanligt passagerarplan;2179;900;km/h;Hur många km/h skiljer marschfarten?
+Flyger Voyager 1 snabbare eller långsammare än den internationella rymdstationen?;Voyager 1;Internationella rymdstationen (ISS);61000;28000;km/h;Hur många km/h skiljer farten?
+Är Burj Khalifa högre eller lägre än One World Trade Center?;Burj Khalifa;One World Trade Center;828;541;meter;Hur många meter skiljer höjden?
+Väger en modern smartphone mer eller mindre än en surfplatta?;Smartphone;Surfplatta;200;470;gram;Hur många gram skiljer vikten?
+Har en Lucid Air längre eller kortare räckvidd än en genomsnittlig elbil?;Lucid Air;Genomsnittlig elbil;830;400;kilometer;Hur många kilometer skiljer räckvidden?
+Är Saturn V-raketen högre eller lägre än Frihetsgudinnan?;Saturn V;Frihetsgudinnan;111;93;meter;Hur många meter skiljer höjden?
+Väger en DJI Mini-drönare mer eller mindre än en DJI Mavic 3?;DJI Mini 4 Pro;DJI Mavic 3;249;895;gram;Hur många gram skiljer vikten?
+Är kryssningsfartyget Icon of the Seas längre eller kortare än Symphony of the Seas?;Icon of the Seas;Symphony of the Seas;365;362;meter;Hur många meter skiljer längden?
+Hade rymdfärjan högre eller lägre fart i omloppsbana än SR-71 Blackbird?;Rymdfärjan;SR-71 Blackbird;28000;3530;km/h;Hur många km/h skiljer farten?
+Hade en Formel 1-bil högre eller lägre toppfart än en IndyCar?;Formel 1-bil;IndyCar;360;380;km/h;Hur många km/h skiljer toppfarten?
+Har en smartklocka längre eller kortare batteritid än ett aktivitetsarmband?;Smartklocka (Apple Watch);Aktivitetsarmband (Fitbit);18;168;timmar;Hur många timmar skiljer batteritiden?
+Är en blåval längre eller kortare än containerfartyget Ever Given?;Blåval;Ever Given;30;400;meter;Hur många meter skiljer längden?
+Skulle en Hyperloop ha högre eller lägre toppfart än ett TGV?;Hyperloop (koncept);TGV;1000;320;km/h;Hur många km/h skiljer toppfarten?
+Har en FPV-racingdrönare högre eller lägre toppfart än en DJI Mavic 3?;FPV-racingdrönare;DJI Mavic 3;160;75;km/h;Hur många km/h skiljer toppfarten?
+Kan rymdfärjan lyfta mer eller mindre last till omloppsbana än en Falcon 9?;Rymdfärjan;Falcon 9;24;22;ton;Hur många ton skiljer lastkapaciteten?
+Har ett ATR 72-propellerplan längre eller kortare räckvidd än en Boeing 737 MAX?;ATR 72;Boeing 737 MAX;1500;6500;kilometer;Hur många kilometer skiljer räckvidden?
+Är ett Goodyear-luftskepp längre eller kortare än vad Hindenburg var?;Goodyear-luftskepp;Hindenburg;75;245;meter;Hur många meter skiljer längden?
+Är en Typhoon-ubåt längre eller kortare än Titanic?;Typhoon-ubåt;Titanic;175;269;meter;Hur många meter skiljer längden?
+Kan Saturn V lyfta mer eller mindre last till låg omloppsbana än Falcon Heavy?;Saturn V;Falcon Heavy;140;64;ton;Hur många ton skiljer lastkapaciteten?
+Har en Tesla Model S Plaid högre eller lägre toppfart än en Bugatti Chiron?;Tesla Model S Plaid;Bugatti Chiron;322;420;km/h;Hur många km/h skiljer toppfarten?
+Är en Airbus A220 längre eller kortare än en Boeing 737 MAX 8?;Airbus A220-300;Boeing 737 MAX 8;38,7;39,5;meter;Hur många meter skiljer längden?
+Har en robotgräsklippare längre eller kortare batteritid än en elektrisk lövblås?;Robotgräsklippare;Elektrisk lövblås;90;30;minuter;Hur många minuter skiljer batteritiden?
+Väger en Mars-rover som Curiosity mer eller mindre än Perseverance?;Curiosity;Perseverance;899;1025;kilo;Hur många kilo skiljer vikten?
+Har en elektrisk gräsklippare mer eller mindre effekt än en bensindriven?;Elektrisk gräsklippare;Bensindriven gräsklippare;1800;3000;watt;Hur många watt skiljer effekten?
+Har NASA:s SLS-raket högre eller lägre startdragkraft än Saturn V?;NASA SLS;Saturn V;39100;33000;kilonewton;Hur många kilonewton skiljer dragkraften?
+Har en vanlig laptop större eller mindre lagring än en extern hårddisk?;Vanlig laptop;Extern hårddisk;512;4000;GB;Hur många GB skiljer lagringen?

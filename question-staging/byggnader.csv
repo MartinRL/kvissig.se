@@ -1,0 +1,131 @@
+﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Är Empire State Building högre eller lägre än Eiffeltornet?;Empire State Building;Eiffeltornet;443,2;330;meter;Hur många meter skiljer det?
+Är Shanghai Tower högre eller lägre än Tokyo Skytree?;Shanghai Tower;Tokyo Skytree;632;634;meter;Hur många meter skiljer det?
+Är Petronas Towers högre eller lägre än Empire State Building?;Petronas Towers;Empire State Building;451,9;443,2;meter;Hur många meter skiljer det?
+Är Frihetsgudinnan högre eller lägre än Burj Khalifa?;Frihetsgudinnan;Burj Khalifa;93;828;meter;Hur många meter skiljer det?
+Är Burj Khalifa högre eller lägre än Eiffeltornet?;Burj Khalifa;Eiffeltornet;828;330;meter;Hur många meter skiljer det?
+Är CN Tower högre eller lägre än Globen?;CN Tower;Globen;553;85;meter;Hur många meter skiljer det?
+Är Tokyo Skytree högre eller lägre än Eiffeltornet?;Tokyo Skytree;Eiffeltornet;634;330;meter;Hur många meter skiljer det?
+Är Kölnerdomen högre eller lägre än Sagrada Família?;Kölnerdomen;Sagrada Família;157;162,9;meter;Hur många meter skiljer det?
+Är Ulms domkyrka högre eller lägre än Big Ben?;Ulms domkyrka;Big Ben;161,5;96;meter;Hur många meter skiljer det?
+Är lutande tornet i Pisa högre eller lägre än Big Ben?;Lutande tornet i Pisa;Big Ben;56,7;96;meter;Hur många meter skiljer det?
+Är Washingtonmonumentet högre eller lägre än Space Needle?;Washingtonmonumentet;Space Needle;169;184,4;meter;Hur många meter skiljer det?
+Är Washingtonmonumentet högre eller lägre än Big Ben?;Washingtonmonumentet;Big Ben;169;96;meter;Hur många meter skiljer det?
+Är Kristusstatyn i Rio högre eller lägre än Frihetsgudinnan?;Kristusstatyn i Rio;Frihetsgudinnan;38;93;meter;Hur många meter skiljer det?
+Är Cheopspyramiden högre eller lägre än Kristusstatyn i Rio?;Cheopspyramiden;Kristusstatyn i Rio;146,6;38;meter;Hur många meter skiljer det?
+Är Globen högre eller lägre än Burj Khalifa?;Globen;Burj Khalifa;85;828;meter;Hur många meter skiljer det?
+Är Globen högre eller lägre än Kaknästornet?;Globen;Kaknästornet;85;170;meter;Hur många meter skiljer det?
+Har Akashi Kaikyo-bron längre eller kortare huvudspann än Golden Gate-bron?;Akashi Kaikyo-bron;Golden Gate-bron;1991;1280;meter;Hur många meter skiljer det?
+Har Öresundsbron längre eller kortare huvudspann än Golden Gate-bron?;Öresundsbron;Golden Gate-bron;490;1280;meter;Hur många meter skiljer det?
+Har Öresundsbron längre eller kortare huvudspann än Akashi Kaikyo-bron?;Öresundsbron;Akashi Kaikyo-bron;490;1991;meter;Hur många meter skiljer det?
+Är Gotthards bastunnel längre eller kortare än Öresundsbron?;Gotthards bastunnel;Öresundsbron;57,1;7,8;kilometer;Hur många kilometer skiljer det?
+Är Seikantunneln längre eller kortare än Kanaltunneln?;Seikantunneln;Kanaltunneln;53,9;50,5;kilometer;Hur många kilometer skiljer det?
+Är Three Gorges-dammen högre eller lägre än Hooverdammen?;Three Gorges-dammen;Hooverdammen;181;221;meter;Hur många meter skiljer det?
+Har Hooverdammen längre eller kortare krön än Three Gorges-dammen?;Hooverdammen;Three Gorges-dammen;379;2335;meter;Hur många meter skiljer det?
+Är Three Gorges-dammen längre eller kortare än Öresundsbron?;Three Gorges-dammen;Öresundsbron;2335;7845;meter;Hur många meter skiljer det?
+Är Kinesiska muren längre eller kortare än Öresundsbron?;Kinesiska muren;Öresundsbron;21196;7,8;kilometer;Hur många kilometer skiljer det?
+Är Stonehenge äldre eller yngre än Colosseum?;Stonehenge;Colosseum;5000;1946;år;Hur många år skiljer det?
+Är Notre-Dame i Paris äldre eller yngre än Colosseum?;Notre-Dame i Paris;Colosseum;681;1946;år;Hur många år skiljer det?
+Är Eiffeltornet äldre eller yngre än Notre-Dame i Paris?;Eiffeltornet;Notre-Dame i Paris;137;681;år;Hur många år skiljer det?
+Är Cheopspyramiden äldre eller yngre än Colosseum?;Cheopspyramiden;Colosseum;4586;1946;år;Hur många år skiljer det?
+Har Sydneyoperan högre eller lägre tak än Kristusstatyn i Rio?;Sydneyoperan;Kristusstatyn i Rio;67;38;meter;Hur många meter skiljer det?
+Är Shanghai Tower högre eller lägre än Merdeka 118?;Shanghai Tower;Merdeka 118;632;678,9;meter;Hur många meter skiljer det?
+Är Lotte World Tower högre eller lägre än One World Trade Center?;Lotte World Tower;One World Trade Center;555,7;541,3;meter;Hur många meter skiljer det?
+Är Willis Tower högre eller lägre än Petronas Tower 1?;Willis Tower;Petronas Tower 1;442,1;451,9;meter;Hur många meter skiljer det?
+Är Burj Al Arab högre eller lägre än Chryslerbyggnaden?;Burj Al Arab;Chryslerbyggnaden;321;318,9;meter;Hur många meter skiljer det?
+Har Lincoln Cathedral högre eller lägre spira än Ulms domkyrka?;Lincoln Cathedral;Ulms domkyrka;160;161,5;meter;Hur många meter skiljer det?
+Har Golden Gate-bron längre eller kortare huvudspann än Verrazzano-Narrows-bron?;Golden Gate-bron;Verrazzano-Narrows-bron;1280;1298;meter;Hur många meter skiljer det?
+Har Maracanã större eller mindre publikkapacitet än San Siro?;Maracanã;San Siro;78838;75923;åskådare;Hur många åskådare skiljer det?
+Har Empire State Building fler eller färre våningar än Willis Tower?;Empire State Building;Willis Tower;102;108;våningar;Hur många våningar skiljer det?
+Är Tokyo Skytree högre eller lägre än Canton Tower?;Tokyo Skytree;Canton Tower;634;604;meter;Hur många meter skiljer det?
+Är Singapore Flyer högre eller lägre än High Roller i Las Vegas?;Singapore Flyer;High Roller;165;167,6;meter;Hur många meter skiljer det?
+Är Three Gorges-dammen högre eller lägre än Itaipú-dammen?;Three Gorges-dammen;Itaipú-dammen;181;196;meter;Hur många meter skiljer det?
+Är Sankt Stefansdomen i Wien högre eller lägre än Strasbourgs katedral?;Sankt Stefansdomen i Wien;Strasbourgs katedral;136;142;meter;Hur många meter skiljer det?
+Har Humberbron längre eller kortare huvudspann än Verrazzano-Narrows-bron?;Humberbron;Verrazzano-Narrows-bron;1410;1298;meter;Hur många meter skiljer det?
+Har Storbältsbron längre eller kortare huvudspann än Akashi Kaikyo-bron?;Storbältsbron;Akashi Kaikyo-bron;1624;1991;meter;Hur många meter skiljer det?
+Är Chryslerbyggnaden högre eller lägre än Eiffeltornet?;Chryslerbyggnaden;Eiffeltornet;318,9;330;meter;Hur många meter skiljer det?
+Är Hooverdammen högre eller lägre än Grande Dixence-dammen?;Hooverdammen;Grande Dixence-dammen;221;285;meter;Hur många meter skiljer det?
+Är Big Ben högre eller lägre än Turning Torso?;Big Ben;Turning Torso;96;190;meter;Hur många meter skiljer det?
+Sitter Petronas-tornens skybridge högre eller lägre än Eiffeltornet?;Petronas skybridge;Eiffeltornet;170;330;meter;Hur många meter skiljer det?
+Är Frihetsgudinnan högre eller lägre än Cheopspyramiden?;Frihetsgudinnan;Cheopspyramiden;93;146,6;meter;Hur många meter skiljer det?
+Är en fotbollsplan längre eller kortare än Cheopspyramidens bassida?;Fotbollsplan;Cheopspyramiden;105;230;meter;Hur många meter skiljer det?
+Är Solens pyramid i Teotihuacán högre eller lägre än Cheopspyramiden?;Solens pyramid;Cheopspyramiden;65;146,6;meter;Hur många meter skiljer det?
+Är Brandenburger Tor högre eller lägre än Triumfbågen i Paris?;Brandenburger Tor;Triumfbågen i Paris;26;50;meter;Hur många meter skiljer det?
+Är Big Ben högre eller lägre än London Eye?;Big Ben;London Eye;96;135;meter;Hur många meter skiljer det?
+Är Eiffeltornet högre eller lägre än Turning Torso?;Eiffeltornet;Turning Torso;330;190;meter;Hur många meter skiljer det?
+Är Itaipú-dammen högre eller lägre än Grande Dixence-dammen?;Itaipú-dammen;Grande Dixence-dammen;196;285;meter;Hur många meter skiljer det?
+Är Gotthards vägtunnel längre eller kortare än Lærdalstunneln?;Gotthards vägtunnel;Lærdalstunneln;16,9;24,5;kilometer;Hur många kilometer skiljer det?
+Är Lærdalstunneln längre eller kortare än Kanaltunneln?;Lærdalstunneln;Kanaltunneln;24,5;50,5;kilometer;Hur många kilometer skiljer det?
+Är Hagia Sofia äldre eller yngre än Colosseum?;Hagia Sofia;Colosseum;1488;1946;år;Hur många år skiljer det?
+Är Notre-Dame i Paris äldre eller yngre än Hagia Sofia?;Notre-Dame i Paris;Hagia Sofia;681;1488;år;Hur många år skiljer det?
+Är Taj Mahal äldre eller yngre än Machu Picchu?;Taj Mahal;Machu Picchu;375;575;år;Hur många år skiljer det?
+Är Angkor Wat äldre eller yngre än Notre-Dame i Paris?;Angkor Wat;Notre-Dame i Paris;875;681;år;Hur många år skiljer det?
+Är Sydneyoperan äldre eller yngre än Sydney Harbour Bridge?;Sydneyoperan;Sydney Harbour Bridge;52;93;år;Hur många år skiljer det?
+Är Burj Khalifa äldre eller yngre än Taipei 101?;Burj Khalifa;Taipei 101;16;22;år;Hur många år skiljer det?
+Har Petersplatsen större eller mindre yta än Cheopspyramidens botten?;Petersplatsen;Cheopspyramiden;33000;53000;kvadratmeter;Hur många kvadratmeter skiljer det?
+Har Empire State Building större eller mindre golvyta än Pentagon?;Empire State Building;Pentagon;257000;620000;kvadratmeter;Hur många kvadratmeter skiljer det?
+Har Vatikanstaten större eller mindre yta än Förbjudna staden?;Vatikanstaten;Förbjudna staden;440000;720000;kvadratmeter;Hur många kvadratmeter skiljer det?
+Har Maracanã större eller mindre publikkapacitet än Camp Nou?;Maracanã;Camp Nou;78838;99354;åskådare;Hur många åskådare skiljer det?
+Har Wembley större eller mindre publikkapacitet än Friends Arena?;Wembley;Friends Arena;90000;50000;åskådare;Hur många åskådare skiljer det?
+Är Eiffeltornet högre eller lägre än Petronas Towers?;Eiffeltornet;Petronas Towers;330;451,9;meter;Hur många meter skiljer det?
+Är Empire State Building högre eller lägre än One World Trade Center?;Empire State Building;One World Trade Center;381;541,3;meter;Hur många meter skiljer det?
+Är Eiffeltornet högre eller lägre än Oriental Pearl Tower?;Eiffeltornet;Oriental Pearl Tower;330;468;meter;Hur många meter skiljer det?
+Är Stratosphere Tower i Las Vegas högre eller lägre än Space Needle?;Stratosphere Tower;Space Needle;350,2;184,4;meter;Hur många meter skiljer det?
+Är Moderlandet-statyn i Volgograd högre eller lägre än Sardar Patel-statyn?;Moderlandet-statyn;Sardar Patel-statyn;85;182;meter;Hur många meter skiljer det?
+Är Globen högre eller lägre än Washingtonmonumentet?;Globen;Washingtonmonumentet;85;169;meter;Hur många meter skiljer det?
+Är lutande tornet i Pisa högre eller lägre än Globen?;Lutande tornet i Pisa;Globen;56,7;85;meter;Hur många meter skiljer det?
+Är Hagia Sofia äldre eller yngre än Pantheon i Rom?;Hagia Sofia;Pantheon i Rom;1488;1900;år;Hur många år skiljer det?
+Är Burj Khalifa högre eller lägre än Tokyo Skytree?;Burj Khalifa;Tokyo Skytree;828;634;meter;Hur många meter skiljer det?
+Är Empire State Building högre eller lägre än Space Needle?;Empire State Building;Space Needle;381;184,4;meter;Hur många meter skiljer det?
+Är Oriental Pearl Tower högre eller lägre än Tokyo Skytree?;Oriental Pearl Tower;Tokyo Skytree;468;634;meter;Hur många meter skiljer det?
+Är Sagrada Família högre eller lägre än Big Ben?;Sagrada Família;Big Ben;172,5;96;meter;Hur många meter skiljer det?
+Har Maracanã större eller mindre publikkapacitet än Friends Arena?;Maracanã;Friends Arena;78838;50000;åskådare;Hur många åskådare skiljer det?
+Har Michigan Stadium större eller mindre publikkapacitet än Friends Arena?;Michigan Stadium;Friends Arena;107601;50000;åskådare;Hur många åskådare skiljer det?
+Är Kölnerdomen högre eller lägre än Frihetsgudinnan?;Kölnerdomen;Frihetsgudinnan;157;93;meter;Hur många meter skiljer det?
+Är Washingtonmonumentet högre eller lägre än Eiffeltornet?;Washingtonmonumentet;Eiffeltornet;169;330;meter;Hur många meter skiljer det?
+Är Eiffeltornet högre eller lägre än CN Tower?;Eiffeltornet;CN Tower;330;553;meter;Hur många meter skiljer det?
+Har Buckingham Palace fler eller färre rum än Versailles slott?;Buckingham Palace;Versailles;775;2300;rum;Hur många rum skiljer det?
+Har Buckingham Palace fler eller färre rum än Vita huset?;Buckingham Palace;Vita huset;775;132;rum;Hur många rum skiljer det?
+Är Atomium högre eller lägre än Kristusstatyn i Rio?;Atomium;Kristusstatyn i Rio;102;38;meter;Hur många meter skiljer det?
+Är lutande tornet i Pisa högre eller lägre än Washingtonmonumentet?;Lutande tornet i Pisa;Washingtonmonumentet;56,7;169;meter;Hur många meter skiljer det?
+Väger Eiffeltornet mer eller mindre än Atomium?;Eiffeltornet;Atomium;10100;2400;ton;Hur många ton skiljer det?
+Är Empire State Building högre eller lägre än Big Ben?;Empire State Building;Big Ben;381;96;meter;Hur många meter skiljer det?
+Har Brooklynbron längre eller kortare huvudspann än Golden Gate-bron?;Brooklynbron;Golden Gate-bron;486;1280;meter;Hur många meter skiljer det?
+Är Stratosphere Tower i Las Vegas högre eller lägre än lutande tornet i Pisa?;Stratosphere Tower;Lutande tornet i Pisa;350,2;56,7;meter;Hur många meter skiljer det?
+Är Space Needle högre eller lägre än One World Trade Center?;Space Needle;One World Trade Center;184,4;541,3;meter;Hur många meter skiljer det?
+Är Taipei 101 högre eller lägre än Space Needle?;Taipei 101;Space Needle;508;184,4;meter;Hur många meter skiljer det?
+Är Tokyo Skytree högre eller lägre än Kaknästornet?;Tokyo Skytree;Kaknästornet;634;170;meter;Hur många meter skiljer det?
+Är Canton Tower högre eller lägre än Kaknästornet?;Canton Tower;Kaknästornet;604;170;meter;Hur många meter skiljer det?
+Är CN Tower högre eller lägre än Space Needle?;CN Tower;Space Needle;553;184,4;meter;Hur många meter skiljer det?
+Är Stratosphere Tower i Las Vegas högre eller lägre än Big Ben?;Stratosphere Tower;Big Ben;350,2;96;meter;Hur många meter skiljer det?
+Är Millauviadukten högre eller lägre än Big Ben?;Millauviadukten;Big Ben;343;96;meter;Hur många meter skiljer det?
+Har Akashi Kaikyo-bron högre eller lägre pyloner än Big Ben?;Akashi Kaikyo-bron;Big Ben;282,8;96;meter;Hur många meter skiljer det?
+Har Storbältsbron längre eller kortare huvudspann än Brooklynbron?;Storbältsbron;Brooklynbron;1624;486;meter;Hur många meter skiljer det?
+Har Verrazzano-Narrows-bron längre eller kortare huvudspann än Brooklynbron?;Verrazzano-Narrows-bron;Brooklynbron;1298;486;meter;Hur många meter skiljer det?
+Har Akashi Kaikyo-bron längre eller kortare huvudspann än Brooklynbron?;Akashi Kaikyo-bron;Brooklynbron;1991;486;meter;Hur många meter skiljer det?
+Är Gotthards bastunnel längre eller kortare än Gotthards vägtunnel?;Gotthards bastunnel;Gotthards vägtunnel;57,1;16,9;kilometer;Hur många kilometer skiljer det?
+Är Kanaltunneln längre eller kortare än Gotthards vägtunnel?;Kanaltunneln;Gotthards vägtunnel;50,5;16,9;kilometer;Hur många kilometer skiljer det?
+Är Stonehenge äldre eller yngre än Hagia Sofia?;Stonehenge;Hagia Sofia;5000;1488;år;Hur många år skiljer det?
+Är Cheopspyramiden äldre eller yngre än Hagia Sofia?;Cheopspyramiden;Hagia Sofia;4586;1488;år;Hur många år skiljer det?
+Är Petra äldre eller yngre än Notre-Dame i Paris?;Petra;Notre-Dame i Paris;2050;681;år;Hur många år skiljer det?
+Är Eiffeltornet äldre eller yngre än Angkor Wat?;Eiffeltornet;Angkor Wat;137;875;år;Hur många år skiljer det?
+Är Taj Mahal äldre eller yngre än Eiffeltornet?;Taj Mahal;Eiffeltornet;375;137;år;Hur många år skiljer det?
+Är Machu Picchu äldre eller yngre än Eiffeltornet?;Machu Picchu;Eiffeltornet;575;137;år;Hur många år skiljer det?
+Är CN Tower högre eller lägre än Kaknästornet?;CN Tower;Kaknästornet;553;170;meter;Hur många meter skiljer det?
+Är Oriental Pearl Tower högre eller lägre än Kaknästornet?;Oriental Pearl Tower;Kaknästornet;468;170;meter;Hur många meter skiljer det?
+Är Big Ben högre eller lägre än Burj Khalifa?;Big Ben;Burj Khalifa;96;828;meter;Hur många meter skiljer det?
+Är Tokyo Skytree högre eller lägre än Globen?;Tokyo Skytree;Globen;634;85;meter;Hur många meter skiljer det?
+Är Burj Khalifa högre eller lägre än lutande tornet i Pisa?;Burj Khalifa;Lutande tornet i Pisa;828;56,7;meter;Hur många meter skiljer det?
+Är Burj Khalifa högre eller lägre än Atomium?;Burj Khalifa;Atomium;828;102;meter;Hur många meter skiljer det?
+Är CN Tower högre eller lägre än lutande tornet i Pisa?;CN Tower;Lutande tornet i Pisa;553;56,7;meter;Hur många meter skiljer det?
+Väger Eiffeltornet mer eller mindre än Frihetsgudinnan?;Eiffeltornet;Frihetsgudinnan;10100;225;ton;Hur många ton skiljer det?
+Väger Tsar-klockan i Moskva mer eller mindre än Big Bens klocka?;Tsar-klockan;Big Bens klocka;201;13,7;ton;Hur många ton skiljer det?
+Har Petersplatsen större eller mindre yta än Stora moskén i Mecka?;Petersplatsen;Stora moskén i Mecka;33000;356800;kvadratmeter;Hur många kvadratmeter skiljer det?
+Har Tower Bridge längre eller kortare huvudspann än Akashi Kaikyo-bron?;Tower Bridge;Akashi Kaikyo-bron;61;1991;meter;Hur många meter skiljer det?
+Har Golden Gate-bron längre eller kortare huvudspann än Tower Bridge?;Golden Gate-bron;Tower Bridge;1280;61;meter;Hur många meter skiljer det?
+Är Empire State Building högre eller lägre än lutande tornet i Pisa?;Empire State Building;Lutande tornet i Pisa;381;56,7;meter;Hur många meter skiljer det?
+Är Notre-Dame i Paris äldre eller yngre än Cheopspyramiden?;Notre-Dame i Paris;Cheopspyramiden;681;4586;år;Hur många år skiljer det?
+Har Versailles slott fler eller färre rum än Vita huset?;Versailles;Vita huset;2300;132;rum;Hur många rum skiljer det?
+Har Pentagon större eller mindre golvyta än Louvren?;Pentagon;Louvren;620000;72735;kvadratmeter;Hur många kvadratmeter skiljer det?
+Är Tokyo Skytree högre eller lägre än lutande tornet i Pisa?;Tokyo Skytree;Lutande tornet i Pisa;634;56,7;meter;Hur många meter skiljer det?
+Är Eiffeltornet högre eller lägre än Globen?;Eiffeltornet;Globen;330;85;meter;Hur många meter skiljer det?

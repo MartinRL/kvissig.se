@@ -27,3 +27,8 @@ TestResults/
 
 # Generated emlang diagrams
 specs/*.html
+
+# question-staging scratch (one-shot generators + intermediates)
+question-staging/_*
+question-staging/tmp_*
+question-staging/*.tmp.csv

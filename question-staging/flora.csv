@@ -1,0 +1,111 @@
+﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Var rekordträdet Hyperion (en kustsekvoja) högre eller lägre än den fällda jättedouglasgranen Mineral Tree?;Hyperion;Mineral-douglasgranen;116;119;meter;Hur många meter skiljer det?
+Är tallen Methuselah äldre eller yngre än den äldsta kända bristleconetallen?;Methuselah;Äldsta bristleconetallen;4850;5060;år;Hur många år skiljer det?
+Är Tugelafallen i Sydafrika högre eller lägre än Angelfallen i Venezuela?;Tugelafallen;Angelfallen;948;979;meter;Hur många meter skiljer det?
+Är Bajkalsjön djupare eller grundare än Tanganyikasjön?;Bajkalsjön;Tanganyikasjön;1642;1470;meter;Hur många meter skiljer det?
+Är olivträdet i Vouves äldre eller yngre än idegranen i Llangernyw?;Olivträdet i Vouves;Llangernyw-idegranen;3000;4000;år;Hur många år skiljer det?
+Är Fuji högre eller lägre än Kilimanjaro?;Fuji;Kilimanjaro;3776;5895;meter;Hur många meter skiljer det?
+Blir en gran i regel äldre eller yngre än en tall?;Gran;Tall;350;600;år;Hur många år skiljer det?
+Är jättesekvojan General Sherman högre eller lägre än rekordsekvojan Hyperion?;General Sherman;Hyperion;84;116;meter;Hur många meter skiljer det?
+Blir ett olivträd i regel äldre eller yngre än en av de äldsta bristleconetallarna?;Gammalt olivträd;Bristleconetall;3000;5000;år;Hur många år skiljer det?
+Blir ett äppelträd i regel äldre eller yngre än en björk?;Äppelträd;Björk;100;50;år;Hur många år skiljer det?
+Är en fullvuxen ek högre eller lägre än jättesekvojan General Sherman?;Fullvuxen ek;General Sherman;20;84;meter;Hur många meter skiljer det?
+Är Vättern djupare eller grundare än Hornavan, Sveriges djupaste sjö?;Vättern;Hornavan;128;221;meter;Hur många meter skiljer det?
+Är en saguarokaktus högre eller lägre än en fullvuxen ek?;Saguarokaktus;Fullvuxen ek;12;20;meter;Hur många meter skiljer det?
+Är Mauna Loa högre eller lägre än Kilimanjaro?;Mauna Loa;Kilimanjaro;4169;5895;meter;Hur många meter skiljer det?
+Är Kaspiska havet djupare eller grundare än Tanganyikasjön?;Kaspiska havet;Tanganyikasjön;1025;1470;meter;Hur många meter skiljer det?
+Blir en ek i regel äldre eller yngre än en tall?;Ek;Tall;300;600;år;Hur många år skiljer det?
+Är en kustsekvoja som Hyperion högre eller lägre än en fullvuxen ek?;Kustsekvoja (Hyperion);Fullvuxen ek;116;40;meter;Hur många meter skiljer det?
+Blir en ek i regel äldre eller yngre än en av de äldsta bristleconetallarna?;Ek;Bristleconetall;1000;5000;år;Hur många år skiljer det?
+Är Fuji högre eller lägre än Vesuvius?;Fuji;Vesuvius;3776;1281;meter;Hur många meter skiljer det?
+Är Vesuvius högre eller lägre än Etna?;Vesuvius;Etna;1281;3403;meter;Hur många meter skiljer det?
+Är Vesuvius högre eller lägre än Kilimanjaro?;Vesuvius;Kilimanjaro;1281;5895;meter;Hur många meter skiljer det?
+Blir ett olivträd som det i Vouves äldre eller yngre än en ek?;Olivträdet i Vouves;Ek;3000;1000;år;Hur många år skiljer det?
+Blir en ek i regel äldre eller yngre än ett äppelträd?;Ek;Äppelträd;300;100;år;Hur många år skiljer det?
+Är Etna högre eller lägre än Fuji?;Etna;Fuji;3403;3776;meter;Hur många meter skiljer det?
+Är Mauna Loa högre eller lägre än Vesuvius?;Mauna Loa;Vesuvius;4169;1281;meter;Hur många meter skiljer det?
+Är Angelfallen högre eller lägre än Niagarafallen?;Angelfallen;Niagarafallen;979;57;meter;Hur många meter skiljer det?
+Är Tugelafallen högre eller lägre än Niagarafallen?;Tugelafallen;Niagarafallen;948;57;meter;Hur många meter skiljer det?
+Är Bajkalsjön djupare eller grundare än Vänern?;Bajkalsjön;Vänern;1642;106;meter;Hur många meter skiljer det?
+Blir en tall i regel äldre eller yngre än en björk?;Tall;Björk;1000;50;år;Hur många år skiljer det?
+Blir en bristleconetall i regel äldre eller yngre än ett äppelträd?;Bristleconetall;Äppelträd;5000;100;år;Hur många år skiljer det?
+Har avokado mer eller mindre energi per 100 gram än banan?;Avokado;Banan;160;89;kcal;Hur många kcal skiljer det?
+Har banan mer eller mindre energi per 100 gram än äpple?;Banan;Äpple;89;52;kcal;Hur många kcal skiljer det?
+Har jordnötter mer eller mindre energi per 100 gram än mandel?;Jordnötter;Mandel;567;579;kcal;Hur många kcal skiljer det?
+Har valnötter mer eller mindre energi per 100 gram än cashewnötter?;Valnötter;Cashewnötter;654;553;kcal;Hur många kcal skiljer det?
+Har gurka mer eller mindre energi per 100 gram än tomat?;Gurka;Tomat;15;18;kcal;Hur många kcal skiljer det?
+Har broccoli mer eller mindre energi per 100 gram än blomkål?;Broccoli;Blomkål;34;25;kcal;Hur många kcal skiljer det?
+Har potatis mer eller mindre energi per 100 gram än sötpotatis?;Potatis;Sötpotatis;77;86;kcal;Hur många kcal skiljer det?
+Har vitlök mer eller mindre energi per 100 gram än gul lök?;Vitlök;Gul lök;149;40;kcal;Hur många kcal skiljer det?
+Har russin mer eller mindre energi per 100 gram än färska vindruvor?;Russin;Vindruvor;299;69;kcal;Hur många kcal skiljer det?
+Har dadlar mer eller mindre energi per 100 gram än färska fikon?;Dadlar;Fikon;277;74;kcal;Hur många kcal skiljer det?
+Har apelsin mer eller mindre energi per 100 gram än citron?;Apelsin;Citron;47;29;kcal;Hur många kcal skiljer det?
+Har mango mer eller mindre energi per 100 gram än ananas?;Mango;Ananas;60;50;kcal;Hur många kcal skiljer det?
+Har vindruvor mer eller mindre energi per 100 gram än jordgubbar?;Vindruvor;Jordgubbar;69;32;kcal;Hur många kcal skiljer det?
+Har morot mer eller mindre energi per 100 gram än rödbeta?;Morot;Rödbeta;41;43;kcal;Hur många kcal skiljer det?
+Har spenat mer eller mindre energi per 100 gram än grönkål?;Spenat;Grönkål;23;49;kcal;Hur många kcal skiljer det?
+Har kikärtor mer eller mindre energi per 100 gram än röda linser?;Kikärtor;Röda linser;364;352;kcal;Hur många kcal skiljer det?
+Har vitt ris mer eller mindre energi per 100 gram än havregryn?;Vitt ris;Havregryn;365;389;kcal;Hur många kcal skiljer det?
+Väger en kokosnöt mer eller mindre än en grapefrukt?;Kokosnöt;Grapefrukt;1400;250;gram;Hur många gram skiljer det?
+Väger en vattenmelon mer eller mindre än en honungsmelon?;Vattenmelon;Honungsmelon;9;2;kilo;Hur många kilo skiljer det?
+Väger en kokosnöt mer eller mindre än en mango?;Kokosnöt;Mango;1400;300;gram;Hur många gram skiljer det?
+Väger ett äpple mer eller mindre än en apelsin?;Äpple;Apelsin;180;140;gram;Hur många gram skiljer det?
+Väger en avokado mer eller mindre än en kiwi?;Avokado;Kiwi;200;75;gram;Hur många gram skiljer det?
+Väger en citron mer eller mindre än en lime?;Citron;Lime;100;67;gram;Hur många gram skiljer det?
+Väger en banan mer eller mindre än en persika?;Banan;Persika;120;150;gram;Hur många gram skiljer det?
+Är en solros högre eller lägre än en majsplanta?;Solros;Majsplanta;3;2,5;meter;Hur många meter skiljer det?
+Växer bambu i regel snabbare eller långsammare per dygn än en pumpkaranka?;Bambu;Pumpkaranka;90;15;centimeter;Hur många centimeter skiljer det?
+Är ett blad av jättenäckrosen Victoria bredare eller smalare än rekordblomman Rafflesia?;Victoria-näckros;Rafflesia;300;100;centimeter;Hur många centimeter skiljer det?
+Väger världens största frö, coco de mer, mer eller mindre än en kokosnöt?;Coco de mer;Kokosnöt;18;1,4;kilo;Hur många kilo skiljer det?
+Väger en pumpa i rekordklass mer eller mindre än en vattenmelon i rekordklass?;Rekordpumpa;Rekordvattenmelon;1278;159;kilo;Hur många kilo skiljer det?
+Är en jättesekvojas stamomkrets större eller mindre än ett baobabträds?;Jättesekvoja;Baobab;34;25;meter;Hur många meter skiljer det?
+Har en jordnöt fler eller färre kalorier per 100 gram än en gurka?;Jordnötter;Gurka;567;15;kcal;Hur många kcal skiljer det?
+Har olivolja fler eller färre kalorier per 100 gram än broccoli?;Olivolja;Broccoli;884;34;kcal;Hur många kcal skiljer det?
+Har en mandel fler eller färre kalorier per 100 gram än en jordgubbe?;Mandel;Jordgubbar;579;32;kcal;Hur många kcal skiljer det?
+Har socker fler eller färre kalorier per 100 gram än en morot?;Strösocker;Morot;387;41;kcal;Hur många kcal skiljer det?
+Är en rödklöver kortare eller längre än en solros?;Rödklöver;Solros;0,4;3;meter;Hur många meter skiljer det?
+Är en maskros lägre eller högre än en majsplanta?;Maskros;Majsplanta;0,3;2,5;meter;Hur många meter skiljer det?
+Är en tulpan kortare eller längre än en stjälk av stockros?;Tulpan;Stockros;0,4;2,5;meter;Hur många meter skiljer det?
+Är en liljekonvalj lägre eller högre än en lupin?;Liljekonvalj;Lupin;0,2;1;meter;Hur många meter skiljer det?
+Lever en solros i regel kortare eller längre än ett äppelträd?;Solros;Äppelträd;1;100;år;Hur många år skiljer det?
+Lever en björk i regel kortare eller längre än en ek?;Björk;Ek;50;300;år;Hur många år skiljer det?
+Lever en tulpanlök i regel kortare eller längre än en pion?;Tulpan;Pion;5;50;år;Hur många år skiljer det?
+Har en kantarell mindre eller större hatt än en Karl Johan?;Kantarell;Karl Johan;6;15;centimeter;Hur många centimeter skiljer det?
+Har en champinjon mindre eller större hatt än en jätteröksvamp?;Champinjon;Jätteröksvamp;8;40;centimeter;Hur många centimeter skiljer det?
+Har vitlök mer eller mindre energi per 100 gram än purjolök?;Vitlök;Purjolök;149;61;kcal;Hur många kcal skiljer det?
+Har en dadel mer eller mindre energi per 100 gram än ett russin?;Dadlar;Russin;277;299;kcal;Hur många kcal skiljer det?
+Har en paprika mer eller mindre energi per 100 gram än en zucchini?;Paprika;Zucchini;31;17;kcal;Hur många kcal skiljer det?
+Har en aubergine mer eller mindre energi per 100 gram än en gurka?;Aubergine;Gurka;25;15;kcal;Hur många kcal skiljer det?
+Har vetemjöl mer eller mindre energi per 100 gram än rågmjöl?;Vetemjöl;Rågmjöl;364;325;kcal;Hur många kcal skiljer det?
+Har sallad mer eller mindre energi per 100 gram än kikärtor?;Sallad;Kikärtor;15;364;kcal;Hur många kcal skiljer det?
+Har en cashewnöt mer eller mindre energi per 100 gram än en pistagenöt?;Cashewnötter;Pistagenötter;553;560;kcal;Hur många kcal skiljer det?
+Har basilika mer eller mindre energi per 100 gram än persilja?;Basilika;Persilja;23;36;kcal;Hur många kcal skiljer det?
+Har en tomat mer eller mindre energi per 100 gram än en russin?;Tomat;Russin;18;299;kcal;Hur många kcal skiljer det?
+Har en zucchini mer eller mindre energi per 100 gram än en mandel?;Zucchini;Mandel;17;579;kcal;Hur många kcal skiljer det?
+Är ett körsbär lättare eller tyngre än en jordgubbe?;Körsbär;Jordgubbe;8;12;gram;Hur många gram skiljer det?
+Är en zucchini kortare eller längre än en gurka?;Zucchini;Gurka;20;30;centimeter;Hur många centimeter skiljer det?
+Är en morot kortare eller längre än en palsternacka?;Morot;Palsternacka;18;25;centimeter;Hur många centimeter skiljer det?
+Är en chilifrukt kortare eller längre än en paprika?;Chilifrukt;Paprika;7;10;centimeter;Hur många centimeter skiljer det?
+Väger en potatis mer eller mindre än en gul lök?;Potatis;Gul lök;170;110;gram;Hur många gram skiljer det?
+Väger en tomat mer eller mindre än en paprika?;Tomat;Paprika;120;160;gram;Hur många gram skiljer det?
+Väger en zucchini mer eller mindre än en aubergine?;Zucchini;Aubergine;200;300;gram;Hur många gram skiljer det?
+Väger en gul lök mer eller mindre än en rödbeta?;Gul lök;Rödbeta;110;150;gram;Hur många gram skiljer det?
+Väger en avokado mer eller mindre än en mango?;Avokado;Mango;200;300;gram;Hur många gram skiljer det?
+Väger en grapefrukt mer eller mindre än en apelsin?;Grapefrukt;Apelsin;250;140;gram;Hur många gram skiljer det?
+Har ett fikon mer eller mindre energi per 100 gram än ett äpple?;Fikon;Äpple;74;52;kcal;Hur många kcal skiljer det?
+Har ett granatäpple mer eller mindre energi per 100 gram än ett päron?;Granatäpple;Päron;83;57;kcal;Hur många kcal skiljer det?
+Har en oliv mer eller mindre energi per 100 gram än en avokado?;Oliver;Avokado;115;160;kcal;Hur många kcal skiljer det?
+Har majs mer eller mindre energi per 100 gram än en morot?;Majs;Morot;86;41;kcal;Hur många kcal skiljer det?
+Har en sojaböna mer eller mindre energi per 100 gram än en kidneyböna?;Sojabönor;Kidneybönor;446;333;kcal;Hur många kcal skiljer det?
+Har ingefära mer eller mindre energi per 100 gram än vitlök?;Ingefära;Vitlök;80;149;kcal;Hur många kcal skiljer det?
+Är en lavendelbuske lägre eller högre än en rosenbuske?;Lavendel;Rosenbuske;0,6;1,2;meter;Hur många meter skiljer det?
+Lever en hallonbuske i regel kortare eller längre än ett vinbärsris?;Hallonbuske;Vinbärsbuske;10;15;år;Hur många år skiljer det?
+Är en blåbärsbuske lägre eller högre än en hallonbuske?;Blåbärsbuske;Hallonbuske;0,5;1,5;meter;Hur många meter skiljer det?
+Har sötpotatis mer eller mindre energi per 100 gram än en pumpa?;Sötpotatis;Pumpa;86;26;kcal;Hur många kcal skiljer det?
+Är en krokus lägre eller högre än en påsklilja?;Krokus;Påsklilja;0,1;0,4;meter;Hur många meter skiljer det?
+Lever en lavendelbuske i regel kortare eller längre än en pion?;Lavendel;Pion;15;50;år;Hur många år skiljer det?
+Har en pumpa mer eller mindre energi per 100 gram än en banan?;Pumpa;Banan;26;89;kcal;Hur många kcal skiljer det?
+Har sallad mer eller mindre energi per 100 gram än potatis?;Sallad;Potatis;15;77;kcal;Hur många kcal skiljer det?
+Har en gurka mer eller mindre energi per 100 gram än en majskolv?;Gurka;Majs;15;86;kcal;Hur många kcal skiljer det?
+Har en morot mer eller mindre energi per 100 gram än vitlök?;Morot;Vitlök;41;149;kcal;Hur många kcal skiljer det?
+Har ett päron mer eller mindre energi per 100 gram än en dadel?;Päron;Dadlar;57;277;kcal;Hur många kcal skiljer det?

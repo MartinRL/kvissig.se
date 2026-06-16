@@ -106,6 +106,19 @@ See `specs/CLAUDE.md` for the full cheat-sheet.
 - Events: noun past-tense (`LobbyOpened`, `GuessSubmitted`)
 - Errors: descriptive (`GameNotFound`, `DifferenceOutOfRange`)
 
+## Tools
+
+`tools/` holds .NET file-based apps, run from repo root as `dotnet run tools/<name>.cs`.
+Each `#:project`s the Domain so band/parsing logic has ONE source of truth (no re-implemented
+formulas). No `.csproj`, no global tool.
+
+- `tools/pack.cs` — question-pack band-histogram report (style-guide thresholds 20/60/85,
+  targets 15/40/30/15) + direction split, top units, duplicate `questionText` flags.
+  - `report` (default, read-only) on the live pack; `report --staging` over all
+    `question-staging/*.csv` candidates.
+  - `merge --out <path>` concats + dedups staging into a valid pack CSV; `--out` required,
+    refuses the live-pack path unless `--force`.
+
 ## Plans
 
 Plans live in `~/.claude/plans/`; the user reads/edits them in Obsidian. ALWAYS end any

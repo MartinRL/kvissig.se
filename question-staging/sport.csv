@@ -1,0 +1,101 @@
+﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Tar världsrekordet på 100 meter kortare eller längre tid än rekordet på 200 meter?;100 meter (herrar);200 meter (herrar);9,58;19,19;sekunder;Hur många sekunder skiljer det?
+Är en fotbollsplan längre än den är bred (proffsmått)?;Längd;Bredd;105;68;meter;Hur många meter skiljer det?
+Är en NBA-plan kortare eller längre än en olympisk simbassäng?;NBA-plan;Olympisk bassäng;28,65;50;meter;Hur många meter skiljer det?
+Rymmer Wembley fler eller färre åskådare än Camp Nou?;Wembley;Camp Nou;90000;99354;åskådare;Hur många åskådare skiljer det?
+Sitter ett volleybollnät (herrar) högre eller lägre än en basketkorg?;Volleybollnät;Basketkorg;2,43;3,05;meter;Hur många meter skiljer det?
+Väger en fotboll mer eller mindre än en NBA-basketboll?;Fotboll;Basketboll;430;624;gram;Hur många gram skiljer det?
+Är en NHL-rink längre eller kortare än en tennisbana?;NHL-rink;Tennisbana;61;23,77;meter;Hur många meter skiljer det?
+Är en golfboll mindre eller större i diameter än ett golfhål?;Golfboll;Golfhål;42,67;108;millimeter;Hur många millimeter skiljer det?
+Är det snabbaste basebollkastet snabbare eller långsammare än den snabbaste tennisserven?;Snabbaste basebollkast;Snabbaste tennisserve;170;263;km/h;Hur många km/h skiljer det?
+Är en bowlingbana längre eller kortare än kastlinjen i dart?;Bowlingbana;Dart-oche;18,29;2,37;meter;Hur många meter skiljer det?
+Är världsrekordet i höjdhopp högre eller lägre än rekordet i stavhopp?;Höjdhopp (rekord);Stavhopp (rekord);2,45;6,31;meter;Hur många meter skiljer det?
+Är världsrekordet i längdhopp kortare eller längre än rekordet i tresteg?;Längdhopp (rekord);Tresteg (rekord);8,95;18,29;meter;Hur många meter skiljer det?
+Är ett Tour de France längre eller kortare än ett maratonlopp?;Tour de France 2024;Maraton;3498;42,195;kilometer;Hur många kilometer skiljer det?
+Är ett tennisnät högre vid mitten eller vid stolparna?;Mitten;Stolparna;0,914;1,07;meter;Hur många meter skiljer det?
+Är en fotbollsplan bredare eller smalare än en basketplan?;Fotbollsplan (bredd);Basketplan (bredd);68;15,24;meter;Hur många meter skiljer det?
+Sitter ett volleybollnät för damer högre eller lägre än för herrar?;Damnät;Herrnät;2,24;2,43;meter;Hur många meter skiljer det?
+Är en tennisbana kortare eller längre än en NBA-plan?;Tennisbana;NBA-plan;23,77;28,65;meter;Hur många meter skiljer det?
+Är ett maratonlopp längre eller kortare än ett 5000-meterslopp?;Maraton;5000 meter;42,195;5;kilometer;Hur många kilometer skiljer det?
+Är en volleybollplan längre än den är bred?;Längd;Bredd;18;9;meter;Hur många meter skiljer det?
+Spelas en fotbollsmatch under fler eller färre minuter än en NBA-match?;Fotbollsmatch;NBA-match;90;48;minuter;Hur många minuter skiljer det?
+Är en fotbollshalvlek längre eller kortare än en period i ishockey?;Fotbollshalvlek;Ishockeyperiod;45;20;minuter;Hur många minuter skiljer det?
+Avgörs en proffs-VM-match i boxning över fler eller färre ronder än en amatörmatch?;VM-match;Amatörmatch;12;3;ronder;Hur många ronder skiljer det?
+Spelar ett rugbylag (union) med fler eller färre spelare än ett fotbollslag?;Rugbylag;Fotbollslag;15;11;spelare;Hur många spelare skiljer det?
+Är ett 10 000-meterslopp kortare eller längre än ett maraton?;10 000 meter;Maraton;10;42,195;kilometer;Hur många kilometer skiljer det?
+Väger en tennisboll mer eller mindre än en golfboll?;Tennisboll;Golfboll;58;45,93;gram;Hur många gram skiljer det?
+Är ett ishockeymål smalare eller bredare än ett fotbollsmål?;Ishockeymål;Fotbollsmål;1,83;7,32;meter;Hur många meter skiljer det?
+Är ett fotbollsmål bredare eller smalare än ett handbollsmål?;Fotbollsmål;Handbollsmål;7,32;3;meter;Hur många meter skiljer det?
+Är ett golfhål mindre eller större i diameter än en basketring?;Golfhål;Basketring;10,8;45,7;centimeter;Hur många centimeter skiljer det?
+Är ett varv på en löparbana kortare eller längre än ett maraton?;Löparvarv;Maraton;0,4;42,195;kilometer;Hur många kilometer skiljer det?
+Är en basketrings diameter mindre eller större än omkretsen på en fotboll?;Basketring;Fotboll (omkrets);45,7;69;centimeter;Hur många centimeter skiljer det?
+Tar världsrekordet på 800 meter (herrar) kortare eller längre tid än rekordet på 400 meter?;800 meter;400 meter;100,91;43,03;sekunder;Hur många sekunder skiljer det?
+Tar världsrekordet på 1500 meter (herrar) kortare eller längre tid än rekordet på 800 meter?;1500 meter;800 meter;206;100,91;sekunder;Hur många sekunder skiljer det?
+Tar världsrekordet på 5000 meter (herrar) kortare eller längre tid än rekordet på 1500 meter?;5000 meter;1500 meter;755,36;206;sekunder;Hur många sekunder skiljer det?
+Tar världsrekordet på 200 meter (herrar) kortare eller längre tid än damrekordet på 100 meter?;200 meter herrar;100 meter damer;19,19;10,49;sekunder;Hur många sekunder skiljer det?
+Är damernas världsrekord på 100 meter snabbare eller långsammare än herrarnas?;100 meter damer;100 meter herrar;10,49;9,58;sekunder;Hur många sekunder skiljer det?
+Kastas herrarnas spjut längre eller kortare än rekordet i diskus?;Spjut (rekord);Diskus (rekord);98,48;74,08;meter;Hur många meter skiljer det?
+Kastas herrarnas slägga längre eller kortare än rekordet i diskus?;Slägga (rekord);Diskus (rekord);86,74;74,08;meter;Hur många meter skiljer det?
+Stöts herrarnas kula längre eller kortare än rekordet i släggkast?;Kula (rekord);Slägga (rekord);23,56;86,74;meter;Hur många meter skiljer det?
+Är världsrekordet i stavhopp högre eller lägre än längden på en ishockeyrink?;Stavhopp (rekord);Ishockeyrink;6,31;61;meter;Hur många meter skiljer det?
+Är det längsta skidflygningshoppet längre eller kortare än rekordet i längdhopp?;Skidflygning (rekord);Längdhopp (rekord);253,5;8,95;meter;Hur många meter skiljer det?
+Väger en herrkula mer eller mindre än ett herrspjut?;Kula (herrar);Spjut (herrar);7,26;0,8;kilo;Hur många kilo skiljer det?
+Väger en herrslägga mer eller mindre än en herrdiskus?;Slägga (herrar);Diskus (herrar);7,26;2;kilo;Hur många kilo skiljer det?
+Väger en damkula mer eller mindre än en damdiskus?;Kula (damer);Diskus (damer);4;1;kilo;Hur många kilo skiljer det?
+Väger ett herrspjut mer eller mindre än ett damspjut?;Spjut (herrar);Spjut (damer);0,8;0,6;kilo;Hur många kilo skiljer det?
+Är ett cricketwicket (pitch) längre eller kortare än en ishockeyrink?;Cricketpitch;Ishockeyrink;20,12;61;meter;Hur många meter skiljer det?
+Rymmer Indianapolis Motor Speedway fler eller färre åskådare än Camp Nou?;Indianapolis Motor Speedway;Camp Nou;235000;99354;åskådare;Hur många åskådare skiljer det?
+Rymmer Rungrado-stadion i Pyongyang fler eller färre åskådare än Wembley?;Rungrado;Wembley;114000;90000;åskådare;Hur många åskådare skiljer det?
+Rymmer Michigan Stadium fler eller färre åskådare än Madison Square Garden?;Michigan Stadium;Madison Square Garden;107601;19812;åskådare;Hur många åskådare skiljer det?
+Rymmer Daytona International Speedway fler eller färre åskådare än Allianz Arena?;Daytona;Allianz Arena;101500;75000;åskådare;Hur många åskådare skiljer det?
+Rymmer Camp Nou fler eller färre åskådare än Melbourne Cricket Ground?;Camp Nou;Melbourne Cricket Ground;99354;100024;åskådare;Hur många åskådare skiljer det?
+Är NBA:s trepoängslinje längre eller kortare bort än ett cricketwicket (pitch)?;NBA trepoäng;Cricketpitch;7,24;20,12;meter;Hur många meter skiljer det?
+Är en frikastlinje i basket längre eller kortare bort än en straffpunkt i fotboll?;Frikast (basket);Straffpunkt (fotboll);4,6;11;meter;Hur många meter skiljer det?
+Är en curlingbana längre eller kortare än en bowlingbana?;Curlingbana;Bowlingbana;45,72;18,29;meter;Hur många meter skiljer det?
+Är en boulebana längre eller kortare än en ishockeyrink?;Boulebana;Ishockeyrink;15;61;meter;Hur många meter skiljer det?
+Är en squashbana längre eller kortare än en boulebana?;Squashbana;Boulebana;9,75;15;meter;Hur många meter skiljer det?
+Är en curlingbana längre eller kortare än en ishockeyrink?;Curlingbana;Ishockeyrink;45,72;61;meter;Hur många meter skiljer det?
+Är en simbassäng (olympisk) längre eller kortare än en NHL-rink?;Olympisk bassäng;NHL-rink;50;61;meter;Hur många meter skiljer det?
+Är topphastigheten för en F1-bil högre eller lägre än för en MotoGP-motorcykel?;F1-bil;MotoGP;372;366;km/h;Hur många km/h skiljer det?
+Är den snabbaste tennisserven snabbare eller långsammare än topphastigheten för en MotoGP-motorcykel?;Snabbaste tennisserve;MotoGP;263;366;km/h;Hur många km/h skiljer det?
+Är den snabbaste tennisserven snabbare eller långsammare än det snabbaste basebollkastet?;Snabbaste tennisserve;Snabbaste basebollkast;263;170;km/h;Hur många km/h skiljer det?
+Är en olympisk höjdhoppsplattform (svikt) högre eller lägre än ett stavhoppsrekord?;Höjdhoppsplattform (10 m);Stavhopp (rekord);10;6,31;meter;Hur många meter skiljer det?
+Är Eiffeltornet högre eller lägre än en olympisk höjdhoppsplattform?;Eiffeltornet;Höjdhoppsplattform;330;10;meter;Hur många meter skiljer det?
+Är ett snookerbord längre eller kortare än ett poolbord (spelyta)?;Snookerbord;Poolbord;3,57;2,54;meter;Hur många meter skiljer det?
+Väger en damkula mer eller mindre än en herrkula?;Kula (damer);Kula (herrar);4;7,26;kilo;Hur många kilo skiljer det?
+Är världsrekordet i tresteg längre eller kortare än längden på en simbassäng?;Tresteg (rekord);Olympisk bassäng;18,29;50;meter;Hur många meter skiljer det?
+Är ett varv på en inomhusbana (200 m) längre eller kortare än ett varv utomhus (400 m)?;Inomhusvarv;Utomhusvarv;200;400;meter;Hur många meter skiljer det?
+Är en handbollsplan längre eller kortare än en fotbollsplan?;Handbollsplan;Fotbollsplan;40;105;meter;Hur många meter skiljer det?
+Är en handbollsplan längre eller kortare än en basketplan?;Handbollsplan;Basketplan;40;28,65;meter;Hur många meter skiljer det?
+Är en badmintonbana längre eller kortare än en NHL-rink?;Badmintonbana;NHL-rink;13,4;61;meter;Hur många meter skiljer det?
+Är ett bordtennisbord längre eller kortare än en badmintonbana?;Bordtennisbord;Badmintonbana;2,74;13,4;meter;Hur många meter skiljer det?
+Väger en bordtennisboll mer eller mindre än en golfboll?;Bordtennisboll;Golfboll;2,7;45,93;gram;Hur många gram skiljer det?
+Väger en handboll (herrar) mer eller mindre än en fotboll?;Handboll (herrar);Fotboll;450;430;gram;Hur många gram skiljer det?
+Väger en basketboll (NBA) mer eller mindre än en bordtennisboll?;Basketboll;Bordtennisboll;624;2,7;gram;Hur många gram skiljer det?
+Väger en bowlingklot (max) mer eller mindre än en basketboll?;Bowlingklot (max);Basketboll;7260;624;gram;Hur många gram skiljer det?
+Väger en boxningshandske (proffs) mer eller mindre än en fotboll?;Boxningshandske;Fotboll;284;430;gram;Hur många gram skiljer det?
+Är diametern på en basketboll större eller mindre än diametern på en golfboll?;Basketboll;Golfboll;24,6;4,27;centimeter;Hur många centimeter skiljer det?
+Är ett dartavstånd (oche) längre eller kortare än en frikastlinje i basket?;Dart-oche;Frikast (basket);2,37;4,6;meter;Hur många meter skiljer det?
+Är ett fält i amerikansk fotboll längre eller kortare än en fotbollsplan?;Amerikansk fotboll;Fotbollsplan;91,44;105;meter;Hur många meter skiljer det?
+Är ett maratonlopp längre eller kortare än ett 100-meterslopp?;Maraton;100 meter;42195;100;meter;Hur många meter skiljer det?
+Är en basketkorg högre eller lägre än ett fotbollsmåls överliggare?;Basketkorg;Fotbollsmål (höjd);3,05;2,44;meter;Hur många meter skiljer det?
+Var Giro d'Italia 2024 längre eller kortare än Tour de France 2024?;Giro d'Italia 2024;Tour de France 2024;3400,8;3498;kilometer;Hur många kilometer skiljer det?
+Är ett halvmaraton längre eller kortare än ett 10 km-lopp?;Halvmaraton;10 km;21,0975;10;kilometer;Hur många kilometer skiljer det?
+Är ett halvmaraton längre eller kortare än ett helt maraton?;Halvmaraton;Maraton;21,0975;42,195;kilometer;Hur många kilometer skiljer det?
+Är ett 3000 meter hinder längre eller kortare än ett 1500-meterslopp?;3000 meter hinder;1500 meter;3;1,5;kilometer;Hur många kilometer skiljer det?
+Är längden på en olympisk roddbana längre eller kortare än ett maraton?;Roddbana (2000 m);Maraton;2;42,195;kilometer;Hur många kilometer skiljer det?
+Tar en period i ishockey kortare eller längre tid än en hel fotbollsmatch?;Ishockeyperiod;Fotbollsmatch;20;90;minuter;Hur många minuter skiljer det?
+Spelas en basketmatch (NBA) under fler eller färre minuter än en ishockeymatch?;NBA-match;Ishockeymatch;48;60;minuter;Hur många minuter skiljer det?
+Spelas en handbollsmatch under fler eller färre minuter än en fotbollsmatch?;Handbollsmatch;Fotbollsmatch;60;90;minuter;Hur många minuter skiljer det?
+Spelas en fjärdedel (quarter) i NBA under fler eller färre minuter än en period i ishockey?;NBA-quarter;Ishockeyperiod;12;20;minuter;Hur många minuter skiljer det?
+Väger en ishockeypuck mer eller mindre än en golfboll?;Ishockeypuck;Golfboll;170;45,93;gram;Hur många gram skiljer det?
+Har ett baseboll-lag fler eller färre spelare på plan än ett amerikansk fotbollslag?;Baseboll;Amerikansk fotboll;9;11;spelare;Hur många spelare skiljer det?
+Har ett vattenpololag fler eller färre spelare i vattnet än ett basketlag på planen?;Vattenpolo;Basket;7;5;spelare;Hur många spelare skiljer det?
+Är avståndet från pitchern till home plate i baseboll längre eller kortare än en frikastlinje i basket?;Pitcheravstånd (baseboll);Frikast (basket);18,44;4,6;meter;Hur många meter skiljer det?
+Har ett rugby league-lag fler eller färre spelare än ett rugby union-lag?;Rugby league;Rugby union;13;15;spelare;Hur många spelare skiljer det?
+Är diametern på en bordtennisboll mindre eller större än en fotboll?;Bordtennisboll;Fotboll;40;220;millimeter;Hur många millimeter skiljer det?
+Är diametern på en tennisboll större eller mindre än en bordtennisboll?;Tennisboll;Bordtennisboll;67;40;millimeter;Hur många millimeter skiljer det?
+Är diametern på ett golfhål större eller mindre än en tennisbolls diameter?;Golfhål;Tennisboll;108;67;millimeter;Hur många millimeter skiljer det?
+Avgörs en tiebreak i tennis vid fler eller färre poäng än ett game (vanligt)?;Tiebreak;Game;7;4;poäng;Hur många poäng skiljer det?
+Är ett snookerbord längre eller kortare än ett bordtennisbord?;Snookerbord;Bordtennisbord;3,57;2,74;meter;Hur många meter skiljer det?
+Hoppar en längdhoppare ett världsrekord längre eller kortare än bredden på en fotbollsplan?;Längdhopp (rekord);Fotbollsplan (bredd);8,95;68;meter;Hur många meter skiljer det?

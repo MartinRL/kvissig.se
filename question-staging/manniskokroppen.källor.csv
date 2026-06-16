@@ -1,0 +1,91 @@
+﻿fråga;källa;år
+Väger lungorna mer eller mindre än hjärnan?;Normal Organ Weights (Duke Pathology, Typical Organ Weights Table); brain ~1336 g, lungs combined ~1300 g;2012
+Väger hjärnan mer eller mindre än levern?;Normal Organ Weights in Men (PubMed/ResearchGate); brain ~1336 g, liver ~1500 g;2012
+Väger levern mer eller mindre än lungorna?;Duke Pathology Typical Organ Weights; liver ~1500 g, lungs ~1300 g;2012
+Har en vuxen fler eller färre tänder än antalet ryggkotor?;NHS inform (tänder) + standard anatomi (kotor 33);2024
+Har en hand fler eller färre ben än skallen?;StatPearls Hand Bones (27 ben) + Kenhub/TeachMeAnatomy skull (22 ben: 8 kraniella + 14 ansikts);2024
+Har en vuxen fler eller färre ben än en nyfödd?;Cleveland Clinic / IFLScience; vuxen 206, nyfödd ~300;2024
+Har ett barn fler eller färre mjölktänder än en vuxen har tänder?;Colgate / NHS inform; mjölktänder 20, vuxentänder 32;2024
+Är lårbenet längre eller kortare än överarmsbenet?;PMC stature estimation; femur ~48 cm, humerus ~30 cm;2013
+Har en vuxen fler eller färre tänder än antalet kromosomer i en cell?;genome.gov Chromosomes Fact Sheet (46) + NHS tänder (32);2024
+Har en nyfödd fler eller färre ben än antalet muskler i kroppen?;Cleveland Clinic (nyfödd ~300) + Healthline muskler (~639);2024
+Är en graviditet längre eller kortare än en röd blodkropps livslängd?;Cleveland Clinic gestation (280 dagar) + Stanford Blood Center RBC (~120 dagar);2024
+Är vilopulsens slag per minut fler eller färre än antalet spinala nervpar?;Johns Hopkins vital signs (vilopuls ~70/min) + careers360 spinala nervpar (31);2024
+Har skallen fler eller färre ben än antalet kromosomer i en cell?;Kenhub skull (22 ben) + genome.gov Chromosomes Fact Sheet (46);2024
+Väger levern mer eller mindre än mjälten?;Duke Pathology liver ~1500 g + ScienceDirect spleen ~150 g;2012
+Finns det fler eller färre muskler i kroppen än antalet dagar en graviditet varar?;Healthline muskler (~639) + Cleveland Clinic gestation (280 dagar);2024
+Tar man fler eller färre andetag per minut än antalet spinala nervpar?;American Lung Association respiratory rate (~16/min) + spinala nervpar (31);2024
+Finns det fler eller färre kromosomer i en cell än vilopulsens slag per minut?;genome.gov kromosomer (46) + Johns Hopkins vilopuls (~70/min);2024
+Har en vuxen fler eller färre ben än antalet muskler i kroppen?;BBC Science Focus ben (206) + Healthline muskler (~639);2024
+Är tunntarmen längre eller kortare än tjocktarmen?;Cleveland Clinic small intestine (~7 m) + large intestine (~1,5 m);2024
+Väger hjärtat mer eller mindre än hjärnan?;Normal Organ Weights; heart ~300 g, brain ~1336 g;2012
+Väger levern mer eller mindre än båda njurarna tillsammans?;Duke Pathology liver ~1500 g + kidney ~135 g vardera (par ~270 g);2012
+Tar man fler eller färre andetag per minut än vilopulsens antal slag per minut?;American Lung Association (~16 andetag/min) + Johns Hopkins (~70 slag/min);2024
+Är vilopulsens slag per minut fler eller färre än antalet mjölktänder hos ett barn?;Johns Hopkins vilopuls (~70/min) + Colgate mjölktänder (20);2024
+Väger båda njurarna tillsammans mer eller mindre än lungorna?;Liv Hospital kidney (~135 g/st, par ~270 g) + lungs combined ~1300 g;2024
+Väger hjärnan mer eller mindre än båda njurarna tillsammans?;Normal Organ Weights brain ~1336 g + kidneys par ~270 g;2012
+Väger levern mer eller mindre än hjärtat?;Duke Pathology liver ~1500 g + heart ~300 g;2012
+Finns det fler eller färre muskler i kroppen än antalet hjärtslag i vilopuls per minut?;Healthline muskler (~639) + Johns Hopkins vilopuls (~70/min);2024
+Väger mjälten mer eller mindre än bukspottkörteln?;ScienceDirect spleen (~150 g) + Cleveland Clinic pancreas (~90 g);2024
+Väger hjärnan mer eller mindre än bukspottkörteln?;Normal Organ Weights brain ~1336 g + Cleveland Clinic pancreas (~90 g);2024
+Har en nyfödd fler eller färre ben än antalet spinala nervpar?;Cleveland Clinic nyfödd (~300 ben) + spinala nervpar (31);2024
+Har en fot fler eller färre ben än en hand?;Britannica / Z-Medical, fot 26 ben, hand 27 ben;2024
+Tar man fler eller färre andetag än hjärtslag på en hel dag?;American Lung Association andningsfrekvens (~15/min, ~21 600/dygn) + Harvard Health hjärtfrekvens (~70/min, ~100 800/dygn);2024
+Är ett mänskligt öga större eller mindre i diameter än ögats lins?;Cleveland Clinic blinkfrekvens (~17/min, ~16 320/dygn) + American Lung Association andningsfrekvens (~15/min, ~21 600/dygn);2024
+Har en vuxen fler eller färre kranialnervspar än ryggkotor?;ResearchGate eyeball (~24 mm) + PMC crystalline lens diameter (~10 mm);2022
+Är matstrupen längre eller kortare än ryggmärgen?;Cleveland Clinic kranialnerver (12 par) + medicinsk anatomi ryggkotor (26 ben);2024
+Lever en röd blodkropp längre eller kortare tid än en smakcell på tungan?;ScienceInsights matstrupe (~25 cm) + StatPearls ryggmärg (~45 cm);2024
+Är luftstrupen längre eller kortare än matstrupen?;Stanford Blood Center RBC (~120 dagar) + MitoQ/forskning smakceller (~10 dagar);2024
+Är skenbenet längre eller kortare än lårbenet?;Cleveland Clinic luftstrupe (~11 cm) + ScienceInsights matstrupe (~25 cm);2024
+Är luftstrupen längre eller kortare än ryggmärgen?;PMC kroppslängdsestimering, skenben ~36 cm, lårben ~48 cm;2013
+Väger mjälten mer eller mindre än hjärtat?;Cleveland Clinic luftstrupe (~11 cm) + StatPearls ryggmärg (~45 cm);2024
+Är ett nyfött barns kroppsvatten en högre eller lägre andel än en vuxens?;ScienceDirect mjälte (~150 g) + Normal Organ Weights hjärta (~300 g);2012
+Är överarmsbenet längre eller kortare än matstrupen?;NPR/USGS kroppsvatten, nyfödd ~75 %, vuxen ~60 %;2013
+Lever en hudcell i överhuden längre eller kortare tid än en magslemhinnecell?;PMC humerus (~30 cm) + ScienceInsights matstrupe (~25 cm);2013
+Väger båda njurarna tillsammans mer eller mindre än hjärtat?;Ask The Scientists epidermis (~28 dagar) + MitoQ magslemhinna (~5 dagar);2024
+Är en mans urinrör längre eller kortare än luftstrupen?;Liv Hospital njure (~135 g/st, par ~270 g) + Normal Organ Weights hjärta (~300 g);2012
+Blinkar ögat fler eller färre gånger än man tar andetag på en hel dag?;Cleveland Clinic mannens urinrör (~20 cm) + luftstrupe (~11 cm);2024
+Växer en fingernagel snabbare eller långsammare än en tånagel?;Wikipedia stapes (~3 mm) + ResearchGate eyeball (~24 mm);2022
+Lever en röd blodkropp längre eller kortare tid än en hudcell i överhuden?;Healthline / ResearchGate nageltillväxt, fingernagel ~3 mm/mån, tånagel ~1 mm/mån;2010
+Är lårbenet längre eller kortare än ryggmärgen?;Stanford Blood Center RBC (~120 dagar) + Ask The Scientists epidermis (~28 dagar);2024
+Väger mjälten mer eller mindre än båda njurarna tillsammans?;PMC lårben (~48 cm) + StatPearls ryggmärg (~45 cm);2013
+Är matstrupen längre eller kortare än skenbenet?;ScienceDirect mjälte (~150 g) + Liv Hospital njurpar (~270 g);2012
+Har tungan fler eller färre smaklökar än näsan har lukttyper den känner?;ScienceInsights matstrupe (~25 cm) + PMC skenben (~36 cm);2013
+Är överarmsbenet längre eller kortare än skenbenet?;OpenStax smaklökar (~5 000) + Dana Foundation luktreceptortyper (~350);2024
+Lever en smakcell på tungan längre eller kortare tid än en magslemhinnecell?;PMC humerus (~30 cm) + skenben (~36 cm);2013
+Väger levern mer eller mindre än mjälten och hjärtat tillsammans?;MitoQ smakceller (~10 dagar) + magslemhinna (~5 dagar);2024
+Är en mans urinrör längre eller kortare än en kvinnas?;Duke Pathology lever (~1500 g) + mjälte (~150 g) + hjärta (~300 g), summa ~450 g;2012
+Är stigbygeln, kroppens minsta ben, större eller mindre i längd än ögats diameter?;Cleveland Clinic / Merck, mannens urinrör ~20 cm, kvinnans ~4 cm;2024
+Har skallen fler eller färre ben i ansiktet än i hjärnskålen?;TeachMeAnatomy skalle, 14 ansiktsben, 8 kranieben;2024
+Lever en hudcell i överhuden längre eller kortare tid än en smakcell på tungan?;Kenhub skalle (22 ben) + TeachMeAnatomy tungmuskler (8 st);2024
+Väger hjärnan mer eller mindre än levern och hjärtat tillsammans?;Ask The Scientists epidermis (~28 dagar) + MitoQ smakceller (~10 dagar);2024
+Är ryggmärgen längre eller kortare än matstrupen och luftstrupen tillsammans?;Normal Organ Weights hjärna (~1336 g) + lever (~1500 g) + hjärta (~300 g), summa ~1800 g;2012
+Har en vuxen fler eller färre ben än antalet smaklökar på tungan?;StatPearls ryggmärg (~45 cm) + matstrupe (~25 cm) + luftstrupe (~11 cm), summa ~36 cm;2024
+Är luftstrupens diameter större eller mindre än ögats diameter?;BBC Science Focus ben (206) + OpenStax smaklökar (~5 000);2024
+Väger mjälten mer eller mindre än hjärnan?;Cleveland Clinic luftstrupe-diameter (~20 mm) + ResearchGate eyeball (~24 mm);2024
+Lever en röd blodkropp längre eller kortare tid än en magslemhinnecell?;ScienceDirect mjälte (~150 g) + Normal Organ Weights hjärna (~1336 g);2012
+Är en mans urinrör längre eller kortare än matstrupen?;Stanford Blood Center RBC (~120 dagar) + MitoQ magslemhinna (~5 dagar);2024
+Har en hand fler eller färre ben än antalet tänder hos en vuxen?;Cleveland Clinic mannens urinrör (~20 cm) + ScienceInsights matstrupe (~25 cm);2024
+Är aortans diameter större eller mindre än luftstrupens diameter?;StatPearls hand (27 ben) + NHS inform tänder (32);2024
+Väger bukspottkörteln mer eller mindre än båda njurarna tillsammans?;JACC aorta-diameter (~30 mm) + Cleveland Clinic luftstrupe (~20 mm);2024
+Är överarmsbenet längre eller kortare än luftstrupen?;Cleveland Clinic bukspottkörtel (~90 g) + Liv Hospital njurpar (~270 g);2024
+Har tungan fler eller färre smaklökar än kroppen har svettkörtlar?;PMC humerus (~30 cm) + Cleveland Clinic luftstrupe (~11 cm);2013
+Har en vuxen fler eller färre ben i skallen än muskler i tungan?;OpenStax smaklökar (~5 000) + IACD svettkörtlar (~3 miljoner);2024
+Är ögats lins större eller mindre i diameter än aortan?;PMC linsdiameter (~10 mm) + JACC aorta-diameter (~30 mm);2022
+Har en vuxen fler eller färre ben än antalet alveoler i lungorna?;BBC Science Focus ben (206) + AJRCCM alveoler (~480 miljoner);2004
+Är en kvinnas urinrör längre eller kortare än den minsta hörselbenets längd?;Cleveland Clinic kvinnans urinrör (~40 mm) + Wikipedia stapes (~3 mm);2024
+Tar hjärtat fler eller färre slag än ögat blinkar på en hel dag?;Harvard Health hjärtfrekvens (~70/min, ~100 800/dygn) + Cleveland Clinic blink (~16 320/dygn);2024
+Växer håret snabbare eller långsammare per månad än en fingernagel?;Wikipedia hårtillväxt (~10 mm/mån) + Healthline fingernagel (~3 mm/mån);2024
+Är matstrupen längre eller kortare än luftstrupen och en mans urinrör tillsammans?;ScienceInsights matstrupe (~25 cm) + luftstrupe (~11 cm) + urinrör (~20 cm), summa ~31 cm;2024
+Har kroppen fler eller färre svettkörtlar än alveoler i lungorna?;IACD svettkörtlar (~3 miljoner) + AJRCCM alveoler (~480 miljoner);2024
+Har en vuxen fler eller färre ben i hjärnskålen än kranialnervspar?;TeachMeAnatomy kranieben (8 st) + Cleveland Clinic kranialnerver (12 par);2024
+Väger hjärnan mer eller mindre än mjälten och bukspottkörteln tillsammans?;Normal Organ Weights hjärna (~1336 g) + mjälte (~150 g) + bukspottkörtel (~90 g), summa ~240 g;2012
+Är ryggmärgen längre eller kortare än en mans urinrör?;StatPearls ryggmärg (~45 cm) + Cleveland Clinic mannens urinrör (~20 cm);2024
+Har kroppen fler eller färre muskler än tungan har smaklökar?;Healthline muskler (~639) + OpenStax smaklökar (~5 000);2024
+Är ögat större eller mindre i diameter än aortan?;ResearchGate eyeball (~24 mm) + JACC aorta-diameter (~30 mm);2022
+Väger levern mer eller mindre än hjärnan, hjärtat och mjälten tillsammans?;Duke Pathology lever (~1500 g) + hjärna (~1336 g) + hjärta (~300 g) + mjälte (~150 g), summa ~1786 g;2012
+Har kroppen fler eller färre svettkörtlar än röda blodkroppar bildas per sekund?;IACD svettkörtlar (~3 miljoner) + Wikipedia RBC-produktion (~2,4 miljoner/sek);2024
+Är lårbenet längre eller kortare än matstrupen och luftstrupen tillsammans?;PMC lårben (~48 cm) + matstrupe (~25 cm) + luftstrupe (~11 cm), summa ~36 cm;2013
+Är ryggmärgen längre eller kortare än skenbenet?;StatPearls ryggmärg (~45 cm) + PMC skenben (~36 cm);2024
+Är skenbenet längre eller kortare än en mans urinrör?;PMC skenben (~36 cm) + Cleveland Clinic mannens urinrör (~20 cm);2024
+Är en kvinnas urinrör längre eller kortare än ögats diameter?;Cleveland Clinic kvinnans urinrör (~40 mm) + ResearchGate eyeball (~24 mm);2024

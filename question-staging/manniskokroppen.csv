@@ -1,0 +1,91 @@
+﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Väger lungorna mer eller mindre än hjärnan?;Lungorna;Hjärnan;1300;1336;gram;Hur många gram skiljer det?
+Väger hjärnan mer eller mindre än levern?;Hjärnan;Levern;1336;1500;gram;Hur många gram skiljer det?
+Väger levern mer eller mindre än lungorna?;Levern;Lungorna;1500;1300;gram;Hur många gram skiljer det?
+Har en vuxen fler eller färre tänder än antalet ryggkotor?;Tänder hos vuxen;Ryggkotor;32;33;stycken;Hur många stycken skiljer det?
+Har en hand fler eller färre ben än skallen?;Ben i en hand;Ben i skallen;27;22;stycken;Hur många stycken skiljer det?
+Har en vuxen fler eller färre ben än en nyfödd?;Ben hos vuxen;Ben hos nyfödd;206;300;stycken;Hur många stycken skiljer det?
+Har ett barn fler eller färre mjölktänder än en vuxen har tänder?;Mjölktänder hos barn;Tänder hos vuxen;20;32;stycken;Hur många stycken skiljer det?
+Är lårbenet längre eller kortare än överarmsbenet?;Lårbenet;Överarmsbenet;48;30;centimeter;Hur många centimeter skiljer det?
+Har en vuxen fler eller färre tänder än antalet kromosomer i en cell?;Tänder hos vuxen;Kromosomer i en cell;32;46;stycken;Hur många stycken skiljer det?
+Har en nyfödd fler eller färre ben än antalet muskler i kroppen?;Ben hos nyfödd;Muskler i kroppen;300;639;stycken;Hur många stycken skiljer det?
+Är en graviditet längre eller kortare än en röd blodkropps livslängd?;En graviditet;En röd blodkropps livslängd;280;120;dagar;Hur många dagar skiljer det?
+Är vilopulsens slag per minut fler eller färre än antalet spinala nervpar?;Vilopuls per minut;Spinala nervpar;70;31;stycken;Hur många stycken skiljer det?
+Har skallen fler eller färre ben än antalet kromosomer i en cell?;Ben i skallen;Kromosomer i en cell;22;46;stycken;Hur många stycken skiljer det?
+Väger levern mer eller mindre än mjälten?;Levern;Mjälten;1500;150;gram;Hur många gram skiljer det?
+Finns det fler eller färre muskler i kroppen än antalet dagar en graviditet varar?;Muskler i kroppen;Dagar en graviditet varar;639;280;stycken;Hur många stycken skiljer det?
+Tar man fler eller färre andetag per minut än antalet spinala nervpar?;Andetag per minut;Spinala nervpar;16;31;stycken;Hur många stycken skiljer det?
+Finns det fler eller färre kromosomer i en cell än vilopulsens slag per minut?;Kromosomer i en cell;Vilopuls per minut;46;70;stycken;Hur många stycken skiljer det?
+Har en vuxen fler eller färre ben än antalet muskler i kroppen?;Ben hos vuxen;Muskler i kroppen;206;639;stycken;Hur många stycken skiljer det?
+Är tunntarmen längre eller kortare än tjocktarmen?;Tunntarmen;Tjocktarmen;7;1,5;meter;Hur många meter skiljer det?
+Väger hjärtat mer eller mindre än hjärnan?;Hjärtat;Hjärnan;300;1336;gram;Hur många gram skiljer det?
+Väger levern mer eller mindre än båda njurarna tillsammans?;Levern;Båda njurarna;1500;270;gram;Hur många gram skiljer det?
+Tar man fler eller färre andetag per minut än vilopulsens antal slag per minut?;Andetag per minut;Vilopuls per minut;16;70;stycken;Hur många stycken skiljer det?
+Är vilopulsens slag per minut fler eller färre än antalet mjölktänder hos ett barn?;Vilopuls per minut;Mjölktänder hos barn;70;20;stycken;Hur många stycken skiljer det?
+Väger båda njurarna tillsammans mer eller mindre än lungorna?;Båda njurarna;Lungorna;270;1300;gram;Hur många gram skiljer det?
+Väger hjärnan mer eller mindre än båda njurarna tillsammans?;Hjärnan;Båda njurarna;1336;270;gram;Hur många gram skiljer det?
+Väger levern mer eller mindre än hjärtat?;Levern;Hjärtat;1500;300;gram;Hur många gram skiljer det?
+Finns det fler eller färre muskler i kroppen än antalet hjärtslag i vilopuls per minut?;Muskler i kroppen;Vilopuls per minut;639;70;stycken;Hur många stycken skiljer det?
+Väger mjälten mer eller mindre än bukspottkörteln?;Mjälten;Bukspottkörteln;150;90;gram;Hur många gram skiljer det?
+Väger hjärnan mer eller mindre än bukspottkörteln?;Hjärnan;Bukspottkörteln;1336;90;gram;Hur många gram skiljer det?
+Har en nyfödd fler eller färre ben än antalet spinala nervpar?;Ben hos nyfödd;Spinala nervpar;300;31;stycken;Hur många stycken skiljer det?
+Har en fot fler eller färre ben än en hand?;Ben i en fot;Ben i en hand;26;27;stycken;Hur många stycken skiljer det?
+Tar man fler eller färre andetag än hjärtslag på en hel dag?;Andetag per dygn;Hjärtslag per dygn;21600;100800;stycken;Hur många stycken skiljer det?
+Är ett mänskligt öga större eller mindre i diameter än ögats lins?;Ögat;Ögats lins;24;10;millimeter;Hur många millimeter skiljer det?
+Har en vuxen fler eller färre kranialnervspar än ryggkotor?;Kranialnervspar;Ryggkotor;12;26;stycken;Hur många stycken skiljer det?
+Är matstrupen längre eller kortare än ryggmärgen?;Matstrupen;Ryggmärgen;25;45;centimeter;Hur många centimeter skiljer det?
+Lever en röd blodkropp längre eller kortare tid än en smakcell på tungan?;En röd blodkropps livslängd;En smakcells livslängd;120;10;dagar;Hur många dagar skiljer det?
+Är luftstrupen längre eller kortare än matstrupen?;Luftstrupen;Matstrupen;11;25;centimeter;Hur många centimeter skiljer det?
+Är skenbenet längre eller kortare än lårbenet?;Skenbenet;Lårbenet;36;48;centimeter;Hur många centimeter skiljer det?
+Är luftstrupen längre eller kortare än ryggmärgen?;Luftstrupen;Ryggmärgen;11;45;centimeter;Hur många centimeter skiljer det?
+Väger mjälten mer eller mindre än hjärtat?;Mjälten;Hjärtat;150;300;gram;Hur många gram skiljer det?
+Är ett nyfött barns kroppsvatten en högre eller lägre andel än en vuxens?;Kroppsvatten hos nyfödd;Kroppsvatten hos vuxen;75;60;procent;Hur många procentenheter skiljer det?
+Är överarmsbenet längre eller kortare än matstrupen?;Överarmsbenet;Matstrupen;30;25;centimeter;Hur många centimeter skiljer det?
+Lever en hudcell i överhuden längre eller kortare tid än en magslemhinnecell?;En hudcells livslängd;En magslemhinnecells livslängd;28;5;dagar;Hur många dagar skiljer det?
+Väger båda njurarna tillsammans mer eller mindre än hjärtat?;Båda njurarna;Hjärtat;270;300;gram;Hur många gram skiljer det?
+Är en mans urinrör längre eller kortare än luftstrupen?;Mannens urinrör;Luftstrupen;20;11;centimeter;Hur många centimeter skiljer det?
+Blinkar ögat fler eller färre gånger än man tar andetag på en hel dag?;Blinkningar per dygn;Andetag per dygn;16320;21600;stycken;Hur många stycken skiljer det?
+Växer en fingernagel snabbare eller långsammare än en tånagel?;En fingernagel per månad;En tånagel per månad;3;1;millimeter;Hur många millimeter skiljer det?
+Lever en röd blodkropp längre eller kortare tid än en hudcell i överhuden?;En röd blodkropps livslängd;En hudcells livslängd;120;28;dagar;Hur många dagar skiljer det?
+Är lårbenet längre eller kortare än ryggmärgen?;Lårbenet;Ryggmärgen;48;45;centimeter;Hur många centimeter skiljer det?
+Väger mjälten mer eller mindre än båda njurarna tillsammans?;Mjälten;Båda njurarna;150;270;gram;Hur många gram skiljer det?
+Är matstrupen längre eller kortare än skenbenet?;Matstrupen;Skenbenet;25;36;centimeter;Hur många centimeter skiljer det?
+Har tungan fler eller färre smaklökar än näsan har lukttyper den känner?;Smaklökar;Lukttyper;5000;350;stycken;Hur många stycken skiljer det?
+Är överarmsbenet längre eller kortare än skenbenet?;Överarmsbenet;Skenbenet;30;36;centimeter;Hur många centimeter skiljer det?
+Lever en smakcell på tungan längre eller kortare tid än en magslemhinnecell?;En smakcells livslängd;En magslemhinnecells livslängd;10;5;dagar;Hur många dagar skiljer det?
+Väger levern mer eller mindre än mjälten och hjärtat tillsammans?;Levern;Mjälten och hjärtat;1500;450;gram;Hur många gram skiljer det?
+Är en mans urinrör längre eller kortare än en kvinnas?;Mannens urinrör;Kvinnans urinrör;20;4;centimeter;Hur många centimeter skiljer det?
+Är stigbygeln, kroppens minsta ben, större eller mindre i längd än ögats diameter?;Stigbygeln;Ögat;3;24;millimeter;Hur många millimeter skiljer det?
+Har skallen fler eller färre ben i ansiktet än i hjärnskålen?;Ansiktsben;Kranieben;14;8;stycken;Hur många stycken skiljer det?
+Lever en hudcell i överhuden längre eller kortare tid än en smakcell på tungan?;En hudcells livslängd;En smakcells livslängd;28;10;dagar;Hur många dagar skiljer det?
+Väger hjärnan mer eller mindre än levern och hjärtat tillsammans?;Hjärnan;Levern och hjärtat;1336;1800;gram;Hur många gram skiljer det?
+Är ryggmärgen längre eller kortare än matstrupen och luftstrupen tillsammans?;Ryggmärgen;Matstrupen och luftstrupen;45;36;centimeter;Hur många centimeter skiljer det?
+Har en vuxen fler eller färre ben än antalet smaklökar på tungan?;Ben hos vuxen;Smaklökar;206;5000;stycken;Hur många stycken skiljer det?
+Är luftstrupens diameter större eller mindre än ögats diameter?;Luftstrupens diameter;Ögat;20;24;millimeter;Hur många millimeter skiljer det?
+Väger mjälten mer eller mindre än hjärnan?;Mjälten;Hjärnan;150;1336;gram;Hur många gram skiljer det?
+Lever en röd blodkropp längre eller kortare tid än en magslemhinnecell?;En röd blodkropps livslängd;En magslemhinnecells livslängd;120;5;dagar;Hur många dagar skiljer det?
+Är en mans urinrör längre eller kortare än matstrupen?;Mannens urinrör;Matstrupen;20;25;centimeter;Hur många centimeter skiljer det?
+Har en hand fler eller färre ben än antalet tänder hos en vuxen?;Ben i en hand;Tänder hos vuxen;27;32;stycken;Hur många stycken skiljer det?
+Är aortans diameter större eller mindre än luftstrupens diameter?;Aortans diameter;Luftstrupens diameter;30;20;millimeter;Hur många millimeter skiljer det?
+Väger bukspottkörteln mer eller mindre än båda njurarna tillsammans?;Bukspottkörteln;Båda njurarna;90;270;gram;Hur många gram skiljer det?
+Är överarmsbenet längre eller kortare än luftstrupen?;Överarmsbenet;Luftstrupen;30;11;centimeter;Hur många centimeter skiljer det?
+Har tungan fler eller färre smaklökar än kroppen har svettkörtlar?;Smaklökar;Svettkörtlar;5000;3000000;stycken;Hur många stycken skiljer det?
+Har en vuxen fler eller färre ben i skallen än muskler i tungan?;Ben i skallen;Muskler i tungan;22;8;stycken;Hur många stycken skiljer det?
+Är ögats lins större eller mindre i diameter än aortan?;Ögats lins;Aortans diameter;10;30;millimeter;Hur många millimeter skiljer det?
+Har en vuxen fler eller färre ben än antalet alveoler i lungorna?;Ben hos vuxen;Alveoler i lungorna;206;480000000;stycken;Hur många stycken skiljer det?
+Är en kvinnas urinrör längre eller kortare än den minsta hörselbenets längd?;Kvinnans urinrör;Stigbygeln;40;3;millimeter;Hur många millimeter skiljer det?
+Tar hjärtat fler eller färre slag än ögat blinkar på en hel dag?;Hjärtslag per dygn;Blinkningar per dygn;100800;16320;stycken;Hur många stycken skiljer det?
+Växer håret snabbare eller långsammare per månad än en fingernagel?;Hår per månad;En fingernagel per månad;10;3;millimeter;Hur många millimeter skiljer det?
+Är matstrupen längre eller kortare än luftstrupen och en mans urinrör tillsammans?;Matstrupen;Luftstrupen och urinröret;25;31;centimeter;Hur många centimeter skiljer det?
+Har kroppen fler eller färre svettkörtlar än alveoler i lungorna?;Svettkörtlar;Alveoler i lungorna;3000000;480000000;stycken;Hur många stycken skiljer det?
+Har en vuxen fler eller färre ben i hjärnskålen än kranialnervspar?;Kranieben;Kranialnervspar;8;12;stycken;Hur många stycken skiljer det?
+Väger hjärnan mer eller mindre än mjälten och bukspottkörteln tillsammans?;Hjärnan;Mjälten och bukspottkörteln;1336;240;gram;Hur många gram skiljer det?
+Är ryggmärgen längre eller kortare än en mans urinrör?;Ryggmärgen;Mannens urinrör;45;20;centimeter;Hur många centimeter skiljer det?
+Har kroppen fler eller färre muskler än tungan har smaklökar?;Muskler i kroppen;Smaklökar;639;5000;stycken;Hur många stycken skiljer det?
+Är ögat större eller mindre i diameter än aortan?;Ögat;Aortans diameter;24;30;millimeter;Hur många millimeter skiljer det?
+Väger levern mer eller mindre än hjärnan, hjärtat och mjälten tillsammans?;Levern;Hjärnan, hjärtat och mjälten;1500;1786;gram;Hur många gram skiljer det?
+Har kroppen fler eller färre svettkörtlar än röda blodkroppar bildas per sekund?;Svettkörtlar;Röda blodkroppar per sekund;3000000;2400000;stycken;Hur många stycken skiljer det?
+Är lårbenet längre eller kortare än matstrupen och luftstrupen tillsammans?;Lårbenet;Matstrupen och luftstrupen;48;36;centimeter;Hur många centimeter skiljer det?
+Är ryggmärgen längre eller kortare än skenbenet?;Ryggmärgen;Skenbenet;45;36;centimeter;Hur många centimeter skiljer det?
+Är skenbenet längre eller kortare än en mans urinrör?;Skenbenet;Mannens urinrör;36;20;centimeter;Hur många centimeter skiljer det?
+Är en kvinnas urinrör längre eller kortare än ögats diameter?;Kvinnans urinrör;Ögat;40;24;millimeter;Hur många millimeter skiljer det?

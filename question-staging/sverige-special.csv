@@ -1,0 +1,111 @@
+﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Har Vänern större eller mindre yta än Mälaren?;Vänern;Mälaren;5650;1078;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Mälaren större eller mindre yta än Vättern?;Mälaren;Vättern;1078;1893;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Hjälmaren större eller mindre yta än Storsjön?;Hjälmaren;Storsjön;483;464;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Siljan större eller mindre yta än Torneträsk?;Siljan;Torneträsk;290;332;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Mälaren större eller mindre yta än Hjälmaren?;Mälaren;Hjälmaren;1078;483;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Hjälmaren större eller mindre yta än Vänern?;Hjälmaren;Vänern;483;5650;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Malmö större eller mindre folkmängd än Göteborg? (2024);Malmö;Göteborg;365644;608993;invånare;Hur många invånare skiljer det?
+Har Uppsala större eller mindre folkmängd än Linköping? (2024);Uppsala;Linköping;248016;168035;invånare;Hur många invånare skiljer det?
+Har Malmö större eller mindre folkmängd än Linköping? (2024);Malmö;Linköping;365644;168035;invånare;Hur många invånare skiljer det?
+Har Göteborg större eller mindre folkmängd än Stockholm? (2024);Göteborg;Stockholm;608993;995574;invånare;Hur många invånare skiljer det?
+Har Stockholm större eller mindre folkmängd än Malmö? (2024);Stockholm;Malmö;995574;365644;invånare;Hur många invånare skiljer det?
+Har Linköping större eller mindre folkmängd än Uppsala? (2024);Linköping;Uppsala;168035;248016;invånare;Hur många invånare skiljer det?
+Är Öresundsbron längre eller kortare än Ölandsbron?;Öresundsbron;Ölandsbron;7845;6072;meter;Hur många meter skiljer det?
+Är Hisingsbron längre eller kortare än Götaälvbron?;Hisingsbron;Götaälvbron;440;927;meter;Hur många meter skiljer det?
+Är Götaälvbron längre eller kortare än Ölandsbron?;Götaälvbron;Ölandsbron;927;6072;meter;Hur många meter skiljer det?
+Är Öresundsbron längre eller kortare än Götaälvbron?;Öresundsbron;Götaälvbron;7845;927;meter;Hur många meter skiljer det?
+Är Kista Science Tower högre eller lägre än Turning Torso?;Kista Science Tower;Turning Torso;124;190;meter;Hur många meter skiljer det?
+Är Karlatornet högre eller lägre än Globen?;Karlatornet;Globen;246;85;meter;Hur många meter skiljer det?
+Är Kaknästornet högre eller lägre än Globen?;Kaknästornet;Globen;155;85;meter;Hur många meter skiljer det?
+Är Globen högre eller lägre än Turning Torso?;Globen;Turning Torso;85;190;meter;Hur många meter skiljer det?
+Är Kaknästornet högre eller lägre än Turning Torso?;Kaknästornet;Turning Torso;155;190;meter;Hur många meter skiljer det?
+Har Öland större eller mindre yta än Gotland?;Öland;Gotland;1342;2994;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Öland större eller mindre yta än Orust?;Öland;Orust;1342;346;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Orust större eller mindre yta än Gotland?;Orust;Gotland;346;2994;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Är Kebnekaise högre eller lägre än Sarektjåkkå?;Kebnekaise;Sarektjåkkå;2097;2089;meter;Hur många meter skiljer det?
+Är Helagsfjället högre eller lägre än Kebnekaise?;Helagsfjället;Kebnekaise;1797;2097;meter;Hur många meter skiljer det?
+Är avståndet Stockholm–Göteborg längre eller kortare än Stockholm–Malmö?;Stockholm–Göteborg;Stockholm–Malmö;397;513;kilometer;Hur många kilometer skiljer det?
+Är avståndet Malmö–Kiruna längre eller kortare än Göteborg–Malmö?;Malmö–Kiruna;Göteborg–Malmö;1412;242;kilometer;Hur många kilometer skiljer det?
+Är avståndet Stockholm–Kiruna längre eller kortare än Göteborg–Malmö?;Stockholm–Kiruna;Göteborg–Malmö;954;242;kilometer;Hur många kilometer skiljer det?
+Är avståndet Göteborg–Malmö längre eller kortare än Stockholm–Göteborg?;Göteborg–Malmö;Stockholm–Göteborg;242;397;kilometer;Hur många kilometer skiljer det?
+Är Hornavan djupare eller grundare än Storsjön?;Hornavan;Storsjön;221;74;meter;Hur många meter skiljer det?
+Är Hornavan djupare eller grundare än Torneträsk?;Hornavan;Torneträsk;221;168;meter;Hur många meter skiljer det?
+Är Storsjön djupare eller grundare än Siljan?;Storsjön;Siljan;74;134;meter;Hur många meter skiljer det?
+Är Ångermanälven längre eller kortare än Ljusnan?;Ångermanälven;Ljusnan;460;451;kilometer;Hur många kilometer skiljer det?
+Är Ume älv längre eller kortare än Lule älv?;Ume älv;Lule älv;477;470;kilometer;Hur många kilometer skiljer det?
+Är Klarälven längre eller kortare än Dalälven?;Klarälven;Dalälven;460;557;kilometer;Hur många kilometer skiljer det?
+Är Indalsälven längre eller kortare än Vindelälven?;Indalsälven;Vindelälven;431;467;kilometer;Hur många kilometer skiljer det?
+Är Ångermanälven längre eller kortare än Göta älv?;Ångermanälven;Göta älv;460;93;kilometer;Hur många kilometer skiljer det?
+Är Åreskutan högre eller lägre än Helags?;Åreskutan;Helags;1420;1797;meter;Hur många meter skiljer det?
+Är Storsylen högre eller lägre än Helags?;Storsylen;Helags;1762;1797;meter;Hur många meter skiljer det?
+Är Sarektjåkkå högre eller lägre än Helags?;Sarektjåkkå;Helags;2089;1797;meter;Hur många meter skiljer det?
+Är Åreskutan högre eller lägre än Kebnekaise?;Åreskutan;Kebnekaise;1420;2097;meter;Hur många meter skiljer det?
+Har Hisingen större eller mindre yta än Värmdö?;Hisingen;Värmdö;199;180;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Värmdö större eller mindre yta än Tjörn?;Värmdö;Tjörn;180;147;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Tjörn större eller mindre yta än Öland?;Tjörn;Öland;147;1342;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Hisingen större eller mindre yta än Orust?;Hisingen;Orust;199;346;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Är avståndet Stockholm–Sundsvall längre eller kortare än Stockholm–Göteborg?;Stockholm–Sundsvall;Stockholm–Göteborg;343;397;kilometer;Hur många kilometer skiljer det?
+Är avståndet Stockholm–Umeå längre eller kortare än Stockholm–Sundsvall?;Stockholm–Umeå;Stockholm–Sundsvall;513;343;kilometer;Hur många kilometer skiljer det?
+Är avståndet Göteborg–Jönköping längre eller kortare än Göteborg–Malmö?;Göteborg–Jönköping;Göteborg–Malmö;130;242;kilometer;Hur många kilometer skiljer det?
+Är avståndet Kiruna–Stockholm längre eller kortare än Kiruna–Malmö?;Kiruna–Stockholm;Kiruna–Malmö;954;1412;kilometer;Hur många kilometer skiljer det?
+Regerade Gustav Vasa längre eller kortare än Gustaf V?;Gustav Vasa;Gustaf V;37;43;år;Hur många år skiljer det?
+Regerade Oscar II längre eller kortare än Gustav Vasa?;Oscar II;Gustav Vasa;35;37;år;Hur många år skiljer det?
+Regerade Karl XIV Johan längre eller kortare än Oscar II?;Karl XIV Johan;Oscar II;26;35;år;Hur många år skiljer det?
+Regerade Karl XII längre eller kortare än Gustaf V?;Karl XII;Gustaf V;21;43;år;Hur många år skiljer det?
+Är Turning Torso högre eller lägre än Karlatornet?;Turning Torso;Karlatornet;190;246;meter;Hur många meter skiljer det?
+Är Kista Science Tower högre eller lägre än Kaknästornet?;Kista Science Tower;Kaknästornet;124;155;meter;Hur många meter skiljer det?
+Är Karlatornet högre eller lägre än Kaknästornet?;Karlatornet;Kaknästornet;246;155;meter;Hur många meter skiljer det?
+Är Globen högre eller lägre än Kista Science Tower?;Globen;Kista Science Tower;85;124;meter;Hur många meter skiljer det?
+Har Uppsala domkyrka högre eller lägre tornhöjd än Globen?;Uppsala domkyrka;Globen;118;85;meter;Hur många meter skiljer det?
+Är Njupeskär högre eller lägre än Fettjeåfallet?;Njupeskär;Fettjeåfallet;93;60;meter;Hur många meter skiljer det?
+Är Njupeskär högre eller lägre än Ristafallet?;Njupeskär;Ristafallet;93;14;meter;Hur många meter skiljer det?
+Är Hällingsåfallet högre eller lägre än Tännforsen?;Hällingsåfallet;Tännforsen;43;38;meter;Hur många meter skiljer det?
+Är Fettjeåfallet högre eller lägre än Tännforsen?;Fettjeåfallet;Tännforsen;60;38;meter;Hur många meter skiljer det?
+Har Lappland större eller mindre yta än Norrbotten?;Lappland;Norrbotten;108561;26671;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Jämtland större eller mindre yta än Dalarna?;Jämtland;Dalarna;34009;29086;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Uppland större eller mindre yta än Småland?;Uppland;Småland;12738;29400;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Lappland större eller mindre yta än Jämtland?;Lappland;Jämtland;108561;34009;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Uppland större eller mindre yta än Lappland?;Uppland;Lappland;12738;108561;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Skåne större eller mindre yta än Småland?;Skåne;Småland;10963;29400;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Uppsala domkyrka högre eller lägre tornhöjd än Lunds domkyrka?;Uppsala domkyrka;Lunds domkyrka;118;55;meter;Hur många meter skiljer det?
+Har Linköpings domkyrka högre eller lägre tornhöjd än Skara domkyrka?;Linköpings domkyrka;Skara domkyrka;107;65;meter;Hur många meter skiljer det?
+Har Lunds domkyrka högre eller lägre tornhöjd än Skara domkyrka?;Lunds domkyrka;Skara domkyrka;55;65;meter;Hur många meter skiljer det?
+Har Helsingborg större eller mindre folkmängd än Jönköping? (2024);Helsingborg;Jönköping;151371;145609;invånare;Hur många invånare skiljer det?
+Har Västerås större eller mindre folkmängd än Umeå? (2024);Västerås;Umeå;159082;132372;invånare;Hur många invånare skiljer det?
+Har Örebro större eller mindre folkmängd än Norrköping? (2024);Örebro;Norrköping;158505;145308;invånare;Hur många invånare skiljer det?
+Har Padjelanta nationalpark större eller mindre yta än Sarek nationalpark?;Padjelanta;Sarek;1984;1970;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Stora Sjöfallet nationalpark större eller mindre yta än Sarek nationalpark?;Stora Sjöfallet;Sarek;1278;1970;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Abisko nationalpark större eller mindre yta än Sarek nationalpark?;Abisko;Sarek;77;1970;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Padjelanta nationalpark större eller mindre yta än Abisko nationalpark?;Padjelanta;Abisko;1984;77;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Hornavan större eller mindre yta än Uddjaure?;Hornavan;Uddjaure;262;249;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Bolmen större eller mindre yta än Storuman?;Bolmen;Storuman;173;171;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Hornavan större eller mindre yta än Åsnen?;Hornavan;Åsnen;262;150;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Bolmen större eller mindre yta än Hornavan?;Bolmen;Hornavan;173;262;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Åsnen större eller mindre yta än Vänern?;Åsnen;Vänern;150;5650;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Är Karlatornet högre eller lägre än Uppsala domkyrka?;Karlatornet;Uppsala domkyrka;246;118;meter;Hur många meter skiljer det?
+Är Turning Torso högre eller lägre än Linköpings domkyrka?;Turning Torso;Linköpings domkyrka;190;107;meter;Hur många meter skiljer det?
+Har Skåne större eller mindre yta än Gotland?;Skåne;Gotland;10963;3134;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Blekinge större eller mindre yta än Öland?;Blekinge;Öland;2941;1342;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Kiruna kommun större eller mindre yta än Stockholms kommun?;Kiruna kommun;Stockholms kommun;20551;187;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Jokkmokks kommun större eller mindre yta än Solna kommun?;Jokkmokks kommun;Solna kommun;19334;20;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Gällivare kommun större eller mindre yta än Sundbybergs kommun?;Gällivare kommun;Sundbybergs kommun;16818;9;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Stockholms kommun större eller mindre yta än Solna kommun?;Stockholms kommun;Solna kommun;187;20;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Är Sundsvallsbron längre eller kortare än Öresundsbron?;Sundsvallsbron;Öresundsbron;2109;7845;meter;Hur många meter skiljer det?
+Är Högakustenbron längre eller kortare än Tjörnbron?;Högakustenbron;Tjörnbron;1867;664;meter;Hur många meter skiljer det?
+Är Tjörnbron längre eller kortare än Älvsborgsbron?;Tjörnbron;Älvsborgsbron;664;933;meter;Hur många meter skiljer det?
+Är Älvsborgsbron längre eller kortare än Ölandsbron?;Älvsborgsbron;Ölandsbron;933;6072;meter;Hur många meter skiljer det?
+Är Sundsvallsbron längre eller kortare än Tjörnbron?;Sundsvallsbron;Tjörnbron;2109;664;meter;Hur många meter skiljer det?
+Är Högakustenbron längre eller kortare än Ölandsbron?;Högakustenbron;Ölandsbron;1867;6072;meter;Hur många meter skiljer det?
+Har Kiruna kommun större eller mindre yta än Gotland?;Kiruna kommun;Gotland;20551;3134;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Vänern större eller mindre yta än Bolmen?;Vänern;Bolmen;5650;173;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Vättern större eller mindre yta än Åsnen?;Vättern;Åsnen;1893;150;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Sarek nationalpark större eller mindre yta än Gotland?;Sarek;Gotland;1970;3134;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Norrbotten större eller mindre yta än Uppland?;Norrbotten;Uppland;26671;12738;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Är Lule älv längre eller kortare än Göta älv?;Lule älv;Göta älv;470;93;kilometer;Hur många kilometer skiljer det?
+Är Indalsälven längre eller kortare än Göta älv?;Indalsälven;Göta älv;431;93;kilometer;Hur många kilometer skiljer det?
+Är Ume älv längre eller kortare än Göta älv?;Ume älv;Göta älv;477;93;kilometer;Hur många kilometer skiljer det?
+Är Hornavan djupare eller grundare än Vänern?;Hornavan;Vänern;221;106;meter;Hur många meter skiljer det?
+Är Torneträsk djupare eller grundare än Vättern?;Torneträsk;Vättern;168;128;meter;Hur många meter skiljer det?
+Har Padjelanta nationalpark större eller mindre yta än Gotland?;Padjelanta;Gotland;1984;3134;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Har Vänern större eller mindre yta än Storuman?;Vänern;Storuman;5650;171;kvadratkilometer;Hur många kvadratkilometer skiljer det?

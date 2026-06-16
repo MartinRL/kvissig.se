@@ -1,0 +1,121 @@
+﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Har Venus en större eller mindre diameter än jorden?;Venus;Jorden;12104;12756;km;Hur många km skiljer det i diameter?
+Har Eris en större eller mindre diameter än Pluto?;Eris;Pluto;2326;2377;km;Hur många km skiljer det i diameter?
+Är månen Io större eller mindre i diameter än jordens måne?;Io;Månen;3640;3474;km;Hur många km skiljer det i diameter?
+Har Neptunus en större eller mindre diameter än Uranus?;Neptunus;Uranus;49528;51118;km;Hur många km skiljer det i diameter?
+Är Ganymedes större eller mindre i diameter än Titan?;Ganymedes;Titan;5262;5150;km;Hur många km skiljer det i diameter?
+Har Saturnus en större eller mindre diameter än Jupiter?;Saturnus;Jupiter;120536;142984;km;Hur många km skiljer det i diameter?
+Har Mars en större eller mindre diameter än Merkurius?;Mars;Merkurius;6792;4879;km;Hur många km skiljer det i diameter?
+Är Callisto större eller mindre i diameter än Io?;Callisto;Io;4821;3640;km;Hur många km skiljer det i diameter?
+Har Venus ett längre eller kortare omloppsår än jorden?;Venus;Jorden;225;365;dygn;Hur många dygn skiljer det i omloppstid?
+Ligger Mars längre bort eller närmare solen än jorden?;Mars;Jorden;227,9;149,6;miljoner km;Hur många miljoner km skiljer det i avstånd till solen?
+Ligger Venus längre bort eller närmare solen än Merkurius?;Venus;Merkurius;108,2;57,9;miljoner km;Hur många miljoner km skiljer det i avstånd till solen?
+Har Uranus en större eller mindre diameter än Saturnus?;Uranus;Saturnus;51118;120536;km;Hur många km skiljer det i diameter?
+Ligger Neptunus längre bort eller närmare solen än Uranus?;Neptunus;Uranus;4497;2873;miljoner km;Hur många miljoner km skiljer det i avstånd till solen?
+Har Saturnus ett längre eller kortare omloppsår än Jupiter?;Saturnus;Jupiter;10759;4333;dygn;Hur många dygn skiljer det i omloppstid?
+Är Olympus Mons på Mars högre eller lägre än Mount Everest?;Olympus Mons;Mount Everest;21;8,8;km;Hur många km skiljer det i höjd?
+Har Mars ett längre eller kortare omloppsår än jorden?;Mars;Jorden;687;365;dygn;Hur många dygn skiljer det i omloppstid?
+Har Venus en större eller mindre diameter än Mars?;Venus;Mars;12104;6792;km;Hur många km skiljer det i diameter?
+Har jorden en större eller mindre diameter än Merkurius?;Jorden;Merkurius;12756;4879;km;Hur många km skiljer det i diameter?
+Har Merkurius ett längre eller kortare omloppsår än jorden?;Merkurius;Jorden;88;365;dygn;Hur många dygn skiljer det i omloppstid?
+Har Jupiter en större eller mindre diameter än Uranus?;Jupiter;Uranus;142984;51118;km;Hur många km skiljer det i diameter?
+Ligger Mars längre bort eller närmare solen än Jupiter?;Mars;Jupiter;227,9;778;miljoner km;Hur många miljoner km skiljer det i avstånd till solen?
+Har Venus en större eller mindre diameter än Neptunus?;Venus;Neptunus;12104;49528;km;Hur många km skiljer det i diameter?
+Har Venus ett längre eller kortare omloppsår än Mars?;Venus;Mars;225;687;dygn;Hur många dygn skiljer det i omloppstid?
+Ligger Merkurius längre bort eller närmare solen än jorden?;Merkurius;Jorden;57,9;149,6;miljoner km;Hur många miljoner km skiljer det i avstånd till solen?
+Har Uranus en större eller mindre diameter än jorden?;Uranus;Jorden;51118;12756;km;Hur många km skiljer det i diameter?
+Har Venus en längre eller kortare rotationstid än Merkurius?;Venus;Merkurius;243;58,6;dygn;Hur många dygn skiljer det i rotationstid?
+Har jorden en större eller mindre diameter än Saturnus?;Jorden;Saturnus;12756;120536;km;Hur många km skiljer det i diameter?
+Har Saturnus ett längre eller kortare omloppsår än Mars?;Saturnus;Mars;10759;687;dygn;Hur många dygn skiljer det i omloppstid?
+Ligger jorden längre bort eller närmare solen än Saturnus?;Jorden;Saturnus;149,6;1432;miljoner km;Hur många miljoner km skiljer det i avstånd till solen?
+Har Mars en större eller mindre diameter än Uranus?;Mars;Uranus;6792;51118;km;Hur många km skiljer det i diameter?
+Har Triton en större eller mindre diameter än Europa?;Triton;Europa;2707;3122;km;Hur många km skiljer det i diameter?
+Är Oberon större eller mindre i diameter än Titania?;Oberon;Titania;1523;1577;km;Hur många km skiljer det i diameter?
+Har Iapetus en större eller mindre diameter än Rhea?;Iapetus;Rhea;1469;1528;km;Hur många km skiljer det i diameter?
+Har Quaoar en större eller mindre diameter än Charon?;Quaoar;Charon;1080;1212;km;Hur många km skiljer det i diameter?
+Har Haumea en större eller mindre diameter än Eris?;Haumea;Eris;1931;2326;km;Hur många km skiljer det i diameter?
+Har Ceres en större eller mindre diameter än Orcus?;Ceres;Orcus;946;960;km;Hur många km skiljer det i diameter?
+Har Charon en större eller mindre diameter än Gonggong?;Charon;Gonggong;1212;1230;km;Hur många km skiljer det i diameter?
+Har Tethys en större eller mindre diameter än Dione?;Tethys;Dione;1062;1123;km;Hur många km skiljer det i diameter?
+Har Pluto en större eller mindre diameter än Triton?;Pluto;Triton;2376;2707;km;Hur många km skiljer det i diameter?
+Har Charon en större eller mindre diameter än Makemake?;Charon;Makemake;1212;1426;km;Hur många km skiljer det i diameter?
+Har Mimas en större eller mindre diameter än Enceladus?;Mimas;Enceladus;396;504;km;Hur många km skiljer det i diameter?
+Har Pluto en större eller mindre diameter än Europa?;Pluto;Europa;2376;3122;km;Hur många km skiljer det i diameter?
+Har Makemake en större eller mindre diameter än Haumea?;Makemake;Haumea;1426;1931;km;Hur många km skiljer det i diameter?
+Har Tethys en större eller mindre diameter än Iapetus?;Tethys;Iapetus;1062;1469;km;Hur många km skiljer det i diameter?
+Har Charon en större eller mindre diameter än Rhea?;Charon;Rhea;1212;1528;km;Hur många km skiljer det i diameter?
+Har Makemake en större eller mindre diameter än Triton?;Makemake;Triton;1426;2707;km;Hur många km skiljer det i diameter?
+Har Ceres en större eller mindre diameter än Eris?;Ceres;Eris;946;2326;km;Hur många km skiljer det i diameter?
+Har Enceladus en större eller mindre diameter än Ceres?;Enceladus;Ceres;504;946;km;Hur många km skiljer det i diameter?
+Har Ceres en större eller mindre diameter än Europa?;Ceres;Europa;946;3122;km;Hur många km skiljer det i diameter?
+Har Ceres en större eller mindre diameter än Triton?;Ceres;Triton;946;2707;km;Hur många km skiljer det i diameter?
+Har Mimas en större eller mindre diameter än Pluto?;Mimas;Pluto;396;2376;km;Hur många km skiljer det i diameter?
+Har Enceladus en större eller mindre diameter än Triton?;Enceladus;Triton;504;2707;km;Hur många km skiljer det i diameter?
+Har Mimas en större eller mindre diameter än Europa?;Mimas;Europa;396;3122;km;Hur många km skiljer det i diameter?
+Har Merkurius en större eller mindre diameter än Ganymedes?;Merkurius;Ganymedes;4879;5268;km;Hur många km skiljer det i diameter?
+Har Venus en högre eller lägre ytgravitation än Saturnus?;Venus;Saturnus;8,9;9,0;m/s²;Hur stor är skillnaden i ytgravitation?
+Har jorden en högre eller lägre ytgravitation än Neptunus?;Jorden;Neptunus;9,8;11,0;m/s²;Hur stor är skillnaden i ytgravitation?
+Har Neptunus en högre eller lägre ytgravitation än Jupiter?;Neptunus;Jupiter;11,0;23,1;m/s²;Hur stor är skillnaden i ytgravitation?
+Har jorden en högre eller lägre ytgravitation än Mars?;Jorden;Mars;9,8;3,7;m/s²;Hur stor är skillnaden i ytgravitation?
+Har Jupiter en högre eller lägre ytgravitation än månen?;Jupiter;Månen;23,1;1,6;m/s²;Hur stor är skillnaden i ytgravitation?
+Har jorden en högre eller lägre ytgravitation än Pluto?;Jorden;Pluto;9,8;0,7;m/s²;Hur stor är skillnaden i ytgravitation?
+Ligger Jupiter längre bort eller närmare solen än Saturnus?;Jupiter;Saturnus;778;1432;miljoner km;Hur många miljoner km skiljer det i avstånd till solen?
+Ligger Saturnus längre bort eller närmare solen än Uranus?;Saturnus;Uranus;1432;2873;miljoner km;Hur många miljoner km skiljer det i avstånd till solen?
+Ligger Merkurius längre bort eller närmare solen än Neptunus?;Merkurius;Neptunus;57,9;4497;miljoner km;Hur många miljoner km skiljer det i avstånd till solen?
+Ligger Venus längre bort eller närmare solen än Jupiter?;Venus;Jupiter;108,2;778;miljoner km;Hur många miljoner km skiljer det i avstånd till solen?
+Ligger Proxima Centauri längre bort eller närmare än Alfa Centauri?;Proxima Centauri;Alfa Centauri;4,2;4,35;ljusår;Hur många ljusår skiljer det i avstånd?
+Ligger Sirius längre bort eller närmare än Barnards stjärna?;Sirius;Barnards stjärna;8,6;5,96;ljusår;Hur många ljusår skiljer det i avstånd?
+Ligger Vega längre bort eller närmare än Sirius?;Vega;Sirius;25;8,6;ljusår;Hur många ljusår skiljer det i avstånd?
+Ligger Betelgeuse längre bort eller närmare än Polstjärnan?;Betelgeuse;Polstjärnan;430;433;ljusår;Hur många ljusår skiljer det i avstånd?
+Ligger Polstjärnan längre bort eller närmare än Vega?;Polstjärnan;Vega;433;25;ljusår;Hur många ljusår skiljer det i avstånd?
+Ligger Sirius längre bort eller närmare än Proxima Centauri?;Sirius;Proxima Centauri;8,6;4,2;ljusår;Hur många ljusår skiljer det i avstånd?
+Har jorden en större eller mindre massa än Venus?;Jorden;Venus;5,97;4,87;10^24 kg;Hur stor är skillnaden i massa?
+Har Neptunus en större eller mindre massa än Uranus?;Neptunus;Uranus;102;86,8;10^24 kg;Hur stor är skillnaden i massa?
+Har Saturnus en större eller mindre massa än Neptunus?;Saturnus;Neptunus;568;102;10^24 kg;Hur stor är skillnaden i massa?
+Har Jupiter en större eller mindre massa än Saturnus?;Jupiter;Saturnus;1898;568;10^24 kg;Hur stor är skillnaden i massa?
+Har jorden en större eller mindre massa än Mars?;Jorden;Mars;5,97;0,642;10^24 kg;Hur stor är skillnaden i massa?
+Har Uranus en större eller mindre massa än jorden?;Uranus;Jorden;86,8;5,97;10^24 kg;Hur stor är skillnaden i massa?
+Har Mars en större eller mindre massa än Merkurius?;Mars;Merkurius;0,642;0,33;10^24 kg;Hur stor är skillnaden i massa?
+Har Saturnus en större eller mindre massa än Uranus?;Saturnus;Uranus;568;86,8;10^24 kg;Hur stor är skillnaden i massa?
+Har Jupiter en längre eller kortare rotationstid än Saturnus?;Jupiter;Saturnus;9,9;10,7;timmar;Hur många timmar skiljer det i rotationstid?
+Har Saturnus en längre eller kortare rotationstid än Neptunus?;Saturnus;Neptunus;10,7;16,1;timmar;Hur många timmar skiljer det i rotationstid?
+Har Uranus en längre eller kortare rotationstid än Neptunus?;Uranus;Neptunus;17,2;16,1;timmar;Hur många timmar skiljer det i rotationstid?
+Har jorden en längre eller kortare rotationstid än Mars?;Jorden;Mars;23,9;24,6;timmar;Hur många timmar skiljer det i rotationstid?
+Har Mars en längre eller kortare rotationstid än Jupiter?;Mars;Jupiter;24,6;9,9;timmar;Hur många timmar skiljer det i rotationstid?
+Ligger Vega längre bort eller närmare än Barnards stjärna?;Vega;Barnards stjärna;25;5,96;ljusår;Hur många ljusår skiljer det i avstånd?
+Har Merkurius en längre eller kortare rotationstid än jorden?;Merkurius;Jorden;1408;23,9;timmar;Hur många timmar skiljer det i rotationstid?
+Har Uranus fler eller färre kända månar än Neptunus? (2024);Uranus;Neptunus;28;16;månar;Hur många månar skiljer det?
+Har Mars fler eller färre månar än jorden?;Mars;Jorden;2;1;månar;Hur många månar skiljer det?
+Har Saturnus en längre eller kortare omloppstid än Uranus?;Saturnus;Uranus;29,5;84;år;Hur många år skiljer det i omloppstid?
+Har Neptunus en längre eller kortare omloppstid än Uranus?;Neptunus;Uranus;164,8;84;år;Hur många år skiljer det i omloppstid?
+Har Pluto en längre eller kortare omloppstid än Neptunus?;Pluto;Neptunus;248;164,8;år;Hur många år skiljer det i omloppstid?
+Har Saturnus en högre eller lägre flykthastighet än Neptunus?;Saturnus;Neptunus;35,5;23,5;km/s;Hur stor är skillnaden i flykthastighet?
+Har Jupiter en högre eller lägre flykthastighet än Saturnus?;Jupiter;Saturnus;59,5;35,5;km/s;Hur stor är skillnaden i flykthastighet?
+Har jorden en högre eller lägre flykthastighet än Mars?;Jorden;Mars;11,2;5,0;km/s;Hur stor är skillnaden i flykthastighet?
+Har Jupiter en högre eller lägre flykthastighet än jorden?;Jupiter;Jorden;59,5;11,2;km/s;Hur stor är skillnaden i flykthastighet?
+Har jorden en högre eller lägre flykthastighet än månen?;Jorden;Månen;11,2;2,4;km/s;Hur stor är skillnaden i flykthastighet?
+Har Jupiter en högre eller lägre flykthastighet än Pluto?;Jupiter;Pluto;59,5;1,3;km/s;Hur stor är skillnaden i flykthastighet?
+Har Neptunus en högre eller lägre flykthastighet än Uranus?;Neptunus;Uranus;23,5;21,3;km/s;Hur stor är skillnaden i flykthastighet?
+Tar det längre eller kortare tid för Europa än Io att gå runt Jupiter?;Europa;Io;3,55;1,77;dygn;Hur många dygn skiljer det i omloppstid?
+Tar det längre eller kortare tid för Ganymedes än Europa att gå runt Jupiter?;Ganymedes;Europa;7,15;3,55;dygn;Hur många dygn skiljer det i omloppstid?
+Tar det längre eller kortare tid för Callisto än Ganymedes att gå runt Jupiter?;Callisto;Ganymedes;16,69;7,15;dygn;Hur många dygn skiljer det i omloppstid?
+Tar det längre eller kortare tid för Titan att gå runt Saturnus än för Callisto runt Jupiter?;Titan;Callisto;15,95;16,69;dygn;Hur många dygn skiljer det i omloppstid?
+Tar det längre eller kortare tid för månen att gå runt jorden än för Callisto runt Jupiter?;Månen;Callisto;27,3;16,69;dygn;Hur många dygn skiljer det i omloppstid?
+Tar det längre eller kortare tid för månen att gå runt jorden än för Io runt Jupiter?;Månen;Io;27,3;1,77;dygn;Hur många dygn skiljer det i omloppstid?
+Tar det längre eller kortare tid för Triton att gå runt Neptunus än för Europa runt Jupiter?;Triton;Europa;5,88;3,55;dygn;Hur många dygn skiljer det i omloppstid?
+Tar det längre eller kortare tid för Phobos än Deimos att gå runt Mars?;Phobos;Deimos;7,65;30,3;timmar;Hur många timmar skiljer det i omloppstid?
+Har Callisto en större eller mindre diameter än Ganymedes?;Callisto;Ganymedes;4821;5268;km;Hur många km skiljer det i diameter?
+Har Titan en större eller mindre diameter än Callisto?;Titan;Callisto;5150;4821;km;Hur många km skiljer det i diameter?
+Har Io en större eller mindre diameter än Europa?;Io;Europa;3640;3122;km;Hur många km skiljer det i diameter?
+Har månen en större eller mindre diameter än Europa?;Månen;Europa;3474;3122;km;Hur många km skiljer det i diameter?
+Har Callisto en större eller mindre diameter än månen?;Callisto;Månen;4821;3474;km;Hur många km skiljer det i diameter?
+Har Ganymedes en större eller mindre diameter än Europa?;Ganymedes;Europa;5268;3122;km;Hur många km skiljer det i diameter?
+Har Titan en större eller mindre diameter än Triton?;Titan;Triton;5150;2707;km;Hur många km skiljer det i diameter?
+Har Ganymedes en större eller mindre diameter än Triton?;Ganymedes;Triton;5268;2707;km;Hur många km skiljer det i diameter?
+Har Titan en större eller mindre diameter än månen?;Titan;Månen;5150;3474;km;Hur många km skiljer det i diameter?
+Har Saturnus en längre eller kortare omloppstid än Neptunus?;Saturnus;Neptunus;29,5;164,8;år;Hur många år skiljer det i omloppstid?
+Har Uranus en längre eller kortare omloppstid än Pluto?;Uranus;Pluto;84;248;år;Hur många år skiljer det i omloppstid?
+Har Halleys komet en längre eller kortare omloppstid än Pluto?;Halleys komet;Pluto;75;248;år;Hur många år skiljer det i omloppstid?
+Har Jupiter en längre eller kortare omloppstid än Neptunus?;Jupiter;Neptunus;11,9;164,8;år;Hur många år skiljer det i omloppstid?
+Har Ganymedes en större eller mindre massa än månen?;Ganymedes;Månen;0,148;0,0735;10^24 kg;Hur stor är skillnaden i massa?
+Har Pluto en större eller mindre massa än månen?;Pluto;Månen;0,0130;0,0735;10^24 kg;Hur stor är skillnaden i massa?
