@@ -48,7 +48,7 @@ body {
 .logo .mindre { color: var(--mindre-deep); }
 .pill {
   font-family: var(--display); font-weight: 700; font-size: .8rem;
-  background: var(--ink); color: var(--bg); padding: .35rem .8rem; border-radius: 999px;
+  background: var(--mindre-deep); color: var(--bg); padding: .35rem .8rem; border-radius: 999px;
   white-space: nowrap;
 }
 .pill.soft { background: var(--bg-2); color: var(--mindre-deep); }
@@ -129,8 +129,8 @@ input[type=range]::-moz-range-thumb {
 }
 .bar.a, .bar.is-mer { background: linear-gradient(180deg, var(--mer), var(--mer-deep)); color: var(--mer-ink); }
 .bar.b, .bar.is-mindre { background: linear-gradient(180deg, var(--mindre), var(--mindre-deep)); color: var(--mindre-ink); }
-.barcap { position: absolute; bottom: -1.4rem; color: var(--ink-soft); font-size: .8rem; white-space: nowrap; }
-.twobars-legend { display: flex; justify-content: space-around; margin-top: 2rem; }
+.twobars-legend { display: flex; justify-content: space-around; margin-top: 2rem; gap: 1rem; }
+.twobars-legend > span { flex: 1; text-align: center; color: var(--ink-soft); font-size: .8rem; }
 .answer { font-family: var(--display); font-weight: 700; font-size: 1.2rem; }
 .answer .mer { color: var(--mer-deep); }
 .answer .mindre { color: var(--mindre-deep); }
