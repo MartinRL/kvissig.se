@@ -146,7 +146,7 @@ public class QuestionPackCsvParserTests
         var pack = QuestionPackCsvParser.Parse("mer-eller-mindre", text);
 
         pack.Name.Should().Be("Mer eller mindre");
-        pack.QuestionCount.Should().Be(1334);
+        pack.QuestionCount.Should().Be(1085);
 
         // First card: Mount Everest vs K2. Convention: Mer = sakA holds the larger value.
         var first = pack.Questions[0];
