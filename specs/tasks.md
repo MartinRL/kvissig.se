@@ -96,13 +96,14 @@ source, no GT).
 ## Phase 9: Polish
 - [x] nu när vi inte längre ser maxvärdet, utan bara hur den mindre förhåller sig till den större (mindre vs mer) så är det lämpligt att på något vis introducera %. dvs när rikting har valts och man rör slidern, så är det ju i praktiken den mindres % av mer man gissar. detta ska du ultrathink om ur ett spel- och UX-mässigt perspektiv innan lösning.
 - [ ] textöverlapp under staplarna när man svarar. ser bra ut när man har svarat och ser svaret.
-- [ ] poöngsammanställning ska visa vilken "rond" som just spelats (under spelets gång visas rond#/21)
+- [ ] pongsammanställning ska visa vilken "rond" som just spelats (under spelets gång visas rond#/21)
 - [ ] Mobile-friendly CSS
 - [ ] PWA manifest
 - [ ] Error handling UI
 - [ ] Loading states
 - [ ] create favicon 
 - [ ] feedback. nu saknar spelet kontaktmöjlighet helt och hållet.  
+- [x] vid poängsammanställningen, när alla spelare svarat, ska det också framgå hur de enskilda spelarna svarat (rondresultatet visar per spelare svarad % "mindre av mer" + rätt/fel-riktning; facit som "mindre är X% av mer")
 
 ## Phase 10: deploy
 - [x] deploy to fly.io from github actions (live på https://kvissig.fly.dev, CI Deploy grön, single-instance)

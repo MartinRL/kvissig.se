@@ -212,7 +212,8 @@ public class GameEndpointsTests : IClassFixture<TestAppFactory>
         var results = await State(host, code);
         results.Should().Contain("Danmark");           // larger item revealed
         results.Should().Contain("MER");
-        results.Should().Contain("/ 100");              // normalized facit shown
+        results.Should().Contain("% av mer");           // facit shown as slider-%
+        results.Should().Contain("Mindre av mer");       // per-player answered-% column
         results.Should().Contain("Nästa fråga");        // host advance button
         results.Should().Contain("-10");                // Martin's round score
     }

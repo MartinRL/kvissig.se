@@ -17,29 +17,30 @@
             <span>@Model.SmallerItem · @Fmt(Model.SmallerValue) @Model.Unit</span>
         </div>
 
-        <p style="margin-top:2.2rem">Normaliserad skillnad <span class="diffnum">@Model.CorrectDifference</span> / 100</p>
+        <p style="margin-top:2.2rem">Facit: mindre är <span class="diffnum">@Model.SmallerBarPercent</span>% av mer</p>
     </div>
 
     <div class="card">
         <div class="cardhead">Poäng <span class="pill soft">lägst total leder</span></div>
         <table class="scoreboard">
             <thead>
-                <tr><th class="rank">#</th><th>Spelare</th><th class="round">Gissning</th><th class="round">Rond</th><th class="total">Total</th></tr>
+                <tr><th class="rank">#</th><th>Spelare</th><th class="round">Mer eller Mindre?</th><th class="round">Mindre av mer</th><th class="round">Rond</th><th class="total">Total</th></tr>
             </thead>
             <tbody>
                 @foreach (var r in Model.Rows)
                 {
                     <tr>
                         <td class="rank">@r.Rank</td>
-                        <td class="who">@r.Name@(r.IsHost ? " (värd)" : "") @if (r.IsYou) { <small class="muted">(du)</small> }</td>
-                        <td class="round">@(r.GuessedDirection == Direction.Mer ? "mer" : "mindre"), @r.GuessedDifferenceNormalized</td>
+                        <td class="who">@r.Name@(r.IsHost ? " (värd)" : "")</td>
+                        <td class="round">@(r.GuessedDirection == Direction.Mer ? "mer" : "mindre") @(r.GuessedDirection == Model.CorrectDirection ? "✓" : "✗")</td>
+                        <td class="round">@(100 - r.GuessedDifferenceNormalized)%</td>
                         <td class="round">@Signed(r.RoundScore)</td>
                         <td class="total">@r.TotalScore</td>
                     </tr>
                 }
             </tbody>
         </table>
-        <p class="muted" style="margin-top:.8rem">Rätt riktning ger −10 bonus; differenspoäng = |gissad − @Model.CorrectDifference|.</p>
+        <p class="muted" style="margin-top:.8rem">Rätt riktning ger −10 bonus; differenspoäng = |din % − facit-%|.</p>
     </div>
 
     @if (Model.ViewerIsHost)
@@ -51,7 +52,7 @@
     }
     else
     {
-        <p class="fakenav next-hint">Spelledaren går vidare strax…</p>
+        <p class="fakenav next-hint">Spelledaren visar strax nästa fråga…</p>
     }
 </div>
 
