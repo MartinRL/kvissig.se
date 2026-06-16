@@ -103,7 +103,12 @@ Two user roles + System. Events live on the `Game` stream; views are bare.
   — never a subset, or the swimlane labels disagree. The System processors share ONE
   `System` initiator lane (distinguished by box name), a simplification of the canonical
   per-processor gear.
-  Human-role triggers (`GameMaster /`, `Player /`) stay bare.
+  Human-role triggers carry a head/face emoji on the SAME initiator-lane principle, one
+  per swimlane so every lane is emoji-tagged (not just System): `🧑‍🏫 GameMaster /` (the
+  quiz leader) and `🧑‍🎓 Player /` (the contestant). Apply each CONSISTENTLY to all of
+  that role's triggers (`🧑‍🏫 GameMaster / Quiz catalog`, `🧑‍🏫 GameMaster / Game lobby`;
+  `🧑‍🎓 Player / Join form`, `🧑‍🎓 Player / Question`) — same parse-as-UTF-8, renders on the
+  swimlane label.
 - **Commands are bare**: `OpenLobby`, `SubmitDirection`.
 - **Events carry the stream**: `Game / LobbyOpened`.
 - **Exceptions are bare**: `GameNotFound`.
@@ -120,9 +125,9 @@ the **slice's type** — one of three buckets, applied to ALL slices (never a su
 |--------|-----------------|------------------------------------------|--------|
 | `✍️`   | state-change    | writes the stream (command/processor)    | Open Lobby, Join Game, Start Game, Submit Direction, Submit Difference, Reveal Direction, Score Difference, Ask Next Question, End Game |
 | `👀`   | state view      | reads/shows state (screens + decider State) | Quiz Catalog, Game Lobby, Question, Waiting For Others, Direction Results, Round Results, Final Standings, Decision Model |
-| `📝`   | todo            | a `Todo /` read-model the gears gate on  | Outstanding Directions, Outstanding Differences, Game Progress |
+| `📋`   | todo            | a `Todo /` read-model the gears gate on  | Outstanding Directions, Outstanding Differences, Game Progress |
 
-`✍️` (write) / `👀` (read) are a deliberate read/write duality; `📝` is the todo subset
+`✍️` (write) / `👀` (read) are a deliberate read/write duality; `📋` is the todo subset
 of read-models. A processor slice is `✍️` (it writes) AND still carries `⚙️` on its
 System trigger — the two emoji are orthogonal (slice type vs initiator gear). Prefixes
 parse as plain UTF-8 (lint ignores name content) and render on the slice heading.

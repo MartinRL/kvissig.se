@@ -156,7 +156,7 @@ slices:
   #   host hostName = Martin ; minted joinCode = joinCode
   ✍️ Open Lobby:
     steps:
-      - t: GameMaster / Quiz catalog
+      - t: 🧑‍🏫 GameMaster /Quiz catalog
       - c: OpenLobby
         props:
           hostName: string
@@ -230,7 +230,7 @@ slices:
   #   present in the lobby — including the host's name (the GM is the first player).
   ✍️ Join Game:
     steps:
-      - t: Player / Join form
+      - t: 🧑‍🎓 Player /Join form
       - c: JoinGame
         props:
           joinCode: Guid
@@ -307,7 +307,7 @@ slices:
   #   on the command and is deferred.
   ✍️ Start Game:
     steps:
-      - t: GameMaster / Game lobby
+      - t: 🧑‍🏫 GameMaster /Game lobby
       - c: StartGame
         props:
           gameId: Guid
@@ -400,7 +400,7 @@ slices:
   # no questionIndex; DirectionSubmitted stamps the resolved questionIndex.
   ✍️ Submit Direction:
     steps:
-      - t: Player / Question
+      - t: 🧑‍🎓 Player /Question
       - c: SubmitDirection
         props:
           gameId: Guid
@@ -499,7 +499,7 @@ slices:
   # SubmitDifference carries no questionIndex; DifferenceSubmitted stamps the resolved one.
   ✍️ Submit Difference:
     steps:
-      - t: Player / Question
+      - t: 🧑‍🎓 Player /Question
       - c: SubmitDifference
         props:
           gameId: Guid
@@ -621,7 +621,7 @@ slices:
   # Outstanding Directions gates ⚙️ System / Reveal direction (stage 1):
   #   { questionIndex, pendingPlayerIds, allDirectionsIn }. Each DirectionSubmitted checks
   #   off that player; allDirectionsIn = that row's pendingPlayerIds empty.
-  📝 Outstanding Directions:
+  📋 Outstanding Directions:
     steps:
       - v: Todo / Outstanding directions
         props:
@@ -678,7 +678,7 @@ slices:
   #   { questionIndex, pendingPlayerIds, allDifferencesIn, directionRevealed }. Each
   #   DifferenceSubmitted checks off that player; allDifferencesIn = pendingPlayerIds empty;
   #   directionRevealed flips on QuestionDirectionRevealed (the stage-1 → stage-2 gate).
-  📝 Outstanding Differences:
+  📋 Outstanding Differences:
     steps:
       - v: Todo / Outstanding differences
         props:
@@ -1057,7 +1057,7 @@ slices:
   # scoredQuestionCount / hasNextQuestion are projected as each question is answered.
   # hasNextQuestion is the gate: true -> ⚙️ Ask next question, false -> ⚙️ End game
   # (mutually exclusive). SEPARATE from State / Game, kept minimal. GT below proves it.
-  📝 Game Progress:
+  📋 Game Progress:
     steps:
       - v: Todo / Game progress
         props:
