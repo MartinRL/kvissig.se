@@ -34,6 +34,7 @@ Anroparen ger dig: **kategori**, **antal att generera**, **typiska enheter**. Ex
 Skriv (eller appenda) till `question-staging/<kategori>.csv`:
 - Header `fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga` (en gång, om filen är ny).
 - En rad per kort, sv-SE-dialekt (`;`, `,`-decimal, RFC4180-citat vid `;` i fält).
+- **UTF-8 med BOM** (`EF BB BF`) — annars blir åäö skräp i svensk Excel. Gäller även sidecar.
 
 Och en sidecar `question-staging/<kategori>.källor.csv`:
 - Header `fråga;källa;år`.

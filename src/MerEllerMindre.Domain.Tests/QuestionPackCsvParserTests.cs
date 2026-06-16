@@ -146,7 +146,7 @@ public class QuestionPackCsvParserTests
         var pack = QuestionPackCsvParser.Parse("mer-eller-mindre", text);
 
         pack.Name.Should().Be("Mer eller mindre");
-        pack.QuestionCount.Should().Be(10);
+        pack.QuestionCount.Should().Be(366);
 
         // First card: Danmark vs Norge. Convention: Mer = sakA holds the larger value.
         var first = pack.Questions[0];
