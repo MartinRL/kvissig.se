@@ -18,7 +18,7 @@
             @foreach (var r in Model.Rows)
             {
                 <tr>
-                    <td class="who">@r.Name@(r.IsHost ? " (värd)" : "") @if (r.IsYou) { <small class="muted">(du)</small> }</td>
+                    <td class="who">@r.Name@(r.IsHost ? " (värd)" : "")</td>
                     <td class="round">@(r.GuessedDirection == Direction.Mer ? "mer" : "mindre") @(r.DirectionCorrect ? "✓" : "✗")</td>
                     <td class="round">@Signed(r.BonusPoints)</td>
                     <td class="total">@r.TotalSoFar</td>

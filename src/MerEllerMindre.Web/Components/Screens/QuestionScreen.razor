@@ -25,7 +25,7 @@
                 </button>
             </div>
 
-            <button type="submit" class="btn" style="margin-top:1.75rem">Lås riktning</button>
+            <button type="submit" class="btn" style="margin-top:1.75rem">Gissa!</button>
         </form>
     </div>
 
@@ -63,12 +63,15 @@ else
                hiding is ever needed: post a 0–100 proportion instead of the raw value. *@
             <div class="diffwrap">
                 <input type="range" id="diff" min="0" max="@MaxStr" value="0" step="@StepStr" aria-label="@Model.Unit" />
-                <div class="unit">@Model.Unit</div>
             </div>
 
             <div class="twobars" aria-hidden="true">
-                <div class="bar is-mer" id="barA" style="height:100%"><span class="barcap">@Model.ItemA</span></div>
-                <div class="bar is-mindre" id="barB" style="height:100%"><span class="barcap">@Model.ItemB</span></div>
+                <div class="bar is-mer" id="barA" style="height:100%"></div>
+                <div class="bar is-mindre" id="barB" style="height:100%"></div>
+            </div>
+            <div class="twobars-legend" aria-hidden="true">
+                <span id="capA">@Model.ItemA</span>
+                <span id="capB">@Model.ItemB</span>
             </div>
 
             <button type="submit" class="btn" style="margin-top:1.75rem">Gissa!</button>
@@ -83,21 +86,21 @@ else
             const diffInput = document.getElementById('diffInput');
             const barA = document.getElementById('barA');
             const barB = document.getElementById('barB');
+            const capA = document.getElementById('capA');
+            const capB = document.getElementById('capB');
             // Read item names from the DOM, not injected Razor strings, to avoid escaping/injection.
-            const nameA = barA.querySelector('.barcap').textContent;
-            const nameB = barB.querySelector('.barcap').textContent;
+            const tallName = merIsA ? capA.textContent : capB.textContent;
+            const shortName = merIsA ? capB.textContent : capA.textContent;
 
             function norm(v) { return max > 0 ? Math.min(100, Math.round(v / max * 100)) : 0; }
 
             // Direction is locked in stage 2: the taller (MER) bar never moves.
             const tall = merIsA ? barA : barB;
             const short = merIsA ? barB : barA;
-            const tallName = merIsA ? nameA : nameB;
-            const shortName = merIsA ? nameB : nameA;
+            const shortCap = merIsA ? capB : capA;   // only the short bar's caption shows the live %
             tall.classList.add('is-mer'); tall.classList.remove('is-mindre');
             short.classList.add('is-mindre'); short.classList.remove('is-mer');
             tall.style.height = '100%';
-            tall.querySelector('.barcap').textContent = tallName;
 
             function render() {
                 const v = Number(range.value);
@@ -106,7 +109,7 @@ else
                 range.style.background = `linear-gradient(90deg, var(--accent) ${n}%, var(--line) ${n}%)`;
                 const pct = 100 - n;
                 short.style.height = pct + '%';
-                short.querySelector('.barcap').textContent = `${shortName} ≈ ${pct}%`;
+                shortCap.textContent = `${shortName} ≈ ${pct}%`;
                 range.setAttribute('aria-valuetext', `${shortName} ${pct} procent av ${tallName}`);
             }
 

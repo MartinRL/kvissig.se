@@ -12,7 +12,7 @@
                 {
                     <tr class="@(r.IsWinner ? "winner" : null)">
                         <td class="rank">@r.Rank</td>
-                        <td class="who">@r.Name@(r.IsHost ? " (värd)" : "") @if (r.IsYou) { <small class="muted">(du)</small> }</td>
+                        <td class="who">@r.Name@(r.IsHost ? " (värd)" : "")</td>
                         <td class="total">@r.TotalScore</td>
                     </tr>
                 }

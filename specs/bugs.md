@@ -14,6 +14,12 @@ Loggade buggar i samma anda som `tasks.md`. Mall för nya poster:
 
 - [x] språkbruk: "din gissning är ställd" --> "du har gissat"
 
+- [x] språkbruk: "Lås riktning" --> "Gissa!"
+
+- [x] det behövs ingen enhet (tex 'meter') under slidern — framgår av frågan
+
+- [x] språkbruk: "Spelledaren går vidare strax…" --> "Spelledaren visar strax nästa fråga…"
+
 
 - [x] **Död 6-teckens-join-kod visas i värd-lobbyn** — `LobbyHostScreen.razor`
   - Förväntat: visad kod går att skriva in för att gå med.
