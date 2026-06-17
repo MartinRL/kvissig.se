@@ -32,7 +32,7 @@
                     <tr>
                         <td class="rank">@r.Rank</td>
                         <td class="who">@r.Name@(r.IsHost ? " (värd)" : "")</td>
-                        <td class="round" data-label="Riktning">@(r.GuessedDirection == Direction.Mer ? "mer" : "mindre") @if (r.GuessedDirection == Model.CorrectDirection) { <span class="mark ok">✓</span> } else { <span class="mark bad">✗</span> }</td>
+                        <td class="round" data-label="Riktning">@if (r.GuessedDirection == Model.CorrectDirection) { <span class="mark ok">✓</span> } else { <span class="mark bad">✗</span> } @(r.GuessedDirection == Direction.Mer ? "mer" : "mindre")</td>
                         <td class="round" data-label="Mindre/mer">@(100 - r.GuessedDifferenceNormalized)%</td>
                         <td class="round" data-label="Rond">@Signed(r.RoundScore)</td>
                         <td class="total">@r.TotalScore</td>
