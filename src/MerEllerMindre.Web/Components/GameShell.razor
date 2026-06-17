@@ -16,5 +16,6 @@
 
 @code {
     [Parameter] public Guid JoinCode { get; set; }
-    private string StatePath => $"/games/{JoinCode:N}/state";
+    [Parameter] public bool ShowJoinUrl { get; set; }
+    private string StatePath => $"/games/{JoinCode:N}/state{(ShowJoinUrl ? "?url" : "")}";
 }

@@ -53,7 +53,7 @@ public static class GameScreens
         return ScreenKind.DirectionResults;
     }
 
-    public static LobbyVm Lobby(GameState state, Guid? viewer, string token, string joinUrl)
+    public static LobbyVm Lobby(GameState state, Guid? viewer, string token, string joinUrl, bool showJoinUrl)
     {
         var players = state.Players
             .Select(p => new LobbyPlayerVm(p.Name, p.IsHost, p.PlayerId == viewer))
@@ -66,6 +66,7 @@ public static class GameScreens
             players,
             ViewerIsHost: viewer == state.HostPlayerId,
             CanStart: state.Players.Count >= 2,
+            ShowJoinUrl: showJoinUrl,
             token);
     }
 

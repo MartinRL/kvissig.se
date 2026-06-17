@@ -27,6 +27,7 @@ public sealed record LobbyVm(
     IReadOnlyList<LobbyPlayerVm> Players,
     bool ViewerIsHost,
     bool CanStart,
+    bool ShowJoinUrl,
     string AntiforgeryToken);
 
 /// <summary>Which half of the tvåstegsraket a question screen renders.</summary>

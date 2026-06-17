@@ -184,7 +184,7 @@ public class GameEndpointsTests : IClassFixture<TestAppFactory>
         await SubmitDirection(player, code, "Mindre");  // wrong → 0
 
         var mellansteg = await State(host, code);
-        mellansteg.Should().Contain("riktning avslöjad");
+        mellansteg.Should().Contain("mer eller mindre avslöjat");
         mellansteg.Should().Contain("Danmark");
         mellansteg.Should().Contain("MER");
         mellansteg.Should().Contain("-10");                 // Martin's bonus so far

@@ -7,7 +7,7 @@
 {
     <div class="card">
         <div class="brand" style="margin-bottom:1rem">
-            <span class="pill">Fråga @Model.QuestionNumber / @Model.TotalQuestions · riktning</span>
+            <span class="pill">Fråga @Model.QuestionNumber / @Model.TotalQuestions · mer eller mindre</span>
         </div>
         <h1>@Model.QuestionText</h1>
 
@@ -16,7 +16,7 @@
             <input type="hidden" name="direction" id="dirInput" value="Mer" />
 
             <p class="steplabel">Vilken är mer?</p>
-            <div class="direction" role="group" aria-label="Riktning">
+            <div class="direction" role="group" aria-label="Mer eller mindre">
                 <button type="button" class="dirbtn" data-dir="Mer" aria-pressed="true">
                     <span class="arrow">▲</span> @Model.ItemA
                 </button>

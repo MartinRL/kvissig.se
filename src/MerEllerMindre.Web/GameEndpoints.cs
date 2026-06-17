@@ -81,18 +81,18 @@ public static class GameEndpoints
             return Results.Ok();
         });
 
-        app.MapGet("/games/{code}", (string code, GameApplicationService svc) =>
+        app.MapGet("/games/{code}", (string code, GameApplicationService svc, HttpContext http) =>
         {
             if (Resolve(svc, code) is not var (_, state))
                 return Results.NotFound("Spelet hittades inte.");
-            return new RazorComponentResult<GameShell>(new { JoinCode = state.JoinCode });
+            return new RazorComponentResult<GameShell>(new { JoinCode = state.JoinCode, ShowJoinUrl = http.Request.Query.ContainsKey("url") });
         });
 
         app.MapGet("/games/{code}/state", (string code, GameApplicationService svc, PlayerIdentity identity, IAntiforgery antiforgery, HttpContext http) =>
         {
             if (Resolve(svc, code) is not var (gameId, state))
                 return Results.NotFound("Spelet hittades inte.");
-            return RenderState(state, identity.GetPlayer(http, gameId), antiforgery.GetAndStoreTokens(http).RequestToken!, AbsoluteJoinUrl(http, state.JoinCode));
+            return RenderState(state, identity.GetPlayer(http, gameId), antiforgery.GetAndStoreTokens(http).RequestToken!, AbsoluteJoinUrl(http, state.JoinCode), http.Request.Query.ContainsKey("url"));
         });
 
         app.MapPost("/games/{code}/start", (string code, GameApplicationService svc, PlayerIdentity identity, IAntiforgery antiforgery, HttpContext http) =>
@@ -182,11 +182,11 @@ public static class GameEndpoints
     private static string AbsoluteJoinUrl(HttpContext http, Guid joinCode) =>
         $"{http.Request.Scheme}://{http.Request.Host}/games/{joinCode:N}/join";
 
-    private static IResult RenderState(GameState state, Guid? viewer, string token, string joinUrl) =>
+    private static IResult RenderState(GameState state, Guid? viewer, string token, string joinUrl, bool showJoinUrl = false) =>
         GameScreens.Select(state, viewer) switch
         {
-            ScreenKind.LobbyHost => new RazorComponentResult<LobbyHostScreen>(new { Model = GameScreens.Lobby(state, viewer, token, joinUrl) }),
-            ScreenKind.LobbyPlayer => new RazorComponentResult<LobbyPlayerScreen>(new { Model = GameScreens.Lobby(state, viewer, token, joinUrl) }),
+            ScreenKind.LobbyHost => new RazorComponentResult<LobbyHostScreen>(new { Model = GameScreens.Lobby(state, viewer, token, joinUrl, showJoinUrl) }),
+            ScreenKind.LobbyPlayer => new RazorComponentResult<LobbyPlayerScreen>(new { Model = GameScreens.Lobby(state, viewer, token, joinUrl, showJoinUrl: false) }),
             ScreenKind.Question => new RazorComponentResult<QuestionScreen>(new { Model = GameScreens.Question(state, token, QuestionStage.Direction) }),
             ScreenKind.Waiting => new RazorComponentResult<WaitingScreen>(new { Model = GameScreens.Waiting(state, viewer) }),
             ScreenKind.DirectionResults => new RazorComponentResult<DirectionResultsScreen>(new { Model = GameScreens.DirectionResults(state, viewer) }),
@@ -212,12 +212,12 @@ public static class GameEndpoints
         QuestionPackNotFound => "Frågepaketet hittades inte.",
         GameNotStarted => "Omgången har inte startat.",
         PlayerNotInGame => "Du är inte med i spelet.",
-        AlreadySubmittedDirection => "Du har redan valt riktning.",
+        AlreadySubmittedDirection => "Du har redan svarat mer eller mindre.",
         AlreadySubmittedDifference => "Du har redan gissat skillnaden.",
-        DirectionNotRevealed => "Riktningen är inte avslöjad än.",
+        DirectionNotRevealed => "Mer eller mindre är inte avslöjat än.",
         DifferenceOutOfRange => "Ogiltig gissning.",
-        NotAllDirectionsIn => "Alla har inte valt riktning än.",
-        DirectionAlreadyRevealed => "Riktningen är redan avslöjad.",
+        NotAllDirectionsIn => "Alla har inte svarat mer eller mindre än.",
+        DirectionAlreadyRevealed => "Mer eller mindre är redan avslöjat.",
         NotAllDifferencesIn => "Alla har inte gissat än.",
         QuestionAlreadyScored => "Frågan är redan rättad."
     };

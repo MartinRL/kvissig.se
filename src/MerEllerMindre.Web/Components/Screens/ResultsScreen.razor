@@ -32,7 +32,7 @@
                     <tr>
                         <td class="rank">@r.Rank</td>
                         <td class="who">@r.Name@(r.IsHost ? " (värd)" : "")</td>
-                        <td class="round" data-label="Riktning">@if (r.GuessedDirection == Model.CorrectDirection) { <span class="mark ok">✓</span> } else { <span class="mark bad">✗</span> } @(r.GuessedDirection == Direction.Mer ? "mer" : "mindre")</td>
+                        <td class="round" data-label="Mer eller mindre">@if (r.GuessedDirection == Model.CorrectDirection) { <span class="mark ok">✓</span> } else { <span class="mark bad">✗</span> } @(r.GuessedDirection == Direction.Mer ? "mer" : "mindre")</td>
                         <td class="round" data-label="Mindre/mer">@(100 - r.GuessedDifferenceNormalized)%</td>
                         <td class="round" data-label="Rond">@Signed(r.RoundScore)</td>
                         <td class="total">@r.TotalScore</td>
@@ -40,7 +40,7 @@
                 }
             </tbody>
         </table>
-        <p class="muted" style="margin-top:.8rem">Rätt riktning ger −10 bonus; differenspoäng = |din % − facit-%|.</p>
+        <p class="muted" style="margin-top:.8rem">Rätt på mer/mindre ger −10 bonus; differenspoäng = |din % − facit-%|.</p>
     </div>
 
     @if (Model.ViewerIsHost)
