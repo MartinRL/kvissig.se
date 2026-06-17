@@ -12,15 +12,14 @@
     <div class="cardhead">Riktning <span class="pill soft">rätt ger −10</span></div>
     <table class="scoreboard">
         <thead>
-            <tr><th>Spelare</th><th class="round">Gissning</th><th class="round">Bonus</th><th class="total">Total</th></tr>
+            <tr><th>Spelare</th><th class="round">Gissning</th><th class="total">Total</th></tr>
         </thead>
         <tbody>
             @foreach (var r in Model.Rows)
             {
                 <tr>
                     <td class="who">@r.Name@(r.IsHost ? " (värd)" : "")</td>
-                    <td class="round" data-label="Gissning">@(r.GuessedDirection == Direction.Mer ? "mer" : "mindre") @if (r.DirectionCorrect) { <span class="mark ok">✓</span> } else { <span class="mark bad">✗</span> }</td>
-                    <td class="round" data-label="Bonus">@Signed(r.BonusPoints)</td>
+                    <td class="round" data-label="Gissning">@if (r.DirectionCorrect) { <span class="mark ok">✓</span> } else { <span class="mark bad">✗</span> } @(r.GuessedDirection == Direction.Mer ? "mer" : "mindre")</td>
                     <td class="total">@r.TotalSoFar</td>
                 </tr>
             }
@@ -35,5 +34,4 @@
 
 @code {
     [Parameter] public required DirectionResultsVm Model { get; set; }
-    private static string Signed(int n) => n > 0 ? $"+{n}" : n.ToString(CultureInfo.InvariantCulture);
 }
