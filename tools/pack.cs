@@ -4,6 +4,8 @@
 //   dotnet run tools/pack.cs                         report on the live pack
 //   dotnet run tools/pack.cs -- report --staging     report over staging candidates
 //   dotnet run tools/pack.cs -- merge --out <path>    dedup+write a candidate pack
+//   dotnet run tools/pack.cs -- cap --max N --out <kept> --park <wip>
+//                                                     cap item frequency, park overflow
 // Reuses the Domain's parser + Decider.NormalizeDifference so band math has ONE source.
 
 using System.Globalization;
@@ -18,6 +20,7 @@ const string StagingDir = "question-staging";
 int[] thresholds = [20, 60, 85];
 string[] bandLabels = ["0-20", "21-60", "61-85", "86-100"];
 int[] targets = [15, 40, 30, 15];
+const int ItemCap = 4; // report flags items appearing more than this in the live pack
 
 var argv = new List<string>(args);
 var command = argv.Count > 0 && !argv[0].StartsWith('-') ? argv[0] : "report";
@@ -26,6 +29,8 @@ if (argv.Count > 0 && !argv[0].StartsWith('-')) argv.RemoveAt(0);
 bool useStaging = argv.Remove("--staging");
 bool force = argv.Remove("--force");
 string? outPath = TakeOption("--out");
+string? parkPath = TakeOption("--park");
+string? maxOpt = TakeOption("--max");
 var positional = argv.Where(a => !a.StartsWith('-')).ToList();
 
 switch (command)
@@ -36,8 +41,11 @@ switch (command)
     case "merge":
         Merge();
         break;
+    case "cap":
+        Cap();
+        break;
     default:
-        Console.Error.WriteLine($"Unknown command '{command}'. Use 'report' or 'merge'.");
+        Console.Error.WriteLine($"Unknown command '{command}'. Use 'report', 'merge' or 'cap'.");
         Environment.Exit(2);
         break;
 }
@@ -114,6 +122,20 @@ void Report(List<Question> cards)
     foreach (var g in cards.GroupBy(c => c.Unit).OrderByDescending(g => g.Count()).Take(10))
         Console.WriteLine($"  {g.Count(),5}  {g.Key}");
 
+    var items = cards
+        .SelectMany(c => new[] { c.ItemA, c.ItemB })
+        .GroupBy(x => x)
+        .OrderByDescending(g => g.Count())
+        .ThenBy(g => g.Key)
+        .ToList();
+    Console.WriteLine();
+    Console.WriteLine("Top items (sakA + sakB):");
+    foreach (var g in items.Take(25))
+        Console.WriteLine($"  {g.Count(),5}  {g.Key}");
+    var over = items.Where(g => g.Count() > ItemCap).ToList();
+    Console.WriteLine($"Items over cap {ItemCap}: {over.Count}" +
+        (over.Count == 0 ? "" : $"   ({string.Join(", ", over.Select(g => g.Key))})"));
+
     var dups = cards
         .GroupBy(c => c.QuestionText.Trim(), StringComparer.OrdinalIgnoreCase)
         .Where(g => g.Count() > 1)
@@ -151,20 +173,63 @@ void Merge()
         if (seen.Add(c.QuestionText.Trim())) kept.Add(c);
         else dropped++;
 
+    WritePack(kept, outPath);
+    Console.WriteLine($"Wrote {kept.Count} cards to {outPath} (dropped {dropped} duplicate questionText).");
+    Console.WriteLine();
+    Report(kept);
+}
+
+void Cap()
+{
+    if (maxOpt is null || !int.TryParse(maxOpt, out var max) || max < 1)
+    { Console.Error.WriteLine("cap requires --max <N> (N >= 1)."); Environment.Exit(2); return; }
+    if (outPath is null) { Console.Error.WriteLine("cap requires --out <keptPath>."); Environment.Exit(2); return; }
+    if (parkPath is null) { Console.Error.WriteLine("cap requires --park <wipPath>."); Environment.Exit(2); return; }
+
+    if ((Path.GetFullPath(outPath) == Path.GetFullPath(LivePack)
+        || Path.GetFullPath(parkPath) == Path.GetFullPath(LivePack)) && !force)
+    {
+        Console.Error.WriteLine($"Refusing to overwrite the live pack '{LivePack}'. Pass --force if you really mean it.");
+        Environment.Exit(2);
+        return;
+    }
+
+    var cards = LoadCards([LivePack]);
+    var seen = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+    var kept = new List<Question>();
+    var parked = new List<Question>();
+    foreach (var c in cards) // stable order
+    {
+        seen.TryGetValue(c.ItemA, out var a);
+        seen.TryGetValue(c.ItemB, out var b);
+        if (a < max && b < max)
+        {
+            seen[c.ItemA] = a + 1;
+            seen[c.ItemB] = b + 1;
+            kept.Add(c);
+        }
+        else parked.Add(c);
+    }
+
+    WritePack(kept, outPath);
+    WritePack(parked, parkPath);
+    Console.WriteLine($"Capped at {max}/item: kept {kept.Count} to {outPath}, parked {parked.Count} to {parkPath}.");
+    Console.WriteLine();
+    Report(kept);
+}
+
+void WritePack(List<Question> cards, string path)
+{
     var sb = new StringBuilder();
     sb.Append('\uFEFF'); // BOM so Excel reads sv-SE UTF-8
     sb.Append("fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga\n");
     var sv = CultureInfo.GetCultureInfo("sv-SE");
-    foreach (var c in kept)
+    foreach (var c in cards)
         sb.Append(string.Join(';',
             Q(c.QuestionText), Q(c.ItemA), Q(c.ItemB),
             Q(c.ValueA.ToString(sv)), Q(c.ValueB.ToString(sv)),
             Q(c.Unit), Q(c.DifferencePrompt))).Append('\n');
-
-    File.WriteAllText(outPath, sb.ToString(), new UTF8Encoding(false));
-    Console.WriteLine($"Wrote {kept.Count} cards to {outPath} (dropped {dropped} duplicate questionText).");
-    Console.WriteLine();
-    Report(kept);
+    File.WriteAllText(path, sb.ToString(), new UTF8Encoding(false));
 }
 
 static string Q(string field) =>

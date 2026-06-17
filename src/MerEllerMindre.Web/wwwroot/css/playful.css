@@ -162,8 +162,33 @@ input[type=range]::-moz-range-thumb {
 .scoreboard .total { font-family: var(--display); font-weight: 800; }
 .scoreboard tr.winner td { background: linear-gradient(90deg, rgba(33, 192, 138, .14), transparent); }
 .scoreboard tr.winner .rank { color: var(--mer-deep); }
+.mark { font-weight: 800; }
+.mark.ok { color: var(--mer-deep); }
+.mark.bad { color: var(--accent); }
 .winner-banner { font-family: var(--display); font-weight: 800; font-size: 1.6rem; margin: .5rem 0 .2rem; }
 .winner-banner .name { color: var(--mer-deep); }
+
+/* ---- scoreboard: stack into per-player blocks on phones (table only ≥560px) ---- */
+@media (max-width: 559.98px) {
+  .scoreboard thead { display: none; }
+  .scoreboard, .scoreboard tbody { display: block; }
+  .scoreboard tr {
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: .35rem .6rem;
+    padding: .7rem 0; border-top: 1px solid var(--line);
+  }
+  .scoreboard td { padding: 0; border: none; }
+  .scoreboard .who { flex: 1; }
+  .scoreboard .total { font-family: var(--display); font-weight: 800; }
+  /* round cells wrap to row 2 as labelled chips */
+  .scoreboard .round {
+    order: 1; flex: 0 0 auto; text-align: left;
+    color: var(--ink-soft); font-size: .85rem;
+  }
+  .scoreboard .round::before {
+    content: attr(data-label) " "; font-weight: 700;
+  }
+  .scoreboard .round + .round::before { content: " · " attr(data-label) " "; }
+}
 
 /* ---- forms ---- */
 label { display: block; font-family: var(--display); font-weight: 700; margin-bottom: .4rem; }

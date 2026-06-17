@@ -10,8 +10,9 @@ namespace MerEllerMindre.Domain.Tests;
 public class QuestionSelectionTests
 {
     // mx is always 100 here, so norm == |A - B|. Pick A=100, B=100-norm to land a band.
+    // Items are unique per id so the item-distinct guard doesn't collapse band quotas.
     private static Question Card(int norm, int id) =>
-        new($"q{id}", "A", "B", 100m, 100m - norm, "u", "d");
+        new($"q{id}", $"A{id}", $"B{id}", 100m, 100m - norm, "u", "d");
 
     private static int Band(Question q)
     {
@@ -65,5 +66,26 @@ public class QuestionSelectionTests
         selected.Should().HaveCount(21);
         selected.Distinct().Should().HaveCount(21);
         selected.Count(q => Band(q) == 0).Should().Be(1); // band 0 exhausted, no overdraw
+    }
+
+    [Fact]
+    public void OverRepresentedItemAppearsAtMostOnce()
+    {
+        var pool = new List<Question>();
+        var id = 0;
+        // Plenty of item-distinct cards across bands...
+        foreach (var norm in new[] { 10, 40, 70, 95 })
+            for (var k = 0; k < 25; k++)
+                pool.Add(Card(norm, id++));
+        // ...plus many cards all sharing the item "Globen" (the bug: it landed 3x/game).
+        for (var k = 0; k < 30; k++)
+            pool.Add(new($"globen{k}", "Globen", $"Other{k}", 100m, 40m, "u", "d"));
+
+        var selected = QuestionSelection.PickBalanced(pool, 21, _ => 0);
+
+        selected.Should().HaveCount(21);
+        selected.SelectMany(q => new[] { q.ItemA, q.ItemB })
+            .GroupBy(x => x)
+            .All(g => g.Count() == 1).Should().BeTrue();
     }
 }

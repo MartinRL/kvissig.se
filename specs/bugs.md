@@ -25,3 +25,11 @@ Loggade buggar i samma anda som `tasks.md`. Mall för nya poster:
   - Förväntat: visad kod går att skriva in för att gå med.
   - Faktiskt: inget konsumerar den korta koden — `Resolve` kräver hela 32-teckens-Guiden (`Guid.TryParse`), enda vägen in är QR/full-URL. Att skriva in koden gav "Spelet hittades inte". Fix: tog bort visningen (QR + full-URL räcker).
 
+- [x] **Samma sak förekom flera gånger i samma spel (Globen ×3)** — `QuestionSelection.PickBalanced` (Decider.cs)
+  - Förväntat: ingen sak ska dyka upp mer än en gång bland ett spels 21 frågor.
+  - Faktiskt: band-urvalet shufflade utan sak-spärr; den 1085-korts live-packen är tung på populära saker (Eiffeltornet ×22, Globen ×11) → slumpen landade samma sak 2–3×. Fix: runtime-spärr i `PickBalanced` (varje itemA/itemB högst 1×/spel, best-effort) + sak-frekvensrapport & `cap`-kommando i `tools/pack.cs` för offline-kurering.
+
+- [x] **Poängtavlan beskär "Total" på smala telefoner** — `playful.css` / `ResultsScreen.razor`
+  - Förväntat: hela tabellen, inkl. Total-kolumnen, ryms inom kortramen på alla telefoner.
+  - Faktiskt: 6-kolumnstabellen rymdes precis vid `.wrap` 560px → spillde över kortet och klipptes på smalare skärmar. Fix: ren CSS — `@media (max-width: 559.98px)` staplar `.scoreboard` till per-spelare-block (rad 1 = rank · namn · total, rad 2 = rond-celler som etiketterade chips via `data-label` + `::before`); ≥560px oförändrad tabell.
+

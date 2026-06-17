@@ -19,8 +19,8 @@
             {
                 <tr>
                     <td class="who">@r.Name@(r.IsHost ? " (värd)" : "")</td>
-                    <td class="round">@(r.GuessedDirection == Direction.Mer ? "mer" : "mindre") @(r.DirectionCorrect ? "✓" : "✗")</td>
-                    <td class="round">@Signed(r.BonusPoints)</td>
+                    <td class="round" data-label="Gissning">@(r.GuessedDirection == Direction.Mer ? "mer" : "mindre") @if (r.DirectionCorrect) { <span class="mark ok">✓</span> } else { <span class="mark bad">✗</span> }</td>
+                    <td class="round" data-label="Bonus">@Signed(r.BonusPoints)</td>
                     <td class="total">@r.TotalSoFar</td>
                 </tr>
             }

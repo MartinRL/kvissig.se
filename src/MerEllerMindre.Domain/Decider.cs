@@ -371,9 +371,10 @@ public record GameContext(
 
 /// <summary>
 /// Picks a difficulty-band-balanced subset of question cards for a single game. Balance is
-/// on the difficulty band ONLY (band = NormalizeDifference(|A-B|, max(A,B)), the same math
-/// ScoreDifference uses); direction/unit spread is expected to fall out of a well-authored
-/// pool. Final order is shuffled so bands don't cluster. Pure: RNG is injected as `next`
+/// on the difficulty band (band = NormalizeDifference(|A-B|, max(A,B)), the same math
+/// ScoreDifference uses) PLUS each item (itemA/itemB) appears at most once per game;
+/// best-effort, falls back on repetition only if the pool can't supply enough item-distinct
+/// cards. Final order is shuffled so bands don't cluster. Pure: RNG is injected as `next`
 /// (an exclusive-upper-bound generator, like Random.Next(n)).
 /// </summary>
 public static class QuestionSelection
@@ -399,18 +400,43 @@ public static class QuestionSelection
         var quotas = Apportion(count, BandWeights);
 
         var picked = new List<Question>();
+        var pickedSet = new HashSet<Question>();
         var leftover = new List<Question>();
+        var usedItems = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+        bool TryUse(Question q)
+        {
+            if (usedItems.Contains(q.ItemA) || usedItems.Contains(q.ItemB)) return false;
+            usedItems.Add(q.ItemA);
+            usedItems.Add(q.ItemB);
+            return true;
+        }
+
         for (var b = 0; b < bands.Length; b++)
         {
             Shuffle(bands[b], next);
-            var take = Math.Min(quotas[b], bands[b].Count);
-            picked.AddRange(bands[b].Take(take));
-            leftover.AddRange(bands[b].Skip(take));
+            var taken = 0;
+            foreach (var q in bands[b])
+                if (taken < quotas[b] && TryUse(q)) { picked.Add(q); pickedSet.Add(q); taken++; }
+                else leftover.Add(q);
         }
 
-        // Any band that was short leaves a deficit; fill it from the leftover pool (shuffled).
+        // Fill band deficits from leftover, still item-distinct.
         Shuffle(leftover, next);
-        picked.AddRange(leftover.Take(count - picked.Count));
+        foreach (var q in leftover)
+        {
+            if (picked.Count >= count) break;
+            if (TryUse(q)) { picked.Add(q); pickedSet.Add(q); }
+        }
+
+        // ponytail: item-distinct is best-effort. If the pool can't yield `count` item-distinct
+        // cards (never hits the live pack) — fill without the guard so the game isn't short.
+        if (picked.Count < count)
+            foreach (var q in leftover)
+            {
+                if (picked.Count >= count) break;
+                if (pickedSet.Add(q)) picked.Add(q);
+            }
 
         // Shuffle the final selection so bands don't cluster in play order.
         Shuffle(picked, next);
