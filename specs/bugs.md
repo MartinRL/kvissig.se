@@ -33,3 +33,7 @@ Loggade buggar i samma anda som `tasks.md`. Mall för nya poster:
   - Förväntat: hela tabellen, inkl. Total-kolumnen, ryms inom kortramen på alla telefoner.
   - Faktiskt: 6-kolumnstabellen rymdes precis vid `.wrap` 560px → spillde över kortet och klipptes på smalare skärmar. Fix: ren CSS — `@media (max-width: 559.98px)` staplar `.scoreboard` till per-spelare-block (rad 1 = rank · namn · total, rad 2 = rond-celler som etiketterade chips via `data-label` + `::before`); ≥560px oförändrad tabell.
 
+- [x] **Långt egennamn spiller utanför kortet på riktningsknapp** — `playful.css` / `QuestionScreen.razor`
+  - Förväntat: långa ord ("Washingtonmonumentet") ryms inom knappen/kortet, snyggt avstavat.
+  - Faktiskt: ordet i `.dirbtn` (halv kolumn, grid 1fr 1fr) fick inte plats och stack ut förbi kortramen. Fix: ren CSS — `hyphens: auto` + `-webkit-hyphens: auto` på `.dirbtn` och `h1` (svensk avstavning via `<html lang="sv">`), `overflow-wrap: break-word` som skyddsnät om inget bindestreckställe finns.
+

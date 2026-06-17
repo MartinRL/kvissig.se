@@ -60,7 +60,7 @@ body {
   padding: 1.5rem 1.35rem; margin-bottom: 1.1rem;
 }
 .card.center { text-align: center; }
-h1 { font-family: var(--display); font-weight: 800; font-size: 1.7rem; line-height: 1.1; margin: 0 0 .35rem; }
+h1 { font-family: var(--display); font-weight: 800; font-size: 1.7rem; line-height: 1.1; margin: 0 0 .35rem; overflow-wrap: break-word; hyphens: auto; -webkit-hyphens: auto; }
 h2 { font-family: var(--display); font-weight: 700; font-size: 1.3rem; margin: 0 0 .6rem; }
 .sub, .muted { color: var(--ink-soft); }
 .sub { margin: 0 0 1.4rem; font-size: .95rem; }
@@ -92,6 +92,7 @@ h2 { font-family: var(--display); font-weight: 700; font-size: 1.3rem; margin: 0
   border-radius: var(--radius-sm); padding: 1rem 1.1rem; font-family: var(--display);
   font-weight: 700; font-size: 1.1rem; display: flex; flex-direction: column; gap: .35rem;
   transition: transform .12s ease, box-shadow .12s ease, border-color .12s, background .12s;
+  min-width: 0; overflow-wrap: break-word; hyphens: auto; -webkit-hyphens: auto; /* long single words (Washingtonmonumentet) hyphenate inside the cell, break-word as fallback */
 }
 .dirbtn .arrow { font-size: 1.4rem; line-height: 1; color: var(--mer-deep); }
 .dirbtn[aria-pressed="false"] .arrow { color: var(--ink-soft); }
