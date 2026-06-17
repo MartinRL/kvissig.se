@@ -1,9 +1,8 @@
 # Mer eller Mindre
 
 Ett kviss för flera spelare där man gissar:
-1. **Riktning**: Är A mer eller mindre än B?
-2. **Differens**: Hur stor är skillnaden? Du gissar den **råa skillnaden i kortets egen
-   enhet** (t.ex. antal km eller miljoner invånare) — systemet normaliserar gissningen
+1. **Mer eller Mindre**: Är A mer eller mindre än B?
+2. **Differens**: Hur stor är skillnaden? Du gissar **skillnaden i %** och systemet normaliserar gissningen
    till 0–100 för poängräkning.
 
 Inspirerat av sällskapsspelet [0-100](https://playmig.com/produkter/0-100-vit/).
