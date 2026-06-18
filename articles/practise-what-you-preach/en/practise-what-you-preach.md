@@ -100,6 +100,11 @@ The loop *is* Given–When–Then: **Given** a state (fold prior events via `evo
 command, **Then** events — or a rejection. The same shape as the slice, the same shape as the
 test. Design and test speak the same language. (Initial and final states left out for brevity.)
 
+All three patterns derive from **a single source**: an emlang event modeling spec that
+maps the game's entire flow — trigger, command, event, view — before a line of code is written.
+
+![[assets/game-flow-em.png|700]]
+
 ### The Supporting Beams
 
 These aren't three loose patterns — they hang on a common scaffold:

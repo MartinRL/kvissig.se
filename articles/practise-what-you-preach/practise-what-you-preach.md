@@ -101,6 +101,11 @@ Loopen *är* Given–When–Then: **Given** ett tillstånd (vikta tidigare event
 `evolve`), **When** ett kommando, **Then** events — eller en avvisning. Samma form som
 slicen, samma form som testet. Designen och testet talar samma språk. (Inledande och slutliga tillstånd utelämnade för läsbarhet.)
 
+Alla tre mönstren härleds ur **en enda källa**: en emlang event modeling-spec som
+ritar hela spelets flöde — trigger, kommando, event, vy — innan en rad kod skrivs.
+
+![[assets/game-flow-em.png|700]]
+
 ### Stödbalkarna
 
 Det här är inte tre lösryckta mönster — de hänger på en gemensam ställning:
