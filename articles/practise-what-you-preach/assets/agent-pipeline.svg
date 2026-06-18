@@ -44,42 +44,39 @@
   <text x="60" y="58" font-size="34" font-weight="800" fill="#1e1b4b">Agent Pipeline &#8212; Question Data</text>
   <text x="61" y="86" font-size="16" font-weight="500" fill="#64748b">Every card passes four gates before it reaches the live pack &#8212; work COCOMO never counts</text>
 
-  <!-- ============ STAGE 1: frågesättare ============ -->
+  <!-- ============ STAGE 1: Author ============ -->
   <g filter="url(#shadow)">
     <rect x="56" y="170" width="248" height="150" rx="20" fill="url(#authorGrad)"/>
   </g>
-  <text x="180" y="206" font-size="18" font-weight="900" fill="#ffffff" text-anchor="middle">frågesättare</text>
-  <text x="180" y="230" font-size="12" font-weight="600" fill="#eaf4fc" text-anchor="middle">AUTHOR</text>
+  <text x="180" y="206" font-size="18" font-weight="900" fill="#ffffff" text-anchor="middle">Author</text>
   <text x="180" y="262" font-size="12.5" font-weight="500" fill="#eaf4fc" text-anchor="middle">writes batches of ~25&#8211;30</text>
   <text x="180" y="282" font-size="12.5" font-weight="500" fill="#eaf4fc" text-anchor="middle">cards against the</text>
   <text x="180" y="302" font-size="12.5" font-weight="700" fill="#ffffff" text-anchor="middle">style-guide bands</text>
 
-  <!-- ============ STAGE 2: faktagranskare ============ -->
+  <!-- ============ STAGE 2: Fact-checker ============ -->
   <g filter="url(#shadow)">
     <rect x="356" y="170" width="248" height="150" rx="20" fill="url(#factGrad)"/>
   </g>
-  <text x="480" y="206" font-size="18" font-weight="900" fill="#ffffff" text-anchor="middle">faktagranskare</text>
-  <text x="480" y="230" font-size="12" font-weight="600" fill="#fdebd9" text-anchor="middle">FACT-CHECK</text>
+  <text x="480" y="206" font-size="18" font-weight="900" fill="#ffffff" text-anchor="middle">Fact-checker</text>
   <text x="480" y="262" font-size="12.5" font-weight="500" fill="#fdebd9" text-anchor="middle">verifies every value +</text>
   <text x="480" y="282" font-size="12.5" font-weight="500" fill="#fdebd9" text-anchor="middle">direction vs. source,</text>
   <text x="480" y="302" font-size="12.5" font-weight="700" fill="#ffffff" text-anchor="middle">pins the year</text>
 
-  <!-- ============ STAGE 3: språkgranskare ============ -->
+  <!-- ============ STAGE 3: Language editor ============ -->
   <g filter="url(#shadow)">
     <rect x="656" y="170" width="248" height="150" rx="20" fill="url(#langGrad)"/>
   </g>
-  <text x="780" y="206" font-size="18" font-weight="900" fill="#ffffff" text-anchor="middle">språkgranskare</text>
-  <text x="780" y="230" font-size="12" font-weight="600" fill="#ddd6fe" text-anchor="middle">LANGUAGE</text>
+  <text x="780" y="206" font-size="18" font-weight="900" fill="#ffffff" text-anchor="middle">Language editor</text>
   <text x="780" y="262" font-size="12.5" font-weight="500" fill="#ddd6fe" text-anchor="middle">polishes Swedish &#8212;</text>
   <text x="780" y="282" font-size="12.5" font-weight="500" fill="#ddd6fe" text-anchor="middle">grammar, flow, comparatives;</text>
   <text x="780" y="302" font-size="12.5" font-weight="700" fill="#ffffff" text-anchor="middle">never touches the facts</text>
 
-  <!-- ============ STAGE 4: kurator ============ -->
+  <!-- ============ STAGE 4: Curator ============ -->
   <g filter="url(#shadow)">
     <rect x="956" y="170" width="188" height="150" rx="20" fill="url(#curGrad)"/>
   </g>
-  <text x="1050" y="206" font-size="18" font-weight="900" fill="#ffffff" text-anchor="middle">kurator</text>
-  <text x="1050" y="230" font-size="12" font-weight="600" fill="#c7d2fe" text-anchor="middle">CURATE &#183; pack.cs</text>
+  <text x="1050" y="206" font-size="18" font-weight="900" fill="#ffffff" text-anchor="middle">Curator</text>
+  <text x="1050" y="230" font-size="12" font-weight="600" fill="#c7d2fe" text-anchor="middle">pack.cs</text>
   <text x="1050" y="262" font-size="12.5" font-weight="500" fill="#c7d2fe" text-anchor="middle">merge + dedup,</text>
   <text x="1050" y="282" font-size="12.5" font-weight="500" fill="#c7d2fe" text-anchor="middle">band histogram,</text>
   <text x="1050" y="302" font-size="12.5" font-weight="700" fill="#ffffff" text-anchor="middle">into the live pack</text>
