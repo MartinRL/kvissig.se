@@ -113,7 +113,7 @@ public class GameEndpointsTests : IClassFixture<TestAppFactory>
 
         var code = await CreateGame(host);
 
-        var state = await State(host, code);
+        var state = await (await host.GetAsync($"/games/{code}/state?url")).Content.ReadAsStringAsync();
         state.Should().Contain("Skanna för att gå med");
         state.Should().Contain("<svg");                          // a real, scannable QR is rendered
         state.Should().Contain($"/games/{code}/join");           // encoding the absolute join URL

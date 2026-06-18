@@ -37,3 +37,7 @@ Loggade buggar i samma anda som `tasks.md`. Mall för nya poster:
   - Förväntat: långa ord ("Washingtonmonumentet") ryms inom knappen/kortet, snyggt avstavat.
   - Faktiskt: ordet i `.dirbtn` (halv kolumn, grid 1fr 1fr) fick inte plats och stack ut förbi kortramen. Fix: ren CSS — `hyphens: auto` + `-webkit-hyphens: auto` på `.dirbtn` och `h1` (svensk avstavning via `<html lang="sv">`), `overflow-wrap: break-word` som skyddsnät om inget bindestreckställe finns.
 
+- [x] **Inaktuell test: `CreateGame_RedirectsHostToTheLobbyShell` röd** — `GameEndpointsTests.cs:119`
+  - Förväntat: testen grön; den verifierar att värd-lobbyn renderar join-länken.
+  - Faktiskt: testen kräver `/games/{code}/join` i plain `/state`-svaret, men committen "clickable join URL + copy-to-clipboard" gjorde länken progressivt avslöjad — `LobbyHostScreen.razor:8` visar den bara `@if (Model.ShowJoinUrl)`, vilket slås på först när pollen anropar `/state?url`. Funktionen funkar; testen påstår ett gammalt kontrakt. Fix: assert mot `/state?url` (där join-URL:en faktiskt renderas), inte plain `/state`.
+
