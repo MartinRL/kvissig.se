@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 660 440" font-family="'Segoe UI', system-ui, -apple-system, sans-serif">
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto-start-reverse">
+      <path d="M0,0 L8,3 L0,6" fill="#2c3e50"/>
+    </marker>
+    <marker id="arr-red" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto-start-reverse">
+      <path d="M0,0 L8,3 L0,6" fill="#c0392b"/>
+    </marker>
+  </defs>
+
+  <!-- ════════════════════════════════════════════════════════ -->
+  <!-- COMMAND (blue, top-left)                                 -->
+  <!-- ════════════════════════════════════════════════════════ -->
+  <rect x="50" y="90" width="110" height="50" rx="6" fill="#3498db"/>
+  <text x="105" y="120" text-anchor="middle" font-size="14" font-weight="500" fill="#fff">command</text>
+
+  <!-- Arrow: command → decide -->
+  <line x1="160" y1="115" x2="226" y2="115" stroke="#2c3e50" stroke-width="2.2" marker-end="url(#arr)"/>
+
+  <!-- ════════════════════════════════════════════════════════ -->
+  <!-- DECIDE (purple, top-center)                              -->
+  <!-- ════════════════════════════════════════════════════════ -->
+  <rect x="228" y="90" width="100" height="50" rx="6" fill="#8e44ad"/>
+  <text x="278" y="120" text-anchor="middle" font-size="14" font-weight="600" fill="#fff">decide</text>
+
+  <!-- Purity annotation -->
+  <text x="278" y="78" text-anchor="middle" font-size="9" fill="#95a5a6" font-style="italic">pure function: no side effects</text>
+
+  <!-- Label: Accepted (on right arrow) -->
+  <text x="358" y="105" text-anchor="middle" font-size="9" fill="#27ae60" font-weight="600">Accepted</text>
+
+  <!-- Arrow: decide → events -->
+  <line x1="328" y1="115" x2="390" y2="115" stroke="#2c3e50" stroke-width="2.2" marker-end="url(#arr)"/>
+
+  <!-- ════════════════════════════════════════════════════════ -->
+  <!-- REJECTED PATH (red, downward from decide)               -->
+  <!-- ════════════════════════════════════════════════════════ -->
+  <!-- Label: Rejected -->
+  <text x="296" y="168" font-size="9" fill="#c0392b" font-weight="600">Rejected</text>
+
+  <!-- Arrow: decide → rejected box -->
+  <line x1="278" y1="140" x2="278" y2="188" stroke="#2c3e50" stroke-width="2.2" marker-end="url(#arr)"/>
+
+  <!-- Rejected box -->
+  <rect x="213" y="190" width="130" height="42" rx="6" fill="#c0392b"/>
+  <text x="278" y="216" text-anchor="middle" font-size="13" font-weight="500" fill="#fff">rejection</text>
+
+  <!-- ════════════════════════════════════════════════════════ -->
+  <!-- EVENTS (orange, stacked, top-right, in dashed box)       -->
+  <!-- ════════════════════════════════════════════════════════ -->
+  <!-- Dashed container -->
+  <rect x="392" y="52" width="190" height="150" rx="10"
+        fill="none" stroke="#2c3e50" stroke-width="2" stroke-dasharray="10,5"/>
+
+  <!-- Stacked event boxes (offset) -->
+  <rect x="410" y="68" width="110" height="44" rx="5" fill="#e67e22" opacity="0.7"/>
+  <text x="465" y="95" text-anchor="middle" font-size="13" font-weight="500" fill="#fff">event</text>
+
+  <rect x="430" y="92" width="110" height="44" rx="5" fill="#e67e22" opacity="0.85"/>
+  <text x="485" y="119" text-anchor="middle" font-size="13" font-weight="500" fill="#fff">event</text>
+
+  <rect x="450" y="116" width="110" height="44" rx="5" fill="#e67e22"/>
+  <text x="505" y="143" text-anchor="middle" font-size="13" font-weight="500" fill="#fff">event</text>
+
+  <!-- ════════════════════════════════════════════════════════ -->
+  <!-- ARROWS: events → evolve (down right side, then left)     -->
+  <!-- ════════════════════════════════════════════════════════ -->
+  <!-- Down from events box, then curve left to evolve -->
+  <path d="M505,160 L505,313 L428,313" fill="none" stroke="#2c3e50" stroke-width="2.2" marker-end="url(#arr)"/>
+
+  <!-- ════════════════════════════════════════════════════════ -->
+  <!-- EVOLVE (purple, bottom-center-right)                     -->
+  <!-- ════════════════════════════════════════════════════════ -->
+  <rect x="328" y="288" width="100" height="50" rx="6" fill="#8e44ad"/>
+  <text x="378" y="318" text-anchor="middle" font-size="14" font-weight="600" fill="#fff">evolve</text>
+
+  <!-- Arrow: evolve → state -->
+  <line x1="328" y1="313" x2="200" y2="313" stroke="#2c3e50" stroke-width="2.2" marker-end="url(#arr)"/>
+
+  <!-- ════════════════════════════════════════════════════════ -->
+  <!-- STATE (gray, bottom-left)                                -->
+  <!-- ════════════════════════════════════════════════════════ -->
+  <rect x="100" y="288" width="100" height="50" rx="6" fill="#2ecc71"/>
+  <text x="150" y="318" text-anchor="middle" font-size="14" font-weight="500" fill="#fff">state</text>
+
+  <!-- Arrow: state → decide (from top-mid of state, under command, into decide's left edge) -->
+  <path d="M150,288 L150,165 L210,165 L210,135 L226,135" fill="none" stroke="#2c3e50" stroke-width="2.2" marker-end="url(#arr)"/>
+
+  <!-- ════════════════════════════════════════════════════════ -->
+  <!-- GWT MAPPING (bottom annotation)                          -->
+  <!-- ════════════════════════════════════════════════════════ -->
+  <line x1="40" y1="370" x2="620" y2="370" stroke="#d5dbdb" stroke-width="1"/>
+
+  <!-- Given → state -->
+  <text x="105" y="395" text-anchor="middle" font-size="10" font-weight="700" fill="#2ecc71">Given</text>
+  <text x="105" y="410" text-anchor="middle" font-size="9" fill="#566573">prior events → state</text>
+  <text x="105" y="424" text-anchor="middle" font-size="9" fill="#566573" font-style="italic">(via evolve)</text>
+
+  <!-- When → command -->
+  <text x="330" y="395" text-anchor="middle" font-size="10" font-weight="700" fill="#3498db">When</text>
+  <text x="330" y="410" text-anchor="middle" font-size="9" fill="#566573">command</text>
+  <text x="330" y="424" text-anchor="middle" font-size="9" fill="#566573" font-style="italic">(input to decide)</text>
+
+  <!-- Then → events or rejection -->
+  <text x="530" y="395" text-anchor="middle" font-size="10" font-weight="700" fill="#e67e22">Then</text>
+  <text x="530" y="410" text-anchor="middle" font-size="9" fill="#566573">event(s) produced</text>
+  <text x="530" y="424" text-anchor="middle" font-size="9" fill="#c0392b" font-style="italic">or command rejected</text>
+
+</svg>

@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <defs>
+    <!-- Background -->
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f8fafc"/>
+      <stop offset="1" stop-color="#eef2ff"/>
+    </linearGradient>
+    <!-- UI / web (blue) -->
+    <linearGradient id="uiGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5dade2"/>
+      <stop offset="1" stop-color="#3498db"/>
+    </linearGradient>
+    <!-- Application shell (slate) -->
+    <linearGradient id="shellGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#64748b"/>
+      <stop offset="1" stop-color="#475569"/>
+    </linearGradient>
+    <!-- Decider core (indigo/violet) -->
+    <linearGradient id="coreGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7c3aed"/>
+      <stop offset="1" stop-color="#4f46e5"/>
+    </linearGradient>
+    <!-- Event store (orange = events colour) -->
+    <linearGradient id="storeGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#eb984e"/>
+      <stop offset="1" stop-color="#e67e22"/>
+    </linearGradient>
+    <!-- Vertical slice (coral/salmon) -->
+    <linearGradient id="sliceGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fb7185"/>
+      <stop offset="1" stop-color="#f43f5e"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#1e1b4b" flood-opacity="0.22"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="620" fill="url(#bgGrad)"/>
+
+  <!-- Title -->
+  <text x="60" y="56" font-size="32" font-weight="800" fill="#1e1b4b">Vertical Slice Architecture</text>
+  <text x="61" y="84" font-size="16" font-weight="500" fill="#64748b">One feature cuts through every layer &#8212; UI to event store</text>
+
+  <!-- ============== FOUR HORIZONTAL LAYER BARS ============== -->
+  <!-- UI -->
+  <g filter="url(#shadow)">
+    <rect x="170" y="120" width="660" height="76" rx="20" fill="url(#uiGrad)"/>
+  </g>
+  <text x="545" y="156" font-size="20" font-weight="800" fill="#ffffff" text-anchor="middle">HTTP endpoint + Razor SSR</text>
+  <text x="545" y="178" font-size="13" font-weight="600" fill="#eaf4fc" text-anchor="middle">minimal API &#183; RazorComponentResult&lt;T&gt;</text>
+
+  <!-- Application shell -->
+  <g filter="url(#shadow)">
+    <rect x="170" y="216" width="660" height="76" rx="20" fill="url(#shellGrad)"/>
+  </g>
+  <text x="545" y="252" font-size="20" font-weight="800" fill="#ffffff" text-anchor="middle">Application service</text>
+  <text x="545" y="274" font-size="13" font-weight="600" fill="#cbd5e1" text-anchor="middle">imperative shell &#183; load &#8594; decide &#8594; append</text>
+
+  <!-- Decider core -->
+  <g filter="url(#shadow)">
+    <rect x="170" y="312" width="660" height="76" rx="20" fill="url(#coreGrad)"/>
+  </g>
+  <text x="545" y="348" font-size="20" font-weight="800" fill="#ffffff" text-anchor="middle">Decider &#183; decide / evolve</text>
+  <text x="545" y="370" font-size="13" font-weight="600" fill="#c7d2fe" text-anchor="middle">pure functional core &#183; no I/O</text>
+
+  <!-- Event store -->
+  <g filter="url(#shadow)">
+    <rect x="170" y="408" width="660" height="76" rx="20" fill="url(#storeGrad)"/>
+  </g>
+  <text x="545" y="444" font-size="20" font-weight="800" fill="#ffffff" text-anchor="middle">In-memory event store</text>
+  <text x="545" y="466" font-size="13" font-weight="600" fill="#fdebd9" text-anchor="middle">append-only &#183; no database</text>
+
+  <!-- ============== VERTICAL SLICE ============== -->
+  <g filter="url(#shadow)">
+    <rect x="80" y="104" width="116" height="396" rx="22" fill="url(#sliceGrad)"/>
+  </g>
+  <text x="138" y="284" font-size="20" font-weight="900" fill="#ffffff" text-anchor="middle" transform="rotate(-90 138 284)">One feature</text>
+  <text x="160" y="284" font-size="13" font-weight="700" fill="#ffe4e6" text-anchor="middle" transform="rotate(-90 160 284)">Submit Guess</text>
+
+  <!-- caption: same shape repeats per feature -->
+  <text x="138" y="528" font-size="12.5" font-weight="600" fill="#9f1239" text-anchor="middle">one slice</text>
+  <text x="138" y="546" font-size="12.5" font-weight="600" fill="#9f1239" text-anchor="middle">per feature</text>
+
+  <!-- ============== EMPHASIS LINE ============== -->
+  <g filter="url(#shadow)">
+    <rect x="80" y="560" width="740" height="44" rx="14" fill="#1e1b4b"/>
+  </g>
+  <text x="450" y="588" font-size="15.5" font-weight="800" fill="#ffffff" text-anchor="middle">Each feature cuts top-to-bottom &#8212; an independently verifiable <tspan fill="#fbbf24">Given&#8211;When&#8211;Then</tspan> contract</text>
+</svg>
