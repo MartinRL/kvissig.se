@@ -69,7 +69,7 @@ Bygg en funktion åt gången, hela vägen genom: en self-contained slice. Ingen 
 delas spekulativt mellan funktioner — varje slice är ett **oberoende verifierbart
 Given–When–Then-kontrakt**.
 
-![[assets/vertical-slice.svg]]
+![[assets/vertical-slice.svg|700]]
 
 För ledaren: du kan leverera och verifiera en funktion utan att rota i tio andra. För
 ingenjören: ingen prematur abstraktion, inga lager-för-lagrets-skull, koppling hålls
@@ -80,7 +80,7 @@ inom slicen.
 All beslutslogik bor i en **ren kärna** — inga databaser, ingen klocka, inget nätverk,
 helt deterministisk. Allt stökigt (I/O, tid, anrop) trycks ut i ett tunt yttre skal.
 
-![[assets/functional-core.svg]]
+![[assets/functional-core.svg|700]]
 
 Konsekvensen står i bilden: *beteendet är simulerbart — kör tusentals scenarier utan
 databas, verifierbart innan det ens är byggt.* Du behöver inte starta något för att veta
@@ -95,7 +95,7 @@ decide:  (State, Command)  →  Result<Event[]>
 evolve:  (State, Event)    →  State
 ```
 
-![[assets/decider-pattern.svg]]
+![[assets/decider-pattern.svg|700]]
 
 Loopen *är* Given–When–Then: **Given** ett tillstånd (vikta tidigare events via
 `evolve`), **When** ett kommando, **Then** events — eller en avvisning. Samma form som
@@ -106,11 +106,11 @@ slicen, samma form som testet. Designen och testet talar samma språk. (Inledand
 Det här är inte tre lösryckta mönster — de hänger på en gemensam ställning:
 
 - **Spec som sanningskälla.** Allt beteende definieras först i en emlang-spec
-  (event modeling, ADR 004) — inte i koden, inte i mitt huvud. Koden följer specen.
-- **Sju ADR:er.** Varje vägval (event sourcing in-memory, Decider, HTMX-polling, CSV,
+  (event modeling) — inte i koden, inte i mitt huvud. Koden följer specen.
+- **Architectural Decision Records.** Varje vägval (event sourcing in-memory, Decider, HTMX-polling, CSV,
   ROP, Razor static SSR) är ett skrivet beslut med ett *varför*. Inget omförhandlas i
   varje commit.
-- **Result / Railway-Oriented Programming** via native unions (ADR 006). Affärsfel är
+- **Result / Railway-Oriented Programming** via native unions. Affärsfel är
   *värden på ett felspår*, aldrig kastade undantag. Kärnan förblir total.
 - **Constraints som feature.** Ingen SignalR, ingen Entity Framework, ingen
   Blazor-circuit. Färre rörliga delar = färre fellägen. Begränsningen är designen.
@@ -149,7 +149,7 @@ påstående om kvalitet — det är en *mekanism* för den.
 Frågedatan är inte hopkastad. Varje kort passerar en pipeline av specialiserade agenter
 innan det når den live-paketet:
 
-![[assets/agent-pipeline.svg]]
+![[assets/agent-pipeline.svg|700]]
 
 **frågesättare** författar batchar mot svårighetsbanden → **faktagranskare** verifierar
 *varje* värde och riktning mot källa och pinnar årtalet (overifierbart = förkastat) →
@@ -204,3 +204,8 @@ illustrationerna — hämtade ur mitt eget mönsterbibliotek, samma visuella spr
 spelets diagram — och draftandet följde exakt samma övade metod som koden.
 
 Ankaret var aldrig poängen. Disciplinen är det.
+
+## 8. Spela
+
+Nog teori — spelet är till för att spelas. Samla gänget, öppna
+[kvissig.se](https://kvissig.se) och se vem som gissar närmast. Mer eller mindre?

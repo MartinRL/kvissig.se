@@ -68,7 +68,7 @@ Build one feature at a time, all the way through: a self-contained slice. No cod
 speculatively between features — every slice is an **independently verifiable
 Given–When–Then contract**.
 
-![[assets/vertical-slice.svg]]
+![[assets/vertical-slice.svg|700]]
 
 For the lead: you can ship and verify one feature without rummaging through ten others. For
 the engineer: no premature abstraction, no layers for layers' sake, coupling kept inside the
@@ -79,7 +79,7 @@ slice.
 All decision logic lives in a **pure core** — no databases, no clock, no network, fully
 deterministic. Everything messy (I/O, time, calls) is pushed out into a thin outer shell.
 
-![[assets/functional-core.svg]]
+![[assets/functional-core.svg|700]]
 
 The consequence is right there in the image: *behaviour is simulatable — run thousands of
 scenarios without a database, verifiable before it's even built.* You don't need to start
@@ -94,7 +94,7 @@ decide:  (State, Command)  →  Result<Event[]>
 evolve:  (State, Event)    →  State
 ```
 
-![[assets/decider-pattern.svg]]
+![[assets/decider-pattern.svg|700]]
 
 The loop *is* Given–When–Then: **Given** a state (fold prior events via `evolve`), **When** a
 command, **Then** events — or a rejection. The same shape as the slice, the same shape as the
@@ -105,11 +105,11 @@ test. Design and test speak the same language. (Initial and final states left ou
 These aren't three loose patterns — they hang on a common scaffold:
 
 - **Spec as source of truth.** All behaviour is defined first in an emlang spec (event
-  modeling, ADR 004) — not in the code, not in my head. The code follows the spec.
-- **Seven ADRs.** Every choice (in-memory event sourcing, Decider, HTMX polling, CSV, ROP,
+  modeling) — not in the code, not in my head. The code follows the spec.
+- **Architectural Decision Records.** Every choice (in-memory event sourcing, Decider, HTMX polling, CSV, ROP,
   Razor static SSR) is a written decision with a *why*. Nothing is renegotiated in every
   commit.
-- **Result / Railway-Oriented Programming** via native unions (ADR 006). Business failures are
+- **Result / Railway-Oriented Programming** via native unions. Business failures are
   *values on a failure track*, never thrown exceptions. The core stays total.
 - **Constraints as a feature.** No SignalR, no Entity Framework, no Blazor circuit. Fewer
   moving parts = fewer failure modes. The constraint is the design.
@@ -126,8 +126,7 @@ decisions sit in the spinal cord and the cost of deciding goes to zero.
 *mechanism* for it.
 
 - **Bulletproof FC tests.** Given–When–Then and Given–Then cases in `DeciderTests`,
-  `EvolveTests`, `ProjectionTests`. The pure core makes them deterministic and mock-free — the
-  test runs the same loop as the design.
+  `EvolveTests`, `ProjectionTests`. The pure core makes them deterministic and mock-free — the test runs the same loop as the design.
 - **Architecture tests.** `ArchitectureTests` enforces the FC/IS boundary *in CI*. If anyone
   sneaks I/O into the core, the build fails. The discipline is automated, not hopeful.
 - **End-to-end.** `GameEndpointsTests` against a `TestAppFactory` runs all the way through the
@@ -147,7 +146,7 @@ decisions sit in the spinal cord and the cost of deciding goes to zero.
 The question data isn't slapped together. Every card passes through a pipeline of specialised
 agents before it reaches the live pack:
 
-![[assets/agent-pipeline.svg]]
+![[assets/agent-pipeline.svg|700]]
 
 **author** writes batches against the difficulty bands → **fact-checker** verifies *every*
 value and direction against a source and pins the year (unverifiable = rejected) →
@@ -201,3 +200,8 @@ illustrations — drawn from my own pattern library, the same visual language as
 diagrams — and the drafting followed the exact same practised method as the code.
 
 The anchor was never the point. The discipline is.
+
+## 8. Play
+
+Enough theory — the game is made to be played. Gather your friends, open
+[kvissig.se](https://kvissig.se), and guess. More or less?
