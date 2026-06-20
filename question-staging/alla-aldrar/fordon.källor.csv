@@ -1,0 +1,27 @@
+﻿fråga;källa;år
+Väger en lastbil mer eller mindre än en personbil?;Wikipedia "Lastbil" (tung lastbil/distributionsbil ~12-18 ton) + typisk personbil tjänstevikt ~1500 kg;2025
+Har en cykel högre eller lägre toppfart än en moped?;Wikipedia "Moped klass I" (max 45 km/h) + typisk cykelfart ~25-30 km/h;2025
+Är en personbil längre eller kortare än en stadsbuss?;Wikipedia "Stadsbuss" (standardbuss 12 m) + typisk personbil ~4,5 m;2025
+Har en jumbojet fler eller färre sittplatser än ett litet propellerplan?;Boeing 747-400 typisk trekabin ~416 platser; Cessna 172 = 4 platser (cessnaflyer.org/Wikipedia);2025
+Har en personbil högre eller lägre toppfart än ett höghastighetståg?;Wikipedia "Snabbtåg/Höghastighetståg" (TGV/Shinkansen 320 km/h) + snabb personbil ~200 km/h;2025
+Har en motorcykel högre eller lägre toppfart än en moped?;Mellanklass-MC ~175-200 km/h (sporthoj/fleetview) + Wikipedia "Moped klass I" (45 km/h);2025
+Är Titanic längre eller kortare än en oljetanker?;Britannica/Wikipedia "RMS Titanic" (269 m) + VLCC/ULCC ~330-415 m, typisk supertanker ~380 m;2025
+Har ett ånglok högre eller lägre toppfart än en personbil?;Wikipedia ånglok i tjänst ~90-115 km/h + snabb personbil ~200 km/h;2025
+Har en spårvagn högre eller lägre toppfart än ett tunnelbanetåg?;Göteborgs spårvagn max ~60 km/h + Stockholms tunnelbana ~70-80 km/h (Wikipedia C20/C30);2025
+Är en lastbil längre eller kortare än en stadsbuss?;Lastbilsekipage med släp ~18 m + Wikipedia "Stadsbuss" (standardbuss 12 m);2025
+Väger en cykel mer eller mindre än en motorcykel?;Typisk cykel ~15 kg + Wikipedia "Motorcykel" tjänstevikt ~150-250 kg;2025
+Har en helikopter högre eller lägre toppfart än en jumbojet?;Helikopter marschfart ~250-260 km/h (airleap/illvet) + Boeing 747 marschfart ~913-920 km/h;2025
+Har en stadsbuss fler eller färre sittplatser än ett tunnelbanetåg?;12 m stadsbuss ~40-50 sittplatser + tunnelbanetåg (helt tågsätt) ~240 sittplatser;2025
+Har en traktor högre eller lägre toppfart än ett höghastighetståg?;Jordbrukstraktor toppfart ~40 km/h + Wikipedia "Höghastighetståg" (TGV/Shinkansen 320 km/h);2025
+Väger en Formel 1-bil mer eller mindre än en motorcykel?;Wikipedia "Formel 1" minimivikt 798 kg (2024) + typisk motorcykel ~200 kg;2024
+Väger en stadsbuss mer eller mindre än en lastbil?;13 m buss totalvikt ~18 ton (Wikipedia "Buss") + tungt lastbilsekipage ~40 ton;2025
+Är ett containerfartyg längre eller kortare än en segelbåt?;Största containerfartyg ~400 m (Ever Alot/MSC Irina, Wikipedia) + typisk fritidssegelbåt ~12 m;2025
+Har ett höghastighetståg fler eller färre sittplatser än en jumbojet?;Höghastighetståg (t.ex. TGV Duplex) ~500+ platser + Boeing 747-400 typisk ~416 platser;2025
+Väger en lastbil mer eller mindre än ett ånglok?;Tungt lastbilsekipage ~40 ton + ånglok ~50-150 ton, typiskt ~100 ton (Wikipedia);2025
+Väger en moped mer eller mindre än en cykel?;Moped klass I ~60-90 kg + typisk cykel ~15 kg;2025
+Är en helikopter längre eller kortare än en jumbojet?;Typisk helikopter ~15-20 m + Boeing 747 längd 70,66 m (Wikipedia/Lufthansa);2025
+Är en spårvagn längre eller kortare än ett tunnelbanetåg?;Typisk spårvagn ~30 m + tunnelbanetåg helt tågsätt ~120 m (Wikipedia C20/C30);2025
+Har en Formel 1-bil högre eller lägre toppfart än ett höghastighetståg?;F1-bil topphastighet ~350-372 km/h (Wikipedia "Formel 1") + höghastighetståg 320 km/h;2025
+Har en segelbåt högre eller lägre toppfart än en motorbåt?;Typisk segelbåt ~8 knop (~15 km/h) + planande motorbåt ~30+ knop (~60 km/h);2025
+Väger en oljetanker mer eller mindre än ett containerfartyg?;VLCC dödvikt ~300 000 ton + största containerfartyg ~240 000 dwt (marineinsight/Wikipedia);2025
+Är Titanic längre eller kortare än en bilfärja?;Britannica/Wikipedia "RMS Titanic" (269 m) + typisk bilfärja ~180 m (t.ex. Stena Jutlandica 184 m);2025

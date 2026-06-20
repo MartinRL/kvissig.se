@@ -1,0 +1,27 @@
+﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Väger en lastbil mer eller mindre än en personbil?;Lastbil;Personbil;15000;1500;kilo;Hur många kilo skiljer det?
+Har en cykel högre eller lägre toppfart än en moped?;Cykel;Moped;30;45;km/h;Hur många km/h skiljer toppfarten?
+Är en personbil längre eller kortare än en stadsbuss?;Personbil;Stadsbuss;4,5;12;meter;Hur många meter skiljer längden?
+Har en jumbojet fler eller färre sittplatser än ett litet propellerplan?;Jumbojet (Boeing 747);Litet propellerplan;410;4;platser;Hur många sittplatser skiljer det?
+Har en personbil högre eller lägre toppfart än ett höghastighetståg?;Personbil;Höghastighetståg;200;320;km/h;Hur många km/h skiljer toppfarten?
+Har en motorcykel högre eller lägre toppfart än en moped?;Motorcykel;Moped;200;45;km/h;Hur många km/h skiljer toppfarten?
+Är Titanic längre eller kortare än en oljetanker?;Titanic;Oljetanker;269;380;meter;Hur många meter skiljer längden?
+Har ett ånglok högre eller lägre toppfart än en personbil?;Ånglok;Personbil;100;200;km/h;Hur många km/h skiljer toppfarten?
+Har en spårvagn högre eller lägre toppfart än ett tunnelbanetåg?;Spårvagn;Tunnelbanetåg;60;80;km/h;Hur många km/h skiljer toppfarten?
+Är en lastbil längre eller kortare än en stadsbuss?;Lastbil;Stadsbuss;18;12;meter;Hur många meter skiljer längden?
+Väger en cykel mer eller mindre än en motorcykel?;Cykel;Motorcykel;15;200;kilo;Hur många kilo skiljer det?
+Har en helikopter högre eller lägre toppfart än en jumbojet?;Helikopter;Jumbojet (Boeing 747);260;920;km/h;Hur många km/h skiljer toppfarten?
+Har en stadsbuss fler eller färre sittplatser än ett tunnelbanetåg?;Stadsbuss;Tunnelbanetåg;50;240;platser;Hur många sittplatser skiljer det?
+Har en traktor högre eller lägre toppfart än ett höghastighetståg?;Traktor;Höghastighetståg;40;320;km/h;Hur många km/h skiljer toppfarten?
+Väger en Formel 1-bil mer eller mindre än en motorcykel?;Formel 1-bil;Motorcykel;798;200;kilo;Hur många kilo skiljer det?
+Väger en stadsbuss mer eller mindre än en lastbil?;Stadsbuss;Lastbil;18;40;ton;Hur många ton skiljer det?
+Är ett containerfartyg längre eller kortare än en segelbåt?;Containerfartyg;Segelbåt;400;12;meter;Hur många meter skiljer längden?
+Har ett höghastighetståg fler eller färre sittplatser än en jumbojet?;Höghastighetståg;Jumbojet (Boeing 747);500;410;platser;Hur många sittplatser skiljer det?
+Väger en lastbil mer eller mindre än ett ånglok?;Lastbil;Ånglok;40;100;ton;Hur många ton skiljer det?
+Väger en moped mer eller mindre än en cykel?;Moped;Cykel;90;15;kilo;Hur många kilo skiljer det?
+Är en helikopter längre eller kortare än en jumbojet?;Helikopter;Jumbojet (Boeing 747);18;70;meter;Hur många meter skiljer längden?
+Är en spårvagn längre eller kortare än ett tunnelbanetåg?;Spårvagn;Tunnelbanetåg;30;120;meter;Hur många meter skiljer längden?
+Har en Formel 1-bil högre eller lägre toppfart än ett höghastighetståg?;Formel 1-bil;Höghastighetståg;360;320;km/h;Hur många km/h skiljer toppfarten?
+Har en segelbåt högre eller lägre toppfart än en motorbåt?;Segelbåt;Motorbåt;15;60;km/h;Hur många km/h skiljer toppfarten?
+Väger en oljetanker mer eller mindre än ett containerfartyg?;Oljetanker;Containerfartyg;320000;200000;ton;Hur många ton skiljer det?
+Är Titanic längre eller kortare än en bilfärja?;Titanic;Bilfärja;269;180;meter;Hur många meter skiljer längden?
