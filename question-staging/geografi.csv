@@ -36,8 +36,6 @@ Har Indiska oceanen större eller mindre yta än Norra ishavet?;Indiska oceanen;
 Är Matterhorn högre eller lägre än Eiger?;Matterhorn;Eiger;4478;3967;meter;Hur många meter skiljer det?
 Är Jungfrau högre eller lägre än Grossglockner?;Jungfrau;Grossglockner;4158;3798;meter;Hur många meter skiljer det?
 Är Zugspitze högre eller lägre än bergstoppen Galdhøpiggen?;Zugspitze;Galdhøpiggen;2962;2469;meter;Hur många meter skiljer det?
-Är floden Volga längre eller kortare än floden Eufrat?;Volga;Eufrat;3645;3596;kilometer;Hur många kilometer skiljer det?
-Är floden Mekong längre eller kortare än floden Niger?;Mekong;Niger;4350;4200;kilometer;Hur många kilometer skiljer det?
 Är Zambezi längre eller kortare än Seine?;Zambezi;Seine;2693;777;kilometer;Hur många kilometer skiljer det?
 Är Tugelafallen högre eller lägre än Yosemitefallen?;Tugelafallen;Yosemitefallen;948;739;meter;Hur många meter skiljer det?
 Har Nya Guinea större eller mindre yta än Sumatra?;Nya Guinea;Sumatra;785753;443066;kvadratkilometer;Hur många kvadratkilometer skiljer det?
@@ -47,8 +45,6 @@ Har Medelhavet större eller mindre yta än Karibiska havet?;Medelhavet;Karibisk
 Har Östersjön större eller mindre yta än Svarta havet?;Östersjön;Svarta havet;392000;422000;kvadratkilometer;Hur många kvadratkilometer skiljer det?
 Har Röda havet större eller mindre yta än Nordsjön?;Röda havet;Nordsjön;438000;570000;kvadratkilometer;Hur många kvadratkilometer skiljer det?
 Har Kalahariöknen större eller mindre yta än Patagoniska öknen?;Kalahariöknen;Patagoniska öknen;930000;673000;kvadratkilometer;Hur många kvadratkilometer skiljer det?
-Har Stora Victoriaöknen större eller mindre yta än Syriska öknen?;Stora Victoriaöknen;Syriska öknen;647000;500000;kvadratkilometer;Hur många kvadratkilometer skiljer det?
-Har Karakumöknen större eller mindre yta än Stora Victoriaöknen?;Karakumöknen;Stora Victoriaöknen;350000;647000;kvadratkilometer;Hur många kvadratkilometer skiljer det?
 Har Polen större eller mindre befolkning än Portugal? (2024);Polen;Portugal;37,5;10,75;miljoner invånare;Hur många miljoner invånare skiljer det?
 Har Sverige större eller mindre befolkning än Grekland? (2024);Sverige;Grekland;10,6;10,05;miljoner invånare;Hur många miljoner invånare skiljer det?
 Har Norge större eller mindre befolkning än Finland? (2024);Norge;Finland;5,5;5,65;miljoner invånare;Hur många miljoner invånare skiljer det?
@@ -57,37 +53,26 @@ Har Stilla havet större eller mindre yta än Norra ishavet?;Stilla havet;Norra 
 Är bergstoppen Galdhøpiggen högre eller lägre än Kebnekaise?;Galdhøpiggen;Kebnekaise;2469;2097;meter;Hur många meter skiljer det?
 Är Kaspiska havet djupare eller grundare än Bajkalsjön?;Kaspiska havet;Bajkalsjön;1025;1642;meter;Hur många meter skiljer det?
 Har Sumatra större eller mindre yta än Honshu?;Sumatra;Honshu;443066;227898;kvadratkilometer;Hur många kvadratkilometer skiljer det?
-Är floden Niger längre eller kortare än floden Volga?;Niger;Volga;4200;3645;kilometer;Hur många kilometer skiljer det?
 Har Storbritannien större eller mindre yta än Java?;Storbritannien;Java;209331;138794;kvadratkilometer;Hur många kvadratkilometer skiljer det?
 Har Ukraina större eller mindre yta än Frankrike?;Ukraina;Frankrike;603500;543941;kvadratkilometer;Hur många kvadratkilometer skiljer det?
 Har Italien större eller mindre yta än Tyskland?;Italien;Tyskland;301958;357581;kvadratkilometer;Hur många kvadratkilometer skiljer det?
 Har Storbritannien större eller mindre yta än Polen?;Storbritannien;Polen;244381;312679;kvadratkilometer;Hur många kvadratkilometer skiljer det?
 Har Frankrike större eller mindre yta än Tyskland?;Frankrike;Tyskland;543941;357581;kvadratkilometer;Hur många kvadratkilometer skiljer det?
 Har Italien större eller mindre yta än Ukraina?;Italien;Ukraina;301958;603500;kvadratkilometer;Hur många kvadratkilometer skiljer det?
-Är Mount Cook högre eller lägre än Mount Fuji?;Mount Cook;Mount Fuji;3724;3776;meter;Hur många meter skiljer det?
-Är Mount Kenya högre eller lägre än Pico de Orizaba?;Mount Kenya;Pico de Orizaba;5199;5636;meter;Hur många meter skiljer det?
 Är Mont Blanc högre eller lägre än Mount Kenya?;Mont Blanc;Mount Kenya;4808;5199;meter;Hur många meter skiljer det?
-Är Olympos högre eller lägre än Zugspitze?;Olympos;Zugspitze;2917;2962;meter;Hur många meter skiljer det?
 Är Pico de Orizaba högre eller lägre än Mount Fuji?;Pico de Orizaba;Mount Fuji;5636;3776;meter;Hur många meter skiljer det?
 Har Victoriasjön större eller mindre yta än Tanganyikasjön?;Victoriasjön;Tanganyikasjön;59947;32900;kvadratkilometer;Hur många kvadratkilometer skiljer det?
 Har Vänern större eller mindre yta än Ladogasjön?;Vänern;Ladogasjön;5580;17891;kvadratkilometer;Hur många kvadratkilometer skiljer det?
 Har Övre sjön större eller mindre yta än Kaspiska havet?;Övre sjön;Kaspiska havet;82100;374000;kvadratkilometer;Hur många kvadratkilometer skiljer det?
-Är Gula floden längre eller kortare än floden Jenisej?;Gula floden;Jenisej;5464;5539;kilometer;Hur många kilometer skiljer det?
-Är floden Lena längre eller kortare än floden Ob?;Lena;Ob;4400;5410;kilometer;Hur många kilometer skiljer det?
-Är floden Indus längre eller kortare än Kongofloden?;Indus;Kongofloden;3180;4700;kilometer;Hur många kilometer skiljer det?
-Är floden Brahmaputra längre eller kortare än Gula floden?;Brahmaputra;Gula floden;2948;5464;kilometer;Hur många kilometer skiljer det?
-Är floden Murray längre eller kortare än floden Indus?;Murray;Indus;3672;3180;kilometer;Hur många kilometer skiljer det?
+Är floden Jenisej längre eller kortare än Nilen?;Jenisej;Nilen;5539;6650;kilometer;Hur många kilometer skiljer det?
 Har Egypten större eller mindre befolkning än Turkiet? (2024);Egypten;Turkiet;107;85,6;miljoner invånare;Hur många miljoner invånare skiljer det?
 Har Tyskland större eller mindre befolkning än Frankrike? (2024);Tyskland;Frankrike;84,5;65,9;miljoner invånare;Hur många miljoner invånare skiljer det?
 Har Italien större eller mindre befolkning än Spanien? (2024);Italien;Spanien;58,8;48,4;miljoner invånare;Hur många miljoner invånare skiljer det?
 Har Kenya större eller mindre befolkning än Kanada? (2024);Kenya;Kanada;51,5;39,9;miljoner invånare;Hur många miljoner invånare skiljer det?
 Har Kanada större eller mindre befolkning än Egypten? (2024);Kanada;Egypten;39,9;107;miljoner invånare;Hur många miljoner invånare skiljer det?
 Har Australien större eller mindre befolkning än Kanada? (2024);Australien;Kanada;27,2;39,9;miljoner invånare;Hur många miljoner invånare skiljer det?
-Är Elbrus högre eller lägre än bergstoppen Vinson Massif?;Elbrus;Vinson Massif;5642;4892;meter;Hur många meter skiljer det?
-Är bergstoppen Vinson Massif högre eller lägre än Puncak Jaya?;Vinson Massif;Puncak Jaya;4892;4884;meter;Hur många meter skiljer det?
 Är Denali högre eller lägre än Elbrus?;Denali;Elbrus;6190;5642;meter;Hur många meter skiljer det?
 Är Kilimanjaro högre eller lägre än Elbrus?;Kilimanjaro;Elbrus;5895;5642;meter;Hur många meter skiljer det?
-Är bergstoppen Puncak Jaya högre eller lägre än Mont Blanc?;Puncak Jaya;Mont Blanc;4884;4808;meter;Hur många meter skiljer det?
 Är Aconcagua högre eller lägre än Kilimanjaro?;Aconcagua;Kilimanjaro;6961;5895;meter;Hur många meter skiljer det?
 Har Island större eller mindre yta än Irland?;Island;Irland;103001;70273;kvadratkilometer;Hur många kvadratkilometer skiljer det?
 Har Portugal större eller mindre yta än Grekland?;Portugal;Grekland;92090;131990;kvadratkilometer;Hur många kvadratkilometer skiljer det?
@@ -95,21 +80,17 @@ Har Österrike större eller mindre yta än Schweiz?;Österrike;Schweiz;83871;41
 Har Nederländerna större eller mindre yta än Belgien?;Nederländerna;Belgien;41545;30689;kvadratkilometer;Hur många kvadratkilometer skiljer det?
 Har Danmark större eller mindre yta än Schweiz?;Danmark;Schweiz;42943;41293;kvadratkilometer;Hur många kvadratkilometer skiljer det?
 Har Irland större eller mindre yta än Island?;Irland;Island;70273;103001;kvadratkilometer;Hur många kvadratkilometer skiljer det?
-Har Hispaniola större eller mindre yta än Hokkaido?;Hispaniola;Hokkaido;76480;78719;kvadratkilometer;Hur många kvadratkilometer skiljer det?
 Har Tasmanien större eller mindre yta än Sri Lanka?;Tasmanien;Sri Lanka;64519;65268;kvadratkilometer;Hur många kvadratkilometer skiljer det?
 Har Sardinien större eller mindre yta än Sicilien?;Sardinien;Sicilien;24090;25662;kvadratkilometer;Hur många kvadratkilometer skiljer det?
 Har Korsika större eller mindre yta än Cypern?;Korsika;Cypern;8741;9251;kvadratkilometer;Hur många kvadratkilometer skiljer det?
-Har Kreta större eller mindre yta än Korsika?;Kreta;Korsika;8450;8741;kvadratkilometer;Hur många kvadratkilometer skiljer det?
 Har Cypern större eller mindre yta än Sardinien?;Cypern;Sardinien;9251;24090;kvadratkilometer;Hur många kvadratkilometer skiljer det?
 Har Hispaniola större eller mindre yta än Sri Lanka?;Hispaniola;Sri Lanka;76480;65268;kvadratkilometer;Hur många kvadratkilometer skiljer det?
 Har Tasmanien större eller mindre yta än Sicilien?;Tasmanien;Sicilien;64519;25662;kvadratkilometer;Hur många kvadratkilometer skiljer det?
-Är Dalälven längre eller kortare än Torne älv?;Dalälven;Torne älv;557;545;kilometer;Hur många kilometer skiljer det?
 Är Klarälven längre eller kortare än Torne älv?;Klarälven;Torne älv;460;545;kilometer;Hur många kilometer skiljer det?
 Är Klarälven längre eller kortare än Göta älv?;Klarälven;Göta älv;460;93;kilometer;Hur många kilometer skiljer det?
 Har Vänern större eller mindre yta än Vättern?;Vänern;Vättern;5519;1886;kvadratkilometer;Hur många kvadratkilometer skiljer det?
 Har Vättern större eller mindre yta än Mälaren?;Vättern;Mälaren;1886;1090;kvadratkilometer;Hur många kvadratkilometer skiljer det?
 Har Mälaren större eller mindre yta än Hjälmaren?;Mälaren;Hjälmaren;1090;477;kvadratkilometer;Hur många kvadratkilometer skiljer det?
-Har Hjälmaren större eller mindre yta än Storsjön?;Hjälmaren;Storsjön;477;456;kvadratkilometer;Hur många kvadratkilometer skiljer det?
 Är Vättern djupare eller grundare än Övre sjön?;Vättern;Övre sjön;128;406;meter;Hur många meter skiljer det?
 Är Övre sjön djupare eller grundare än Bajkalsjön?;Övre sjön;Bajkalsjön;406;1642;meter;Hur många meter skiljer det?
 Har Grekland större eller mindre yta än Österrike?;Grekland;Österrike;131990;83871;kvadratkilometer;Hur många kvadratkilometer skiljer det?
@@ -119,21 +100,7 @@ Har Schweiz större eller mindre yta än Nederländerna?;Schweiz;Nederländerna;
 Har Sicilien större eller mindre yta än Tasmanien?;Sicilien;Tasmanien;25662;64519;kvadratkilometer;Hur många kvadratkilometer skiljer det?
 Har Island större eller mindre yta än Portugal?;Island;Portugal;103001;92090;kvadratkilometer;Hur många kvadratkilometer skiljer det?
 Har Sri Lanka större eller mindre yta än Island?;Sri Lanka;Island;65268;103001;kvadratkilometer;Hur många kvadratkilometer skiljer det?
-Är K2 högre eller lägre än bergstoppen Kangchenjunga?;K2;Kangchenjunga;8611;8586;meter;Hur många meter skiljer det?
-Är bergstoppen Lhotse högre eller lägre än Kangchenjunga?;Lhotse;Kangchenjunga;8516;8586;meter;Hur många meter skiljer det?
-Är bergstoppen Lhotse högre eller lägre än Makalu?;Lhotse;Makalu;8516;8485;meter;Hur många meter skiljer det?
-Är bergstoppen Cho Oyu högre eller lägre än Makalu?;Cho Oyu;Makalu;8188;8485;meter;Hur många meter skiljer det?
-Är bergstoppen Cho Oyu högre eller lägre än Dhaulagiri?;Cho Oyu;Dhaulagiri;8188;8167;meter;Hur många meter skiljer det?
-Är bergstoppen Manaslu högre eller lägre än granntoppen Dhaulagiri?;Manaslu;Dhaulagiri;8163;8167;meter;Hur många meter skiljer det?
-Är bergstoppen Nanga Parbat högre eller lägre än Annapurna?;Nanga Parbat;Annapurna;8126;8091;meter;Hur många meter skiljer det?
-Är bergstoppen Gasherbrum I högre eller lägre än Annapurna?;Gasherbrum I;Annapurna;8080;8091;meter;Hur många meter skiljer det?
-Är bergstoppen Cho Oyu högre eller lägre än Kangchenjunga?;Cho Oyu;Kangchenjunga;8188;8586;meter;Hur många meter skiljer det?
-Är floden Paraná längre eller kortare än floden São Francisco?;Paraná;São Francisco;4880;3180;kilometer;Hur många kilometer skiljer det?
-Är floden Orinoco längre eller kortare än floden Rio Grande?;Orinoco;Rio Grande;3010;3057;kilometer;Hur många kilometer skiljer det?
-Är floden Yukon längre eller kortare än Saint Lawrence-floden?;Yukon;Saint Lawrence-floden;3185;3058;kilometer;Hur många kilometer skiljer det?
-Är floden Orinoco längre eller kortare än floden São Francisco?;Orinoco;São Francisco;3010;3180;kilometer;Hur många kilometer skiljer det?
-Är floden Paraná längre eller kortare än floden Yukon?;Paraná;Yukon;4880;3185;kilometer;Hur många kilometer skiljer det?
-Är floden Rio Grande längre eller kortare än floden Paraná?;Rio Grande;Paraná;3057;4880;kilometer;Hur många kilometer skiljer det?
+Är bergstoppen Manaslu högre eller lägre än Mount Everest?;Manaslu;Mount Everest;8163;8849;meter;Hur många meter skiljer det?
 Är bergstoppen Lhotse högre eller lägre än Mont Blanc?;Lhotse;Mont Blanc;8516;4808;meter;Hur många meter skiljer det?
 Är K2 högre eller lägre än Kilimanjaro?;K2;Kilimanjaro;8611;5895;meter;Hur många meter skiljer det?
 Är Denali högre eller lägre än bergstoppen Makalu?;Denali;Makalu;6190;8485;meter;Hur många meter skiljer det?
@@ -141,7 +108,6 @@ Har Sri Lanka större eller mindre yta än Island?;Sri Lanka;Island;65268;103001
 Är Matterhorn högre eller lägre än bergstoppen Manaslu?;Matterhorn;Manaslu;4478;8163;meter;Hur många meter skiljer det?
 Har Sahara större eller mindre yta än Kalahariöknen?;Sahara;Kalahariöknen;9200000;930000;kvadratkilometer;Hur många kvadratkilometer skiljer det?
 Har Kalahariöknen större eller mindre yta än Gobiöknen?;Kalahariöknen;Gobiöknen;930000;1300000;kvadratkilometer;Hur många kvadratkilometer skiljer det?
-Har Patagoniska öknen större eller mindre yta än Karakumöknen?;Patagoniska öknen;Karakumöknen;673000;350000;kvadratkilometer;Hur många kvadratkilometer skiljer det?
 Har Medelhavet större eller mindre yta än Stilla havet?;Medelhavet;Stilla havet;2500000;165250000;kvadratkilometer;Hur många kvadratkilometer skiljer det?
 Har Atlanten större eller mindre yta än Östersjön?;Atlanten;Östersjön;85133000;392000;kvadratkilometer;Hur många kvadratkilometer skiljer det?
 Har Vänern större eller mindre yta än Victoriasjön?;Vänern;Victoriasjön;5519;59947;kvadratkilometer;Hur många kvadratkilometer skiljer det?
@@ -172,9 +138,7 @@ Har USA större eller mindre befolkning än Kina? (2024);USA;Kina;346;1418;miljo
 Är Cotopaxi högre eller lägre än Mauna Kea?;Cotopaxi;Mauna Kea;5897;4205;meter;Hur många meter skiljer det?
 Är Etna högre eller lägre än Mount Rainier?;Etna;Mount Rainier;3403;4390;meter;Hur många meter skiljer det?
 Är Etna högre eller lägre än Vesuvius?;Etna;Vesuvius;3403;1281;meter;Hur många meter skiljer det?
-Är Mauna Kea högre eller lägre än Mount Rainier?;Mauna Kea;Mount Rainier;4205;4390;meter;Hur många meter skiljer det?
 Har Luzon större eller mindre yta än Kuba?;Luzon;Kuba;109965;105806;kvadratkilometer;Hur många kvadratkilometer skiljer det?
-Har Mindanao större eller mindre yta än Newfoundland?;Mindanao;Newfoundland;97530;108860;kvadratkilometer;Hur många kvadratkilometer skiljer det?
 Har Kuba större eller mindre yta än Hokkaido?;Kuba;Hokkaido;105806;78719;kvadratkilometer;Hur många kvadratkilometer skiljer det?
 Har Kyushu större eller mindre yta än Mindanao?;Kyushu;Mindanao;36782;97530;kvadratkilometer;Hur många kvadratkilometer skiljer det?
 Har Kyushu större eller mindre yta än Taiwan?;Kyushu;Taiwan;36782;35808;kvadratkilometer;Hur många kvadratkilometer skiljer det?
@@ -189,7 +153,6 @@ Har Salar de Uyuni större eller mindre yta än Etoshapannan?;Salar de Uyuni;Eto
 Ligger Döda havet djupare eller grundare under havsytan än Assalsjön?;Döda havet;Assalsjön;438;155;meter;Hur många meter skiljer det?
 Är Norges fastlandskust längre eller kortare än Grönlands kustlinje?;Norges fastlandskust;Grönlands kustlinje;28953;44087;kilometer;Hur många kilometer skiljer det?
 Har Titicacasjön större eller mindre yta än Maracaibosjön?;Titicacasjön;Maracaibosjön;8372;13512;kvadratkilometer;Hur många kvadratkilometer skiljer det?
-Är Pico Cristóbal Colón högre eller lägre än Mount Logan?;Pico Cristóbal Colón;Mount Logan;5775;5959;meter;Hur många meter skiljer det?
 Är Iguazúfallen bredare eller smalare än Victoriafallen?;Iguazúfallen;Victoriafallen;2700;1708;meter;Hur många meter skiljer det i bredd?
 Har Vatikanstaten större eller mindre yta än Monaco?;Vatikanstaten;Monaco;0,49;2,1;kvadratkilometer;Hur många kvadratkilometer skiljer det?
 Har Monaco större eller mindre yta än San Marino?;Monaco;San Marino;2,1;61;kvadratkilometer;Hur många kvadratkilometer skiljer det?
@@ -199,3 +162,26 @@ Har Kaspiska havet större eller mindre yta än Victoriasjön?;Kaspiska havet;Vi
 Har Maracaibosjön större eller mindre yta än Övre sjön?;Maracaibosjön;Övre sjön;13512;82103;kvadratkilometer;Hur många kvadratkilometer skiljer det?
 Är Vättern djupare eller grundare än Vänern?;Vättern;Vänern;128;106;meter;Hur många meter skiljer det?
 Ligger Mexico City högre eller lägre än Quito?;Mexico City;Quito;2240;2850;meter;Hur många meter skiljer det i höjd över havet?
+Är floden Volga längre eller kortare än floden Eufrat?;Volga;Eufrat;3645;3596;kilometer;Hur många kilometer skiljer det?
+Är floden Mekong längre eller kortare än floden Niger?;Mekong;Niger;4350;4200;kilometer;Hur många kilometer skiljer det?
+Är floden Niger längre eller kortare än floden Volga?;Niger;Volga;4200;3645;kilometer;Hur många kilometer skiljer det?
+Är Mount Cook högre eller lägre än Mount Fuji?;Mount Cook;Mount Fuji;3724;3776;meter;Hur många meter skiljer det?
+Är Olympos högre eller lägre än Zugspitze?;Olympos;Zugspitze;2917;2962;meter;Hur många meter skiljer det?
+Är floden Indus längre eller kortare än Kongofloden?;Indus;Kongofloden;3180;4700;kilometer;Hur många kilometer skiljer det?
+Är floden Brahmaputra längre eller kortare än Gula floden?;Brahmaputra;Gula floden;2948;5464;kilometer;Hur många kilometer skiljer det?
+Är floden Murray längre eller kortare än floden Indus?;Murray;Indus;3672;3180;kilometer;Hur många kilometer skiljer det?
+Är Elbrus högre eller lägre än bergstoppen Vinson Massif?;Elbrus;Vinson Massif;5642;4892;meter;Hur många meter skiljer det?
+Är bergstoppen Vinson Massif högre eller lägre än Puncak Jaya?;Vinson Massif;Puncak Jaya;4892;4884;meter;Hur många meter skiljer det?
+Är bergstoppen Puncak Jaya högre eller lägre än Mont Blanc?;Puncak Jaya;Mont Blanc;4884;4808;meter;Hur många meter skiljer det?
+Har Kreta större eller mindre yta än Korsika?;Kreta;Korsika;8450;8741;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Är Dalälven längre eller kortare än Torne älv?;Dalälven;Torne älv;557;545;kilometer;Hur många kilometer skiljer det?
+Har Hjälmaren större eller mindre yta än Storsjön?;Hjälmaren;Storsjön;477;456;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Är K2 högre eller lägre än bergstoppen Kangchenjunga?;K2;Kangchenjunga;8611;8586;meter;Hur många meter skiljer det?
+Är bergstoppen Lhotse högre eller lägre än Kangchenjunga?;Lhotse;Kangchenjunga;8516;8586;meter;Hur många meter skiljer det?
+Är bergstoppen Lhotse högre eller lägre än Makalu?;Lhotse;Makalu;8516;8485;meter;Hur många meter skiljer det?
+Är bergstoppen Cho Oyu högre eller lägre än Makalu?;Cho Oyu;Makalu;8188;8485;meter;Hur många meter skiljer det?
+Är bergstoppen Cho Oyu högre eller lägre än Dhaulagiri?;Cho Oyu;Dhaulagiri;8188;8167;meter;Hur många meter skiljer det?
+Är bergstoppen Manaslu högre eller lägre än granntoppen Dhaulagiri?;Manaslu;Dhaulagiri;8163;8167;meter;Hur många meter skiljer det?
+Är bergstoppen Nanga Parbat högre eller lägre än Annapurna?;Nanga Parbat;Annapurna;8126;8091;meter;Hur många meter skiljer det?
+Är bergstoppen Gasherbrum I högre eller lägre än Annapurna?;Gasherbrum I;Annapurna;8080;8091;meter;Hur många meter skiljer det?
+Är bergstoppen Cho Oyu högre eller lägre än Kangchenjunga?;Cho Oyu;Kangchenjunga;8188;8586;meter;Hur många meter skiljer det?
