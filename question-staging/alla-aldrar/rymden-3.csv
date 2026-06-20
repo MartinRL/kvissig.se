@@ -1,0 +1,26 @@
+﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Har Saturnusmånen Titan större eller mindre diameter än Jupitermånen Ganymedes?;Titan;Ganymedes;5150;5268;km;Hur många km skiljer det i diameter?
+Är rymdteleskopet Hubble längre eller kortare än en buss på tolv meter?;Hubble;Buss;13,2;12;meter;Hur många meter skiljer det i längd?
+Har Jupitermånen Io större eller mindre diameter än Jupitermånen Callisto?;Io;Callisto;3642;4821;km;Hur många km skiljer det i diameter?
+Har dvärgplaneten Ceres större eller mindre diameter än Saturnusmånen Mimas?;Ceres;Mimas;940;394;km;Hur många km skiljer det i diameter?
+Har Neptunusmånen Triton större eller mindre diameter än dvärgplanetmånen Charon?;Triton;Charon;2700;1212;km;Hur många km skiljer det i diameter?
+Har Neptunusmånen Triton större eller mindre diameter än Jupitermånen Io?;Triton;Io;2700;3642;km;Hur många km skiljer det i diameter?
+Ligger stjärnan Sirius längre bort eller närmare än stjärnan Proxima Centauri?;Sirius;Proxima Centauri;8,6;4,2;ljusår;Hur många ljusår skiljer det?
+Väger rymdteleskopet Hubble mer eller mindre än rymdteleskopet James Webb?;Hubble;James Webb;11;6,2;ton;Hur många ton skiljer det i vikt?
+Har Saturnusmånen Enceladus större eller mindre diameter än Saturnusmånen Mimas?;Enceladus;Mimas;500;394;km;Hur många km skiljer det i diameter?
+Är den röda hyperjätten VY Canis Majoris större eller mindre än stjärnan Betelgeuse?;VY Canis Majoris;Betelgeuse;1400;764;solradier;Hur många solradier skiljer det i storlek?
+Är rymdteleskopet James Webbs spegel större eller mindre än Hubbles spegel?;James Webb;Hubble;6,5;2,4;meter;Hur många meter skiljer det i spegeldiameter?
+Är solsystemet yngre eller äldre än universum?;Solsystemet;Universum;4,6;13,8;miljarder år;Hur många miljarder år skiljer det i ålder?
+Har Saturnusmånen Mimas större eller mindre diameter än dvärgplanetmånen Charon?;Mimas;Charon;394;1212;km;Hur många km skiljer det i diameter?
+Har Neptunusmånen Triton större eller mindre diameter än Saturnusmånen Enceladus?;Triton;Enceladus;2700;500;km;Hur många km skiljer det i diameter?
+Är berget Kilimanjaro högre eller lägre än vulkanen Olympus Mons på Mars?;Kilimanjaro;Olympus Mons;5,9;22;km;Hur många km skiljer det i höjd?
+Har dvärgplanetmånen Charon större eller mindre diameter än Saturnusmånen Titan?;Charon;Titan;1212;5150;km;Hur många km skiljer det i diameter?
+Har Jupitermånen Callisto större eller mindre diameter än dvärgplanetmånen Charon?;Callisto;Charon;4821;1212;km;Hur många km skiljer det i diameter?
+Har dvärgplaneten Ceres större eller mindre diameter än Saturnusmånen Titan?;Ceres;Titan;940;5150;km;Hur många km skiljer det i diameter?
+Är flytande lava varmare eller kallare än solens yta?;Lava;Solens yta;1200;5500;°C;Hur många grader skiljer det?
+Har Saturnusmånen Mimas större eller mindre diameter än Neptunusmånen Triton?;Mimas;Triton;394;2700;km;Hur många km skiljer det i diameter?
+Har Jupitermånen Ganymedes större eller mindre diameter än dvärgplaneten Ceres?;Ganymedes;Ceres;5268;940;km;Hur många km skiljer det i diameter?
+Har Saturnusmånen Enceladus större eller mindre diameter än Jupitermånen Ganymedes?;Enceladus;Ganymedes;500;5268;km;Hur många km skiljer det i diameter?
+Ligger den röda hyperjätten VY Canis Majoris längre bort eller närmare än stjärnan Sirius?;VY Canis Majoris;Sirius;3900;8,6;ljusår;Hur många ljusår skiljer det?
+Ligger stjärnan Sirius längre bort eller närmare än stjärnan Betelgeuse?;Sirius;Betelgeuse;8,6;550;ljusår;Hur många ljusår skiljer det?
+Ligger stjärnan Proxima Centauri längre bort eller närmare än den röda hyperjätten VY Canis Majoris?;Proxima Centauri;VY Canis Majoris;4,2;3900;ljusår;Hur många ljusår skiljer det?
