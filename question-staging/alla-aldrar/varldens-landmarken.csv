@@ -1,0 +1,23 @@
+﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Är Eiffeltornet högre eller lägre än Chryslerbyggnaden i New York?;Eiffeltornet;Chryslerbyggnaden;330;319;meter;Hur många meter skiljer det?
+Är Petronastornen högre eller lägre än Willis Tower i Chicago?;Petronastornen;Willis Tower;452;442;meter;Hur många meter skiljer det?
+Är Frihetsgudinnan högre eller lägre än Big Bens torn?;Frihetsgudinnan;Big Bens torn;93;96;meter;Hur många meter skiljer det?
+Är Empire State Building högre eller lägre än Burj Khalifa?;Empire State Building;Burj Khalifa;381;828;meter;Hur många meter skiljer det?
+Är CN-tornet i Toronto högre eller lägre än Eiffeltornet?;CN-tornet;Eiffeltornet;553;330;meter;Hur många meter skiljer det?
+Är Space Needle i Seattle högre eller lägre än Tokyotornet?;Space Needle;Tokyotornet;184;333;meter;Hur många meter skiljer det?
+Är Pisas lutande torn högre eller lägre än Big Bens torn?;Pisas lutande torn;Big Bens torn;56;96;meter;Hur många meter skiljer det?
+Är Turning Torso i Malmö högre eller lägre än Avicii Arena (Globen)?;Turning Torso;Avicii Arena;190;85;meter;Hur många meter skiljer det?
+Är Colosseum högre eller lägre än Taj Mahal?;Colosseum;Taj Mahal;48;73;meter;Hur många meter skiljer det?
+Är Sydneys hamnbro (bågen) högre eller lägre än Frihetsgudinnan?;Sydneys hamnbro;Frihetsgudinnan;134;93;meter;Hur många meter skiljer det?
+Har Burj Khalifa fler eller färre våningar än Empire State Building?;Burj Khalifa;Empire State Building;163;102;våningar;Hur många våningar skiljer det?
+Är Golden Gate-bron längre eller kortare än Sydneys hamnbro?;Golden Gate-bron;Sydneys hamnbro;2737;1149;meter;Hur många meter skiljer det?
+Har Eiffeltornet fler eller färre trappsteg än Frihetsgudinnan?;Eiffeltornet;Frihetsgudinnan;1665;354;trappsteg;Hur många trappsteg skiljer det?
+Är Brooklynbrons huvudspann längre eller kortare än Golden Gate-brons huvudspann?;Brooklynbrons huvudspann;Golden Gate-brons huvudspann;486;1280;meter;Hur många meter skiljer det?
+Är Empire State Building högre eller lägre än Pisas lutande torn?;Empire State Building;Pisas lutande torn;381;56;meter;Hur många meter skiljer det?
+Är CN-tornet i Toronto högre eller lägre än Turning Torso?;CN-tornet;Turning Torso;553;190;meter;Hur många meter skiljer det?
+Har Burj Khalifa fler eller färre våningar än Turning Torso?;Burj Khalifa;Turning Torso;163;54;våningar;Hur många våningar skiljer det?
+Är Öresundsbron längre eller kortare än Golden Gate-bron?;Öresundsbron;Golden Gate-bron;7,8;2,7;kilometer;Hur många kilometer skiljer det?
+Är Avicii Arena (Globen) högre eller lägre än Eiffeltornet?;Avicii Arena;Eiffeltornet;85;330;meter;Hur många meter skiljer det?
+Är Kinesiska muren längre eller kortare än Öresundsbron?;Kinesiska muren;Öresundsbron;21196;7,8;kilometer;Hur många kilometer skiljer det?
+Är Empire State Building högre eller lägre än Christ the Redeemer-statyn (med sockel)?;Empire State Building;Christ the Redeemer;381;38;meter;Hur många meter skiljer det?
+Är Burj Khalifa högre eller lägre än Pisas lutande torn?;Burj Khalifa;Pisas lutande torn;828;56;meter;Hur många meter skiljer det?
