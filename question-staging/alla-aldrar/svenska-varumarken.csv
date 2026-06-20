@@ -1,0 +1,24 @@
+﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Har havredrycksföretaget Oatly fler eller färre anställda än IKEA? (2024);Oatly;IKEA;1500;220000;anställda;Hur många anställda skiljer det?
+Har Ericsson fler eller färre anställda än friluftsmärket Fjällräven? (2024);Ericsson;Fjällräven;94000;2500;anställda;Hur många anställda skiljer det?
+Har havredrycksföretaget Oatly fler eller färre anställda än lastbilstillverkaren Scania? (2024);Oatly;Scania;1500;59000;anställda;Hur många anställda skiljer det?
+Har Volvo Cars fler eller färre anställda än Oatly? (2024);Volvo Cars;Oatly;42600;1500;anställda;Hur många anställda skiljer det?
+Har Scania fler eller färre anställda än Fjällräven? (2024);Scania;Fjällräven;59000;2500;anställda;Hur många anställda skiljer det?
+Har friluftsmärket Fjällräven fler eller färre anställda än H&M? (2024);Fjällräven;H&M;2500;138000;anställda;Hur många anställda skiljer det?
+Har Spotify fler eller färre användare än Klarna? (2024);Spotify;Klarna;675;150;miljoner användare;Hur många miljoner användare skiljer det?
+Har Tetra Pak fler eller färre anställda än läkemedelsbolaget AstraZeneca? (2024);Tetra Pak;AstraZeneca;24500;94000;anställda;Hur många anställda skiljer det?
+Har Tetra Pak fler eller färre anställda än Ericsson? (2024);Tetra Pak;Ericsson;24500;94000;anställda;Hur många anställda skiljer det?
+Har H&M fler eller färre butiker i världen än ICA har butiker i Sverige? (2024);H&M;ICA;4200;1300;butiker;Hur många butiker skiljer det?
+Har IKEA fler eller färre anställda än vitvarutillverkaren Electrolux? (2024);IKEA;Electrolux;220000;41000;anställda;Hur många anställda skiljer det?
+Har ICA fler eller färre butiker i Sverige än antalet IKEA-varuhus i världen? (2024);ICA;IKEA;1300;480;butiker;Hur många butiker skiljer det?
+Har AstraZeneca fler eller färre anställda än motorsågstillverkaren Husqvarna? (2024);AstraZeneca;Husqvarna;94000;12300;anställda;Hur många anställda skiljer det?
+Har motorsågstillverkaren Husqvarna fler eller färre anställda än Volvo Cars? (2024);Husqvarna;Volvo Cars;12300;42600;anställda;Hur många anställda skiljer det?
+Har Electrolux fler eller färre anställda än Husqvarna? (2024);Electrolux;Husqvarna;41000;12300;anställda;Hur många anställda skiljer det?
+Har Husqvarna fler eller färre anställda än Scania? (2024);Husqvarna;Scania;12300;59000;anställda;Hur många anställda skiljer det?
+Har H&M fler eller färre anställda än Electrolux? (2024);H&M;Electrolux;138000;41000;anställda;Hur många anställda skiljer det?
+Har Volvo Cars fler eller färre anställda än IKEA? (2024);Volvo Cars;IKEA;42600;220000;anställda;Hur många anställda skiljer det?
+Har Ericsson fler eller färre anställda än Scania? (2024);Ericsson;Scania;94000;59000;anställda;Hur många anställda skiljer det?
+Har Volvo Cars fler eller färre anställda än AstraZeneca? (2024);Volvo Cars;AstraZeneca;42600;94000;anställda;Hur många anställda skiljer det?
+Har Tetra Pak fler eller färre anställda än Electrolux? (2024);Tetra Pak;Electrolux;24500;41000;anställda;Hur många anställda skiljer det?
+Finns Spotify i fler eller färre länder än H&M har butiker i? (2024);Spotify;H&M;184;79;länder;Hur många länder skiljer det?
+Grundades Saab tidigare eller senare än Volvo?;Saab;Volvo;1937;1927;årtal;Hur många år skiljer grundandet?
