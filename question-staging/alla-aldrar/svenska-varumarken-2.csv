@@ -1,0 +1,24 @@
+﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Grundades verktygsföretaget Sandvik tidigare eller senare än kullagertillverkaren SKF?;Sandvik;SKF;1862;1907;årtal;Hur många år skiljer grundandet?
+Grundades industrikoncernen Atlas Copco tidigare eller senare än Alfa Laval?;Atlas Copco;Alfa Laval;1873;1883;årtal;Hur många år skiljer grundandet?
+Grundades bevakningsföretaget Securitas tidigare eller senare än låskoncernen Assa Abloy?;Securitas;Assa Abloy;1934;1994;årtal;Hur många år skiljer grundandet?
+Grundades Handelsbanken tidigare eller senare än SEB?;Handelsbanken;SEB;1871;1856;årtal;Hur många år skiljer grundandet?
+Har bevakningsföretaget Securitas fler eller färre anställda än industrikoncernen ABB? (2024);Securitas;ABB;336000;109900;anställda;Hur många anställda skiljer det?
+Har industrikoncernen ABB fler eller färre anställda än låskoncernen Assa Abloy? (2024);ABB;Assa Abloy;109900;63000;anställda;Hur många anställda skiljer det?
+Har Atlas Copco fler eller färre anställda än kullagertillverkaren SKF? (2024);Atlas Copco;SKF;55267;38743;anställda;Hur många anställda skiljer det?
+Har verktygsföretaget Sandvik fler eller färre anställda än Telia? (2024);Sandvik;Telia;41447;16859;anställda;Hur många anställda skiljer det?
+Har hygienkoncernen Essity fler eller färre anställda än kullagertillverkaren SKF? (2024);Essity;SKF;36000;38743;anställda;Hur många anställda skiljer det?
+Har Tele2 fler eller färre anställda än industrikoncernen ABB? (2024);Tele2;ABB;4328;109900;anställda;Hur många anställda skiljer det?
+Har bevakningsföretaget Securitas fler eller färre anställda än verktygsföretaget Sandvik? (2024);Securitas;Sandvik;336000;41447;anställda;Hur många anställda skiljer det?
+Har Atlas Copco fler eller färre anställda än Telia? (2024);Atlas Copco;Telia;55267;16859;anställda;Hur många anställda skiljer det?
+Har industrikoncernen ABB fler eller färre anställda än bevakningsföretaget Securitas? (2024);ABB;Securitas;109900;336000;anställda;Hur många anställda skiljer det?
+Har Telia fler eller färre anställda än hygienkoncernen Essity? (2024);Telia;Essity;16859;36000;anställda;Hur många anställda skiljer det?
+Har låskoncernen Assa Abloy fler eller färre anställda än Telia? (2024);Assa Abloy;Telia;63000;16859;anställda;Hur många anställda skiljer det?
+Har Tele2 fler eller färre anställda än kullagertillverkaren SKF? (2024);Tele2;SKF;4328;38743;anställda;Hur många anställda skiljer det?
+Har Tele2 fler eller färre anställda än verktygsföretaget Sandvik? (2024);Tele2;Sandvik;4328;41447;anställda;Hur många anställda skiljer det?
+Har Spotify fler eller färre månadsanvändare än Truecaller? (2024);Spotify;Truecaller;675;430;miljoner användare;Hur många miljoner användare skiljer det?
+Har betaltjänsten Klarna fler eller färre användare än Truecaller? (2024);Klarna;Truecaller;93;430;miljoner användare;Hur många miljoner användare skiljer det?
+Har betaltjänsten Klarna fler eller färre användare än spelet Candy Crush har spelare? (2024);Klarna;Candy Crush;93;180;miljoner användare;Hur många miljoner användare skiljer det?
+Har spelet Candy Crush fler eller färre spelare än ljudbokstjänsten Storytel har betalande prenumeranter? (2024);Candy Crush;Storytel;180;2,4;miljoner användare;Hur många miljoner användare skiljer det?
+Har ljudbokstjänsten Storytel fler eller färre betalande prenumeranter än Spotify har månadsanvändare? (2024);Storytel;Spotify;2,4;675;miljoner användare;Hur många miljoner användare skiljer det?
+Har spelet Candy Crush fler eller färre spelare än betaltjänsten Klarna har användare? (2024);Candy Crush;Klarna;180;93;miljoner användare;Hur många miljoner användare skiljer det?
