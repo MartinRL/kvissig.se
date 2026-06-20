@@ -1,0 +1,26 @@
+﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Är Mont Blanc högre eller lägre än Matterhorn?;Mont Blanc;Matterhorn;4809;4478;meter;Hur många meter skiljer det?
+Är Aconcagua i Anderna högre eller lägre än Denali i Alaska?;Aconcagua;Denali;6961;6190;meter;Hur många meter skiljer det?
+Är K2 högre eller lägre än Kilimanjaro?;K2;Kilimanjaro;8611;5895;meter;Hur många meter skiljer det?
+Är vulkanen Fuji i Japan högre eller lägre än vulkanen Etna på Sicilien?;Fuji;Etna;3776;3357;meter;Hur många meter skiljer det?
+Är vulkanen Vesuvius vid Neapel högre eller lägre än vulkanen Etna på Sicilien?;Vesuvius;Etna;1281;3357;meter;Hur många meter skiljer det?
+Är vulkanen Fuji i Japan högre eller lägre än vulkanen Vesuvius vid Neapel?;Fuji;Vesuvius;3776;1281;meter;Hur många meter skiljer det?
+Är Amazonfloden längre eller kortare än floden Rhen?;Amazonfloden;Rhen;6992;1233;kilometer;Hur många kilometer skiljer det?
+Är floden Rhen längre eller kortare än Mississippifloden?;Rhen;Mississippifloden;1233;6275;kilometer;Hur många kilometer skiljer det?
+Är Nilen längre eller kortare än floden Seine i Frankrike?;Nilen;Seine;6695;777;kilometer;Hur många kilometer skiljer det?
+Rinner det mer eller mindre vatten i Amazonfloden än i Yangtzefloden, mätt vid mynningen?;Amazonfloden;Yangtzefloden;209000;30000;kubikmeter per sekund;Hur många kubikmeter per sekund skiljer det?
+Rinner det mer eller mindre vatten i Nilen än i Mississippifloden, mätt vid mynningen?;Nilen;Mississippifloden;2800;16800;kubikmeter per sekund;Hur många kubikmeter per sekund skiljer det?
+Är Baikalsjön i Ryssland större eller mindre till ytan än Lake Superior i Nordamerika?;Baikalsjön;Lake Superior;31500;82100;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Är Kaspiska havet större eller mindre till ytan än Victoriasjön i Afrika?;Kaspiska havet;Victoriasjön;371000;68800;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Är Victoriasjön i Afrika större eller mindre till ytan än Baikalsjön i Ryssland?;Victoriasjön;Baikalsjön;68800;31500;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Är Kaspiska havet större eller mindre till ytan än Lake Superior i Nordamerika?;Kaspiska havet;Lake Superior;371000;82100;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Är Lake Superior djupare eller grundare än Baikalsjön i Ryssland?;Lake Superior;Baikalsjön;406;1642;meter;Hur många meter skiljer det?
+Är Angelfallen i Venezuela högre eller lägre än Victoriafallen i Afrika?;Angelfallen;Victoriafallen;979;108;meter;Hur många meter skiljer det?
+Är Niagarafallen högre eller lägre än Victoriafallen i Afrika?;Niagarafallen;Victoriafallen;51;108;meter;Hur många meter skiljer det?
+Är Angelfallen i Venezuela högre eller lägre än Niagarafallen?;Angelfallen;Niagarafallen;979;51;meter;Hur många meter skiljer det?
+Är Kalahariöknen större eller mindre till ytan än Gobiöknen?;Kalahariöknen;Gobiöknen;900000;1295000;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Är Gobiöknen större eller mindre till ytan än Arabiska öknen?;Gobiöknen;Arabiska öknen;1295000;2330000;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Är Gobiöknen större eller mindre till ytan än Atacamaöknen i Sydamerika?;Gobiöknen;Atacamaöknen;1295000;105000;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Är Grönlands inlandsis större eller mindre till ytan än Arabiska öknen?;Grönlands inlandsis;Arabiska öknen;1710000;2330000;kvadratkilometer;Hur många kvadratkilometer skiljer det?
+Är Kaspiska havet djupare eller grundare än Baikalsjön i Ryssland?;Kaspiska havet;Baikalsjön;1025;1642;meter;Hur många meter skiljer det?
+Är Stora barriärrevet längre eller kortare än Nilen?;Stora barriärrevet;Nilen;2300;6695;kilometer;Hur många kilometer skiljer det?
