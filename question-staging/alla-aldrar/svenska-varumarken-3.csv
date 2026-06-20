@@ -1,0 +1,11 @@
+﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Har superbilen Koenigsegg Jesko högre eller lägre toppfart än en Saab 9-3 Aero?;Koenigsegg Jesko;Saab 9-3 Aero;412;250;km/h;Hur många km/h skiljer toppfarten?
+Har en Volvo-lastbil högre eller lägre toppfart än elbilen Polestar 2?;Volvo-lastbil;Polestar 2;90;205;km/h;Hur många km/h skiljer toppfarten?
+Grundades Cloetta tidigare eller senare än Marabou?;Cloetta;Marabou;1862;1916;årtal;Hur många år skiljer grundandet?
+Grundades Findus tidigare eller senare än Felix?;Findus;Felix;1941;1939;årtal;Hur många år skiljer grundandet?
+Väger lyxsängen Hästens Vividus mer eller mindre än en Marabou chokladkaka?;Hästens Vividus;Marabou chokladkaka;250;0,2;kilo;Hur många kilo skiljer det?
+Väger en Volvo-lastbil mer eller mindre än en Polestar 2?;Volvo-lastbil;Polestar 2;9000;2000;kilo;Hur många kilo skiljer det?
+Väger en tub Kalles kaviar mer eller mindre än ett paket Bregott?;Kalles kaviar;Bregott;190;600;gram;Hur många gram skiljer det?
+Väger en gruvtruck från Epiroc mer eller mindre än superbilen Koenigsegg Jesko?;Epiroc gruvtruck;Koenigsegg Jesko;65000;1420;kilo;Hur många kilo skiljer det?
+Är en Saab 9-3 längre eller kortare än en Stena Line-färja?;Saab 9-3;Stena Line-färja;4,5;240;meter;Hur många meter skiljer längden?
+Är ett vanligt bildäck större eller mindre i diameter än ett traktordäck från Trelleborg?;Bildäck;Trelleborg traktordäck;0,63;2,05;meter;Hur många meter skiljer diametern?
