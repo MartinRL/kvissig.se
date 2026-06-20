@@ -1,7 +1,10 @@
-# ADR 008: Plausible Cloud for Analytics
+---
+status: Accepted
+created: 2026-06-20
+revised: 2026-06-20
+---
 
-## Status
-Accepted
+# ADR 008: Plausible Cloud for Analytics
 
 ## Context
 The site shipped with no analytics (`specs/tasks.md` had an open `analytics (GA2?)` TODO).

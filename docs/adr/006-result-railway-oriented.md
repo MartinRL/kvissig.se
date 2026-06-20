@@ -1,7 +1,10 @@
-# ADR 006: Error Handling via Result / Railway Oriented Programming
+---
+status: Accepted
+created: 2026-06-12
+revised: 2026-06-12
+---
 
-## Status
-Accepted
+# ADR 006: Error Handling via Result / Railway Oriented Programming
 
 ## Context
 The functional core (the Decider) must report business failures — unknown

@@ -1,7 +1,10 @@
-# ADR 005: CSV File per QuestionPack
+---
+status: Accepted
+created: 2026-01-27
+revised: 2026-06-01
+---
 
-## Status
-Accepted
+# ADR 005: CSV File per QuestionPack
 
 ## Context
 *Mer eller Mindre* asks "Är A **mer eller mindre** än B?" — every question is a

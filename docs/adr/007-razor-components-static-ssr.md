@@ -1,7 +1,10 @@
-# ADR 007: Razor Components in Static SSR as the Renderer
+---
+status: Accepted
+created: 2026-06-14
+revised: 2026-06-14
+---
 
-## Status
-Accepted
+# ADR 007: Razor Components in Static SSR as the Renderer
 
 ## Context
 The UI/UX direction is locked (the "Lekfull kortlek" design, `prototype/pico/`), but

@@ -83,8 +83,8 @@
   <rect x="100" y="288" width="100" height="50" rx="6" fill="#2ecc71"/>
   <text x="150" y="318" text-anchor="middle" font-size="14" font-weight="500" fill="#fff">state</text>
 
-  <!-- Arrow: state → command (up left side, right-angle turn) -->
-  <path d="M100,313 L16,313 L16,115 L48,115" fill="none" stroke="#2c3e50" stroke-width="2.2" marker-end="url(#arr)"/>
+  <!-- Arrow: state → decide (from top-mid of state, under command, into decide's left edge) -->
+  <path d="M150,288 L150,165 L210,165 L210,135 L226,135" fill="none" stroke="#2c3e50" stroke-width="2.2" marker-end="url(#arr)"/>
 
   <!-- ════════════════════════════════════════════════════════ -->
   <!-- GWT MAPPING (bottom annotation)                          -->

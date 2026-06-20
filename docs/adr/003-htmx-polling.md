@@ -1,7 +1,10 @@
-# ADR 003: HTMX with Polling for Real-Time Updates
+---
+status: Accepted
+created: 2026-01-27
+revised: 2026-01-27
+---
 
-## Status
-Accepted
+# ADR 003: HTMX with Polling for Real-Time Updates
 
 ## Context
 Players need to see when others have answered and when the game advances. Options:

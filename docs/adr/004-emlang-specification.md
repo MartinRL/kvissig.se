@@ -1,7 +1,10 @@
-# ADR 004: emlang YAML for Behavior Specification
+---
+status: Accepted
+created: 2026-01-27
+revised: 2026-05-31
+---
 
-## Status
-Accepted
+# ADR 004: emlang YAML for Behavior Specification
 
 ## Context
 We need to specify game behavior in a way that:

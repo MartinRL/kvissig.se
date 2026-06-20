@@ -1,7 +1,10 @@
-# ADR 002: Decider Pattern for Game Logic
+---
+status: Accepted
+created: 2026-01-27
+revised: 2026-06-03
+---
 
-## Status
-Accepted
+# ADR 002: Decider Pattern for Game Logic
 
 ## Context
 We need a structure for the game engine that handles commands (player actions) and produces events. Common patterns:
