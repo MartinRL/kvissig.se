@@ -1,0 +1,15 @@
+﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Är solens yta varmare eller kallare än glödtråden i en glödlampa?;Solens yta;Glödlampstråd;5500;2500;°C;Hur många grader skiljer det?
+Väger Jupiter mer eller mindre än Saturnus?;Jupiter;Saturnus;1898;568;kvadriljoner ton;Hur många kvadriljoner ton skiljer det i massa?
+Är rymdfärjan högre eller lägre än raketen Saturn V?;Rymdfärjan;Saturn V;56;111;meter;Hur många meter skiljer det i höjd?
+Väger raketen Saturn V mer eller mindre vid start än rymdfärjan?;Saturn V;Rymdfärjan;2970;2030;ton;Hur många ton skiljer det i startvikt?
+Tog Apollo 11:s resa till månen längre eller kortare tid än tre dygn?;Apollo 11;Tre dygn;76;72;timmar;Hur många timmar skiljer det?
+Var Apollo 11:s besättning fler eller färre än antalet personer som gått på månen totalt?;Apollo 11;Alla månpromenörer;3;12;personer;Hur många personer skiljer det?
+Kretsar ISS högre eller lägre över jorden än ett trafikflygplan flyger?;ISS;Trafikflygplan;408;11;km;Hur många km skiljer det i höjd?
+Tar ett varv runt jorden för ISS längre eller kortare tid än ett halvt dygn?;ISS;Halvt dygn;1,5;12;timmar;Hur många timmar skiljer det?
+Kommer Halleys komet tillbaka oftare eller mer sällan än vart trettionde år?;Trettio år;Halleys komet;30;76;år;Hur många år skiljer det i omloppstid?
+Har Orions bälte fler eller färre tydliga stjärnor än stjärnbilden Karlavagnen?;Orions bälte;Karlavagnen;3;7;antal;Hur många stjärnor skiljer det?
+Är jordens månvarv längre eller kortare än en månad på 30 dagar?;Månvarvet;Trettio dagar;27,3;30;dygn;Hur många dygn skiljer det?
+Är avståndet till månen längre eller kortare än ett varv runt jordklotet?;Avstånd till månen;Varv runt jorden;384400;40075;km;Hur många km skiljer det?
+Är ett kvarts jordår längre eller kortare än ett dygn på Merkurius?;Kvarts jordår;Merkurius-dygnet;91;176;dygn;Hur många dygn skiljer det?
+Har dvärgplaneten Pluto större eller mindre diameter än Merkurius?;Pluto;Merkurius;2377;4879;km;Hur många km skiljer det i diameter?
