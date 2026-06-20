@@ -2,19 +2,19 @@
 Har jorden större eller mindre diameter än Venus?;Jorden;Venus;12742;12104;km;Hur många km skiljer det i diameter?
 Har Mars större eller mindre diameter än jorden?;Mars;Jorden;6779;12742;km;Hur många km skiljer det i diameter?
 Har jorden större eller mindre diameter än Jupiter?;Jorden;Jupiter;12742;139820;km;Hur många km skiljer det i diameter?
-Snurrar månen ett varv runt sin axel snabbare eller långsammare än Merkurius?;Månen;Merkurius;655;1408;timmar;Hur många timmar skiljer det i rotationstid?
-Är det varmare eller kallare på Venus yta än på Merkurius?;Venus;Merkurius;464;167;°C;Hur många grader skiljer det i yttemperatur?
+Snurrar månen snabbare eller långsammare runt sin egen axel än Merkurius?;Månen;Merkurius;655;1408;timmar;Hur många timmar skiljer det i rotationstid?
+Är det varmare eller kallare på Venus yta än på Merkurius yta?;Venus;Merkurius;464;167;°C;Hur många grader skiljer det i yttemperatur?
 Ligger Venus närmare eller längre från solen än Mars?;Venus;Mars;108;228;miljoner km;Hur många miljoner km skiljer det?
 Har Venus större eller mindre diameter än solen?;Venus;Solen;12104;1391000;km;Hur många km skiljer det i diameter?
 Har Mars större eller mindre diameter än månen?;Mars;Månen;6779;3474;km;Hur många km skiljer det i diameter?
-Har Mars större eller mindre diameter än Pluto?;Mars;Pluto;6779;2377;km;Hur många km skiljer det i diameter?
+Har Mars större eller mindre diameter än dvärgplaneten Pluto?;Mars;Pluto;6779;2377;km;Hur många km skiljer det i diameter?
 Är ytgravitationen på Merkurius starkare eller svagare än på Jupiter?;Merkurius;Jupiter;3,7;24,8;m/s²;Hur många m/s² skiljer det i ytgravitation?
 Ligger Jupiter närmare eller längre från solen än Neptunus?;Jupiter;Neptunus;778;4495;miljoner km;Hur många miljoner km skiljer det?
 Har Saturnus större eller mindre diameter än Uranus?;Saturnus;Uranus;116460;50724;km;Hur många km skiljer det i diameter?
 Har Saturnus större eller mindre diameter än Neptunus?;Saturnus;Neptunus;116460;49244;km;Hur många km skiljer det i diameter?
 Har Saturnus större eller mindre diameter än solen?;Saturnus;Solen;116460;1391000;km;Hur många km skiljer det i diameter?
 Har Uranus större eller mindre diameter än Neptunus?;Uranus;Neptunus;50724;49244;km;Hur många km skiljer det i diameter?
-Tar Uranus varv runt solen längre eller kortare tid än Plutos?;Uranus;Pluto;84;248;år;Hur många år skiljer det i omloppstid?
+Tar Uranus längre eller kortare tid på ett varv runt solen än Pluto?;Uranus;Pluto;84;248;år;Hur många år skiljer det i omloppstid?
 Ligger Uranus närmare eller längre från solen än Neptunus?;Uranus;Neptunus;2871;4495;miljoner km;Hur många miljoner km skiljer det?
 Har solen större eller mindre diameter än månen?;Solen;Månen;1391000;3474;km;Hur många km skiljer det i diameter?
 Är ytgravitationen på solen starkare eller svagare än på jorden?;Solen;Jorden;274;9,8;m/s²;Hur många m/s² skiljer det i ytgravitation?

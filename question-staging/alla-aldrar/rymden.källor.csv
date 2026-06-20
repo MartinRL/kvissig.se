@@ -1,22 +1,22 @@
 fråga;källa;år
-Har jorden större eller mindre diameter än Venus?;NASA Planetary Fact Sheet (nssdc.gsfc.nasa.gov);2024
-Har Mars större eller mindre diameter än jorden?;NASA Planetary Fact Sheet (nssdc.gsfc.nasa.gov);2024
-Har jorden större eller mindre diameter än Jupiter?;NASA Planetary Fact Sheet (nssdc.gsfc.nasa.gov);2024
-Snurrar månen ett varv runt sin axel snabbare eller långsammare än Merkurius?;NASA Planetary Fact Sheet (nssdc.gsfc.nasa.gov);2024
-Är det varmare eller kallare på Venus yta än på Merkurius?;NASA Planetary Fact Sheet (nssdc.gsfc.nasa.gov);2024
-Ligger Venus närmare eller längre från solen än Mars?;NASA Planetary Fact Sheet (nssdc.gsfc.nasa.gov);2024
-Har Venus större eller mindre diameter än solen?;NASA Sun Fact Sheet & Planetary Fact Sheet (nssdc.gsfc.nasa.gov);2024
-Har Mars större eller mindre diameter än månen?;NASA Planetary Fact Sheet (nssdc.gsfc.nasa.gov);2024
-Har Mars större eller mindre diameter än Pluto?;NASA Planetary Fact Sheet (nssdc.gsfc.nasa.gov);2024
-Är ytgravitationen på Merkurius starkare eller svagare än på Jupiter?;NASA Planetary Fact Sheet (nssdc.gsfc.nasa.gov);2024
-Ligger Jupiter närmare eller längre från solen än Neptunus?;NASA Planetary Fact Sheet (nssdc.gsfc.nasa.gov);2024
-Har Saturnus större eller mindre diameter än Uranus?;NASA Planetary Fact Sheet (nssdc.gsfc.nasa.gov);2024
-Har Saturnus större eller mindre diameter än Neptunus?;NASA Planetary Fact Sheet (nssdc.gsfc.nasa.gov);2024
-Har Saturnus större eller mindre diameter än solen?;NASA Sun Fact Sheet & Planetary Fact Sheet (nssdc.gsfc.nasa.gov);2024
-Har Uranus större eller mindre diameter än Neptunus?;NASA Planetary Fact Sheet (nssdc.gsfc.nasa.gov);2024
-Tar Uranus varv runt solen längre eller kortare tid än Plutos?;NASA Planetary Fact Sheet (nssdc.gsfc.nasa.gov);2024
-Ligger Uranus närmare eller längre från solen än Neptunus?;NASA Planetary Fact Sheet (nssdc.gsfc.nasa.gov);2024
-Har solen större eller mindre diameter än månen?;NASA Sun Fact Sheet & Planetary Fact Sheet (nssdc.gsfc.nasa.gov);2024
-Är ytgravitationen på solen starkare eller svagare än på jorden?;NASA Sun Fact Sheet & Planetary Fact Sheet (nssdc.gsfc.nasa.gov);2024
-Är ytgravitationen på månen starkare eller svagare än på Pluto?;NASA Planetary Fact Sheet (nssdc.gsfc.nasa.gov);2024
-Rör sig rymdstationen ISS snabbare eller långsammare än ett trafikflygplan?;NASA / Wikipedia (International Space Station orbital speed);2024
+Har jorden större eller mindre diameter än Venus?;NASA Planetary Fact Sheet (nssdc.gsfc.nasa.gov, volumetrisk medeldiameter);2025
+Har Mars större eller mindre diameter än jorden?;NASA Planetary Fact Sheet (nssdc.gsfc.nasa.gov, volumetrisk medeldiameter);2025
+Har jorden större eller mindre diameter än Jupiter?;NASA Planetary Fact Sheet (nssdc.gsfc.nasa.gov, volumetrisk medeldiameter);2025
+Snurrar månen ett varv runt sin axel snabbare eller långsammare än Merkurius?;NASA Planetary Fact Sheet (nssdc.gsfc.nasa.gov, siderisk rotationstid);2025
+Är det varmare eller kallare på Venus yta än på Merkurius?;NASA Planetary Fact Sheet (nssdc.gsfc.nasa.gov, medeltemperatur);2025
+Ligger Venus närmare eller längre från solen än Mars?;NASA Planetary Fact Sheet (nssdc.gsfc.nasa.gov);2025
+Har Venus större eller mindre diameter än solen?;NASA Sun Fact Sheet & Planetary Fact Sheet (nssdc.gsfc.nasa.gov);2025
+Har Mars större eller mindre diameter än månen?;NASA Planetary Fact Sheet (nssdc.gsfc.nasa.gov, volumetrisk medeldiameter);2025
+Har Mars större eller mindre diameter än Pluto?;NASA Planetary Fact Sheet & NASA Pluto Fact Sheet (nssdc.gsfc.nasa.gov);2025
+Är ytgravitationen på Merkurius starkare eller svagare än på Jupiter?;NASA Planetary Fact Sheet (nssdc.gsfc.nasa.gov, ekvatoriell ytgravitation);2025
+Ligger Jupiter närmare eller längre från solen än Neptunus?;NASA Planetary Fact Sheet (nssdc.gsfc.nasa.gov);2025
+Har Saturnus större eller mindre diameter än Uranus?;NASA Planetary Fact Sheet (nssdc.gsfc.nasa.gov, volumetrisk medeldiameter);2025
+Har Saturnus större eller mindre diameter än Neptunus?;NASA Planetary Fact Sheet (nssdc.gsfc.nasa.gov, volumetrisk medeldiameter);2025
+Har Saturnus större eller mindre diameter än solen?;NASA Sun Fact Sheet & Planetary Fact Sheet (nssdc.gsfc.nasa.gov);2025
+Har Uranus större eller mindre diameter än Neptunus?;NASA Planetary Fact Sheet (nssdc.gsfc.nasa.gov, volumetrisk medeldiameter);2025
+Tar Uranus varv runt solen längre eller kortare tid än Plutos?;NASA Planetary Fact Sheet & NASA Pluto Fact Sheet (nssdc.gsfc.nasa.gov, omloppstid);2025
+Ligger Uranus närmare eller längre från solen än Neptunus?;NASA Planetary Fact Sheet (nssdc.gsfc.nasa.gov);2025
+Har solen större eller mindre diameter än månen?;NASA Sun Fact Sheet & Planetary Fact Sheet (nssdc.gsfc.nasa.gov);2025
+Är ytgravitationen på solen starkare eller svagare än på jorden?;NASA Sun Fact Sheet & Planetary Fact Sheet (nssdc.gsfc.nasa.gov);2025
+Är ytgravitationen på månen starkare eller svagare än på Pluto?;NASA Planetary Fact Sheet & NASA Pluto Fact Sheet (nssdc.gsfc.nasa.gov);2025
+Rör sig rymdstationen ISS snabbare eller långsammare än ett trafikflygplan?;NASA International Space Station Facts and Figures (omloppshastighet ~28 000 km/h);2025
