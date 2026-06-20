@@ -1,15 +1,15 @@
 ﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
-Levde Gustav II Adolf längre eller kortare än Karl XII?;Gustav II Adolf;Karl XII;37;35;år;Hur många år skiljer det i ålder vid döden?
+Levde Gustav II Adolf längre eller kortare än Karl XII?;Gustav II Adolf;Karl XII;37;36;år;Hur många år skiljer det i ålder vid döden?
 Inträffade Stockholms blodbad före eller efter Gustav Vasas trontillträde?;Stockholms blodbad;Gustav Vasa blir kung;1520;1523;årtal;Hur många år skiljer det?
 Inträffade slaget vid Narva före eller efter slaget vid Poltava?;Slaget vid Narva;Slaget vid Poltava;1700;1709;årtal;Hur många år skiljer det?
 Regerade Gustav Vasa fler eller färre år än drottning Kristina?;Gustav Vasa;Drottning Kristina;37;22;år;Hur många år skiljer det i regeringstid?
 Var Gustav Vasa äldre eller yngre än Gustav II Adolf när de dog?;Gustav Vasa;Gustav II Adolf;64;37;år;Hur många år skiljer det i ålder vid döden?
 Hade Vasaskeppet fler eller färre kanoner än master?;Antal kanoner på Vasa;Antal master på Vasa;64;3;styck;Hur många fler kanoner än master skiljer det?
 Är Vasaskeppet högre från köl till masttopp än det är långt?;Vasa höjd till masttopp;Vasa längd;52;69;meter;Hur många meter skiljer det?
-Levde Gustav Vasa fler eller färre år än vikingatiden varade?;Gustav Vasas livslängd;Vikingatidens längd;64;300;år;Hur många år skiljer det?
+Levde Gustav Vasa fler eller färre år än vikingatiden varade?;Gustav Vasas livslängd;Vikingatidens längd;64;273;år;Hur många år skiljer det?
 Är Uppsala domkyrka högre eller lägre än Kalmar slotts torn?;Uppsala domkyrka;Kalmar slotts torn;118;30;meter;Hur många meter skiljer det i höjd?
 Var Sverige med i Kalmarunionen fler eller färre år än Gustav Vasa levde?;Sverige i Kalmarunionen;Gustav Vasas livslängd;126;64;år;Hur många år skiljer det?
-Varade vikingatiden fler eller färre år än stormaktstiden?;Vikingatidens längd;Stormaktstidens längd;300;110;år;Hur många år skiljer det?
+Varade vikingatiden fler eller färre år än stormaktstiden?;Vikingatidens längd;Stormaktstidens längd;273;110;år;Hur många år skiljer det?
 Är Birka äldre eller yngre som handelsplats än staden Sigtuna?;Birka grundas;Sigtuna grundas;750;980;årtal;Hur många år skiljer det?
 Är Vänern större eller mindre än Vättern till ytan?;Vänern;Vättern;5650;1893;kvadratkilometer;Hur många kvadratkilometer skiljer det?
 Har Carl XVI Gustaf ett högre eller lägre ordningsnummer än den högst numrerade Gustav?;Carl XVI Gustafs ordningsnummer;Högsta Gustav-numret;16;6;ordningsnummer;Hur många nummer skiljer det?
@@ -18,11 +18,10 @@ Vägde Vasaskeppet mer eller mindre än en modern stridsvagn?;Vasaskeppets vikt;
 Restes det fler eller färre runstenar i Danmark än i Sverige?;Runstenar i Danmark;Runstenar i Sverige;250;2500;styck;Hur många runstenar skiljer det?
 Har Stockholms slott fler eller färre rum än Drottningholms slott?;Stockholms slott;Drottningholms slott;600;200;rum;Hur många rum skiljer det?
 Är Kalmar slott äldre eller yngre än Stockholms slott?;Kalmar slott;Stockholms slott;1280;1754;byggår;Hur många år skiljer det i ålder?
-Var Karl XII äldre eller yngre än Gustav Vasa när de dog?;Karl XII;Gustav Vasa;35;64;år;Hur många år skiljer det i ålder vid döden?
+Var Karl XII äldre eller yngre än Gustav Vasa när de dog?;Karl XII;Gustav Vasa;36;64;år;Hur många år skiljer det i ålder vid döden?
 Hade ett vikingaskepp fler eller färre man i besättningen än Vasaskeppet hade kanoner?;Besättning på vikingaskepp;Kanoner på Vasa;30;64;styck;Hur många skiljer det?
-Levde Karl XII fler eller färre år än Sverige var med i Kalmarunionen?;Karl XII levde;Sverige i Kalmarunionen;35;126;år;Hur många år skiljer det?
+Levde Karl XII fler eller färre år än Sverige var med i Kalmarunionen?;Karl XII levde;Sverige i Kalmarunionen;36;126;år;Hur många år skiljer det?
 Regerade Karl XI fler eller färre år än sonen Karl XII?;Karl XI;Karl XII;37;21;år;Hur många år skiljer det i regeringstid?
 Inföll vikingatidens början före eller efter år 1500?;Vikingatidens början;År 1500;793;1500;årtal;Hur många år skiljer det?
 Var Gustav II Adolf äldre eller yngre än Karl XIV Johan när de blev kungar?;Gustav II Adolf blir kung;Karl XIV Johan blir kung;16;55;år;Hur många år skiljer det i ålder?
-Är Glimmingehus högre eller lägre än Turning Torso?;Glimmingehus höjd;Turning Torso;26;190;meter;Hur många meter skiljer det i höjd?
 Varade stormaktstiden fler eller färre år än Gustav Vasa regerade?;Stormaktstiden;Gustav Vasas regeringstid;110;37;år;Hur många år skiljer det?
