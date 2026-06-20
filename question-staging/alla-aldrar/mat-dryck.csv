@@ -1,0 +1,26 @@
+﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Innehåller ett äpple mer eller mindre socker än en banan?;Äpple;Banan;10;12;gram;Hur många gram socker skiljer det?
+Innehåller en kopp te mer eller mindre koffein än en kopp kaffe?;Te;Kaffe;47;95;milligram;Hur många milligram koffein skiljer det?
+Har en skiva knäckebröd fler eller färre kalorier än en skiva vetebröd?;Knäckebröd;Vetebröd;35;70;kalorier;Hur många kalorier skiljer det?
+Innehåller mjölk mer eller mindre fett än grädde per 100 gram?;Mjölk;Grädde;3;36;gram;Hur många gram fett skiljer det?
+Innehåller lättmjölk mer eller mindre fett än standardmjölk per 100 gram?;Lättmjölk;Standardmjölk;0,5;3;gram;Hur många gram fett skiljer det?
+Innehåller apelsinjuice mer eller mindre socker än Coca-Cola per 100 milliliter?;Apelsinjuice;Coca-Cola;8,9;10,6;gram;Hur många gram socker skiljer det?
+Innehåller en gurka mer eller mindre socker än en banan per 100 gram?;Gurka;Banan;1,7;12;gram;Hur många gram socker skiljer det?
+Har en morot fler eller färre kalorier än potatis per 100 gram?;Morot;Potatis;41;77;kalorier;Hur många kalorier skiljer det?
+Innehåller vitt bröd mer eller mindre fiber än knäckebröd per 100 gram?;Vitt bröd;Knäckebröd;2,7;16;gram;Hur många gram fiber skiljer det?
+Innehåller en jordgubbe mer eller mindre C-vitamin än ett blåbär per 100 gram?;Jordgubbe;Blåbär;59;10;milligram;Hur många milligram C-vitamin skiljer det?
+Innehåller en banan mer eller mindre kalium än en apelsin per 100 gram?;Banan;Apelsin;358;181;milligram;Hur många milligram kalium skiljer det?
+Innehåller mörk choklad mer eller mindre kakao än mjölkchoklad?;Mörk choklad;Mjölkchoklad;70;30;procent;Hur många procentenheter skiljer det?
+Innehåller cheddarost mer eller mindre fett än keso per 100 gram?;Cheddarost;Keso;33;4;gram;Hur många gram fett skiljer det?
+Har en kanelbulle fler eller färre kalorier än en chokladboll?;Kanelbulle;Chokladboll;240;130;kalorier;Hur många kalorier skiljer det?
+Innehåller lättöl mer eller mindre alkohol än starköl?;Lättöl;Starköl;2,1;5,2;procent;Hur många procentenheter skiljer det?
+Innehåller espresso mer eller mindre koffein än bryggkaffe per 100 milliliter?;Espresso;Bryggkaffe;212;40;milligram;Hur många milligram koffein skiljer det?
+Innehåller honung fler eller färre kalorier än strösocker per 100 gram?;Honung;Strösocker;304;387;kalorier;Hur många kalorier skiljer det?
+Innehåller ett ägg mer eller mindre protein än en avokado per 100 gram?;Ägg;Avokado;13;2;gram;Hur många gram protein skiljer det?
+Har en blandsallad fler eller färre kalorier än en pizza per 100 gram?;Blandsallad;Pizza;20;250;kalorier;Hur många kalorier skiljer det?
+Innehåller en vindruva mer eller mindre socker än ett russin per 100 gram?;Vindruva;Russin;16;59;gram;Hur många gram socker skiljer det?
+Innehåller ketchup mer eller mindre socker än senap per 100 gram?;Ketchup;Senap;22;6;gram;Hur många gram socker skiljer det?
+Innehåller smör mer eller mindre fett än lättmargarin per 100 gram?;Smör;Lättmargarin;81;40;gram;Hur många gram fett skiljer det?
+Innehåller Coca-Cola mer eller mindre koffein än en energidryck per 100 milliliter?;Coca-Cola;Energidryck;10;32;milligram;Hur många milligram koffein skiljer det?
+Innehåller lax mer eller mindre fett än torsk per 100 gram?;Lax;Torsk;13;0,7;gram;Hur många gram fett skiljer det?
+Innehåller en vattenmelon mer eller mindre socker än ett äpple per 100 gram?;Vattenmelon;Äpple;6;10;gram;Hur många gram socker skiljer det?
