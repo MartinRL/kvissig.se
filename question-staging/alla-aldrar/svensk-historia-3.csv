@@ -3,7 +3,7 @@ Dog Birger Jarl tidigare eller senare än Magnus Ladulås?;Birger Jarl;Magnus La
 Dog Erik den helige tidigare eller senare än Heliga Birgitta?;Erik den helige;Heliga Birgitta;1160;1373;årtal;Hur många år skiljer det i dödsår?
 Levde Sten Sture den äldre kortare eller längre än Axel Oxenstierna?;Sten Sture den äldre;Axel Oxenstierna;63;71;år;Hur många år skiljer det i ålder vid döden?
 Levde drottning Margareta längre eller kortare än Engelbrekt?;Drottning Margareta;Engelbrekt;59;46;år;Hur många år skiljer det i ålder vid döden?
-Blev Karl X Gustav äldre eller yngre än Karl IX?;Karl X Gustav;Karl IX;38;61;år;Hur många år skiljer det i ålder vid döden?
+Blev Karl X Gustav äldre eller yngre än Karl IX?;Karl X Gustav;Karl IX;37;61;år;Hur många år skiljer det i ålder vid döden?
 Byggdes Gripsholms slott senare eller tidigare än Kalmar slott?;Gripsholms slott;Kalmar slotts äldsta torn;1537;1180;byggår;Hur många år skiljer det i byggår?
 Byggdes Skokloster slott senare eller tidigare än Borgholms slott?;Skokloster slott;Borgholms slotts kärntorn;1654;1100;byggår;Hur många år skiljer det i byggår?
 Levde Anders Celsius längre eller kortare än Alfred Nobel?;Anders Celsius;Alfred Nobel;42;63;år;Hur många år skiljer det i ålder vid döden?
@@ -12,10 +12,10 @@ Levde Carl von Linné längre eller kortare än Anders Celsius?;Carl von Linné;
 Levde Engelbrekt längre eller kortare än Heliga Birgitta?;Engelbrekt;Heliga Birgitta;46;70;år;Hur många år skiljer det i ålder vid döden?
 Var Hedvig Eleonora förmyndarregent fler eller färre år än Birger Jarl styrde som jarl?;Hedvig Eleonora som förmyndarregent;Birger Jarl som jarl;12;18;år;Hur många år skiljer det?
 Levde Anders Celsius längre eller kortare än Emanuel Swedenborg?;Anders Celsius;Emanuel Swedenborg;42;84;år;Hur många år skiljer det i ålder vid döden?
-Är regalskeppet Kronan längre än Kalmar Nyckel?;Regalskeppet Kronan;Kalmar Nyckel;60;28;meter;Hur många meter skiljer det i längd?
-Är ostindiefararen Götheborg längre än Kalmar Nyckel?;Ostindiefararen Götheborg;Kalmar Nyckel;58;28;meter;Hur många meter skiljer det i längd?
+Är regalskeppet Kronan längre än Kalmar Nyckel?;Regalskeppet Kronan;Kalmar Nyckel;53;28;meter;Hur många meter skiljer det i längd?
+Är ostindiefararen Götheborg längre än Kalmar Nyckel?;Ostindiefararen Götheborg;Kalmar Nyckel;58,5;28;meter;Hur många meter skiljer det i längd?
 Regerade Magnus Ladulås fler eller färre år än Magnus Eriksson?;Magnus Ladulås regeringstid;Magnus Erikssons regeringstid;15;45;år;Hur många år skiljer det?
-Hade ostindiefararen Götheborg fler man i besättningen än antal kanoner ombord?;Besättning på Götheborg;Kanoner på Götheborg;144;30;styck;Hur många fler skiljer det?
+Hade ostindiefararen Götheborg fler man i besättningen än antal kanoner ombord?;Besättning på Götheborg;Kanoner på Götheborg;144;30;styck;Hur många fler är besättningen än kanonerna?
 Regerade Karl IX fler eller färre år än Magnus Eriksson?;Karl IX regeringstid;Magnus Erikssons regeringstid;7;45;år;Hur många år skiljer det?
 Ledde Engelbrekt upproret fler eller färre år än Hedvig Eleonora var förmyndarregent?;Engelbrektsupprorets längd;Hedvig Eleonora som förmyndarregent;2;12;år;Hur många år skiljer det?
 Regerade Karl X Gustav fler eller färre år än Karl IX?;Karl X Gustav;Karl IX;6;7;år;Hur många år skiljer det i regeringstid?
@@ -24,6 +24,6 @@ Byggdes Skokloster slott senare eller tidigare än Bohus fästning?;Skokloster s
 Hade regalskeppet Kronan fler kanoner än master?;Kanoner på Kronan;Master på Kronan;126;3;styck;Hur många fler kanoner än master skiljer det?
 Levde Erik den helige längre eller kortare än Carl von Linné?;Erik den helige;Carl von Linné;40;70;år;Hur många år skiljer det i ålder vid döden?
 Regerade Magnus Ladulås fler eller färre år än Axel Oxenstierna var rikskansler?;Magnus Ladulås regeringstid;Axel Oxenstiernas tid som rikskansler;15;42;år;Hur många år skiljer det?
-Hade ostindiefararen Götheborg fler man i besättningen än antal master?;Besättning på Götheborg;Master på Götheborg;144;3;styck;Hur många fler skiljer det?
-Hade regalskeppet Kronan fler kanoner än Kalmar Nyckel?;Kanoner på Kronan;Kanoner på Kalmar Nyckel;126;6;styck;Hur många kanoner skiljer det?
-Är Gripsholms slott äldre eller yngre än Skokloster slott till antalet år?;Gripsholms slotts ålder;Skokloster slotts ålder;489;372;år;Hur många år skiljer det i ålder?
+Hade ostindiefararen Götheborg fler man i besättningen än antal master?;Besättning på Götheborg;Master på Götheborg;144;3;styck;Hur många fler är besättningen än masterna?
+Hade regalskeppet Kronan fler kanoner än Kalmar Nyckel?;Kanoner på Kronan;Kanoner på Kalmar Nyckel;126;14;styck;Hur många kanoner skiljer det?
+Är Gripsholms slott äldre eller yngre än Skokloster slott räknat i år?;Gripsholms slotts ålder;Skokloster slotts ålder;489;372;år;Hur många år skiljer det i ålder?
