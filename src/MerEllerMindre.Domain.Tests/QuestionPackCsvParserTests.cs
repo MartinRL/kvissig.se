@@ -137,6 +137,17 @@ public class QuestionPackCsvParserTests
     }
 
     [Fact]
+    public void AppliesDisplayNameOverrideForAllaAldrar()
+    {
+        // Plain de-slug would drop the å ("Alla aldrar"); the override restores it.
+        var csv = Header + "\n" + "Q;A;B;10;5;kg;Hur många kg skiljer det?\n";
+
+        var pack = QuestionPackCsvParser.Parse("alla-aldrar", csv);
+
+        pack.Name.Should().Be("Mer eller mindre – alla åldrar");
+    }
+
+    [Fact]
     public void LoadsTheRealMerEllerMindrePack()
     {
         // The pack CSVs are copied to output beside the Domain assembly (see its csproj).

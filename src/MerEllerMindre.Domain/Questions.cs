@@ -118,8 +118,17 @@ public static class QuestionPackCsvParser
             $"Question pack '{slug}' row {row} column '{column}' has an unparseable number '{raw}' (expected sv-SE decimal, e.g. 5,9).");
     }
 
+    // Slug→display-name overrides where the slug can't round-trip (lost å/ä/ö, en-dash, …).
+    private static readonly Dictionary<string, string> DisplayNameOverrides = new()
+    {
+        ["alla-aldrar"] = "Mer eller mindre – alla åldrar",
+    };
+
     private static string Deslug(string slug)
     {
+        if (DisplayNameOverrides.TryGetValue(slug, out var name))
+            return name;
+
         var spaced = slug.Replace('-', ' ').Trim();
         if (spaced.Length == 0)
             return slug;

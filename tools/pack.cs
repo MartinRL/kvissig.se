@@ -6,6 +6,8 @@
 //   dotnet run tools/pack.cs -- merge --out <path>    dedup+write a candidate pack
 //   dotnet run tools/pack.cs -- cap --max N --out <kept> --park <wip>
 //                                                     cap item frequency, park overflow
+//   --dir <stagingDir>     scan a different staging dir (report --staging + merge); default question-staging
+//   --targets a,b,c,d      override band-target display percentages; default 15,40,30,15
 // Reuses the Domain's parser + Decider.NormalizeDifference so band math has ONE source.
 
 using System.Globalization;
@@ -13,7 +15,7 @@ using System.Text;
 using MerEllerMindre.Domain;
 
 const string LivePack = "src/MerEllerMindre.Domain/data/packs/mer-eller-mindre.csv";
-const string StagingDir = "question-staging";
+var stagingDir = "question-staging";
 
 // Style-guide band thresholds (specs/question-style-guide.md): the only numbers that
 // live here; the normalization itself comes from Decider.NormalizeDifference.
@@ -31,6 +33,9 @@ bool force = argv.Remove("--force");
 string? outPath = TakeOption("--out");
 string? parkPath = TakeOption("--park");
 string? maxOpt = TakeOption("--max");
+stagingDir = TakeOption("--dir") ?? stagingDir;
+var targetsOpt = TakeOption("--targets");
+if (targetsOpt is not null) targets = targetsOpt.Split(',').Select(int.Parse).ToArray();
 var positional = argv.Where(a => !a.StartsWith('-')).ToList();
 
 switch (command)
@@ -64,7 +69,7 @@ string[] DefaultSources(bool staging) =>
     staging ? StagingFiles() : [LivePack];
 
 string[] StagingFiles() =>
-    Directory.GetFiles(StagingDir, "*.csv")
+    Directory.GetFiles(stagingDir, "*.csv")
         .Where(f =>
         {
             var name = Path.GetFileName(f);

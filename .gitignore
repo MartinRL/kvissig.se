@@ -28,6 +28,9 @@ TestResults/
 # Generated emlang diagrams
 specs/*.html
 
+# Local-only scratch (ralph-loop prompts etc.)
+*.local.md
+
 # question-staging scratch (one-shot generators + intermediates)
 question-staging/_*
 question-staging/tmp_*
