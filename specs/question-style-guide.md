@@ -55,6 +55,8 @@ Rapportera band-histogrammet per batch. Justera tills fördelningen matchar mål
 ## Vad gör ett bra par
 
 - **Båda sakerna igenkännbara** för en familj / 14+ (inte nischade trivia-objekt).
+- **Namnge alltid arten** (kategori-apposition) för nischade egennamn så man vet VAD som
+  jämförs: "Uranusmånen Oberon", "dvärgplaneten Ceres", "floden Niger", "bergstoppen Lhotse".
 - **Jämförelsen icke-trivial / överraskande / debatterbar** — gärna sådan man skulle
   diskutera vid matbordet.
 - **Riktningen ibland kontraintuitiv** — argumentsfröet. Den uppenbara gissningen ska
@@ -121,3 +123,21 @@ Väger en afrikansk elefant mer eller mindre än en blåval?;Afrikansk elefant;B
 **Dåligt** — trivialt: "Är solen större eller mindre än ett äpple?" (norm ~100, men noll spänning).
 **Dåligt** — ovärderbar/volatil utan år: "Hur många följare har X på Instagram?".
 **Dåligt** — luddig siffra: "ca 3 000–4 000 arter".
+
+## Alla åldrar (lättare lek)
+
+Gäller NÄR pack = `alla-aldrar` (delta mot basfilosofin ovan — allt annat i guiden står kvar).
+
+- **Bandmål 10/35/35/20** (inte 15/40/30/15): färre 0–20-riktningsfällor, fler "tydligt
+  glapp" + wow. Mät mot detta: `report --staging --dir question-staging/alla-aldrar
+  --targets 10,35,35,20`.
+- **Målgrupp 13–83, tvärgenerationellt**: maximera igenkänning. Båda 13- och 83-åringen ska
+  känna saken → tidlösa kategorier (djur, kropp, mat, landmärken, planeter, svenska
+  storheter). Undvik dagsfärsk popkultur som bara ena änden känner.
+- **Jämn mix ~50/50** globalt-känt ↔ svenskt/nordiskt.
+- Lättare via BÅDE igenkännbara saker OCH mildare bandkurva — inte enklare matte.
+
+**Bra** (igenkänt par, tydligt glapp): "Är en giraff högre eller lägre än en elefant?"
+**Bra** (svenskt, tidlöst): "Är Vänern större eller mindre än Vättern till ytan?"
+**Dåligt** (off-audience): "Har låt X fler eller färre Spotify-streams än låt Y?" (dagsfärsk,
+bara ena generationen känner båda).
