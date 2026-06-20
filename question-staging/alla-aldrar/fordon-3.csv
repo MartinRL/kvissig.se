@@ -1,0 +1,28 @@
+﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Är VW-bubblan längre eller kortare än en Volvo Amazon?;VW-bubblan;Volvo Amazon;4,03;4,45;meter;Hur många meter skiljer det i längd?
+Har en Ford T högre eller lägre toppfart än en Volvo Amazon?;Ford T;Volvo Amazon;72;150;km/h;Hur många km/h skiljer det i toppfart?
+Är en kanot längre eller kortare än en roddbåt?;Kanot;Roddbåt;5;3,5;meter;Hur många meter skiljer det i längd?
+Är en gondol i Venedig längre eller kortare än ett vikingaskepp?;Gondol (Venedig);Vikingaskepp;11;24;meter;Hur många meter skiljer det i längd?
+Har ett maglev-tåg högre eller lägre toppfart än ett X2000-tåg?;Maglev-tåg;X2000;430;200;km/h;Hur många km/h skiljer det i toppfart?
+Väger en Volvo Amazon mer eller mindre än en pickup?;Volvo Amazon;Pickup;1100;2200;kilo;Hur många kilo skiljer det?
+Väger en sopbil mer eller mindre än en betongbil?;Sopbil;Betongbil;18;32;ton;Hur många ton skiljer det?
+Har en elsparkcykel högre eller lägre toppfart än en mountainbike?;Elsparkcykel;Mountainbike;20;40;km/h;Hur många km/h skiljer det i toppfart?
+Är en limousine längre eller kortare än en VW-bubbla?;Limousine;VW-bubblan;9;4;meter;Hur många meter skiljer det i längd?
+Har ett pendeltåg högre eller lägre toppfart än ett X2000-tåg?;Pendeltåg;X2000;120;200;km/h;Hur många km/h skiljer det i toppfart?
+Har ett Airbus A380 fler eller färre sittplatser än Concorde?;Airbus A380;Concorde;555;100;platser;Hur många sittplatser skiljer det?
+Är en isbrytare längre eller kortare än ett hangarfartyg?;Isbrytare;Hangarfartyg;108;333;meter;Hur många meter skiljer det i längd?
+Är en katamaran längre eller kortare än en roddbåt?;Katamaran;Roddbåt;12;3,5;meter;Hur många meter skiljer det i längd?
+Väger en sopbil mer eller mindre än en stridsvagn?;Sopbil;Stridsvagn;18;60;ton;Hur många ton skiljer det?
+Är en ångbåt längre eller kortare än ett vikingaskepp?;Ångbåt;Vikingaskepp;78;24;meter;Hur många meter skiljer det i längd?
+Väger en mountainbike mer eller mindre än en lastcykel?;Mountainbike;Lastcykel;13;35;kilo;Hur många kilo skiljer det?
+Har en drönare högre eller lägre toppfart än en elsparkcykel?;Drönare;Elsparkcykel;70;20;km/h;Hur många km/h skiljer det i toppfart?
+Har en dressin högre eller lägre toppfart än en Spitfire?;Dressin;Spitfire;25;595;km/h;Hur många km/h skiljer det i toppfart?
+Har Concorde högre eller lägre toppfart än en Spitfire?;Concorde;Spitfire;2179;595;km/h;Hur många km/h skiljer det i toppfart?
+Har en hästdroska högre eller lägre toppfart än en gokart?;Hästdroska;Gokart;15;60;km/h;Hur många km/h skiljer det i toppfart?
+Har ett Airbus A380 större eller mindre vingbredd än Concorde?;Airbus A380;Concorde;80;26;meter;Hur många meter skiljer det i vingbredd?
+Har en limousine starkare eller svagare motor än en VW-bubbla?;Limousine;VW-bubblan;300;50;hk;Hur många hästkrafter skiljer det?
+Är ett hangarfartyg längre eller kortare än en roddbåt?;Hangarfartyg;Roddbåt;333;3,5;meter;Hur många meter skiljer det i längd?
+Har ett maglev-tåg högre eller lägre toppfart än en dressin?;Maglev-tåg;Dressin;430;25;km/h;Hur många km/h skiljer det i toppfart?
+Har Concorde högre eller lägre toppfart än en hästdroska?;Concorde;Hästdroska;2179;15;km/h;Hur många km/h skiljer det i toppfart?
+Har en Spitfire högre eller lägre toppfart än en hästdroska?;Spitfire;Hästdroska;595;15;km/h;Hur många km/h skiljer det i toppfart?
+Har en katamaran högre eller lägre toppfart än en ångbåt?;Katamaran;Ångbåt;70;25;km/h;Hur många km/h skiljer det i toppfart?

@@ -1,0 +1,28 @@
+﻿fråga;källa;år
+Är VW-bubblan längre eller kortare än en Volvo Amazon?;Wikipedia (Volkswagen Beetle, Volvo Amazon);2024
+Har en Ford T högre eller lägre toppfart än en Volvo Amazon?;Wikipedia (Ford Model T, Volvo Amazon);2024
+Är en kanot längre eller kortare än en roddbåt?;Allmänna båtspecifikationer (kanot ~5 m, roddbåt ~3,5 m);2024
+Är en gondol i Venedig längre eller kortare än ett vikingaskepp?;Wikipedia (Gondola, vikingaskepp/Gokstadskeppet);2024
+Har ett maglev-tåg högre eller lägre toppfart än ett X2000-tåg?;Wikipedia (Maglev/Shanghai Transrapid, SJ X2000);2024
+Väger en Volvo Amazon mer eller mindre än en pickup?;Wikipedia (Volvo Amazon); allmänna pickup-data;2024
+Väger en sopbil mer eller mindre än en betongbil?;Allmänna lastbilsdata (sopbil ~18 t, betongbil ~32 t);2024
+Har en elsparkcykel högre eller lägre toppfart än en mountainbike?;Allmänna data (elsparkcykel begränsad 20 km/h, mountainbike ~40 km/h);2024
+Är en limousine längre eller kortare än en VW-bubbla?;Allmänna data (stretchlimousine ~9 m, VW-bubblan ~4 m);2024
+Har ett pendeltåg högre eller lägre toppfart än ett X2000-tåg?;Allmänna data (pendeltåg ~120 km/h, SJ X2000 200 km/h);2024
+Har ett Airbus A380 fler eller färre sittplatser än Concorde?;airbus.com (A380 ~555 platser); Wikipedia (Concorde ~100);2024
+Är en isbrytare längre eller kortare än ett hangarfartyg?;Allmänna data (isbrytare ~108 m, hangarfartyg/Nimitz ~333 m);2024
+Är en katamaran längre eller kortare än en roddbåt?;Allmänna båtdata (katamaran ~12 m, roddbåt ~3,5 m);2024
+Väger en sopbil mer eller mindre än en stridsvagn?;Allmänna data (sopbil ~18 t, stridsvagn/Leopard ~60 t);2024
+Är en ångbåt längre eller kortare än ett vikingaskepp?;Allmänna data (ångbåt ~78 m, vikingaskepp ~24 m);2024
+Väger en mountainbike mer eller mindre än en lastcykel?;Allmänna data (mountainbike ~13 kg, lastcykel ~35 kg);2024
+Har en drönare högre eller lägre toppfart än en elsparkcykel?;Allmänna data (konsumentdrönare ~70 km/h, elsparkcykel 20 km/h);2024
+Har en dressin högre eller lägre toppfart än en Spitfire?;Allmänna data (dressin ~25 km/h); Wikipedia (Supermarine Spitfire ~595 km/h);2024
+Har Concorde högre eller lägre toppfart än en Spitfire?;Wikipedia (Concorde Mach 2,04 ~2179 km/h, Supermarine Spitfire);2024
+Har en hästdroska högre eller lägre toppfart än en gokart?;Allmänna data (hästdroska ~15 km/h, gokart ~60 km/h);2024
+Har ett Airbus A380 större eller mindre vingbredd än Concorde?;airbus.com (A380 vingbredd 79,8 m); Wikipedia (Concorde ~25,6 m);2024
+Har en limousine starkare eller svagare motor än en VW-bubbla?;Allmänna data (limousine ~300 hk, VW-bubblan ~50 hk);2024
+Är ett hangarfartyg längre eller kortare än en roddbåt?;Allmänna data (hangarfartyg/Nimitz ~333 m, roddbåt ~3,5 m);2024
+Har ett maglev-tåg högre eller lägre toppfart än en dressin?;Wikipedia (Shanghai Maglev 430 km/h); dressin ~25 km/h;2024
+Har Concorde högre eller lägre toppfart än en hästdroska?;Wikipedia (Concorde ~2179 km/h); hästdroska ~15 km/h;2024
+Har en Spitfire högre eller lägre toppfart än en hästdroska?;Wikipedia (Supermarine Spitfire ~595 km/h); hästdroska ~15 km/h;2024
+Har en katamaran högre eller lägre toppfart än en ångbåt?;Allmänna data (sportkatamaran ~70 km/h, ångbåt ~25 km/h);2024
