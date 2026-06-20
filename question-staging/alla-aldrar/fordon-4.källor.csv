@@ -1,0 +1,29 @@
+﻿fråga;källa;år
+Är ett Airbus A320 längre eller kortare än ett Boeing 737?;Airbus officiell (A320 längd 37,57 m) + Boeing officiell (737-8 längd 39,5 m);2026
+Väger en Trabant mer eller mindre än en Mini?;Fordonsdata Trabant 601 (ca 620 kg) + klassisk Mini (ca 650 kg);2026
+Är en husvagn längre eller kortare än en livbåt?;Branschdata husvagnar (turistvagn ca 5-7 m) + SOLAS livbåt (helt sluten ca 7,5 m);2026
+Har ett Boeing 737 större eller mindre vingbredd än ett Boeing 787 Dreamliner?;Boeing officiell (737 vingbredd 35,9 m; 787-8 vingbredd 60,1 m);2026
+Väger en bulldozer mer eller mindre än en hjullastare?;Caterpillar specifikation (D8 driftvikt ca 40 ton) + hjullastare medelstor ca 25 ton;2026
+Väger en dumper mer eller mindre än en mobilkran?;Tillverkardata midjestyrd dumper (ca 40 ton driftvikt) + mobilkran mellanklass (ca 60 ton);2026
+Har en Vespa högre eller lägre toppfart än en Harley-Davidson?;Tillverkardata Vespa GTS (ca 95 km/h) + Harley-Davidson cruiser (ca 180 km/h);2026
+Har en höghjuling högre eller lägre toppfart än en tandemcykel?;Cykelhistoriska data penny-farthing (ca 24 km/h) + tandemcykel rekreation (ca 40 km/h);2026
+Väger en DeLorean mer eller mindre än en Trabant?;Fordonsdata DeLorean DMC-12 (ca 1230 kg) + Trabant 601 (ca 620 kg);2026
+Är ett Boeing 787 Dreamliner längre eller kortare än ett Airbus A320?;Boeing officiell (787-8 längd 56,7 m) + Airbus officiell (A320 37,57 m);2026
+Har ett Wright Flyer större eller mindre vingbredd än rymdfärjan?;Smithsonian NASM (Wright Flyer vingbredd 12,3 m; Space Shuttle orbiter vingbredd 23,8 m / 78 ft);2026
+Är en dubbeldäckarbuss i London längre eller kortare än en ledbuss?;TfL bussdata (London dubbeldäckare ca 10-11 m) + ledbuss/boggibuss (ca 18 m);2026
+Är Saturn V-raketen längre eller kortare än en varmluftsballong?;NASA (Saturn V höjd 110,6 m) + varmluftsballong standardkupol (ca 20 m);2026
+Är en väghyvel längre eller kortare än en golfbil?;Caterpillar väghyvel (full storlek ca 9 m) + golfbil 2-sits (ca 2,4 m);2026
+Väger en enhjuling mer eller mindre än en elcykel?;Tillverkardata standardenhjuling (ca 5 kg) + elcykel genomsnitt (ca 24-26 kg);2026
+Har ett hundspann högre eller lägre toppfart än en bobsleigh?;Slädhundsdata (hundspann typisk ca 30 km/h) + IBSF bobsleigh (ca 135 km/h);2026
+Har en pulka högre eller lägre toppfart än en bobsleigh?;Pulka utförsåkning (ca 40 km/h) + IBSF bobsleigh (ca 135 km/h);2026
+Har en enskenebana högre eller lägre toppfart än ett Eurostar-tåg?;Monorail driftsdata (ca 80 km/h) + Eurostar tjänstehastighet (ca 300 km/h);2026
+Har ett Eurostar-tåg högre eller lägre toppfart än Orient-expressen?;Eurostar tjänstehastighet (ca 300 km/h) + historiska Orient-expressen (ca 100 km/h);2026
+Väger Mars-rovern Curiosity mer eller mindre än månbilen?;NASA Science (Curiosity 899 kg) + NASA (Apollo Lunar Roving Vehicle ca 210 kg);2026
+Har en skidlift högre eller lägre toppfart än en bergbana?;Liftdata stollift (ca 10 km/h) + modern funikulär/bergbana (ca 35 km/h);2026
+Har Internationella rymdstationen ISS större eller mindre spännvidd än ett Wright Flyer?;NASA ISS Facts (solpanelsspann 109 m) + Smithsonian NASM (Wright Flyer 12,3 m);2026
+Är Queen Mary 2 längre eller kortare än en bogserbåt?;Cunard officiell (Queen Mary 2 längd 345 m) + hamnbogserbåt (ca 32 m);2026
+Väger Saturn V-raketen mer eller mindre än Queen Mary 2?;NASA (Saturn V startmassa ca 2970 ton) + Queen Mary 2 deplacement (ca 76000 ton);2026
+Är Saturn V-raketen längre eller kortare än en livbåt?;NASA (Saturn V höjd 110,6 m) + SOLAS livbåt (ca 7,5 m);2026
+Har ett Boeing 787 Dreamliner fler eller färre passagerare än en jolle?;Boeing officiell (787-8 200-275 i tvåklass, upp till ca 290 i tät konfiguration) + allmänna data (jolle ca 2 personer);2026
+Har en skolbuss fler eller färre passagerare än en golfbil?;Skolbusstandard USA (full storlek ca 72 passagerare) + golfbil 4-sits (ca 4 personer);2026
+Väger Internationella rymdstationen ISS mer eller mindre än en bulldozer?;NASA ISS Facts (massa 419 725 kg ≈ 420 ton) + allmänna data (Cat D8 ca 40 ton);2026

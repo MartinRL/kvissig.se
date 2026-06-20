@@ -1,0 +1,29 @@
+﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Är ett Airbus A320 längre eller kortare än ett Boeing 737?;Airbus A320;Boeing 737;37,6;39,5;meter;Hur många meter skiljer det i längd?
+Väger en Trabant mer eller mindre än en Mini?;Trabant;Mini;620;650;kilo;Hur många kilo skiljer det?
+Är en husvagn längre eller kortare än en livbåt?;Husvagn;Livbåt;7;7,5;meter;Hur många meter skiljer det i längd?
+Har ett Boeing 737 större eller mindre vingbredd än ett Boeing 787 Dreamliner?;Boeing 737;Boeing 787 Dreamliner;36;60;meter;Hur många meter skiljer det i vingbredd?
+Väger en bulldozer mer eller mindre än en hjullastare?;Bulldozer;Hjullastare;40;25;ton;Hur många ton skiljer det?
+Väger en dumper mer eller mindre än en mobilkran?;Dumper;Mobilkran;40;60;ton;Hur många ton skiljer det?
+Har en Vespa högre eller lägre toppfart än en Harley-Davidson?;Vespa;Harley-Davidson;95;180;km/h;Hur många km/h skiljer det i toppfart?
+Har en höghjuling högre eller lägre toppfart än en tandemcykel?;Höghjuling;Tandemcykel;24;40;km/h;Hur många km/h skiljer det i toppfart?
+Väger en DeLorean mer eller mindre än en Trabant?;DeLorean;Trabant;1230;620;kilo;Hur många kilo skiljer det?
+Är ett Boeing 787 Dreamliner längre eller kortare än ett Airbus A320?;Boeing 787 Dreamliner;Airbus A320;57;37,6;meter;Hur många meter skiljer det i längd?
+Har ett Wright Flyer större eller mindre vingbredd än rymdfärjan?;Wright Flyer;Rymdfärjan;12;24;meter;Hur många meter skiljer det i vingbredd?
+Är en dubbeldäckarbuss i London längre eller kortare än en ledbuss?;Dubbeldäckarbuss (London);Ledbuss;11;18;meter;Hur många meter skiljer det i längd?
+Är Saturn V-raketen längre eller kortare än en varmluftsballong?;Saturn V-raketen;Varmluftsballong;110;20;meter;Hur många meter skiljer det i längd?
+Är en väghyvel längre eller kortare än en golfbil?;Väghyvel;Golfbil;9;2,4;meter;Hur många meter skiljer det i längd?
+Väger en enhjuling mer eller mindre än en elcykel?;Enhjuling;Elcykel;5;25;kilo;Hur många kilo skiljer det?
+Har ett hundspann högre eller lägre toppfart än en bobsleigh?;Hundspann;Bobsleigh;30;135;km/h;Hur många km/h skiljer det i toppfart?
+Har en pulka högre eller lägre toppfart än en bobsleigh?;Pulka;Bobsleigh;40;135;km/h;Hur många km/h skiljer det i toppfart?
+Har en enskenebana högre eller lägre toppfart än ett Eurostar-tåg?;Enskenebana;Eurostar;80;300;km/h;Hur många km/h skiljer det i toppfart?
+Har ett Eurostar-tåg högre eller lägre toppfart än Orient-expressen?;Eurostar;Orient-expressen;300;100;km/h;Hur många km/h skiljer det i toppfart?
+Väger Mars-rovern Curiosity mer eller mindre än månbilen?;Mars-rovern Curiosity;Månbilen;900;210;kilo;Hur många kilo skiljer det?
+Har en skidlift högre eller lägre toppfart än en bergbana?;Skidlift;Bergbana (funikulär);10;35;km/h;Hur många km/h skiljer det i toppfart?
+Har Internationella rymdstationen ISS större eller mindre spännvidd än ett Wright Flyer?;Internationella rymdstationen ISS;Wright Flyer;109;12;meter;Hur många meter skiljer det i spännvidd?
+Är Queen Mary 2 längre eller kortare än en bogserbåt?;Queen Mary 2;Bogserbåt;345;32;meter;Hur många meter skiljer det i längd?
+Väger Saturn V-raketen mer eller mindre än Queen Mary 2?;Saturn V-raketen;Queen Mary 2;2970;76000;ton;Hur många ton skiljer det?
+Är Saturn V-raketen längre eller kortare än en livbåt?;Saturn V-raketen;Livbåt;110;7,5;meter;Hur många meter skiljer det i längd?
+Har ett Boeing 787 Dreamliner fler eller färre passagerare än en jolle?;Boeing 787 Dreamliner;Jolle;290;2;personer;Hur många passagerare skiljer det?
+Har en skolbuss fler eller färre passagerare än en golfbil?;Skolbuss;Golfbil;72;4;personer;Hur många passagerare skiljer det?
+Väger Internationella rymdstationen ISS mer eller mindre än en bulldozer?;Internationella rymdstationen ISS;Bulldozer;420;40;ton;Hur många ton skiljer det?
