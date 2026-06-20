@@ -32,6 +32,9 @@ builder.Services.AddSingleton<PlayerIdentity>();
 // Antiforgery for the catalog POST form (htmx posts the hidden token field).
 builder.Services.AddAntiforgery();
 
+// Plausible Events API client for the server-side gameplay funnel (no-op outside Production).
+builder.Services.AddHttpClient<PlausibleClient>();
+
 var app = builder.Build();
 
 // Behind fly's edge proxy: honour X-Forwarded-Proto/-For so the app sees https

@@ -76,15 +76,14 @@ public sealed class GameApplicationService
     /// <summary>Progression gear: once the current question is scored, ask the next question
     /// or end the game. Host-paced (fired from the Round-results "next" action) so everyone
     /// reads the result together before advancing — co-located, no timer.</summary>
-    public void RunProgressionGear(Guid gameId)
+    public Result<GameEvent[]> RunProgressionGear(Guid gameId)
     {
         var state = _repo.Load(gameId);
         if (state.Phase != GamePhase.Started || !state.CurrentQuestionScored)
-            return;
+            return new Ok<GameEvent[]>([]);
 
-        if (state.HasNextQuestion)
-            Execute(gameId, new AskNextQuestion(gameId));
-        else
-            Execute(gameId, new EndGame(gameId));
+        return state.HasNextQuestion
+            ? Execute(gameId, new AskNextQuestion(gameId))
+            : Execute(gameId, new EndGame(gameId));
     }
 }

@@ -120,7 +120,7 @@ source, no GT).
 ## Phase 12: product-led growth and growth
 - [ ] hur får vi användare/spela att dela spelet med familj och vänner?
 - [ ] logisk nästa lokala marknad? nb. ej blott baserat på språk med land/kultur (t.ex. sverige OCH svenska)
-- [ ] analytics (GA2?)
+- [x] analytics (Plausible Cloud: snippet for traffic + server-side Events API gameplay funnel)
 
 ## product feature validation / lean-startup MVP'ing
 - [ ] klicka på en knapp "köp detta spel som app till en engångskostnad precis som en fysisk kortlek"

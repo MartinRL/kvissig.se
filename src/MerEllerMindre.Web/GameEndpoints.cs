@@ -41,12 +41,14 @@ public static class GameEndpoints
             [FromForm] string hostName,
             GameApplicationService svc,
             PlayerIdentity identity,
+            PlausibleClient plausible,
             HttpContext http) =>
         {
             var result = svc.Open(new OpenLobby(hostName, questionPackId));
             if (result is not DomainOk ok || ok.Value is not [LobbyOpened opened, ..])
                 return Results.BadRequest(result is Err err ? Describe(err.Error) : "Något gick fel.");
 
+            plausible.Track("game_created", http);
             identity.SetPlayer(http, opened.GameId, opened.HostPlayerId);
             http.Response.Headers["HX-Redirect"] = $"/games/{opened.JoinCode:N}";
             return Results.Ok();
@@ -67,6 +69,7 @@ public static class GameEndpoints
             [FromForm] string playerName,
             GameApplicationService svc,
             PlayerIdentity identity,
+            PlausibleClient plausible,
             HttpContext http) =>
         {
             if (Resolve(svc, code) is not var (gameId, state))
@@ -76,6 +79,7 @@ public static class GameEndpoints
             if (result is not DomainOk ok || ok.Value is not [PlayerJoined joined, ..])
                 return Results.BadRequest(result is Err err ? Describe(err.Error) : "Något gick fel.");
 
+            plausible.Track("player_joined", http);
             identity.SetPlayer(http, gameId, joined.PlayerId);
             http.Response.Headers["HX-Redirect"] = $"/games/{state.JoinCode:N}";
             return Results.Ok();
@@ -95,12 +99,13 @@ public static class GameEndpoints
             return RenderState(state, identity.GetPlayer(http, gameId), antiforgery.GetAndStoreTokens(http).RequestToken!, AbsoluteJoinUrl(http, state.JoinCode), http.Request.Query.ContainsKey("url"));
         });
 
-        app.MapPost("/games/{code}/start", (string code, GameApplicationService svc, PlayerIdentity identity, IAntiforgery antiforgery, HttpContext http) =>
+        app.MapPost("/games/{code}/start", (string code, GameApplicationService svc, PlayerIdentity identity, PlausibleClient plausible, IAntiforgery antiforgery, HttpContext http) =>
         {
             if (Resolve(svc, code) is not var (gameId, _))
                 return Results.NotFound("Spelet hittades inte.");
 
-            svc.Execute(gameId, new StartGame(gameId));
+            if (svc.Execute(gameId, new StartGame(gameId)) is DomainOk { Value: [GameStarted, ..] })
+                plausible.Track("game_started", http);
             var state = svc.Load(gameId);
             return RenderState(state, identity.GetPlayer(http, gameId), antiforgery.GetAndStoreTokens(http).RequestToken!, AbsoluteJoinUrl(http, state.JoinCode));
         });
@@ -164,12 +169,13 @@ public static class GameEndpoints
             return RenderState(scored, viewer, antiforgery.GetAndStoreTokens(http).RequestToken!, AbsoluteJoinUrl(http, scored.JoinCode));
         });
 
-        app.MapPost("/games/{code}/next", (string code, GameApplicationService svc, PlayerIdentity identity, IAntiforgery antiforgery, HttpContext http) =>
+        app.MapPost("/games/{code}/next", (string code, GameApplicationService svc, PlayerIdentity identity, PlausibleClient plausible, IAntiforgery antiforgery, HttpContext http) =>
         {
             if (Resolve(svc, code) is not var (gameId, _))
                 return Results.NotFound("Spelet hittades inte.");
 
-            svc.RunProgressionGear(gameId);
+            if (svc.RunProgressionGear(gameId) is DomainOk { Value: var events } && events.Any(e => e is GameEnded))
+                plausible.Track("game_completed", http);
             var state = svc.Load(gameId);
             return RenderState(state, identity.GetPlayer(http, gameId), antiforgery.GetAndStoreTokens(http).RequestToken!, AbsoluteJoinUrl(http, state.JoinCode));
         });
