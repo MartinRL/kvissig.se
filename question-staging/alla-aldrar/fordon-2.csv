@@ -1,0 +1,27 @@
+﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Väger en brandbil mer eller mindre än en ambulans?;Brandbil;Ambulans;14000;3500;kilo;Hur många kilo skiljer det?
+Har en grävmaskin högre eller lägre tjänstevikt än en traktor?;Grävmaskin;Traktor;25000;8000;kilo;Hur många kilo skiljer vikten?
+Har en snöskoter högre eller lägre toppfart än en vattenskoter?;Snöskoter;Vattenskoter;150;110;km/h;Hur många km/h skiljer toppfarten?
+Har en gaffeltruck högre eller lägre toppfart än en snöskoter?;Gaffeltruck;Snöskoter;25;150;km/h;Hur många km/h skiljer toppfarten?
+Är ett luftskepp längre eller kortare än ett godståg?;Luftskepp;Godståg;240;700;meter;Hur många meter skiljer längden?
+Är en zeppelinare längre eller kortare än ett containerfartyg?;Zeppelinare;Containerfartyg;245;400;meter;Hur många meter skiljer längden?
+Är en husbil längre eller kortare än en bilfärja?;Husbil;Bilfärja;7;180;meter;Hur många meter skiljer längden?
+Väger en skördetröska mer eller mindre än en grävmaskin?;Skördetröska;Grävmaskin;15000;25000;kilo;Hur många kilo skiljer det?
+Väger en monstertruck mer eller mindre än en grävmaskin?;Monstertruck;Grävmaskin;4500;25000;kilo;Hur många kilo skiljer det?
+Har en dragster högre eller lägre toppfart än en Formel 1-bil?;Dragster;Formel 1-bil;530;360;km/h;Hur många km/h skiljer toppfarten?
+Har ett jaktplan högre eller lägre toppfart än en helikopter?;Jaktplan;Helikopter;2400;260;km/h;Hur många km/h skiljer toppfarten?
+Väger ett segelflygplan mer eller mindre än en husbil?;Segelflygplan;Husbil;400;3200;kilo;Hur många kilo skiljer det?
+Är ett kryssningsfartyg längre eller kortare än Titanic?;Kryssningsfartyg;Titanic;360;269;meter;Hur många meter skiljer längden?
+Är ett godståg längre eller kortare än en spårvagn?;Godståg;Spårvagn;700;30;meter;Hur många meter skiljer längden?
+Har en linbanegondol högre eller lägre toppfart än en spårvagn?;Linbanegondol;Spårvagn;20;60;km/h;Hur många km/h skiljer toppfarten?
+Har en cykelrickshaw högre eller lägre toppfart än en tuktuk?;Cykelrickshaw;Tuktuk;25;45;km/h;Hur många km/h skiljer toppfarten?
+Väger en fyrhjuling mer eller mindre än en snöskoter?;Fyrhjuling;Snöskoter;300;250;kilo;Hur många kilo skiljer det?
+Är en ubåt längre eller kortare än en oljetanker?;Ubåt;Oljetanker;170;380;meter;Hur många meter skiljer längden?
+Har en racingbåt högre eller lägre toppfart än en motorbåt?;Racingbåt;Motorbåt;250;60;km/h;Hur många km/h skiljer toppfarten?
+Är en ambulans längre eller kortare än en brandbil?;Ambulans;Brandbil;6;10;meter;Hur många meter skiljer längden?
+Har en skördetröska starkare eller svagare motor än en traktor?;Skördetröska;Traktor;400;100;hk;Hur många hästkrafter skiljer det?
+Har en grävmaskin starkare eller svagare motor än en monstertruck?;Grävmaskin;Monstertruck;150;1500;hk;Hur många hästkrafter skiljer det?
+Väger en husbil mer eller mindre än en ambulans?;Husbil;Ambulans;3200;3500;kilo;Hur många kilo skiljer det?
+Väger en tuktuk mer eller mindre än en fyrhjuling?;Tuktuk;Fyrhjuling;350;300;kilo;Hur många kilo skiljer det?
+Har en dragster högre eller lägre toppfart än en racingbåt?;Dragster;Racingbåt;530;250;km/h;Hur många km/h skiljer toppfarten?
+Är ett segelflygplan längre eller kortare än ett jaktplan?;Segelflygplan;Jaktplan;7;15;meter;Hur många meter skiljer längden?
