@@ -1,0 +1,29 @@
+﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Har en kattuggla större eller mindre vingspann än en berguv?;Kattuggla;Berguv;90;160;centimeter;Hur många centimeter skiljer det?
+Är en trana högre eller lägre än en grågås?;Trana;Grågås;120;75;centimeter;Hur många centimeter skiljer det?
+Väger en igelkott mer eller mindre än en mullvad?;Igelkott;Mullvad;1;0,1;kilo;Hur många kilo skiljer det?
+Väger en näbbmus mer eller mindre än en igelkott?;Näbbmus;Igelkott;0,01;1;kilo;Hur många kilo skiljer det?
+Väger en ejder mer eller mindre än en sångsvan?;Ejder;Sångsvan;2,5;10;kilo;Hur många kilo skiljer det?
+Har en fiskmås större eller mindre vingspann än en storskarv?;Fiskmås;Storskarv;115;145;centimeter;Hur många centimeter skiljer det?
+Flyger en pilgrimsfalk fortare eller långsammare än en tornfalk under en dykning?;Pilgrimsfalk;Tornfalk;350;60;km/h;Hur många km/h skiljer det?
+Väger en koltrast mer eller mindre än en domherre?;Koltrast;Domherre;0,1;0,025;kilo;Hur många kilo skiljer det?
+Väger en blåmes mer eller mindre än en nötväcka?;Blåmes;Nötväcka;0,011;0,022;kilo;Hur många kilo skiljer det?
+Väger en mård mer eller mindre än en hermelin?;Mård;Hermelin;1,2;0,25;kilo;Hur många kilo skiljer det?
+Är en utter längre eller kortare än en mink?;Utter;Mink;120;55;centimeter;Hur många centimeter skiljer det?
+Väger en fjällräv mer eller mindre än en ren?;Fjällräv;Ren;3,5;90;kilo;Hur många kilo skiljer det?
+Väger en fälthare mer eller mindre än en mufflon?;Fälthare;Mufflon;4;50;kilo;Hur många kilo skiljer det?
+Är en harr längre eller kortare än en lake?;Harr;Lake;40;60;centimeter;Hur många centimeter skiljer det?
+Är en mört längre eller kortare än en sik?;Mört;Sik;25;50;centimeter;Hur många centimeter skiljer det?
+Är en braxen längre eller kortare än en id?;Braxen;Id;50;45;centimeter;Hur många centimeter skiljer det?
+Är en asp längre eller kortare än en sutare?;Asp (fisk);Sutare;70;40;centimeter;Hur många centimeter skiljer det?
+Blir en röding i regel äldre eller yngre än en öring?;Röding;Öring;20;18;år;Hur många år skiljer det?
+Blir en ål i regel äldre eller yngre än en nors?;Ål;Nors;25;6;år;Hur många år skiljer det?
+Är en sill längre eller kortare än en torsk?;Sill;Torsk;30;100;centimeter;Hur många centimeter skiljer det?
+Är en makrill längre eller kortare än en torsk?;Makrill;Torsk;40;100;centimeter;Hur många centimeter skiljer det?
+Är en fullvuxen bok högre eller lägre än en hassel?;Bok;Hassel;30;6;meter;Hur många meter skiljer det?
+Är en fullvuxen lind högre eller lägre än en hägg?;Lind;Hägg;25;8;meter;Hur många meter skiljer det?
+Är en fullvuxen asp högre eller lägre än en alm?;Asp (träd);Alm;25;30;meter;Hur många meter skiljer det?
+Är lingonriset högre eller lägre än ljungen?;Lingonris;Ljung;0,2;0,4;meter;Hur många meter skiljer det?
+Är en snok längre eller kortare än en huggorm?;Snok;Huggorm;120;60;centimeter;Hur många centimeter skiljer det?
+Är en kopparödla längre eller kortare än en huggorm?;Kopparödla;Huggorm;40;60;centimeter;Hur många centimeter skiljer det?
+Har en kungsörn större eller mindre vingspann än en berguv?;Kungsörn;Berguv;215;160;centimeter;Hur många centimeter skiljer det?
