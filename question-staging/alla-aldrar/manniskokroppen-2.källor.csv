@@ -1,0 +1,29 @@
+﻿fråga;källa;år
+Är lårbenet längre eller kortare än överarmsbenet?;Gray's Anatomy / anatomiska standardvärden (femur ~46 cm, humerus ~36 cm);2020
+Är strålbenet i underarmen längre eller kortare än skenbenet?;Anatomiska standardvärden, radius ~24 cm vs tibia ~36 cm;2020
+Väger levern mer eller mindre än hjärnan?;Duke Pathology Typical Organ Weights / Britannica (lever ~1500 g, hjärna ~1400 g);2018
+Väger mjälten mer eller mindre än hjärtat?;Duke Pathology Typical Organ Weights (mjälte ~150-170 g, hjärta ~300 g);2018
+Väger en lunga mer eller mindre än levern?;Duke Pathology Typical Organ Weights (lunga ~600 g, lever ~1500 g);2018
+Väger huden mer eller mindre än hela skelettet?;Wikipedia Human skeleton (skelett ~10,5 kg) / hudvikt ~3-4 kg;2020
+Har människokroppen fler eller färre muskler än ben?;Cleveland Clinic / standardanatomi (>600 muskler, 206 ben);2022
+Har en vuxen fler eller färre tänder än ryggkotor?;Cleveland Clinic / Wikipedia Spinal column (32 tänder, 33 kotor);2022
+Har ryggraden fler eller färre halskotor än bröstkotor?;Wikipedia Spinal column / StatPearls (7 hals-, 12 bröstkotor);2022
+Är kroppens alla blodkärl tillsammans längre eller kortare än jordens omkrets vid ekvatorn?;Krogh-uppskattning ~96 000 km / jordens ekvatorsomkrets 40 075 km;2020
+Är tunntarmen längre eller kortare än en vuxens kroppslängd?;Vedantu/StatPearls (tunntarm ~7 m) / genomsnittlig kroppslängd 1,8 m;2020
+Har hjärnan fler eller färre nervceller än Vintergatan har stjärnor?;Herculano-Houzel 2009 (86 mdr nervceller) / NASA (200 mdr stjärnor);2009
+Lever en röd blodkropp längre eller kortare tid än en blodplätt?;StanfordBloodCenter/MSKCC (röd blodkropp 120 dygn, blodplätt ~10 dygn);2021
+Är hela matsmältningskanalen längre eller kortare än en vuxens kroppslängd?;Liv Hospital/medicinsk litteratur (mag-tarmkanal ~9 m) / kroppslängd 1,8 m;2020
+Har lungorna invändigt större eller mindre yta än en tennisplan?;PMC Hasleton/UCSF (lungyta ~75 m²) / tennisplan ~260 m²;2020
+Är matstrupen längre eller kortare än tjocktarmen?;Anatomisk standard (matstrupe ~25 cm, tjocktarm ~1,5 m);2020
+Är vadbenet längre eller kortare än nyckelbenet?;PMC kadaverstudie (fibula ~33-35 cm) / Wikipedia Clavicle (~15 cm);2019
+Är underkäken längre eller kortare än stigbygeln, kroppens minsta ben?;Wikipedia Stapes (~3 mm) / anatomisk underkäkslängd ~10 cm;2020
+Slår hjärtat fler eller färre slag per minut när man är vaken och vilar än när man sover?;Sleep Foundation / Cleveland Clinic (vilopuls ~70, sovande ~55 bpm);2022
+Tar man fler eller färre andetag per minut när man sover än när man är vaken?;Sleep Foundation / WHOOP (normal andningsfrekvens 12-20/min);2022
+Kissar en vuxen ut mer eller mindre vätska per dygn än mängden blod i kroppen?;MedlinePlus (urin ~1,5 l/dygn) / StatPearls Blood Volume (~5 l);2022
+Pumpar hjärtat mer eller mindre blod på ett helt dygn än på en timme?;American Heart Association / Cleveland Clinic (~5 l/min → ~300 l/h, ~7000 l/dygn);2020
+Hör en människa högre eller lägre frekvenser än en hund?;Physics Factbook / BBC Science Focus (människa 20 kHz, hund ~45 kHz);2020
+Väger levern mer eller mindre än båda njurarna tillsammans?;Duke Pathology (lever ~1,5 kg) / njurar ~120-170 g styck;2018
+Är skenbenet längre eller kortare än lårbenet?;Anatomiska standardvärden (tibia ~36 cm, femur ~46 cm);2020
+Utgör blodet en större eller mindre andel av kroppsvikten än hjärnan?;Hematology.org (blod ~7 %) / Britannica (hjärna ~2 % av kroppsvikt);2020
+Slår hjärtat fler eller färre gånger per år än vi tar andetag?;Beräkning från vilopuls ~70 bpm (~37 milj/år) och andning ~15/min (~8 milj/år);2020
+Lever en cell i tarmslemhinnan kortare eller längre tid än en röd blodkropp?;PMC tarmepitel-omsättning (3-5 dygn) / röd blodkropp 120 dygn;2016
