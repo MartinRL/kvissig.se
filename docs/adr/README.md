@@ -9,3 +9,4 @@
 | [005](005-csv-questions.md) | CSV File for Questions | Accepted |
 | [006](006-result-railway-oriented.md) | Error Handling via Result / Railway Oriented Programming | Accepted |
 | [007](007-razor-components-static-ssr.md) | Razor Components in Static SSR as the Renderer | Accepted |
+| [008](008-plausible-analytics.md) | Plausible Cloud for Analytics | Accepted |
