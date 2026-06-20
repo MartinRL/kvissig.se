@@ -2,7 +2,7 @@
 
 > En 47 år gammal kostnadsmodell prissätter min helg till $492 788.
 
-## 1. Ankaret
+## Ankaret
 
 En 47 år gammal kostnadsmodell prissätter min helg till **$492 788**.
 
@@ -25,7 +25,7 @@ Och innan någon ingenjör i baksätet sätter sitt eget mot-ankare — *"pfft, 
 vibe-codat helgleksak, värt typ $0"* — nej. Det är lika fel, åt andra hållet. Den här
 texten handlar om vad som ligger emellan, och varför avståndet inte mäts i rader kod.
 
-## 2. Ankaret ljuger åt två håll
+## Ankaret ljuger åt två håll
 
 COCOMO (Constructive Cost Model, Barry Boehm, **1981**) skattar kostnad ur en enda
 ingång: antal rader kod, körda genom en takt kalibrerad mot vattenfallsprojekt på
@@ -56,7 +56,7 @@ största delen av arbetet väger ingenting.
 Det är pudelns kärna: **modellen mäter skuggan, inte det som kastar den.** Rader kod är
 skuggan. Det som kastar skuggan — övad metod — syns inte i en SLOC-räknare.
 
-## 3. Vad som faktiskt gjorde det snabbt: övad metod, inte AI-typing
+## Vad som faktiskt gjorde det snabbt: övad metod, inte AI-typing
 
 Hävstången var inte att jag skrev fort, och inte att en AI skrev åt mig. Den var att
 *besluten redan var fattade* — av en uppsättning seniora discipliner jag har **övat**
@@ -126,7 +126,7 @@ Det här är inte tre lösryckta mönster — de hänger på en gemensam ställn
 Inget av det här är talang. Det är *övad ingenjörsdisciplin*. Det är repetition tills besluten
 sitter i ryggmärgen och beslutskostnaden går mot noll.
 
-## 4. Kvalitet påstås inte — den upprätthålls
+## Kvalitet påstås inte — den upprätthålls
 
 "Snabbt och billigt" betyder ingenting om det går sönder. Så det här är inte ett
 påstående om kvalitet — det är en *mekanism* för den.
@@ -149,7 +149,7 @@ påstående om kvalitet — det är en *mekanism* för den.
   förebygger bloat *vid källan* — komplexiteten skrivs aldrig, så det finns inget att
   städa bort i efterhand. Den billigaste förenklingen är den man aldrig behövde göra.
 
-## 5. Och inte bara kod — content också
+## Och inte bara kod — content också
 
 Frågedatan är inte hopkastad. Varje kort passerar en pipeline av specialiserade agenter
 innan det når den live-paketet:
@@ -164,41 +164,8 @@ innan det når den live-paketet:
 Hög kvalitet, stor människa/AI-insats — och **noll rader kod**. Lika osynligt för COCOMO
 som arkitekturen. Content är hantverk på samma villkor som mjukvaran.
 
-## 6. Vad som kollapsar — och vad som blir kvar
 
-Återvänd till hävstången i §3: den var aldrig tangenttrycken. När metoden är övad och
-besluten fattade kollapsar själva *kodandet* mot noll — skrivandet av rader är det sista,
-billigaste steget, inte arbetet. COCOMO prissätter exakt det som kollapsade (rader kod) och
-är blind för det som blir kvar. Samma "skugga vs. det som kastar den" som i §2 — nu vänt
-framåt: skuggan krymper, men det som kastar den gör det inte.
-
-När kodandet kollapsar flyttar värdet. Två vägar blir kvar.
-
-**Product engineer.** Den som på djupet förstår *vad* som ska byggas och *varför* — vilket
-problem, för vem, vad som ska skippas. Det är omdöme, inte syntax, och det överlever varje
-modellgeneration. ACMM landar i samma slutsats: *"the decision about what to build and what
-to skip — that's still me."* Modellen kan implementera; den kan inte bestämma vad som är
-värt att bygga.
-
-**Elite engineer.** En av få som bygger själva *fabriken* — agenterna, harnesset,
-pipelinen som producerar och granskar arbetet. ACMM:s kärnfynd: *"the intelligence is in
-the system, not the model."* Modellen är en commodity; infrastrukturen runt den är
-differentieringen. Att byta modell tar en eftermiddag; att bygga om systemet runt den tar
-månader.
-
-Det är ett hävstångsskifte. Förr multiplicerade en force-multiplier *genom människor* —
-staff+-ingenjören med starka people skills som lyfter ett team. Stark hävstång, men taket
-sitter i antalet människor man kan nå: kanske 10x. Att multiplicera *genom agenter, harness
-och pipeline* har inte samma tak — riktningen pekar mot 100x, 1000x. Riktning, inte ett mätt
-löfte; var x faktiskt landar är en empirisk fråga, inte en utfästelse (jfr kvalitetsnoten
-nedan — vi påstår inte siffror vi inte mätt).
-
-Och kvissig är beviset i miniatyr. Content-pipelinen (§5) *är* en sådan fabrik: agenter som
-författar, faktagranskar, putsar och kurerar utan att jag skriver en rad. Metoden (§3) och
-mekanismen (§4) *är* precis vad som blir kvar när kodandet kollapsar — de besluten, den
-disciplinen, det som kastar skuggan.
-
-## 7. Practise what you preach
+## Practise what you preach
 
 Skickligheten *är* predikan, och predikan är övad. Det var aldrig AI:n och aldrig
 tangenttrycken — det var att besluten redan var fattade, av discipliner jag tränat tills
@@ -210,7 +177,7 @@ spelets diagram — och draftandet följde exakt samma övade metod som koden.
 
 Ankaret var aldrig poängen. Disciplinen är det.
 
-## 8. Spela
+## Spela
 
 Nog teori — spelet är till för att spelas. Samla gänget, öppna
 [kvissig.se](https://kvissig.se) och se vem som gissar närmast. Mer eller mindre?

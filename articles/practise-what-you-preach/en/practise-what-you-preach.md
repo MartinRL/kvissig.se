@@ -2,7 +2,7 @@
 
 > A 47-year-old cost model prices my weekend at $492,788.
 
-## 1. The Anchor
+## The Anchor
 
 A 47-year-old cost model prices my weekend at **$492,788**.
 
@@ -23,7 +23,7 @@ And before some engineer in the back seat drops their own counter-anchor — *"p
 vibe-coded weekend toy, worth maybe $0"* — no. That's just as wrong, in the other direction.
 This piece is about what lies in between, and why the distance isn't measured in lines of code.
 
-## 2. The Anchor Lies in Both Directions
+## The Anchor Lies in Both Directions
 
 COCOMO (Constructive Cost Model, Barry Boehm, **1981**) estimates cost from a single input:
 the number of lines of code, run through a rate calibrated against waterfall projects on
@@ -55,7 +55,7 @@ That's the crux of it: **the model measures the shadow, not the thing casting it
 code are the shadow. The thing casting the shadow — practised method — doesn't show up in a
 SLOC counter.
 
-## 3. What Actually Made It Fast: Practised Method, Not AI Typing
+## What Actually Made It Fast: Practised Method, Not AI Typing
 
 The leverage wasn't that I typed fast, and it wasn't that an AI wrote it for me. It was that
 *the decisions were already made* — by a set of senior disciplines I've **practised** until
@@ -125,7 +125,7 @@ These aren't three loose patterns — they hang on a common scaffold:
 None of this is talent. It's *practised engineering discipline*. It's repetition until the
 decisions sit in the spinal cord and the cost of deciding goes to zero.
 
-## 4. Quality Isn't Claimed — It's Enforced
+## Quality Isn't Claimed — It's Enforced
 
 "Fast and cheap" means nothing if it breaks. So this isn't a claim about quality — it's a
 *mechanism* for it.
@@ -146,7 +146,7 @@ decisions sit in the spinal cord and the cost of deciding goes to zero.
   bloat *at the source* — the complexity is never written, so there's nothing to clean up after
   the fact. The cheapest simplification is the one you never had to make.
 
-## 5. And Not Just Code — Content Too
+## And Not Just Code — Content Too
 
 The question data isn't slapped together. Every card passes through a pipeline of specialised
 agents before it reaches the live pack:
@@ -161,40 +161,8 @@ value and direction against a source and pins the year (unverifiable = rejected)
 High quality, large human/AI effort — and **zero lines of code**. Just as invisible to COCOMO
 as the architecture. Content is craft on the same terms as the software.
 
-## 6. What Collapses — and What Remains
 
-Return to the leverage in §3: it was never the keystrokes. When the method is practised and
-the decisions made, the *coding itself* collapses toward zero — writing the lines is the last,
-cheapest step, not the work. COCOMO prices exactly what collapsed (lines of code) and is blind
-to what remains. The same "shadow vs. the thing casting it" as in §2 — now turned forward: the
-shadow shrinks, but the thing casting it doesn't.
-
-When the coding collapses, the value moves. Two paths remain.
-
-**Product engineer.** The one who deeply understands *what* should be built and *why* — which
-problem, for whom, what to skip. That's judgement, not syntax, and it survives every model
-generation. ACMM lands on the same conclusion: *"the decision about what to build and what to
-skip — that's still me."* The model can implement; it can't decide what's worth building.
-
-**Elite engineer.** One of the few who builds the *factory* itself — the agents, the harness,
-the pipeline that produces and reviews the work. ACMM's core finding: *"the intelligence is in
-the system, not the model."* The model is a commodity; the infrastructure around it is the
-differentiation. Swapping the model takes an afternoon; rebuilding the system around it takes
-months.
-
-It's a shift in leverage. The old force-multiplier multiplied *through people* — the staff+
-engineer with strong people skills who lifts a team. Strong leverage, but the ceiling sits in
-the number of people you can reach: maybe 10x. Multiplying *through agents, harness, and
-pipeline* has no such ceiling — the direction points toward 100x, 1000x. A direction, not a
-measured promise; where x actually lands is an empirical question, not a commitment (cf. the
-quality note above — we don't claim numbers we haven't measured).
-
-And kvissig is the proof in miniature. The content pipeline (§5) *is* such a factory: agents
-that author, fact-check, polish, and curate without me writing a line. The method (§3) and the
-mechanism (§4) *are* exactly what remains when the coding collapses — those decisions, that
-discipline, the thing casting the shadow.
-
-## 7. Practise What You Preach
+## Practise What You Preach
 
 The skill *is* the sermon, and the sermon is practised. It was never the AI and never the
 keystrokes — it was that the decisions were already made, by disciplines I'd drilled until they
@@ -206,7 +174,7 @@ diagrams — and the drafting followed the exact same practised method as the co
 
 The anchor was never the point. The discipline is.
 
-## 8. Play
+## Play
 
 Enough theory — the game is made to be played. Gather your friends, open
 [kvissig.se](https://kvissig.se), and guess. More or less?

@@ -57,7 +57,7 @@
     <rect x="290" y="108" width="320" height="344" rx="26" fill="url(#shellGrad)"/>
   </g>
   <text x="450" y="136" font-size="16" font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="0.5">IMPERATIVE SHELL</text>
-  <text x="450" y="156" font-size="11.5" font-weight="500" fill="#cbd5e1" text-anchor="middle">all I/O lives here</text>
+  <text x="450" y="156" font-size="11.5" font-weight="500" fill="#cbd5e1" text-anchor="middle">all I/O lives here &#8212; messier than it looks</text>
 
   <!-- shell side-effect chips (this codebase's real I/O) -->
   <g filter="url(#softShadow)">
@@ -73,12 +73,13 @@
   <g filter="url(#softShadow)">
     <rect x="306" y="346" width="132" height="40" rx="10" fill="url(#seGrad)" stroke="#94a3b8" stroke-width="1.5"/>
   </g>
-  <text x="372" y="371" font-size="12.5" font-weight="700" fill="#334155" text-anchor="middle">Clock &#183; Now</text>
+  <text x="372" y="371" font-size="12.5" font-weight="700" fill="#334155" text-anchor="middle">Web server &#183; HTTP</text>
 
   <g filter="url(#softShadow)">
-    <rect x="448" y="346" width="132" height="40" rx="10" fill="url(#seGrad)" stroke="#94a3b8" stroke-width="1.5"/>
+    <rect x="448" y="346" width="132" height="40" rx="10" fill="url(#seGrad)" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5 4"/>
   </g>
-  <text x="514" y="371" font-size="12.5" font-weight="700" fill="#334155" text-anchor="middle">Id gen &#183; NewGuid</text>
+  <text x="514" y="364" font-size="12.5" font-weight="700" fill="#334155" text-anchor="middle">DI &#183; config &#183; logging</text>
+  <text x="514" y="378" font-size="9.5" font-weight="500" fill="#64748b" text-anchor="middle">&#8230; and the rest</text>
 
   <!-- ============== PURE CORE (inner zone) ============== -->
   <g filter="url(#shadow)">
