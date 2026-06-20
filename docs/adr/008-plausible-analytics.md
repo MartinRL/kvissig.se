@@ -1,7 +1,7 @@
 ---
 status: Accepted
 created: 2026-06-20
-revised: 2026-06-20
+revised:
 ---
 
 # ADR 008: Plausible Cloud for Analytics
