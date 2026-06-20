@@ -1,0 +1,29 @@
+﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Är en blixt varmare eller kallare än solens yta?;Blixt;Solens yta;30000;5500;°C;Hur många grader skiljer det?
+Är vattnets kokpunkt högre eller lägre än temperaturen i en het bastu?;Vattnets kokpunkt;Het bastu;100;80;°C;Hur många grader skiljer det?
+Har en regnbåge fler eller färre färger än vad ett år har månader?;Regnbågen;Året;7;12;antal;Hur många i antal skiljer det?
+Har ett år fler eller färre årstider än månader?;Årstider på ett år;Månader på ett år;4;12;antal;Hur många i antal skiljer det?
+Blåser det mer eller mindre i en orkan än i en storm?;Orkan;Storm;119;89;km/h;Hur många km/h skiljer det?
+Är en regndroppe större eller mindre än ett hagelkorn i diameter?;Regndroppe;Hagelkorn;5;20;millimeter;Hur många millimeter skiljer det?
+Är en fullvuxen ek högre eller lägre än en fullvuxen gran?;Fullvuxen ek;Fullvuxen gran;25;40;meter;Hur många meter skiljer det?
+Är en fullvuxen tall högre eller lägre än en fullvuxen björk?;Fullvuxen tall;Fullvuxen björk;30;20;meter;Hur många meter skiljer det?
+Är en solros högre eller lägre än en kokospalm?;Solros;Kokospalm;3;25;meter;Hur många meter skiljer det?
+Har en vecka fler eller färre dagar än en månad?;Veckan;Månaden;7;30;dagar;Hur många dagar skiljer det?
+Har februari fler eller färre dagar än juli?;Februari;Juli;28;31;dagar;Hur många dagar skiljer det?
+Finns det fler eller färre kontinenter än världshav på jorden?;Kontinenter;Världshav;7;5;antal;Hur många i antal skiljer det?
+Är en solros högre eller lägre än en maskros?;Solros;Maskros;3;0,3;meter;Hur många meter skiljer det?
+Blir en björk i regel äldre eller yngre än en tall?;Björk;Tall;80;150;år;Hur många år skiljer det?
+Väger ett cumulusmoln mer eller mindre än en afrikansk elefant?;Cumulusmoln;Afrikansk elefant;500;6;ton;Hur många ton skiljer det?
+Har en regnbåge fler eller färre färger än antalet toner i en oktav?;Regnbågen;Oktaven;7;8;antal;Hur många i antal skiljer det?
+Syns en större eller mindre del av ett isberg ovanför vattnet än under?;Del ovanför vattnet;Del under vattnet;10;90;procent;Hur många procentenheter skiljer det?
+Täcker vatten en större eller mindre del av jordens yta än land?;Vatten på jordytan;Land på jordytan;71;29;procent;Hur många procentenheter skiljer det?
+Faller det mer eller mindre regn under en vanlig regnskur än under ett skyfall?;Vanlig regnskur;Skyfall;5;50;millimeter;Hur många millimeter skiljer det?
+Är det varmare eller kallare en het sommardag än i en bastu?;Het sommardag;Bastu;30;80;°C;Hur många grader skiljer det?
+Blåser det mer eller mindre i en tornado än i en orkan?;Tornado;Orkan;300;119;km/h;Hur många km/h skiljer det?
+Har ett skottår fler eller färre dagar än ett vanligt år?;Skottår;Vanligt år;366;365;dagar;Hur många dagar skiljer det?
+Är en tallkotte längre eller kortare än en grankotte?;Tallkotte;Grankotte;5;12;centimeter;Hur många centimeter skiljer det?
+Är en kokospalm högre eller lägre än ett äppelträd?;Kokospalm;Äppelträd;25;5;meter;Hur många meter skiljer det?
+Faller det mer eller mindre nederbörd på ett år i en regnskog än i en öken?;Regnskog;Öken;2500;100;millimeter;Hur många millimeter skiljer det?
+Har en prästkrage fler eller färre kronblad än en smörblomma?;Prästkrage;Smörblomma;20;5;antal;Hur många i antal skiljer det?
+Är ett tallbarr längre eller kortare än ett granbarr?;Tallbarr;Granbarr;5;2;centimeter;Hur många centimeter skiljer det?
+Är en sommarnatt under midnattssolen längre eller kortare än en sommarnatt i Stockholm?;Midnattssolen;Stockholm;24;18;timmar ljus;Hur många timmar skiljer det?
