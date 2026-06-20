@@ -1,0 +1,15 @@
+﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Är tornet på Stockholms stadshus högre eller lägre än Riddarholmskyrkans spira?;Stockholms stadshus torn;Riddarholmskyrkan;106;90,8;meter;Hur många meter skiljer det i höjd?
+Patenterades skiftnyckeln före eller efter dynamiten?;Skiftnyckeln;Dynamiten;1892;1867;årtal;Hur många år skiljer det mellan uppfinningarna?
+Är Öresundsbron längre eller kortare än Ölandsbron?;Öresundsbron;Ölandsbron;7845;6072;meter;Hur många meter skiljer det i längd?
+Är Uppsala domkyrka högre eller lägre än Lunds domkyrka?;Uppsala domkyrka;Lunds domkyrka;118,7;55;meter;Hur många meter skiljer det i höjd?
+Är Höga Kusten-bron längre eller kortare än Älvsborgsbron i Göteborg?;Höga Kusten-bron;Älvsborgsbron;1867;933;meter;Hur många meter skiljer det i längd?
+Är Göta kanal längre eller kortare än Dalslands kanal?;Göta kanal;Dalslands kanal;190;254;kilometer;Hur många kilometer skiljer det i längd?
+Är Tjörnbron längre eller kortare än Älvsborgsbron i Göteborg?;Tjörnbron;Älvsborgsbron;664;933;meter;Hur många meter skiljer det i längd?
+Är Lunds domkyrka högre eller lägre än Riddarholmskyrkan i Stockholm?;Lunds domkyrka;Riddarholmskyrkan;55;90,8;meter;Hur många meter skiljer det i höjd?
+Är Ölandsbron längre eller kortare än Älvsborgsbron i Göteborg?;Ölandsbron;Älvsborgsbron;6072;933;meter;Hur många meter skiljer det i längd?
+Är Tjörnbron längre eller kortare än Höga Kusten-bron?;Tjörnbron;Höga Kusten-bron;664;1867;meter;Hur många meter skiljer det i längd?
+Är Karlatornet i Göteborg högre eller lägre än Lunds domkyrka?;Karlatornet;Lunds domkyrka;246;55;meter;Hur många meter skiljer det i höjd?
+Är Riddarholmskyrkan i Stockholm högre eller lägre än Karlatornet i Göteborg?;Riddarholmskyrkan;Karlatornet;90,8;246;meter;Hur många meter skiljer det i höjd?
+Har Stockholms slott fler eller färre rum än Läckö slott?;Stockholms slott;Läckö slott;1430;248;rum;Hur många rum skiljer det?
+Är Göta kanal längre eller kortare än Tjörnbron?;Göta kanal;Tjörnbron;190;0,664;kilometer;Hur många kilometer skiljer det i längd?
