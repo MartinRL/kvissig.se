@@ -98,10 +98,17 @@ source, no GT).
 - [x] textöverlapp under staplarna när man svarar. ser bra ut när man har svarat och ser svaret.
 - [x] pongsammanställning ska visa vilken "rond" som just spelats (under spelets gång visas rond#/21)
 - [ ] Mobile-friendly CSS
-- [ ] PWA manifest
+- [x] PWA manifest
+  - [ ] Skärmdumpar för rikare installationsdialog (valfritt — påverkar inte "installable")
+    - [ ] Starta appen lokalt: `dotnet run --project src/MerEllerMindre.Web`
+    - [ ] Desktop (wide): sätt Chrome-fönstret till ~1280×720, öppna t.ex. quiz-katalogen. DevTools (F12) → Kör kommando (Ctrl+Shift+P) → "Capture screenshot". Spara som `wwwroot/screenshots/desktop-1280x720.png`
+    - [ ] Mobil (narrow): DevTools → Device toolbar (Ctrl+Shift+M) → välj t.ex. 720×1280 (porträtt) → "Capture screenshot". Spara som `wwwroot/screenshots/mobil-720x1280.png`
+    - [ ] Krav på bilderna: 320–3840 px per sida, längsta sidan ≤ 2,3× kortaste, PNG/JPEG; alla med samma form_factor måste ha samma bildförhållande
+    - [ ] Lägg till `screenshots`-blocket i `wwwroot/manifest.json` (en `wide` + en `narrow`, med `src`, `sizes`, `type`, `form_factor`, `label`)
+    - [ ] Verifiera i Chrome DevTools → Application → Manifest att skärmdumps-varningarna är borta
 - [ ] Error handling UI
 - [ ] Loading states
-- [ ] create favicon 
+- [x] create favicon
 - [ ] feedback. nu saknar spelet kontaktmöjlighet helt och hållet.  
 - [x] vid poängsammanställningen, när alla spelare svarat, ska det också framgå hur de enskilda spelarna svarat (rondresultatet visar per spelare svarad % "mindre av mer" + rätt/fel-riktning; facit som "mindre är X% av mer")
 
