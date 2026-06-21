@@ -1,5 +1,6 @@
 ---
 status: Accepted
+type: architecture
 created: 2026-06-12
 revised:
 ---
