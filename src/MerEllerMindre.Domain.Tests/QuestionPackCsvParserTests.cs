@@ -147,17 +147,46 @@ public class QuestionPackCsvParserTests
         pack.Name.Should().Be("Mer eller Mindre – alla åldrar");
     }
 
-    [Fact]
-    public void LoadsTheRealMerEllerMindrePack()
-    {
-        // The pack CSVs are copied to output beside the Domain assembly (see its csproj).
-        var path = Path.Combine(AppContext.BaseDirectory, "data", "packs", "mer-eller-mindre.csv");
-        var text = File.ReadAllText(path);
+    // The pack CSVs are copied to output beside the Domain assembly (see its csproj).
+    private static readonly string PacksDir = Path.Combine(AppContext.BaseDirectory, "data", "packs");
 
-        var pack = QuestionPackCsvParser.Parse("mer-eller-mindre", text);
+    public static TheoryData<string> LivePacks()
+    {
+        var data = new TheoryData<string>();
+        foreach (var f in Directory.GetFiles(PacksDir, "*.csv").Where(f => !f.EndsWith(".källor.csv")))
+            data.Add(f);
+        return data;
+    }
+
+    [Theory]
+    [MemberData(nameof(LivePacks))]
+    public void EveryLivePackIsExactly1085CleanCards(string path)
+    {
+        var slug = Path.GetFileNameWithoutExtension(path);
+        var pack = QuestionPackCsvParser.Parse(slug, File.ReadAllText(path));
+
+        pack.QuestionCount.Should().Be(1085);
+
+        pack.Questions.Should().OnlyContain(q =>
+            q.QuestionText.Length > 0 && q.ItemA.Length > 0 && q.ItemB.Length > 0
+            && q.Unit.Length > 0 && q.DifferencePrompt.Length > 0);
+
+        // Part-vs-whole / same-entity tautologies have no real guess — never ship them.
+        var smells = pack.Questions
+            .Select(q => (q, smell: QuestionChecks.SameEntitySmell(q)))
+            .Where(t => t.smell.flagged)
+            .Select(t => $"{t.q.QuestionText} ({t.smell.reason})")
+            .ToList();
+        smells.Should().BeEmpty();
+    }
+
+    [Fact]
+    public void MerEllerMindreFirstCardIsEverestVsK2()
+    {
+        var path = Path.Combine(PacksDir, "mer-eller-mindre.csv");
+        var pack = QuestionPackCsvParser.Parse("mer-eller-mindre", File.ReadAllText(path));
 
         pack.Name.Should().Be("Mer eller Mindre");
-        pack.QuestionCount.Should().Be(1085);
 
         // First card: Mount Everest vs K2. Convention: Mer = sakA holds the larger value.
         var first = pack.Questions[0];
@@ -169,25 +198,29 @@ public class QuestionPackCsvParserTests
         first.Unit.Should().Be("meter");
         first.DifferencePrompt.Should().Be("Hur många meter skiljer det?");
         first.ValueA.Should().BeGreaterThan(first.ValueB, "Mer = sakA holds the larger value");
-
-        pack.Questions.Should().OnlyContain(q =>
-            q.QuestionText.Length > 0 && q.ItemA.Length > 0 && q.ItemB.Length > 0
-            && q.Unit.Length > 0 && q.DifferencePrompt.Length > 0);
     }
 
     [Fact]
-    public void LoadsTheRealAllaAldrarPack()
+    public void AllaAldrarPackHasDisplayName()
     {
-        var path = Path.Combine(AppContext.BaseDirectory, "data", "packs", "alla-aldrar.csv");
-        var text = File.ReadAllText(path);
-
-        var pack = QuestionPackCsvParser.Parse("alla-aldrar", text);
+        var path = Path.Combine(PacksDir, "alla-aldrar.csv");
+        var pack = QuestionPackCsvParser.Parse("alla-aldrar", File.ReadAllText(path));
 
         pack.Name.Should().Be("Mer eller Mindre – alla åldrar");
-        pack.QuestionCount.Should().Be(1085);
+    }
 
-        pack.Questions.Should().OnlyContain(q =>
-            q.QuestionText.Length > 0 && q.ItemA.Length > 0 && q.ItemB.Length > 0
-            && q.Unit.Length > 0 && q.DifferencePrompt.Length > 0);
+    [Fact]
+    public void SameEntitySmellFlagsPartVsWholeButNotLegitPairs()
+    {
+        var brain = new Question("Väger vänstra hjärnhalvan mer eller mindre än hela hjärnan?",
+            "Vänstra hjärnhalvan", "Hela hjärnan", 680, 1300, "gram", "Hur många gram skiljer det?");
+        var everest = new Question("Är Mount Everest högre eller lägre än K2?",
+            "Mount Everest", "K2", 8849, 8611, "meter", "Hur många meter skiljer det?");
+        var slott = new Question("Är Stockholms slott större eller mindre än Drottningholms slott?",
+            "Stockholms slott", "Drottningholms slott", 2, 1, "hektar", "Hur många hektar skiljer det?");
+
+        QuestionChecks.SameEntitySmell(brain).flagged.Should().BeTrue();
+        QuestionChecks.SameEntitySmell(everest).flagged.Should().BeFalse();
+        QuestionChecks.SameEntitySmell(slott).flagged.Should().BeFalse();
     }
 }

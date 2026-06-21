@@ -154,6 +154,15 @@ void Report(List<Question> cards)
         foreach (var g in dups)
             Console.WriteLine($"  x{g.Count()}  {g.Key}");
     }
+
+    var smells = cards
+        .Select(c => (card: c, smell: QuestionChecks.SameEntitySmell(c)))
+        .Where(t => t.smell.flagged)
+        .ToList();
+    Console.WriteLine();
+    Console.WriteLine($"Suspicious same-entity pairs ({smells.Count}):");
+    foreach (var (card, smell) in smells)
+        Console.WriteLine($"  {card.QuestionText}   ({smell.reason})");
 }
 
 void Merge()
