@@ -184,7 +184,7 @@ public class QuestionPackCsvParserTests
         var pack = QuestionPackCsvParser.Parse("alla-aldrar", text);
 
         pack.Name.Should().Be("Mer eller mindre – alla åldrar");
-        pack.QuestionCount.Should().Be(1322);
+        pack.QuestionCount.Should().Be(1085);
 
         pack.Questions.Should().OnlyContain(q =>
             q.QuestionText.Length > 0 && q.ItemA.Length > 0 && q.ItemB.Length > 0
