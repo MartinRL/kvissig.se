@@ -28,7 +28,7 @@ public static class Fixtures
         new("question1", "question1A", "question1B", 80m, 100m, "question1U", "question1D");
 
     public static readonly QuestionPack Pack =
-        new("mer-eller-mindre", "Mer eller mindre", [Question0, Question1]);
+        new("mer-eller-mindre", "Mer eller Mindre", [Question0, Question1]);
 
     /// <summary>
     /// Stub context: FindPack resolves the 2-card fixture pack for "mer-eller-mindre",

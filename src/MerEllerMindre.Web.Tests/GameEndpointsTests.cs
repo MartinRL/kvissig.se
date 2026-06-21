@@ -77,7 +77,7 @@ public class GameEndpointsTests : IClassFixture<TestAppFactory>
     {
         var html = await (await NewClient().GetAsync("/")).Content.ReadAsStringAsync();
 
-        html.Should().Contain("Mer eller mindre");
+        html.Should().Contain("Mer eller Mindre");
         html.Should().Contain("/games/new/mer-eller-mindre");
     }
 
@@ -86,7 +86,7 @@ public class GameEndpointsTests : IClassFixture<TestAppFactory>
     {
         var html = await (await NewClient().GetAsync("/games/new/mer-eller-mindre")).Content.ReadAsStringAsync();
 
-        html.Should().Contain("Mer eller mindre");
+        html.Should().Contain("Mer eller Mindre");
         html.Should().Contain("name=\"hostName\"");
     }
 

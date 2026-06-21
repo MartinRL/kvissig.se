@@ -20,7 +20,7 @@ public class QuestionPackCsvParserTests
         var pack = QuestionPackCsvParser.Parse("mer-eller-mindre", csv);
 
         pack.PackId.Should().Be("mer-eller-mindre");
-        pack.Name.Should().Be("Mer eller mindre");
+        pack.Name.Should().Be("Mer eller Mindre");
         pack.QuestionCount.Should().Be(1);
 
         var q = pack.Questions[0];
@@ -144,7 +144,7 @@ public class QuestionPackCsvParserTests
 
         var pack = QuestionPackCsvParser.Parse("alla-aldrar", csv);
 
-        pack.Name.Should().Be("Mer eller mindre – alla åldrar");
+        pack.Name.Should().Be("Mer eller Mindre – alla åldrar");
     }
 
     [Fact]
@@ -156,7 +156,7 @@ public class QuestionPackCsvParserTests
 
         var pack = QuestionPackCsvParser.Parse("mer-eller-mindre", text);
 
-        pack.Name.Should().Be("Mer eller mindre");
+        pack.Name.Should().Be("Mer eller Mindre");
         pack.QuestionCount.Should().Be(1085);
 
         // First card: Mount Everest vs K2. Convention: Mer = sakA holds the larger value.
@@ -183,7 +183,7 @@ public class QuestionPackCsvParserTests
 
         var pack = QuestionPackCsvParser.Parse("alla-aldrar", text);
 
-        pack.Name.Should().Be("Mer eller mindre – alla åldrar");
+        pack.Name.Should().Be("Mer eller Mindre – alla åldrar");
         pack.QuestionCount.Should().Be(1085);
 
         pack.Questions.Should().OnlyContain(q =>
