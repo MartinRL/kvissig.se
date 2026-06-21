@@ -174,4 +174,20 @@ public class QuestionPackCsvParserTests
             q.QuestionText.Length > 0 && q.ItemA.Length > 0 && q.ItemB.Length > 0
             && q.Unit.Length > 0 && q.DifferencePrompt.Length > 0);
     }
+
+    [Fact]
+    public void LoadsTheRealAllaAldrarPack()
+    {
+        var path = Path.Combine(AppContext.BaseDirectory, "data", "packs", "alla-aldrar.csv");
+        var text = File.ReadAllText(path);
+
+        var pack = QuestionPackCsvParser.Parse("alla-aldrar", text);
+
+        pack.Name.Should().Be("Mer eller mindre – alla åldrar");
+        pack.QuestionCount.Should().Be(1322);
+
+        pack.Questions.Should().OnlyContain(q =>
+            q.QuestionText.Length > 0 && q.ItemA.Length > 0 && q.ItemB.Length > 0
+            && q.Unit.Length > 0 && q.DifferencePrompt.Length > 0);
+    }
 }
