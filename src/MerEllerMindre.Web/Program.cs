@@ -47,9 +47,6 @@ app.UseForwardedHeaders(new ForwardedHeadersOptions
 app.UseStaticFiles();
 app.UseAntiforgery();
 
-// Browsers auto-request /favicon.ico; answer 204 so it doesn't surface as a stray 404.
-app.MapGet("/favicon.ico", () => Results.NoContent());
-
 // Liveness probe for fly's health check.
 app.MapGet("/healthz", () => Results.Ok("ok"));
 

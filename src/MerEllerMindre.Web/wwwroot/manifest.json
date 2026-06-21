@@ -1,0 +1,14 @@
+{
+  "id": "/",
+  "name": "Mer eller Mindre",
+  "short_name": "Mer eller Mindre",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fff7ec",
+  "theme_color": "#21c08a",
+  "icons": [
+    { "src": "/icons/icon-192.png", "type": "image/png", "sizes": "192x192", "purpose": "any" },
+    { "src": "/icons/icon-512.png", "type": "image/png", "sizes": "512x512", "purpose": "any" },
+    { "src": "/icons/icon-512.png", "type": "image/png", "sizes": "512x512", "purpose": "maskable" }
+  ]
+}
