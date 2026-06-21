@@ -10,5 +10,9 @@
     { "src": "/icons/icon-192.png", "type": "image/png", "sizes": "192x192", "purpose": "any" },
     { "src": "/icons/icon-512.png", "type": "image/png", "sizes": "512x512", "purpose": "any" },
     { "src": "/icons/icon-512.png", "type": "image/png", "sizes": "512x512", "purpose": "maskable" }
+  ],
+  "screenshots": [
+    { "src": "/screenshots/screenshot-1280x720.png", "type": "image/png", "sizes": "1536x864", "form_factor": "wide", "label": "Kvisskatalogen på desktop" },
+    { "src": "/screenshots/screenshot-720x1280.png", "type": "image/png", "sizes": "810x1440", "form_factor": "narrow", "label": "Kvisskatalogen på mobil" }
   ]
 }
