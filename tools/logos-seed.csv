@@ -1,0 +1,2113 @@
+# Logo corpus seed — name;domain;origin (se|int).
+# Edit this file, then `dotnet run tools/logos.cs -- gen` to (re)build data/logos/logos.csv
+# with clean slugs + slug-dedup. This is the human-editable source; logos.csv is generated.
+# NOTE: a starting corpus of brands with high-confidence domains. Expand toward 2000 total
+# / 700 se by appending rows (Wikipedia "List of companies of Sweden", Nasdaq Stockholm
+# Large/Mid/Small Cap, SimpleIcons brand pool). The ralph loop fetches; it does not invent.
+
+# ── Swedish (se) ─────────────────────────────────────────────────────────────
+Volvo;volvo.com;se
+Volvo Cars;volvocars.com;se
+Volvo Trucks;volvotrucks.com;se
+Volvo Penta;volvopenta.com;se
+Scania;scania.com;se
+Polestar;polestar.com;se
+Koenigsegg;koenigsegg.com;se
+NEVS;nevs.com;se
+Ericsson;ericsson.com;se
+IKEA;ikea.com;se
+H&M;hm.com;se
+Spotify;spotify.com;se
+Klarna;klarna.com;se
+Electrolux;electrolux.com;se
+Atlas Copco;atlascopco.com;se
+Sandvik;sandvik.com;se
+SKF;skf.com;se
+Assa Abloy;assaabloy.com;se
+Hexagon;hexagon.com;se
+Investor AB;investorab.com;se
+EQT;eqtgroup.com;se
+Securitas;securitas.com;se
+Essity;essity.com;se
+Boliden;boliden.com;se
+SSAB;ssab.com;se
+Alfa Laval;alfalaval.com;se
+Epiroc;epiroc.com;se
+Saab;saab.com;se
+Skanska;skanska.com;se
+NCC;ncc.com;se
+Peab;peab.com;se
+ICA;ica.se;se
+Axfood;axfood.se;se
+Coop;coop.se;se
+Systembolaget;systembolaget.se;se
+Telia;telia.se;se
+Tele2;tele2.com;se
+Comviq;comviq.se;se
+Halebop;halebop.se;se
+Hallon;hallon.se;se
+Swedbank;swedbank.se;se
+SEB;seb.se;se
+Handelsbanken;handelsbanken.se;se
+Nordea;nordea.com;se
+Avanza;avanza.se;se
+Nordnet;nordnet.se;se
+SBAB;sbab.se;se
+Länsförsäkringar;lansforsakringar.se;se
+Folksam;folksam.se;se
+If;if.se;se
+Trygg-Hansa;trygghansa.se;se
+Skandia;skandia.se;se
+Resurs Bank;resursbank.se;se
+Tink;tink.com;se
+Trustly;trustly.com;se
+Zettle;zettle.com;se
+Storytel;storytel.com;se
+Sinch;sinch.com;se
+Truecaller;truecaller.com;se
+King;king.com;se
+Mojang;mojang.com;se
+Embark Studios;embark-studios.com;se
+Paradox Interactive;paradoxinteractive.com;se
+DICE;dice.se;se
+Avalanche Studios;avalanchestudios.com;se
+Dometic;dometic.com;se
+Husqvarna;husqvarna.com;se
+Trelleborg;trelleborg.com;se
+Getinge;getinge.com;se
+Elekta;elekta.com;se
+Mölnlycke;molnlycke.com;se
+AstraZeneca;astrazeneca.com;se
+Sobi;sobi.com;se
+BioGaia;biogaia.com;se
+Camurus;camurus.com;se
+CellaVision;cellavision.com;se
+Vitrolife;vitrolife.com;se
+Axis Communications;axis.com;se
+Mycronic;mycronic.com;se
+Hexatronic;hexatronic.com;se
+Fingerprint Cards;fingerprints.com;se
+IAR Systems;iar.com;se
+Lime Technologies;lime-technologies.com;se
+Sectra;sectra.com;se
+Knowit;knowit.se;se
+HiQ;hiq.se;se
+Clavister;clavister.com;se
+Ovzon;ovzon.com;se
+Tobii;tobii.com;se
+Mentimeter;mentimeter.com;se
+Northvolt;northvolt.com;se
+Voi;voiscooters.com;se
+Einride;einride.tech;se
+Candela;candela.com;se
+Heart Aerospace;heartaerospace.com;se
+Epidemic Sound;epidemicsound.com;se
+Budbee;budbee.com;se
+Instabee;instabee.com;se
+Bambuser;bambuser.com;se
+Readly;readly.com;se
+Cint;cint.com;se
+Marabou;marabou.se;se
+Felix;felix.se;se
+Abba Seafood;abba.se;se
+Wasa;wasa.com;se
+Oatly;oatly.com;se
+Löfbergs;lofbergs.se;se
+Zoégas;zoegas.se;se
+Cloetta;cloetta.com;se
+Estrella;estrella.se;se
+OLW;olw.se;se
+Läkerol;lakerol.se;se
+Malaco;malaco.se;se
+Spendrups;spendrups.se;se
+Kopparbergs;kopparbergs.se;se
+Åbro;abro.se;se
+Loka;loka.se;se
+Ramlösa;ramlosa.se;se
+Findus;findus.se;se
+Scan;scan.se;se
+Kronfågel;kronfagel.se;se
+Pågen;pagen.se;se
+Polarbröd;polarbrod.se;se
+Lantmännen;lantmannen.com;se
+Semper;semper.se;se
+Skånemejerier;skanemejerier.se;se
+Norrmejerier;norrmejerier.se;se
+Hemglass;hemglass.se;se
+GB Glace;gbglace.se;se
+SIA Glass;siaglass.se;se
+Absolut Vodka;absolut.com;se
+BabyBjörn;babybjorn.com;se
+Fjällräven;fjallraven.com;se
+Hestra;hestragloves.com;se
+Tretorn;tretorn.com;se
+Didriksons;didriksons.com;se
+Peak Performance;peakperformance.com;se
+Haglöfs;haglofs.com;se
+Craft Sportswear;craftsportswear.com;se
+Björn Borg;bjornborg.com;se
+Acne Studios;acnestudios.com;se
+Filippa K;filippa-k.com;se
+Gina Tricot;ginatricot.com;se
+Lindex;lindex.com;se
+KappAhl;kappahl.com;se
+Nudie Jeans;nudiejeans.com;se
+WESC;wesc.com;se
+Eton;etonshirts.com;se
+Tiger of Sweden;tigerofsweden.com;se
+J.Lindeberg;jlindeberg.com;se
+Stutterheim;stutterheim.com;se
+Sandqvist;sandqvist.com;se
+Daniel Wellington;danielwellington.com;se
+Happy Socks;happysocks.com;se
+CDON;cdon.com;se
+Boozt;boozt.com;se
+Nelly;nelly.com;se
+Ellos;ellos.se;se
+Apotea;apotea.se;se
+Apoteket;apoteket.se;se
+Clas Ohlson;clasohlson.com;se
+Jula;jula.se;se
+Biltema;biltema.se;se
+Rusta;rusta.com;se
+Mio;mio.se;se
+Hemtex;hemtex.se;se
+Indiska;indiska.com;se
+Granngården;granngarden.se;se
+Stadium;stadium.se;se
+Elgiganten;elgiganten.se;se
+NetOnNet;netonnet.se;se
+Webhallen;webhallen.com;se
+Inet;inet.se;se
+Dustin;dustin.se;se
+Kjell & Company;kjell.com;se
+Fortnox;fortnox.se;se
+SAS;flysas.com;se
+BRA;flygbra.se;se
+Viaplay;viaplay.com;se
+TV4;tv4.se;se
+SVT;svt.se;se
+Sveriges Radio;sverigesradio.se;se
+Aftonbladet;aftonbladet.se;se
+Expressen;expressen.se;se
+Dagens Nyheter;dn.se;se
+Svenska Dagbladet;svd.se;se
+Bonnier;bonnier.com;se
+Blocket;blocket.se;se
+Hemnet;hemnet.se;se
+Tradera;tradera.com;se
+Mathem;mathem.se;se
+Matsmart;matsmart.se;se
+Thule;thule.com;se
+Hultafors;hultafors.com;se
+Bahco;bahco.com;se
+Gränsfors Bruk;gransforsbruk.com;se
+Morakniv;morakniv.se;se
+Hilleberg;hilleberg.com;se
+Primus;primus.com;se
+Light My Fire;lightmyfire.com;se
+Klättermusen;klattermusen.com;se
+Houdini;houdinisportswear.com;se
+POC;pocsports.com;se
+Hövding;hovding.com;se
+CAKE;ridecake.com;se
+
+# ── International (int) ──────────────────────────────────────────────────────
+Apple;apple.com;int
+Microsoft;microsoft.com;int
+Google;google.com;int
+Amazon;amazon.com;int
+Meta;meta.com;int
+Facebook;facebook.com;int
+Instagram;instagram.com;int
+WhatsApp;whatsapp.com;int
+YouTube;youtube.com;int
+Netflix;netflix.com;int
+Adobe;adobe.com;int
+Oracle;oracle.com;int
+IBM;ibm.com;int
+Intel;intel.com;int
+AMD;amd.com;int
+Nvidia;nvidia.com;int
+Qualcomm;qualcomm.com;int
+Cisco;cisco.com;int
+Dell;dell.com;int
+HP;hp.com;int
+Lenovo;lenovo.com;int
+Asus;asus.com;int
+Acer;acer.com;int
+Samsung;samsung.com;int
+LG;lg.com;int
+Sony;sony.com;int
+Panasonic;panasonic.com;int
+Toshiba;toshiba.com;int
+Huawei;huawei.com;int
+Xiaomi;mi.com;int
+Oppo;oppo.com;int
+OnePlus;oneplus.com;int
+TikTok;tiktok.com;int
+Snapchat;snapchat.com;int
+X;x.com;int
+LinkedIn;linkedin.com;int
+Pinterest;pinterest.com;int
+Reddit;reddit.com;int
+Discord;discord.com;int
+Slack;slack.com;int
+Zoom;zoom.us;int
+Dropbox;dropbox.com;int
+Salesforce;salesforce.com;int
+SAP;sap.com;int
+PayPal;paypal.com;int
+Stripe;stripe.com;int
+Visa;visa.com;int
+Mastercard;mastercard.com;int
+American Express;americanexpress.com;int
+eBay;ebay.com;int
+Alibaba;alibaba.com;int
+AliExpress;aliexpress.com;int
+Shopify;shopify.com;int
+Airbnb;airbnb.com;int
+Uber;uber.com;int
+Lyft;lyft.com;int
+Booking.com;booking.com;int
+Expedia;expedia.com;int
+TripAdvisor;tripadvisor.com;int
+Tesla;tesla.com;int
+GitHub;github.com;int
+GitLab;gitlab.com;int
+Atlassian;atlassian.com;int
+Twitch;twitch.tv;int
+Roblox;roblox.com;int
+Epic Games;epicgames.com;int
+Steam;steampowered.com;int
+EA;ea.com;int
+Ubisoft;ubisoft.com;int
+Activision;activision.com;int
+Blizzard;blizzard.com;int
+Nintendo;nintendo.com;int
+PlayStation;playstation.com;int
+Xbox;xbox.com;int
+Sega;sega.com;int
+Square Enix;square-enix.com;int
+Riot Games;riotgames.com;int
+Valve;valvesoftware.com;int
+Toyota;toyota.com;int
+Honda;honda.com;int
+Nissan;nissan-global.com;int
+Mazda;mazda.com;int
+Subaru;subaru.com;int
+Mitsubishi Motors;mitsubishi-motors.com;int
+Suzuki;globalsuzuki.com;int
+Lexus;lexus.com;int
+Infiniti;infiniti.com;int
+Acura;acura.com;int
+Ford;ford.com;int
+Chevrolet;chevrolet.com;int
+GMC;gmc.com;int
+Cadillac;cadillac.com;int
+Buick;buick.com;int
+Dodge;dodge.com;int
+Jeep;jeep.com;int
+Chrysler;chrysler.com;int
+Ram Trucks;ramtrucks.com;int
+Rivian;rivian.com;int
+Lucid Motors;lucidmotors.com;int
+Volkswagen;vw.com;int
+Audi;audi.com;int
+BMW;bmw.com;int
+Mercedes-Benz;mercedes-benz.com;int
+Porsche;porsche.com;int
+Opel;opel.com;int
+Skoda;skoda-auto.com;int
+SEAT;seat.com;int
+Cupra;cupraofficial.com;int
+Bentley;bentleymotors.com;int
+Rolls-Royce;rolls-roycemotorcars.com;int
+Lamborghini;lamborghini.com;int
+Ferrari;ferrari.com;int
+Maserati;maserati.com;int
+Alfa Romeo;alfaromeo.com;int
+Fiat;fiat.com;int
+Lancia;lancia.com;int
+Renault;renault.com;int
+Peugeot;peugeot.com;int
+Citroën;citroen.com;int
+DS Automobiles;dsautomobiles.com;int
+Dacia;dacia.com;int
+Hyundai;hyundai.com;int
+Kia;kia.com;int
+Genesis;genesis.com;int
+Jaguar;jaguar.com;int
+Land Rover;landrover.com;int
+Mini;mini.com;int
+Aston Martin;astonmartin.com;int
+McLaren;mclaren.com;int
+Bugatti;bugatti.com;int
+Coca-Cola;coca-cola.com;int
+Pepsi;pepsi.com;int
+Fanta;fanta.com;int
+Sprite;sprite.com;int
+Dr Pepper;drpepper.com;int
+Red Bull;redbull.com;int
+Nestlé;nestle.com;int
+Nescafé;nescafe.com;int
+KitKat;kitkat.com;int
+Mars;mars.com;int
+Snickers;snickers.com;int
+Twix;twix.com;int
+Hershey;hershey.com;int
+Cadbury;cadbury.co.uk;int
+Lindt;lindt.com;int
+Toblerone;toblerone.com;int
+Ferrero;ferrero.com;int
+Nutella;nutella.com;int
+Kinder;kinder.com;int
+Oreo;oreo.com;int
+Pringles;pringles.com;int
+Lay's;lays.com;int
+Doritos;doritos.com;int
+Cheetos;cheetos.com;int
+McDonald's;mcdonalds.com;int
+Burger King;burgerking.com;int
+KFC;kfc.com;int
+Subway;subway.com;int
+Starbucks;starbucks.com;int
+Dunkin';dunkindonuts.com;int
+Domino's;dominos.com;int
+Pizza Hut;pizzahut.com;int
+Taco Bell;tacobell.com;int
+Wendy's;wendys.com;int
+Chipotle;chipotle.com;int
+Heinz;heinz.com;int
+Kellogg's;kelloggs.com;int
+Danone;danone.com;int
+Unilever;unilever.com;int
+Ben & Jerry's;benjerry.com;int
+Häagen-Dazs;haagen-dazs.com;int
+Lipton;lipton.com;int
+Knorr;knorr.com;int
+Barilla;barilla.com;int
+Kraft Heinz;kraftheinz.com;int
+Quaker;quakeroats.com;int
+Gatorade;gatorade.com;int
+Evian;evian.com;int
+Perrier;perrier.com;int
+San Pellegrino;sanpellegrino.com;int
+Carlsberg;carlsberg.com;int
+Heineken;heineken.com;int
+Budweiser;budweiser.com;int
+Corona;coronaextra.com;int
+Guinness;guinness.com;int
+Stella Artois;stellaartois.com;int
+Jack Daniel's;jackdaniels.com;int
+Johnnie Walker;johnniewalker.com;int
+Bacardi;bacardi.com;int
+Smirnoff;smirnoff.com;int
+Jägermeister;jagermeister.com;int
+Hennessy;hennessy.com;int
+Nike;nike.com;int
+Adidas;adidas.com;int
+Puma;puma.com;int
+Reebok;reebok.com;int
+Under Armour;underarmour.com;int
+New Balance;newbalance.com;int
+Converse;converse.com;int
+Vans;vans.com;int
+Asics;asics.com;int
+Fila;fila.com;int
+Levi's;levi.com;int
+Wrangler;wrangler.com;int
+Lee;lee.com;int
+Gap;gap.com;int
+Zara;zara.com;int
+Bershka;bershka.com;int
+Pull&Bear;pullandbear.com;int
+Massimo Dutti;massimodutti.com;int
+Mango;mango.com;int
+Uniqlo;uniqlo.com;int
+Gucci;gucci.com;int
+Louis Vuitton;louisvuitton.com;int
+Chanel;chanel.com;int
+Hermès;hermes.com;int
+Prada;prada.com;int
+Versace;versace.com;int
+Armani;armani.com;int
+Dolce & Gabbana;dolcegabbana.com;int
+Burberry;burberry.com;int
+Dior;dior.com;int
+Balenciaga;balenciaga.com;int
+Fendi;fendi.com;int
+Givenchy;givenchy.com;int
+Valentino;valentino.com;int
+Saint Laurent;ysl.com;int
+Tommy Hilfiger;tommy.com;int
+Calvin Klein;calvinklein.com;int
+Ralph Lauren;ralphlauren.com;int
+Lacoste;lacoste.com;int
+Hugo Boss;hugoboss.com;int
+Diesel;diesel.com;int
+Guess;guess.com;int
+Rolex;rolex.com;int
+Omega;omegawatches.com;int
+TAG Heuer;tagheuer.com;int
+Cartier;cartier.com;int
+Tiffany & Co;tiffany.com;int
+Swatch;swatch.com;int
+Casio;casio.com;int
+Fossil;fossil.com;int
+Walmart;walmart.com;int
+Target;target.com;int
+Costco;costco.com;int
+Home Depot;homedepot.com;int
+Lowe's;lowes.com;int
+Best Buy;bestbuy.com;int
+Carrefour;carrefour.com;int
+Tesco;tesco.com;int
+Aldi;aldi.com;int
+Lidl;lidl.com;int
+Walgreens;walgreens.com;int
+CVS;cvs.com;int
+Sephora;sephora.com;int
+L'Oréal;loreal.com;int
+Nivea;nivea.com;int
+Dove;dove.com;int
+Gillette;gillette.com;int
+Colgate;colgate.com;int
+Pampers;pampers.com;int
+Procter & Gamble;pg.com;int
+Johnson & Johnson;jnj.com;int
+Estée Lauder;esteelauder.com;int
+MAC Cosmetics;maccosmetics.com;int
+Maybelline;maybelline.com;int
+Emirates;emirates.com;int
+Qatar Airways;qatarairways.com;int
+Lufthansa;lufthansa.com;int
+Air France;airfrance.com;int
+KLM;klm.com;int
+British Airways;britishairways.com;int
+Ryanair;ryanair.com;int
+easyJet;easyjet.com;int
+Delta Air Lines;delta.com;int
+United Airlines;united.com;int
+American Airlines;aa.com;int
+Southwest Airlines;southwest.com;int
+Singapore Airlines;singaporeair.com;int
+Cathay Pacific;cathaypacific.com;int
+Turkish Airlines;turkishairlines.com;int
+JPMorgan;jpmorgan.com;int
+Goldman Sachs;goldmansachs.com;int
+Morgan Stanley;morganstanley.com;int
+Bank of America;bankofamerica.com;int
+Citi;citi.com;int
+HSBC;hsbc.com;int
+Barclays;barclays.com;int
+Deutsche Bank;db.com;int
+UBS;ubs.com;int
+Santander;santander.com;int
+BNP Paribas;bnpparibas.com;int
+Berkshire Hathaway;berkshirehathaway.com;int
+BlackRock;blackrock.com;int
+General Electric;ge.com;int
+Siemens;siemens.com;int
+Bosch;bosch.com;int
+Philips;philips.com;int
+Honeywell;honeywell.com;int
+3M;3m.com;int
+Caterpillar;caterpillar.com;int
+John Deere;deere.com;int
+Boeing;boeing.com;int
+Airbus;airbus.com;int
+Lockheed Martin;lockheedmartin.com;int
+ExxonMobil;exxonmobil.com;int
+Shell;shell.com;int
+BP;bp.com;int
+Chevron;chevron.com;int
+TotalEnergies;totalenergies.com;int
+Disney;disney.com;int
+Warner Bros;warnerbros.com;int
+Universal Pictures;universalpictures.com;int
+Paramount;paramount.com;int
+Sony Pictures;sonypictures.com;int
+HBO;hbo.com;int
+Marvel;marvel.com;int
+Pixar;pixar.com;int
+Lego;lego.com;int
+Mattel;mattel.com;int
+Hasbro;hasbro.com;int
+Playmobil;playmobil.com;int
+
+# ── More Swedish (se) — listed industrials & holdings ────────────────────────
+Industrivärden;industrivarden.se;se
+Lundbergföretagen;lundbergforetagen.se;se
+Kinnevik;kinnevik.com;se
+Latour;latour.se;se
+Lifco;lifco.se;se
+Indutrade;indutrade.com;se
+Addtech;addtech.com;se
+Lagercrantz;lagercrantz.com;se
+Beijer Ref;beijerref.com;se
+Beijer Alma;beijeralma.se;se
+NIBE;nibe.com;se
+Munters;munters.com;se
+Concentric;concentricab.com;se
+VBG Group;vbggroup.com;se
+Haldex;haldex.com;se
+Autoliv;autoliv.com;se
+Nederman;nederman.com;se
+Systemair;systemair.com;se
+Inwido;inwido.com;se
+Nobia;nobia.com;se
+Sweco;sweco.com;se
+AFRY;afry.com;se
+Rejlers;rejlers.com;se
+Semcon;semcon.com;se
+Bufab;bufab.com;se
+Troax;troax.com;se
+Holmen;holmen.com;se
+Billerud;billerud.com;se
+SCA;sca.com;se
+Setra Group;setragroup.com;se
+JM;jm.se;se
+Bonava;bonava.com;se
+Serneke;serneke.se;se
+Instalco;instalco.se;se
+Bravida;bravida.se;se
+Sdiptech;sdiptech.com;se
+Lindab;lindab.com;se
+Fagerhult;fagerhultgroup.com;se
+Garo;garo.se;se
+OEM International;oem.se;se
+Volati;volati.se;se
+Storskogen;storskogen.com;se
+Alimak;alimak.com;se
+ITAB;itab.com;se
+HMS Networks;hms-networks.com;se
+Beijer Electronics;beijerelectronics.com;se
+Westermo;westermo.com;se
+Mips;mipsprotection.com;se
+Hexpol;hexpol.com;se
+Nolato;nolato.com;se
+Camfil;camfil.com;se
+Gränges;granges.com;se
+Ovako;ovako.com;se
+Uddeholm;uddeholm.com;se
+Stena;stena.com;se
+Stena Line;stenaline.se;se
+
+# ── More Swedish (se) — real estate, gaming, pharma, finance, services ───────
+Castellum;castellum.se;se
+Fabege;fabege.se;se
+Hufvudstaden;hufvudstaden.se;se
+Wihlborgs;wihlborgs.se;se
+Sagax;sagax.se;se
+Pandox;pandox.com;se
+Catena;catenafastigheter.se;se
+Atrium Ljungberg;al.se;se
+Diös;dios.se;se
+Wallenstam;wallenstam.se;se
+Balder;balder.se;se
+SBB Norden;sbbnorden.se;se
+Nyfosa;nyfosa.se;se
+Corem Property;corem.se;se
+Heimstaden;heimstaden.com;se
+Akelius;akelius.com;se
+Vasakronan;vasakronan.se;se
+Riksbyggen;riksbyggen.se;se
+HSB;hsb.se;se
+Stillfront;stillfront.com;se
+MTG;mtg.com;se
+Embracer Group;embracer.com;se
+Thunderful;thunderfulgroup.com;se
+Starbreeze;starbreeze.com;se
+Coffee Stain;coffeestainstudios.com;se
+Fatshark;fatshark.se;se
+MachineGames;machinegames.com;se
+Sharkmob;sharkmob.com;se
+Raw Fury;rawfury.com;se
+Stunlock Studios;stunlock.com;se
+G5 Entertainment;g5e.com;se
+Hansa Biopharma;hansabiopharma.com;se
+Calliditas;calliditas.com;se
+Oncopeptides;oncopeptides.com;se
+BioArctic;bioarctic.com;se
+Medivir;medivir.com;se
+Karo Pharma;karopharma.com;se
+Recipharm;recipharm.com;se
+Orexo;orexo.com;se
+Bactiguard;bactiguard.com;se
+Arjo;arjo.com;se
+Biotage;biotage.com;se
+Cellink;cellink.com;se
+BICO;bico.com;se
+Intrum;intrum.com;se
+Hoist Finance;hoistfinance.com;se
+TF Bank;tfbank.se;se
+Norion Bank;norionbank.se;se
+Marginalen Bank;marginalen.se;se
+ICA Banken;icabanken.se;se
+Ikano Bank;ikanobank.se;se
+Carnegie;carnegie.se;se
+Söderberg & Partners;soderbergpartners.se;se
+Attendo;attendo.se;se
+Ambea;ambea.se;se
+Humana;humana.se;se
+Capio;capio.se;se
+Aleris;aleris.se;se
+Kry;kry.se;se
+Min Doktor;mindoktor.se;se
+Doktor.se;doktor.se;se
+Loomis;loomis.com;se
+Coor;coor.com;se
+Transcom;transcom.com;se
+
+# ── More Swedish (se) — brands, furniture, energy, telecom, retail ───────────
+Gunnebo;gunnebo.com;se
+Tetra Pak;tetrapak.com;se
+Hasselblad;hasselblad.com;se
+Höganäs;hoganas.com;se
+Kinnarps;kinnarps.com;se
+Lammhults;lammhults.se;se
+String Furniture;stringfurniture.com;se
+Swedese;swedese.com;se
+Norrgavel;norrgavel.se;se
+Hästens;hastens.com;se
+Duxiana;duxiana.com;se
+Stiga;stiga.com;se
+Snickers Workwear;snickersworkwear.com;se
+Blåkläder;blaklader.se;se
+Fristads;fristads.com;se
+Vattenfall;vattenfall.se;se
+Ellevio;ellevio.se;se
+Skellefteå Kraft;skekraft.se;se
+Jämtkraft;jamtkraft.se;se
+Göteborg Energi;goteborgenergi.se;se
+Mälarenergi;malarenergi.se;se
+Tekniska verken;tekniskaverken.se;se
+Öresundskraft;oresundskraft.se;se
+Preem;preem.se;se
+OKQ8;okq8.se;se
+Bahnhof;bahnhof.se;se
+Bredband2;bredband2.com;se
+Tre;tre.se;se
+Boxer;boxer.se;se
+Allente;allente.se;se
+Enea;enea.com;se
+Telavox;telavox.com;se
+Åhléns;ahlens.se;se
+NK;nk.se;se
+Lager 157;lager157.com;se
+Byggmax;byggmax.se;se
+Bygghemma;bygghemma.se;se
+Beijer Byggmaterial;beijerbygg.se;se
+Optimera;optimera.se;se
+Blomsterlandet;blomsterlandet.se;se
+Bokus;bokus.com;se
+Adlibris;adlibris.com;se
+Akademibokhandeln;akademibokhandeln.se;se
+Power;power.se;se
+Trademax;trademax.se;se
+Furniturebox;furniturebox.se;se
+Royal Design;royaldesign.se;se
+Synsam;synsam.se;se
+Smarteyes;smarteyes.se;se
+Synoptik;synoptik.se;se
+Apotek Hjärtat;apotekhjartat.se;se
+Kronans Apotek;kronansapotek.se;se
+Teknikmagasinet;teknikmagasinet.se;se
+Lekia;lekia.se;se
+Cervera;cervera.se;se
+Kicks;kicks.se;se
+Lyko;lyko.com;se
+Babyshop;babyshop.com;se
+Jollyroom;jollyroom.se;se
+Hemköp;hemkop.se;se
+Willys;willys.se;se
+City Gross;citygross.se;se
+Naturkompaniet;naturkompaniet.se;se
+Outnorth;outnorth.com;se
+Team Sportia;teamsportia.se;se
+
+# ── More Swedish (se) — food/drink, restaurants, media ───────────────────────
+Santa Maria;santamaria.se;se
+Kavli;kavli.se;se
+Risifrutti;risifrutti.se;se
+Bregott;bregott.se;se
+Göteborgs Kex;goteborgskex.se;se
+Rekorderlig;rekorderlig.com;se
+Arla;arla.se;se
+Risenta;risenta.se;se
+Kung Markatta;kungmarkatta.se;se
+Saltå Kvarn;saltakvarn.se;se
+Proviva;proviva.se;se
+Delicato;delicato.se;se
+Triumf Glass;triumfglass.se;se
+Dafgård;dafgards.se;se
+Max Burgers;max.se;se
+Sibylla;sibylla.se;se
+Espresso House;espressohouse.com;se
+Pressbyrån;pressbyran.se;se
+O'Learys;olearys.se;se
+Gateau;gateau.se;se
+Linas Matkasse;linasmatkasse.se;se
+Göteborgs-Posten;gp.se;se
+Sydsvenskan;sydsvenskan.se;se
+Dagens Industri;di.se;se
+Helsingborgs Dagblad;hd.se;se
+Upsala Nya Tidning;unt.se;se
+Östgöta Correspondenten;corren.se;se
+Borås Tidning;bt.se;se
+Nerikes Allehanda;na.se;se
+Nya Wermlands-Tidningen;nwt.se;se
+Norran;norran.se;se
+ETC;etc.se;se
+Ny Teknik;nyteknik.se;se
+Breakit;breakit.se;se
+Omni;omni.se;se
+TT;tt.se;se
+SF Anytime;sfanytime.com;se
+Filmstaden;filmstaden.se;se
+SF Studios;sfstudios.se;se
+
+# ── More Swedish (se) — sports clubs, universities, transport, fashion ───────
+AIK;aikfotboll.se;se
+Djurgårdens IF;dif.se;se
+Hammarby IF;hammarbyfotboll.se;se
+IFK Göteborg;ifkgoteborg.se;se
+Malmö FF;mff.se;se
+Helsingborgs IF;hif.se;se
+IF Elfsborg;elfsborg.se;se
+BK Häcken;bkhacken.se;se
+Kalmar FF;kalmarff.se;se
+IFK Norrköping;ifknorrkoping.se;se
+GAIS;gais.se;se
+Halmstads BK;hbk.se;se
+Degerfors IF;degerforsif.se;se
+Frölunda HC;frolundahockey.com;se
+Färjestad BK;farjestadbk.se;se
+Skellefteå AIK;skellefteaaik.se;se
+Luleå Hockey;luleahockey.se;se
+Brynäs IF;brynas.se;se
+HV71;hv71.se;se
+Växjö Lakers;vaxjolakers.se;se
+Rögle BK;roglebk.se;se
+Leksands IF;leksandsif.se;se
+Modo Hockey;modohockey.se;se
+Timrå IK;timraik.se;se
+Malmö Redhawks;redhawks.se;se
+KTH;kth.se;se
+Lunds universitet;lu.se;se
+Uppsala universitet;uu.se;se
+Chalmers;chalmers.se;se
+Göteborgs universitet;gu.se;se
+Stockholms universitet;su.se;se
+Karolinska Institutet;ki.se;se
+Linköpings universitet;liu.se;se
+Umeå universitet;umu.se;se
+Luleå tekniska universitet;ltu.se;se
+Örebro universitet;oru.se;se
+Linnéuniversitetet;lnu.se;se
+Mälardalens universitet;mdu.se;se
+Karlstads universitet;kau.se;se
+Mittuniversitetet;miun.se;se
+Jönköping University;ju.se;se
+Malmö universitet;mau.se;se
+Södertörns högskola;sh.se;se
+Handelshögskolan i Stockholm;hhs.se;se
+SLU;slu.se;se
+SJ;sj.se;se
+SL;sl.se;se
+Västtrafik;vasttrafik.se;se
+Skånetrafiken;skanetrafiken.se;se
+Nobina;nobina.com;se
+Snälltåget;snalltaget.se;se
+Swedavia;swedavia.se;se
+PostNord;postnord.se;se
+Trafikverket;trafikverket.se;se
+Bilprovningen;bilprovningen.se;se
+Brio;brio.se;se
+Polarn O. Pyret;polarnopyret.se;se
+Cellbes;cellbes.se;se
+Bubbleroom;bubbleroom.se;se
+NA-KD;na-kd.com;se
+Arket;arket.com;se
+COS;cosstores.com;se
+Monki;monki.com;se
+Weekday;weekday.com;se
+Gant;gant.com;se
+Oscar Jacobson;oscarjacobson.com;se
+Asket;asket.com;se
+Detectify;detectify.com;se
+Mynewsdesk;mynewsdesk.com;se
+Quinyx;quinyx.com;se
+Oneflow;oneflow.com;se
+Billogram;billogram.com;se
+IFS;ifs.com;se
+Vitec;vitecsoftware.com;se
+Sellpy;sellpy.se;se
+
+# ── More Swedish (se) — food/drink brands, autos, finance, energy, tech ──────
+Svenska Foder;svenskafoder.se;se
+Guldfågeln;guldfageln.se;se
+Almondy;almondy.com;se
+Frödinge;frodinge.se;se
+Gevalia;gevalia.se;se
+Arvid Nordquist;arvidnordquist.se;se
+Mackmyra;mackmyra.com;se
+Omnipollo;omnipollo.com;se
+Swedish Match;swedishmatch.com;se
+Mekonomen;mekonomen.se;se
+Bilia;bilia.se;se
+Hedin Bil;hedinbil.se;se
+Pricer;pricer.com;se
+Yubico;yubico.com;se
+Plejd;plejd.com;se
+Polarium;polarium.com;se
+Stegra;stegra.com;se
+Climeon;climeon.com;se
+Minesto;minesto.com;se
+Eolus Vind;eolusvind.com;se
+OX2;ox2.com;se
+Catella;catella.com;se
+Lannebo;lannebo.se;se
+AMF;amf.se;se
+Alecta;alecta.se;se
+SPP;spp.se;se
+AcadeMedia;academedia.se;se
+Kunskapsskolan;kunskapsskolan.se;se
+Smart Eye;smarteye.se;se
+Pierce;piercegroup.com;se
+Whyred;whyred.com;se
+Rodebjer;rodebjer.com;se
+Hope;hope-sthlm.com;se
+A Day's March;adaysmarch.com;se
+Soft Goat;softgoat.com;se
+Newbie;newbiestore.com;se
+Kuling;kulingstockholm.com;se
+DeLaval;delaval.com;se
+Väderstad;vaderstad.com;se
+Komatsu Forest;komatsuforest.se;se
+Vimek;vimek.se;se
+Indexator;indexator.se;se
+Ljungby Maskin;ljungbymaskin.se;se
+
+# ── More International (int) — software, internet, fintech ────────────────────
+ServiceNow;servicenow.com;int
+Workday;workday.com;int
+Snowflake;snowflake.com;int
+Datadog;datadoghq.com;int
+MongoDB;mongodb.com;int
+Twilio;twilio.com;int
+Cloudflare;cloudflare.com;int
+Okta;okta.com;int
+Zendesk;zendesk.com;int
+HubSpot;hubspot.com;int
+Asana;asana.com;int
+Notion;notion.so;int
+Figma;figma.com;int
+Canva;canva.com;int
+Miro;miro.com;int
+Trello;trello.com;int
+Airtable;airtable.com;int
+Squarespace;squarespace.com;int
+Wix;wix.com;int
+WordPress;wordpress.com;int
+Automattic;automattic.com;int
+Mailchimp;mailchimp.com;int
+Intercom;intercom.com;int
+Plaid;plaid.com;int
+Robinhood;robinhood.com;int
+Coinbase;coinbase.com;int
+Binance;binance.com;int
+Kraken;kraken.com;int
+Revolut;revolut.com;int
+Wise;wise.com;int
+N26;n26.com;int
+Monzo;monzo.com;int
+Chime;chime.com;int
+SoFi;sofi.com;int
+Affirm;affirm.com;int
+Venmo;venmo.com;int
+Western Union;westernunion.com;int
+DigitalOcean;digitalocean.com;int
+Heroku;heroku.com;int
+Vercel;vercel.com;int
+Netlify;netlify.com;int
+Mozilla;mozilla.org;int
+Firefox;firefox.com;int
+Opera;opera.com;int
+Brave;brave.com;int
+DuckDuckGo;duckduckgo.com;int
+SoundCloud;soundcloud.com;int
+Tidal;tidal.com;int
+Deezer;deezer.com;int
+Vimeo;vimeo.com;int
+Quora;quora.com;int
+Medium;medium.com;int
+Substack;substack.com;int
+Patreon;patreon.com;int
+Telegram;telegram.org;int
+Signal;signal.org;int
+Skype;skype.com;int
+WeChat;wechat.com;int
+Line;line.me;int
+Viber;viber.com;int
+Tinder;tinder.com;int
+Bumble;bumble.com;int
+Match;match.com;int
+Yelp;yelp.com;int
+Glassdoor;glassdoor.com;int
+Indeed;indeed.com;int
+Upwork;upwork.com;int
+Fiverr;fiverr.com;int
+DoorDash;doordash.com;int
+Grubhub;grubhub.com;int
+Instacart;instacart.com;int
+Deliveroo;deliveroo.com;int
+Just Eat;justeat.com;int
+Wolt;wolt.com;int
+Foodpanda;foodpanda.com;int
+Grab;grab.com;int
+Gojek;gojek.com;int
+Bolt;bolt.eu;int
+
+# ── More International (int) — hardware, semiconductors, enterprise, security ─
+TSMC;tsmc.com;int
+ASML;asml.com;int
+Broadcom;broadcom.com;int
+Texas Instruments;ti.com;int
+Micron;micron.com;int
+SK Hynix;skhynix.com;int
+Western Digital;westerndigital.com;int
+Seagate;seagate.com;int
+SanDisk;sandisk.com;int
+Kingston;kingston.com;int
+Corsair;corsair.com;int
+Razer;razer.com;int
+Logitech;logitech.com;int
+SteelSeries;steelseries.com;int
+Anker;anker.com;int
+Belkin;belkin.com;int
+Netgear;netgear.com;int
+TP-Link;tp-link.com;int
+D-Link;dlink.com;int
+Ubiquiti;ui.com;int
+Juniper Networks;junipernetworks.com;int
+VMware;vmware.com;int
+Citrix;citrix.com;int
+Red Hat;redhat.com;int
+SUSE;suse.com;int
+Docker;docker.com;int
+Elastic;elastic.co;int
+Splunk;splunk.com;int
+Palantir;palantir.com;int
+Unity;unity.com;int
+Autodesk;autodesk.com;int
+Ansys;ansys.com;int
+PTC;ptc.com;int
+Dassault Systèmes;3ds.com;int
+National Instruments;ni.com;int
+Keysight;keysight.com;int
+Fortinet;fortinet.com;int
+Palo Alto Networks;paloaltonetworks.com;int
+CrowdStrike;crowdstrike.com;int
+SentinelOne;sentinelone.com;int
+McAfee;mcafee.com;int
+Norton;norton.com;int
+Kaspersky;kaspersky.com;int
+Bitdefender;bitdefender.com;int
+Avast;avast.com;int
+NordVPN;nordvpn.com;int
+ExpressVPN;expressvpn.com;int
+1Password;1password.com;int
+LastPass;lastpass.com;int
+Grammarly;grammarly.com;int
+DeepL;deepl.com;int
+OpenAI;openai.com;int
+Anthropic;anthropic.com;int
+Hugging Face;huggingface.co;int
+Midjourney;midjourney.com;int
+Perplexity;perplexity.ai;int
+Databricks;databricks.com;int
+Confluent;confluent.io;int
+HashiCorp;hashicorp.com;int
+JetBrains;jetbrains.com;int
+Postman;postman.com;int
+Stack Overflow;stackoverflow.com;int
+Bitbucket;bitbucket.org;int
+
+# ── More International (int) — telecom, airlines, hotels, travel, logistics ──
+AT&T;att.com;int
+Verizon;verizon.com;int
+T-Mobile;t-mobile.com;int
+Vodafone;vodafone.com;int
+Orange;orange.com;int
+Telefónica;telefonica.com;int
+Movistar;movistar.com;int
+O2;o2.com;int
+BT;bt.com;int
+Comcast;comcast.com;int
+Xfinity;xfinity.com;int
+Deutsche Telekom;telekom.com;int
+Telenor;telenor.com;int
+KPN;kpn.com;int
+Swisscom;swisscom.ch;int
+Telstra;telstra.com.au;int
+Rogers;rogers.com;int
+NTT;global.ntt;int
+SoftBank;softbank.jp;int
+Airtel;airtel.in;int
+JetBlue;jetblue.com;int
+Alaska Airlines;alaskaair.com;int
+Spirit Airlines;spirit.com;int
+Frontier Airlines;flyfrontier.com;int
+WestJet;westjet.com;int
+Air Canada;aircanada.com;int
+Aer Lingus;aerlingus.com;int
+Iberia;iberia.com;int
+Vueling;vueling.com;int
+Wizz Air;wizzair.com;int
+Norwegian;norwegian.com;int
+Finnair;finnair.com;int
+Icelandair;icelandair.com;int
+ANA;ana.co.jp;int
+Japan Airlines;jal.com;int
+Korean Air;koreanair.com;int
+Asiana Airlines;flyasiana.com;int
+Air China;airchina.com;int
+China Eastern;ceair.com;int
+China Southern;csair.com;int
+Etihad Airways;etihad.com;int
+EVA Air;evaair.com;int
+Thai Airways;thaiairways.com;int
+Malaysia Airlines;malaysiaairlines.com;int
+Qantas;qantas.com;int
+Air New Zealand;airnewzealand.com;int
+LATAM;latamairlines.com;int
+Avianca;avianca.com;int
+Aeroméxico;aeromexico.com;int
+Marriott;marriott.com;int
+Hilton;hilton.com;int
+Hyatt;hyatt.com;int
+IHG;ihg.com;int
+Holiday Inn;holidayinn.com;int
+Crowne Plaza;crowneplaza.com;int
+Radisson;radissonhotels.com;int
+Best Western;bestwestern.com;int
+Accor;accor.com;int
+Ibis;ibis.com;int
+Novotel;novotel.com;int
+Sofitel;sofitel.com;int
+Four Seasons;fourseasons.com;int
+Ritz-Carlton;ritzcarlton.com;int
+Sheraton;sheraton.com;int
+Westin;westin.com;int
+Wyndham;wyndhamhotels.com;int
+Premier Inn;premierinn.com;int
+Hertz;hertz.com;int
+Avis;avis.com;int
+Enterprise;enterprise.com;int
+Budget;budget.com;int
+Sixt;sixt.com;int
+Europcar;europcar.com;int
+Carnival;carnival.com;int
+Royal Caribbean;royalcaribbean.com;int
+Norwegian Cruise Line;ncl.com;int
+MSC Cruises;msccruises.com;int
+FedEx;fedex.com;int
+UPS;ups.com;int
+USPS;usps.com;int
+DHL;dhl.com;int
+Maersk;maersk.com;int
+Kuehne+Nagel;kuehne-nagel.com;int
+DSV;dsv.com;int
+Kayak;kayak.com;int
+Skyscanner;skyscanner.com;int
+Trivago;trivago.com;int
+Vrbo;vrbo.com;int
+Agoda;agoda.com;int
+Hotels.com;hotels.com;int
+
+# ── More International (int) — restaurants, food, beverages, spirits ──────────
+Five Guys;fiveguys.com;int
+Shake Shack;shakeshack.com;int
+In-N-Out;in-n-out.com;int
+Popeyes;popeyes.com;int
+Arby's;arbys.com;int
+Sonic;sonicdrivein.com;int
+Dairy Queen;dairyqueen.com;int
+Panera Bread;panerabread.com;int
+Papa John's;papajohns.com;int
+Little Caesars;littlecaesars.com;int
+Tim Hortons;timhortons.com;int
+Costa Coffee;costa.co.uk;int
+Pret a Manger;pret.com;int
+Greggs;greggs.co.uk;int
+Nando's;nandos.com;int
+Wagamama;wagamama.com;int
+IHOP;ihop.com;int
+Denny's;dennys.com;int
+Olive Garden;olivegarden.com;int
+Outback Steakhouse;outback.com;int
+Cheesecake Factory;thecheesecakefactory.com;int
+Krispy Kreme;krispykreme.com;int
+Baskin-Robbins;baskinrobbins.com;int
+Cinnabon;cinnabon.com;int
+General Mills;generalmills.com;int
+Mondelez;mondelezinternational.com;int
+PepsiCo;pepsico.com;int
+Conagra;conagrabrands.com;int
+Campbell's;campbells.com;int
+Tyson Foods;tyson.com;int
+Hormel;hormelfoods.com;int
+Oscar Mayer;oscarmayer.com;int
+Cheerios;cheerios.com;int
+Pop-Tarts;poptarts.com;int
+Special K;specialk.com;int
+Ritz;ritzcrackers.com;int
+Chips Ahoy;chipsahoy.com;int
+Nabisco;nabisco.com;int
+Tic Tac;tictac.com;int
+Mentos;mentos.com;int
+Trident;tridentgum.com;int
+Orbit;orbitgum.com;int
+Wrigley;wrigley.com;int
+Skittles;skittles.com;int
+Starburst;starburst.com;int
+M&M's;mms.com;int
+Milky Way;milkyway.com;int
+Butterfinger;butterfinger.com;int
+Haribo;haribo.com;int
+Ghirardelli;ghirardelli.com;int
+Godiva;godiva.com;int
+Mountain Dew;mountaindew.com;int
+7Up;7up.com;int
+Schweppes;schweppes.com;int
+Canada Dry;canadadry.com;int
+A&W;awrestaurants.com;int
+Sunkist;sunkist.com;int
+Tropicana;tropicana.com;int
+Minute Maid;minutemaid.com;int
+Capri-Sun;capri-sun.com;int
+Ocean Spray;oceanspray.com;int
+Snapple;snapple.com;int
+Monster Energy;monsterenergy.com;int
+Rockstar;rockstarenergy.com;int
+Powerade;powerade.com;int
+Vitaminwater;vitaminwater.com;int
+Twinings;twinings.com;int
+Tetley;tetley.com;int
+Folgers;folgers.com;int
+Maxwell House;maxwellhousecoffee.com;int
+Keurig;keurig.com;int
+Lavazza;lavazza.com;int
+Illy;illy.com;int
+Peet's Coffee;peets.com;int
+Grey Goose;greygoose.com;int
+Belvedere;belvederevodka.com;int
+Tito's;titosvodka.com;int
+Captain Morgan;captainmorgan.com;int
+Jim Beam;jimbeam.com;int
+Maker's Mark;makersmark.com;int
+Jameson;jamesonwhiskey.com;int
+Glenfiddich;glenfiddich.com;int
+The Macallan;themacallan.com;int
+Chivas Regal;chivas.com;int
+Crown Royal;crownroyal.com;int
+Tanqueray;tanqueray.com;int
+Bombay Sapphire;bombaysapphire.com;int
+Hendrick's;hendricksgin.com;int
+Patrón;patrontequila.com;int
+Don Julio;donjulio.com;int
+Baileys;baileys.com;int
+Cointreau;cointreau.com;int
+Aperol;aperol.com;int
+Campari;campari.com;int
+Moët & Chandon;moet.com;int
+Veuve Clicquot;veuveclicquot.com;int
+Dom Pérignon;domperignon.com;int
+
+# ── More International (int) — fashion, footwear, luxury, watches, beauty ────
+Bottega Veneta;bottegaveneta.com;int
+Celine;celine.com;int
+Loewe;loewe.com;int
+Moncler;moncler.com;int
+Canada Goose;canadagoose.com;int
+The North Face;thenorthface.com;int
+Patagonia;patagonia.com;int
+Columbia;columbia.com;int
+Arc'teryx;arcteryx.com;int
+Salomon;salomon.com;int
+Timberland;timberland.com;int
+Dr. Martens;drmartens.com;int
+Clarks;clarks.com;int
+Birkenstock;birkenstock.com;int
+UGG;ugg.com;int
+Crocs;crocs.com;int
+Skechers;skechers.com;int
+Brooks;brooksrunning.com;int
+Hoka;hoka.com;int
+Saucony;saucony.com;int
+Mizuno;mizuno.com;int
+Kappa;kappa.com;int
+Umbro;umbro.com;int
+Le Coq Sportif;lecoqsportif.com;int
+Champion;champion.com;int
+Carhartt;carhartt.com;int
+Dickies;dickies.com;int
+Quiksilver;quiksilver.com;int
+Billabong;billabong.com;int
+Rip Curl;ripcurl.com;int
+Volcom;volcom.com;int
+DC Shoes;dcshoes.com;int
+Stüssy;stussy.com;int
+Supreme;supremenewyork.com;int
+Lululemon;lululemon.com;int
+Gymshark;gymshark.com;int
+Bvlgari;bulgari.com;int
+Van Cleef & Arpels;vancleefarpels.com;int
+Chopard;chopard.com;int
+Piaget;piaget.com;int
+Montblanc;montblanc.com;int
+Patek Philippe;patek.com;int
+Audemars Piguet;audemarspiguet.com;int
+Vacheron Constantin;vacheron-constantin.com;int
+IWC;iwc.com;int
+Jaeger-LeCoultre;jaeger-lecoultre.com;int
+Breitling;breitling.com;int
+Hublot;hublot.com;int
+Panerai;panerai.com;int
+Tudor;tudorwatch.com;int
+Longines;longines.com;int
+Tissot;tissotwatches.com;int
+Hamilton;hamiltonwatch.com;int
+Seiko;seikowatches.com;int
+Citizen;citizenwatches.com;int
+Garmin;garmin.com;int
+Fitbit;fitbit.com;int
+Pandora;pandora.net;int
+Swarovski;swarovski.com;int
+Clinique;clinique.com;int
+Lancôme;lancome.com;int
+Shiseido;shiseido.com;int
+Olay;olay.com;int
+Neutrogena;neutrogena.com;int
+Cetaphil;cetaphil.com;int
+CeraVe;cerave.com;int
+La Roche-Posay;laroche-posay.com;int
+Vichy;vichy.com;int
+Eucerin;eucerin.com;int
+Aveeno;aveeno.com;int
+Garnier;garnier.com;int
+Schwarzkopf;schwarzkopf.com;int
+Pantene;pantene.com;int
+Head & Shoulders;headandshoulders.com;int
+TRESemmé;tresemme.com;int
+Old Spice;oldspice.com;int
+Axe;axe.com;int
+Rexona;rexona.com;int
+Crest;crest.com;int
+Oral-B;oralb.com;int
+Sensodyne;sensodyne.com;int
+Listerine;listerine.com;int
+Tampax;tampax.com;int
+Always;always.com;int
+Durex;durex.com;int
+NARS;narscosmetics.com;int
+Urban Decay;urbandecay.com;int
+Too Faced;toofaced.com;int
+Benefit;benefitcosmetics.com;int
+Charlotte Tilbury;charlottetilbury.com;int
+Fenty Beauty;fentybeauty.com;int
+Rare Beauty;rarebeauty.com;int
+Glossier;glossier.com;int
+e.l.f.;elfcosmetics.com;int
+Revlon;revlon.com;int
+CoverGirl;covergirl.com;int
+Rimmel;rimmellondon.com;int
+NYX;nyxcosmetics.com;int
+OPI;opi.com;int
+Ulta;ulta.com;int
+
+# ── More International (int) — retail & grocery ───────────────────────────────
+Macy's;macys.com;int
+Nordstrom;nordstrom.com;int
+Kohl's;kohls.com;int
+JCPenney;jcpenney.com;int
+Dillard's;dillards.com;int
+Dollar General;dollargeneral.com;int
+Dollar Tree;dollartree.com;int
+Big Lots;biglots.com;int
+Ross;rossstores.com;int
+TJ Maxx;tjmaxx.com;int
+Marshalls;marshalls.com;int
+Burlington;burlington.com;int
+Bath & Body Works;bathandbodyworks.com;int
+Victoria's Secret;victoriassecret.com;int
+Wayfair;wayfair.com;int
+Etsy;etsy.com;int
+Temu;temu.com;int
+Shein;shein.com;int
+ASOS;asos.com;int
+Boohoo;boohoo.com;int
+Zalando;zalando.com;int
+About You;aboutyou.com;int
+Next;next.co.uk;int
+Primark;primark.com;int
+Marks & Spencer;marksandspencer.com;int
+John Lewis;johnlewis.com;int
+Selfridges;selfridges.com;int
+Harrods;harrods.com;int
+Argos;argos.co.uk;int
+Currys;currys.co.uk;int
+B&Q;diy.com;int
+Screwfix;screwfix.com;int
+Whole Foods;wholefoodsmarket.com;int
+Trader Joe's;traderjoes.com;int
+Kroger;kroger.com;int
+Safeway;safeway.com;int
+Albertsons;albertsons.com;int
+Publix;publix.com;int
+Wegmans;wegmans.com;int
+H-E-B;heb.com;int
+Meijer;meijer.com;int
+Sprouts;sprouts.com;int
+Sainsbury's;sainsburys.co.uk;int
+Asda;asda.com;int
+Morrisons;morrisons.com;int
+Waitrose;waitrose.com;int
+Edeka;edeka.de;int
+Rewe;rewe.de;int
+Kaufland;kaufland.com;int
+Auchan;auchan.com;int
+Mercadona;mercadona.es;int
+El Corte Inglés;elcorteingles.es;int
+Migros;migros.ch;int
+Albert Heijn;ah.nl;int
+Jumbo;jumbo.com;int
+Delhaize;delhaize.be;int
+Colruyt;colruyt.be;int
+Decathlon;decathlon.com;int
+Bauhaus;bauhaus.info;int
+Hornbach;hornbach.com;int
+Leroy Merlin;leroymerlin.com;int
+Action;action.com;int
+Tchibo;tchibo.de;int
+Douglas;douglas.de;int
+Boots;boots.com;int
+Superdrug;superdrug.com;int
+Rite Aid;riteaid.com;int
+
+# ── More International (int) — autos, motorcycles, tires ─────────────────────
+Isuzu;isuzu.com;int
+Daihatsu;daihatsu.com;int
+BYD;byd.com;int
+Geely;geely.com;int
+Nio;nio.com;int
+Xpeng;xpeng.com;int
+Li Auto;lixiang.com;int
+MG;mgmotor.com;int
+Tata Motors;tatamotors.com;int
+Mahindra;mahindra.com;int
+Maruti Suzuki;marutisuzuki.com;int
+VinFast;vinfast.com;int
+Pagani;pagani.com;int
+Lotus;lotuscars.com;int
+Morgan;morgan-motor.com;int
+Smart;smart.com;int
+Abarth;abarth.com;int
+Mack Trucks;macktrucks.com;int
+Peterbilt;peterbilt.com;int
+Kenworth;kenworth.com;int
+Freightliner;freightliner.com;int
+Iveco;iveco.com;int
+MAN;man.eu;int
+DAF;daf.com;int
+Harley-Davidson;harley-davidson.com;int
+Ducati;ducati.com;int
+Triumph;triumphmotorcycles.com;int
+Royal Enfield;royalenfield.com;int
+KTM;ktm.com;int
+Aprilia;aprilia.com;int
+Moto Guzzi;motoguzzi.com;int
+MV Agusta;mvagusta.com;int
+Indian Motorcycle;indianmotorcycle.com;int
+Vespa;vespa.com;int
+Piaggio;piaggio.com;int
+Kawasaki;kawasaki.com;int
+Yamaha;yamaha-motor.com;int
+Bridgestone;bridgestone.com;int
+Michelin;michelin.com;int
+Goodyear;goodyear.com;int
+Pirelli;pirelli.com;int
+Continental;continental.com;int
+Dunlop;dunlop.com;int
+Hankook;hankooktire.com;int
+Brembo;brembo.com;int
+ZF;zf.com;int
+
+# ── More International (int) — industrial, energy, chemicals ──────────────────
+Schneider Electric;se.com;int
+Emerson;emerson.com;int
+Rockwell Automation;rockwellautomation.com;int
+Parker Hannifin;parker.com;int
+Eaton;eaton.com;int
+ABB;abb.com;int
+Komatsu;komatsu.com;int
+Hitachi;hitachi.com;int
+Mitsubishi Electric;mitsubishielectric.com;int
+Schindler;schindler.com;int
+Otis;otis.com;int
+KONE;kone.com;int
+Thyssenkrupp;thyssenkrupp.com;int
+Liebherr;liebherr.com;int
+JCB;jcb.com;int
+Bobcat;bobcat.com;int
+Doosan;doosan.com;int
+Saudi Aramco;aramco.com;int
+Equinor;equinor.com;int
+Eni;eni.com;int
+Repsol;repsol.com;int
+Petrobras;petrobras.com.br;int
+ConocoPhillips;conocophillips.com;int
+Valero;valero.com;int
+Phillips 66;phillips66.com;int
+Enbridge;enbridge.com;int
+Schlumberger;slb.com;int
+Halliburton;halliburton.com;int
+Baker Hughes;bakerhughes.com;int
+Dow;dow.com;int
+DuPont;dupont.com;int
+BASF;basf.com;int
+Bayer;bayer.com;int
+LyondellBasell;lyondellbasell.com;int
+Air Liquide;airliquide.com;int
+Linde;linde.com;int
+Ecolab;ecolab.com;int
+Sherwin-Williams;sherwin-williams.com;int
+PPG;ppg.com;int
+AkzoNobel;akzonobel.com;int
+Henkel;henkel.com;int
+
+# ── More International (int) — pharma, finance, insurance ─────────────────────
+Pfizer;pfizer.com;int
+Moderna;modernatx.com;int
+Merck;merck.com;int
+Novartis;novartis.com;int
+Roche;roche.com;int
+GSK;gsk.com;int
+Sanofi;sanofi.com;int
+AbbVie;abbvie.com;int
+Bristol Myers Squibb;bms.com;int
+Eli Lilly;lilly.com;int
+Amgen;amgen.com;int
+Gilead;gilead.com;int
+Biogen;biogen.com;int
+Regeneron;regeneron.com;int
+Boehringer Ingelheim;boehringer-ingelheim.com;int
+Takeda;takeda.com;int
+Novo Nordisk;novonordisk.com;int
+Teva;tevapharm.com;int
+Wells Fargo;wellsfargo.com;int
+U.S. Bank;usbank.com;int
+PNC;pnc.com;int
+Capital One;capitalone.com;int
+Charles Schwab;schwab.com;int
+Fidelity;fidelity.com;int
+Vanguard;vanguard.com;int
+State Street;statestreet.com;int
+Discover;discover.com;int
+ING;ing.com;int
+Rabobank;rabobank.com;int
+ABN AMRO;abnamro.com;int
+Crédit Agricole;credit-agricole.com;int
+Société Générale;societegenerale.com;int
+BBVA;bbva.com;int
+UniCredit;unicredit.it;int
+Standard Chartered;sc.com;int
+Lloyds Bank;lloydsbank.com;int
+NatWest;natwest.com;int
+Commonwealth Bank;commbank.com.au;int
+ANZ;anz.com;int
+Westpac;westpac.com.au;int
+Scotiabank;scotiabank.com;int
+RBC;rbc.com;int
+TD Bank;td.com;int
+Nomura;nomura.com;int
+Allianz;allianz.com;int
+AXA;axa.com;int
+Zurich;zurich.com;int
+Generali;generali.com;int
+Aviva;aviva.com;int
+Prudential;prudential.com;int
+MetLife;metlife.com;int
+Cigna;cigna.com;int
+UnitedHealth;unitedhealthgroup.com;int
+AIG;aig.com;int
+Chubb;chubb.com;int
+Progressive;progressive.com;int
+Geico;geico.com;int
+State Farm;statefarm.com;int
+Allstate;allstate.com;int
+Liberty Mutual;libertymutual.com;int
+
+# ── More International (int) — media, streaming, games, music ─────────────────
+NBC;nbc.com;int
+CBS;cbs.com;int
+ABC;abc.com;int
+Fox;fox.com;int
+CNN;cnn.com;int
+BBC;bbc.com;int
+ESPN;espn.com;int
+MTV;mtv.com;int
+Nickelodeon;nick.com;int
+Cartoon Network;cartoonnetwork.com;int
+National Geographic;nationalgeographic.com;int
+History;history.com;int
+Comedy Central;cc.com;int
+Hulu;hulu.com;int
+Peacock;peacocktv.com;int
+Paramount+;paramountplus.com;int
+Max;max.com;int
+Crunchyroll;crunchyroll.com;int
+DAZN;dazn.com;int
+Audible;audible.com;int
+iHeartRadio;iheart.com;int
+Universal Music;universalmusic.com;int
+Sony Music;sonymusic.com;int
+Warner Music;wmg.com;int
+Atlantic Records;atlanticrecords.com;int
+Bandai Namco;bandainamco.com;int
+Konami;konami.com;int
+Capcom;capcom.com;int
+Atari;atari.com;int
+Take-Two;take2games.com;int
+Rockstar Games;rockstargames.com;int
+2K;2k.com;int
+Bethesda;bethesda.net;int
+Bungie;bungie.net;int
+CD Projekt;cdprojekt.com;int
+Larian Studios;larian.com;int
+FromSoftware;fromsoftware.jp;int
+Tencent;tencent.com;int
+NetEase;neteasegames.com;int
+Supercell;supercell.com;int
+Niantic;nianticlabs.com;int
+Zynga;zynga.com;int
+
+# ── More International (int) — sports leagues & clubs ─────────────────────────
+NBA;nba.com;int
+NFL;nfl.com;int
+MLB;mlb.com;int
+NHL;nhl.com;int
+MLS;mlssoccer.com;int
+FIFA;fifa.com;int
+UEFA;uefa.com;int
+Premier League;premierleague.com;int
+La Liga;laliga.com;int
+Bundesliga;bundesliga.com;int
+NASCAR;nascar.com;int
+Formula 1;formula1.com;int
+MotoGP;motogp.com;int
+UFC;ufc.com;int
+WWE;wwe.com;int
+Real Madrid;realmadrid.com;int
+FC Barcelona;fcbarcelona.com;int
+Manchester United;manutd.com;int
+Manchester City;mancity.com;int
+Liverpool;liverpoolfc.com;int
+Chelsea;chelseafc.com;int
+Arsenal;arsenal.com;int
+Tottenham;tottenhamhotspur.com;int
+Bayern Munich;fcbayern.com;int
+Borussia Dortmund;bvb.de;int
+Juventus;juventus.com;int
+AC Milan;acmilan.com;int
+Inter Milan;inter.it;int
+Paris Saint-Germain;psg.fr;int
+Ajax;ajax.nl;int
+
+# ── More International (int) — toys, electronics, appliances, cameras, office ─
+Funko;funko.com;int
+Hot Wheels;hotwheels.com;int
+Barbie;barbie.com;int
+Fisher-Price;fisher-price.com;int
+Play-Doh;play-doh.com;int
+Monopoly;monopoly.com;int
+Bandai;bandai.com;int
+GoPro;gopro.com;int
+DJI;dji.com;int
+Bose;bose.com;int
+JBL;jbl.com;int
+Beats;beatsbydre.com;int
+Sennheiser;sennheiser.com;int
+Sonos;sonos.com;int
+Harman Kardon;harmankardon.com;int
+Marshall;marshall.com;int
+Bang & Olufsen;bang-olufsen.com;int
+Bowers & Wilkins;bowerswilkins.com;int
+Klipsch;klipsch.com;int
+Ring;ring.com;int
+Roku;roku.com;int
+Vizio;vizio.com;int
+TCL;tcl.com;int
+Hisense;hisense.com;int
+Whirlpool;whirlpool.com;int
+Maytag;maytag.com;int
+KitchenAid;kitchenaid.com;int
+Frigidaire;frigidaire.com;int
+Miele;miele.com;int
+Dyson;dyson.com;int
+Shark;sharkclean.com;int
+iRobot;irobot.com;int
+Breville;breville.com;int
+Cuisinart;cuisinart.com;int
+Ninja;ninjakitchen.com;int
+Vitamix;vitamix.com;int
+Nespresso;nespresso.com;int
+De'Longhi;delonghi.com;int
+Smeg;smeg.com;int
+Canon;canon.com;int
+Nikon;nikon.com;int
+Fujifilm;fujifilm.com;int
+Leica;leica-camera.com;int
+Polaroid;polaroid.com;int
+Kodak;kodak.com;int
+Xerox;xerox.com;int
+Brother;brother.com;int
+Epson;epson.com;int
+Ricoh;ricoh.com;int
+Staples;staples.com;int
+Office Depot;officedepot.com;int
+
+# ── More Swedish (se) — agencies, betting, gyms, travel, real-estate, media ──
+Skatteverket;skatteverket.se;se
+Försäkringskassan;forsakringskassan.se;se
+Arbetsförmedlingen;arbetsformedlingen.se;se
+CSN;csn.se;se
+Migrationsverket;migrationsverket.se;se
+Polisen;polisen.se;se
+Kronofogden;kronofogden.se;se
+Pensionsmyndigheten;pensionsmyndigheten.se;se
+Transportstyrelsen;transportstyrelsen.se;se
+Bolagsverket;bolagsverket.se;se
+SCB;scb.se;se
+SMHI;smhi.se;se
+Naturvårdsverket;naturvardsverket.se;se
+Livsmedelsverket;livsmedelsverket.se;se
+Folkhälsomyndigheten;folkhalsomyndigheten.se;se
+Svenska Spel;svenskaspel.se;se
+ATG;atg.se;se
+Betsson;betsson.com;se
+Unibet;unibet.com;se
+LeoVegas;leovegas.com;se
+Mr Green;mrgreen.com;se
+Casumo;casumo.com;se
+Kindred Group;kindredgroup.com;se
+Evolution;evolution.com;se
+NetEnt;netent.com;se
+SATS;sats.se;se
+Nordic Wellness;nordicwellness.se;se
+Friskis&Svettis;friskissvettis.se;se
+Actic;actic.se;se
+Fitness24Seven;fitness24seven.com;se
+Ving;ving.se;se
+Apollo;apollo.se;se
+Solresor;solresor.se;se
+Resia;resia.se;se
+Moderna Försäkringar;modernaforsakringar.se;se
+Dina Försäkringar;dina.se;se
+Fastighetsbyrån;fastighetsbyran.se;se
+Svensk Fastighetsförmedling;svenskfast.se;se
+Mäklarhuset;maklarhuset.se;se
+HusmanHagberg;husmanhagberg.se;se
+Bjurfors;bjurfors.se;se
+Erik Olsson;erikolsson.se;se
+Notar;notar.se;se
+Skandiamäklarna;skandiamaklarna.se;se
+Vestmanlands Läns Tidning;vlt.se;se
+Dalarnas Tidningar;dt.se;se
+Footway;footway.se;se
+Sportshopen;sportshopen.com;se
+Coolstuff;coolstuff.se;se
+Arken Zoo;arkenzoo.se;se
+Engelsons;engelsons.se;se
+Önos;onos.se;se
+Ekströms;ekstroms.se;se
+Zeta;zeta.nu;se
+Konstfack;konstfack.se;se
+Sparbanken Skåne;sparbankenskane.se;se
+Verisure;verisure.se;se
+Anticimex;anticimex.com;se
+Assemblin;assemblin.se;se
+Midsona;midsona.com;se
+AAK;aak.com;se
+Ratos;ratos.com;se
+AddLife;addlife.se;se
+Bure Equity;bure.se;se
+Creades;creades.se;se
+Karnov Group;karnovgroup.com;se
+Acast;acast.com;se
+Anyfin;anyfin.com;se
+Voyado;voyado.com;se
+Lendo;lendo.se;se
+Zmarta;zmarta.se;se
+Sambla;sambla.se;se
+Care of Carl;careofcarl.se;se
+Stayhard;stayhard.se;se
+Boomerang;boomerangstore.com;se
+Morris;morrisstockholm.com;se
+Odd Molly;oddmolly.com;se
+Bastard Burgers;bastardburgers.com;se
+Flygbussarna;flygbussarna.se;se
+Annas Pepparkakor;annas.se;se
+Pärsons;parsons.se;se
+IK Sirius;siriusfotboll.se;se
+Östers IF;ostersif.se;se
+GIF Sundsvall;gifsundsvall.se;se
+Örgryte IS;ois.se;se
+Mjällby AIF;maif.nu;se
+Nivika;nivika.se;se
+Alligo;alligo.com;se
+Fenix Outdoor;fenixoutdoor.se;se
+Lundhags;lundhags.com;se
+Icebug;icebug.com;se
+Tenson;tenson.com;se
+Sail Racing;sailracing.com;se
+Probi;probi.com;se
+Sedana Medical;sedanamedical.com;se
+Xvivo;xvivogroup.com;se
+Absolent;absolentgroup.com;se
+Skogaholm;skogaholm.se;se
+Korvbrödsbagarn;korvbrodsbagarn.se;se
+Bokio;bokio.se;se
+Tessin;tessin.com;se
+inriver;inriver.com;se
+Sitoo;sitoo.com;se
+Försvarshögskolan;fhs.se;se
+GIH;gih.se;se
+Högskolan Väst;hv.se;se
+Högskolan Dalarna;du.se;se
+Högskolan i Gävle;hig.se;se
+Högskolan i Borås;hb.se;se
+Högskolan Kristianstad;hkr.se;se
+Blekinge Tekniska Högskola;bth.se;se
+Hallandsposten;hallandsposten.se;se
+Smålandsposten;smp.se;se
+Blekinge Läns Tidning;blt.se;se
+TTELA;ttela.se;se
+Gefle Dagblad;gd.se;se
+Arbetarbladet;arbetarbladet.se;se
+Västerbottens-Kuriren;vk.se;se
+Örebro Hockey;orebrohockey.com;se
+Trelleborgs FF;trelleborgsff.se;se
+Landskrona BoIS;landskronabois.se;se
+
+# ── More International (int) — web, apps, learning, productivity ──────────────
+Wikipedia;wikipedia.org;int
+Yahoo;yahoo.com;int
+Bing;bing.com;int
+Baidu;baidu.com;int
+Naver;naver.com;int
+Yandex;yandex.com;int
+VK;vk.com;int
+Weibo;weibo.com;int
+Threads;threads.net;int
+Bluesky;bsky.app;int
+Dailymotion;dailymotion.com;int
+IMDb;imdb.com;int
+Rotten Tomatoes;rottentomatoes.com;int
+Letterboxd;letterboxd.com;int
+Goodreads;goodreads.com;int
+Duolingo;duolingo.com;int
+Coursera;coursera.org;int
+Udemy;udemy.com;int
+Khan Academy;khanacademy.org;int
+edX;edx.org;int
+Skillshare;skillshare.com;int
+MasterClass;masterclass.com;int
+Babbel;babbel.com;int
+Calm;calm.com;int
+Headspace;headspace.com;int
+Strava;strava.com;int
+MyFitnessPal;myfitnesspal.com;int
+Peloton;onepeloton.com;int
+WHOOP;whoop.com;int
+Evernote;evernote.com;int
+Todoist;todoist.com;int
+ClickUp;clickup.com;int
+Basecamp;basecamp.com;int
+Calendly;calendly.com;int
+DocuSign;docusign.com;int
+Box;box.com;int
+WeTransfer;wetransfer.com;int
+Zapier;zapier.com;int
+Webflow;webflow.com;int
+Framer;framer.com;int
+Sketch;sketch.com;int
+Procreate;procreate.com;int
+Blender;blender.org;int
+Unreal Engine;unrealengine.com;int
+
+# ── More International (int) — finance, retail, sportswear ────────────────────
+Afterpay;afterpay.com;int
+Nubank;nubank.com.br;int
+Mercado Libre;mercadolibre.com;int
+eToro;etoro.com;int
+Interactive Brokers;interactivebrokers.com;int
+E*Trade;etrade.com;int
+Webull;webull.com;int
+Trading 212;trading212.com;int
+Sam's Club;samsclub.com;int
+Williams-Sonoma;williams-sonoma.com;int
+Pottery Barn;potterybarn.com;int
+Crate & Barrel;crateandbarrel.com;int
+West Elm;westelm.com;int
+Anthropologie;anthropologie.com;int
+Urban Outfitters;urbanoutfitters.com;int
+Forever 21;forever21.com;int
+American Eagle;ae.com;int
+Abercrombie & Fitch;abercrombie.com;int
+Hollister;hollisterco.com;int
+Old Navy;oldnavy.com;int
+Banana Republic;bananarepublic.com;int
+J.Crew;jcrew.com;int
+Madewell;madewell.com;int
+Express;express.com;int
+PacSun;pacsun.com;int
+Foot Locker;footlocker.com;int
+JD Sports;jdsports.com;int
+Dick's Sporting Goods;dickssportinggoods.com;int
+REI;rei.com;int
+GameStop;gamestop.com;int
+Barnes & Noble;barnesandnoble.com;int
+Petco;petco.com;int
+PetSmart;petsmart.com;int
+Chewy;chewy.com;int
+
+# ── More International (int) — snacks, sweets, drinks ─────────────────────────
+Reese's;reeses.com;int
+Twizzlers;twizzlers.com;int
+Jolly Rancher;jollyrancher.com;int
+Sour Patch Kids;sourpatchkids.com;int
+Airheads;airheads.com;int
+Pez;pez.com;int
+Ferrero Rocher;ferrerorocher.com;int
+Ruffles;ruffles.com;int
+Tostitos;tostitos.com;int
+Fritos;fritos.com;int
+Sun Chips;sunchips.com;int
+Triscuit;triscuit.com;int
+Magnum;magnumicecream.com;int
+Breyers;breyers.com;int
+Cheez-It;cheez-it.com;int
+Vita Coco;vitacoco.com;int
+Liquid Death;liquiddeath.com;int
+La Croix;lacroixwater.com;int
+Dasani;dasani.com;int
+Aquafina;aquafina.com;int
+Fiji;fijiwater.com;int
+Amstel;amstel.com;int
+Coors;coors.com;int
+Modelo;modelousa.com;int
+Glenlivet;theglenlivet.com;int
+
+# ── More International (int) — film, music, airlines, phones ──────────────────
+DC;dc.com;int
+Lucasfilm;lucasfilm.com;int
+DreamWorks;dreamworks.com;int
+Lionsgate;lionsgate.com;int
+MGM;mgm.com;int
+A24;a24films.com;int
+Focus Features;focusfeatures.com;int
+Shazam;shazam.com;int
+Genius;genius.com;int
+Bandcamp;bandcamp.com;int
+Discogs;discogs.com;int
+Hawaiian Airlines;hawaiianairlines.com;int
+Saudia;saudia.com;int
+Egyptair;egyptair.com;int
+Ethiopian Airlines;ethiopianairlines.com;int
+Aegean;aegeanair.com;int
+TAP Air Portugal;flytap.com;int
+SWISS;swiss.com;int
+Austrian Airlines;austrian.com;int
+Motorola;motorola.com;int
+Nokia;nokia.com;int
+BlackBerry;blackberry.com;int
+HTC;htc.com;int
+Realme;realme.com;int
+Vivo;vivo.com;int
+Honor;hihonor.com;int
+Nothing;nothing.tech;int
+TomTom;tomtom.com;int
+
+# ── More Swedish (se) — buffer: brands, energy, publishers, services ─────────
+Oriflame;oriflame.com;se
+Svevia;svevia.se;se
+Liber;liber.se;se
+Norstedts;norstedts.se;se
+Studentlitteratur;studentlitteratur.se;se
+Natur & Kultur;nok.se;se
+Gleerups;gleerups.se;se
+Nextory;nextory.com;se
+BookBeat;bookbeat.com;se
+Pinchos;pinchos.se;se
+Wayne's Coffee;waynescoffee.se;se
+Picadeli;picadeli.com;se
+Lifvs;lifvs.com;se
+Sushi Yama;sushiyama.se;se
+Lysa;lysa.se;se
+Opti;opti.se;se
+Werlabs;werlabs.se;se
+Praktikertjänst;praktikertjanst.se;se
+Hemfrid;hemfrid.se;se
+Cibes Lift;cibeslift.com;se
+Aritco;aritco.com;se
+Kabe;kabe.se;se
+NCAB;ncabgroup.com;se
+Note;note.eu;se
+Inission;inission.com;se
+Profilgruppen;profilgruppen.se;se
+Eltel;eltelnetworks.com;se
+Infranord;infranord.se;se
+Cabonline;cabonline.com;se
+Carspect;carspect.se;se
+Werksta;werksta.se;se
+Apohem;apohem.se;se
+Meds;meds.se;se
+Nordicfeel;nordicfeel.se;se
+Bangerhead;bangerhead.se;se
+Maria Nila;marianila.com;se
+Sachajuan;sachajuan.com;se
+Estelle & Thild;estellethild.com;se
+Telge Energi;telgeenergi.se;se
+Bixia;bixia.se;se
+Kraftringen;kraftringen.se;se
+Stockholm Exergi;stockholmexergi.se;se
+Umeå Energi;umeaenergi.se;se
+IFK Kristianstad;ifkkristianstad.se;se
+Sävehof;savehof.se;se
+Bredbandsbolaget;bredbandsbolaget.se;se
+Bonnier News;bonniernews.se;se
+Sörmlands Sparbank;sormlandssparbank.se;se
+Image Systems;imagesystems.se;se
+Surgical Science;surgicalscience.com;se
+Humble Group;humblegroup.se;se
+Vimian;vimian.com;se
+Tempo;tempo.se;se
+Opus Bilprovning;opus.se;se
+Björk & Berries;bjorkandberries.com;se
+
+# ── More International (int) — buffer: restaurants, SaaS, tools, fashion ──────
+Chick-fil-A;chick-fil-a.com;int
+Whataburger;whataburger.com;int
+Jack in the Box;jackinthebox.com;int
+Carl's Jr;carlsjr.com;int
+Hardee's;hardees.com;int
+Del Taco;deltaco.com;int
+Qdoba;qdoba.com;int
+Jersey Mike's;jerseymikes.com;int
+Jimmy John's;jimmyjohns.com;int
+Firehouse Subs;firehousesubs.com;int
+Panda Express;pandaexpress.com;int
+Raising Cane's;raisingcanes.com;int
+Bojangles;bojangles.com;int
+Culver's;culvers.com;int
+White Castle;whitecastle.com;int
+Steak 'n Shake;steaknshake.com;int
+Wingstop;wingstop.com;int
+Buffalo Wild Wings;buffalowildwings.com;int
+Red Lobster;redlobster.com;int
+Applebee's;applebees.com;int
+TGI Fridays;tgifridays.com;int
+Chili's;chilis.com;int
+Red Robin;redrobin.com;int
+Texas Roadhouse;texasroadhouse.com;int
+Cracker Barrel;crackerbarrel.com;int
+P.F. Chang's;pfchangs.com;int
+Waffle House;wafflehouse.com;int
+Trip.com;trip.com;int
+MakeMyTrip;makemytrip.com;int
+Klook;klook.com;int
+GetYourGuide;getyourguide.com;int
+Viator;viator.com;int
+Lonely Planet;lonelyplanet.com;int
+OYO;oyorooms.com;int
+Vacasa;vacasa.com;int
+Loom;loom.com;int
+Linear;linear.app;int
+Retool;retool.com;int
+Amplitude;amplitude.com;int
+Mixpanel;mixpanel.com;int
+Sentry;sentry.io;int
+PagerDuty;pagerduty.com;int
+New Relic;newrelic.com;int
+Grafana;grafana.com;int
+Auth0;auth0.com;int
+SendGrid;sendgrid.com;int
+Klaviyo;klaviyo.com;int
+Braze;braze.com;int
+Algolia;algolia.com;int
+Contentful;contentful.com;int
+Sanity;sanity.io;int
+Strapi;strapi.io;int
+Supabase;supabase.com;int
+PlanetScale;planetscale.com;int
+Render;render.com;int
+GoDaddy;godaddy.com;int
+Namecheap;namecheap.com;int
+Bluehost;bluehost.com;int
+HostGator;hostgator.com;int
+SiteGround;siteground.com;int
+Cloudinary;cloudinary.com;int
+Tefal;tefal.com;int
+Moulinex;moulinex.com;int
+Rowenta;rowenta.com;int
+Krups;krups.com;int
+Braun;braun.com;int
+Wahl;wahl.com;int
+Conair;conair.com;int
+Bissell;bissell.com;int
+Hoover;hoover.com;int
+Black+Decker;blackanddecker.com;int
+DeWalt;dewalt.com;int
+Makita;makita.com;int
+Milwaukee Tool;milwaukeetool.com;int
+Stanley;stanleytools.com;int
+Craftsman;craftsman.com;int
+Ryobi;ryobitools.com;int
+Hilti;hilti.com;int
+Festool;festool.com;int
+Coach;coach.com;int
+Michael Kors;michaelkors.com;int
+Kate Spade;katespade.com;int
+Tory Burch;toryburch.com;int
+Marc Jacobs;marcjacobs.com;int
+Longchamp;longchamp.com;int
+Furla;furla.com;int
+Tod's;tods.com;int
+Salvatore Ferragamo;ferragamo.com;int
+Jimmy Choo;jimmychoo.com;int
+Christian Louboutin;christianlouboutin.com;int
+Stuart Weitzman;stuartweitzman.com;int
+Cole Haan;colehaan.com;int
+Allen Edmonds;allenedmonds.com;int
+Ecco;ecco.com;int
+Geox;geox.com;int
+Sperry;sperry.com;int
+Hush Puppies;hushpuppies.com;int
+Trident Gum;trident.com;int
+Chick;chickfila.com;int
+Wattpad;wattpad.com;int
+Behance;behance.net;int
+Dribbble;dribbble.com;int
+Unsplash;unsplash.com;int
+Pexels;pexels.com;int
+Shutterstock;shutterstock.com;int
+Getty Images;gettyimages.com;int
+Giphy;giphy.com;int
+Imgur;imgur.com;int
+Flickr;flickr.com;int
+500px;500px.com;int
+DeviantArt;deviantart.com;int
+ArtStation;artstation.com;int
