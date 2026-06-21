@@ -46,6 +46,9 @@ body {
 .logo { font-family: var(--display); font-weight: 800; font-size: 1.35rem; letter-spacing: -.01em; }
 .logo .mer { color: var(--mer-deep); }
 .logo .mindre { color: var(--mindre-deep); }
+
+/* Company logo image (loggor-* packs): on direction buttons, the two-bars legend, and reveal. */
+.logoimg { max-height: 2.4rem; max-width: 100%; width: auto; height: auto; object-fit: contain; align-self: center; vertical-align: middle; }
 .pill {
   font-family: var(--display); font-weight: 700; font-size: .8rem;
   background: var(--mindre-deep); color: var(--bg); padding: .35rem .8rem; border-radius: 999px;

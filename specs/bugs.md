@@ -41,3 +41,8 @@ Loggade buggar i samma anda som `tasks.md`. Mall för nya poster:
   - Förväntat: testen grön; den verifierar att värd-lobbyn renderar join-länken.
   - Faktiskt: testen kräver `/games/{code}/join` i plain `/state`-svaret, men committen "clickable join URL + copy-to-clipboard" gjorde länken progressivt avslöjad — `LobbyHostScreen.razor:8` visar den bara `@if (Model.ShowJoinUrl)`, vilket slås på först när pollen anropar `/state?url`. Funktionen funkar; testen påstår ett gammalt kontrakt. Fix: assert mot `/state?url` (där join-URL:en faktiskt renderas), inte plain `/state`.
 
+  ## Loggor
+  - [x] Mer eller Mindre – Loggor (alla åldrar 1) --> Mer eller Mindre – Loggor – alla åldrar
+  - [x] Mer eller Mindre – Loggor (blandat 1) --> Mer eller Mindre – Loggor
+  - [x] loggorna ska inte skalas om. ser helt förfärligt ut! kolla skärmdumpen scaled-logos-bug.png! — `.dirbtn`/`.twobars-legend` är flexcontainrar (`align-items: stretch`) som tänjde `<img>` till full bredd medan `max-height` klippte höjden → distordrade loggor. Fix: `.logoimg` får `align-self: center` (ingen sträckning) + `object-fit: contain` i playful.css.
+
