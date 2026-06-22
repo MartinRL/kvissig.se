@@ -45,4 +45,5 @@ Loggade buggar i samma anda som `tasks.md`. Mall för nya poster:
   - [x] Mer eller Mindre – Loggor (alla åldrar 1) --> Mer eller Mindre – Loggor – alla åldrar
   - [x] Mer eller Mindre – Loggor (blandat 1) --> Mer eller Mindre – Loggor
   - [x] loggorna ska inte skalas om. ser helt förfärligt ut! kolla skärmdumpen scaled-logos-bug.png! — `.dirbtn`/`.twobars-legend` är flexcontainrar (`align-items: stretch`) som tänjde `<img>` till full bredd medan `max-height` klippte höjden → distordrade loggor. Fix: `.logoimg` får `align-self: center` (ingen sträckning) + `object-fit: contain` i playful.css.
+  - [x] spelet "Mer eller Mindre" ska vara placerat högst upp, ej längst ned — katalogen sorterade rent ordinalt på slug (`mer-eller-mindre` hamnade sist). Fix: `FileSystemQuestionPackCatalog` pinnar `mer-eller-mindre` först, resten alfabetiskt.
 

@@ -2,12 +2,26 @@
    GameLobby) wrap their markup in <MainLayout>…</MainLayout>; fragment components
    (PlayersList, OpenLobbyForm) render bare markup and do NOT use this. Google Fonts arrive
    via playful.css's own @@import. *@
+@inject IHttpContextAccessor Http
 <!DOCTYPE html>
 <html lang="sv">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@Title</title>
+    <meta name="description" content="@Description" />
+    <link rel="canonical" href="@Canonical" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Mer eller Mindre" />
+    <meta property="og:locale" content="sv_SE" />
+    <meta property="og:title" content="@Title" />
+    <meta property="og:description" content="@Description" />
+    <meta property="og:url" content="@Canonical" />
+    <meta property="og:image" content="@AbsoluteOgImage" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="@Title" />
+    <meta name="twitter:description" content="@Description" />
+    <meta name="twitter:image" content="@AbsoluteOgImage" />
     <link rel="icon" href="/icon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -21,9 +35,31 @@
         window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
         plausible.init()
     </script>
+    <script type="application/ld+json">
+    {"@@context":"https://schema.org","@@graph":[
+      {"@@type":"WebSite","name":"Mer eller Mindre","url":"@SiteUrl","inLanguage":"sv"},
+      {"@@type":"Organization","name":"Mer eller Mindre","url":"@SiteUrl","logo":"@SiteUrl/icons/icon-512.png"}
+    ]}
+    </script>
+    @if (JsonLd is not null)
+    {
+        @((MarkupString)$"<script type=\"application/ld+json\">{JsonLd}</script>")
+    }
 </head>
 <body>
     <div id="error-banner" class="error-banner" hidden></div>
+    @if (ShowMenu)
+    {
+        <input type="checkbox" id="navtoggle" class="navtoggle" hidden />
+        <label for="navtoggle" class="hamburger" aria-label="Meny" title="Meny">
+            <span></span><span></span><span></span>
+        </label>
+        <nav class="mainnav">
+            <a href="/">Kviss</a>
+            <a href="/om-spelet">Om spelet</a>
+            <a href="/om-spelet#sa-spelar-du">Så spelar du</a>
+        </nav>
+    }
     @ChildContent
     <script>
         document.body.addEventListener('htmx:responseError', e => {
@@ -37,5 +73,25 @@
 
 @code {
     [Parameter] public string Title { get; set; } = "Mer eller Mindre";
+    [Parameter] public string Description { get; set; } =
+        "Frågespelet Mer eller Mindre (eng. More or Less) — online men tillsammans i samma rum. Gissa riktning och hur stor skillnaden är; lägst totaldifferens vinner.";
+    [Parameter] public string CanonicalPath { get; set; } = "/";
+    [Parameter] public string OgImage { get; set; } = "/screenshots/screenshot-1280x720.png";
+    [Parameter] public bool ShowMenu { get; set; } = true;
+    // Optional per-page schema.org JSON-LD (already-serialized object, no enclosing <script>).
+    [Parameter] public string? JsonLd { get; set; }
     [Parameter] public RenderFragment? ChildContent { get; set; }
+
+    // Built from the request host so canonical/OG URLs are absolute and match the live origin
+    // (behind fly's edge, ForwardedHeaders makes Scheme=https + the public Host).
+    private string SiteUrl
+    {
+        get
+        {
+            var req = Http.HttpContext!.Request;
+            return $"{req.Scheme}://{req.Host}";
+        }
+    }
+    private string Canonical => $"{SiteUrl}{CanonicalPath}";
+    private string AbsoluteOgImage => OgImage.StartsWith("http") ? OgImage : $"{SiteUrl}{OgImage}";
 }

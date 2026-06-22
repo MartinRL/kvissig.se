@@ -51,7 +51,10 @@ public sealed record QuestionVm(
     QuestionStage Stage,
     // Stage 2 only: the now-revealed direction so the slider fixes the taller (MER) bar.
     Direction? RevealedDirection,
-    string AntiforgeryToken);
+    string AntiforgeryToken,
+    // Logo mode (loggor-* packs): PNG URLs for ItemA/ItemB; null in text mode.
+    string? LogoA = null,
+    string? LogoB = null);
 
 public sealed record DirectionResultRowVm(
     string Name,
@@ -71,7 +74,10 @@ public sealed record DirectionResultsVm(
     string MindreItem,
     Direction CorrectDirection,
     IReadOnlyList<DirectionResultRowVm> Rows,
-    string AntiforgeryToken);
+    string AntiforgeryToken,
+    // Logo mode: PNGs for the Mer/Mindre items (direction revealed, names still hidden).
+    string? MerLogo = null,
+    string? MindreLogo = null);
 
 public sealed record WaitingPlayerVm(string Name, bool IsYou);
 
@@ -110,7 +116,10 @@ public sealed record ResultsVm(
     IReadOnlyList<ResultRowVm> Rows,
     bool ViewerIsHost,
     bool HasNextQuestion,
-    string AntiforgeryToken);
+    string AntiforgeryToken,
+    // Logo mode: PNGs revealed alongside the Larger/Smaller names.
+    string? LargerLogo = null,
+    string? SmallerLogo = null);
 
 public sealed record StandingRowVm(int Rank, string Name, bool IsYou, bool IsHost, int TotalScore, bool IsWinner);
 

@@ -141,3 +141,34 @@ Gäller NÄR pack = `alla-aldrar` (delta mot basfilosofin ovan — allt annat i 
 **Bra** (svenskt, tidlöst): "Är Vänern större eller mindre än Vättern till ytan?"
 **Dåligt** (off-audience): "Har låt X fler eller färre Spotify-streams än låt Y?" (dagsfärsk,
 bara ena generationen känner båda).
+
+## Loggor (logga-läge)
+
+Gäller NÄR pack-slug börjar på `loggor-` (delta mot basfilosofin ovan). Loggleken visar
+loggor på frågeskärmen och DÖLJER namnen tills resultatet — så frågestammen MÅSTE vara
+namnfri och `sakA`/`sakB` får aldrig läcka ut i frågan.
+
+- **`fråga` + `differensfråga` är NAMNFRIA och enhetliga** över hela leken (samma stam för
+  alla kort i samma metrik):
+  - Ålder: `fråga` "Vilket av märkena är äldst?", `differensfråga` "Hur många år skiljer
+    dem åt?", enhet `år`.
+  - Länder: `fråga` "Vilket märke finns i flest länder?", `differensfråga` "Hur många länder
+    skiljer det?", enhet `länder`. (Butiker för kedjor: enhet `butiker`.)
+- **`sakA`/`sakB` = EXAKTA namn ur `data/logos/logos.csv` vars png finns på disk.** Annars
+  returnerar `LogoCatalog.UrlFor` null → trasig render. Filtrera kandidaterna mot disk.
+- **Metrik = ålder (`2026 − grundningsår`) eller antal länder/butiker.** ALDRIG
+  grundningsår rakt av — det är degenererat: `|1943−2006|/2006 ≈ 0,03` → norm ~3 → varje
+  kort hamnar i band 0. Ålder ger ratio-spridning (IKEA 83 vs Spotify 20 → norm 76 → band 2).
+  Stabila metriker (ej volatil omsättning/streams).
+- **Två lekar = två svårighetsgrader, BARA via pack-val:**
+  - `loggor-alla-aldrar-1` — bandmål **10/35/35/20**, pool = **konsumentmärken** (hushållsnamn
+    13- OCH 83-åringen känner: sweets/drinks/snacks, restaurants, toys, games/music/film,
+    electronics, sports, fashion, retail).
+  - `loggor-blandat-1` — bandmål **15/40/30/15**, pool = **B2B/industri** (obskyra:
+    industrials/holdings, real estate, pharma, finance/insurance, semiconductors/enterprise,
+    chemicals/energy, logistics, SaaS/components).
+  - Poolerna (mestadels) disjunkta — igenkänning är den andra svårighetsaxeln.
+- **`--key pair` vid report OCH merge** (alla kort delar EN frågestam → dedup/dupflagg på
+  questionText skulle kollapsa leken till 1 kort). Mät:
+  `report --staging --dir question-staging/loggor-alla-aldrar --targets 10,35,35,20 --key pair`.
+- `ItemCap = 4` gäller (≥543 distinkta märken/lek; korpusen 2034 png räcker väl).

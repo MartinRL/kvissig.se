@@ -2,6 +2,8 @@
   "id": "/",
   "name": "Mer eller Mindre",
   "short_name": "Mer eller Mindre",
+  "description": "Frågespelet Mer eller Mindre — online men tillsammans i samma rum. Gissa riktning och hur stor skillnaden är; lägst totaldifferens vinner.",
+  "categories": ["games"],
   "start_url": "/",
   "display": "standalone",
   "background_color": "#fff7ec",

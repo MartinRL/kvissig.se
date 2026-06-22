@@ -5,7 +5,7 @@
 <div class="card center">
     <span class="pill">Fråga @Model.QuestionNumber / @Model.TotalQuestions · mer eller mindre avslöjat</span>
     <h1 style="margin-top:.6rem">@Model.QuestionText</h1>
-    <p class="answer"><span class="mer">@Model.MerItem</span> är <span class="mer">MER</span> än @Model.MindreItem</p>
+    <p class="answer">@if (Model.MerLogo is not null) { <img class="logoimg" src="@Model.MerLogo" alt="Logotyp" /> } else { <span class="mer">@Model.MerItem</span> } är <span class="mer">MER</span> än @if (Model.MindreLogo is not null) { <img class="logoimg" src="@Model.MindreLogo" alt="Logotyp" /> } else { @Model.MindreItem }</p>
 </div>
 
 <div class="card">

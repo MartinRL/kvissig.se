@@ -26,7 +26,11 @@ public sealed class FileSystemQuestionPackCatalog
             _bySlug[slug] = QuestionPackCsvParser.Parse(slug, text);
         }
 
-        Packs = _bySlug.Values.OrderBy(p => p.PackId, StringComparer.Ordinal).ToList();
+        // The base "Mer eller Mindre" pack pins to the top; the rest stay alphabetical.
+        Packs = _bySlug.Values
+            .OrderBy(p => p.PackId != "mer-eller-mindre")
+            .ThenBy(p => p.PackId, StringComparer.Ordinal)
+            .ToList();
     }
 
     public IReadOnlyList<QuestionPack> Packs { get; }

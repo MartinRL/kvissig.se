@@ -8,6 +8,8 @@
 //                                                     cap item frequency, park overflow
 //   --dir <stagingDir>     scan a different staging dir (report --staging + merge); default question-staging
 //   --targets a,b,c,d      override band-target display percentages; default 15,40,30,15
+//   --key question|pair    dedup + duplicate-flag key (report + merge); default question.
+//                          pair = the unordered {sakA,sakB} (logo decks share one stem).
 // Reuses the Domain's parser + Decider.NormalizeDifference so band math has ONE source.
 
 using System.Globalization;
@@ -36,6 +38,9 @@ string? maxOpt = TakeOption("--max");
 stagingDir = TakeOption("--dir") ?? stagingDir;
 var targetsOpt = TakeOption("--targets");
 if (targetsOpt is not null) targets = targetsOpt.Split(',').Select(int.Parse).ToArray();
+var keyMode = TakeOption("--key") ?? "question";
+if (keyMode is not ("question" or "pair"))
+{ Console.Error.WriteLine("--key must be 'question' or 'pair'."); Environment.Exit(2); }
 var positional = argv.Where(a => !a.StartsWith('-')).ToList();
 
 switch (command)
@@ -93,6 +98,13 @@ List<Question> LoadCards(IEnumerable<string> files)
     return cards;
 }
 
+// Dedup/duplicate-flag key. pair = unordered {sakA,sakB} so a logo deck sharing one
+// frågestam ("Vilket av märkena är äldst?") dedups on the pair, not the identical text.
+string KeyOf(Question q) =>
+    keyMode == "pair"
+        ? string.Join('\u0001', new[] { q.ItemA.Trim(), q.ItemB.Trim() }.OrderBy(x => x, StringComparer.OrdinalIgnoreCase))
+        : q.QuestionText.Trim();
+
 int Band(Question q)
 {
     var norm = Decider.NormalizeDifference(Math.Abs(q.ValueA - q.ValueB), Math.Max(q.ValueA, q.ValueB));
@@ -142,17 +154,18 @@ void Report(List<Question> cards)
         (over.Count == 0 ? "" : $"   ({string.Join(", ", over.Select(g => g.Key))})"));
 
     var dups = cards
-        .GroupBy(c => c.QuestionText.Trim(), StringComparer.OrdinalIgnoreCase)
+        .GroupBy(KeyOf, StringComparer.OrdinalIgnoreCase)
         .Where(g => g.Count() > 1)
         .ToList();
+    var dupLabel = keyMode == "pair" ? "pair {sakA,sakB}" : "questionText";
     Console.WriteLine();
     if (dups.Count == 0)
-        Console.WriteLine("No duplicate questionText.");
+        Console.WriteLine($"No duplicate {dupLabel}.");
     else
     {
-        Console.WriteLine($"DUPLICATE questionText ({dups.Count}):");
+        Console.WriteLine($"DUPLICATE {dupLabel} ({dups.Count}):");
         foreach (var g in dups)
-            Console.WriteLine($"  x{g.Count()}  {g.Key}");
+            Console.WriteLine($"  x{g.Count()}  {(keyMode == "pair" ? $"{g.First().ItemA} / {g.First().ItemB}" : g.Key)}");
     }
 
     var smells = cards
@@ -184,11 +197,12 @@ void Merge()
     var kept = new List<Question>();
     var dropped = 0;
     foreach (var c in cards)
-        if (seen.Add(c.QuestionText.Trim())) kept.Add(c);
+        if (seen.Add(KeyOf(c))) kept.Add(c);
         else dropped++;
 
+    var dupLabel = keyMode == "pair" ? "pair {sakA,sakB}" : "questionText";
     WritePack(kept, outPath);
-    Console.WriteLine($"Wrote {kept.Count} cards to {outPath} (dropped {dropped} duplicate questionText).");
+    Console.WriteLine($"Wrote {kept.Count} cards to {outPath} (dropped {dropped} duplicate {dupLabel}).");
     Console.WriteLine();
     Report(kept);
 }

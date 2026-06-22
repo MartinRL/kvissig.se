@@ -150,7 +150,7 @@ public class QuestionPackCsvParserTests
     // The pack CSVs are copied to output beside the Domain assembly (see its csproj).
     private static readonly string PacksDir = Path.Combine(AppContext.BaseDirectory, "data", "packs");
 
-    public static TheoryData<string> LivePacks()
+    public static TheoryData<string> AllPacks()
     {
         var data = new TheoryData<string>();
         foreach (var f in Directory.GetFiles(PacksDir, "*.csv").Where(f => !f.EndsWith(".källor.csv")))
@@ -159,13 +159,21 @@ public class QuestionPackCsvParserTests
     }
 
     [Theory]
-    [MemberData(nameof(LivePacks))]
-    public void EveryLivePackIsExactly1085CleanCards(string path)
+    [MemberData(nameof(AllPacks))]
+    public void EveryFullDeckIsExactly1085Cards(string path)
     {
         var slug = Path.GetFileNameWithoutExtension(path);
         var pack = QuestionPackCsvParser.Parse(slug, File.ReadAllText(path));
 
         pack.QuestionCount.Should().Be(1085);
+    }
+
+    [Theory]
+    [MemberData(nameof(AllPacks))]
+    public void EveryPackHasCleanCards(string path)
+    {
+        var slug = Path.GetFileNameWithoutExtension(path);
+        var pack = QuestionPackCsvParser.Parse(slug, File.ReadAllText(path));
 
         pack.Questions.Should().OnlyContain(q =>
             q.QuestionText.Length > 0 && q.ItemA.Length > 0 && q.ItemB.Length > 0

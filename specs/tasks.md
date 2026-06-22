@@ -133,5 +133,16 @@ source, no GT).
 - [ ] klicka på en knapp "köp detta spel som app till en engångskostnad precis som en fysisk kortlek"
 - [ ] feature-flagging, t.ex. WIP-kortlekar
 
-## ACMM Level 3
-- [ ] [[acmm]]
+## ACMM Level-Up!
+- [x] level 1
+- [x] level 2
+- [ ] level 3 - half-way there- WIP
+- [ ] level 4
+- [ ] level 5
+- [ ] level 6
+
+## SEO 
+- [ ] Google
+- [ ] MS
+- [ ] Anthropic
+- [ ] ...

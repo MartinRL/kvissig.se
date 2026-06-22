@@ -1,0 +1,9 @@
+# Mer eller Mindre
+
+> Svenskt frågespel online men tillsammans i samma rum (eng. More or Less). Gissa först
+> riktning (mer/mindre), sedan hur stor skillnaden är. Lägst totaldifferens vinner. Spelas
+> i webbläsaren, 2+ spelare på var sin skärm, inga kort att köpa, färska kurerade frågor.
+
+## Sidor
+- [Om spelet](https://kvissig.se/om-spelet): vad spelet är, så spelar du, idén bakom, FAQ.
+- [Välj kviss](https://kvissig.se/): frågepaketen (kortlekarna) man kan spela.

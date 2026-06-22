@@ -1,0 +1,146 @@
+@* GET /om-spelet — the crawlable/citeable "About" page. Plain static SSR, no JS. Fråge-
+   rubriker + korta definitionssvar (GEO). Section 6 "Historien bakom" is the owner's text —
+   see the STORY placeholder; do not fill it in. FAQ here MUST stay in sync with the FAQPage
+   JSON-LD in @code (FaqJsonLd). *@
+<MainLayout Title="Om spelet — Mer eller Mindre"
+            Description="Mer eller Mindre (eng. More or Less) är ett svenskt frågespel online men tillsammans i samma rum: gissa först riktning (mer/mindre), sedan hur stor skillnaden är. Lägst totaldifferens vinner."
+            CanonicalPath="/om-spelet"
+            JsonLd="@FaqJsonLd">
+    <div class="wrap content">
+        <div class="brand">
+            <a class="logo" href="/"><span class="mer">Mer</span> eller <span class="mindre">Mindre</span></a>
+        </div>
+
+        @* 1. Hero / pitch *@
+        <h1>Frågespelet med en egen idé — online men tillsammans i samma rum</h1>
+        <p class="sub">
+            <strong>Mer eller Mindre</strong> (eng. <em>More or Less</em>) är ett svenskt
+            frågespel där ni först gissar <em>riktningen</em> — är A mer eller mindre än B? —
+            och sedan <em>hur stor</em> skillnaden är. Två gissningar per fråga, lägst
+            totaldifferens vinner. Samla gänget runt bordet, en skärm var, och spela som med
+            en kortlek — fast snabbare och roligare.
+        </p>
+        <a class="btn" href="/">Välj kviss och spela</a>
+
+        @* 2. Vad är det? *@
+        <div class="card">
+            <h2>Vad är Mer eller Mindre?</h2>
+            <p>
+                Mer eller Mindre är ett digitalt frågespel för 2 eller fler spelare. Det förenar
+                två klassiska mekaniker: <em>more/less</em>-gissningen (är det mer eller mindre?)
+                och <em>hur mycket</em>-skattningen (hur stor är skillnaden, 0–100). Frågorna
+                bygger på riktiga fakta ur ett kurerat svenskt frågekorpus som hela tiden växer.
+            </p>
+        </div>
+
+        @* 3. Samma-rum-formatet (huvudvinkeln) *@
+        <div class="card">
+            <h2>Online men tillsammans — så funkar samma-rum-formatet</h2>
+            <p>
+                Det här är inte ett vanligt onlinespel mot främlingar på distans. Tanken är att
+                ni sitter i samma rum, var och en med sin egen skärm, precis som runt ett
+                sällskapsspel. Värden startar en omgång, alla andra ansluter med en kod eller
+                QR — sedan svarar var och en på sin telefon.
+            </p>
+            <ul class="bullets">
+                <li><strong>Inget att blanda</strong> — appen drar fram frågorna åt er.</li>
+                <li><strong>Ingen poängräkning för hand</strong> — poängen räknas automatiskt.</li>
+                <li><strong>Inga kort att köpa</strong> — och nya, färska frågor varje gång.</li>
+            </ul>
+        </div>
+
+        @* 4. Så spelar du *@
+        <div class="card" id="sa-spelar-du">
+            <h2>Så spelar du</h2>
+            <ol class="steps">
+                <li>Värden väljer en kviss (ett frågepaket = en kortlek) och får en delningskod.</li>
+                <li>Övriga spelare ansluter med koden eller QR-koden, på var sin skärm.</li>
+                <li>Varje fråga jämför två saker, A och B. <strong>Steg 1:</strong> gissa
+                    riktningen — är A <em>mer</em> eller <em>mindre</em> än B?</li>
+                <li><strong>Steg 2:</strong> gissa <em>hur stor</em> skillnaden är, i frågans
+                    egen enhet.</li>
+                <li>När alla svarat avslöjas facit och poängen räknas. Lägst total efter
+                    @Decider.QuestionsPerGame frågor vinner.</li>
+            </ol>
+            <div class="rulebox">
+                <p class="steplabel">Poäng per fråga</p>
+                <p>
+                    <code>rundpoäng = |gissad skillnad − rätt skillnad| (0–100) + (rätt riktning? −10 : 0)</code>
+                </p>
+                <p class="muted">
+                    Skillnaden normaliseras till 0–100, så exakt rätt ger 0 poäng. Rätt riktning
+                    ger −10 i bonus. <strong>Lägst totalpoäng vinner</strong> — negativa poäng
+                    är möjliga.
+                </p>
+            </div>
+        </div>
+
+        @* 5. Idén — tvåstegsraketen *@
+        <div class="card">
+            <h2>Idén — tvåstegsraketen</h2>
+            <p>
+                Det roliga sitter i tvåstegsraketen. Först den snabba magkänslan: mer eller
+                mindre? Sedan den nervösa skattningen: hur mycket? Du kan pricka riktningen men
+                missa storleken — eller tvärtom. Det gör att även den som inte kan exakta siffror
+                har en chans, samtidigt som den som vågar gissa magnituden belönas. En fråga,
+                två beslut, dubbel spänning.
+            </p>
+        </div>
+
+        @* 6. Historien bakom — ÄGARENS TEXT. Klistras in här. Rör inte. *@
+        <div class="card">
+            <h2>Historien bakom</h2>
+            <!-- STORY: klistras in -->
+        </div>
+
+        @* 7. FAQ (matchar FaqJsonLd nedan) *@
+        <div class="card">
+            <h2>Frågor &amp; svar</h2>
+
+            <h3>Måste vi sitta i samma rum?</h3>
+            <p>Spelet är gjort för det: en skärm var, alla i samma rum. Det fungerar tekniskt
+               på distans också (t.ex. över videosamtal), men det är roligast tillsammans.</p>
+
+            <h3>Behöver man köpa något eller installera en app?</h3>
+            <p>Nej. Det spelas direkt i webbläsaren — inga kort, ingen nedladdning. Den som är
+               värd öppnar en omgång och delar koden.</p>
+
+            <h3>Hur många kan spela?</h3>
+            <p>Från 2 spelare och uppåt. Varje deltagare använder sin egen skärm.</p>
+
+            <h3>Vad skiljer Mer eller Mindre från 0-100 och More or Less?</h3>
+            <p>I 0-100 svarar du med en enda siffra; i kortspelet More or Less svarar du bara
+               mer eller mindre. Mer eller Mindre kombinerar båda — först riktning, sedan
+               storlek — i ett webbaserat format med automatisk poäng och färska frågor.</p>
+
+            <h3>Hur räknas poängen?</h3>
+            <p>Du får poäng för hur långt din skillnadsgissning ligger från facit (0–100), minus
+               10 i bonus om du prickade riktningen. Lägst total vinner.</p>
+
+            <h3>Vad finns det för frågor?</h3>
+            <p>Ett kurerat svenskt korpus med faktagranskade kort i flera teman — och fler är på
+               väg. Varje frågepaket fungerar som en egen kortlek.</p>
+        </div>
+
+        <a class="btn" href="/">Välj kviss och spela</a>
+        <a class="back" href="/">← Tillbaka till kvissarna</a>
+    </div>
+</MainLayout>
+
+@code {
+    // FAQPage + Game schema for rich results / LLM citation. Keep the Q&A in sync with the
+    // FAQ section above. Serialized object only (MainLayout wraps it in <script>).
+    private const string FaqJsonLd = """
+    {"@context":"https://schema.org","@graph":[
+      {"@type":"Game","name":"Mer eller Mindre","description":"Svenskt frågespel online men tillsammans i samma rum: gissa först riktning (mer/mindre), sedan hur stor skillnaden är. Lägst totaldifferens vinner.","genre":"Frågespel","inLanguage":"sv","gamePlatform":"Webbläsare","numberOfPlayers":{"@type":"QuantitativeValue","minValue":2}},
+      {"@type":"FAQPage","mainEntity":[
+        {"@type":"Question","name":"Måste vi sitta i samma rum?","acceptedAnswer":{"@type":"Answer","text":"Spelet är gjort för det: en skärm var, alla i samma rum. Det fungerar tekniskt på distans också, men det är roligast tillsammans."}},
+        {"@type":"Question","name":"Behöver man köpa något eller installera en app?","acceptedAnswer":{"@type":"Answer","text":"Nej. Det spelas direkt i webbläsaren — inga kort, ingen nedladdning. Den som är värd öppnar en omgång och delar koden."}},
+        {"@type":"Question","name":"Hur många kan spela?","acceptedAnswer":{"@type":"Answer","text":"Från 2 spelare och uppåt. Varje deltagare använder sin egen skärm."}},
+        {"@type":"Question","name":"Vad skiljer Mer eller Mindre från 0-100 och More or Less?","acceptedAnswer":{"@type":"Answer","text":"I 0-100 svarar du med en enda siffra; i kortspelet More or Less svarar du bara mer eller mindre. Mer eller Mindre kombinerar båda — först riktning, sedan storlek — i ett webbaserat format med automatisk poäng och färska frågor."}},
+        {"@type":"Question","name":"Hur räknas poängen?","acceptedAnswer":{"@type":"Answer","text":"Du får poäng för hur långt din skillnadsgissning ligger från facit (0–100), minus 10 i bonus om du prickade riktningen. Lägst total vinner."}},
+        {"@type":"Question","name":"Vad finns det för frågor?","acceptedAnswer":{"@type":"Answer","text":"Ett kurerat svenskt korpus med faktagranskade kort i flera teman — och fler är på väg. Varje frågepaket fungerar som en egen kortlek."}}
+      ]}
+    ]}
+    """;
+}

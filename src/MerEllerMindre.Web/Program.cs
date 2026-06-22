@@ -1,6 +1,7 @@
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.Extensions.FileProviders;
 using MerEllerMindre.Web;
 using MerEllerMindre.Web.Infrastructure;
 
@@ -15,9 +16,17 @@ builder.Services.AddSingleton(HtmlEncoder.Create(UnicodeRanges.All));
 var packsDirectory = Path.Combine(AppContext.BaseDirectory, "data", "packs");
 builder.Services.AddSingleton(new FileSystemQuestionPackCatalog(packsDirectory));
 
+// Logo corpus for the loggor-* packs: maps a pack's company name → its PNG URL (served at
+// /logos below), skipping rows whose PNG isn't on disk so a missing download never breaks.
+var logosDirectory = Path.Combine(AppContext.BaseDirectory, "data", "logos");
+builder.Services.AddSingleton(new LogoCatalog(logosDirectory));
+
 // Razor Components in STATIC SSR (no interactive render mode → no circuit, no WebSocket,
 // no blazor.web.js). Endpoints return RazorComponentResult<T>. See ADR 007.
 builder.Services.AddRazorComponents();
+
+// MainLayout reads the request host to build absolute canonical/OG URLs.
+builder.Services.AddHttpContextAccessor();
 
 // Imperative-shell game state: a single in-memory event log shared across requests, with the
 // repository (joinCode→gameId index) and the command-side application service on top.
@@ -45,6 +54,15 @@ app.UseForwardedHeaders(new ForwardedHeadersOptions
 });
 
 app.UseStaticFiles();
+
+// Serve the logo PNGs from the Domain's data/logos corpus at /logos/{origin}/{slug}.png.
+if (Directory.Exists(logosDirectory))
+    app.UseStaticFiles(new StaticFileOptions
+    {
+        FileProvider = new PhysicalFileProvider(logosDirectory),
+        RequestPath = "/logos",
+    });
+
 app.UseAntiforgery();
 
 // Liveness probe for fly's health check.

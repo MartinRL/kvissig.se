@@ -18,10 +18,12 @@
             <p class="steplabel">Vilken är mer?</p>
             <div class="direction" role="group" aria-label="Mer eller Mindre">
                 <button type="button" class="dirbtn" data-dir="Mer" aria-pressed="true">
-                    <span class="arrow">▲</span> @Model.ItemA
+                    <span class="arrow">▲</span>
+                    @if (Model.LogoA is not null) { <img class="logoimg" src="@Model.LogoA" alt="Logotyp A" /> } else { @Model.ItemA }
                 </button>
                 <button type="button" class="dirbtn" data-dir="Mindre" aria-pressed="false">
-                    <span class="arrow">▼</span> @Model.ItemB
+                    <span class="arrow">▼</span>
+                    @if (Model.LogoB is not null) { <img class="logoimg" src="@Model.LogoB" alt="Logotyp B" /> } else { @Model.ItemB }
                 </button>
             </div>
 
@@ -51,7 +53,7 @@ else
             <span class="pill">Fråga @Model.QuestionNumber / @Model.TotalQuestions · skillnad</span>
         </div>
         <h1>@Model.QuestionText</h1>
-        <p class="answer"><span class="mer">@MerItem</span> är <span class="mer">MER</span> — hur stor är skillnaden?</p>
+        <p class="answer">@if (MerLogo is not null) { <img class="logoimg" src="@MerLogo" alt="Logotyp" /> } else { <span class="mer">@MerItem</span> } är <span class="mer">MER</span> — hur stor är skillnaden?</p>
 
         <form hx-post="@($"/games/{Model.JoinCode:N}/difference")" hx-target="#screen" hx-swap="innerHTML">
             <input type="hidden" name="__RequestVerificationToken" value="@Model.AntiforgeryToken" />
@@ -70,8 +72,8 @@ else
                 <div class="bar is-mindre" id="barB" style="height:100%"></div>
             </div>
             <div class="twobars-legend" aria-hidden="true">
-                <span id="capA">@Model.ItemA</span>
-                <span id="capB">@Model.ItemB</span>
+                <span id="capA" data-label="A">@if (Model.LogoA is not null) { <img class="logoimg" src="@Model.LogoA" alt="Logotyp A" /> } else { @Model.ItemA }</span>
+                <span id="capB" data-label="B">@if (Model.LogoB is not null) { <img class="logoimg" src="@Model.LogoB" alt="Logotyp B" /> } else { @Model.ItemB }</span>
             </div>
 
             <button type="submit" class="btn" style="margin-top:1.75rem">Gissa!</button>
@@ -88,9 +90,13 @@ else
             const barB = document.getElementById('barB');
             const capA = document.getElementById('capA');
             const capB = document.getElementById('capB');
-            // Read item names from the DOM, not injected Razor strings, to avoid escaping/injection.
-            const tallName = merIsA ? capA.textContent : capB.textContent;
-            const shortName = merIsA ? capB.textContent : capA.textContent;
+            // In logo mode the captions hold an <img>, not a name: read the text but fall back on
+            // the neutral data-label ("A"/"B") so screen-reader output never leaks a hidden name.
+            const logoMode = !!capA.querySelector('img');
+            const nameA = capA.textContent.trim() || capA.dataset.label;
+            const nameB = capB.textContent.trim() || capB.dataset.label;
+            const tallName = merIsA ? nameA : nameB;
+            const shortName = merIsA ? nameB : nameA;
 
             function norm(v) { return max > 0 ? Math.min(100, Math.round(v / max * 100)) : 0; }
 
@@ -109,7 +115,8 @@ else
                 range.style.background = `linear-gradient(90deg, var(--accent) ${n}%, var(--line) ${n}%)`;
                 const pct = 100 - n;
                 short.style.height = pct + '%';
-                shortCap.textContent = `${shortName} ≈ ${pct}%`;
+                // Keep the logo intact in logo mode (writing textContent would wipe the <img>).
+                if (!logoMode) shortCap.textContent = `${shortName} ≈ ${pct}%`;
                 range.setAttribute('aria-valuetext', `${shortName} ${pct} procent av ${tallName}`);
             }
 
@@ -125,4 +132,5 @@ else
     private string StepStr => Model.SliderStep.ToString(CultureInfo.InvariantCulture);
     private bool MerIsA => Model.RevealedDirection == Direction.Mer;
     private string MerItem => MerIsA ? Model.ItemA : Model.ItemB;
+    private string? MerLogo => MerIsA ? Model.LogoA : Model.LogoB;
 }

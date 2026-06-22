@@ -232,6 +232,40 @@ input[type=text]:focus { outline: none; border-color: var(--accent); }
   h1 { font-size: 1.9rem; }
 }
 
+/* ---- hamburger menu (pure CSS checkbox-hack, no JS) ---- */
+.hamburger {
+  position: fixed; top: .9rem; right: .9rem; z-index: 900;
+  width: 44px; height: 44px; border-radius: 12px; cursor: pointer;
+  background: var(--card); border: 2px solid var(--line); box-shadow: var(--shadow);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px;
+}
+.hamburger span { display: block; width: 22px; height: 2px; border-radius: 2px; background: var(--ink); }
+.mainnav {
+  position: fixed; top: 4.1rem; right: .9rem; z-index: 900; min-width: 200px;
+  background: var(--card); border: 2px solid var(--line); border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-lift); padding: .5rem; display: none;
+}
+.mainnav a {
+  display: block; padding: .7rem .9rem; border-radius: 12px; text-decoration: none;
+  font-family: var(--display); font-weight: 700; color: var(--ink);
+}
+.mainnav a:hover { background: var(--bg); color: var(--accent); }
+.navtoggle:checked ~ .mainnav { display: block; }
+
+/* ---- content page (/om-spelet) ---- */
+.content h2 { margin-top: .2rem; }
+.content h3 { font-family: var(--display); font-weight: 700; font-size: 1.05rem; margin: 1rem 0 .3rem; }
+.content p { line-height: 1.55; margin: 0 0 .8rem; }
+.content .btn { margin: 1rem 0; }
+.content .bullets, .content .steps { line-height: 1.55; padding-left: 1.3rem; margin: 0 0 .4rem; }
+.content .bullets li, .content .steps li { margin-bottom: .5rem; }
+.content .rulebox {
+  background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius-sm);
+  padding: 1rem 1.1rem; margin-top: 1rem;
+}
+.content .rulebox code { font-size: .85rem; word-break: break-word; }
+a.logo { text-decoration: none; }
+
 /* ---- global htmx error banner ---- */
 .error-banner {
   position: fixed; top: 0; left: 0; right: 0; z-index: 1000;

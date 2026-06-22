@@ -1,0 +1,21 @@
+# Mer eller Mindre — vi vill bli hittade och citerade.
+User-agent: *
+Allow: /
+
+# AI-crawlers (vi tillåter citat)
+User-agent: GPTBot
+Allow: /
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: Claude-Web
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://kvissig.se/sitemap.xml

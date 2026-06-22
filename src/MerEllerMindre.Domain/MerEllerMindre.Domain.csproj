@@ -10,6 +10,8 @@
        output so referencing projects (Web, Tests) find them beside the assembly. -->
   <ItemGroup>
     <Content Include="data\**\*.csv" CopyToOutputDirectory="PreserveNewest" />
+    <!-- Logo corpus PNGs for the loggor-* packs: copied to output so Web serves them at /logos. -->
+    <Content Include="data\logos\**\*.png" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
 </Project>

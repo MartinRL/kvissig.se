@@ -27,6 +27,14 @@ public sealed class TestAppFactory : WebApplicationFactory<Program>
             "Har Danmark större eller mindre befolkning än Norge?;Danmark;Norge;5,9;5,5;miljoner invånare;Hur många miljoner invånare skiljer det?\n" +
             "Är Sveriges yta större eller mindre än Norges?;Sverige;Norge;450295;385207;km²;Hur många km² skiljer det?\n";
         File.WriteAllText(Path.Combine(_packsDir, "mer-eller-mindre.csv"), csv, new UTF8Encoding(false));
+
+        // A tiny logo-mode pack (loggor-* prefix) for the logo-rendering test. Q0 = Volvo/Ericsson,
+        // companies whose PNGs ship in the Domain corpus, so LogoCatalog.UrlFor resolves.
+        var logoCsv =
+            "fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga\n" +
+            "Vilket företag hade störst omsättning 2023?;Volvo;Ericsson;473;263;miljarder kronor;Hur många miljarder kronor skiljer det?\n" +
+            "Vilket företag hade störst omsättning 2023?;H&M;Electrolux;236;135;miljarder kronor;Hur många miljarder kronor skiljer det?\n";
+        File.WriteAllText(Path.Combine(_packsDir, "loggor-blandat-1.csv"), logoCsv, new UTF8Encoding(false));
     }
 
     protected override void ConfigureWebHost(IWebHostBuilder builder) =>

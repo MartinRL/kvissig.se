@@ -6,15 +6,15 @@
     <div class="card center">
         <span class="pill">Fråga @Model.QuestionNumber / @Model.TotalQuestions · resultat</span>
         <h1 style="margin-top:.6rem">@Model.QuestionText</h1>
-        <p class="answer"><span class="mer">@Model.LargerItem</span> är <span class="mer">MER</span></p>
+        <p class="answer">@if (Model.LargerLogo is not null) { <img class="logoimg" src="@Model.LargerLogo" alt="" /> } <span class="mer">@Model.LargerItem</span> är <span class="mer">MER</span></p>
 
         <div class="twobars" aria-hidden="true">
             <div class="bar a" style="height:100%"><span>@Fmt(Model.LargerValue)</span></div>
             <div class="bar b" style="height:@Model.SmallerBarPercent%"><span>@Fmt(Model.SmallerValue) · @Model.SmallerBarPercent%</span></div>
         </div>
         <div class="twobars-legend">
-            <span>@Model.LargerItem · @Fmt(Model.LargerValue) @Model.Unit</span>
-            <span>@Model.SmallerItem · @Fmt(Model.SmallerValue) @Model.Unit</span>
+            <span>@if (Model.LargerLogo is not null) { <img class="logoimg" src="@Model.LargerLogo" alt="" /> } @Model.LargerItem · @Fmt(Model.LargerValue) @Model.Unit</span>
+            <span>@if (Model.SmallerLogo is not null) { <img class="logoimg" src="@Model.SmallerLogo" alt="" /> } @Model.SmallerItem · @Fmt(Model.SmallerValue) @Model.Unit</span>
         </div>
 
         <p style="margin-top:2.2rem">Facit: mindre är <span class="diffnum">@Model.SmallerBarPercent</span>% av mer</p>

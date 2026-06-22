@@ -38,11 +38,13 @@ public class GameEndpointsTests : IClassFixture<TestAppFactory>
         return new FormUrlEncodedContent(data);
     }
 
-    private static async Task<string> CreateGame(HttpClient host)
+    private static Task<string> CreateGame(HttpClient host) => CreateGame(host, "mer-eller-mindre");
+
+    private static async Task<string> CreateGame(HttpClient host, string packId)
     {
-        var token = Token(await (await host.GetAsync("/games/new/mer-eller-mindre")).Content.ReadAsStringAsync());
+        var token = Token(await (await host.GetAsync($"/games/new/{packId}")).Content.ReadAsStringAsync());
         var resp = await host.PostAsync("/games", Form(token,
-            ("questionPackId", "mer-eller-mindre"), ("hostName", "Martin")));
+            ("questionPackId", packId), ("hostName", "Martin")));
         resp.StatusCode.Should().Be(HttpStatusCode.OK);
         var redirect = resp.Headers.GetValues("HX-Redirect").Single();
         redirect.Should().StartWith("/games/");
@@ -79,6 +81,30 @@ public class GameEndpointsTests : IClassFixture<TestAppFactory>
 
         html.Should().Contain("Mer eller Mindre");
         html.Should().Contain("/games/new/mer-eller-mindre");
+    }
+
+    [Fact]
+    public async Task OmSpelet_RendersContentAndSchema()
+    {
+        var html = await (await NewClient().GetAsync("/om-spelet")).Content.ReadAsStringAsync();
+
+        html.Should().Contain("Vad är Mer eller Mindre?");
+        html.Should().Contain("id=\"sa-spelar-du\"");
+        html.Should().Contain("\"@type\":\"FAQPage\"");
+        html.Should().Contain("rel=\"canonical\"");
+        html.Should().Contain("og:title");
+    }
+
+    [Fact]
+    public async Task Sitemap_ListsCatalogAndContentPages()
+    {
+        var resp = await NewClient().GetAsync("/sitemap.xml");
+        resp.Content.Headers.ContentType!.MediaType.Should().Be("application/xml");
+
+        var xml = await resp.Content.ReadAsStringAsync();
+        xml.Should().Contain("<urlset");
+        xml.Should().Contain("/om-spelet</loc>");
+        xml.Should().Contain("/games/new/mer-eller-mindre</loc>");
     }
 
     [Fact]
@@ -238,5 +264,32 @@ public class GameEndpointsTests : IClassFixture<TestAppFactory>
         var q1 = await State(player, code);
         // Q1 = Sverige 450295 / Norge 385207 (km²) — stage-1 direction screen.
         q1.Should().Contain("Är Sveriges yta större eller mindre än Norges?");
+    }
+
+    [Fact]
+    public async Task LogoMode_HidesNamesOnTheQuestionScreenAndRevealsThemOnResults()
+    {
+        var host = NewClient();
+        var player = NewClient();
+        var code = await CreateGame(host, "loggor-blandat-1");
+        await Join(player, code, "Nils");
+        await host.PostAsync($"/games/{code}/start", Form(Token(await State(host, code))));
+
+        // Q0 = Volvo / Ericsson: the direction screen shows logos and hides the names.
+        var question = await State(player, code);
+        question.Should().Contain("class=\"logoimg\"");
+        question.Should().Contain("/logos/se/volvo.png");
+        question.Should().NotContain("Volvo");
+        question.Should().NotContain("Ericsson");
+
+        // Play the round through to the reveal.
+        await SubmitDirection(host, code, "Mer");
+        await SubmitDirection(player, code, "Mindre");
+        await SubmitDifference(host, code, "210");
+        await SubmitDifference(player, code, "210");
+
+        var results = await State(host, code);
+        results.Should().Contain("Volvo");      // names revealed on the results screen
+        results.Should().Contain("Ericsson");
     }
 }

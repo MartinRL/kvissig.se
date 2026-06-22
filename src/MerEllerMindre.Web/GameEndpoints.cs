@@ -27,6 +27,19 @@ public static class GameEndpoints
             return new RazorComponentResult<QuizCatalog>(new { Model = new CatalogVm(packs) });
         });
 
+        app.MapGet("/om-spelet", () => new RazorComponentResult<OmSpelet>());
+
+        app.MapGet("/sitemap.xml", (FileSystemQuestionPackCatalog catalog, HttpContext http) =>
+        {
+            var root = $"{http.Request.Scheme}://{http.Request.Host}";
+            var urls = new List<string> { "/", "/om-spelet" };
+            urls.AddRange(catalog.Packs.Select(p => $"/games/new/{p.PackId}"));
+            var body = string.Concat(urls.Select(u =>
+                $"<url><loc>{System.Security.SecurityElement.Escape(root + u)}</loc></url>"));
+            var xml = $"""<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{body}</urlset>""";
+            return Results.Text(xml, "application/xml");
+        });
+
         app.MapGet("/games/new/{packId}", (string packId, FileSystemQuestionPackCatalog catalog, IAntiforgery antiforgery, HttpContext http) =>
         {
             if (catalog.Find(packId) is not { } pack)
@@ -92,14 +105,14 @@ public static class GameEndpoints
             return new RazorComponentResult<GameShell>(new { JoinCode = state.JoinCode, ShowJoinUrl = http.Request.Query.ContainsKey("url") });
         });
 
-        app.MapGet("/games/{code}/state", (string code, GameApplicationService svc, PlayerIdentity identity, IAntiforgery antiforgery, HttpContext http) =>
+        app.MapGet("/games/{code}/state", (string code, GameApplicationService svc, PlayerIdentity identity, LogoCatalog logos, IAntiforgery antiforgery, HttpContext http) =>
         {
             if (Resolve(svc, code) is not var (gameId, state))
                 return Results.NotFound("Spelet hittades inte.");
-            return RenderState(state, identity.GetPlayer(http, gameId), antiforgery.GetAndStoreTokens(http).RequestToken!, AbsoluteJoinUrl(http, state.JoinCode), http.Request.Query.ContainsKey("url"));
+            return RenderState(state, identity.GetPlayer(http, gameId), antiforgery.GetAndStoreTokens(http).RequestToken!, AbsoluteJoinUrl(http, state.JoinCode), logos.UrlFor, http.Request.Query.ContainsKey("url"));
         });
 
-        app.MapPost("/games/{code}/start", (string code, GameApplicationService svc, PlayerIdentity identity, PlausibleClient plausible, IAntiforgery antiforgery, HttpContext http) =>
+        app.MapPost("/games/{code}/start", (string code, GameApplicationService svc, PlayerIdentity identity, LogoCatalog logos, PlausibleClient plausible, IAntiforgery antiforgery, HttpContext http) =>
         {
             if (Resolve(svc, code) is not var (gameId, _))
                 return Results.NotFound("Spelet hittades inte.");
@@ -107,7 +120,7 @@ public static class GameEndpoints
             if (svc.Execute(gameId, new StartGame(gameId)) is DomainOk { Value: [GameStarted, ..] })
                 plausible.Track("game_started", http);
             var state = svc.Load(gameId);
-            return RenderState(state, identity.GetPlayer(http, gameId), antiforgery.GetAndStoreTokens(http).RequestToken!, AbsoluteJoinUrl(http, state.JoinCode));
+            return RenderState(state, identity.GetPlayer(http, gameId), antiforgery.GetAndStoreTokens(http).RequestToken!, AbsoluteJoinUrl(http, state.JoinCode), logos.UrlFor);
         });
 
         app.MapPost("/games/{code}/direction", (
@@ -115,6 +128,7 @@ public static class GameEndpoints
             [FromForm] string direction,
             GameApplicationService svc,
             PlayerIdentity identity,
+            LogoCatalog logos,
             IAntiforgery antiforgery,
             HttpContext http) =>
         {
@@ -129,21 +143,21 @@ public static class GameEndpoints
             }
 
             var next = svc.Load(gameId);
-            return RenderState(next, viewer, antiforgery.GetAndStoreTokens(http).RequestToken!, AbsoluteJoinUrl(http, next.JoinCode));
+            return RenderState(next, viewer, antiforgery.GetAndStoreTokens(http).RequestToken!, AbsoluteJoinUrl(http, next.JoinCode), logos.UrlFor);
         });
 
         // Mellansteg → slider: render the stage-2 question once the direction is revealed.
-        app.MapGet("/games/{code}/difference", (string code, GameApplicationService svc, IAntiforgery antiforgery, HttpContext http) =>
+        app.MapGet("/games/{code}/difference", (string code, GameApplicationService svc, LogoCatalog logos, IAntiforgery antiforgery, HttpContext http) =>
         {
             if (Resolve(svc, code) is not var (gameId, state))
                 return Results.NotFound("Spelet hittades inte.");
 
             var i = state.CurrentQuestionIndex;
             if (state.Phase != GamePhase.Started || !state.DirectionRevealed(i) || state.Questions[i].Scored)
-                return RenderState(state, viewer: null, antiforgery.GetAndStoreTokens(http).RequestToken!, AbsoluteJoinUrl(http, state.JoinCode));
+                return RenderState(state, viewer: null, antiforgery.GetAndStoreTokens(http).RequestToken!, AbsoluteJoinUrl(http, state.JoinCode), logos.UrlFor);
 
             var token = antiforgery.GetAndStoreTokens(http).RequestToken!;
-            return new RazorComponentResult<QuestionScreen>(new { Model = GameScreens.Question(state, token, QuestionStage.Difference) });
+            return new RazorComponentResult<QuestionScreen>(new { Model = GameScreens.Question(state, token, QuestionStage.Difference, logos.UrlFor) });
         });
 
         app.MapPost("/games/{code}/difference", (
@@ -151,6 +165,7 @@ public static class GameEndpoints
             [FromForm] string guessedDifference,
             GameApplicationService svc,
             PlayerIdentity identity,
+            LogoCatalog logos,
             IAntiforgery antiforgery,
             HttpContext http) =>
         {
@@ -166,10 +181,10 @@ public static class GameEndpoints
             }
 
             var scored = svc.Load(gameId);
-            return RenderState(scored, viewer, antiforgery.GetAndStoreTokens(http).RequestToken!, AbsoluteJoinUrl(http, scored.JoinCode));
+            return RenderState(scored, viewer, antiforgery.GetAndStoreTokens(http).RequestToken!, AbsoluteJoinUrl(http, scored.JoinCode), logos.UrlFor);
         });
 
-        app.MapPost("/games/{code}/next", (string code, GameApplicationService svc, PlayerIdentity identity, PlausibleClient plausible, IAntiforgery antiforgery, HttpContext http) =>
+        app.MapPost("/games/{code}/next", (string code, GameApplicationService svc, PlayerIdentity identity, LogoCatalog logos, PlausibleClient plausible, IAntiforgery antiforgery, HttpContext http) =>
         {
             if (Resolve(svc, code) is not var (gameId, _))
                 return Results.NotFound("Spelet hittades inte.");
@@ -177,7 +192,7 @@ public static class GameEndpoints
             if (svc.RunProgressionGear(gameId) is DomainOk { Value: var events } && events.Any(e => e is GameEnded))
                 plausible.Track("game_completed", http);
             var state = svc.Load(gameId);
-            return RenderState(state, identity.GetPlayer(http, gameId), antiforgery.GetAndStoreTokens(http).RequestToken!, AbsoluteJoinUrl(http, state.JoinCode));
+            return RenderState(state, identity.GetPlayer(http, gameId), antiforgery.GetAndStoreTokens(http).RequestToken!, AbsoluteJoinUrl(http, state.JoinCode), logos.UrlFor);
         });
     }
 
@@ -188,15 +203,15 @@ public static class GameEndpoints
     private static string AbsoluteJoinUrl(HttpContext http, Guid joinCode) =>
         $"{http.Request.Scheme}://{http.Request.Host}/games/{joinCode:N}/join";
 
-    private static IResult RenderState(GameState state, Guid? viewer, string token, string joinUrl, bool showJoinUrl = false) =>
+    private static IResult RenderState(GameState state, Guid? viewer, string token, string joinUrl, Func<string, string?> resolveLogo, bool showJoinUrl = false) =>
         GameScreens.Select(state, viewer) switch
         {
             ScreenKind.LobbyHost => new RazorComponentResult<LobbyHostScreen>(new { Model = GameScreens.Lobby(state, viewer, token, joinUrl, showJoinUrl) }),
             ScreenKind.LobbyPlayer => new RazorComponentResult<LobbyPlayerScreen>(new { Model = GameScreens.Lobby(state, viewer, token, joinUrl, showJoinUrl: false) }),
-            ScreenKind.Question => new RazorComponentResult<QuestionScreen>(new { Model = GameScreens.Question(state, token, QuestionStage.Direction) }),
+            ScreenKind.Question => new RazorComponentResult<QuestionScreen>(new { Model = GameScreens.Question(state, token, QuestionStage.Direction, resolveLogo) }),
             ScreenKind.Waiting => new RazorComponentResult<WaitingScreen>(new { Model = GameScreens.Waiting(state, viewer) }),
-            ScreenKind.DirectionResults => new RazorComponentResult<DirectionResultsScreen>(new { Model = GameScreens.DirectionResults(state, viewer) }),
-            ScreenKind.Results => new RazorComponentResult<ResultsScreen>(new { Model = GameScreens.Results(state, viewer, token) }),
+            ScreenKind.DirectionResults => new RazorComponentResult<DirectionResultsScreen>(new { Model = GameScreens.DirectionResults(state, viewer, resolveLogo) }),
+            ScreenKind.Results => new RazorComponentResult<ResultsScreen>(new { Model = GameScreens.Results(state, viewer, token, resolveLogo) }),
             ScreenKind.Standings => new RazorComponentResult<StandingsScreen>(new { Model = GameScreens.Standings(state, viewer) }),
             _ => throw new InvalidOperationException($"Unhandled screen kind for game {state.GameId}.")
         };

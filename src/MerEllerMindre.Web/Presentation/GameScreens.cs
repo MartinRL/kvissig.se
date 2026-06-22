@@ -70,11 +70,12 @@ public static class GameScreens
             token);
     }
 
-    public static QuestionVm Question(GameState state, string token, QuestionStage stage)
+    public static QuestionVm Question(GameState state, string token, QuestionStage stage, Func<string, string?>? resolveLogo = null)
     {
         var i = state.CurrentQuestionIndex;
         var card = state.Questions[i].Card;
         var sliderMax = Math.Max(card.ValueA, card.ValueB);
+        var logo = LogoResolver(state, resolveLogo);
         return new QuestionVm(
             state.JoinCode,
             QuestionNumber: i + 1,
@@ -88,15 +89,20 @@ public static class GameScreens
             SliderStep(sliderMax),
             stage,
             RevealedDirection: stage == QuestionStage.Difference ? state.Questions[i].CorrectDirection : null,
-            token);
+            token,
+            LogoA: logo(card.ItemA),
+            LogoB: logo(card.ItemB));
     }
 
-    public static DirectionResultsVm DirectionResults(GameState state, Guid? viewer)
+    public static DirectionResultsVm DirectionResults(GameState state, Guid? viewer, Func<string, string?>? resolveLogo = null)
     {
         var i = state.CurrentQuestionIndex;
         var round = state.Questions[i];
         var card = round.Card;
         var correct = round.CorrectDirection!.Value;
+        var logo = LogoResolver(state, resolveLogo);
+        var merItem = correct == Direction.Mer ? card.ItemA : card.ItemB;
+        var mindreItem = correct == Direction.Mer ? card.ItemB : card.ItemA;
 
         var rows = state.Players
             .Select(p =>
@@ -119,12 +125,14 @@ public static class GameScreens
             QuestionNumber: i + 1,
             TotalQuestions: state.Questions.Count,
             card.QuestionText,
-            MerItem: correct == Direction.Mer ? card.ItemA : card.ItemB,
-            MindreItem: correct == Direction.Mer ? card.ItemB : card.ItemA,
+            MerItem: merItem,
+            MindreItem: mindreItem,
             correct,
             rows,
             // No token needed: the only action is a GET to the slider screen.
-            AntiforgeryToken: "");
+            AntiforgeryToken: "",
+            MerLogo: logo(merItem),
+            MindreLogo: logo(mindreItem));
     }
 
     public static WaitingVm Waiting(GameState state, Guid? viewer)
@@ -146,12 +154,15 @@ public static class GameScreens
         return new WaitingVm(state.JoinCode, i + 1, state.Questions.Count, done.Count, state.Players.Count, done, pending);
     }
 
-    public static ResultsVm Results(GameState state, Guid? viewer, string token)
+    public static ResultsVm Results(GameState state, Guid? viewer, string token, Func<string, string?>? resolveLogo = null)
     {
         var i = state.CurrentQuestionIndex;
         var round = state.Questions[i];
         var card = round.Card;
         var aLarger = card.ValueA >= card.ValueB;
+        var logo = LogoResolver(state, resolveLogo);
+        var largerItem = aLarger ? card.ItemA : card.ItemB;
+        var smallerItem = aLarger ? card.ItemB : card.ItemA;
         var largerValue = Math.Max(card.ValueA, card.ValueB);
         var smallerValue = Math.Min(card.ValueA, card.ValueB);
         var smallerPercent = largerValue == 0 ? 0 : (int)Math.Round(smallerValue / largerValue * 100, MidpointRounding.AwayFromZero);
@@ -176,8 +187,8 @@ public static class GameScreens
             QuestionNumber: i + 1,
             TotalQuestions: state.Questions.Count,
             card.QuestionText,
-            LargerItem: aLarger ? card.ItemA : card.ItemB,
-            SmallerItem: aLarger ? card.ItemB : card.ItemA,
+            LargerItem: largerItem,
+            SmallerItem: smallerItem,
             largerValue,
             smallerValue,
             card.Unit,
@@ -187,8 +198,20 @@ public static class GameScreens
             rows,
             ViewerIsHost: viewer == state.HostPlayerId,
             state.HasNextQuestion,
-            token);
+            token,
+            LargerLogo: logo(largerItem),
+            SmallerLogo: logo(smallerItem));
     }
+
+    /// <summary>
+    /// Logo lookup, but only for loggor-* packs (slug-prefix convention) — text packs always
+    /// resolve to null so they render names. GameScreens stays IO-free: the caller injects the
+    /// catalog lookup as a func.
+    /// </summary>
+    private static Func<string, string?> LogoResolver(GameState state, Func<string, string?>? resolveLogo) =>
+        state.QuestionPackId.StartsWith("loggor-", StringComparison.Ordinal)
+            ? resolveLogo ?? (_ => null)
+            : _ => null;
 
     public static StandingsVm Standings(GameState state, Guid? viewer)
     {
