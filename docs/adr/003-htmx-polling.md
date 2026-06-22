@@ -4,7 +4,6 @@ type: architecture
 created: 2026-01-27
 revised:
 ---
-
 # ADR 003: HTMX with Polling for Real-Time Updates
 
 ## Context

@@ -4,7 +4,6 @@ type: architecture
 created: 2026-06-14
 revised:
 ---
-
 # ADR 007: Razor Components in Static SSR as the Renderer
 
 ## Context

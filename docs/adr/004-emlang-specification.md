@@ -4,7 +4,6 @@ type: architecture
 created: 2026-01-27
 revised: 2026-05-31
 ---
-
 # ADR 004: emlang YAML for Behavior Specification
 
 ## Context

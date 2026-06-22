@@ -4,7 +4,6 @@ type: architecture
 created: 2026-01-27
 revised: 2026-06-01
 ---
-
 # ADR 005: CSV File per QuestionPack
 
 ## Context

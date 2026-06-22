@@ -4,7 +4,6 @@ type: architecture
 created: 2026-06-12
 revised:
 ---
-
 # ADR 006: Error Handling via Result / Railway Oriented Programming
 
 ## Context
