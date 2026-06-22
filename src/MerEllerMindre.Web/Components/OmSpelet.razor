@@ -1,6 +1,6 @@
 @* GET /om-spelet — the crawlable/citeable "About" page. Plain static SSR, no JS. Fråge-
-   rubriker + korta definitionssvar (GEO). Section 6 "Historien bakom" is the owner's text —
-   see the STORY placeholder; do not fill it in. FAQ here MUST stay in sync with the FAQPage
+   rubriker + korta definitionssvar (GEO). Section 6 "Historien bakom" is the owner's text.
+   FAQ here MUST stay in sync with the FAQPage
    JSON-LD in @code (FaqJsonLd). *@
 <MainLayout Title="Om spelet — Mer eller Mindre"
             Description="Mer eller Mindre (eng. More or Less) är ett svenskt frågespel online men tillsammans i samma rum: gissa först riktning (mer/mindre), sedan hur stor skillnaden är. Lägst totaldifferens vinner."
@@ -60,7 +60,7 @@
                 <li><strong>Steg 2:</strong> gissa <em>hur stor</em> skillnaden är, i frågans
                     egen enhet.</li>
                 <li>När alla svarat avslöjas facit och poängen räknas. Lägst total efter
-                    @Decider.QuestionsPerGame frågor vinner.</li>
+                    @Decider.FullGameSize frågor vinner.</li>
             </ol>
             <div class="rulebox">
                 <p class="steplabel">Poäng per fråga</p>
@@ -87,10 +87,29 @@
             </p>
         </div>
 
-        @* 6. Historien bakom — ÄGARENS TEXT. Klistras in här. Rör inte. *@
+        @* 6. Historien bakom — ÄGARENS TEXT. *@
         <div class="card">
             <h2>Historien bakom</h2>
-            <!-- STORY: klistras in -->
+            <p>
+                Idén till kvissig föddes en sommardag på Öland 2024, i ett glasuterum. Sällskapet
+                som hade haft med sig sitt 0-100-spel hade just åkt hem — men suget att spela
+                vidare med min bror och hans familj satt kvar.
+            </p>
+            <p>
+                Jag tänkte: borde man inte kunna prompta ChatGPT till en 0-100-spelkonstruktör?
+                Det funkade — sådär. Spelbart, men knappt. Andra och sista kvällen gick det
+                betydligt bättre med Perplexity, och något hade klickat.
+            </p>
+            <p>
+                Där, i uterummet, föddes idén om ett virtuellt kortspel: ett spel man alltid bär
+                med sig så länge det finns internet, utan en fysisk kortlek att packa eller tappa
+                bort — men som behåller det allra bästa, glädjen i att spela tillsammans i samma
+                rum. Det är därför man ansluter genom att skanna spelledarens QR-kod rakt från
+                telefonen.
+            </p>
+            <p>
+                För det är där det är som roligast. Tillsammans, på riktigt.
+            </p>
         </div>
 
         @* 7. FAQ (matchar FaqJsonLd nedan) *@
