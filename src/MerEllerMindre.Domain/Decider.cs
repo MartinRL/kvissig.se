@@ -12,9 +12,13 @@ public static class Decider
 {
     /// <summary>
     /// Number of question cards a single game plays, drawn balanced from the pack.
+    /// Prod decks play the full round; concept ("mini") packs play a short round to test
+    /// a game idea cheaply.
     /// </summary>
-    // ponytail: fixed 21, lift to config only if a pack ever needs a different N
-    public const int QuestionsPerGame = 21;
+    // ponytail: "mini"-slug marker picks the size; promote = rename without "mini" + grow
+    // the pack to 1085, which auto-makes it a 21-question prod deck.
+    public const int FullGameSize = 21;
+    public const int MiniGameSize = 7;
 
     /// <summary>
     /// Evolve applies an event to produce new state. Pure, no side effects.
@@ -146,7 +150,8 @@ public static class Decider
         var hostPlayerId = context.NewGuid();
         var joinCode = context.NewGuid();
 
-        var questions = QuestionSelection.PickBalanced(pack.Questions, QuestionsPerGame, context.NextRandom);
+        var count = command.QuestionPackId.Contains("mini") ? MiniGameSize : FullGameSize;
+        var questions = QuestionSelection.PickBalanced(pack.Questions, count, context.NextRandom);
 
         return new Ok<GameEvent[]>([
             new LobbyOpened(gameId, hostPlayerId, command.HostName, joinCode, command.QuestionPackId, questions, context.Now())

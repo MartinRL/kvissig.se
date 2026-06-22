@@ -100,6 +100,19 @@ See `specs/CLAUDE.md` for the full cheat-sheet.
 4. **Tests**: Implement GWT from `?TestName?` blocks
 5. **Web**: HTMX endpoints and Razor pages
 
+## Game ideas / scaling
+
+New game ideas are proven in **mini-scale** before full prod, to test the concept cheaply
+(a "fråga" = one round: direction + difference):
+
+- **Mini = 175 cards, 7-question round.** Marker: pack-slug contains `mini`. Such packs play
+  `Decider.MiniGameSize` (7) and are **exempt** from the 1085-card contract test.
+- **Prod = 1085 cards, 21-question round.** Everything without `mini` plays
+  `Decider.FullGameSize` (21) and the `EveryFullDeckIsExactly1085Cards` test guards it.
+- **Promote path:** when the concept is validated, rename the pack (drop the `mini` marker)
+  + grow content to 1085 → it automatically becomes a 21-question prod deck the 1085 test
+  guards.
+
 ## Naming
 
 - Commands: verb noun (`OpenLobby`, `SubmitGuess`)

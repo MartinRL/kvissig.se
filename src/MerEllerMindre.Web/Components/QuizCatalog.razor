@@ -15,11 +15,11 @@
 
         @foreach (var pack in Model.Packs)
         {
-            <div class="card">
+            <div class="card@(pack.IsNew ? " is-new" : "")">
                 <div class="pack">
                     <div class="info">
-                        <div class="name">@pack.Name</div>
-                        <div class="count">@Decider.QuestionsPerGame frågor per omgång · @pack.QuestionCount kort i leken</div>
+                        <div class="name">@pack.Name @if (pack.IsNew) { <span class="pill new">Nytt</span> }</div>
+                        <div class="count">@(pack.PackId.Contains("mini") ? Decider.MiniGameSize : Decider.FullGameSize) frågor per omgång · @pack.QuestionCount kort i leken</div>
                     </div>
                     <a class="btn" href="/games/new/@pack.PackId">Spela</a>
                 </div>

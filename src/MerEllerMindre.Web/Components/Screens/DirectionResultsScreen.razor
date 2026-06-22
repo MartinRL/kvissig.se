@@ -1,11 +1,12 @@
-@* Mellansteget: stage 1 closed, the correct direction is revealed and the −10 bonus dealt.
-   The drama screen between the two stages — it shows who called the direction right and the
-   running total so far. Self-paced per player: tap "Fortsätt" to GET the stage-2 slider. Does
-   NOT poll; the player advances themselves. *@
+@* Mellansteget: stage 1 closed, the correct direction is revealed (and in logo mode the brand
+   NAME too, now that the direction guess is locked) and the −10 bonus dealt. The drama screen
+   between the two stages — it shows who called the direction right and the running total so far.
+   Self-paced per player: tap "Fortsätt" to GET the stage-2 slider. Does NOT poll; the player
+   advances themselves. *@
 <div class="card center">
     <span class="pill">Fråga @Model.QuestionNumber / @Model.TotalQuestions · mer eller mindre avslöjat</span>
     <h1 style="margin-top:.6rem">@Model.QuestionText</h1>
-    <p class="answer">@if (Model.MerLogo is not null) { <img class="logoimg" src="@Model.MerLogo" alt="Logotyp" /> } else { <span class="mer">@Model.MerItem</span> } är <span class="mer">MER</span> än @if (Model.MindreLogo is not null) { <img class="logoimg" src="@Model.MindreLogo" alt="Logotyp" /> } else { @Model.MindreItem }</p>
+    <p class="answer">@if (Model.MerLogo is not null) { <img class="logoimg" src="@Model.MerLogo" alt="@Model.MerItem" /> } <span class="mer">@Model.MerItem</span> är <span class="mer">MER</span> än @if (Model.MindreLogo is not null) { <img class="logoimg" src="@Model.MindreLogo" alt="@Model.MindreItem" /> } @Model.MindreItem</p>
 </div>
 
 <div class="card">

@@ -9,7 +9,7 @@ namespace MerEllerMindre.Web.Presentation;
 /// and the raw values revealed only on the results screen. Built from <see cref="GameState"/>
 /// by <see cref="GameScreens"/>; the Razor components see ONLY these models.
 /// </summary>
-public sealed record PackVm(string PackId, string Name, int QuestionCount);
+public sealed record PackVm(string PackId, string Name, int QuestionCount, bool IsNew = false);
 
 public sealed record CatalogVm(IReadOnlyList<PackVm> Packs);
 
@@ -75,7 +75,8 @@ public sealed record DirectionResultsVm(
     Direction CorrectDirection,
     IReadOnlyList<DirectionResultRowVm> Rows,
     string AntiforgeryToken,
-    // Logo mode: PNGs for the Mer/Mindre items (direction revealed, names still hidden).
+    // Logo mode: PNGs for the Mer/Mindre items (direction AND names revealed — the screen shows
+    // logo + name now that the direction guess is locked).
     string? MerLogo = null,
     string? MindreLogo = null);
 

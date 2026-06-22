@@ -10,7 +10,7 @@ namespace MerEllerMindre.Web.Tests;
 /// <summary>
 /// Pins the integration tests to a small fixed 2-card pack so they stay deterministic
 /// regardless of the production catalog's size. A pack with &lt;= 21 cards is used whole
-/// in file order (Decider.QuestionsPerGame guard), so Q0/Q1 are exactly the two cards
+/// in file order (Decider.FullGameSize guard), so Q0/Q1 are exactly the two cards
 /// written below. Without this the balanced selection would shuffle 21 of the ~350-card
 /// production pack and the per-card assertions (Danmark, Sverige) would be non-deterministic.
 /// </summary>
@@ -34,7 +34,7 @@ public sealed class TestAppFactory : WebApplicationFactory<Program>
             "fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga\n" +
             "Vilket företag hade störst omsättning 2023?;Volvo;Ericsson;473;263;miljarder kronor;Hur många miljarder kronor skiljer det?\n" +
             "Vilket företag hade störst omsättning 2023?;H&M;Electrolux;236;135;miljarder kronor;Hur många miljarder kronor skiljer det?\n";
-        File.WriteAllText(Path.Combine(_packsDir, "loggor-blandat-1.csv"), logoCsv, new UTF8Encoding(false));
+        File.WriteAllText(Path.Combine(_packsDir, "loggor-mini-1.csv"), logoCsv, new UTF8Encoding(false));
     }
 
     protected override void ConfigureWebHost(IWebHostBuilder builder) =>

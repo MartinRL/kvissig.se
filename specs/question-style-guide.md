@@ -145,30 +145,47 @@ bara ena generationen känner båda).
 ## Loggor (logga-läge)
 
 Gäller NÄR pack-slug börjar på `loggor-` (delta mot basfilosofin ovan). Loggleken visar
-loggor på frågeskärmen och DÖLJER namnen tills resultatet — så frågestammen MÅSTE vara
-namnfri och `sakA`/`sakB` får aldrig läcka ut i frågan.
+loggor på frågeskärmen och DÖLJER namnen tills riktningen är gissad — så frågestammen MÅSTE
+vara namnfri och `sakA`/`sakB` får aldrig läcka ut i frågan. (Steg 1 = bara loggan; efter
+riktningsgissningen visas namnet bredvid loggan, råvärden/facit först på resultatskärmen.)
 
-- **`fråga` + `differensfråga` är NAMNFRIA och enhetliga** över hela leken (samma stam för
-  alla kort i samma metrik):
-  - Ålder: `fråga` "Vilket av märkena är äldst?", `differensfråga` "Hur många år skiljer
-    dem åt?", enhet `år`.
-  - Länder: `fråga` "Vilket märke finns i flest länder?", `differensfråga` "Hur många länder
-    skiljer det?", enhet `länder`. (Butiker för kedjor: enhet `butiker`.)
+**Blandade mått, INTE enmetrik.** Leken växlar mått runda för runda så frågan inte blir
+likadan varje gång. Sex metriker, var och en med en **namnfri, enhetlig stam** (samma
+`fråga`/`differensfråga`/`enhet` för alla kort i samma metrik):
+
+| Mått | `fråga` | `differensfråga` | `enhet` |
+|---|---|---|---|
+| Ålder | Vilket av märkena är äldst? | Hur många år skiljer dem åt? | år |
+| Länder | Vilket märke finns i flest länder? | Hur många länder skiljer det? | länder |
+| Anställda | Vilket märke har flest anställda? | Hur många anställda skiljer det? | anställda |
+| Omsättning | Vilket märke har störst omsättning? (ÅR) | Hur många miljarder kronor skiljer det? | miljarder kr |
+| Börsvärde | Vilket märke har störst börsvärde? (ÅR) | Hur många miljarder kronor skiljer det? | miljarder kr |
+| Varumärkesvärde | Vilket märke är värt mest som varumärke? (ÅR) | Hur många miljarder dollar skiljer det? | miljarder USD |
+
+(Kedjor: använd `butiker` som enhet under Länder-måttet om butiksantal är det naturliga.)
+
+- **Valuta/år:** båda sidor av ETT kort har samma enhet OCH samma år/källa — annars är de
+  inte jämförbara. **Volatila mått (omsättning, börsvärde, varumärkesvärde) år-pinnas i
+  `fråga`** (ersätt `(ÅR)` med t.ex. `(2024)`). Stabila mått (ålder, länder, anställda)
+  behöver ingen pinne men ska ändå spegla en aktuell källa.
+- **Metrik-val:** ålder = `nuvarande år − grundningsår` (ALDRIG grundningsår rakt av — det
+  är degenererat: `|1943−2006|/2006 ≈ 0,03` → band 0 för varje kort). Ålder ger
+  ratio-spridning (IKEA 83 vs Spotify 20 → norm 76 → band 2).
 - **`sakA`/`sakB` = EXAKTA namn ur `data/logos/logos.csv` vars png finns på disk.** Annars
   returnerar `LogoCatalog.UrlFor` null → trasig render. Filtrera kandidaterna mot disk.
-- **Metrik = ålder (`2026 − grundningsår`) eller antal länder/butiker.** ALDRIG
-  grundningsår rakt av — det är degenererat: `|1943−2006|/2006 ≈ 0,03` → norm ~3 → varje
-  kort hamnar i band 0. Ålder ger ratio-spridning (IKEA 83 vs Spotify 20 → norm 76 → band 2).
-  Stabila metriker (ej volatil omsättning/streams).
-- **Två lekar = två svårighetsgrader, BARA via pack-val:**
-  - `loggor-alla-aldrar-1` — bandmål **10/35/35/20**, pool = **konsumentmärken** (hushållsnamn
-    13- OCH 83-åringen känner: sweets/drinks/snacks, restaurants, toys, games/music/film,
-    electronics, sports, fashion, retail).
-  - `loggor-blandat-1` — bandmål **15/40/30/15**, pool = **B2B/industri** (obskyra:
-    industrials/holdings, real estate, pharma, finance/insurance, semiconductors/enterprise,
-    chemicals/energy, logistics, SaaS/components).
-  - Poolerna (mestadels) disjunkta — igenkänning är den andra svårighetsaxeln.
-- **`--key pair` vid report OCH merge** (alla kort delar EN frågestam → dedup/dupflagg på
-  questionText skulle kollapsa leken till 1 kort). Mät:
-  `report --staging --dir question-staging/loggor-alla-aldrar --targets 10,35,35,20 --key pair`.
-- `ItemCap = 4` gäller (≥543 distinkta märken/lek; korpusen 2034 png räcker väl).
+- **Svensk-tung pool + krav:** majoriteten svenska märken. Utländska märken BARA om de har
+  **svensk närvaro** (säljs/används i relevant omfång här — t.ex. digitala tjänster som
+  Google/Meta, eller kedjor/varor på svenska hyllor). Inga obskyra B2B-märken ingen känner.
+- **Bandmål 10/35/35/20**, riktning ~50/50, `ItemCap = 4`, inga lika-värde-ties (samma
+  `värdeA`/`värdeB` ⇒ ingen riktning, droppa kortet).
+- **`--key metricpair` vid report OCH merge** (mått-stam + oordnat `{sakA,sakB}`): samma
+  par får finnas en gång *per mått* men inte två gånger inom samma mått. Mät:
+  `report --staging --dir question-staging/loggor-mini --targets 10,35,35,20 --key metricpair`.
+
+### Mini- vs prod-skala
+
+En pack-slug som innehåller `mini` = koncept-pack: **175 kort, 7-frågors omgång**, undantas
+från 1085-kontraktet. Prövas billigt innan full prod. Promote-väg när konceptet validerats:
+döp om (släpp `mini`-markören) + skala till **1085 kort** → blir automatiskt 21-frågors
+prod-deck (se CLAUDE.md "Game ideas / scaling"). Pilotens slug = `loggor-mini-1`,
+visningsnamn "Loggor".

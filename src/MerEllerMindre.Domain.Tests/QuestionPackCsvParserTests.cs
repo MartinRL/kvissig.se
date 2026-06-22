@@ -163,6 +163,12 @@ public class QuestionPackCsvParserTests
     public void EveryFullDeckIsExactly1085Cards(string path)
     {
         var slug = Path.GetFileNameWithoutExtension(path);
+
+        // "mini" packs are concept decks (deliberately short, e.g. 175 cards / 7-question round)
+        // tested before scaling to a full prod deck — they are exempt from the 1085 contract.
+        if (slug.Contains("mini"))
+            return;
+
         var pack = QuestionPackCsvParser.Parse(slug, File.ReadAllText(path));
 
         pack.QuestionCount.Should().Be(1085);

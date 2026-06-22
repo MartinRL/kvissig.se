@@ -55,6 +55,7 @@ body {
   white-space: nowrap;
 }
 .pill.soft { background: var(--bg-2); color: var(--mindre-deep); }
+.pill.new { background: var(--accent); color: var(--bg); }
 
 /* ---- cards & text ---- */
 .card {
@@ -63,6 +64,7 @@ body {
   padding: 1.5rem 1.35rem; margin-bottom: 1.1rem;
 }
 .card.center { text-align: center; }
+.card.is-new { border-color: var(--accent); box-shadow: var(--shadow-lift); }
 h1 { font-family: var(--display); font-weight: 800; font-size: 1.7rem; line-height: 1.1; margin: 0 0 .35rem; overflow-wrap: break-word; hyphens: auto; -webkit-hyphens: auto; }
 h2 { font-family: var(--display); font-weight: 700; font-size: 1.3rem; margin: 0 0 .6rem; }
 .sub, .muted { color: var(--ink-soft); }
@@ -227,7 +229,7 @@ input[type=text]:focus { outline: none; border-color: var(--accent); }
 /* ---- catalog pack list ---- */
 .pack { display: flex; align-items: center; gap: 1rem; }
 .pack .info { flex: 1; }
-.pack .name { font-family: var(--display); font-weight: 800; font-size: 1.2rem; }
+.pack .name { font-family: var(--display); font-weight: 800; font-size: 1.2rem; display: flex; align-items: center; gap: .5rem; }
 .pack .count { color: var(--ink-soft); font-size: .85rem; }
 .pack .btn { width: auto; padding: .7rem 1.4rem; font-size: 1rem; flex: none; }
 

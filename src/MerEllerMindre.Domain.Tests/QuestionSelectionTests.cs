@@ -25,7 +25,7 @@ public class QuestionSelectionTests
     {
         var pool = new List<Question> { Card(10, 0), Card(40, 1), Card(70, 2) };
 
-        var selected = QuestionSelection.PickBalanced(pool, Decider.QuestionsPerGame, _ => 0);
+        var selected = QuestionSelection.PickBalanced(pool, Decider.FullGameSize, _ => 0);
 
         selected.Should().BeSameAs(pool);
     }

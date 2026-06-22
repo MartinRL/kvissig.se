@@ -81,6 +81,11 @@ public class GameEndpointsTests : IClassFixture<TestAppFactory>
 
         html.Should().Contain("Mer eller Mindre");
         html.Should().Contain("/games/new/mer-eller-mindre");
+
+        // New pack gets a "Nytt" pill + is-new card, and bubbles right after the base deck.
+        html.Should().Contain("<span class=\"pill new\">Nytt</span>");
+        html.IndexOf("/games/new/mer-eller-mindre", StringComparison.Ordinal)
+            .Should().BeLessThan(html.IndexOf("/games/new/loggor-mini-1", StringComparison.Ordinal));
     }
 
     [Fact]
@@ -271,7 +276,7 @@ public class GameEndpointsTests : IClassFixture<TestAppFactory>
     {
         var host = NewClient();
         var player = NewClient();
-        var code = await CreateGame(host, "loggor-blandat-1");
+        var code = await CreateGame(host, "loggor-mini-1");
         await Join(player, code, "Nils");
         await host.PostAsync($"/games/{code}/start", Form(Token(await State(host, code))));
 

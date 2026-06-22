@@ -8,8 +8,11 @@
 //                                                     cap item frequency, park overflow
 //   --dir <stagingDir>     scan a different staging dir (report --staging + merge); default question-staging
 //   --targets a,b,c,d      override band-target display percentages; default 15,40,30,15
-//   --key question|pair    dedup + duplicate-flag key (report + merge); default question.
+//   --key question|pair|metricpair   dedup + duplicate-flag key (report + merge); default question.
 //                          pair = the unordered {sakA,sakB} (logo decks share one stem).
+//                          metricpair = questionText + unordered {sakA,sakB} (mixed-metric logo
+//                          deck: the same brand pair may appear once PER metric, not twice within
+//                          one metric — the namnfri frågestam identifies the metric).
 // Reuses the Domain's parser + Decider.NormalizeDifference so band math has ONE source.
 
 using System.Globalization;
@@ -39,8 +42,8 @@ stagingDir = TakeOption("--dir") ?? stagingDir;
 var targetsOpt = TakeOption("--targets");
 if (targetsOpt is not null) targets = targetsOpt.Split(',').Select(int.Parse).ToArray();
 var keyMode = TakeOption("--key") ?? "question";
-if (keyMode is not ("question" or "pair"))
-{ Console.Error.WriteLine("--key must be 'question' or 'pair'."); Environment.Exit(2); }
+if (keyMode is not ("question" or "pair" or "metricpair"))
+{ Console.Error.WriteLine("--key must be 'question', 'pair' or 'metricpair'."); Environment.Exit(2); }
 var positional = argv.Where(a => !a.StartsWith('-')).ToList();
 
 switch (command)
@@ -98,12 +101,18 @@ List<Question> LoadCards(IEnumerable<string> files)
     return cards;
 }
 
-// Dedup/duplicate-flag key. pair = unordered {sakA,sakB} so a logo deck sharing one
-// frågestam ("Vilket av märkena är äldst?") dedups on the pair, not the identical text.
+// Dedup/duplicate-flag key. pair = unordered {sakA,sakB} so a single-metric logo deck
+// sharing one frågestam dedups on the pair, not the identical text. metricpair prepends the
+// frågestam so a mixed-metric deck allows the same pair once per metric but not twice within one.
+string PairKey(Question q) =>
+    string.Join('\u0001', new[] { q.ItemA.Trim(), q.ItemB.Trim() }.OrderBy(x => x, StringComparer.OrdinalIgnoreCase));
 string KeyOf(Question q) =>
-    keyMode == "pair"
-        ? string.Join('\u0001', new[] { q.ItemA.Trim(), q.ItemB.Trim() }.OrderBy(x => x, StringComparer.OrdinalIgnoreCase))
-        : q.QuestionText.Trim();
+    keyMode switch
+    {
+        "pair" => PairKey(q),
+        "metricpair" => q.QuestionText.Trim() + '\u0002' + PairKey(q),
+        _ => q.QuestionText.Trim()
+    };
 
 int Band(Question q)
 {
@@ -157,7 +166,12 @@ void Report(List<Question> cards)
         .GroupBy(KeyOf, StringComparer.OrdinalIgnoreCase)
         .Where(g => g.Count() > 1)
         .ToList();
-    var dupLabel = keyMode == "pair" ? "pair {sakA,sakB}" : "questionText";
+    var dupLabel = keyMode switch
+    {
+        "pair" => "pair {sakA,sakB}",
+        "metricpair" => "metric+pair (fråga + {sakA,sakB})",
+        _ => "questionText"
+    };
     Console.WriteLine();
     if (dups.Count == 0)
         Console.WriteLine($"No duplicate {dupLabel}.");
@@ -165,7 +179,7 @@ void Report(List<Question> cards)
     {
         Console.WriteLine($"DUPLICATE {dupLabel} ({dups.Count}):");
         foreach (var g in dups)
-            Console.WriteLine($"  x{g.Count()}  {(keyMode == "pair" ? $"{g.First().ItemA} / {g.First().ItemB}" : g.Key)}");
+            Console.WriteLine($"  x{g.Count()}  {(keyMode == "question" ? g.Key : $"{g.First().ItemA} / {g.First().ItemB} [{g.First().QuestionText}]")}");
     }
 
     var smells = cards
@@ -200,7 +214,12 @@ void Merge()
         if (seen.Add(KeyOf(c))) kept.Add(c);
         else dropped++;
 
-    var dupLabel = keyMode == "pair" ? "pair {sakA,sakB}" : "questionText";
+    var dupLabel = keyMode switch
+    {
+        "pair" => "pair {sakA,sakB}",
+        "metricpair" => "metric+pair (fråga + {sakA,sakB})",
+        _ => "questionText"
+    };
     WritePack(kept, outPath);
     Console.WriteLine($"Wrote {kept.Count} cards to {outPath} (dropped {dropped} duplicate {dupLabel}).");
     Console.WriteLine();
