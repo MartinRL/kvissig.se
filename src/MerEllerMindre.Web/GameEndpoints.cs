@@ -19,11 +19,17 @@ namespace MerEllerMindre.Web;
 /// </summary>
 public static class GameEndpoints
 {
+    // Web-only "new pack" markers: drop a slug here when its deck stops being new.
+    static readonly HashSet<string> NewPacks = new(StringComparer.Ordinal) { "loggor-mini-1" };
+
     public static void MapGameEndpoints(this WebApplication app)
     {
         app.MapGet("/", (FileSystemQuestionPackCatalog catalog) =>
         {
-            var packs = catalog.Packs.Select(p => new PackVm(p.PackId, p.Name, p.QuestionCount)).ToList();
+            var packs = catalog.Packs
+                .Select(p => new PackVm(p.PackId, p.Name, p.QuestionCount, NewPacks.Contains(p.PackId)))
+                .OrderBy(p => p.PackId == "mer-eller-mindre" ? 0 : p.IsNew ? 1 : 2)
+                .ToList();
             return new RazorComponentResult<QuizCatalog>(new { Model = new CatalogVm(packs) });
         });
 
