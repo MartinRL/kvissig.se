@@ -73,6 +73,17 @@ h2 { font-family: var(--display); font-weight: 700; font-size: 1.3rem; margin: 0
 .copybtn { display: inline-flex; align-items: center; padding: .2rem; border: 0; background: none; color: var(--ink-soft); cursor: pointer; }
 .copybtn:hover { color: var(--accent); }
 .copybtn.copied { color: #2ca36b; }
+.share-btn {
+  display: inline-flex; align-items: center; gap: .4rem; cursor: pointer;
+  border: 2px solid var(--line); background: var(--card); color: var(--ink);
+  border-radius: 999px; padding: .45rem .9rem; margin: 1rem auto 0;
+  font-family: var(--display); font-weight: 700; font-size: .9rem;
+}
+.share-btn:hover { color: var(--accent); border-color: var(--accent); }
+.share-btn.copied { color: #2ca36b; border-color: #2ca36b; }
+.share-btn.copied span { font-size: 0; }
+.share-btn.copied span::after { content: "Länk kopierad!"; font-size: .9rem; }
+.brand .share-btn { margin: 0 0 0 auto; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 .center { text-align: center; }
 .steplabel { font-family: var(--display); font-weight: 700; font-size: .95rem; margin: 0 0 .6rem; }

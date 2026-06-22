@@ -1,11 +1,12 @@
 @* GET / — the Quiz Catalog. The GM picks a pack; "Spela" links to /games/new/{packId} where
    the host enters their name before the game is created. Full page (wraps MainLayout). *@
-<MainLayout Title="Mer eller Mindre — välj kviss och spela"
-            Description="Mer eller Mindre (eng. More or Less) — det svenska frågespelet online men tillsammans i samma rum. Välj ett frågepaket, samla gänget runt bordet och spela på var sin skärm. Läs mer på Om spelet."
+<MainLayout Title="Mer eller Mindre — gissa mer/mindre och hur stor skillnaden är"
+            Description="Gissa mer eller mindre — och sedan hur stor skillnaden är. Mer eller Mindre (eng. More or Less) är frågespelet ni spelar online men tillsammans i samma rum, var och en på sin skärm. Välj ett frågepaket och samla gänget runt bordet."
             CanonicalPath="/">
     <div class="wrap">
         <div class="brand">
             <div class="logo"><span class="mer">Mer</span> eller <span class="mindre">Mindre</span></div>
+            <ShareButton />
             <span class="pill soft">Spelledare</span>
         </div>
 

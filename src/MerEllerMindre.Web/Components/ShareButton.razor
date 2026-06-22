@@ -1,0 +1,16 @@
+@* Dela-knapp: sprider sajten/konceptet (kvissig.se). Web Share API på mobil,
+   clipboard-copy som fallback på desktop — se MainLayout body-scriptet. *@
+<button type="button" class="share-btn" aria-label="Dela"
+        data-share-title="Mer eller Mindre"
+        data-share-text="@Text">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="18" cy="5" r="3" /><circle cx="6" cy="12" r="3" /><circle cx="18" cy="19" r="3" />
+        <line x1="8.6" y1="10.5" x2="15.4" y2="6.5" /><line x1="8.6" y1="13.5" x2="15.4" y2="17.5" />
+    </svg>
+    <span>Dela</span>
+</button>
+
+@code {
+    [Parameter] public string Text { get; set; } =
+        "Mer eller Mindre — frågespelet där ni först gissar mer/mindre och sedan hur stor skillnaden är. Online men tillsammans i samma rum, var och en på sin skärm.";
+}

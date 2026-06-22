@@ -67,6 +67,12 @@
             b.textContent = e.detail.xhr.responseText || 'Något gick fel.';
             b.hidden = false;
         });
+        document.body.addEventListener('click', async e => {
+            const b = e.target.closest('.share-btn'); if (!b) return;
+            const data = { title: b.dataset.shareTitle, text: b.dataset.shareText, url: location.origin };
+            try { if (navigator.share) { await navigator.share(data); return; } } catch { return; }
+            try { await navigator.clipboard.writeText(location.origin); b.classList.add('copied'); } catch {}
+        });
     </script>
 </body>
 </html>
@@ -74,7 +80,7 @@
 @code {
     [Parameter] public string Title { get; set; } = "Mer eller Mindre";
     [Parameter] public string Description { get; set; } =
-        "Frågespelet Mer eller Mindre (eng. More or Less) — online men tillsammans i samma rum. Gissa riktning och hur stor skillnaden är; lägst totaldifferens vinner.";
+        "Gissa mer eller mindre — och sedan hur stor skillnaden är. Mer eller Mindre (eng. More or Less) är frågespelet ni spelar online men tillsammans i samma rum, var och en på sin skärm.";
     [Parameter] public string CanonicalPath { get; set; } = "/";
     [Parameter] public string OgImage { get; set; } = "/screenshots/screenshot-1280x720.png";
     [Parameter] public bool ShowMenu { get; set; } = true;
