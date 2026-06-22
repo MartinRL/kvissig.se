@@ -1,0 +1,2033 @@
+name,origin,slug
+1Password,int,1password
+2K,int,2k
+3M,int,3m
+7Up,int,7up
+A&W,int,a-w
+A24,int,a24
+Abarth,int,abarth
+ABB,int,abb
+AbbVie,int,abbvie
+ABC,int,abc
+Abercrombie & Fitch,int,abercrombie-fitch
+ABN AMRO,int,abn-amro
+About You,int,about-you
+AC Milan,int,ac-milan
+Accor,int,accor
+Acer,int,acer
+Action,int,action
+Activision,int,activision
+Acura,int,acura
+Adidas,int,adidas
+Adobe,int,adobe
+Aegean,int,aegean
+Aer Lingus,int,aer-lingus
+Aeroméxico,int,aeromexico
+Affirm,int,affirm
+Afterpay,int,afterpay
+Agoda,int,agoda
+AIG,int,aig
+Air Canada,int,air-canada
+Air China,int,air-china
+Air France,int,air-france
+Air Liquide,int,air-liquide
+Air New Zealand,int,air-new-zealand
+Airbnb,int,airbnb
+Airbus,int,airbus
+Airheads,int,airheads
+Airtable,int,airtable
+Airtel,int,airtel
+Ajax,int,ajax
+AkzoNobel,int,akzonobel
+Alaska Airlines,int,alaska-airlines
+Albert Heijn,int,albert-heijn
+Albertsons,int,albertsons
+Aldi,int,aldi
+Alfa Romeo,int,alfa-romeo
+Algolia,int,algolia
+Alibaba,int,alibaba
+AliExpress,int,aliexpress
+Allen Edmonds,int,allen-edmonds
+Allianz,int,allianz
+Allstate,int,allstate
+Always,int,always
+Amazon,int,amazon
+AMD,int,amd
+American Airlines,int,american-airlines
+American Eagle,int,american-eagle
+American Express,int,american-express
+Amgen,int,amgen
+Amplitude,int,amplitude
+Amstel,int,amstel
+ANA,int,ana
+Anker,int,anker
+Ansys,int,ansys
+Anthropic,int,anthropic
+Anthropologie,int,anthropologie
+ANZ,int,anz
+Aperol,int,aperol
+Apple,int,apple
+Applebee's,int,applebee-s
+Aprilia,int,aprilia
+Aquafina,int,aquafina
+Arby's,int,arby-s
+Arc'teryx,int,arc-teryx
+Argos,int,argos
+Armani,int,armani
+Arsenal,int,arsenal
+Asana,int,asana
+Asda,int,asda
+Asiana Airlines,int,asiana-airlines
+Asics,int,asics
+ASML,int,asml
+ASOS,int,asos
+Aston Martin,int,aston-martin
+Asus,int,asus
+AT&T,int,at-t
+Atari,int,atari
+Atlantic Records,int,atlantic-records
+Atlassian,int,atlassian
+Auchan,int,auchan
+Audemars Piguet,int,audemars-piguet
+Audi,int,audi
+Audible,int,audible
+Austrian Airlines,int,austrian-airlines
+Auth0,int,auth0
+Autodesk,int,autodesk
+Automattic,int,automattic
+Avast,int,avast
+Aveeno,int,aveeno
+Avianca,int,avianca
+Avis,int,avis
+Aviva,int,aviva
+AXA,int,axa
+Axe,int,axe
+B&Q,int,b-q
+Babbel,int,babbel
+Bacardi,int,bacardi
+Baidu,int,baidu
+Baileys,int,baileys
+Baker Hughes,int,baker-hughes
+Balenciaga,int,balenciaga
+Banana Republic,int,banana-republic
+Bandai,int,bandai
+Bandai Namco,int,bandai-namco
+Bandcamp,int,bandcamp
+Bang & Olufsen,int,bang-olufsen
+Bank of America,int,bank-of-america
+Barbie,int,barbie
+Barclays,int,barclays
+Barilla,int,barilla
+Barnes & Noble,int,barnes-noble
+Basecamp,int,basecamp
+BASF,int,basf
+Baskin-Robbins,int,baskin-robbins
+Bath & Body Works,int,bath-body-works
+Bauhaus,int,bauhaus
+Bayer,int,bayer
+Bayern Munich,int,bayern-munich
+BBC,int,bbc
+BBVA,int,bbva
+Beats,int,beats
+Belkin,int,belkin
+Belvedere,int,belvedere
+Ben & Jerry's,int,ben-jerry-s
+Benefit,int,benefit
+Bentley,int,bentley
+Berkshire Hathaway,int,berkshire-hathaway
+Bershka,int,bershka
+Best Buy,int,best-buy
+Best Western,int,best-western
+Bethesda,int,bethesda
+Big Lots,int,big-lots
+Billabong,int,billabong
+Binance,int,binance
+Bing,int,bing
+Biogen,int,biogen
+Birkenstock,int,birkenstock
+Bissell,int,bissell
+Bitbucket,int,bitbucket
+Bitdefender,int,bitdefender
+Black+Decker,int,black-decker
+BlackBerry,int,blackberry
+BlackRock,int,blackrock
+Blender,int,blender
+Blizzard,int,blizzard
+Bluehost,int,bluehost
+Bluesky,int,bluesky
+BMW,int,bmw
+BNP Paribas,int,bnp-paribas
+Bobcat,int,bobcat
+Boehringer Ingelheim,int,boehringer-ingelheim
+Boeing,int,boeing
+Bojangles,int,bojangles
+Bolt,int,bolt
+Bombay Sapphire,int,bombay-sapphire
+Boohoo,int,boohoo
+Booking.com,int,booking-com
+Boots,int,boots
+Borussia Dortmund,int,borussia-dortmund
+Bosch,int,bosch
+Bose,int,bose
+Bottega Veneta,int,bottega-veneta
+Bowers & Wilkins,int,bowers-wilkins
+Box,int,box
+BP,int,bp
+Braun,int,braun
+Brave,int,brave
+Braze,int,braze
+Breitling,int,breitling
+Brembo,int,brembo
+Breville,int,breville
+Breyers,int,breyers
+Bridgestone,int,bridgestone
+Bristol Myers Squibb,int,bristol-myers-squibb
+British Airways,int,british-airways
+Broadcom,int,broadcom
+Brooks,int,brooks
+Brother,int,brother
+BT,int,bt
+Budget,int,budget
+Budweiser,int,budweiser
+Buffalo Wild Wings,int,buffalo-wild-wings
+Bugatti,int,bugatti
+Buick,int,buick
+Bumble,int,bumble
+Bundesliga,int,bundesliga
+Bungie,int,bungie
+Burberry,int,burberry
+Burger King,int,burger-king
+Burlington,int,burlington
+Butterfinger,int,butterfinger
+Bvlgari,int,bvlgari
+BYD,int,byd
+Cadbury,int,cadbury
+Cadillac,int,cadillac
+Calendly,int,calendly
+Calm,int,calm
+Calvin Klein,int,calvin-klein
+Campari,int,campari
+Campbell's,int,campbell-s
+Canada Dry,int,canada-dry
+Canada Goose,int,canada-goose
+Canon,int,canon
+Canva,int,canva
+Capcom,int,capcom
+Capital One,int,capital-one
+Capri-Sun,int,capri-sun
+Captain Morgan,int,captain-morgan
+Carhartt,int,carhartt
+Carl's Jr,int,carl-s-jr
+Carlsberg,int,carlsberg
+Carnival,int,carnival
+Carrefour,int,carrefour
+Cartier,int,cartier
+Cartoon Network,int,cartoon-network
+Casio,int,casio
+Caterpillar,int,caterpillar
+Cathay Pacific,int,cathay-pacific
+CBS,int,cbs
+CD Projekt,int,cd-projekt
+Celine,int,celine
+CeraVe,int,cerave
+Cetaphil,int,cetaphil
+Champion,int,champion
+Chanel,int,chanel
+Charles Schwab,int,charles-schwab
+Charlotte Tilbury,int,charlotte-tilbury
+Cheerios,int,cheerios
+Cheesecake Factory,int,cheesecake-factory
+Cheetos,int,cheetos
+Cheez-It,int,cheez-it
+Chelsea,int,chelsea
+Chevrolet,int,chevrolet
+Chevron,int,chevron
+Chewy,int,chewy
+Chick-fil-A,int,chick-fil-a
+Chili's,int,chili-s
+Chime,int,chime
+China Eastern,int,china-eastern
+China Southern,int,china-southern
+Chipotle,int,chipotle
+Chips Ahoy,int,chips-ahoy
+Chivas Regal,int,chivas-regal
+Chopard,int,chopard
+Christian Louboutin,int,christian-louboutin
+Chrysler,int,chrysler
+Chubb,int,chubb
+Cigna,int,cigna
+Cinnabon,int,cinnabon
+Cisco,int,cisco
+Citi,int,citi
+Citizen,int,citizen
+Citrix,int,citrix
+Citroën,int,citroen
+Clarks,int,clarks
+ClickUp,int,clickup
+Clinique,int,clinique
+Cloudflare,int,cloudflare
+Cloudinary,int,cloudinary
+CNN,int,cnn
+Coach,int,coach
+Coca-Cola,int,coca-cola
+Coinbase,int,coinbase
+Cointreau,int,cointreau
+Cole Haan,int,cole-haan
+Colgate,int,colgate
+Colruyt,int,colruyt
+Columbia,int,columbia
+Comcast,int,comcast
+Comedy Central,int,comedy-central
+Commonwealth Bank,int,commonwealth-bank
+Conagra,int,conagra
+Conair,int,conair
+Confluent,int,confluent
+ConocoPhillips,int,conocophillips
+Contentful,int,contentful
+Continental,int,continental
+Converse,int,converse
+Coors,int,coors
+Corona,int,corona
+Corsair,int,corsair
+Costa Coffee,int,costa-coffee
+Costco,int,costco
+Coursera,int,coursera
+CoverGirl,int,covergirl
+Cracker Barrel,int,cracker-barrel
+Craftsman,int,craftsman
+Crate & Barrel,int,crate-barrel
+Crest,int,crest
+Crocs,int,crocs
+CrowdStrike,int,crowdstrike
+Crown Royal,int,crown-royal
+Crowne Plaza,int,crowne-plaza
+Crunchyroll,int,crunchyroll
+Crédit Agricole,int,credit-agricole
+Cuisinart,int,cuisinart
+Culver's,int,culver-s
+Cupra,int,cupra
+Currys,int,currys
+CVS,int,cvs
+D-Link,int,d-link
+Dacia,int,dacia
+DAF,int,daf
+Daihatsu,int,daihatsu
+Dailymotion,int,dailymotion
+Dairy Queen,int,dairy-queen
+Danone,int,danone
+Dasani,int,dasani
+Dassault Systèmes,int,dassault-systemes
+Databricks,int,databricks
+Datadog,int,datadog
+DAZN,int,dazn
+DC,int,dc
+DC Shoes,int,dc-shoes
+De'Longhi,int,de-longhi
+Decathlon,int,decathlon
+DeepL,int,deepl
+Deezer,int,deezer
+Del Taco,int,del-taco
+Delhaize,int,delhaize
+Deliveroo,int,deliveroo
+Dell,int,dell
+Delta Air Lines,int,delta-air-lines
+Denny's,int,denny-s
+Deutsche Bank,int,deutsche-bank
+Deutsche Telekom,int,deutsche-telekom
+DeWalt,int,dewalt
+DHL,int,dhl
+Dick's Sporting Goods,int,dick-s-sporting-goods
+Dickies,int,dickies
+Diesel,int,diesel
+DigitalOcean,int,digitalocean
+Dillard's,int,dillard-s
+Dior,int,dior
+Discogs,int,discogs
+Discord,int,discord
+Discover,int,discover
+Disney,int,disney
+DJI,int,dji
+Docker,int,docker
+DocuSign,int,docusign
+Dodge,int,dodge
+Dolce & Gabbana,int,dolce-gabbana
+Dollar General,int,dollar-general
+Dollar Tree,int,dollar-tree
+Dom Pérignon,int,dom-perignon
+Domino's,int,domino-s
+Don Julio,int,don-julio
+DoorDash,int,doordash
+Doosan,int,doosan
+Doritos,int,doritos
+Douglas,int,douglas
+Dove,int,dove
+Dow,int,dow
+Dr Pepper,int,dr-pepper
+Dr. Martens,int,dr-martens
+DreamWorks,int,dreamworks
+Dropbox,int,dropbox
+DS Automobiles,int,ds-automobiles
+DSV,int,dsv
+Ducati,int,ducati
+DuckDuckGo,int,duckduckgo
+Dunkin',int,dunkin
+Dunlop,int,dunlop
+Duolingo,int,duolingo
+DuPont,int,dupont
+Durex,int,durex
+Dyson,int,dyson
+E*Trade,int,e-trade
+e.l.f.,int,e-l-f
+EA,int,ea
+easyJet,int,easyjet
+Eaton,int,eaton
+eBay,int,ebay
+Ecco,int,ecco
+Ecolab,int,ecolab
+Edeka,int,edeka
+edX,int,edx
+Egyptair,int,egyptair
+El Corte Inglés,int,el-corte-ingles
+Elastic,int,elastic
+Eli Lilly,int,eli-lilly
+Emerson,int,emerson
+Emirates,int,emirates
+Enbridge,int,enbridge
+Eni,int,eni
+Enterprise,int,enterprise
+Epic Games,int,epic-games
+Epson,int,epson
+Equinor,int,equinor
+ESPN,int,espn
+Estée Lauder,int,estee-lauder
+Ethiopian Airlines,int,ethiopian-airlines
+Etihad Airways,int,etihad-airways
+eToro,int,etoro
+Etsy,int,etsy
+Eucerin,int,eucerin
+Europcar,int,europcar
+EVA Air,int,eva-air
+Evernote,int,evernote
+Evian,int,evian
+Expedia,int,expedia
+Express,int,express
+ExpressVPN,int,expressvpn
+ExxonMobil,int,exxonmobil
+Facebook,int,facebook
+Fanta,int,fanta
+FC Barcelona,int,fc-barcelona
+FedEx,int,fedex
+Fendi,int,fendi
+Fenty Beauty,int,fenty-beauty
+Ferrari,int,ferrari
+Ferrero,int,ferrero
+Ferrero Rocher,int,ferrero-rocher
+Festool,int,festool
+Fiat,int,fiat
+Fidelity,int,fidelity
+FIFA,int,fifa
+Figma,int,figma
+Fiji,int,fiji
+Fila,int,fila
+Finnair,int,finnair
+Firefox,int,firefox
+Firehouse Subs,int,firehouse-subs
+Fisher-Price,int,fisher-price
+Fitbit,int,fitbit
+Five Guys,int,five-guys
+Fiverr,int,fiverr
+Focus Features,int,focus-features
+Folgers,int,folgers
+Foodpanda,int,foodpanda
+Foot Locker,int,foot-locker
+Ford,int,ford
+Forever 21,int,forever-21
+Formula 1,int,formula-1
+Fortinet,int,fortinet
+Fossil,int,fossil
+Four Seasons,int,four-seasons
+Fox,int,fox
+Framer,int,framer
+Freightliner,int,freightliner
+Frigidaire,int,frigidaire
+Fritos,int,fritos
+FromSoftware,int,fromsoftware
+Frontier Airlines,int,frontier-airlines
+Fujifilm,int,fujifilm
+Funko,int,funko
+Furla,int,furla
+GameStop,int,gamestop
+Gap,int,gap
+Garmin,int,garmin
+Garnier,int,garnier
+Gatorade,int,gatorade
+Geely,int,geely
+Geico,int,geico
+General Electric,int,general-electric
+General Mills,int,general-mills
+Generali,int,generali
+Genesis,int,genesis
+Genius,int,genius
+GetYourGuide,int,getyourguide
+Ghirardelli,int,ghirardelli
+Gilead,int,gilead
+Gillette,int,gillette
+GitHub,int,github
+GitLab,int,gitlab
+Givenchy,int,givenchy
+Glassdoor,int,glassdoor
+Glenfiddich,int,glenfiddich
+Glenlivet,int,glenlivet
+Glossier,int,glossier
+GMC,int,gmc
+GoDaddy,int,godaddy
+Godiva,int,godiva
+Gojek,int,gojek
+Goldman Sachs,int,goldman-sachs
+Goodreads,int,goodreads
+Goodyear,int,goodyear
+Google,int,google
+GoPro,int,gopro
+Grab,int,grab
+Grafana,int,grafana
+Grammarly,int,grammarly
+Greggs,int,greggs
+Grey Goose,int,grey-goose
+Grubhub,int,grubhub
+GSK,int,gsk
+Gucci,int,gucci
+Guess,int,guess
+Guinness,int,guinness
+Gymshark,int,gymshark
+H-E-B,int,h-e-b
+Halliburton,int,halliburton
+Hamilton,int,hamilton
+Hankook,int,hankook
+Hardee's,int,hardee-s
+Haribo,int,haribo
+Harley-Davidson,int,harley-davidson
+Harman Kardon,int,harman-kardon
+Harrods,int,harrods
+Hasbro,int,hasbro
+HashiCorp,int,hashicorp
+Hawaiian Airlines,int,hawaiian-airlines
+HBO,int,hbo
+Head & Shoulders,int,head-shoulders
+Headspace,int,headspace
+Heineken,int,heineken
+Heinz,int,heinz
+Hendrick's,int,hendrick-s
+Henkel,int,henkel
+Hennessy,int,hennessy
+Hermès,int,hermes
+Heroku,int,heroku
+Hershey,int,hershey
+Hertz,int,hertz
+Hilti,int,hilti
+Hilton,int,hilton
+Hisense,int,hisense
+History,int,history
+Hitachi,int,hitachi
+Hoka,int,hoka
+Holiday Inn,int,holiday-inn
+Hollister,int,hollister
+Home Depot,int,home-depot
+Honda,int,honda
+Honeywell,int,honeywell
+Honor,int,honor
+Hoover,int,hoover
+Hormel,int,hormel
+Hornbach,int,hornbach
+HostGator,int,hostgator
+Hot Wheels,int,hot-wheels
+Hotels.com,int,hotels-com
+HP,int,hp
+HSBC,int,hsbc
+HTC,int,htc
+Huawei,int,huawei
+Hublot,int,hublot
+HubSpot,int,hubspot
+Hugging Face,int,hugging-face
+Hugo Boss,int,hugo-boss
+Hulu,int,hulu
+Hyatt,int,hyatt
+Hyundai,int,hyundai
+Häagen-Dazs,int,haagen-dazs
+Iberia,int,iberia
+Ibis,int,ibis
+IBM,int,ibm
+Icelandair,int,icelandair
+iHeartRadio,int,iheartradio
+IHG,int,ihg
+IHOP,int,ihop
+Illy,int,illy
+IMDb,int,imdb
+In-N-Out,int,in-n-out
+Indeed,int,indeed
+Indian Motorcycle,int,indian-motorcycle
+Infiniti,int,infiniti
+ING,int,ing
+Instacart,int,instacart
+Instagram,int,instagram
+Intel,int,intel
+Inter Milan,int,inter-milan
+Interactive Brokers,int,interactive-brokers
+Intercom,int,intercom
+iRobot,int,irobot
+Isuzu,int,isuzu
+Iveco,int,iveco
+IWC,int,iwc
+J.Crew,int,j-crew
+Jack Daniel's,int,jack-daniel-s
+Jack in the Box,int,jack-in-the-box
+Jaeger-LeCoultre,int,jaeger-lecoultre
+Jaguar,int,jaguar
+Jameson,int,jameson
+Japan Airlines,int,japan-airlines
+JBL,int,jbl
+JCB,int,jcb
+JCPenney,int,jcpenney
+JD Sports,int,jd-sports
+Jeep,int,jeep
+Jersey Mike's,int,jersey-mike-s
+JetBlue,int,jetblue
+JetBrains,int,jetbrains
+Jim Beam,int,jim-beam
+Jimmy Choo,int,jimmy-choo
+Jimmy John's,int,jimmy-john-s
+John Deere,int,john-deere
+John Lewis,int,john-lewis
+Johnnie Walker,int,johnnie-walker
+Johnson & Johnson,int,johnson-johnson
+Jolly Rancher,int,jolly-rancher
+JPMorgan,int,jpmorgan
+Jumbo,int,jumbo
+Juniper Networks,int,juniper-networks
+Just Eat,int,just-eat
+Juventus,int,juventus
+Jägermeister,int,jagermeister
+Kappa,int,kappa
+Kaspersky,int,kaspersky
+Kate Spade,int,kate-spade
+Kaufland,int,kaufland
+Kawasaki,int,kawasaki
+Kayak,int,kayak
+Kellogg's,int,kellogg-s
+Kenworth,int,kenworth
+Keurig,int,keurig
+Keysight,int,keysight
+KFC,int,kfc
+Khan Academy,int,khan-academy
+Kia,int,kia
+Kinder,int,kinder
+Kingston,int,kingston
+KitchenAid,int,kitchenaid
+KitKat,int,kitkat
+Klaviyo,int,klaviyo
+Klipsch,int,klipsch
+KLM,int,klm
+Klook,int,klook
+Knorr,int,knorr
+Kodak,int,kodak
+Kohl's,int,kohl-s
+Komatsu,int,komatsu
+Konami,int,konami
+KONE,int,kone
+Korean Air,int,korean-air
+KPN,int,kpn
+Kraft Heinz,int,kraft-heinz
+Kraken,int,kraken
+Krispy Kreme,int,krispy-kreme
+Kroger,int,kroger
+Krups,int,krups
+KTM,int,ktm
+Kuehne+Nagel,int,kuehne-nagel
+L'Oréal,int,l-oreal
+La Croix,int,la-croix
+La Liga,int,la-liga
+La Roche-Posay,int,la-roche-posay
+Lacoste,int,lacoste
+Lamborghini,int,lamborghini
+Lancia,int,lancia
+Lancôme,int,lancome
+Land Rover,int,land-rover
+Larian Studios,int,larian-studios
+LastPass,int,lastpass
+LATAM,int,latam
+Lavazza,int,lavazza
+Lay's,int,lay-s
+Le Coq Sportif,int,le-coq-sportif
+Lee,int,lee
+Lego,int,lego
+Leica,int,leica
+Lenovo,int,lenovo
+Leroy Merlin,int,leroy-merlin
+Letterboxd,int,letterboxd
+Levi's,int,levi-s
+Lexus,int,lexus
+LG,int,lg
+Li Auto,int,li-auto
+Liberty Mutual,int,liberty-mutual
+Lidl,int,lidl
+Liebherr,int,liebherr
+Linde,int,linde
+Lindt,int,lindt
+Line,int,line
+Linear,int,linear
+LinkedIn,int,linkedin
+Lionsgate,int,lionsgate
+Lipton,int,lipton
+Liquid Death,int,liquid-death
+Listerine,int,listerine
+Little Caesars,int,little-caesars
+Liverpool,int,liverpool
+Lloyds Bank,int,lloyds-bank
+Lockheed Martin,int,lockheed-martin
+Loewe,int,loewe
+Logitech,int,logitech
+Lonely Planet,int,lonely-planet
+Longchamp,int,longchamp
+Longines,int,longines
+Loom,int,loom
+Lotus,int,lotus
+Louis Vuitton,int,louis-vuitton
+Lowe's,int,lowe-s
+Lucasfilm,int,lucasfilm
+Lucid Motors,int,lucid-motors
+Lufthansa,int,lufthansa
+Lululemon,int,lululemon
+Lyft,int,lyft
+LyondellBasell,int,lyondellbasell
+M&M's,int,m-m-s
+MAC Cosmetics,int,mac-cosmetics
+Mack Trucks,int,mack-trucks
+Macy's,int,macy-s
+Madewell,int,madewell
+Maersk,int,maersk
+Magnum,int,magnum
+Mahindra,int,mahindra
+Mailchimp,int,mailchimp
+MakeMyTrip,int,makemytrip
+Maker's Mark,int,maker-s-mark
+Makita,int,makita
+Malaysia Airlines,int,malaysia-airlines
+MAN,int,man
+Manchester City,int,manchester-city
+Manchester United,int,manchester-united
+Mango,int,mango
+Marc Jacobs,int,marc-jacobs
+Marks & Spencer,int,marks-spencer
+Marriott,int,marriott
+Mars,int,mars
+Marshall,int,marshall
+Marshalls,int,marshalls
+Maruti Suzuki,int,maruti-suzuki
+Marvel,int,marvel
+Maserati,int,maserati
+Massimo Dutti,int,massimo-dutti
+Mastercard,int,mastercard
+MasterClass,int,masterclass
+Match,int,match
+Mattel,int,mattel
+Max,int,max
+Maxwell House,int,maxwell-house
+Maybelline,int,maybelline
+Maytag,int,maytag
+Mazda,int,mazda
+McAfee,int,mcafee
+McDonald's,int,mcdonald-s
+McLaren,int,mclaren
+Medium,int,medium
+Meijer,int,meijer
+Mentos,int,mentos
+Mercado Libre,int,mercado-libre
+Mercadona,int,mercadona
+Mercedes-Benz,int,mercedes-benz
+Merck,int,merck
+Meta,int,meta
+MetLife,int,metlife
+MG,int,mg
+MGM,int,mgm
+Michael Kors,int,michael-kors
+Michelin,int,michelin
+Micron,int,micron
+Microsoft,int,microsoft
+Midjourney,int,midjourney
+Miele,int,miele
+Migros,int,migros
+Milky Way,int,milky-way
+Milwaukee Tool,int,milwaukee-tool
+Mini,int,mini
+Minute Maid,int,minute-maid
+Miro,int,miro
+Mitsubishi Electric,int,mitsubishi-electric
+Mitsubishi Motors,int,mitsubishi-motors
+Mixpanel,int,mixpanel
+Mizuno,int,mizuno
+MLB,int,mlb
+MLS,int,mls
+Modelo,int,modelo
+Moderna,int,moderna
+Moncler,int,moncler
+Mondelez,int,mondelez
+MongoDB,int,mongodb
+Monopoly,int,monopoly
+Monster Energy,int,monster-energy
+Montblanc,int,montblanc
+Monzo,int,monzo
+Morgan,int,morgan
+Morgan Stanley,int,morgan-stanley
+Morrisons,int,morrisons
+Moto Guzzi,int,moto-guzzi
+MotoGP,int,motogp
+Motorola,int,motorola
+Moulinex,int,moulinex
+Mountain Dew,int,mountain-dew
+Movistar,int,movistar
+Mozilla,int,mozilla
+Moët & Chandon,int,moet-chandon
+MSC Cruises,int,msc-cruises
+MTV,int,mtv
+MV Agusta,int,mv-agusta
+MyFitnessPal,int,myfitnesspal
+N26,int,n26
+Nabisco,int,nabisco
+Namecheap,int,namecheap
+Nando's,int,nando-s
+NARS,int,nars
+NASCAR,int,nascar
+National Geographic,int,national-geographic
+National Instruments,int,national-instruments
+NatWest,int,natwest
+Naver,int,naver
+NBA,int,nba
+NBC,int,nbc
+Nescafé,int,nescafe
+Nespresso,int,nespresso
+Nestlé,int,nestle
+NetEase,int,netease
+Netflix,int,netflix
+Netgear,int,netgear
+Netlify,int,netlify
+Neutrogena,int,neutrogena
+New Balance,int,new-balance
+New Relic,int,new-relic
+Next,int,next
+NFL,int,nfl
+NHL,int,nhl
+Niantic,int,niantic
+Nickelodeon,int,nickelodeon
+Nike,int,nike
+Nikon,int,nikon
+Ninja,int,ninja
+Nintendo,int,nintendo
+Nio,int,nio
+Nissan,int,nissan
+Nivea,int,nivea
+Nokia,int,nokia
+Nomura,int,nomura
+Nordstrom,int,nordstrom
+NordVPN,int,nordvpn
+Norton,int,norton
+Norwegian,int,norwegian
+Norwegian Cruise Line,int,norwegian-cruise-line
+Nothing,int,nothing
+Notion,int,notion
+Novartis,int,novartis
+Novo Nordisk,int,novo-nordisk
+Novotel,int,novotel
+NTT,int,ntt
+Nubank,int,nubank
+Nutella,int,nutella
+Nvidia,int,nvidia
+NYX,int,nyx
+O2,int,o2
+Ocean Spray,int,ocean-spray
+Office Depot,int,office-depot
+Okta,int,okta
+Olay,int,olay
+Old Navy,int,old-navy
+Old Spice,int,old-spice
+Olive Garden,int,olive-garden
+Omega,int,omega
+OnePlus,int,oneplus
+Opel,int,opel
+OpenAI,int,openai
+Opera,int,opera
+OPI,int,opi
+Oppo,int,oppo
+Oracle,int,oracle
+Oral-B,int,oral-b
+Orange,int,orange
+Orbit,int,orbit
+Oreo,int,oreo
+Oscar Mayer,int,oscar-mayer
+Otis,int,otis
+Outback Steakhouse,int,outback-steakhouse
+OYO,int,oyo
+P.F. Chang's,int,p-f-chang-s
+PacSun,int,pacsun
+Pagani,int,pagani
+PagerDuty,int,pagerduty
+Palantir,int,palantir
+Palo Alto Networks,int,palo-alto-networks
+Pampers,int,pampers
+Panasonic,int,panasonic
+Panda Express,int,panda-express
+Pandora,int,pandora
+Panera Bread,int,panera-bread
+Panerai,int,panerai
+Pantene,int,pantene
+Papa John's,int,papa-john-s
+Paramount,int,paramount
+Paris Saint-Germain,int,paris-saint-germain
+Parker Hannifin,int,parker-hannifin
+Patagonia,int,patagonia
+Patek Philippe,int,patek-philippe
+Patreon,int,patreon
+Patrón,int,patron
+PayPal,int,paypal
+Peacock,int,peacock
+Peet's Coffee,int,peet-s-coffee
+Peloton,int,peloton
+Pepsi,int,pepsi
+PepsiCo,int,pepsico
+Perplexity,int,perplexity
+Perrier,int,perrier
+Petco,int,petco
+Peterbilt,int,peterbilt
+Petrobras,int,petrobras
+PetSmart,int,petsmart
+Peugeot,int,peugeot
+Pez,int,pez
+Pfizer,int,pfizer
+Philips,int,philips
+Phillips 66,int,phillips-66
+Piaget,int,piaget
+Piaggio,int,piaggio
+Pinterest,int,pinterest
+Pirelli,int,pirelli
+Pixar,int,pixar
+Pizza Hut,int,pizza-hut
+Plaid,int,plaid
+PlanetScale,int,planetscale
+Play-Doh,int,play-doh
+Playmobil,int,playmobil
+PlayStation,int,playstation
+PNC,int,pnc
+Polaroid,int,polaroid
+Pop-Tarts,int,pop-tarts
+Popeyes,int,popeyes
+Porsche,int,porsche
+Postman,int,postman
+Pottery Barn,int,pottery-barn
+Powerade,int,powerade
+PPG,int,ppg
+Prada,int,prada
+Premier Inn,int,premier-inn
+Premier League,int,premier-league
+Pret a Manger,int,pret-a-manger
+Primark,int,primark
+Pringles,int,pringles
+Procreate,int,procreate
+Procter & Gamble,int,procter-gamble
+Progressive,int,progressive
+Prudential,int,prudential
+PTC,int,ptc
+Publix,int,publix
+Pull&Bear,int,pull-bear
+Puma,int,puma
+Qantas,int,qantas
+Qatar Airways,int,qatar-airways
+Qdoba,int,qdoba
+Quaker,int,quaker
+Qualcomm,int,qualcomm
+Quiksilver,int,quiksilver
+Quora,int,quora
+Rabobank,int,rabobank
+Radisson,int,radisson
+Raising Cane's,int,raising-cane-s
+Ralph Lauren,int,ralph-lauren
+Ram Trucks,int,ram-trucks
+Rare Beauty,int,rare-beauty
+Razer,int,razer
+RBC,int,rbc
+Real Madrid,int,real-madrid
+Realme,int,realme
+Red Bull,int,red-bull
+Red Hat,int,red-hat
+Red Lobster,int,red-lobster
+Red Robin,int,red-robin
+Reddit,int,reddit
+Reebok,int,reebok
+Reese's,int,reese-s
+Regeneron,int,regeneron
+REI,int,rei
+Renault,int,renault
+Render,int,render
+Repsol,int,repsol
+Retool,int,retool
+Revlon,int,revlon
+Revolut,int,revolut
+Rewe,int,rewe
+Rexona,int,rexona
+Ricoh,int,ricoh
+Rimmel,int,rimmel
+Ring,int,ring
+Riot Games,int,riot-games
+Rip Curl,int,rip-curl
+Rite Aid,int,rite-aid
+Ritz,int,ritz
+Ritz-Carlton,int,ritz-carlton
+Rivian,int,rivian
+Robinhood,int,robinhood
+Roblox,int,roblox
+Roche,int,roche
+Rockstar,int,rockstar
+Rockstar Games,int,rockstar-games
+Rockwell Automation,int,rockwell-automation
+Rogers,int,rogers
+Roku,int,roku
+Rolex,int,rolex
+Rolls-Royce,int,rolls-royce
+Ross,int,ross
+Rotten Tomatoes,int,rotten-tomatoes
+Rowenta,int,rowenta
+Royal Caribbean,int,royal-caribbean
+Royal Enfield,int,royal-enfield
+Ruffles,int,ruffles
+Ryanair,int,ryanair
+Ryobi,int,ryobi
+Safeway,int,safeway
+Sainsbury's,int,sainsbury-s
+Saint Laurent,int,saint-laurent
+Salesforce,int,salesforce
+Salomon,int,salomon
+Salvatore Ferragamo,int,salvatore-ferragamo
+Sam's Club,int,sam-s-club
+Samsung,int,samsung
+San Pellegrino,int,san-pellegrino
+SanDisk,int,sandisk
+Sanity,int,sanity
+Sanofi,int,sanofi
+Santander,int,santander
+SAP,int,sap
+Saucony,int,saucony
+Saudi Aramco,int,saudi-aramco
+Saudia,int,saudia
+Schindler,int,schindler
+Schlumberger,int,schlumberger
+Schneider Electric,int,schneider-electric
+Schwarzkopf,int,schwarzkopf
+Schweppes,int,schweppes
+Scotiabank,int,scotiabank
+Screwfix,int,screwfix
+Seagate,int,seagate
+SEAT,int,seat
+Sega,int,sega
+Seiko,int,seiko
+Selfridges,int,selfridges
+SendGrid,int,sendgrid
+Sennheiser,int,sennheiser
+Sensodyne,int,sensodyne
+SentinelOne,int,sentinelone
+Sentry,int,sentry
+Sephora,int,sephora
+ServiceNow,int,servicenow
+Shake Shack,int,shake-shack
+Shark,int,shark
+Shazam,int,shazam
+Shein,int,shein
+Shell,int,shell
+Sheraton,int,sheraton
+Sherwin-Williams,int,sherwin-williams
+Shiseido,int,shiseido
+Shopify,int,shopify
+Siemens,int,siemens
+Signal,int,signal
+Singapore Airlines,int,singapore-airlines
+SiteGround,int,siteground
+Sixt,int,sixt
+SK Hynix,int,sk-hynix
+Skechers,int,skechers
+Sketch,int,sketch
+Skillshare,int,skillshare
+Skittles,int,skittles
+Skoda,int,skoda
+Skype,int,skype
+Skyscanner,int,skyscanner
+Slack,int,slack
+Smart,int,smart
+Smeg,int,smeg
+Smirnoff,int,smirnoff
+Snapchat,int,snapchat
+Snapple,int,snapple
+Snickers,int,snickers
+Snowflake,int,snowflake
+Société Générale,int,societe-generale
+SoFi,int,sofi
+Sofitel,int,sofitel
+SoftBank,int,softbank
+Sonic,int,sonic
+Sonos,int,sonos
+Sony,int,sony
+Sony Music,int,sony-music
+Sony Pictures,int,sony-pictures
+SoundCloud,int,soundcloud
+Sour Patch Kids,int,sour-patch-kids
+Southwest Airlines,int,southwest-airlines
+Special K,int,special-k
+Spirit Airlines,int,spirit-airlines
+Sprite,int,sprite
+Sprouts,int,sprouts
+Square Enix,int,square-enix
+Squarespace,int,squarespace
+Stack Overflow,int,stack-overflow
+Standard Chartered,int,standard-chartered
+Stanley,int,stanley
+Staples,int,staples
+Starbucks,int,starbucks
+Starburst,int,starburst
+State Farm,int,state-farm
+State Street,int,state-street
+Steak 'n Shake,int,steak-n-shake
+Steam,int,steam
+SteelSeries,int,steelseries
+Stella Artois,int,stella-artois
+Strapi,int,strapi
+Strava,int,strava
+Stripe,int,stripe
+Stuart Weitzman,int,stuart-weitzman
+Stüssy,int,stussy
+Subaru,int,subaru
+Substack,int,substack
+Subway,int,subway
+Sun Chips,int,sun-chips
+Sunkist,int,sunkist
+Supabase,int,supabase
+Supercell,int,supercell
+Superdrug,int,superdrug
+Supreme,int,supreme
+SUSE,int,suse
+Suzuki,int,suzuki
+Swarovski,int,swarovski
+Swatch,int,swatch
+SWISS,int,swiss
+Swisscom,int,swisscom
+T-Mobile,int,t-mobile
+Taco Bell,int,taco-bell
+TAG Heuer,int,tag-heuer
+Take-Two,int,take-two
+Takeda,int,takeda
+Tampax,int,tampax
+Tanqueray,int,tanqueray
+TAP Air Portugal,int,tap-air-portugal
+Target,int,target
+Tata Motors,int,tata-motors
+Tchibo,int,tchibo
+TCL,int,tcl
+TD Bank,int,td-bank
+Tefal,int,tefal
+Telefónica,int,telefonica
+Telegram,int,telegram
+Telenor,int,telenor
+Telstra,int,telstra
+Temu,int,temu
+Tencent,int,tencent
+Tesco,int,tesco
+Tesla,int,tesla
+Tetley,int,tetley
+Teva,int,teva
+Texas Instruments,int,texas-instruments
+Texas Roadhouse,int,texas-roadhouse
+TGI Fridays,int,tgi-fridays
+Thai Airways,int,thai-airways
+The Macallan,int,the-macallan
+The North Face,int,the-north-face
+Threads,int,threads
+Thyssenkrupp,int,thyssenkrupp
+Tic Tac,int,tic-tac
+Tidal,int,tidal
+Tiffany & Co,int,tiffany-co
+TikTok,int,tiktok
+Tim Hortons,int,tim-hortons
+Timberland,int,timberland
+Tinder,int,tinder
+Tissot,int,tissot
+Tito's,int,tito-s
+TJ Maxx,int,tj-maxx
+Toblerone,int,toblerone
+Tod's,int,tod-s
+Todoist,int,todoist
+Tommy Hilfiger,int,tommy-hilfiger
+TomTom,int,tomtom
+Too Faced,int,too-faced
+Tory Burch,int,tory-burch
+Toshiba,int,toshiba
+Tostitos,int,tostitos
+TotalEnergies,int,totalenergies
+Tottenham,int,tottenham
+Toyota,int,toyota
+TP-Link,int,tp-link
+Trader Joe's,int,trader-joe-s
+Trading 212,int,trading-212
+Trello,int,trello
+TRESemmé,int,tresemme
+Trident,int,trident
+Trip.com,int,trip-com
+TripAdvisor,int,tripadvisor
+Triscuit,int,triscuit
+Triumph,int,triumph
+Trivago,int,trivago
+Tropicana,int,tropicana
+TSMC,int,tsmc
+Tudor,int,tudor
+Turkish Airlines,int,turkish-airlines
+Twilio,int,twilio
+Twinings,int,twinings
+Twitch,int,twitch
+Twix,int,twix
+Twizzlers,int,twizzlers
+Tyson Foods,int,tyson-foods
+U.S. Bank,int,u-s-bank
+Uber,int,uber
+Ubiquiti,int,ubiquiti
+Ubisoft,int,ubisoft
+UBS,int,ubs
+Udemy,int,udemy
+UEFA,int,uefa
+UFC,int,ufc
+UGG,int,ugg
+Ulta,int,ulta
+Umbro,int,umbro
+Under Armour,int,under-armour
+UniCredit,int,unicredit
+Unilever,int,unilever
+Uniqlo,int,uniqlo
+United Airlines,int,united-airlines
+UnitedHealth,int,unitedhealth
+Unity,int,unity
+Universal Music,int,universal-music
+Universal Pictures,int,universal-pictures
+Unreal Engine,int,unreal-engine
+UPS,int,ups
+Upwork,int,upwork
+Urban Decay,int,urban-decay
+Urban Outfitters,int,urban-outfitters
+USPS,int,usps
+Vacasa,int,vacasa
+Vacheron Constantin,int,vacheron-constantin
+Valentino,int,valentino
+Valero,int,valero
+Valve,int,valve
+Van Cleef & Arpels,int,van-cleef-arpels
+Vanguard,int,vanguard
+Vans,int,vans
+Venmo,int,venmo
+Vercel,int,vercel
+Verizon,int,verizon
+Versace,int,versace
+Vespa,int,vespa
+Veuve Clicquot,int,veuve-clicquot
+Viator,int,viator
+Viber,int,viber
+Vichy,int,vichy
+Victoria's Secret,int,victoria-s-secret
+Vimeo,int,vimeo
+VinFast,int,vinfast
+Visa,int,visa
+Vita Coco,int,vita-coco
+Vitaminwater,int,vitaminwater
+Vitamix,int,vitamix
+Vivo,int,vivo
+Vizio,int,vizio
+VK,int,vk
+VMware,int,vmware
+Vodafone,int,vodafone
+Volcom,int,volcom
+Volkswagen,int,volkswagen
+Vrbo,int,vrbo
+Vueling,int,vueling
+Waffle House,int,waffle-house
+Wagamama,int,wagamama
+Wahl,int,wahl
+Waitrose,int,waitrose
+Walgreens,int,walgreens
+Walmart,int,walmart
+Warner Bros,int,warner-bros
+Warner Music,int,warner-music
+Wayfair,int,wayfair
+Webflow,int,webflow
+Webull,int,webull
+WeChat,int,wechat
+Wegmans,int,wegmans
+Weibo,int,weibo
+Wells Fargo,int,wells-fargo
+Wendy's,int,wendy-s
+West Elm,int,west-elm
+Western Digital,int,western-digital
+Western Union,int,western-union
+Westin,int,westin
+WestJet,int,westjet
+Westpac,int,westpac
+WeTransfer,int,wetransfer
+Whataburger,int,whataburger
+WhatsApp,int,whatsapp
+Whirlpool,int,whirlpool
+White Castle,int,white-castle
+Whole Foods,int,whole-foods
+WHOOP,int,whoop
+Wikipedia,int,wikipedia
+Williams-Sonoma,int,williams-sonoma
+Wingstop,int,wingstop
+Wise,int,wise
+Wix,int,wix
+Wizz Air,int,wizz-air
+Wolt,int,wolt
+WordPress,int,wordpress
+Workday,int,workday
+Wrangler,int,wrangler
+Wrigley,int,wrigley
+WWE,int,wwe
+Wyndham,int,wyndham
+X,int,x
+Xbox,int,xbox
+Xerox,int,xerox
+Xfinity,int,xfinity
+Xiaomi,int,xiaomi
+Xpeng,int,xpeng
+Yahoo,int,yahoo
+Yamaha,int,yamaha
+Yandex,int,yandex
+Yelp,int,yelp
+YouTube,int,youtube
+Zalando,int,zalando
+Zapier,int,zapier
+Zara,int,zara
+Zendesk,int,zendesk
+ZF,int,zf
+Zoom,int,zoom
+Zurich,int,zurich
+Zynga,int,zynga
+A Day's March,se,a-day-s-march
+AAK,se,aak
+Abba Seafood,se,abba-seafood
+Absolent,se,absolent
+Absolut Vodka,se,absolut-vodka
+AcadeMedia,se,academedia
+Acast,se,acast
+Acne Studios,se,acne-studios
+Actic,se,actic
+AddLife,se,addlife
+Addtech,se,addtech
+Adlibris,se,adlibris
+AFRY,se,afry
+Aftonbladet,se,aftonbladet
+AIK,se,aik
+Akademibokhandeln,se,akademibokhandeln
+Akelius,se,akelius
+Alecta,se,alecta
+Aleris,se,aleris
+Alfa Laval,se,alfa-laval
+Alimak,se,alimak
+Allente,se,allente
+Alligo,se,alligo
+Almondy,se,almondy
+Ambea,se,ambea
+AMF,se,amf
+Annas Pepparkakor,se,annas-pepparkakor
+Anticimex,se,anticimex
+Anyfin,se,anyfin
+Apohem,se,apohem
+Apollo,se,apollo
+Apotea,se,apotea
+Apotek Hjärtat,se,apotek-hjartat
+Apoteket,se,apoteket
+Arbetarbladet,se,arbetarbladet
+Arbetsförmedlingen,se,arbetsformedlingen
+Aritco,se,aritco
+Arjo,se,arjo
+Arken Zoo,se,arken-zoo
+Arket,se,arket
+Arla,se,arla
+Arvid Nordquist,se,arvid-nordquist
+Asket,se,asket
+Assa Abloy,se,assa-abloy
+Assemblin,se,assemblin
+AstraZeneca,se,astrazeneca
+ATG,se,atg
+Atlas Copco,se,atlas-copco
+Atrium Ljungberg,se,atrium-ljungberg
+Attendo,se,attendo
+Autoliv,se,autoliv
+Avalanche Studios,se,avalanche-studios
+Avanza,se,avanza
+Axfood,se,axfood
+Axis Communications,se,axis-communications
+BabyBjörn,se,babybjorn
+Babyshop,se,babyshop
+Bactiguard,se,bactiguard
+Bahco,se,bahco
+Bahnhof,se,bahnhof
+Balder,se,balder
+Bambuser,se,bambuser
+Bangerhead,se,bangerhead
+Bastard Burgers,se,bastard-burgers
+Beijer Alma,se,beijer-alma
+Beijer Byggmaterial,se,beijer-byggmaterial
+Beijer Electronics,se,beijer-electronics
+Beijer Ref,se,beijer-ref
+Betsson,se,betsson
+BICO,se,bico
+Bilia,se,bilia
+Billerud,se,billerud
+Billogram,se,billogram
+Bilprovningen,se,bilprovningen
+Biltema,se,biltema
+BioArctic,se,bioarctic
+BioGaia,se,biogaia
+Biotage,se,biotage
+Bixia,se,bixia
+Bjurfors,se,bjurfors
+Björk & Berries,se,bjork-berries
+Björn Borg,se,bjorn-borg
+BK Häcken,se,bk-hacken
+Blekinge Läns Tidning,se,blekinge-lans-tidning
+Blekinge Tekniska Högskola,se,blekinge-tekniska-hogskola
+Blocket,se,blocket
+Blomsterlandet,se,blomsterlandet
+Blåkläder,se,blaklader
+Bokio,se,bokio
+Bokus,se,bokus
+Bolagsverket,se,bolagsverket
+Boliden,se,boliden
+Bonava,se,bonava
+Bonnier,se,bonnier
+Bonnier News,se,bonnier-news
+BookBeat,se,bookbeat
+Boomerang,se,boomerang
+Boozt,se,boozt
+Borås Tidning,se,boras-tidning
+Boxer,se,boxer
+BRA,se,bra
+Bravida,se,bravida
+Breakit,se,breakit
+Bredband2,se,bredband2
+Bredbandsbolaget,se,bredbandsbolaget
+Bregott,se,bregott
+Brio,se,brio
+Brynäs IF,se,brynas-if
+Bubbleroom,se,bubbleroom
+Budbee,se,budbee
+Bufab,se,bufab
+Bure Equity,se,bure-equity
+Bygghemma,se,bygghemma
+Byggmax,se,byggmax
+Cabonline,se,cabonline
+CAKE,se,cake
+Calliditas,se,calliditas
+Camfil,se,camfil
+Camurus,se,camurus
+Candela,se,candela
+Capio,se,capio
+Care of Carl,se,care-of-carl
+Carnegie,se,carnegie
+Carspect,se,carspect
+Castellum,se,castellum
+Casumo,se,casumo
+Catella,se,catella
+Catena,se,catena
+CDON,se,cdon
+CellaVision,se,cellavision
+Cellbes,se,cellbes
+Cellink,se,cellink
+Cervera,se,cervera
+Chalmers,se,chalmers
+Cibes Lift,se,cibes-lift
+Cint,se,cint
+City Gross,se,city-gross
+Clas Ohlson,se,clas-ohlson
+Clavister,se,clavister
+Climeon,se,climeon
+Cloetta,se,cloetta
+Coffee Stain,se,coffee-stain
+Comviq,se,comviq
+Concentric,se,concentric
+Coolstuff,se,coolstuff
+Coop,se,coop
+Coor,se,coor
+Corem Property,se,corem-property
+COS,se,cos
+Craft Sportswear,se,craft-sportswear
+Creades,se,creades
+CSN,se,csn
+Dafgård,se,dafgard
+Dagens Industri,se,dagens-industri
+Dagens Nyheter,se,dagens-nyheter
+Dalarnas Tidningar,se,dalarnas-tidningar
+Daniel Wellington,se,daniel-wellington
+Degerfors IF,se,degerfors-if
+DeLaval,se,delaval
+Delicato,se,delicato
+Detectify,se,detectify
+DICE,se,dice
+Didriksons,se,didriksons
+Dina Försäkringar,se,dina-forsakringar
+Diös,se,dios
+Djurgårdens IF,se,djurgardens-if
+Doktor.se,se,doktor-se
+Dometic,se,dometic
+Dustin,se,dustin
+Duxiana,se,duxiana
+Einride,se,einride
+Ekströms,se,ekstroms
+Electrolux,se,electrolux
+Elekta,se,elekta
+Elgiganten,se,elgiganten
+Ellevio,se,ellevio
+Ellos,se,ellos
+Eltel,se,eltel
+Embark Studios,se,embark-studios
+Embracer Group,se,embracer-group
+Enea,se,enea
+Engelsons,se,engelsons
+Eolus Vind,se,eolus-vind
+Epidemic Sound,se,epidemic-sound
+Epiroc,se,epiroc
+EQT,se,eqt
+Ericsson,se,ericsson
+Erik Olsson,se,erik-olsson
+Espresso House,se,espresso-house
+Essity,se,essity
+Estelle & Thild,se,estelle-thild
+Estrella,se,estrella
+ETC,se,etc
+Eton,se,eton
+Evolution,se,evolution
+Expressen,se,expressen
+Fabege,se,fabege
+Fagerhult,se,fagerhult
+Fastighetsbyrån,se,fastighetsbyran
+Fatshark,se,fatshark
+Felix,se,felix
+Fenix Outdoor,se,fenix-outdoor
+Filippa K,se,filippa-k
+Filmstaden,se,filmstaden
+Findus,se,findus
+Fingerprint Cards,se,fingerprint-cards
+Fitness24Seven,se,fitness24seven
+Fjällräven,se,fjallraven
+Flygbussarna,se,flygbussarna
+Folkhälsomyndigheten,se,folkhalsomyndigheten
+Folksam,se,folksam
+Footway,se,footway
+Fortnox,se,fortnox
+Friskis&Svettis,se,friskis-svettis
+Fristads,se,fristads
+Frödinge,se,frodinge
+Frölunda HC,se,frolunda-hc
+Furniturebox,se,furniturebox
+Färjestad BK,se,farjestad-bk
+Försvarshögskolan,se,forsvarshogskolan
+Försäkringskassan,se,forsakringskassan
+G5 Entertainment,se,g5-entertainment
+GAIS,se,gais
+Gant,se,gant
+Garo,se,garo
+Gateau,se,gateau
+GB Glace,se,gb-glace
+Gefle Dagblad,se,gefle-dagblad
+Getinge,se,getinge
+Gevalia,se,gevalia
+GIF Sundsvall,se,gif-sundsvall
+GIH,se,gih
+Gina Tricot,se,gina-tricot
+Gleerups,se,gleerups
+Granngården,se,granngarden
+Gränges,se,granges
+Gränsfors Bruk,se,gransfors-bruk
+Guldfågeln,se,guldfageln
+Gunnebo,se,gunnebo
+Göteborg Energi,se,goteborg-energi
+Göteborgs Kex,se,goteborgs-kex
+Göteborgs universitet,se,goteborgs-universitet
+Göteborgs-Posten,se,goteborgs-posten
+H&M,se,h-m
+Haglöfs,se,haglofs
+Haldex,se,haldex
+Halebop,se,halebop
+Hallandsposten,se,hallandsposten
+Hallon,se,hallon
+Halmstads BK,se,halmstads-bk
+Hammarby IF,se,hammarby-if
+Handelsbanken,se,handelsbanken
+Handelshögskolan i Stockholm,se,handelshogskolan-i-stockholm
+Hansa Biopharma,se,hansa-biopharma
+Happy Socks,se,happy-socks
+Hasselblad,se,hasselblad
+Heart Aerospace,se,heart-aerospace
+Hedin Bil,se,hedin-bil
+Heimstaden,se,heimstaden
+Helsingborgs Dagblad,se,helsingborgs-dagblad
+Helsingborgs IF,se,helsingborgs-if
+Hemfrid,se,hemfrid
+Hemglass,se,hemglass
+Hemköp,se,hemkop
+Hemnet,se,hemnet
+Hemtex,se,hemtex
+Hestra,se,hestra
+Hexagon,se,hexagon
+Hexatronic,se,hexatronic
+Hexpol,se,hexpol
+Hilleberg,se,hilleberg
+HiQ,se,hiq
+HMS Networks,se,hms-networks
+Hoist Finance,se,hoist-finance
+Holmen,se,holmen
+Hope,se,hope
+Houdini,se,houdini
+HSB,se,hsb
+Hufvudstaden,se,hufvudstaden
+Hultafors,se,hultafors
+Humana,se,humana
+Humble Group,se,humble-group
+HusmanHagberg,se,husmanhagberg
+Husqvarna,se,husqvarna
+HV71,se,hv71
+Hästens,se,hastens
+Höganäs,se,hoganas
+Högskolan Dalarna,se,hogskolan-dalarna
+Högskolan i Borås,se,hogskolan-i-boras
+Högskolan i Gävle,se,hogskolan-i-gavle
+Högskolan Kristianstad,se,hogskolan-kristianstad
+Högskolan Väst,se,hogskolan-vast
+Hövding,se,hovding
+IAR Systems,se,iar-systems
+ICA,se,ica
+ICA Banken,se,ica-banken
+Icebug,se,icebug
+If,se,if
+IF Elfsborg,se,if-elfsborg
+IFK Göteborg,se,ifk-goteborg
+IFK Kristianstad,se,ifk-kristianstad
+IFK Norrköping,se,ifk-norrkoping
+IFS,se,ifs
+IK Sirius,se,ik-sirius
+Ikano Bank,se,ikano-bank
+IKEA,se,ikea
+Image Systems,se,image-systems
+Indexator,se,indexator
+Indiska,se,indiska
+Industrivärden,se,industrivarden
+Indutrade,se,indutrade
+Inet,se,inet
+Infranord,se,infranord
+Inission,se,inission
+inriver,se,inriver
+Instabee,se,instabee
+Instalco,se,instalco
+Intrum,se,intrum
+Investor AB,se,investor-ab
+Inwido,se,inwido
+ITAB,se,itab
+J.Lindeberg,se,j-lindeberg
+JM,se,jm
+Jollyroom,se,jollyroom
+Jula,se,jula
+Jämtkraft,se,jamtkraft
+Jönköping University,se,jonkoping-university
+Kabe,se,kabe
+Kalmar FF,se,kalmar-ff
+KappAhl,se,kappahl
+Karlstads universitet,se,karlstads-universitet
+Karnov Group,se,karnov-group
+Karo Pharma,se,karo-pharma
+Karolinska Institutet,se,karolinska-institutet
+Kavli,se,kavli
+Kicks,se,kicks
+Kindred Group,se,kindred-group
+King,se,king
+Kinnarps,se,kinnarps
+Kinnevik,se,kinnevik
+Kjell & Company,se,kjell-company
+Klarna,se,klarna
+Klättermusen,se,klattermusen
+Knowit,se,knowit
+Koenigsegg,se,koenigsegg
+Komatsu Forest,se,komatsu-forest
+Konstfack,se,konstfack
+Kopparbergs,se,kopparbergs
+Korvbrödsbagarn,se,korvbrodsbagarn
+Kraftringen,se,kraftringen
+Kronans Apotek,se,kronans-apotek
+Kronfågel,se,kronfagel
+Kronofogden,se,kronofogden
+Kry,se,kry
+KTH,se,kth
+Kuling,se,kuling
+Kung Markatta,se,kung-markatta
+Kunskapsskolan,se,kunskapsskolan
+Lager 157,se,lager-157
+Lagercrantz,se,lagercrantz
+Lammhults,se,lammhults
+Landskrona BoIS,se,landskrona-bois
+Lannebo,se,lannebo
+Lantmännen,se,lantmannen
+Latour,se,latour
+Lekia,se,lekia
+Leksands IF,se,leksands-if
+Lendo,se,lendo
+LeoVegas,se,leovegas
+Liber,se,liber
+Lifco,se,lifco
+Lifvs,se,lifvs
+Light My Fire,se,light-my-fire
+Lime Technologies,se,lime-technologies
+Linas Matkasse,se,linas-matkasse
+Lindab,se,lindab
+Lindex,se,lindex
+Linköpings universitet,se,linkopings-universitet
+Linnéuniversitetet,se,linneuniversitetet
+Livsmedelsverket,se,livsmedelsverket
+Ljungby Maskin,se,ljungby-maskin
+Loka,se,loka
+Loomis,se,loomis
+Luleå Hockey,se,lulea-hockey
+Luleå tekniska universitet,se,lulea-tekniska-universitet
+Lundbergföretagen,se,lundbergforetagen
+Lundhags,se,lundhags
+Lunds universitet,se,lunds-universitet
+Lyko,se,lyko
+Lysa,se,lysa
+Läkerol,se,lakerol
+Löfbergs,se,lofbergs
+MachineGames,se,machinegames
+Mackmyra,se,mackmyra
+Malaco,se,malaco
+Malmö FF,se,malmo-ff
+Malmö Redhawks,se,malmo-redhawks
+Malmö universitet,se,malmo-universitet
+Marabou,se,marabou
+Marginalen Bank,se,marginalen-bank
+Maria Nila,se,maria-nila
+Mathem,se,mathem
+Matsmart,se,matsmart
+Max Burgers,se,max-burgers
+Medivir,se,medivir
+Meds,se,meds
+Mekonomen,se,mekonomen
+Mentimeter,se,mentimeter
+Midsona,se,midsona
+Migrationsverket,se,migrationsverket
+Min Doktor,se,min-doktor
+Minesto,se,minesto
+Mio,se,mio
+Mips,se,mips
+Mittuniversitetet,se,mittuniversitetet
+Mjällby AIF,se,mjallby-aif
+Moderna Försäkringar,se,moderna-forsakringar
+Modo Hockey,se,modo-hockey
+Mojang,se,mojang
+Monki,se,monki
+Morakniv,se,morakniv
+Morris,se,morris
+Mr Green,se,mr-green
+MTG,se,mtg
+Munters,se,munters
+Mycronic,se,mycronic
+Mynewsdesk,se,mynewsdesk
+Mäklarhuset,se,maklarhuset
+Mälardalens universitet,se,malardalens-universitet
+Mälarenergi,se,malarenergi
+Mölnlycke,se,molnlycke
+NA-KD,se,na-kd
+Natur & Kultur,se,natur-kultur
+Naturkompaniet,se,naturkompaniet
+Naturvårdsverket,se,naturvardsverket
+NCAB,se,ncab
+NCC,se,ncc
+Nederman,se,nederman
+Nelly,se,nelly
+Nerikes Allehanda,se,nerikes-allehanda
+NetEnt,se,netent
+NetOnNet,se,netonnet
+NEVS,se,nevs
+Newbie,se,newbie
+Nextory,se,nextory
+NIBE,se,nibe
+Nivika,se,nivika
+NK,se,nk
+Nobia,se,nobia
+Nobina,se,nobina
+Nolato,se,nolato
+Nordea,se,nordea
+Nordic Wellness,se,nordic-wellness
+Nordicfeel,se,nordicfeel
+Nordnet,se,nordnet
+Norion Bank,se,norion-bank
+Norran,se,norran
+Norrgavel,se,norrgavel
+Norrmejerier,se,norrmejerier
+Norstedts,se,norstedts
+Northvolt,se,northvolt
+Notar,se,notar
+Note,se,note
+Nudie Jeans,se,nudie-jeans
+Ny Teknik,se,ny-teknik
+Nya Wermlands-Tidningen,se,nya-wermlands-tidningen
+Nyfosa,se,nyfosa
+O'Learys,se,o-learys
+Oatly,se,oatly
+Odd Molly,se,odd-molly
+OEM International,se,oem-international
+OKQ8,se,okq8
+OLW,se,olw
+Omni,se,omni
+Omnipollo,se,omnipollo
+Oncopeptides,se,oncopeptides
+Oneflow,se,oneflow
+Opti,se,opti
+Optimera,se,optimera
+Opus Bilprovning,se,opus-bilprovning
+Orexo,se,orexo
+Oriflame,se,oriflame
+Oscar Jacobson,se,oscar-jacobson
+Outnorth,se,outnorth
+Ovako,se,ovako
+Ovzon,se,ovzon
+OX2,se,ox2
+Pandox,se,pandox
+Paradox Interactive,se,paradox-interactive
+Peab,se,peab
+Peak Performance,se,peak-performance
+Pensionsmyndigheten,se,pensionsmyndigheten
+Picadeli,se,picadeli
+Pierce,se,pierce
+Pinchos,se,pinchos
+Plejd,se,plejd
+POC,se,poc
+Polarbröd,se,polarbrod
+Polarium,se,polarium
+Polarn O. Pyret,se,polarn-o-pyret
+Polestar,se,polestar
+Polisen,se,polisen
+PostNord,se,postnord
+Power,se,power
+Praktikertjänst,se,praktikertjanst
+Preem,se,preem
+Pressbyrån,se,pressbyran
+Pricer,se,pricer
+Primus,se,primus
+Probi,se,probi
+Profilgruppen,se,profilgruppen
+Proviva,se,proviva
+Pärsons,se,parsons
+Pågen,se,pagen
+Quinyx,se,quinyx
+Ramlösa,se,ramlosa
+Ratos,se,ratos
+Raw Fury,se,raw-fury
+Readly,se,readly
+Recipharm,se,recipharm
+Rejlers,se,rejlers
+Rekorderlig,se,rekorderlig
+Resia,se,resia
+Resurs Bank,se,resurs-bank
+Riksbyggen,se,riksbyggen
+Risenta,se,risenta
+Risifrutti,se,risifrutti
+Rodebjer,se,rodebjer
+Royal Design,se,royal-design
+Rusta,se,rusta
+Rögle BK,se,rogle-bk
+Saab,se,saab
+Sachajuan,se,sachajuan
+Sagax,se,sagax
+Sail Racing,se,sail-racing
+Saltå Kvarn,se,salta-kvarn
+Sambla,se,sambla
+Sandqvist,se,sandqvist
+Sandvik,se,sandvik
+Santa Maria,se,santa-maria
+SAS,se,sas
+SATS,se,sats
+SBAB,se,sbab
+SBB Norden,se,sbb-norden
+SCA,se,sca
+Scan,se,scan
+Scania,se,scania
+SCB,se,scb
+Sdiptech,se,sdiptech
+SEB,se,seb
+Sectra,se,sectra
+Securitas,se,securitas
+Sedana Medical,se,sedana-medical
+Sellpy,se,sellpy
+Semcon,se,semcon
+Semper,se,semper
+Serneke,se,serneke
+Setra Group,se,setra-group
+SF Anytime,se,sf-anytime
+SF Studios,se,sf-studios
+Sharkmob,se,sharkmob
+SIA Glass,se,sia-glass
+Sibylla,se,sibylla
+Sinch,se,sinch
+Sitoo,se,sitoo
+SJ,se,sj
+Skandia,se,skandia
+Skandiamäklarna,se,skandiamaklarna
+Skanska,se,skanska
+Skatteverket,se,skatteverket
+Skellefteå AIK,se,skelleftea-aik
+Skellefteå Kraft,se,skelleftea-kraft
+SKF,se,skf
+Skogaholm,se,skogaholm
+Skånemejerier,se,skanemejerier
+Skånetrafiken,se,skanetrafiken
+SL,se,sl
+SLU,se,slu
+Smart Eye,se,smart-eye
+Smarteyes,se,smarteyes
+SMHI,se,smhi
+Smålandsposten,se,smalandsposten
+Snickers Workwear,se,snickers-workwear
+Snälltåget,se,snalltaget
+Sobi,se,sobi
+Soft Goat,se,soft-goat
+Solresor,se,solresor
+Sparbanken Skåne,se,sparbanken-skane
+Spendrups,se,spendrups
+Sportshopen,se,sportshopen
+Spotify,se,spotify
+SPP,se,spp
+SSAB,se,ssab
+Stadium,se,stadium
+Starbreeze,se,starbreeze
+Stayhard,se,stayhard
+Stegra,se,stegra
+Stena,se,stena
+Stena Line,se,stena-line
+Stiga,se,stiga
+Stillfront,se,stillfront
+Stockholm Exergi,se,stockholm-exergi
+Stockholms universitet,se,stockholms-universitet
+Storskogen,se,storskogen
+Storytel,se,storytel
+String Furniture,se,string-furniture
+Studentlitteratur,se,studentlitteratur
+Stunlock Studios,se,stunlock-studios
+Stutterheim,se,stutterheim
+Surgical Science,se,surgical-science
+Sushi Yama,se,sushi-yama
+Svensk Fastighetsförmedling,se,svensk-fastighetsformedling
+Svenska Dagbladet,se,svenska-dagbladet
+Svenska Foder,se,svenska-foder
+Svenska Spel,se,svenska-spel
+Sveriges Radio,se,sveriges-radio
+Svevia,se,svevia
+SVT,se,svt
+Sweco,se,sweco
+Swedavia,se,swedavia
+Swedbank,se,swedbank
+Swedese,se,swedese
+Swedish Match,se,swedish-match
+Sydsvenskan,se,sydsvenskan
+Synoptik,se,synoptik
+Synsam,se,synsam
+Systemair,se,systemair
+Systembolaget,se,systembolaget
+Sävehof,se,savehof
+Söderberg & Partners,se,soderberg-partners
+Södertörns högskola,se,sodertorns-hogskola
+Sörmlands Sparbank,se,sormlands-sparbank
+Team Sportia,se,team-sportia
+Teknikmagasinet,se,teknikmagasinet
+Tekniska verken,se,tekniska-verken
+Telavox,se,telavox
+Tele2,se,tele2
+Telge Energi,se,telge-energi
+Telia,se,telia
+Tempo,se,tempo
+Tenson,se,tenson
+Tessin,se,tessin
+Tetra Pak,se,tetra-pak
+TF Bank,se,tf-bank
+Thule,se,thule
+Thunderful,se,thunderful
+Tiger of Sweden,se,tiger-of-sweden
+Timrå IK,se,timra-ik
+Tink,se,tink
+Tobii,se,tobii
+Trademax,se,trademax
+Tradera,se,tradera
+Trafikverket,se,trafikverket
+Transcom,se,transcom
+Transportstyrelsen,se,transportstyrelsen
+Tre,se,tre
+Trelleborg,se,trelleborg
+Trelleborgs FF,se,trelleborgs-ff
+Tretorn,se,tretorn
+Triumf Glass,se,triumf-glass
+Troax,se,troax
+Truecaller,se,truecaller
+Trustly,se,trustly
+Trygg-Hansa,se,trygg-hansa
+TT,se,tt
+TTELA,se,ttela
+TV4,se,tv4
+Uddeholm,se,uddeholm
+Umeå Energi,se,umea-energi
+Umeå universitet,se,umea-universitet
+Unibet,se,unibet
+Uppsala universitet,se,uppsala-universitet
+Upsala Nya Tidning,se,upsala-nya-tidning
+Vasakronan,se,vasakronan
+Vattenfall,se,vattenfall
+VBG Group,se,vbg-group
+Verisure,se,verisure
+Vestmanlands Läns Tidning,se,vestmanlands-lans-tidning
+Viaplay,se,viaplay
+Vimek,se,vimek
+Vimian,se,vimian
+Ving,se,ving
+Vitec,se,vitec
+Vitrolife,se,vitrolife
+Voi,se,voi
+Volati,se,volati
+Volvo,se,volvo
+Volvo Cars,se,volvo-cars
+Volvo Penta,se,volvo-penta
+Volvo Trucks,se,volvo-trucks
+Voyado,se,voyado
+Väderstad,se,vaderstad
+Västerbottens-Kuriren,se,vasterbottens-kuriren
+Västtrafik,se,vasttrafik
+Växjö Lakers,se,vaxjo-lakers
+Wallenstam,se,wallenstam
+Wasa,se,wasa
+Wayne's Coffee,se,wayne-s-coffee
+Webhallen,se,webhallen
+Weekday,se,weekday
+Werksta,se,werksta
+Werlabs,se,werlabs
+WESC,se,wesc
+Westermo,se,westermo
+Whyred,se,whyred
+Wihlborgs,se,wihlborgs
+Willys,se,willys
+Xvivo,se,xvivo
+Yubico,se,yubico
+Zeta,se,zeta
+Zettle,se,zettle
+Zmarta,se,zmarta
+Zoégas,se,zoegas
+Åbro,se,abro
+Åhléns,se,ahlens
+Önos,se,onos
+Örebro Hockey,se,orebro-hockey
+Örebro universitet,se,orebro-universitet
+Öresundskraft,se,oresundskraft
+Örgryte IS,se,orgryte-is
+Östers IF,se,osters-if
+Östgöta Correspondenten,se,ostgota-correspondenten

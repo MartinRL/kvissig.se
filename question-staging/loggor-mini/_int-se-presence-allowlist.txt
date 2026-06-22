@@ -1,0 +1,269 @@
+Apple
+Samsung
+Microsoft
+Google
+Sony
+LG
+Philips
+Panasonic
+Dell
+HP
+Lenovo
+Asus
+Acer
+Canon
+Nikon
+Fujifilm
+Bose
+JBL
+Sonos
+Logitech
+Garmin
+GoPro
+Dyson
+Bosch
+Siemens
+Huawei
+Xiaomi
+OnePlus
+Oppo
+Nokia
+Motorola
+Intel
+AMD
+Nvidia
+Qualcomm
+IBM
+Oracle
+SAP
+Cisco
+Adobe
+Nintendo
+PlayStation
+Xbox
+Razer
+SteelSeries
+TP-Link
+Netgear
+Sennheiser
+Marshall
+Bang & Olufsen
+Beats
+Anker
+Fitbit
+Polaroid
+Kodak
+Casio
+Seiko
+Citizen
+Miele
+Electrolux
+Facebook
+Instagram
+WhatsApp
+Meta
+YouTube
+TikTok
+Netflix
+Disney
+Max
+Twitch
+Reddit
+LinkedIn
+Snapchat
+Pinterest
+Telegram
+Signal
+Discord
+Zoom
+Slack
+Dropbox
+GitHub
+PayPal
+Visa
+Mastercard
+Amazon
+eBay
+Airbnb
+Uber
+Booking.com
+Revolut
+N26
+Wise
+Wikipedia
+Firefox
+Opera
+OpenAI
+Duolingo
+Steam
+Roblox
+SoundCloud
+Deezer
+McDonald's
+Burger King
+Subway
+KFC
+Starbucks
+Pizza Hut
+Domino's
+Coca-Cola
+Pepsi
+Fanta
+Sprite
+Red Bull
+Nescafé
+Nespresso
+Nestlé
+Nutella
+Kinder
+Oreo
+Pringles
+Doritos
+Toblerone
+Haribo
+Heinz
+Barilla
+Knorr
+Danone
+Mars
+Snickers
+Twix
+KitKat
+M&M's
+Lindt
+Ben & Jerry's
+Häagen-Dazs
+Magnum
+Carlsberg
+Heineken
+Stella Artois
+Corona
+Guinness
+Budweiser
+Jägermeister
+Baileys
+Jack Daniel's
+Smirnoff
+Captain Morgan
+Schweppes
+Lipton
+Twinings
+Evian
+San Pellegrino
+Perrier
+Zara
+Uniqlo
+Nike
+Adidas
+Puma
+Reebok
+New Balance
+Asics
+Converse
+Vans
+Levi's
+Lacoste
+Ralph Lauren
+Tommy Hilfiger
+Calvin Klein
+Hugo Boss
+Gucci
+Prada
+Louis Vuitton
+Chanel
+Dior
+Versace
+Burberry
+Rolex
+Omega
+Swatch
+Tissot
+The North Face
+Patagonia
+Columbia
+Timberland
+Dr. Martens
+Crocs
+UGG
+Birkenstock
+Decathlon
+Lidl
+Pandora
+Swarovski
+Fossil
+Volkswagen
+Audi
+BMW
+Mercedes-Benz
+Toyota
+Tesla
+Ford
+Renault
+Peugeot
+Citroën
+Kia
+Hyundai
+Nissan
+Mazda
+Skoda
+SEAT
+Cupra
+Porsche
+Mini
+Opel
+Dacia
+Honda
+Suzuki
+Mitsubishi Motors
+Ferrari
+Lamborghini
+Land Rover
+Jaguar
+Lexus
+Subaru
+Michelin
+Pirelli
+Continental
+Goodyear
+Bridgestone
+Caterpillar
+John Deere
+Makita
+DeWalt
+Bauhaus
+Hornbach
+Pfizer
+Novartis
+Roche
+Novo Nordisk
+GSK
+Bayer
+Johnson & Johnson
+Sanofi
+Moderna
+Nivea
+Gillette
+Colgate
+Oral-B
+Sensodyne
+L'Oréal
+Garnier
+DHL
+FedEx
+UPS
+Maersk
+DSV
+SAS
+Norwegian
+Finnair
+Lufthansa
+KLM
+Air France
+Ryanair
+easyJet
+Emirates
+Qatar Airways
+Turkish Airlines
+British Airways
+Wizz Air
+Spotify
