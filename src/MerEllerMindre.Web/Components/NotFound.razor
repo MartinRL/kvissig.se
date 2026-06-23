@@ -1,0 +1,13 @@
+@* GET /404 — re-executed by UseStatusCodePagesWithReExecute, keeps the 404 status code.
+   Reuses MainLayout + the same static-SSR styles as OmSpelet (.wrap.content, .btn, .brand). *@
+<MainLayout Title="Sidan hittades inte — Mer eller Mindre" CanonicalPath="/">
+    <div class="wrap content">
+        <div class="brand">
+            <a class="logo" href="/"><span class="mer">Mer</span> eller <span class="mindre">Mindre</span></a>
+        </div>
+        <h1>Sidan hittades inte</h1>
+        <p class="sub">Sidan du letade efter finns inte. Den kanske har flyttat eller aldrig funnits.</p>
+        <a class="btn" href="/">Till kvissarna</a>
+        <a class="back" href="/om-spelet">Om spelet</a>
+    </div>
+</MainLayout>

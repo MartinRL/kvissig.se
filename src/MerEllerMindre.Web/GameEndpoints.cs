@@ -35,6 +35,8 @@ public static class GameEndpoints
 
         app.MapGet("/om-spelet", () => new RazorComponentResult<OmSpelet>());
 
+        app.MapGet("/404", () => new RazorComponentResult<Components.NotFound>());
+
         app.MapGet("/sitemap.xml", (FileSystemQuestionPackCatalog catalog, HttpContext http) =>
         {
             var root = $"{http.Request.Scheme}://{http.Request.Host}";

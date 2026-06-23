@@ -141,8 +141,22 @@ source, no GT).
 - [ ] level 5
 - [ ] level 6
 
-## SEO 
-- [ ] Google
-- [ ] MS
-- [ ] Anthropic
-- [ ] ...
+## SEO — indexering hos sökmotorer
+Teknisk grund KLAR (robots.txt + AI-crawlers, dynamisk /sitemap.xml, canonical/OG/Twitter/
+JSON-LD i MainLayout, PWA-manifest, llms.txt, https live). Kvar = anmäl + verifiera + skicka in
+sitemap. Verifiering via Cloudflare DNS TXT (hela domänen, ingen kodändring).
+
+### Google Search Console
+- [ ] Skapa Domain-property `kvissig.se` på https://search.google.com/search-console
+- [ ] Verifiera via DNS TXT i Cloudflare (klistra in GSC:s `google-site-verification=...` TXT på apex)
+- [ ] Skicka in `https://kvissig.se/sitemap.xml`
+- [ ] Begär indexering av `/` och `/om-spelet` (URL-inspektion)
+
+### Bing Webmaster Tools
+- [ ] Lägg till sajten på https://www.bing.com/webmasters
+- [ ] Importera från Google Search Console (snabbast) ELLER verifiera via Cloudflare DNS TXT
+- [ ] Skicka in `https://kvissig.se/sitemap.xml`
+
+### AI / LLM-upptäckbarhet — redan KLAR (ingen anmälningsportal)
+- [x] robots.txt tillåter GPTBot/OAI-SearchBot/ChatGPT-User/ClaudeBot/Claude-Web/PerplexityBot/Google-Extended
+- [x] llms.txt finns; FAQPage + Game JSON-LD på /om-spelet (GEO)

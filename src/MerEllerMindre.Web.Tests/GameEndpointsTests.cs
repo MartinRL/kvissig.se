@@ -101,6 +101,15 @@ public class GameEndpointsTests : IClassFixture<TestAppFactory>
     }
 
     [Fact]
+    public async Task UnknownUrl_Returns404WithCustomPage()
+    {
+        var resp = await NewClient().GetAsync("/finns-inte");
+
+        resp.StatusCode.Should().Be(System.Net.HttpStatusCode.NotFound);
+        (await resp.Content.ReadAsStringAsync()).Should().Contain("Sidan hittades inte");
+    }
+
+    [Fact]
     public async Task Sitemap_ListsCatalogAndContentPages()
     {
         var resp = await NewClient().GetAsync("/sitemap.xml");

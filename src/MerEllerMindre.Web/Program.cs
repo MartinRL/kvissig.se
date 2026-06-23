@@ -53,6 +53,9 @@ app.UseForwardedHeaders(new ForwardedHeadersOptions
     ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto,
 });
 
+// ponytail: ReExecute återanvänder MainLayout — ingen separat 404-pipeline.
+app.UseStatusCodePagesWithReExecute("/404");
+
 app.UseStaticFiles();
 
 // Serve the logo PNGs from the Domain's data/logos corpus at /logos/{origin}/{slug}.png.
