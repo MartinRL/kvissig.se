@@ -22,9 +22,9 @@
     <meta name="twitter:title" content="@Title" />
     <meta name="twitter:description" content="@Description" />
     <meta name="twitter:image" content="@AbsoluteOgImage" />
-    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
-    <link rel="icon" href="/favicon.ico" sizes="32x32" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="icon" href="/icon.svg?v=2" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico?v=2" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2" />
     <link rel="manifest" href="/manifest.json" />
     <meta name="theme-color" content="#21c08a" />
     <link rel="stylesheet" href="/css/playful.css" />
@@ -73,6 +73,7 @@
             try { if (navigator.share) { await navigator.share(data); return; } } catch { return; }
             try { await navigator.clipboard.writeText(location.origin); b.classList.add('copied'); } catch {}
         });
+        if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js');
     </script>
 </body>
 </html>
@@ -80,7 +81,7 @@
 @code {
     [Parameter] public string Title { get; set; } = "Mer eller Mindre";
     [Parameter] public string Description { get; set; } =
-        "Gissa mer eller mindre — och sedan hur stor skillnaden är. Mer eller Mindre (eng. More or Less) är frågespelet ni spelar online men tillsammans i samma rum, var och en på sin skärm.";
+        "Gissa mer eller mindre, och sedan hur stor skillnaden är. Mer eller Mindre (eng. More or Less) är frågespelet ni spelar online men tillsammans i samma rum, var och en på sin skärm.";
     [Parameter] public string CanonicalPath { get; set; } = "/";
     [Parameter] public string OgImage { get; set; } = "/screenshots/screenshot-1280x720.png";
     [Parameter] public bool ShowMenu { get; set; } = true;
