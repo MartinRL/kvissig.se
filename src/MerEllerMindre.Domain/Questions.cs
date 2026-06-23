@@ -123,7 +123,7 @@ public static class QuestionPackCsvParser
     {
         ["alla-aldrar"] = "Mer eller Mindre – alla åldrar",
         ["mer-eller-mindre"] = "Mer eller Mindre",
-        ["loggor-mini-1"] = "Loggor",
+        ["loggor-mini-1"] = "Mer eller Mindre Mini - Loggor",
     };
 
     private static string Deslug(string slug)
