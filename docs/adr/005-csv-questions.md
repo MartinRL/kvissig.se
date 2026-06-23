@@ -10,7 +10,7 @@ revised: 2026-06-01
 *Mer eller Mindre* asks "Är A **mer eller mindre** än B?" — every question is a
 comparison between two options, not a single number. Questions are grouped into
 **packs** (kviss): the spec makes a pack first-class
-(`QuestionPack { packId: Guid, name, questionCount }`), the GM picks one from the
+(`QuestionPack { packId: Guid, name, questionCount }`), the host picks one from the
 `Screen / Quiz catalog`, and events carry only a `questionIndex: int` into the
 chosen pack. We need somewhere to store these cards. Options:
 

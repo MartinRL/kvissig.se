@@ -3,7 +3,7 @@
 #
 # Conventions:
 #   triggers carry the actor role + originating screen
-#                                  (GameMaster / Quiz catalog, Player / Question, System / ...)
+#                                  (host / Quiz catalog, Player / Question, System / ...)
 #   commands are bare              (OpenLobby, SubmitDirection)
 #   events carry the stream        (Game / LobbyOpened)
 #   exceptions are bare            (GameNotFound)
@@ -11,7 +11,7 @@
 #
 # View lanes:
 #   State / ...   the decider's decision model (folded GameState); read by `decide`
-#   Screen / ...  human screens players & the GM actually see
+#   Screen / ...  human screens players & the host actually see
 #   Todo / ...    processor-facing read-models the System observes (never shown)
 # NOTE: emlang parses + lints these view-lane prefixes fine, but the diagram renders
 #   views by their bare name without a per-view lane label (only triggers and events
@@ -156,7 +156,7 @@ slices:
   #   host hostName = Martin ; minted joinCode = joinCode
   ✍️ Open Lobby:
     steps:
-      - t: 🧑‍🏫 GameMaster /Quiz catalog
+      - t: 🧑‍🏫 host /Quiz catalog
       - c: OpenLobby
         props:
           hostName: string
@@ -227,7 +227,7 @@ slices:
   #   x: NameAlreadyTaken    — see ASSUMPTION below.
   # ASSUMPTION: duplicate joins are detected by playerName within a game (the
   #   command carries no playerId), so NameAlreadyTaken guards a name already
-  #   present in the lobby — including the host's name (the GM is the first player).
+  #   present in the lobby — including the host's name (the host is the first player).
   ✍️ Join Game:
     steps:
       - t: 🧑‍🎓 Player /Join form
@@ -307,7 +307,7 @@ slices:
   #   on the command and is deferred.
   ✍️ Start Game:
     steps:
-      - t: 🧑‍🏫 GameMaster /Game lobby
+      - t: 🧑‍🏫 host /Game lobby
       - c: StartGame
         props:
           gameId: Guid

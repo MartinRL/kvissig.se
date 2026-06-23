@@ -36,7 +36,7 @@ Root is a single `slices:` map. Each slice is either:
   ```yaml
   slices:
     OpenLobby:
-      - t: GameMaster / Quiz catalog
+      - t: host / Quiz catalog
       - c: OpenLobby
       - e: Game / LobbyOpened
       - v: Game lobby
@@ -86,7 +86,7 @@ Two user roles + System. Events live on the `Game` stream; views are bare.
 
 - **Triggers carry the actor role + originating screen**: a command is issued *from*
   a screen, which is itself a read model. Name the trigger after that screen:
-  `GameMaster / Quiz catalog`, `Player / Question`, `GameMaster / Game lobby`. The
+  `host / Quiz catalog`, `Player / Question`, `host / Game lobby`. The
   one exception is a plain UI entry point with no backing read model — the
   `Player / Join form` (you type a join code before any game state exists for you).
   `System / ...` triggers name the policy.
@@ -104,9 +104,9 @@ Two user roles + System. Events live on the `Game` stream; views are bare.
   `System` initiator lane (distinguished by box name), a simplification of the canonical
   per-processor gear.
   Human-role triggers carry a head/face emoji on the SAME initiator-lane principle, one
-  per swimlane so every lane is emoji-tagged (not just System): `🧑‍🏫 GameMaster /` (the
+  per swimlane so every lane is emoji-tagged (not just System): `🧑‍🏫 host /` (the
   quiz leader) and `🧑‍🎓 Player /` (the contestant). Apply each CONSISTENTLY to all of
-  that role's triggers (`🧑‍🏫 GameMaster / Quiz catalog`, `🧑‍🏫 GameMaster / Game lobby`;
+  that role's triggers (`🧑‍🏫 host / Quiz catalog`, `🧑‍🏫 host / Game lobby`;
   `🧑‍🎓 Player / Join form`, `🧑‍🎓 Player / Question`) — same parse-as-UTF-8, renders on the
   swimlane label.
 - **Commands are bare**: `OpenLobby`, `SubmitDirection`.
@@ -160,7 +160,7 @@ Consequences for this spec:
 
 Two view lanes distinguish human screens from processor-facing projections:
 
-- `Screen / ...` — screens players & the GM actually see.
+- `Screen / ...` — screens players & the host actually see.
 - `Todo / ...` — read-models a `System /` processor consumes; never shown to a human.
 
 > **NOTE**: emlang parses + lints both lanes fine, but the diagram renders views by
@@ -170,7 +170,7 @@ Two view lanes distinguish human screens from processor-facing projections:
 
 | View (Screen lane)            | Shown when                                  |
 |-------------------------------|---------------------------------------------|
-| `Screen / Quiz catalog`       | GM browses packs (kviss) to start a game    |
+| `Screen / Quiz catalog`       | host browses packs (kviss) to start a game  |
 | `Screen / Game lobby`         | After open-lobby / join, waiting to start   |
 | `Screen / Question`           | A question is presented (Q0 or next)        |
 | `Screen / Waiting for others` | Player submitted, others still pending      |
@@ -189,12 +189,12 @@ by index; those are not carried on events.
 
 Roles:
 
-- `GameMaster /` — exactly one (Martin, id0): `OpenLobby`, `StartGame`.
+- `host /` — exactly one (Martin, id0): `OpenLobby`, `StartGame`.
 - `Player /` — one or more (Nils id1, Sven id2): `JoinGame`, `SubmitDirection`,
-  `SubmitDifference`. **The Game Master also plays** — Martin guesses through the same
-  `Player /` slices (GM ⊃ Player).
+  `SubmitDifference`. **The host also plays** — Martin guesses through the same
+  `Player /` slices (host ⊃ Player).
 - `System /` — processors named by action: `System / Reveal direction`,
-  `System / Score difference`, `System / Ask next question`, `System / End game`. The GM
+  `System / Score difference`, `System / Ask next question`, `System / End game`. The host
   does **not** manually advance or end.
 
 ### Event vocabulary
@@ -286,7 +286,7 @@ Notes:
 | Svenska (board)        | English (spec/code) |
 |------------------------|---------------------|
 | omgång (spelomgång)    | Game (session)      |
-| spelledare / värd      | GameMaster (host)   |
+| värd (UI) / host (kod) | host                |
 | spelare                | Player              |
 | kviss / frågepaket     | QuestionPack        |
 | fråga (frågekort)      | Question (card)     |
