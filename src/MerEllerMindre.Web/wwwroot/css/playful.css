@@ -154,6 +154,7 @@ input[type=range]::-moz-range-thumb {
 .bar.b, .bar.is-mindre { background: linear-gradient(180deg, var(--mindre), var(--mindre-deep)); color: var(--mindre-ink); }
 .twobars-legend { display: flex; justify-content: space-around; margin-top: 2rem; gap: 1rem; }
 .twobars-legend > span { flex: 1; text-align: center; color: var(--ink-soft); font-size: .8rem; }
+.barpct { display: block; font-size: .8rem; color: var(--ink-soft); }
 .answer { font-family: var(--display); font-weight: 700; font-size: 1.2rem; }
 .answer .mer { color: var(--mer-deep); }
 .answer .mindre { color: var(--mindre-deep); }

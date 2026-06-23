@@ -72,8 +72,8 @@ else
                 <div class="bar is-mindre" id="barB" style="height:100%"></div>
             </div>
             <div class="twobars-legend" aria-hidden="true">
-                <span id="capA" data-label="A">@if (Model.LogoA is not null) { <img class="logoimg" src="@Model.LogoA" alt="Logotyp A" /> } else { @Model.ItemA }</span>
-                <span id="capB" data-label="B">@if (Model.LogoB is not null) { <img class="logoimg" src="@Model.LogoB" alt="Logotyp B" /> } else { @Model.ItemB }</span>
+                <span class="cap" id="capA" data-label="A">@if (Model.LogoA is not null) { <img class="logoimg" src="@Model.LogoA" alt="Logotyp A" /> } else { @Model.ItemA }<span class="barpct" id="pctA"></span></span>
+                <span class="cap" id="capB" data-label="B">@if (Model.LogoB is not null) { <img class="logoimg" src="@Model.LogoB" alt="Logotyp B" /> } else { @Model.ItemB }<span class="barpct" id="pctB"></span></span>
             </div>
 
             <button type="submit" class="btn" style="margin-top:1.75rem">Gissa!</button>
@@ -90,6 +90,8 @@ else
             const barB = document.getElementById('barB');
             const capA = document.getElementById('capA');
             const capB = document.getElementById('capB');
+            const pctA = document.getElementById('pctA');
+            const pctB = document.getElementById('pctB');
             // In logo mode the captions hold an <img>, not a name: read the text but fall back on
             // the neutral data-label ("A"/"B") so screen-reader output never leaks a hidden name.
             const logoMode = !!capA.querySelector('img');
@@ -103,7 +105,10 @@ else
             // Direction is locked in stage 2: the taller (MER) bar never moves.
             const tall = merIsA ? barA : barB;
             const short = merIsA ? barB : barA;
-            const shortCap = merIsA ? capB : capA;   // only the short bar's caption shows the live %
+            // The %-element sits in its own sibling span, separate from the logo/name caption,
+            // so writing it in BOTH text and logo mode never touches the <img>.
+            const shortPct = merIsA ? pctB : pctA;   // only the short bar shows the live %
+            const tallPct = merIsA ? pctA : pctB;
             tall.classList.add('is-mer'); tall.classList.remove('is-mindre');
             short.classList.add('is-mindre'); short.classList.remove('is-mer');
             tall.style.height = '100%';
@@ -115,8 +120,8 @@ else
                 range.style.background = `linear-gradient(90deg, var(--accent) ${n}%, var(--line) ${n}%)`;
                 const pct = 100 - n;
                 short.style.height = pct + '%';
-                // Keep the logo intact in logo mode (writing textContent would wipe the <img>).
-                if (!logoMode) shortCap.textContent = `${shortName} ≈ ${pct}%`;
+                shortPct.textContent = `≈ ${pct}%`;
+                tallPct.textContent = '';
                 range.setAttribute('aria-valuetext', `${shortName} ${pct} procent av ${tallName}`);
             }
 

@@ -297,4 +297,21 @@ public class GameEndpointsTests : IClassFixture<TestAppFactory>
         results.Should().Contain("Volvo");      // names revealed on the results screen
         results.Should().Contain("Ericsson");
     }
+
+    [Fact]
+    public async Task LogoMode_DifferenceScreenHasAPercentElement()
+    {
+        var host = NewClient();
+        var player = NewClient();
+        var code = await CreateGame(host, "loggor-mini-1");
+        await Join(player, code, "Nils");
+        await host.PostAsync($"/games/{code}/start", Form(Token(await State(host, code))));
+        await SubmitDirection(host, code, "Mer");
+        await SubmitDirection(player, code, "Mindre");
+
+        // The %-label lives in its own server-rendered element so logo mode can update it
+        // without wiping the <img> (regression guard for the missing % on logo packs).
+        var diff = await (await host.GetAsync($"/games/{code}/difference")).Content.ReadAsStringAsync();
+        diff.Should().Contain("class=\"barpct\"");
+    }
 }
