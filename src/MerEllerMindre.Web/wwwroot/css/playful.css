@@ -201,8 +201,9 @@ input[type=range]::-moz-range-thumb {
     padding: .7rem 0; border-top: 1px solid var(--line);
   }
   .scoreboard td { padding: 0; border: none; }
-  .scoreboard .who { flex: 1; }
   .scoreboard .total { font-family: var(--display); font-weight: 800; }
+  /* name + total pack left on line 1; first round chip starts a new line */
+  .scoreboard .who + .round { flex-basis: 100%; }
   /* round cells wrap to row 2 as labelled chips */
   .scoreboard .round {
     order: 1; flex: 0 0 auto; text-align: left;

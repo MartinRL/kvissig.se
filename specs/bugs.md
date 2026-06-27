@@ -33,6 +33,10 @@ Loggade buggar i samma anda som `tasks.md`. Mall för nya poster:
   - Förväntat: hela tabellen, inkl. Total-kolumnen, ryms inom kortramen på alla telefoner.
   - Faktiskt: 6-kolumnstabellen rymdes precis vid `.wrap` 560px → spillde över kortet och klipptes på smalare skärmar. Fix: ren CSS — `@media (max-width: 559.98px)` staplar `.scoreboard` till per-spelare-block (rad 1 = rank · namn · total, rad 2 = rond-celler som etiketterade chips via `data-label` + `::before`); ≥560px oförändrad tabell.
 
+- [x] **Poängtavlans rader ser trasiga ut på telefon — totalen slängs till högerkanten** — `playful.css` / `ResultsScreen.razor`
+  - Förväntat: varje spelarrad ser likadan ut oavsett namnlängd; total packad direkt efter namnet.
+  - Faktiskt: i `@media (max-width: 559.98px)` är varje `<tr>` `display:flex; flex-wrap:wrap` och `.who` hade `flex:1`. När ett namn är långt nog att första chippen ("Mer eller Mindre ✓…") inte ryms på rad 1 wrappar chippen → rad 1 har bara rank+namn+total + massa tomrum som `.who{flex:1}` glupskt äter → totalen slängs till ytterkanten. Korta namn (Nils/Sven) ser fina ut, "Martin" (längst) trippar wrappen varje spel. Inte tittar-specifikt. Fix: ren CSS — tog bort `flex:1` från `.scoreboard .who` (namn+total packas vänster) + `.scoreboard .who + .round { flex-basis: 100%; }` tvingar första chippen till egen rad (chip 2+3 wrappar ihop på nästa). Deterministiskt för alla namnlängder; ≥560px oförändrad tabell.
+
 - [x] **Långt egennamn spiller utanför kortet på riktningsknapp** — `playful.css` / `QuestionScreen.razor`
   - Förväntat: långa ord ("Washingtonmonumentet") ryms inom knappen/kortet, snyggt avstavat.
   - Faktiskt: ordet i `.dirbtn` (halv kolumn, grid 1fr 1fr) fick inte plats och stack ut förbi kortramen. Fix: ren CSS — `hyphens: auto` + `-webkit-hyphens: auto` på `.dirbtn` och `h1` (svensk avstavning via `<html lang="sv">`), `overflow-wrap: break-word` som skyddsnät om inget bindestreckställe finns.
