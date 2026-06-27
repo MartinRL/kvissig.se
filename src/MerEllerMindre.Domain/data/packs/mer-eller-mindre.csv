@@ -613,10 +613,10 @@ Växer bambu i regel snabbare eller långsammare per dygn än en pumpkaranka?;Ba
 Väger världens största frö, coco de mer, mer eller mindre än en kokosnöt?;Coco de mer;Kokosnöt;18;1,4;kilo;Hur många kilo skiljer det?
 Väger en pumpa i rekordklass mer eller mindre än en vattenmelon i rekordklass?;Rekordpumpa;Rekordvattenmelon;1278;159;kilo;Hur många kilo skiljer det?
 Är en jättesekvojas stamomkrets större eller mindre än ett baobabträds?;Jättesekvoja;Baobab;34;25;meter;Hur många meter skiljer det?
-Har en jordnöt fler eller färre kalorier per 100 gram än en gurka?;Jordnötter;Gurka;567;15;kcal;Hur många kcal skiljer det?
-Har olivolja fler eller färre kalorier per 100 gram än broccoli?;Olivolja;Broccoli;884;34;kcal;Hur många kcal skiljer det?
-Har en mandel fler eller färre kalorier per 100 gram än en jordgubbe?;Mandel;Jordgubbar;579;32;kcal;Hur många kcal skiljer det?
-Har socker fler eller färre kalorier per 100 gram än en morot?;Strösocker;Morot;387;41;kcal;Hur många kcal skiljer det?
+Har en jordnöt mer eller mindre energi per 100 gram än en gurka?;Jordnötter;Gurka;567;15;kcal;Hur många kcal skiljer det?
+Har olivolja mer eller mindre energi per 100 gram än broccoli?;Olivolja;Broccoli;884;34;kcal;Hur många kcal skiljer det?
+Har en mandel mer eller mindre energi per 100 gram än en jordgubbe?;Mandel;Jordgubbar;579;32;kcal;Hur många kcal skiljer det?
+Har socker mer eller mindre energi per 100 gram än en morot?;Strösocker;Morot;387;41;kcal;Hur många kcal skiljer det?
 Är en rödklöver kortare eller längre än en solros?;Rödklöver;Solros;0,4;3;meter;Hur många meter skiljer det?
 Är en maskros lägre eller högre än en majsplanta?;Maskros;Majsplanta;0,3;2,5;meter;Hur många meter skiljer det?
 Är en tulpan kortare eller längre än en stjälk av stockros?;Tulpan;Stockros;0,4;2,5;meter;Hur många meter skiljer det?
@@ -828,54 +828,54 @@ Har kroppen fler eller färre muskler än tungan har smaklökar?;Muskler i kropp
 Är lårbenet längre eller kortare än matstrupen och luftstrupen tillsammans?;Lårbenet;Matstrupen och luftstrupen;48;36;centimeter;Hur många centimeter skiljer det?
 Är skenbenet längre eller kortare än en mans urinrör?;Skenbenet;Mannens urinrör;36;20;centimeter;Hur många centimeter skiljer det?
 Är en kvinnas urinrör längre eller kortare än ögats diameter?;Kvinnans urinrör;Ögat;40;24;millimeter;Hur många millimeter skiljer det?
-Har gurka fler eller färre kalorier än cashewnötter?;Gurka;Cashewnötter;15;553;kcal per 100 g;Hur många kcal skiljer det?
-Har selleri fler eller färre kalorier än en avokado?;Selleri;Avokado;14;160;kcal per 100 g;Hur många kcal skiljer det?
-Har ett äpple fler eller färre kalorier än en avokado?;Äpple;Avokado;52;160;kcal per 100 g;Hur många kcal skiljer det?
-Har vitt bröd fler eller färre kalorier än kokt ris?;Vitt bröd;Kokt ris;265;130;kcal per 100 g;Hur många kcal skiljer det?
+Har gurka mer eller mindre energi per 100 gram än cashewnötter?;Gurka;Cashewnötter;15;553;kcal;Hur många kcal skiljer det?
+Har selleri mer eller mindre energi per 100 gram än en avokado?;Selleri;Avokado;14;160;kcal;Hur många kcal skiljer det?
+Har ett äpple mer eller mindre energi per 100 gram än en avokado?;Äpple;Avokado;52;160;kcal;Hur många kcal skiljer det?
+Har vitt bröd mer eller mindre energi per 100 gram än kokt ris?;Vitt bröd;Kokt ris;265;130;kcal;Hur många kcal skiljer det?
 Producerades det mer eller mindre kaffe än te i världen 2023?;Kaffe;Te;10,1;6,7;miljoner ton;Hur många miljoner ton skiljer det?
 Producerades det fler eller färre ton bananer än äpplen i världen 2023?;Bananer;Äpplen;139;97;miljoner ton;Hur många miljoner ton skiljer det?
-Har mörk choklad fler eller färre kalorier än vitt bröd?;Mörk choklad;Vitt bröd;600;265;kcal per 100 g;Hur många kcal skiljer det?
+Har mörk choklad mer eller mindre energi per 100 gram än vitt bröd?;Mörk choklad;Vitt bröd;600;265;kcal;Hur många kcal skiljer det?
 Innehåller tofu mer eller mindre protein än linser?;Tofu;Linser;16;9;gram per 100 g;Hur många gram skiljer det?
 Producerades det fler eller färre ton olivolja än honung i världen 2023?;Olivolja;Honung;2,6;1,9;miljoner ton;Hur många miljoner ton skiljer det?
-Har popcorn fler eller färre kalorier än valnötter?;Popcorn;Valnötter;387;654;kcal per 100 g;Hur många kcal skiljer det?
+Har popcorn mer eller mindre energi per 100 gram än valnötter?;Popcorn;Valnötter;387;654;kcal;Hur många kcal skiljer det?
 Innehåller standardmjölk mer eller mindre socker än Coca-Cola?;Standardmjölk;Coca-Cola;4,8;10,6;gram per 100 ml;Hur många gram skiljer det?
 Innehåller ett ägg mer eller mindre protein än cheddar?;Ägg;Cheddar;13;23;gram per 100 g;Hur många gram skiljer det?
 Producerades det fler eller färre ton bananer än potatis i världen 2023?;Bananer;Potatis;139;383;miljoner ton;Hur många miljoner ton skiljer det?
 Innehåller Coca-Cola mer eller mindre koffein än filterkaffe?;Coca-Cola;Filterkaffe;10;80;mg per 100 ml;Hur många mg skiljer det?
-Har en avokado fler eller färre kalorier än olivolja?;Avokado;Olivolja;160;884;kcal per 100 g;Hur många kcal skiljer det?
+Har en avokado mer eller mindre energi per 100 gram än olivolja?;Avokado;Olivolja;160;884;kcal;Hur många kcal skiljer det?
 Producerades det fler eller färre liter vin än öl i världen 2023?;Vin;Öl;23,7;188,4;miljarder liter;Hur många miljarder liter skiljer det?
 Producerades det fler eller färre ton vete än potatis i världen 2023?;Vete;Potatis;799;383;miljoner ton;Hur många miljoner ton skiljer det?
 Innehåller en apelsin mer eller mindre kalium än en banan?;Apelsin;Banan;181;358;mg per 100 g;Hur många mg skiljer det?
-Har lättmjölk fler eller färre kalorier än vispgrädde?;Lättmjölk;Vispgrädde;42;340;kcal per 100 g;Hur många kcal skiljer det?
+Har lättmjölk mer eller mindre energi per 100 gram än vispgrädde?;Lättmjölk;Vispgrädde;42;340;kcal;Hur många kcal skiljer det?
 Innehåller en kopp svart te mer eller mindre koffein än en espresso?;Svart te;Espresso;20;212;mg per 100 ml;Hur många mg skiljer det?
 Väger en Big Mac mer eller mindre än en standardpizza Margherita?;Big Mac;Pizza Margherita;215;420;gram;Hur många gram skiljer det?
 Innehåller ett äpple mer eller mindre fiber än ett päron?;Äpple;Päron;2,4;3,1;gram per 100 g;Hur många gram skiljer det?
 Innehåller honung mer eller mindre socker än lönnsirap?;Honung;Lönnsirap;82;60,5;gram per 100 g;Hur många gram skiljer det?
 Innehåller helmjölk mer eller mindre fett än grekisk yoghurt?;Helmjölk;Grekisk yoghurt;3,3;5;gram per 100 g;Hur många gram skiljer det?
-Har lönnsirap fler eller färre kalorier än strösocker?;Lönnsirap;Strösocker;261;387;kcal per 100 g;Hur många kcal skiljer det?
-Har cheddar fler eller färre kalorier än feta?;Cheddar;Feta;404;264;kcal per 100 g;Hur många kcal skiljer det?
-Har druvor fler eller färre kalorier än en apelsin?;Druvor;Apelsin;69;47;kcal per 100 g;Hur många kcal skiljer det?
+Har lönnsirap mer eller mindre energi per 100 gram än strösocker?;Lönnsirap;Strösocker;261;387;kcal;Hur många kcal skiljer det?
+Har cheddar mer eller mindre energi per 100 gram än feta?;Cheddar;Feta;404;264;kcal;Hur många kcal skiljer det?
+Har druvor mer eller mindre energi per 100 gram än en apelsin?;Druvor;Apelsin;69;47;kcal;Hur många kcal skiljer det?
 Innehåller jordgubbar mer eller mindre C-vitamin än kiwi?;Jordgubbar;Kiwi;59,6;93;mg per 100 g;Hur många mg skiljer det?
-Har nötfärs fler eller färre kalorier än kycklingbröst?;Nötfärs;Kycklingbröst;254;150;kcal per 100 g;Hur många kcal skiljer det?
-Har pommes frites fler eller färre kalorier än potatischips?;Pommes frites;Potatischips;312;547;kcal per 100 g;Hur många kcal skiljer det?
-Har blåbär fler eller färre kalorier än jordgubbar?;Blåbär;Jordgubbar;57;32;kcal per 100 g;Hur många kcal skiljer det?
-Har kokt pasta fler eller färre kalorier än kokt potatis?;Kokt pasta;Kokt potatis;158;87;kcal per 100 g;Hur många kcal skiljer det?
+Har nötfärs mer eller mindre energi per 100 gram än kycklingbröst?;Nötfärs;Kycklingbröst;254;150;kcal;Hur många kcal skiljer det?
+Har pommes frites mer eller mindre energi per 100 gram än potatischips?;Pommes frites;Potatischips;312;547;kcal;Hur många kcal skiljer det?
+Har blåbär mer eller mindre energi per 100 gram än jordgubbar?;Blåbär;Jordgubbar;57;32;kcal;Hur många kcal skiljer det?
+Har kokt pasta mer eller mindre energi per 100 gram än kokt potatis?;Kokt pasta;Kokt potatis;158;87;kcal;Hur många kcal skiljer det?
 Innehåller mörk choklad mer eller mindre socker än mjölkchoklad?;Mörk choklad;Mjölkchoklad;24;50;gram per 100 g;Hur många gram skiljer det?
 Innehåller kokta linser mer eller mindre protein än kokta kikärter?;Kokta linser;Kokta kikärter;18;8,9;gram per 100 g;Hur många gram skiljer det?
-Har bacon fler eller färre kalorier än nötfärs?;Bacon;Nötfärs;541;254;kcal per 100 g;Hur många kcal skiljer det?
-Har en croissant fler eller färre kalorier än en bagel?;Croissant;Bagel;406;250;kcal per 100 g;Hur många kcal skiljer det?
-Har en tomat fler eller färre kalorier än röd paprika?;Tomat;Röd paprika;18;26;kcal per 100 g;Hur många kcal skiljer det?
+Har bacon mer eller mindre energi per 100 gram än nötfärs?;Bacon;Nötfärs;541;254;kcal;Hur många kcal skiljer det?
+Har en croissant mer eller mindre energi per 100 gram än en bagel?;Croissant;Bagel;406;250;kcal;Hur många kcal skiljer det?
+Har en tomat mer eller mindre energi per 100 gram än röd paprika?;Tomat;Röd paprika;18;26;kcal;Hur många kcal skiljer det?
 Innehåller en kopp grönt te mer eller mindre koffein än filterkaffe?;Grönt te;Filterkaffe;20;80;mg per 100 ml;Hur många mg skiljer det?
 Innehåller parmesan mer eller mindre protein än ett ägg?;Parmesan;Ägg;35,7;12,6;gram per 100 g;Hur många gram skiljer det?
-Har popcorn fler eller färre kalorier än potatischips?;Popcorn;Potatischips;387;547;kcal per 100 g;Hur många kcal skiljer det?
+Har popcorn mer eller mindre energi per 100 gram än potatischips?;Popcorn;Potatischips;387;547;kcal;Hur många kcal skiljer det?
 Innehåller en banan mer eller mindre C-vitamin än en kiwi?;Banan;Kiwi;8,7;93;mg per 100 g;Hur många mg skiljer det?
 Innehåller spenat mer eller mindre järn än nötkött?;Spenat;Nötkött;2,7;5,5;mg per 100 g;Hur många mg skiljer det?
-Har en banan fler eller färre kalorier än vindruvor?;Banan;Vindruvor;89;69;kcal per 100 g;Hur många kcal skiljer det?
-Har vaniljglass fler eller färre kalorier än grekisk yoghurt?;Vaniljglass;Grekisk yoghurt;207;97;kcal per 100 g;Hur många kcal skiljer det?
+Har en banan mer eller mindre energi per 100 gram än vindruvor?;Banan;Vindruvor;89;69;kcal;Hur många kcal skiljer det?
+Har vaniljglass mer eller mindre energi per 100 gram än grekisk yoghurt?;Vaniljglass;Grekisk yoghurt;207;97;kcal;Hur många kcal skiljer det?
 Innehåller en espresso mer eller mindre koffein än Coca-Cola?;Espresso;Coca-Cola;212;10;mg per 100 ml;Hur många mg skiljer det?
-Har olivolja fler eller färre kalorier än kokt potatis?;Olivolja;Kokt potatis;884;87;kcal per 100 g;Hur många kcal skiljer det?
+Har olivolja mer eller mindre energi per 100 gram än kokt potatis?;Olivolja;Kokt potatis;884;87;kcal;Hur många kcal skiljer det?
 Väger ett hönsägg mer eller mindre än ett vaktelägg?;Hönsägg;Vaktelägg;58;9;gram;Hur många gram skiljer det?
-Har vodka fler eller färre kalorier än öl?;Vodka;Öl;231;42;kcal per 100 ml;Hur många kcal skiljer det?
+Har vodka mer eller mindre energi per 100 ml än öl?;Vodka;Öl;231;42;kcal;Hur många kcal skiljer det?
 Tar världsrekordet på 100 meter kortare eller längre tid än rekordet på 200 meter?;100 meter (herrar);200 meter (herrar);9,58;19,19;sekunder;Hur många sekunder skiljer det?
 Är en fotbollsplan längre än den är bred (proffsmått)?;Längd;Bredd;105;68;meter;Hur många meter skiljer det?
 Är en NBA-plan kortare eller längre än en olympisk simbassäng?;NBA-plan;Olympisk bassäng;28,65;50;meter;Hur många meter skiljer det?
