@@ -1,13 +1,14 @@
 # Frågestilguide — Mer eller Mindre
 
 Detta är **rubriken**: feel-expertens kunskap om vad som gör ett bra jämförelsekort.
-Författar-agenten (`fragesattare`), fact-check-agenten (`faktagranskare`) och
-språkgranskaren (`sprakgranskare`) läser denna fil varje körning. Itereras tills leken
-känns rolig över hela spektrat.
+Författar-agenten (`fragesattare`), fact-check-agenten (`faktagranskare`),
+språkgranskaren (`sprakgranskare`) och tydlighetsgranskaren (`tydlighetsgranskare`) läser
+denna fil varje körning. Itereras tills leken känns rolig över hela spektrat.
 
 Pipeline per kategori: `fragesattare` (batch ~25–30) → `faktagranskare` (verifiera värden +
 riktning, fyll källa+år) → `sprakgranskare` (putsa fråga + differensfråga, rör ej värden) →
-kurator/användar-snitt → ackumulera behåll.
+`tydlighetsgranskare` (förkasta tvetydig riktning, rör ej värden) → kurator/användar-snitt →
+ackumulera behåll.
 
 ## Spelet i en mening
 
@@ -71,6 +72,34 @@ Rapportera band-histogrammet per batch. Justera tills fördelningen matchar mål
 mönstret). **sakA = det naturliga subjektet** i frågan; knapparna är fasta [Mer]/[Mindre].
 Konvention från `CLAUDE.md`: formulera frågan så sakA är subjektet, men låt verkligt
 facit avgöra vem som är störst — variera medvetet.
+
+## Otydlig riktning (tvetydiga kort)
+
+Att **förstå frågan** är det viktigaste i hela spelet. Knapparna är fasta [Mer]/[Mindre], så
+frågans jämförelseord måste peka samma håll som "mer" — annars kan en familj inte enas om vad
+svaret betyder, även om varje siffra är sann. Ett sådant kort är **trasigt**.
+
+Ett kort är **otydligt i riktning** om NÅGOT av:
+
+1. **Temporal riktning utan magnitud** — värdet är ett **årtal/tidpunkt** OCH frågan jämför
+   *när* (före/efter/inträffade/grundades/invigdes/patenterades/kom ut/byggår). "Mer" bär
+   ingen intuitiv tidsriktning: större årtal = senare = *mindre* länge sedan, en inverterad
+   och osynlig mappning. → **förkasta** (skriv om till äkta magnitud eller ersätt med ett
+   icke-temporalt kort).
+2. **Komparativord ≠ mer/mindre-intuition** — ordet ska peka samma håll som "mer"
+   (äldre/högre/tyngre/längre/fler/större = mer). Inverterade/tvetydiga ord ("länge sedan",
+   "för X år sedan" blandat med årtal) → flagga för omskrivning.
+3. **Konventionsbrott** — `sakA` ska hålla det STÖRRE värdet OCH vara subjektet. Håller sakA
+   det mindre värdet läses facit-meningen bakvänt → byt sakA/sakB.
+
+**Avskräckande exempel (förkasta):** "Inträffade Stockholms blodbad före eller efter Gustav
+Vasas trontillträde?" (1520 vs 1523) — temporal riktning, ingen magnitud, OCH sakA (blodbadet)
+håller det mindre årtalet. Omöjligt att gissa rätt mot [Mer]/[Mindre] utan en dold regel.
+
+**EJ tvetydigt:** höjd/vikt/yta/avstånd/längd/antal/livslängd/ålder-vid-händelse med naturligt
+komparativ. `äldre/yngre` mappar rätt så länge värdet är **ålder i år** (större = äldre = mer)
+— inte ett **årtal/byggår** (större = yngre, inverterat). "År f.Kr." är OK eftersom större
+f.Kr.-tal = äldre = mer.
 
 ## Stabilt vs volatilt
 

@@ -45,6 +45,10 @@ Loggade buggar i samma anda som `tasks.md`. Mall för nya poster:
   - Förväntat: en spelomgång ska sprida sig över olika frågetyper (`fråga`-kategorier), inte domineras av en.
   - Faktiskt: urvalet balanserade bara på svårighetsband + sak-distinkthet; inget spärrade samma `questionText`-kategori. Loggor-mini (7 frågor, 6 kategorier) kunde landa 4 börsvärde-frågor. Fix: runtime-ämnescap i `PickBalanced` — varje distinkt `questionText` högst `ceil(count / antal distinkta kategorier)` ggr/spel (best-effort, samma mönster som sak-spärren).
 
+- [x] **Otydlig riktning — temporala "före/efter"-årtalskort** — pack-CSV:erna (`otydlig-rikting.webp`)
+  - Förväntat: frågans jämförelseord pekar samma håll som [Mer]/[Mindre] så en familj kan enas om svaret.
+  - Faktiskt: kort som "Inträffade Stockholms blodbad före eller efter Gustav Vasas trontillträde?" (1520 vs 1523) jämför *när* mot fasta [Mer]/[Mindre] — större årtal = senare = *mindre* länge sedan, en inverterad osynlig mappning, OCH sakA höll det mindre årtalet (konventionsbrott). Omöjligt att gissa rätt utan dold regel. Fix: skrev om kort med äkta magnitud (regeringslängd/ålder/höjd/antal) och ersatte rena temporala årtalskort med icke-temporala magnitud-kort i alla tre packen (antal bevarat 1085/1085/175). Ny `tydlighetsgranskare`-agent + stilguide-sektion "Otydlig riktning" fångar mönstret framåt.
+
   ## Loggor
   - [x] Mer eller Mindre – Loggor (alla åldrar 1) --> Mer eller Mindre – Loggor – alla åldrar
   - [x] Mer eller Mindre – Loggor (blandat 1) --> Mer eller Mindre – Loggor
