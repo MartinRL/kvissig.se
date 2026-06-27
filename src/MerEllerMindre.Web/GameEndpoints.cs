@@ -35,12 +35,14 @@ public static class GameEndpoints
 
         app.MapGet("/om-spelet", () => new RazorComponentResult<OmSpelet>());
 
+        app.MapGet("/om-mig", () => new RazorComponentResult<OmMig>());
+
         app.MapGet("/404", () => new RazorComponentResult<Components.NotFound>());
 
         app.MapGet("/sitemap.xml", (FileSystemQuestionPackCatalog catalog, HttpContext http) =>
         {
             var root = $"{http.Request.Scheme}://{http.Request.Host}";
-            var urls = new List<string> { "/", "/om-spelet" };
+            var urls = new List<string> { "/", "/om-spelet", "/om-mig" };
             urls.AddRange(catalog.Packs.Select(p => $"/games/new/{p.PackId}"));
             var body = string.Concat(urls.Select(u =>
                 $"<url><loc>{System.Security.SecurityElement.Escape(root + u)}</loc></url>"));
