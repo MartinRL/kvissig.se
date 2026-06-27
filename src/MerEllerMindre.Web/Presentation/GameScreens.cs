@@ -80,7 +80,7 @@ public static class GameScreens
             state.JoinCode,
             QuestionNumber: i + 1,
             TotalQuestions: state.Questions.Count,
-            Heading(state, card.QuestionText, stage),
+            Heading(state, card.QuestionText),
             card.ItemA,
             card.ItemB,
             card.DifferencePrompt,
@@ -124,7 +124,7 @@ public static class GameScreens
             state.JoinCode,
             QuestionNumber: i + 1,
             TotalQuestions: state.Questions.Count,
-            Heading(state, card.QuestionText, QuestionStage.Direction),
+            Heading(state, card.QuestionText),
             MerItem: merItem,
             MindreItem: mindreItem,
             correct,
@@ -186,7 +186,7 @@ public static class GameScreens
             state.JoinCode,
             QuestionNumber: i + 1,
             TotalQuestions: state.Questions.Count,
-            Heading(state, card.QuestionText, QuestionStage.Difference),
+            Heading(state, card.QuestionText),
             LargerItem: largerItem,
             SmallerItem: smallerItem,
             largerValue,
@@ -214,21 +214,16 @@ public static class GameScreens
             : _ => null;
 
     /// <summary>
-    /// The game is "loggor" but the cards are authored with "märke". On the direction screen
-    /// call it "logga", on the difference screen "företag". Only loggor-* packs are relabelled;
-    /// text packs keep their authored question verbatim.
-    /// ponytail: string-replace over the 7 fixed loggor stems, not a grammar engine. "logga" is
-    /// en-gender (Vilket→Vilken, värt→värd); "företag" is ett-gender so it swaps the noun cleanly.
+    /// The game is "loggor" but the cards are authored with "märke". On both screens call it
+    /// "företag". Only loggor-* packs are relabelled; text packs keep their authored question.
+    /// ponytail: string-replace over the fixed loggor stems, not a grammar engine. "företag" is
+    /// ett-gender like "märke" so Vilket/värt stay put.
     /// </summary>
-    private static string Heading(GameState state, string fråga, QuestionStage stage) =>
+    private static string Heading(GameState state, string fråga) =>
         !state.QuestionPackId.StartsWith("loggor-", StringComparison.Ordinal)
             ? fråga
-            : stage == QuestionStage.Direction
-                ? fråga.Replace("Vilket av märkena", "Vilken av loggorna")
-                       .Replace("Vilket märke", "Vilken logga")
-                       .Replace("är värt mest", "är värd mest")
-                : fråga.Replace("av märkena", "av företagen")
-                       .Replace("Vilket märke", "Vilket företag");
+            : fråga.Replace("av märkena", "av företagen")
+                   .Replace("Vilket märke", "Vilket företag");
 
     public static StandingsVm Standings(GameState state, Guid? viewer)
     {
