@@ -53,26 +53,15 @@
         <div class="card" id="sa-spelar-du">
             <h2>Så spelar du</h2>
             <ol class="steps">
-                <li>Värden väljer en kviss (ett frågepaket = en kortlek) och får en QR-kod att dela på sin skärm.</li>
-                <li>Övriga spelare ansluter via QR-koden, på var sin skärm.</li>
-                <li>Varje fråga jämför två saker, A och B. <strong>Steg 1:</strong> gissa
-                    riktningen. Är A <em>mer</em> eller <em>mindre</em> än B?</li>
-                <li><strong>Steg 2:</strong> gissa <em>hur stor</em> skillnaden är, i frågans
-                    egen enhet.</li>
-                <li>När alla svarat avslöjas facit och poängen räknas. Lägst total efter
-                    @Decider.FullGameSize frågor vinner.</li>
+                <li><strong>Samlas.</strong> Värden väljer en kviss och visar en QR-kod.
+                    Övriga skannar och ansluter med var sin skärm.</li>
+                <li><strong>Gissa två gånger.</strong> Varje fråga jämför A och B. Först: är
+                    A <em>mer</em> eller <em>mindre</em> än B? Sedan: <em>hur stor</em> är
+                    skillnaden?</li>
+                <li><strong>Lägst vinner.</strong> Ju närmare facit, desto lägre poäng, och
+                    rätt riktning ger bonus. Lägst total efter @Decider.FullGameSize frågor
+                    vinner.</li>
             </ol>
-            <div class="rulebox">
-                <p class="steplabel">Poäng per fråga</p>
-                <p>
-                    <code>rundpoäng = |gissad skillnad − rätt skillnad| (0–100) + (rätt riktning? −10 : 0)</code>
-                </p>
-                <p class="muted">
-                    Skillnaden normaliseras till 0–100, så exakt rätt ger 0 poäng. Rätt riktning
-                    ger −10 i bonus. <strong>Lägst totalpoäng vinner</strong>, och negativa poäng
-                    är möjliga.
-                </p>
-            </div>
         </div>
 
         @* 5. Idén — tvåstegsraketen *@
