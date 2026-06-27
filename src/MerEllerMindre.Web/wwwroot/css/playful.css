@@ -271,13 +271,16 @@ input[type=text]:focus { outline: none; border-color: var(--accent); }
 .content h3 { font-family: var(--display); font-weight: 700; font-size: 1.05rem; margin: 1rem 0 .3rem; }
 .content p { line-height: 1.55; margin: 0 0 .8rem; }
 .content .btn { margin: 1rem 0; }
-.content .bullets, .content .steps { line-height: 1.55; padding-left: 1.3rem; margin: 0 0 .4rem; }
-.content .bullets li, .content .steps li { margin-bottom: .5rem; }
+.content .bullets, .content .steps, .steps { line-height: 1.55; padding-left: 1.3rem; margin: 0 0 .4rem; }
+.content .bullets li, .content .steps li, .steps li { margin-bottom: .5rem; }
 .content .rulebox {
   background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius-sm);
   padding: 1rem 1.1rem; margin-top: 1rem;
 }
 .content .rulebox code { font-size: .85rem; word-break: break-word; }
+.content table { width: 100%; border-collapse: collapse; margin: .5rem 0; font-size: .92rem; }
+.content th, .content td { border: 1px solid var(--line); padding: .5rem .6rem; text-align: left; vertical-align: top; }
+.content th { background: var(--bg); }
 a.logo { text-decoration: none; }
 
 /* ---- global htmx error banner ---- */
