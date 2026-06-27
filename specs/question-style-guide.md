@@ -171,6 +171,28 @@ likadan varje gång. Sex metriker, var och en med en **namnfri, enhetlig stam** 
 - **Metrik-val:** ålder = `nuvarande år − grundningsår` (ALDRIG grundningsår rakt av — det
   är degenererat: `|1943−2006|/2006 ≈ 0,03` → band 0 för varje kort). Ålder ger
   ratio-spridning (IKEA 83 vs Spotify 20 → norm 76 → band 2).
+- **Sektor-koherens: båda märkena på ett kort ska tillhöra samma breda sektor** — bilmärke
+  mot bilmärke, bank mot bank. Inte snävaste bransch utan BRED sektor; Scania/Tesla/SAS får
+  mötas inom "Fordon & transport". Bred taxonomi (utökas vid behov; alla namn MÅSTE finnas
+  exakt i poolen med png på disk):
+  - **Fordon & transport:** Volvo, Volvo Cars, Scania, Saab, Polestar, BMW, Audi,
+    Mercedes-Benz, Volkswagen, Toyota, Hyundai, Porsche, Ferrari, Tesla, SAS, Lufthansa, Voi
+  - **Mat & dryck:** Marabou, Cloetta, Felix, Pågen, Gevalia, Löfbergs, Oatly, Lantmännen,
+    Kopparbergs, Absolut Vodka, Carlsberg, Heineken, Coca-Cola, Pepsi, Nestlé
+  - **Detaljhandel & dagligvaror:** IKEA, H&M, ICA, Axfood, Willys, Clas Ohlson, Dustin,
+    Systembolaget, McDonald's, Burger King
+  - **Tech & digitalt:** Apple, Microsoft, Google, Amazon, Samsung, Sony, Nintendo, Spotify,
+    Netflix, Facebook, Mojang, King, Nvidia, Ericsson, Telia, Evolution, Klarna, Disney, Adobe
+  - **Industri & verkstad:** Atlas Copco, Sandvik, SKF, Assa Abloy, Electrolux, Husqvarna,
+    NIBE, Hexagon, Bahco, Boliden, Skanska, NCC, Essity, Tetra Pak, Securitas
+  - **Finans & bank:** Swedbank, Nordea, SEB, Handelsbanken, Investor AB, EQT
+  - **Mode & sport:** Nike, Adidas, Levi's, Björn Borg, Fjällräven, Acne Studios,
+    Daniel Wellington, Hästens
+  - **Hälsa/läkemedel:** AstraZeneca (para först när ≥2 finns i poolen, annars hoppa)
+
+  Ambigua märken (Tesla = fordon+tech, Klarna = finans+tech, Samsung = tech) tilldelas
+  konsekvent per kort den sektor som gör kortet giltigt. **Saknar sektorn data för ett mått
+  → hoppa måttet (kortet byter mått eller utgår), vidga ALDRIG till annan sektor.**
 - **`sakA`/`sakB` = EXAKTA namn ur `data/logos/logos.csv` vars png finns på disk.** Annars
   returnerar `LogoCatalog.UrlFor` null → trasig render. Filtrera kandidaterna mot disk.
 - **Svensk-tung pool + krav:** majoriteten svenska märken. Utländska märken BARA om de har
