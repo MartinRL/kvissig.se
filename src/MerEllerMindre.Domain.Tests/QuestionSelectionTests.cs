@@ -88,4 +88,21 @@ public class QuestionSelectionTests
             .GroupBy(x => x)
             .All(g => g.Count() == 1).Should().BeTrue();
     }
+
+    [Fact]
+    public void NoTopicDominatesTheRound()
+    {
+        // 3 topics, plenty of item-distinct cards each; mini round of 7 -> cap = ceil(7/3) = 3.
+        var pool = new List<Question>();
+        var id = 0;
+        foreach (var topic in new[] { "börsvärde", "ålder", "anställda" })
+            for (var k = 0; k < 20; k++)
+                pool.Add(new(topic, $"{topic}A{id}", $"{topic}B{id++}", 100m, 60m, "u", "d"));
+
+        var selected = QuestionSelection.PickBalanced(pool, 7, _ => 0);
+
+        selected.Should().HaveCount(7);
+        selected.GroupBy(q => q.QuestionText)
+            .All(g => g.Count() <= 3).Should().BeTrue();
+    }
 }

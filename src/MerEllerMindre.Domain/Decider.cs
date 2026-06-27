@@ -377,9 +377,10 @@ public record GameContext(
 /// <summary>
 /// Picks a difficulty-band-balanced subset of question cards for a single game. Balance is
 /// on the difficulty band (band = NormalizeDifference(|A-B|, max(A,B)), the same math
-/// ScoreDifference uses) PLUS each item (itemA/itemB) appears at most once per game;
-/// best-effort, falls back on repetition only if the pool can't supply enough item-distinct
-/// cards. Final order is shuffled so bands don't cluster. Pure: RNG is injected as `next`
+/// ScoreDifference uses) PLUS each item (itemA/itemB) appears at most once per game PLUS each
+/// topic (questionText category) appears at most ceil(count / distinct-topics) times so one
+/// category can't dominate a round; all best-effort, falls back on repetition only if the pool
+/// can't supply enough distinct cards. Final order is shuffled so bands don't cluster. Pure: RNG is injected as `next`
 /// (an exclusive-upper-bound generator, like Random.Next(n)).
 /// </summary>
 public static class QuestionSelection
@@ -404,16 +405,23 @@ public static class QuestionSelection
 
         var quotas = Apportion(count, BandWeights);
 
+        var distinctTopics = pool.Select(q => q.QuestionText)
+            .Distinct(StringComparer.OrdinalIgnoreCase).Count();
+        var topicCap = (int)Math.Ceiling((double)count / Math.Max(1, distinctTopics));
+
         var picked = new List<Question>();
         var pickedSet = new HashSet<Question>();
         var leftover = new List<Question>();
         var usedItems = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        var topicCounts = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
 
         bool TryUse(Question q)
         {
             if (usedItems.Contains(q.ItemA) || usedItems.Contains(q.ItemB)) return false;
+            if (topicCounts.GetValueOrDefault(q.QuestionText) >= topicCap) return false;
             usedItems.Add(q.ItemA);
             usedItems.Add(q.ItemB);
+            topicCounts[q.QuestionText] = topicCounts.GetValueOrDefault(q.QuestionText) + 1;
             return true;
         }
 

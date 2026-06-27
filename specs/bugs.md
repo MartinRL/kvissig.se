@@ -41,6 +41,10 @@ Loggade buggar i samma anda som `tasks.md`. Mall för nya poster:
   - Förväntat: testen grön; den verifierar att värd-lobbyn renderar join-länken.
   - Faktiskt: testen kräver `/games/{code}/join` i plain `/state`-svaret, men committen "clickable join URL + copy-to-clipboard" gjorde länken progressivt avslöjad — `LobbyHostScreen.razor:8` visar den bara `@if (Model.ShowJoinUrl)`, vilket slås på först när pollen anropar `/state?url`. Funktionen funkar; testen påstår ett gammalt kontrakt. Fix: assert mot `/state?url` (där join-URL:en faktiskt renderas), inte plain `/state`.
 
+- [x] **För lite ämnesvariation — 4 av 7 frågor handlade om börsvärde** — `QuestionSelection.PickBalanced` (Decider.cs)
+  - Förväntat: en spelomgång ska sprida sig över olika frågetyper (`fråga`-kategorier), inte domineras av en.
+  - Faktiskt: urvalet balanserade bara på svårighetsband + sak-distinkthet; inget spärrade samma `questionText`-kategori. Loggor-mini (7 frågor, 6 kategorier) kunde landa 4 börsvärde-frågor. Fix: runtime-ämnescap i `PickBalanced` — varje distinkt `questionText` högst `ceil(count / antal distinkta kategorier)` ggr/spel (best-effort, samma mönster som sak-spärren).
+
   ## Loggor
   - [x] Mer eller Mindre – Loggor (alla åldrar 1) --> Mer eller Mindre – Loggor – alla åldrar
   - [x] Mer eller Mindre – Loggor (blandat 1) --> Mer eller Mindre – Loggor
