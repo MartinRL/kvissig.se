@@ -1,0 +1,28 @@
+﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Har en Polestar 2 Long Range längre eller kortare räckvidd än en Tesla Model 3 Long Range?;Polestar 2 Long Range Single Motor;Tesla Model 3 Long Range;655;702;km;Hur många km skiljer WLTP-räckvidden?
+Har en Hyundai Ioniq 6 längre eller kortare räckvidd än en Tesla Model S?;Hyundai Ioniq 6 Long Range;Tesla Model S;614;634;km;Hur många km skiljer WLTP-räckvidden?
+Har en Kia EV6 längre eller kortare räckvidd än en Hyundai Ioniq 5?;Kia EV6 Long Range;Hyundai Ioniq 5 Long Range;528;507;km;Hur många km skiljer WLTP-räckvidden?
+Har en Tesla Model S Plaid fler eller färre hästkrafter än en Porsche Taycan Turbo GT?;Tesla Model S Plaid;Porsche Taycan Turbo GT;1020;1108;hk;Hur många hästkrafter skiljer det?
+Tar en BMW i4 M50 längre eller kortare tid på 0–100 km/h än en Tesla Model 3 Performance?;BMW i4 M50;Tesla Model 3 Performance;3,9;3,1;sekunder;Hur många sekunder skiljer accelerationen?
+Tar en Polestar 2 Dual Motor längre eller kortare tid på 0–100 km/h än en Nissan Leaf?;Polestar 2 Dual Motor;Nissan Leaf;4,5;7,9;sekunder;Hur många sekunder skiljer accelerationen?
+Kostade en Kia EV6 mer eller mindre än en MG4? (2024);Kia EV6;MG4;549900;329900;kr;Hur många kronor skiljer priset?
+Kostade en Tesla Model 3 mer eller mindre än en Porsche Taycan? (2024);Tesla Model 3;Porsche Taycan;519000;1095000;kr;Hur många kronor skiljer priset?
+Kostade en BMW i7 mer eller mindre än en BMW i4 eDrive40? (2024);BMW i7 xDrive60;BMW i4 eDrive40;1725000;599900;kr;Hur många kronor skiljer priset?
+Har en Audi Q4 e-tron större eller mindre användbar batterikapacitet än en Mercedes EQS?;Audi Q4 e-tron;Mercedes-Benz EQS 450+;77;118;kWh;Hur många kWh skiljer batterikapaciteten?
+Har en Volkswagen ID.4 större eller mindre användbar batterikapacitet än en Renault 5 E-Tech?;Volkswagen ID.4 Pro;Renault 5 E-Tech;77;52;kWh;Hur många kWh skiljer batterikapaciteten?
+Har en Cupra Born större eller mindre användbar batterikapacitet än en Tesla Model 3 Long Range?;Cupra Born;Tesla Model 3 Long Range;58;75;kWh;Hur många kWh skiljer batterikapaciteten?
+Har en BMW i4 M50 fler eller färre hästkrafter än en Volkswagen ID.4 GTX?;BMW i4 M50;Volkswagen ID.4 GTX;544;340;hk;Hur många hästkrafter skiljer det?
+Har en Volkswagen ID.4 Pro längre eller kortare räckvidd än en Mercedes EQS?;Volkswagen ID.4 Pro;Mercedes-Benz EQS 450+;529;782;km;Hur många km skiljer WLTP-räckvidden?
+Har en BMW i4 eDrive40 längre eller kortare räckvidd än en Cupra Born?;BMW i4 eDrive40;Cupra Born;590;425;km;Hur många km skiljer WLTP-räckvidden?
+Tar en Renault 5 E-Tech längre eller kortare tid på 0–100 km/h än en Tesla Model 3 Performance?;Renault 5 E-Tech;Tesla Model 3 Performance;7,9;3,1;sekunder;Hur många sekunder skiljer accelerationen?
+Tar en Tesla Model S Plaid längre eller kortare tid på 0–100 km/h än en MG4?;Tesla Model S Plaid;MG4 SE;2,1;7,7;sekunder;Hur många sekunder skiljer accelerationen?
+Har en Nissan Leaf fler eller färre hästkrafter än en Audi RS e-tron GT?;Nissan Leaf;Audi RS e-tron GT;218;646;hk;Hur många hästkrafter skiljer det?
+Har en Mercedes EQS större eller mindre användbar batterikapacitet än en Nissan Leaf?;Mercedes-Benz EQS 450+;Nissan Leaf;118;39;kWh;Hur många kWh skiljer batterikapaciteten?
+Kostade en Volvo EX30 mer eller mindre än en Porsche Taycan Turbo GT? (2024);Volvo EX30;Porsche Taycan Turbo GT;429000;2770000;kr;Hur många kronor skiljer priset?
+Har en Mercedes EQS längre eller kortare räckvidd än en Mazda MX-30?;Mercedes-Benz EQS 450+;Mazda MX-30;782;200;km;Hur många km skiljer WLTP-räckvidden?
+Har en Mazda MX-30 längre eller kortare räckvidd än en Hyundai Ioniq 6?;Mazda MX-30;Hyundai Ioniq 6 Long Range;200;614;km;Hur många km skiljer WLTP-räckvidden?
+Har en Tesla Model S Plaid fler eller färre hästkrafter än en Nissan Leaf?;Tesla Model S Plaid;Nissan Leaf;1020;218;hk;Hur många hästkrafter skiljer det?
+Kostade en MG4 mer eller mindre än en BMW i7? (2024);MG4;BMW i7 xDrive60;329900;1725000;kr;Hur många kronor skiljer priset?
+Har en Porsche Taycan Turbo GT fler eller färre hästkrafter än en MG4?;Porsche Taycan Turbo GT;MG4 SE;1108;170;hk;Hur många hästkrafter skiljer det?
+Kostade en Renault 5 E-Tech mer eller mindre än en Porsche Taycan Turbo GT? (2024);Renault 5 E-Tech;Porsche Taycan Turbo GT;349900;2770000;kr;Hur många kronor skiljer priset?
+Har en Tesla Model S Plaid fler eller färre hästkrafter än en Renault 5 E-Tech?;Tesla Model S Plaid;Renault 5 E-Tech;1020;150;hk;Hur många hästkrafter skiljer det?
