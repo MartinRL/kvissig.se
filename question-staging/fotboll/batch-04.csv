@@ -1,0 +1,20 @@
+﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Har Sandvikens IF fler eller färre SM-guld i fotboll än GAIS?;Sandvikens IF;GAIS;0;4;SM-guld;Hur många SM-guld skiljer det?
+Har GAIS fler eller färre SM-guld i fotboll än IFK Värnamo?;GAIS;IFK Värnamo;4;0;SM-guld;Hur många SM-guld skiljer det?
+Är IFK Sundsvall en äldre eller yngre klubb än Syrianska FC? (2026);IFK Sundsvall;Syrianska FC;131;49;år;Hur många år skiljer klubbarna åt i ålder?
+Är IFK Sundsvall en äldre eller yngre klubb än Assyriska FF? (2026);IFK Sundsvall;Assyriska FF;131;52;år;Hur många år skiljer klubbarna åt i ålder?
+Är Syrianska FC en äldre eller yngre klubb än Sandvikens IF? (2026);Syrianska FC;Sandvikens IF;49;127;år;Hur många år skiljer klubbarna åt i ålder?
+Är Örebro SK en äldre eller yngre klubb än Assyriska FF? (2026);Örebro SK;Assyriska FF;118;52;år;Hur många år skiljer klubbarna åt i ålder?
+Är IFK Sundsvall en äldre eller yngre klubb än Västerås SK? (2026);IFK Sundsvall;Västerås SK;131;122;år;Hur många år skiljer klubbarna åt i ålder?
+Är IFK Värnamo en äldre eller yngre klubb än Sandvikens IF? (2026);IFK Värnamo;Sandvikens IF;114;127;år;Hur många år skiljer klubbarna åt i ålder?
+Är IFK Sundsvall en äldre eller yngre klubb än Ljungskile SK? (2026);IFK Sundsvall;Ljungskile SK;131;100;år;Hur många år skiljer klubbarna åt i ålder?
+Är Örebro SK en äldre eller yngre klubb än Falkenbergs FF? (2026);Örebro SK;Falkenbergs FF;118;98;år;Hur många år skiljer klubbarna åt i ålder?
+Är Assyriska FF en äldre eller yngre klubb än Gefle IF? (2026);Assyriska FF;Gefle IF;52;144;år;Hur många år skiljer klubbarna åt i ålder?
+Gjorde Filip Johansson fler eller färre mål än Razak Omotoyossi under respektive skyttekungssäsong? (Johansson 1924/25 vs Omotoyossi 2007);Filip Johansson;Razak Omotoyossi;39;14;mål;Hur många mål skiljer säsongerna åt?
+Gjorde Gunnar Nordahl fler eller färre mål än Marcus Allbäck under respektive skyttekungssäsong? (Nordahl 1945 vs Allbäck 1999);Gunnar Nordahl;Marcus Allbäck;27;15;mål;Hur många mål skiljer säsongerna åt?
+Gjorde Niklas Skoog fler eller färre mål än Gunnar Nordahl under respektive skyttekungssäsong? (Skoog 1995 vs Nordahl 1945);Niklas Skoog;Gunnar Nordahl;17;27;mål;Hur många mål skiljer säsongerna åt?
+Gjorde Marcus Allbäck fler eller färre mål än Niklas Skoog under respektive skyttekungssäsong? (Allbäck 1999 vs Skoog 1995);Marcus Allbäck;Niklas Skoog;15;17;mål;Hur många mål skiljer säsongerna åt?
+Hade IFK Värnamo högre eller lägre publiksnitt än Västerås SK? (Allsvenskan 2024);IFK Värnamo;Västerås SK;2304;6331;åskådare;Hur många åskådare skiljer publiksnitten åt?
+Hade Västerås SK högre eller lägre publiksnitt än Mjällby AIF? (Allsvenskan 2024);Västerås SK;Mjällby AIF;6331;3711;åskådare;Hur många åskådare skiljer publiksnitten åt?
+Hade IK Brage högre eller lägre publiksnitt än Trelleborgs FF? (Superettan 2024);IK Brage;Trelleborgs FF;2037;1005;åskådare;Hur många åskådare skiljer publiksnitten åt?
+Hade Trelleborgs FF högre eller lägre publiksnitt än Sandvikens IF? (Superettan 2024);Trelleborgs FF;Sandvikens IF;1005;1512;åskådare;Hur många åskådare skiljer publiksnitten åt?
