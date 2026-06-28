@@ -3,9 +3,13 @@
 // Question-pack tooling. Run from repo root:
 //   dotnet run tools/pack.cs                         report on the live pack
 //   dotnet run tools/pack.cs -- report --staging     report over staging candidates
+//   dotnet run tools/pack.cs -- check --staging --dir <d> --min 175
+//                                                     machine-readable gate (exit 0/1) for the loop
 //   dotnet run tools/pack.cs -- merge --out <path>    dedup+write a candidate pack
 //   dotnet run tools/pack.cs -- cap --max N --out <kept> --park <wip>
 //                                                     cap item frequency, park overflow
+//   --min N                minimum card count for check (default 175)
+//   --tol N                band tolerance in percentage points for check (default 5)
 //   --dir <stagingDir>     scan a different staging dir (report --staging + merge); default question-staging
 //   --targets a,b,c,d      override band-target display percentages; default 15,40,30,15
 //   --key question|pair|metricpair   dedup + duplicate-flag key (report + merge); default question.
@@ -38,6 +42,8 @@ bool force = argv.Remove("--force");
 string? outPath = TakeOption("--out");
 string? parkPath = TakeOption("--park");
 string? maxOpt = TakeOption("--max");
+int minOpt = int.Parse(TakeOption("--min") ?? "175");
+int tolOpt = int.Parse(TakeOption("--tol") ?? "5");
 stagingDir = TakeOption("--dir") ?? stagingDir;
 var targetsOpt = TakeOption("--targets");
 if (targetsOpt is not null) targets = targetsOpt.Split(',').Select(int.Parse).ToArray();
@@ -51,6 +57,9 @@ switch (command)
     case "report":
         Report(LoadCards(positional.Count > 0 ? positional : DefaultSources(useStaging)));
         break;
+    case "check":
+        Check(LoadCards(positional.Count > 0 ? positional : DefaultSources(useStaging)));
+        break;
     case "merge":
         Merge();
         break;
@@ -58,7 +67,7 @@ switch (command)
         Cap();
         break;
     default:
-        Console.Error.WriteLine($"Unknown command '{command}'. Use 'report', 'merge' or 'cap'.");
+        Console.Error.WriteLine($"Unknown command '{command}'. Use 'report', 'check', 'merge' or 'cap'.");
         Environment.Exit(2);
         break;
 }
@@ -190,6 +199,55 @@ void Report(List<Question> cards)
     Console.WriteLine($"Suspicious same-entity pairs ({smells.Count}):");
     foreach (var (card, smell) in smells)
         Console.WriteLine($"  {card.QuestionText}   ({smell.reason})");
+}
+
+// Deterministic gate for the ralph loop: actionable failure lines + exit code (0 pass, 1 fail).
+// "done" is this exit code, never the agent's gut feeling.
+void Check(List<Question> cards)
+{
+    var fails = new List<string>();
+
+    if (cards.Count < minOpt)
+        fails.Add($"count {cards.Count} < {minOpt} -> +{minOpt - cards.Count} cards");
+
+    if (cards.Count > 0)
+    {
+        var counts = new int[4];
+        foreach (var c in cards) counts[Band(c)]++;
+        for (var b = 0; b < 4; b++)
+        {
+            var pct = 100.0 * counts[b] / cards.Count;
+            var off = pct - targets[b];
+            if (Math.Abs(off) > tolOpt)
+                fails.Add($"band {bandLabels[b]}: {pct:0.0}% (mål {targets[b]}±{tolOpt}) -> " +
+                    (off < 0 ? "+närmare-värde-par" : "-par i detta band"));
+        }
+
+        var mer = cards.Count(c => c.ValueA >= c.ValueB);
+        var merPct = 100.0 * mer / cards.Count;
+        if (Math.Abs(merPct - 50) > 10)
+            fails.Add($"riktning Mer {merPct:0.0}% -> vänd ~{(int)Math.Round(Math.Abs(merPct - 50) / 100.0 * cards.Count)} par så större värdet blir {(merPct > 50 ? "sakB" : "sakA")}");
+
+        var over = cards
+            .SelectMany(c => new[] { c.ItemA, c.ItemB })
+            .GroupBy(x => x)
+            .Where(g => g.Count() > ItemCap)
+            .ToList();
+        foreach (var g in over)
+            fails.Add($"cap: \"{g.Key}\" x{g.Count()} -> byt ut {g.Count() - ItemCap}");
+
+        var dups = cards.GroupBy(KeyOf, StringComparer.OrdinalIgnoreCase).Where(g => g.Count() > 1).ToList();
+        foreach (var g in dups)
+            fails.Add($"dubblett x{g.Count()}: {g.First().QuestionText} -> ersätt {g.Count() - 1}");
+
+        var smells = cards.Where(c => QuestionChecks.SameEntitySmell(c).flagged).ToList();
+        foreach (var c in smells)
+            fails.Add($"same-entity: {c.QuestionText} -> byt ut paret");
+    }
+
+    foreach (var f in fails) Console.WriteLine(f);
+    Console.WriteLine(fails.Count == 0 ? "CHECK PASS" : "CHECK FAIL");
+    Environment.Exit(fails.Count == 0 ? 0 : 1);
 }
 
 void Merge()
