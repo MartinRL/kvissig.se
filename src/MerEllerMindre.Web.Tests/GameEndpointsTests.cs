@@ -101,6 +101,17 @@ public class GameEndpointsTests : IClassFixture<TestAppFactory>
     }
 
     [Fact]
+    public async Task SpelSom0100_RendersComparisonContentAndSchema()
+    {
+        var html = await (await NewClient().GetAsync("/spel-som-0-100")).Content.ReadAsStringAsync();
+
+        html.Should().Contain("0-100");
+        html.Should().Contain("\"@type\":\"FAQPage\"");
+        html.Should().Contain("rel=\"canonical\"");
+        html.Should().Contain("/spel-som-0-100");
+    }
+
+    [Fact]
     public async Task UnknownUrl_Returns404WithCustomPage()
     {
         var resp = await NewClient().GetAsync("/finns-inte");

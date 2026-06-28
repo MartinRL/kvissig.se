@@ -1,0 +1,103 @@
+@* GET /spel-som-0-100 — SEO/GEO comparison landing page targeting "spel som 0-100"/"alternativ
+   till 0-100" long-tail intent. Honest, white-hat comparison (no brand imitation, no implied
+   PlayMIG link). FAQ here MUST stay in sync with the FAQPage JSON-LD in @code (FaqJsonLd). *@
+<MainLayout Title="Spel som 0-100 — prova Mer eller Mindre"
+            Description="Gillar du 0-100? Mer eller Mindre är ett svenskt frågespel i samma anda med en twist: gissa först riktning (mer eller mindre), sedan hur stor skillnaden är. Online men tillsammans i samma rum."
+            CanonicalPath="/spel-som-0-100"
+            JsonLd="@FaqJsonLd">
+    <div class="wrap content">
+        <div class="brand">
+            <a class="logo" href="/"><span class="mer">Mer</span> eller <span class="mindre">Mindre</span></a>
+        </div>
+
+        @* 1. Hero / pitch *@
+        <h1>Gillar du 0-100? Då gillar du nog Mer eller Mindre</h1>
+        <p class="sub">
+            <strong>Mer eller Mindre</strong> är ett svenskt frågespel i samma anda som 0-100,
+            fast med en tvåstegs-twist: gissa först <em>riktningen</em> (är A mer eller mindre
+            än B?), sedan <em>hur stor</em> skillnaden är. Online men tillsammans i samma rum,
+            en skärm var.
+        </p>
+        <a class="btn" href="/">Spela Mer eller Mindre</a>
+
+        @* 2. Vad är 0-100? — neutralt, ärligt *@
+        <div class="card">
+            <h2>Vad är 0-100?</h2>
+            <p>
+                0-100 är ett populärt svenskt frågespel från PlayMIG där svaret på varje fråga
+                är en siffra mellan 0 och 100. Den som gissar närmast facit vinner omgången. Det
+                finns både som fysisk kortlek och i digital form.
+            </p>
+        </div>
+
+        @* 3. Så skiljer sig Mer eller Mindre — tvåstegsraketen *@
+        <div class="card">
+            <h2>Så skiljer sig Mer eller Mindre</h2>
+            <p>
+                Där 0-100 är en enda gissning är Mer eller Mindre en tvåstegsraket. Först den
+                snabba magkänslan: är A <em>mer</em> eller <em>mindre</em> än B? Sedan
+                skattningen: <em>hur stor</em> är skillnaden? Differens-steget poängsätts i
+                princip som 0-100 (närmast vinner, exakt ger bonus) — det som tillkommer är
+                riktnings-steget. En fråga, två beslut, dubbel spänning.
+            </p>
+        </div>
+
+        @* 4. Jämförelsetabell — featured-snippet/GEO-bränsle *@
+        <div class="card">
+            <h2>0-100 och Mer eller Mindre sida vid sida</h2>
+            <table>
+                <thead>
+                    <tr><th></th><th>0-100</th><th>Mer eller Mindre</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Svar per fråga</td><td>En siffra 0–100</td><td>Två steg: riktning, sedan skillnad</td></tr>
+                    <tr><td>Format</td><td>Fysiska kort (och digitalt)</td><td>Spelas i webbläsaren</td></tr>
+                    <tr><td>Poäng</td><td>Närmast facit vinner</td><td>Närmast facit, bonus för rätt riktning, lägst total vinner</td></tr>
+                    <tr><td>Tillsammans</td><td>Runt bordet</td><td>Online men i samma rum, en skärm var</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        @* 5. CTA + interna länkar *@
+        <a class="btn" href="/">Spela Mer eller Mindre</a>
+        <p><a href="/om-spelet#sa-spelar-du">Läs reglerna</a></p>
+
+        @* 6. FAQ (matchar FaqJsonLd nedan) *@
+        <div class="card">
+            <h2>Frågor &amp; svar</h2>
+
+            <h3>Finns det ett spel som liknar 0-100?</h3>
+            <p>Ja. Mer eller Mindre är ett svenskt frågespel i samma anda: ni jämför två saker
+               och gissar hur det ligger till. Skillnaden är tvåstegs-twisten — först riktning,
+               sedan storlek.</p>
+
+            <h3>Vad är skillnaden mellan 0-100 och Mer eller Mindre?</h3>
+            <p>I 0-100 svarar du med en enda siffra 0–100. I Mer eller Mindre gissar du först
+               riktningen (mer eller mindre) och sedan hur stor skillnaden är. Rätt riktning ger
+               bonus, och lägst total vinner.</p>
+
+            <h3>Kan man spela ett 0-100-liknande frågespel online tillsammans?</h3>
+            <p>Ja. Mer eller Mindre spelas i webbläsaren med en skärm var, tänkt för er som
+               sitter i samma rum — som ett sällskapsspel, fast appen sköter frågor och poäng.</p>
+
+            <h3>Behöver man köpa kort för att spela Mer eller Mindre?</h3>
+            <p>Nej. Det spelas direkt i webbläsaren, inga fysiska kort att packa eller tappa
+               bort. Den som är värd öppnar en omgång och delar koden.</p>
+        </div>
+
+        <a class="back" href="/">← Tillbaka till kvissarna</a>
+    </div>
+</MainLayout>
+
+@code {
+    // FAQPage schema for rich results / LLM citation. Keep the Q&A in sync with the FAQ
+    // section above. Serialized object only (MainLayout wraps it in <script>).
+    private const string FaqJsonLd = """
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+      {"@type":"Question","name":"Finns det ett spel som liknar 0-100?","acceptedAnswer":{"@type":"Answer","text":"Ja. Mer eller Mindre är ett svenskt frågespel i samma anda: ni jämför två saker och gissar hur det ligger till. Skillnaden är tvåstegs-twisten — först riktning, sedan storlek."}},
+      {"@type":"Question","name":"Vad är skillnaden mellan 0-100 och Mer eller Mindre?","acceptedAnswer":{"@type":"Answer","text":"I 0-100 svarar du med en enda siffra 0–100. I Mer eller Mindre gissar du först riktningen (mer eller mindre) och sedan hur stor skillnaden är. Rätt riktning ger bonus, och lägst total vinner."}},
+      {"@type":"Question","name":"Kan man spela ett 0-100-liknande frågespel online tillsammans?","acceptedAnswer":{"@type":"Answer","text":"Ja. Mer eller Mindre spelas i webbläsaren med en skärm var, tänkt för er som sitter i samma rum — som ett sällskapsspel, fast appen sköter frågor och poäng."}},
+      {"@type":"Question","name":"Behöver man köpa kort för att spela Mer eller Mindre?","acceptedAnswer":{"@type":"Answer","text":"Nej. Det spelas direkt i webbläsaren, inga fysiska kort att packa eller tappa bort. Den som är värd öppnar en omgång och delar koden."}}
+    ]}
+    """;
+}

@@ -7,3 +7,4 @@
 ## Sidor
 - [Om spelet](https://kvissig.se/om-spelet): vad spelet är, så spelar du, idén bakom, FAQ.
 - [Välj kviss](https://kvissig.se/): frågepaketen (kortlekarna) man kan spela.
+- [Spel som 0-100](https://kvissig.se/spel-som-0-100): hur Mer eller Mindre förhåller sig till 0-100 (tvåstegs-twisten).
