@@ -1,0 +1,176 @@
+﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Har BK Häcken fler eller färre SM-guld i fotboll än Örgryte IS?;BK Häcken;Örgryte IS;1;12;SM-guld;Hur många SM-guld skiljer det?
+Har IFK Norrköping fler eller färre SM-guld i fotboll än Helsingborgs IF?;IFK Norrköping;Helsingborgs IF;13;5;SM-guld;Hur många SM-guld skiljer det?
+Har IF Elfsborg fler eller färre SM-guld i fotboll än IFK Göteborg?;IF Elfsborg;IFK Göteborg;6;18;SM-guld;Hur många SM-guld skiljer det?
+Har Djurgårdens IF fler eller färre SM-guld i fotboll än GAIS?;Djurgårdens IF;GAIS;12;4;SM-guld;Hur många SM-guld skiljer det?
+Har BK Häcken fler eller färre SM-guld i fotboll än Helsingborgs IF?;BK Häcken;Helsingborgs IF;1;5;SM-guld;Hur många SM-guld skiljer det?
+Är IF Brommapojkarna äldre eller yngre som klubb än GAIS? (2026);IF Brommapojkarna;GAIS;84;132;år;Hur många år skiljer klubbarnas ålder?
+Är Hammarby IF äldre eller yngre som klubb än Kalmar FF? (2026);Hammarby IF;Kalmar FF;111;116;år;Hur många år skiljer klubbarnas ålder?
+Är IF Brommapojkarna äldre eller yngre som klubb än Helsingborgs IF? (2026);IF Brommapojkarna;Helsingborgs IF;84;119;år;Hur många år skiljer klubbarnas ålder?
+Hade Malmö FF högre eller lägre publiksnitt än Djurgårdens IF? (Allsvenskan 2024);Malmö FF;Djurgårdens IF;20273;19340;åskådare;Hur många åskådare skiljer publiksnittet?
+Hade IFK Göteborg högre eller lägre publiksnitt än Hammarby IF? (Allsvenskan 2024);IFK Göteborg;Hammarby IF;16846;23579;åskådare;Hur många åskådare skiljer publiksnittet?
+Hade AIK högre eller lägre publiksnitt än IF Elfsborg? (Allsvenskan 2024);AIK;IF Elfsborg;28589;8318;åskådare;Hur många åskådare skiljer publiksnittet?
+Hade AIK högre eller lägre publiksnitt än Kalmar FF? (Allsvenskan 2024);AIK;Kalmar FF;28589;6020;åskådare;Hur många åskådare skiljer publiksnittet?
+Hade GAIS högre eller lägre publiksnitt än Hammarby IF? (Allsvenskan 2024);GAIS;Hammarby IF;9011;23579;åskådare;Hur många åskådare skiljer publiksnittet?
+Gjorde Nikola Vasic fler eller färre mål än Alexander Jeremejeff under sin skyttekungssäsong? (Vasic 2024 vs Jeremejeff 2022);Nikola Vasic;Alexander Jeremejeff;17;22;mål;Hur många mål skiljer säsongerna?
+Gjorde Christofer Nyman fler eller färre mål än Samuel Adegbenro under sin skyttekungssäsong? (Nyman 2020 vs Adegbenro 2021);Christofer Nyman;Samuel Adegbenro;18;17;mål;Hur många mål skiljer säsongerna?
+Gjorde Paulinho fler eller färre mål än Isaac Kiese Thelin under sin skyttekungssäsong? (Paulinho 2018 vs Kiese Thelin 2023);Paulinho;Isaac Kiese Thelin;20;16;mål;Hur många mål skiljer säsongerna?
+Har Östers IF fler eller färre SM-guld i fotboll än IFK Norrköping?;Östers IF;IFK Norrköping;4;13;SM-guld;Hur många SM-guld skiljer det?
+Har Åtvidabergs FF fler eller färre SM-guld i fotboll än Halmstads BK?;Åtvidabergs FF;Halmstads BK;2;4;SM-guld;Hur många SM-guld skiljer det?
+Har IFK Norrköping fler eller färre SM-guld i fotboll än Degerfors IF?;IFK Norrköping;Degerfors IF;13;0;SM-guld;Hur många SM-guld skiljer det?
+Har GIF Sundsvall fler eller färre SM-guld i fotboll än Östers IF?;GIF Sundsvall;Östers IF;0;4;SM-guld;Hur många SM-guld skiljer det?
+Har Halmstads BK fler eller färre SM-guld i fotboll än Trelleborgs FF?;Halmstads BK;Trelleborgs FF;4;0;SM-guld;Hur många SM-guld skiljer det?
+Är Gefle IF en äldre eller yngre klubb än IK Sirius? (2026);Gefle IF;IK Sirius;144;119;år;Hur många år skiljer klubbarna i ålder?
+Är Åtvidabergs FF en äldre eller yngre klubb än Varbergs BoIS? (2026);Åtvidabergs FF;Varbergs BoIS;119;101;år;Hur många år skiljer klubbarna i ålder?
+Är Degerfors IF en äldre eller yngre klubb än Mjällby AIF? (2026);Degerfors IF;Mjällby AIF;119;87;år;Hur många år skiljer klubbarna i ålder?
+Är Trelleborgs FF en äldre eller yngre klubb än Halmstads BK? (2026);Trelleborgs FF;Halmstads BK;100;112;år;Hur många år skiljer klubbarna i ålder?
+Är Gefle IF en äldre eller yngre klubb än Varbergs BoIS? (2026);Gefle IF;Varbergs BoIS;144;101;år;Hur många år skiljer klubbarna i ålder?
+Hade IK Sirius högre eller lägre publiksnitt än IFK Norrköping? (Allsvenskan 2024);IK Sirius;IFK Norrköping;7033;8073;åskådare;Hur många åskådare skiljer publiksnitten?
+Har Örgryte IS fler eller färre SM-guld i fotboll än Åtvidabergs FF?;Örgryte IS;Åtvidabergs FF;12;2;SM-guld;Hur många SM-guld skiljer det?
+Hade IF Brommapojkarna högre eller lägre publiksnitt än Kalmar FF? (Allsvenskan 2024);IF Brommapojkarna;Kalmar FF;1907;6020;åskådare;Hur många åskådare skiljer publiksnitten?
+Gjorde Tobias Hysén fler eller färre mål än Alexander Gerndt under sin skyttekungssäsong? (Hysén 2009 vs Gerndt 2010);Tobias Hysén;Alexander Gerndt;18;20;mål;Hur många mål skiljer det mellan säsongerna?
+Gjorde Tobias Hysén fler eller färre mål än Marcus Berg under sin skyttekungssäsong? (Hysén 2009 vs Berg 2007);Tobias Hysén;Marcus Berg;18;14;mål;Hur många mål skiljer det mellan säsongerna?
+Gjorde Alexander Gerndt fler eller färre mål än Marcus Berg under sin skyttekungssäsong? (Gerndt 2010 vs Berg 2007);Alexander Gerndt;Marcus Berg;20;14;mål;Hur många mål skiljer det mellan säsongerna?
+Är IFK Eskilstuna en äldre eller yngre klubb än Falkenbergs FF? (2026);IFK Eskilstuna;Falkenbergs FF;129;98;år;Hur många år skiljer klubbarna i ålder?
+Är Trelleborgs FF en äldre eller yngre klubb än IFK Eskilstuna? (2026);Trelleborgs FF;IFK Eskilstuna;100;129;år;Hur många år skiljer klubbarna i ålder?
+Är GIF Sundsvall en äldre eller yngre klubb än Ljungskile SK? (2026);GIF Sundsvall;Ljungskile SK;123;100;år;Hur många år skiljer klubbarna i ålder?
+Är Jönköpings Södra IF en äldre eller yngre klubb än Västerås SK? (2026);Jönköpings Södra IF;Västerås SK;104;122;år;Hur många år skiljer klubbarna i ålder?
+Är Gefle IF en äldre eller yngre klubb än Sandvikens IF? (2026);Gefle IF;Sandvikens IF;144;108;år;Hur många år skiljer klubbarna i ålder?
+Har Östers IF fler eller färre SM-guld i fotboll än IFK Göteborg?;Östers IF;IFK Göteborg;4;18;SM-guld;Hur många SM-guld skiljer det?
+Har Landskrona BoIS fler eller färre SM-guld i fotboll än IF Elfsborg?;Landskrona BoIS;IF Elfsborg;0;6;SM-guld;Hur många SM-guld skiljer det?
+Har Degerfors IF fler eller färre SM-guld i fotboll än Halmstads BK?;Degerfors IF;Halmstads BK;0;4;SM-guld;Hur många SM-guld skiljer det?
+Har Mjällby AIF fler eller färre SM-guld i fotboll än Åtvidabergs FF?;Mjällby AIF;Åtvidabergs FF;1;2;SM-guld;Hur många SM-guld skiljer det?
+Har Östers IF fler eller färre SM-guld i fotboll än Landskrona BoIS?;Östers IF;Landskrona BoIS;4;0;SM-guld;Hur många SM-guld skiljer det?
+Hade Örebro SK högre eller lägre publiksnitt än Helsingborgs IF? (Superettan 2024);Örebro SK;Helsingborgs IF;4287;7299;åskådare;Hur många åskådare skiljer publiksnitten?
+Hade Örebro SK högre eller lägre publiksnitt än Degerfors IF? (Superettan 2024);Örebro SK;Degerfors IF;4287;3257;åskådare;Hur många åskådare skiljer publiksnitten?
+Gjorde Markus Berg fler eller färre mål än Peter Ijeh under respektive skyttekungssäsong? (Berg 2007 vs Ijeh 2002);Markus Berg;Peter Ijeh;14;24;mål;Hur många mål skiljer säsongerna?
+Gjorde Peter Ijeh fler eller färre mål än Imad Khalili under respektive skyttekungssäsong? (Ijeh 2002 vs Khalili 2013);Peter Ijeh;Imad Khalili;24;15;mål;Hur många mål skiljer säsongerna?
+Gjorde Markus Berg fler eller färre mål än Lasse Vibe under respektive skyttekungssäsong? (Berg 2007 vs Vibe 2014);Markus Berg;Lasse Vibe;14;23;mål;Hur många mål skiljer säsongerna?
+Gjorde Majeed Waris fler eller färre mål än Markus Rosenberg under respektive skyttekungssäsong? (Waris 2012 vs Rosenberg 2004);Majeed Waris;Markus Rosenberg;23;14;mål;Hur många mål skiljer säsongerna?
+Gjorde Imad Khalili fler eller färre mål än Majeed Waris under respektive skyttekungssäsong? (Khalili 2013 vs Waris 2012);Imad Khalili;Majeed Waris;15;23;mål;Hur många mål skiljer säsongerna?
+Gjorde Mathias Ranégie fler eller färre mål än Markus Rosenberg under respektive skyttekungssäsong? (Ranégie 2011 vs Rosenberg 2004);Mathias Ranégie;Markus Rosenberg;21;14;mål;Hur många mål skiljer säsongerna?
+Gjorde Imad Khalili fler eller färre mål än Emir Kujovic under respektive skyttekungssäsong? (Khalili 2013 vs Kujovic 2015);Imad Khalili;Emir Kujovic;15;21;mål;Hur många mål skiljer säsongerna?
+Gjorde Markus Rosenberg fler eller färre mål än Lasse Vibe under respektive skyttekungssäsong? (Rosenberg 2004 vs Vibe 2014);Markus Rosenberg;Lasse Vibe;14;23;mål;Hur många mål skiljer säsongerna?
+Gjorde Emir Kujovic fler eller färre mål än Markus Rosenberg under respektive skyttekungssäsong? (Kujovic 2015 vs Rosenberg 2004);Emir Kujovic;Markus Rosenberg;21;14;mål;Hur många mål skiljer säsongerna?
+Gjorde Markus Berg fler eller färre mål än Mathias Ranégie under respektive skyttekungssäsong? (Berg 2007 vs Ranégie 2011);Markus Berg;Mathias Ranégie;14;21;mål;Hur många mål skiljer säsongerna?
+Gjorde Mathias Ranégie fler eller färre mål än Lasse Vibe under respektive skyttekungssäsong? (Ranégie 2011 vs Vibe 2014);Mathias Ranégie;Lasse Vibe;21;23;mål;Hur många mål skiljer säsongerna?
+Gjorde Imad Khalili fler eller färre mål än Markus Berg under respektive skyttekungssäsong? (Khalili 2013 vs Berg 2007);Imad Khalili;Markus Berg;15;14;mål;Hur många mål skiljer säsongerna?
+Har Sandvikens IF fler eller färre SM-guld i fotboll än GAIS?;Sandvikens IF;GAIS;0;4;SM-guld;Hur många SM-guld skiljer det?
+Är IFK Sundsvall en äldre eller yngre klubb än Syrianska FC? (2026);IFK Sundsvall;Syrianska FC;131;49;år;Hur många år skiljer klubbarna åt i ålder?
+Är IFK Sundsvall en äldre eller yngre klubb än Assyriska FF? (2026);IFK Sundsvall;Assyriska FF;131;52;år;Hur många år skiljer klubbarna åt i ålder?
+Är Syrianska FC en äldre eller yngre klubb än Sandvikens IF? (2026);Syrianska FC;Sandvikens IF;49;127;år;Hur många år skiljer klubbarna åt i ålder?
+Är IFK Sundsvall en äldre eller yngre klubb än Västerås SK? (2026);IFK Sundsvall;Västerås SK;131;122;år;Hur många år skiljer klubbarna åt i ålder?
+Är IFK Värnamo en äldre eller yngre klubb än Sandvikens IF? (2026);IFK Värnamo;Sandvikens IF;114;127;år;Hur många år skiljer klubbarna åt i ålder?
+Är IFK Sundsvall en äldre eller yngre klubb än Ljungskile SK? (2026);IFK Sundsvall;Ljungskile SK;131;100;år;Hur många år skiljer klubbarna åt i ålder?
+Är Örebro SK en äldre eller yngre klubb än Falkenbergs FF? (2026);Örebro SK;Falkenbergs FF;118;98;år;Hur många år skiljer klubbarna åt i ålder?
+Är Assyriska FF en äldre eller yngre klubb än Gefle IF? (2026);Assyriska FF;Gefle IF;52;144;år;Hur många år skiljer klubbarna åt i ålder?
+Gjorde Filip Johansson fler eller färre mål än Razak Omotoyossi under respektive skyttekungssäsong? (Johansson 1924/25 vs Omotoyossi 2007);Filip Johansson;Razak Omotoyossi;39;14;mål;Hur många mål skiljer säsongerna åt?
+Gjorde Gunnar Nordahl fler eller färre mål än Marcus Allbäck under respektive skyttekungssäsong? (Nordahl 1945 vs Allbäck 1999);Gunnar Nordahl;Marcus Allbäck;27;15;mål;Hur många mål skiljer säsongerna åt?
+Gjorde Niklas Skoog fler eller färre mål än Gunnar Nordahl under respektive skyttekungssäsong? (Skoog 1995 vs Nordahl 1945);Niklas Skoog;Gunnar Nordahl;17;27;mål;Hur många mål skiljer säsongerna åt?
+Gjorde Marcus Allbäck fler eller färre mål än Niklas Skoog under respektive skyttekungssäsong? (Allbäck 1999 vs Skoog 1995);Marcus Allbäck;Niklas Skoog;15;17;mål;Hur många mål skiljer säsongerna åt?
+Hade IFK Värnamo högre eller lägre publiksnitt än Västerås SK? (Allsvenskan 2024);IFK Värnamo;Västerås SK;2304;6331;åskådare;Hur många åskådare skiljer publiksnitten åt?
+Hade Västerås SK högre eller lägre publiksnitt än Mjällby AIF? (Allsvenskan 2024);Västerås SK;Mjällby AIF;6331;3711;åskådare;Hur många åskådare skiljer publiksnitten åt?
+Hade IK Brage högre eller lägre publiksnitt än Trelleborgs FF? (Superettan 2024);IK Brage;Trelleborgs FF;2037;1005;åskådare;Hur många åskådare skiljer publiksnitten åt?
+Har Anders Svensson fler eller färre A-landskamper för Sverige än Pontus Wernbloom?;Anders Svensson;Pontus Wernbloom;148;51;landskamper;Hur många landskamper skiljer det?
+Har Anders Svensson fler eller färre A-landskamper för Sverige än Andreas Granqvist?;Anders Svensson;Andreas Granqvist;148;88;landskamper;Hur många landskamper skiljer det?
+Har Andreas Isaksson fler eller färre A-landskamper för Sverige än Andreas Granqvist?;Andreas Isaksson;Andreas Granqvist;133;88;landskamper;Hur många landskamper skiljer det?
+Har Kim Källström fler eller färre A-landskamper för Sverige än Pontus Wernbloom?;Kim Källström;Pontus Wernbloom;131;51;landskamper;Hur många landskamper skiljer det?
+Har Sebastian Larsson fler eller färre A-landskamper för Sverige än Olof Mellberg?;Sebastian Larsson;Olof Mellberg;133;117;landskamper;Hur många landskamper skiljer det?
+Har Roland Nilsson fler eller färre A-landskamper för Sverige än Niclas Alexandersson?;Roland Nilsson;Niclas Alexandersson;116;109;landskamper;Hur många landskamper skiljer det?
+Har Patrik Andersson fler eller färre A-landskamper för Sverige än Zlatan Ibrahimović?;Patrik Andersson;Zlatan Ibrahimović;96;122;landskamper;Hur många landskamper skiljer det?
+Har Thomas Ravelli fler eller färre A-landskamper för Sverige än Pontus Wernbloom?;Thomas Ravelli;Pontus Wernbloom;143;51;landskamper;Hur många landskamper skiljer det?
+Har Mikael Lustig fler eller färre A-landskamper för Sverige än Anders Svensson?;Mikael Lustig;Anders Svensson;94;148;landskamper;Hur många landskamper skiljer det?
+Har Henrik Larsson gjort fler eller färre A-landslagsmål för Sverige än Zlatan Ibrahimović?;Henrik Larsson;Zlatan Ibrahimović;37;62;mål;Hur många mål skiljer det?
+Har Tomas Brolin gjort fler eller färre A-landslagsmål för Sverige än Sven Rydell?;Tomas Brolin;Sven Rydell;27;49;mål;Hur många mål skiljer det?
+Har Gunnar Nordahl gjort fler eller färre A-landslagsmål för Sverige än Emil Forsberg?;Gunnar Nordahl;Emil Forsberg;43;21;mål;Hur många mål skiljer det?
+Har Kennet Andersson gjort fler eller färre A-landslagsmål för Sverige än Sven Rydell?;Kennet Andersson;Sven Rydell;31;49;mål;Hur många mål skiljer det?
+Har Johan Elmander gjort fler eller färre A-landslagsmål för Sverige än Zlatan Ibrahimović?;Johan Elmander;Zlatan Ibrahimović;20;62;mål;Hur många mål skiljer det?
+Har Marcus Allbäck gjort fler eller färre A-landslagsmål för Sverige än Gunnar Nordahl?;Marcus Allbäck;Gunnar Nordahl;30;43;mål;Hur många mål skiljer det?
+Har Tomas Brolin gjort fler eller färre A-landslagsmål för Sverige än Kennet Andersson?;Tomas Brolin;Kennet Andersson;27;31;mål;Hur många mål skiljer det?
+Har Emil Forsberg gjort fler eller färre A-landslagsmål för Sverige än Henrik Larsson?;Emil Forsberg;Henrik Larsson;21;37;mål;Hur många mål skiljer det?
+Är IFK Värnamo en äldre eller yngre klubb än FC Stockholm Internazionale? (2026);IFK Värnamo;FC Stockholm Internazionale;114;16;år;Hur många år skiljer det i ålder?
+Är Dalkurd FF en äldre eller yngre klubb än Örgryte IS? (2026);Dalkurd FF;Örgryte IS;22;139;år;Hur många år skiljer det i ålder?
+Är AFC Eskilstuna en äldre eller yngre klubb än GIF Sundsvall? (2026);AFC Eskilstuna;GIF Sundsvall;19;123;år;Hur många år skiljer det i ålder?
+Är FC Stockholm Internazionale en äldre eller yngre klubb än Landskrona BoIS? (2026);FC Stockholm Internazionale;Landskrona BoIS;16;111;år;Hur många år skiljer det i ålder?
+Är Dalkurd FF en äldre eller yngre klubb än IK Sirius? (2026);Dalkurd FF;IK Sirius;22;119;år;Hur många år skiljer det i ålder?
+Är Örgryte IS en äldre eller yngre klubb än Syrianska FC? (2026);Örgryte IS;Syrianska FC;139;49;år;Hur många år skiljer det i ålder?
+Är GIF Sundsvall en äldre eller yngre klubb än Assyriska FF? (2026);GIF Sundsvall;Assyriska FF;123;52;år;Hur många år skiljer det i ålder?
+Är IK Sirius en äldre eller yngre klubb än Vasalunds IF? (2026);IK Sirius;Vasalunds IF;119;92;år;Hur många år skiljer det i ålder?
+Är Landskrona BoIS en äldre eller yngre klubb än Utsiktens BK? (2026);Landskrona BoIS;Utsiktens BK;111;91;år;Hur många år skiljer det i ålder?
+Är AFC Eskilstuna en äldre eller yngre klubb än IFK Värnamo? (2026);AFC Eskilstuna;IFK Värnamo;19;114;år;Hur många år skiljer det i ålder?
+Har Björn Nordqvist fler eller färre A-landskamper för Sverige än Alexander Isak?;Björn Nordqvist;Alexander Isak;115;61;landskamper;Hur många landskamper skiljer det?
+Har Olof Mellberg fler eller färre A-landskamper för Sverige än Dejan Kulusevski?;Olof Mellberg;Dejan Kulusevski;117;45;landskamper;Hur många landskamper skiljer det?
+Har Roland Nilsson fler eller färre A-landskamper för Sverige än Glenn Strömberg?;Roland Nilsson;Glenn Strömberg;116;52;landskamper;Hur många landskamper skiljer det?
+Har Teddy Lučić fler eller färre A-landskamper för Sverige än Klas Ingesson?;Teddy Lučić;Klas Ingesson;86;57;landskamper;Hur många landskamper skiljer det?
+Har Glenn Hysén fler eller färre A-landskamper för Sverige än Victor Lindelöf?;Glenn Hysén;Victor Lindelöf;68;73;landskamper;Hur många landskamper skiljer det?
+Har Bo Larsson fler eller färre A-landskamper för Sverige än Emil Krafth?;Bo Larsson;Emil Krafth;70;52;landskamper;Hur många landskamper skiljer det?
+Har Stefan Schwarz fler eller färre A-landskamper för Sverige än Jonas Thern?;Stefan Schwarz;Jonas Thern;69;75;landskamper;Hur många landskamper skiljer det?
+Har Ralf Edström fler eller färre A-landskamper för Sverige än Björn Nordqvist?;Ralf Edström;Björn Nordqvist;40;115;landskamper;Hur många landskamper skiljer det?
+Har Orvar Bergmark fler eller färre A-landskamper för Sverige än Alexander Isak?;Orvar Bergmark;Alexander Isak;94;61;landskamper;Hur många landskamper skiljer det?
+Har Robert Prytz fler eller färre A-landskamper för Sverige än Ola Toivonen?;Robert Prytz;Ola Toivonen;56;64;landskamper;Hur många landskamper skiljer det?
+Har Nils Liedholm fler eller färre A-landskamper för Sverige än Olof Mellberg?;Nils Liedholm;Olof Mellberg;23;117;landskamper;Hur många landskamper skiljer det?
+Har Agne Simonsson fler eller färre A-landskamper för Sverige än Thomas Ravelli?;Agne Simonsson;Thomas Ravelli;51;143;landskamper;Hur många landskamper skiljer det?
+Har Ludwig Augustinsson fler eller färre A-landskamper för Sverige än Roland Nilsson?;Ludwig Augustinsson;Roland Nilsson;56;116;landskamper;Hur många landskamper skiljer det?
+Har Albin Ekdal fler eller färre A-landskamper för Sverige än Glenn Hysén?;Albin Ekdal;Glenn Hysén;70;68;landskamper;Hur många landskamper skiljer det?
+Har Gunnar Gren fler eller färre A-landskamper för Sverige än Teddy Lučić?;Gunnar Gren;Teddy Lučić;57;86;landskamper;Hur många landskamper skiljer det?
+Har Nils Liedholm fler eller färre A-landskamper för Sverige än Thomas Ravelli?;Nils Liedholm;Thomas Ravelli;23;143;landskamper;Hur många landskamper skiljer det?
+Har Martin Dahlin gjort fler eller färre A-landslagsmål för Sverige än Ola Toivonen?;Martin Dahlin;Ola Toivonen;29;14;mål;Hur många mål skiljer det?
+Har Sven Rydell gjort fler eller färre A-landslagsmål för Sverige än Dejan Kulusevski?;Sven Rydell;Dejan Kulusevski;49;5;mål;Hur många mål skiljer det?
+Har Henrik Larsson gjort fler eller färre A-landslagsmål för Sverige än Victor Lindelöf?;Henrik Larsson;Victor Lindelöf;37;3;mål;Hur många mål skiljer det?
+Har Agne Simonsson gjort fler eller färre A-landslagsmål för Sverige än Bo Larsson?;Agne Simonsson;Bo Larsson;27;17;mål;Hur många mål skiljer det?
+Har Kennet Andersson gjort fler eller färre A-landslagsmål för Sverige än Dejan Kulusevski?;Kennet Andersson;Dejan Kulusevski;31;5;mål;Hur många mål skiljer det?
+Har Ralf Edström gjort fler eller färre A-landslagsmål för Sverige än Martin Dahlin?;Ralf Edström;Martin Dahlin;15;29;mål;Hur många mål skiljer det?
+Har Sven Rydell gjort fler eller färre A-landslagsmål för Sverige än Kurt Hamrin?;Sven Rydell;Kurt Hamrin;49;17;mål;Hur många mål skiljer det?
+Är Karlslunds IF en äldre eller yngre klubb än Täby FK? (2026);Karlslunds IF;Täby FK;106;14;år;Hur många år skiljer det i ålder?
+Har Christian Wilhelmsson fler eller färre A-landskamper för Sverige än Lennart Skoglund?;Christian Wilhelmsson;Lennart Skoglund;79;11;landskamper;Hur många landskamper skiljer det?
+Har Lennart Skoglund fler eller färre A-landskamper för Sverige än Joachim Björklund?;Lennart Skoglund;Joachim Björklund;11;78;landskamper;Hur många landskamper skiljer det?
+Har Viktor Gyökeres gjort fler eller färre A-landslagsmål för Sverige än Lennart Skoglund?;Viktor Gyökeres;Lennart Skoglund;20;1;mål;Hur många mål skiljer det?
+Har Lennart Skoglund gjort fler eller färre A-landslagsmål för Sverige än Kurt Hamrin?;Lennart Skoglund;Kurt Hamrin;1;17;mål;Hur många mål skiljer det?
+Har Robin Olsen fler eller färre A-landskamper för Sverige än Hasse Jeppson?;Robin Olsen;Hasse Jeppson;79;12;landskamper;Hur många landskamper skiljer det?
+Har Hasse Jeppson fler eller färre A-landskamper för Sverige än Daniel Andersson?;Hasse Jeppson;Daniel Andersson;12;74;landskamper;Hur många landskamper skiljer det?
+Har John Guidetti fler eller färre A-landskamper för Sverige än Håkan Mild?;John Guidetti;Håkan Mild;29;74;landskamper;Hur många landskamper skiljer det?
+Har Jimmy Durmaz gjort fler eller färre A-landslagsmål för Sverige än Kurt Hamrin?;Jimmy Durmaz;Kurt Hamrin;3;17;mål;Hur många mål skiljer det?
+Har John Guidetti gjort fler eller färre A-landslagsmål för Sverige än Viktor Gyökeres?;John Guidetti;Viktor Gyökeres;3;20;mål;Hur många mål skiljer det?
+Har John Guidetti gjort fler eller färre A-landslagsmål för Sverige än Kurt Hamrin?;John Guidetti;Kurt Hamrin;3;17;mål;Hur många mål skiljer det?
+Har Jimmy Durmaz gjort fler eller färre A-landslagsmål för Sverige än Viktor Gyökeres?;Jimmy Durmaz;Viktor Gyökeres;3;20;mål;Hur många mål skiljer det?
+Har Anders Limpar fler eller färre A-landskamper för Sverige än Hasse Jeppson?;Anders Limpar;Hasse Jeppson;58;12;landskamper;Hur många landskamper skiljer det?
+Har Anders Limpar fler eller färre A-landskamper för Sverige än Pontus Kåmark?;Anders Limpar;Pontus Kåmark;58;57;landskamper;Hur många landskamper skiljer det?
+Har Joachim Björklund fler eller färre A-landskamper för Sverige än Håkan Mild?;Joachim Björklund;Håkan Mild;78;74;landskamper;Hur många landskamper skiljer det?
+Har Pontus Kåmark fler eller färre A-landskamper för Sverige än Mattias Svanberg?;Pontus Kåmark;Mattias Svanberg;57;41;landskamper;Hur många landskamper skiljer det?
+Har Pierre Bengtsson fler eller färre A-landskamper för Sverige än Gustav Svensson?;Pierre Bengtsson;Gustav Svensson;42;32;landskamper;Hur många landskamper skiljer det?
+Har Jimmy Durmaz fler eller färre A-landskamper för Sverige än Daniel Andersson?;Jimmy Durmaz;Daniel Andersson;49;74;landskamper;Hur många landskamper skiljer det?
+Har Gustav Svensson fler eller färre A-landskamper för Sverige än Robin Olsen?;Gustav Svensson;Robin Olsen;32;79;landskamper;Hur många landskamper skiljer det?
+Har Anders Limpar fler eller färre A-landskamper för Sverige än Christian Wilhelmsson?;Anders Limpar;Christian Wilhelmsson;58;79;landskamper;Hur många landskamper skiljer det?
+Har Christian Wilhelmsson gjort fler eller färre A-landslagsmål för Sverige än Jimmy Durmaz?;Christian Wilhelmsson;Jimmy Durmaz;9;3;mål;Hur många mål skiljer det?
+Har Hasse Jeppson gjort fler eller färre A-landslagsmål för Sverige än Anders Limpar?;Hasse Jeppson;Anders Limpar;9;6;mål;Hur många mål skiljer det?
+Har Pierre Bengtsson fler eller färre A-landskamper för Sverige än Pontus Kåmark?;Pierre Bengtsson;Pontus Kåmark;42;57;landskamper;Hur många landskamper skiljer det?
+Har Robin Olsen fler eller färre A-landskamper för Sverige än Pierre Bengtsson?;Robin Olsen;Pierre Bengtsson;79;42;landskamper;Hur många landskamper skiljer det?
+Har Håkan Mild fler eller färre A-landskamper för Sverige än Mattias Svanberg?;Håkan Mild;Mattias Svanberg;74;41;landskamper;Hur många landskamper skiljer det?
+Har Pontus Kåmark fler eller färre A-landskamper för Sverige än Joachim Björklund?;Pontus Kåmark;Joachim Björklund;57;78;landskamper;Hur många landskamper skiljer det?
+Har Andreas Isaksson fler eller färre A-landskamper för Sverige än Joel Asoro?;Andreas Isaksson;Joel Asoro;133;2;landskamper;Hur många landskamper skiljer det?
+Har Joel Asoro fler eller färre A-landskamper för Sverige än Daniel Majstorović?;Joel Asoro;Daniel Majstorović;2;50;landskamper;Hur många landskamper skiljer det?
+Har Sebastian Andersson fler eller färre A-landskamper för Sverige än Andreas Isaksson?;Sebastian Andersson;Andreas Isaksson;9;133;landskamper;Hur många landskamper skiljer det?
+Har Oscar Lewicki fler eller färre A-landskamper för Sverige än Sebastian Larsson?;Oscar Lewicki;Sebastian Larsson;15;133;landskamper;Hur många landskamper skiljer det?
+Har Kim Källström fler eller färre A-landskamper för Sverige än Carl Starfelt?;Kim Källström;Carl Starfelt;131;18;landskamper;Hur många landskamper skiljer det?
+Har Behrang Safari fler eller färre A-landskamper för Sverige än Thomas Ravelli?;Behrang Safari;Thomas Ravelli;31;143;landskamper;Hur många landskamper skiljer det?
+Har Sebastian Larsson fler eller färre A-landskamper för Sverige än Behrang Safari?;Sebastian Larsson;Behrang Safari;133;31;landskamper;Hur många landskamper skiljer det?
+Har Marcus Danielson fler eller färre A-landskamper för Sverige än Kim Källström?;Marcus Danielson;Kim Källström;19;131;landskamper;Hur många landskamper skiljer det?
+Har Filip Helander fler eller färre A-landskamper för Sverige än Andreas Isaksson?;Filip Helander;Andreas Isaksson;21;133;landskamper;Hur många landskamper skiljer det?
+Har Isak Hien fler eller färre A-landskamper för Sverige än Björn Nordqvist?;Isak Hien;Björn Nordqvist;29;115;landskamper;Hur många landskamper skiljer det?
+Har Rasmus Elm fler eller färre A-landskamper för Sverige än Sebastian Andersson?;Rasmus Elm;Sebastian Andersson;39;9;landskamper;Hur många landskamper skiljer det?
+Har Behrang Safari fler eller färre A-landskamper för Sverige än Robin Quaison?;Behrang Safari;Robin Quaison;31;52;landskamper;Hur många landskamper skiljer det?
+Har Kim Källström gjort fler eller färre A-landslagsmål för Sverige än Sebastian Andersson?;Kim Källström;Sebastian Andersson;16;3;mål;Hur många mål skiljer det?
+Har Arne Nyberg gjort fler eller färre A-landslagsmål för Sverige än Marcus Danielson?;Arne Nyberg;Marcus Danielson;18;3;mål;Hur många mål skiljer det?
+Har Marcus Danielson gjort fler eller färre A-landslagsmål för Sverige än Henry Garvis Carlsson?;Marcus Danielson;Henry Garvis Carlsson;3;17;mål;Hur många mål skiljer det?
+Har Sebastian Andersson gjort fler eller färre A-landslagsmål för Sverige än Anthony Elanga?;Sebastian Andersson;Anthony Elanga;3;6;mål;Hur många mål skiljer det?
+Har Robin Quaison fler eller färre A-landskamper för Sverige än Isak Hien?;Robin Quaison;Isak Hien;52;29;landskamper;Hur många landskamper skiljer det?
+Har Daniel Majstorović fler eller färre A-landskamper för Sverige än Carl Starfelt?;Daniel Majstorović;Carl Starfelt;50;18;landskamper;Hur många landskamper skiljer det?
+Har Rasmus Elm fler eller färre A-landskamper för Sverige än Pontus Jansson?;Rasmus Elm;Pontus Jansson;39;27;landskamper;Hur många landskamper skiljer det?
+Har Isak Hien fler eller färre A-landskamper för Sverige än Rasmus Elm?;Isak Hien;Rasmus Elm;29;39;landskamper;Hur många landskamper skiljer det?
+Har Oscar Lewicki fler eller färre A-landskamper för Sverige än Isak Hien?;Oscar Lewicki;Isak Hien;15;29;landskamper;Hur många landskamper skiljer det?
+Har Jesper Karlström fler eller färre A-landskamper för Sverige än Carl Starfelt?;Jesper Karlström;Carl Starfelt;25;18;landskamper;Hur många landskamper skiljer det?
+Har Filip Helander fler eller färre A-landskamper för Sverige än Oscar Lewicki?;Filip Helander;Oscar Lewicki;21;15;landskamper;Hur många landskamper skiljer det?
+Har Robin Quaison fler eller färre A-landskamper för Sverige än Jesper Karlström?;Robin Quaison;Jesper Karlström;52;25;landskamper;Hur många landskamper skiljer det?
+Har Anthony Elanga gjort fler eller färre A-landslagsmål för Sverige än Marcus Danielson?;Anthony Elanga;Marcus Danielson;6;3;mål;Hur många mål skiljer det?
+Har Pontus Jansson fler eller färre A-landskamper för Sverige än Anthony Elanga?;Pontus Jansson;Anthony Elanga;27;31;landskamper;Hur många landskamper skiljer det?
+Har Behrang Safari fler eller färre A-landskamper för Sverige än Carl Starfelt?;Behrang Safari;Carl Starfelt;31;18;landskamper;Hur många landskamper skiljer det?
