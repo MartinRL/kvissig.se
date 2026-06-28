@@ -1,0 +1,18 @@
+fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Har Östers IF fler eller färre SM-guld i fotboll än IFK Norrköping?;Östers IF;IFK Norrköping;4;13;SM-guld;Hur många SM-guld skiljer det?
+Har Åtvidabergs FF fler eller färre SM-guld i fotboll än Halmstads BK?;Åtvidabergs FF;Halmstads BK;2;4;SM-guld;Hur många SM-guld skiljer det?
+Har IFK Norrköping fler eller färre SM-guld i fotboll än Degerfors IF?;IFK Norrköping;Degerfors IF;13;0;SM-guld;Hur många SM-guld skiljer det?
+Har GIF Sundsvall fler eller färre SM-guld i fotboll än Östers IF?;GIF Sundsvall;Östers IF;0;4;SM-guld;Hur många SM-guld skiljer det?
+Har Halmstads BK fler eller färre SM-guld i fotboll än Trelleborgs FF?;Halmstads BK;Trelleborgs FF;4;0;SM-guld;Hur många SM-guld skiljer det?
+Har Mjällby AIF fler eller färre SM-guld i fotboll än Örgryte IS?;Mjällby AIF;Örgryte IS;1;12;SM-guld;Hur många SM-guld skiljer det?
+Är Gefle IF en äldre eller yngre klubb än IK Sirius? (2026);Gefle IF;IK Sirius;144;119;år;Hur många år skiljer klubbarna i ålder?
+Är Åtvidabergs FF en äldre eller yngre klubb än Varbergs BoIS? (2026);Åtvidabergs FF;Varbergs BoIS;119;101;år;Hur många år skiljer klubbarna i ålder?
+Är Degerfors IF en äldre eller yngre klubb än Mjällby AIF? (2026);Degerfors IF;Mjällby AIF;119;87;år;Hur många år skiljer klubbarna i ålder?
+Är Trelleborgs FF en äldre eller yngre klubb än Halmstads BK? (2026);Trelleborgs FF;Halmstads BK;100;112;år;Hur många år skiljer klubbarna i ålder?
+Är Gefle IF en äldre eller yngre klubb än Varbergs BoIS? (2026);Gefle IF;Varbergs BoIS;144;101;år;Hur många år skiljer klubbarna i ålder?
+Hade IK Sirius högre eller lägre publiksnitt än IFK Norrköping? (Allsvenskan 2024);IK Sirius;IFK Norrköping;7033;8073;åskådare;Hur många åskådare skiljer publiksnitten?
+Har Örgryte IS fler eller färre SM-guld i fotboll än Åtvidabergs FF?;Örgryte IS;Åtvidabergs FF;12;2;SM-guld;Hur många SM-guld skiljer det?
+Hade IF Brommapojkarna högre eller lägre publiksnitt än Kalmar FF? (Allsvenskan 2024);IF Brommapojkarna;Kalmar FF;1907;6020;åskådare;Hur många åskådare skiljer publiksnitten?
+Gjorde Tobias Hysén fler eller färre mål än Alexander Gerndt under sin skyttekungssäsong? (Hysén 2009 vs Gerndt 2010);Tobias Hysén;Alexander Gerndt;18;20;mål;Hur många mål skiljer det mellan säsongerna?
+Gjorde Tobias Hysén fler eller färre mål än Marcus Berg under sin skyttekungssäsong? (Hysén 2009 vs Berg 2007);Tobias Hysén;Marcus Berg;18;14;mål;Hur många mål skiljer det mellan säsongerna?
+Gjorde Alexander Gerndt fler eller färre mål än Marcus Berg under sin skyttekungssäsong? (Gerndt 2010 vs Berg 2007);Alexander Gerndt;Marcus Berg;20;14;mål;Hur många mål skiljer det mellan säsongerna?

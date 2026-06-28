@@ -1,0 +1,26 @@
+﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Har Malmö FF fler eller färre SM-guld i fotboll än Hammarby?;Malmö FF;Hammarby IF;24;1;SM-guld;Hur många SM-guld skiljer det?
+Har BK Häcken fler eller färre SM-guld i fotboll än Örgryte IS?;BK Häcken;Örgryte IS;1;12;SM-guld;Hur många SM-guld skiljer det?
+Har IFK Norrköping fler eller färre SM-guld i fotboll än Helsingborgs IF?;IFK Norrköping;Helsingborgs IF;13;5;SM-guld;Hur många SM-guld skiljer det?
+Har IF Elfsborg fler eller färre SM-guld i fotboll än IFK Göteborg?;IF Elfsborg;IFK Göteborg;6;18;SM-guld;Hur många SM-guld skiljer det?
+Har Djurgårdens IF fler eller färre SM-guld i fotboll än GAIS?;Djurgårdens IF;GAIS;12;4;SM-guld;Hur många SM-guld skiljer det?
+Har BK Häcken fler eller färre SM-guld i fotboll än Helsingborgs IF?;BK Häcken;Helsingborgs IF;1;5;SM-guld;Hur många SM-guld skiljer det?
+Är Örgryte IS äldre eller yngre som klubb än BK Häcken? (2026);Örgryte IS;BK Häcken;139;86;år;Hur många år skiljer klubbarnas ålder?
+Är IF Brommapojkarna äldre eller yngre som klubb än GAIS? (2026);IF Brommapojkarna;GAIS;84;132;år;Hur många år skiljer klubbarnas ålder?
+Är Hammarby IF äldre eller yngre som klubb än Kalmar FF? (2026);Hammarby IF;Kalmar FF;111;116;år;Hur många år skiljer klubbarnas ålder?
+Är IF Brommapojkarna äldre eller yngre som klubb än Helsingborgs IF? (2026);IF Brommapojkarna;Helsingborgs IF;84;119;år;Hur många år skiljer klubbarnas ålder?
+Var Malmö FF:s truppvärde högre eller lägre än IFK Göteborgs? (Transfermarkt 2024);Malmö FF;IFK Göteborg;430;150;mkr;Hur många miljoner kronor skiljer truppvärdet?
+Var AIK:s truppvärde högre eller lägre än Hammarby IF:s? (Transfermarkt 2024);AIK;Hammarby IF;230;310;mkr;Hur många miljoner kronor skiljer truppvärdet?
+Var BK Häckens truppvärde högre eller lägre än Kalmar FF:s? (Transfermarkt 2024);BK Häcken;Kalmar FF;200;70;mkr;Hur många miljoner kronor skiljer truppvärdet?
+Var Djurgårdens IF:s truppvärde högre eller lägre än IF Elfsborgs? (Transfermarkt 2024);Djurgårdens IF;IF Elfsborg;280;190;mkr;Hur många miljoner kronor skiljer truppvärdet?
+Var Malmö FF:s truppvärde högre eller lägre än Djurgårdens IF:s? (Transfermarkt 2024);Malmö FF;Djurgårdens IF;430;280;mkr;Hur många miljoner kronor skiljer truppvärdet?
+Var Malmö FF:s truppvärde högre eller lägre än AIK:s? (Transfermarkt 2024);Malmö FF;AIK;430;230;mkr;Hur många miljoner kronor skiljer truppvärdet?
+Hade Malmö FF högre eller lägre publiksnitt än Djurgårdens IF? (Allsvenskan 2024);Malmö FF;Djurgårdens IF;20273;19340;åskådare;Hur många åskådare skiljer publiksnittet?
+Hade IFK Göteborg högre eller lägre publiksnitt än Hammarby IF? (Allsvenskan 2024);IFK Göteborg;Hammarby IF;16846;23579;åskådare;Hur många åskådare skiljer publiksnittet?
+Hade AIK högre eller lägre publiksnitt än IF Elfsborg? (Allsvenskan 2024);AIK;IF Elfsborg;28589;8318;åskådare;Hur många åskådare skiljer publiksnittet?
+Hade AIK högre eller lägre publiksnitt än Kalmar FF? (Allsvenskan 2024);AIK;Kalmar FF;28589;6020;åskådare;Hur många åskådare skiljer publiksnittet?
+Hade GAIS högre eller lägre publiksnitt än Hammarby IF? (Allsvenskan 2024);GAIS;Hammarby IF;9011;23579;åskådare;Hur många åskådare skiljer publiksnittet?
+Gjorde Nikola Vasic fler eller färre mål än Alexander Jeremejeff under sin skyttekungssäsong? (Vasic 2024 vs Jeremejeff 2022);Nikola Vasic;Alexander Jeremejeff;17;22;mål;Hur många mål skiljer säsongerna?
+Gjorde Christofer Nyman fler eller färre mål än Samuel Adegbenro under sin skyttekungssäsong? (Nyman 2020 vs Adegbenro 2021);Christofer Nyman;Samuel Adegbenro;18;17;mål;Hur många mål skiljer säsongerna?
+Gjorde Paulinho fler eller färre mål än Isaac Kiese Thelin under sin skyttekungssäsong? (Paulinho 2018 vs Kiese Thelin 2023);Paulinho;Isaac Kiese Thelin;20;16;mål;Hur många mål skiljer säsongerna?
+Var IF Brommapojkarnas truppvärde högre eller lägre än Hammarby IF:s? (Transfermarkt 2024);IF Brommapojkarna;Hammarby IF;120;310;mkr;Hur många miljoner kronor skiljer truppvärdet?
