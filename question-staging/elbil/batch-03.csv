@@ -1,0 +1,21 @@
+fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Har en Skoda Enyaq längre eller kortare räckvidd än en Volvo EX30 Single Motor?;Skoda Enyaq 85;Volvo EX30 Single Motor;563;344;km;Hur många km skiljer WLTP-räckvidden?
+Har en BYD Atto 3 längre eller kortare räckvidd än en Polestar 3 Long Range?;BYD Atto 3;Polestar 3 Long Range Single Motor;420;650;km;Hur många km skiljer WLTP-räckvidden?
+Har en Opel Mokka Electric längre eller kortare räckvidd än en Jeep Avenger?;Opel Mokka Electric;Jeep Avenger;338;396;km;Hur många km skiljer WLTP-räckvidden?
+Har en Fiat 500e längre eller kortare räckvidd än en Zeekr 001?;Fiat 500e;Zeekr 001 Long Range;320;620;km;Hur många km skiljer WLTP-räckvidden?
+Har en Honda e:Ny1 längre eller kortare räckvidd än en Kia Niro EV?;Honda e:Ny1;Kia Niro EV;412;460;km;Hur många km skiljer WLTP-räckvidden?
+Har en Cupra Born längre eller kortare räckvidd än en BYD Dolphin?;Cupra Born;BYD Dolphin;425;427;km;Hur många km skiljer WLTP-räckvidden?
+Har en XPeng G9 längre eller kortare räckvidd än en Zeekr 001?;XPeng G9 RWD Long Range;Zeekr 001 Long Range;570;620;km;Hur många km skiljer WLTP-räckvidden?
+Tar en Kia EV6 GT längre eller kortare tid på 0–100 km/h än en Volvo EX30 Twin Motor?;Kia EV6 GT;Volvo EX30 Twin Motor Performance;3,5;3,6;sekunder;Hur många sekunder skiljer accelerationen?
+Tar en BYD Seal Performance längre eller kortare tid på 0–100 km/h än en Subaru Solterra?;BYD Seal Performance;Subaru Solterra;3,8;6,9;sekunder;Hur många sekunder skiljer accelerationen?
+Tar en Opel Mokka Electric längre eller kortare tid på 0–100 km/h än en Citroën ë-C3?;Opel Mokka Electric;Citroën ë-C3;9,0;11,0;sekunder;Hur många sekunder skiljer accelerationen?
+Tar en XPeng G9 Performance längre eller kortare tid på 0–100 km/h än en Zeekr 001?;XPeng G9 AWD Performance;Zeekr 001 Long Range;3,9;7,2;sekunder;Hur många sekunder skiljer accelerationen?
+Har en Toyota bZ4X fler eller färre hästkrafter än en Subaru Solterra?;Toyota bZ4X FWD;Subaru Solterra;204;218;hk;Hur många hästkrafter skiljer det?
+Har en Honda e:Ny1 fler eller färre hästkrafter än en Opel Mokka Electric?;Honda e:Ny1;Opel Mokka Electric;204;156;hk;Hur många hästkrafter skiljer det?
+Har en Opel Mokka Electric fler eller färre hästkrafter än en Kia EV6 GT?;Opel Mokka Electric;Kia EV6 GT;156;585;hk;Hur många hästkrafter skiljer det?
+Har en Kia EV6 GT fler eller färre hästkrafter än en Jeep Avenger?;Kia EV6 GT;Jeep Avenger;585;156;hk;Hur många hästkrafter skiljer det?
+Har en BYD Seal Performance fler eller färre hästkrafter än en XPeng G9 Performance?;BYD Seal Performance;XPeng G9 AWD Performance;530;567;hk;Hur många hästkrafter skiljer det?
+Har en Citroën ë-C3 fler eller färre hästkrafter än en XPeng G9 Performance?;Citroën ë-C3;XPeng G9 AWD Performance;113;567;hk;Hur många hästkrafter skiljer det?
+Har en Dacia Spring fler eller färre hästkrafter än en Lotus Eletre R?;Dacia Spring;Lotus Eletre R;65;905;hk;Hur många hästkrafter skiljer det?
+Har en Volvo EX30 Extended Range större eller mindre användbar batterikapacitet än en BYD Atto 3?;Volvo EX30 Extended Range;BYD Atto 3;64;60,5;kWh;Hur många kWh skiljer batterikapaciteten?
+Har en Smart #1 större eller mindre användbar batterikapacitet än en BMW iX?;Smart #1;BMW iX xDrive50;62;105,2;kWh;Hur många kWh skiljer batterikapaciteten?
