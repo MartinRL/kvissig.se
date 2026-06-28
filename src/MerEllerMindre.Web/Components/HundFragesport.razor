@@ -1,0 +1,81 @@
+@* GET /hund-fragesport-tillsammans — SEO landing for the hundraser-mini deck. Search terms:
+   "hund frågesport" + USP "tillsammans". FAQ here MUST stay in sync with FaqJsonLd in @code. *@
+<MainLayout Title="Hund-frågesport att spela tillsammans"
+            Description="Hund-frågesport online men i samma rum. Jämför hundraser i Mer eller Mindre: gissa först mer eller mindre, sedan hur stor skillnaden är. Mankhöjd, vikt, livslängd och SKK-registreringar."
+            CanonicalPath="/hund-fragesport-tillsammans"
+            JsonLd="@FaqJsonLd">
+    <div class="wrap content">
+        <div class="brand">
+            <a class="logo" href="/"><span class="mer">Mer</span> eller <span class="mindre">Mindre</span></a>
+        </div>
+
+        @* 1. Hero / pitch *@
+        <h1>Hund-frågesport att spela tillsammans</h1>
+        <p class="sub">
+            En <strong>hund-frågesport</strong> för er som sitter i samma rum, en skärm var.
+            Ni jämför hundraser två och två: gissa först <em>riktningen</em> (är rasen större
+            eller mindre?), sedan <em>hur stor</em> skillnaden är. En fråga, två beslut.
+        </p>
+        <a class="btn" href="/games/new/hundraser-mini">Spela tillsammans</a>
+
+        @* 2. Vad ni gissar *@
+        <div class="card">
+            <h2>Vad ni gissar</h2>
+            <p>
+                Korten väger hundraser mot varandra på riktiga siffror: mankhöjd i cm, vikt i
+                kg, förväntad livslängd i år och hur många som registreras hos SKK per år.
+                Labrador mot tax, grand danois mot chihuahua — magkänslan ställs mot facit.
+            </p>
+        </div>
+
+        @* 3. Så funkar tvåstegs-twisten *@
+        <div class="card">
+            <h2>Så funkar det</h2>
+            <p>
+                Först den snabba magkänslan: är A <em>mer</em> eller <em>mindre</em> än B? Sedan
+                skattningen: <em>hur stor</em> är skillnaden? Rätt riktning ger bonus, och den
+                som ligger närmast facit över alla frågor vinner. Lägst total vinner.
+            </p>
+        </div>
+
+        @* 4. CTA + interna länkar *@
+        <a class="btn" href="/games/new/hundraser-mini">Spela tillsammans</a>
+        <p><a href="/om-spelet#sa-spelar-du">Läs reglerna</a></p>
+
+        @* 5. FAQ (matchar FaqJsonLd nedan) *@
+        <div class="card">
+            <h2>Frågor &amp; svar</h2>
+
+            <h3>Vad är en hund-frågesport?</h3>
+            <p>Ett frågespel om hundar. I Mer eller Mindre jämför ni hundraser på riktiga
+               siffror — mankhöjd, vikt, livslängd och hur populära de är — och gissar hur det
+               ligger till.</p>
+
+            <h3>Kan man spela hund-frågesporten online tillsammans?</h3>
+            <p>Ja. Den spelas i webbläsaren med en skärm var, tänkt för er som sitter i samma
+               rum. Värden öppnar en omgång och delar koden.</p>
+
+            <h3>Hur många frågor är en omgång?</h3>
+            <p>Den här hund-omgången är sju frågor — kort och kul att ta en runda på.</p>
+
+            <h3>Hur vinner man?</h3>
+            <p>Gissa rätt riktning (mer eller mindre) ger bonus, och ju närmare facit ni gissar
+               skillnaden desto bättre. Lägst total över alla frågor vinner.</p>
+        </div>
+
+        <a class="back" href="/">← Tillbaka till kvissarna</a>
+    </div>
+</MainLayout>
+
+@code {
+    // FAQPage schema for rich results / LLM citation. Keep the Q&A in sync with the FAQ
+    // section above. Serialized object only (MainLayout wraps it in <script>).
+    private const string FaqJsonLd = """
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+      {"@type":"Question","name":"Vad är en hund-frågesport?","acceptedAnswer":{"@type":"Answer","text":"Ett frågespel om hundar. I Mer eller Mindre jämför ni hundraser på riktiga siffror — mankhöjd, vikt, livslängd och hur populära de är — och gissar hur det ligger till."}},
+      {"@type":"Question","name":"Kan man spela hund-frågesporten online tillsammans?","acceptedAnswer":{"@type":"Answer","text":"Ja. Den spelas i webbläsaren med en skärm var, tänkt för er som sitter i samma rum. Värden öppnar en omgång och delar koden."}},
+      {"@type":"Question","name":"Hur många frågor är en omgång?","acceptedAnswer":{"@type":"Answer","text":"Den här hund-omgången är sju frågor — kort och kul att ta en runda på."}},
+      {"@type":"Question","name":"Hur vinner man?","acceptedAnswer":{"@type":"Answer","text":"Gissa rätt riktning (mer eller mindre) ger bonus, och ju närmare facit ni gissar skillnaden desto bättre. Lägst total över alla frågor vinner."}}
+    ]}
+    """;
+}

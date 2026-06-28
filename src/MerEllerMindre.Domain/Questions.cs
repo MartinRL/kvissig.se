@@ -124,6 +124,9 @@ public static class QuestionPackCsvParser
         ["alla-aldrar"] = "Mer eller Mindre – alla åldrar",
         ["mer-eller-mindre"] = "Mer eller Mindre",
         ["loggor-mini-1"] = "Mer eller Mindre Mini - Loggor",
+        ["hundraser-mini"] = "Mer eller Mindre Mini – Hundraser",
+        ["elbil-mini"] = "Mer eller Mindre Mini – Elbilar",
+        ["fotboll-mini"] = "Mer eller Mindre Mini – Fotboll",
     };
 
     private static string Deslug(string slug)
