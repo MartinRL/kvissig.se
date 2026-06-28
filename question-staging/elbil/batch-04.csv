@@ -1,0 +1,19 @@
+﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Har en Volkswagen ID.7 Pro längre eller kortare räckvidd än en Cupra Tavascan?;Volkswagen ID.7 Pro;Cupra Tavascan;621;568;km;Hur många km skiljer WLTP-räckvidden?
+Har en Polestar 3 Long Range Dual Motor fler eller färre hästkrafter än en Volvo EX90 Twin Motor?;Polestar 3 Long Range Dual Motor;Volvo EX90 Twin Motor;489;408;hk;Hur många hästkrafter skiljer det?
+Har en Zeekr X fler eller färre hästkrafter än en Skoda Elroq 85?;Zeekr X;Skoda Elroq 85;428;286;hk;Hur många hästkrafter skiljer det?
+Har en Polestar 3 Long Range Dual Motor längre eller kortare räckvidd än en MG ZS EV?;Polestar 3 Long Range Dual Motor;MG ZS EV;631;440;km;Hur många km skiljer WLTP-räckvidden?
+Har en Kia EV9 GT-Line fler eller färre hästkrafter än en Skoda Elroq 85?;Kia EV9 GT-Line;Skoda Elroq 85;385;286;hk;Hur många hästkrafter skiljer det?
+Har en Nio ET7 större eller mindre användbar batterikapacitet än en MG ZS EV?;Nio ET7;MG ZS EV;90;49;kWh;Hur många kWh skiljer batterikapaciteten?
+Har en BMW iX3 50 längre eller kortare räckvidd än en Nissan Ariya?;BMW iX3 50 xDrive;Nissan Ariya;678;533;km;Hur många km skiljer WLTP-räckvidden?
+Tar en Cupra Tavascan VZ längre eller kortare tid på 0–100 km/h än en Zeekr X?;Cupra Tavascan VZ;Zeekr X;5,5;3,8;sekunder;Hur många sekunder skiljer accelerationen?
+Har en Volkswagen ID.7 Pro S längre eller kortare räckvidd än en Nissan Ariya?;Volkswagen ID.7 Pro S;Nissan Ariya;709;533;km;Hur många km skiljer WLTP-räckvidden?
+Har en Kia EV9 GT-Line större eller mindre användbar batterikapacitet än en Cupra Tavascan?;Kia EV9 GT-Line;Cupra Tavascan;98;77;kWh;Hur många kWh skiljer batterikapaciteten?
+Har en Maserati GranTurismo Folgore fler eller färre hästkrafter än en Skoda Elroq 85?;Maserati GranTurismo Folgore;Skoda Elroq 85;761;286;hk;Hur många hästkrafter skiljer det?
+Har en Honda e:Ny1 fler eller färre hästkrafter än en Maserati GranTurismo Folgore?;Honda e:Ny1;Maserati GranTurismo Folgore;204;761;hk;Hur många hästkrafter skiljer det?
+Har en Mazda MX-30 längre eller kortare räckvidd än en Volkswagen ID.7 Pro?;Mazda MX-30;Volkswagen ID.7 Pro;200;621;km;Hur många km skiljer WLTP-räckvidden?
+Kostade en Audi RS e-tron GT performance mer eller mindre än en Cupra Tavascan? (2024);Audi RS e-tron GT performance;Cupra Tavascan;1860000;564900;kr;Hur många kronor skiljer priset?
+Har en Audi RS e-tron GT performance fler eller färre hästkrafter än en Honda e:Ny1?;Audi RS e-tron GT performance;Honda e:Ny1;925;204;hk;Hur många hästkrafter skiljer det?
+Har en Nio ET7 fler eller färre hästkrafter än en Dacia Spring?;Nio ET7;Dacia Spring;653;65;hk;Hur många hästkrafter skiljer det?
+Har en Dacia Spring fler eller färre hästkrafter än en Audi RS e-tron GT performance?;Dacia Spring;Audi RS e-tron GT performance;65;925;hk;Hur många hästkrafter skiljer det?
+Har en Maserati GranTurismo Folgore fler eller färre hästkrafter än en Dacia Spring?;Maserati GranTurismo Folgore;Dacia Spring;761;65;hk;Hur många hästkrafter skiljer det?

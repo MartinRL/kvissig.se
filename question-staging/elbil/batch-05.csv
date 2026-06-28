@@ -1,0 +1,25 @@
+﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Har en Lucid Air Touring längre eller kortare räckvidd än en Volkswagen ID.3?;Lucid Air Touring;Volkswagen ID.3 Pro;725;429;km;Hur många km skiljer WLTP-räckvidden?
+Har en Kia EV3 längre eller kortare räckvidd än en Mini Cooper SE?;Kia EV3 Long Range;Mini Cooper SE;605;234;km;Hur många km skiljer WLTP-räckvidden?
+Har en Mini Cooper SE längre eller kortare räckvidd än en BMW i5?;Mini Cooper SE;BMW i5 eDrive40;234;582;km;Hur många km skiljer WLTP-räckvidden?
+Har en Kia EV3 längre eller kortare räckvidd än en Mercedes EQS SUV?;Kia EV3;Mercedes-Benz EQS SUV 450;436;613;km;Hur många km skiljer WLTP-räckvidden?
+Har en Polestar 2 längre eller kortare räckvidd än en BMW iX2?;Polestar 2 Long Range Single Motor;BMW iX2 xDrive30;635;449;km;Hur många km skiljer WLTP-räckvidden?
+Har en Volvo C40 längre eller kortare räckvidd än en Hyundai Ioniq 6?;Volvo C40;Hyundai Ioniq 6 Long Range;434;614;km;Hur många km skiljer WLTP-räckvidden?
+Har en Renault Scénic E-Tech längre eller kortare räckvidd än en Citroën ë-C4?;Renault Scénic E-Tech Long Range;Citroën ë-C4;625;357;km;Hur många km skiljer WLTP-räckvidden?
+Har en Ford Explorer EV längre eller kortare räckvidd än en Smart #3?;Ford Explorer EV Extended Range;Smart #3;602;455;km;Hur många km skiljer WLTP-räckvidden?
+Har en Lexus RZ 450e längre eller kortare räckvidd än en Volkswagen ID.7?;Lexus RZ 450e;Volkswagen ID.7 Pro;440;621;km;Hur många km skiljer WLTP-räckvidden?
+Har en Lucid Air Sapphire fler eller färre hästkrafter än en Citroën ë-C4?;Lucid Air Sapphire;Citroën ë-C4;1234;136;hk;Hur många hästkrafter skiljer det?
+Har en Peugeot e-208 fler eller färre hästkrafter än en Lucid Air Sapphire?;Peugeot e-208;Lucid Air Sapphire;156;1234;hk;Hur många hästkrafter skiljer det?
+Har en Mercedes EQA fler eller färre hästkrafter än en Cadillac Lyriq?;Mercedes-Benz EQA 250;Cadillac Lyriq AWD;190;515;hk;Hur många hästkrafter skiljer det?
+Har en BYD Han fler eller färre hästkrafter än en Volkswagen ID.4?;BYD Han;Volkswagen ID.4 Pro;517;204;hk;Hur många hästkrafter skiljer det?
+Har en XPeng G6 fler eller färre hästkrafter än en Lucid Air Grand Touring?;XPeng G6 Long Range;Lucid Air Grand Touring;296;819;hk;Hur många hästkrafter skiljer det?
+Har en Fisker Ocean fler eller färre hästkrafter än en BMW iX3?;Fisker Ocean Extreme;BMW iX3;564;286;hk;Hur många hästkrafter skiljer det?
+Har en BMW i4 eDrive40 fler eller färre hästkrafter än en BMW i5 M60?;BMW i4 eDrive40;BMW i5 M60;340;601;hk;Hur många hästkrafter skiljer det?
+Har en BYD Seal U fler eller färre hästkrafter än en Genesis GV70 Electrified?;BYD Seal U;Genesis GV70 Electrified;218;490;hk;Hur många hästkrafter skiljer det?
+Har en Smart #3 Brabus fler eller färre hästkrafter än en Mercedes EQB?;Smart #3 Brabus;Mercedes-Benz EQB 350;428;292;hk;Hur många hästkrafter skiljer det?
+Tar en Volkswagen ID.Buzz längre eller kortare tid på 0–100 km/h än en Tesla Model Y Performance?;Volkswagen ID.Buzz Pro;Tesla Model Y Performance;10,2;3,5;sekunder;Hur många sekunder skiljer accelerationen?
+Tar en Genesis GV70 Electrified längre eller kortare tid på 0–100 km/h än en Hyundai Ioniq 6?;Genesis GV70 Electrified;Hyundai Ioniq 6 Long Range;4,2;7,4;sekunder;Hur många sekunder skiljer accelerationen?
+Tar en Mercedes EQA längre eller kortare tid på 0–100 km/h än en BMW i5 M60?;Mercedes-Benz EQA 250;BMW i5 M60;8,6;3,8;sekunder;Hur många sekunder skiljer accelerationen?
+Tar en Volvo C40 längre eller kortare tid på 0–100 km/h än en Fisker Ocean?;Volvo C40;Fisker Ocean Extreme;7,4;3,9;sekunder;Hur många sekunder skiljer accelerationen?
+Har en Volkswagen ID.7 större eller mindre användbar batterikapacitet än en Peugeot e-208?;Volkswagen ID.7 Pro;Peugeot e-208;77;48,1;kWh;Hur många kWh skiljer batterikapaciteten?
+Har en BMW iX2 större eller mindre användbar batterikapacitet än en Lucid Air Grand Touring?;BMW iX2 xDrive30;Lucid Air Grand Touring;64,8;112;kWh;Hur många kWh skiljer batterikapaciteten?

@@ -1,27 +1,27 @@
 ﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
 Har en Kia Niro EV längre eller kortare räckvidd än en Hyundai Kona Electric?;Kia Niro EV;Hyundai Kona Electric Long Range;460;514;km;Hur många km skiljer WLTP-räckvidden?
-Har en Audi Q8 e-tron fler eller färre hästkrafter än en Jaguar I-Pace?;Audi Q8 e-tron 55;Jaguar I-Pace;408;400;hk;Hur många hästkrafter skiljer det?
+Har en Audi Q8 e-tron fler eller färre hästkrafter än en Jaguar I-Pace?;Audi Q8 e-tron 55;Jaguar I-Pace;408;400;hk;Hur många hästkrafter skiljer effekten?
 Tar en Ford Mustang Mach-E AWD längre eller kortare tid på 0–100 km/h än en Subaru Solterra?;Ford Mustang Mach-E AWD;Subaru Solterra;5,1;6,9;sekunder;Hur många sekunder skiljer accelerationen?
 Har en Peugeot e-2008 längre eller kortare räckvidd än en MG ZS EV?;Peugeot e-2008;MG ZS EV;406;320;km;Hur många km skiljer WLTP-räckvidden?
-Har en Skoda Enyaq fler eller färre hästkrafter än en Kia EV9 GT-Line?;Skoda Enyaq 85;Kia EV9 GT-Line;286;384;hk;Hur många hästkrafter skiljer det?
+Har en Skoda Enyaq fler eller färre hästkrafter än en Kia EV9 GT-Line?;Skoda Enyaq 85;Kia EV9 GT-Line;286;384;hk;Hur många hästkrafter skiljer effekten?
 Kostade en Volvo EX40 mer eller mindre än en Hyundai Kona Electric? (2024);Volvo EX40;Hyundai Kona Electric;549900;474900;kr;Hur många kronor skiljer priset?
 Har en Toyota bZ4X längre eller kortare räckvidd än en Audi Q6 e-tron?;Toyota bZ4X;Audi Q6 e-tron quattro;436;625;km;Hur många km skiljer WLTP-räckvidden?
 Tar en Tesla Model Y Long Range längre eller kortare tid på 0–100 km/h än en Ford Mustang Mach-E GT?;Tesla Model Y Long Range;Ford Mustang Mach-E GT;4,8;3,7;sekunder;Hur många sekunder skiljer accelerationen?
 Kostade en Nissan Ariya mer eller mindre än en Genesis GV60? (2024);Nissan Ariya;Genesis GV60;525200;631800;kr;Hur många kronor skiljer priset?
 Har en Kia EV9 GT-Line större eller mindre användbar batterikapacitet än en BMW iX3?;Kia EV9 GT-Line;BMW iX3;96;74;kWh;Hur många kWh skiljer batterikapaciteten?
 Har en Polestar 4 längre eller kortare räckvidd än en Renault Megane E-Tech?;Polestar 4 Long Range;Renault Megane E-Tech;610;450;km;Hur många km skiljer WLTP-räckvidden?
-Har en Audi Q6 e-tron fler eller färre hästkrafter än en Volvo EX40?;Audi Q6 e-tron quattro;Volvo EX40;387;252;hk;Hur många hästkrafter skiljer det?
-Har en Mercedes EQE 350 fler eller färre hästkrafter än en BMW iX xDrive50?;Mercedes-Benz EQE 350;BMW iX xDrive50;292;523;hk;Hur många hästkrafter skiljer det?
+Har en Audi Q6 e-tron fler eller färre hästkrafter än en Volvo EX40?;Audi Q6 e-tron quattro;Volvo EX40;387;252;hk;Hur många hästkrafter skiljer effekten?
+Har en Mercedes EQE 350 fler eller färre hästkrafter än en BMW iX xDrive50?;Mercedes-Benz EQE 350;BMW iX xDrive50;292;523;hk;Hur många hästkrafter skiljer effekten?
 Tar en Toyota bZ4X längre eller kortare tid på 0–100 km/h än en Genesis GV60 Performance?;Toyota bZ4X;Genesis GV60 Performance;6,9;4,0;sekunder;Hur många sekunder skiljer accelerationen?
 Kostade en Volvo EX90 mer eller mindre än en Mercedes EQE SUV? (2024);Volvo EX90;Mercedes-Benz EQE SUV;997000;899000;kr;Hur många kronor skiljer priset?
 Har en Mercedes EQE 350 längre eller kortare räckvidd än en Peugeot e-2008?;Mercedes-Benz EQE 350;Peugeot e-2008;626;406;km;Hur många km skiljer WLTP-räckvidden?
-Har en MG ZS EV fler eller färre hästkrafter än en BMW iX xDrive50?;MG ZS EV;BMW iX xDrive50;174;523;hk;Hur många hästkrafter skiljer det?
+Har en MG ZS EV fler eller färre hästkrafter än en BMW iX xDrive50?;MG ZS EV;BMW iX xDrive50;174;523;hk;Hur många hästkrafter skiljer effekten?
 Kostade en Smart #1 mer eller mindre än en Volvo EX90? (2024);Smart #1;Volvo EX90;419900;997000;kr;Hur många kronor skiljer priset?
 Har en Fiat 500e längre eller kortare räckvidd än en Lucid Air Grand Touring?;Fiat 500e;Lucid Air Grand Touring;320;823;km;Hur många km skiljer WLTP-räckvidden?
-Har en Citroën ë-C3 fler eller färre hästkrafter än en Lotus Eletre R?;Citroën ë-C3;Lotus Eletre R;113;905;hk;Hur många hästkrafter skiljer det?
-Har en Rimac Nevera fler eller färre hästkrafter än en Subaru Solterra?;Rimac Nevera;Subaru Solterra;1914;215;hk;Hur många hästkrafter skiljer det?
-Har en Lotus Eletre R fler eller färre hästkrafter än en Fiat 500e?;Lotus Eletre R;Fiat 500e;905;118;hk;Hur många hästkrafter skiljer det?
-Har en Pininfarina Battista fler eller färre hästkrafter än en Polestar 4?;Pininfarina Battista;Polestar 4 Single Motor;1900;272;hk;Hur många hästkrafter skiljer det?
+Har en Citroën ë-C3 fler eller färre hästkrafter än en Lotus Eletre R?;Citroën ë-C3;Lotus Eletre R;113;905;hk;Hur många hästkrafter skiljer effekten?
+Har en Rimac Nevera fler eller färre hästkrafter än en Subaru Solterra?;Rimac Nevera;Subaru Solterra;1914;215;hk;Hur många hästkrafter skiljer effekten?
+Har en Lotus Eletre R fler eller färre hästkrafter än en Fiat 500e?;Lotus Eletre R;Fiat 500e;905;118;hk;Hur många hästkrafter skiljer effekten?
+Har en Pininfarina Battista fler eller färre hästkrafter än en Polestar 4?;Pininfarina Battista;Polestar 4 Single Motor;1900;272;hk;Hur många hästkrafter skiljer effekten?
 Kostade en Citroën ë-C3 mer eller mindre än en Rolls-Royce Spectre? (2024);Citroën ë-C3;Rolls-Royce Spectre;299990;6400000;kr;Hur många kronor skiljer priset?
-Har en Renault Megane E-Tech fler eller färre hästkrafter än en Rimac Nevera?;Renault Megane E-Tech;Rimac Nevera;220;1914;hk;Hur många hästkrafter skiljer det?
-Har en Smart #1 fler eller färre hästkrafter än en Pininfarina Battista?;Smart #1;Pininfarina Battista;272;1900;hk;Hur många hästkrafter skiljer det?
+Har en Renault Megane E-Tech fler eller färre hästkrafter än en Rimac Nevera?;Renault Megane E-Tech;Rimac Nevera;220;1914;hk;Hur många hästkrafter skiljer effekten?
+Har en Smart #1 fler eller färre hästkrafter än en Pininfarina Battista?;Smart #1;Pininfarina Battista;272;1900;hk;Hur många hästkrafter skiljer effekten?
