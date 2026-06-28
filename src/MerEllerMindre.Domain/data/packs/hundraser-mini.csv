@@ -1,69 +1,48 @@
 ﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
-Har en schäfer högre eller lägre mankhöjd än en rottweiler?;Schäfer;Rottweiler;63;64;cm;Hur många cm skiljer det i mankhöjd?
-Har en tax högre eller lägre mankhöjd än en cocker spaniel?;Tax;Cocker spaniel;22;39;cm;Hur många cm skiljer det i mankhöjd?
-Har en beagle högre eller lägre mankhöjd än en jack russell-terrier?;Beagle;Jack russell-terrier;38;28;cm;Hur många cm skiljer det i mankhöjd?
-Har en grand danois högre eller lägre mankhöjd än en chihuahua?;Grand danois;Chihuahua;80;18;cm;Hur många cm skiljer det i mankhöjd?
-Har en irländsk varghund högre eller lägre mankhöjd än en mops?;Irländsk varghund;Mops;81;30;cm;Hur många cm skiljer det i mankhöjd?
-Har en dobermann högre eller lägre mankhöjd än en pomeranian?;Dobermann;Pomeranian;68;22;cm;Hur många cm skiljer det i mankhöjd?
-Väger en golden retriever mer eller mindre än en labrador?;Golden retriever;Labrador;32;30;kg;Hur många kg skiljer det i vikt?
-Väger en bernhardshund mer eller mindre än en beagle?;Bernhardshund;Beagle;75;12;kg;Hur många kg skiljer det i vikt?
-Väger en schäfer mer eller mindre än en border collie?;Schäfer;Border collie;33;18;kg;Hur många kg skiljer det i vikt?
-Väger en korthårig vorsteh mer eller mindre än en mellanpudel?;Korthårig vorsteh;Mellanpudel;28;11;kg;Hur många kg skiljer det i vikt?
-Väger en leonberger mer eller mindre än en papillon?;Leonberger;Papillon;60;4;kg;Hur många kg skiljer det i vikt?
-Väger en newfoundlandshund mer eller mindre än en tax?;Newfoundlandshund;Tax;65;9;kg;Hur många kg skiljer det i vikt?
-Väger en yorkshireterrier mer eller mindre än en rottweiler?;Yorkshireterrier;Rottweiler;3;50;kg;Hur många kg skiljer det i vikt?
-Väger en boxer mer eller mindre än en mastiff?;Boxer;Mastiff;30;80;kg;Hur många kg skiljer det i vikt?
+Har en basenji högre eller lägre andel höftledsdysplasi än en norsk älghund?;Basenji;Norsk älghund;3;20;%;Hur många procentenheter skiljer det i höftledsdysplasi?
+Har en grosser schweizer sennenhund högre eller lägre andel höftledsdysplasi än en manchesterterrier?;Grosser schweizer sennenhund;Manchesterterrier;20;1,4;%;Hur många procentenheter skiljer det i höftledsdysplasi?
+Har en finsk spets högre eller lägre andel höftledsdysplasi än en old english sheepdog?;Finsk spets;Old english sheepdog;6;19;%;Hur många procentenheter skiljer det i höftledsdysplasi?
+Har en welsh springer spaniel högre eller lägre andel höftledsdysplasi än en keeshond?;Welsh springer spaniel;Keeshond;12;6;%;Hur många procentenheter skiljer det i höftledsdysplasi?
+Har en hamiltonstövare längre eller kortare livslängd än en norrbottenspets?;Hamiltonstövare;Norrbottenspets;13;14;år;Hur många år skiljer det i livslängd?
+Har en tosa inu längre eller kortare livslängd än en kromfohrländer?;Tosa inu;Kromfohrländer;11;14;år;Hur många år skiljer det i livslängd?
+Springer en scottish deerhound snabbare eller långsammare än en galgo español?;Scottish deerhound;Galgo español;45;64;km/h;Hur många km/h skiljer det i toppfart?
+Har en dogue de bordeaux högre eller lägre andel höftledsdysplasi än en australian cattle dog?;Dogue de bordeaux;Australian cattle dog;57;16;%;Hur många procentenheter skiljer det i höftledsdysplasi?
+Har en mops högre eller lägre andel höftledsdysplasi än en whippet?;Mops;Whippet;71,7;1,4;%;Hur många procentenheter skiljer det i höftledsdysplasi?
+Har en sibirisk husky högre eller lägre andel höftledsdysplasi än en engelsk bulldogg?;Sibirisk husky;Engelsk bulldogg;2;70,1;%;Hur många procentenheter skiljer det i höftledsdysplasi?
+Har en flatcoated retriever högre eller lägre andel höftledsdysplasi än en clumber spaniel?;Flatcoated retriever;Clumber spaniel;3;44,8;%;Hur många procentenheter skiljer det i höftledsdysplasi?
+Har en otterhound högre eller lägre andel höftledsdysplasi än en standardpudel?;Otterhound;Standardpudel;47,2;12,2;%;Hur många procentenheter skiljer det i höftledsdysplasi?
+Har en samojed högre eller lägre andel höftledsdysplasi än en mastino napoletano?;Samojed;Mastino napoletano;11,1;47;%;Hur många procentenheter skiljer det i höftledsdysplasi?
+Har en basset hound högre eller lägre andel höftledsdysplasi än en mellanschnauzer?;Basset hound;Mellanschnauzer;37,4;8,6;%;Hur många procentenheter skiljer det i höftledsdysplasi?
+Har en clumber spaniel högre eller lägre andel höftledsdysplasi än en mastino napoletano?;Clumber spaniel;Mastino napoletano;44,8;47;%;Hur många procentenheter skiljer det i höftledsdysplasi?
+Har en mastino napoletano högre eller lägre andel höftledsdysplasi än en newfoundlandshund?;Mastino napoletano;Newfoundlandshund;47;25,2;%;Hur många procentenheter skiljer det i höftledsdysplasi?
+Har en otterhound högre eller lägre andel höftledsdysplasi än en basset hound?;Otterhound;Basset hound;47,2;37,4;%;Hur många procentenheter skiljer det i höftledsdysplasi?
+Har en mellanschnauzer högre eller lägre andel höftledsdysplasi än en samojed?;Mellanschnauzer;Samojed;8,6;11,1;%;Hur många procentenheter skiljer det i höftledsdysplasi?
+Har en grand danois högre eller lägre andel höftledsdysplasi än en mellanschnauzer?;Grand danois;Mellanschnauzer;12;8,6;%;Hur många procentenheter skiljer det i höftledsdysplasi?
+Har en standardpudel högre eller lägre andel höftledsdysplasi än en samojed?;Standardpudel;Samojed;12,2;11,1;%;Hur många procentenheter skiljer det i höftledsdysplasi?
+Har en flatcoated retriever högre eller lägre andel höftledsdysplasi än en sibirisk husky?;Flatcoated retriever;Sibirisk husky;3;2;%;Hur många procentenheter skiljer det i höftledsdysplasi?
 Har en dvärgschnauzer längre eller kortare livslängd än en cocker spaniel?;Dvärgschnauzer;Cocker spaniel;14;13;år;Hur många år skiljer det i livslängd?
 Har en fransk bulldogg längre eller kortare livslängd än en labrador?;Fransk bulldogg;Labrador;11;13;år;Hur många år skiljer det i livslängd?
 Har en jack russell-terrier längre eller kortare livslängd än en grand danois?;Jack russell-terrier;Grand danois;16;8;år;Hur många år skiljer det i livslängd?
 Har en pomeranian längre eller kortare livslängd än en bernhardshund?;Pomeranian;Bernhardshund;15;9;år;Hur många år skiljer det i livslängd?
 Har en border collie längre eller kortare livslängd än en irländsk varghund?;Border collie;Irländsk varghund;14;7;år;Hur många år skiljer det i livslängd?
-Har en mellanpudel längre eller kortare livslängd än en boxer?;Mellanpudel;Boxer;15;11;år;Hur många år skiljer det i livslängd?
-Är en tibetansk mastiff dyrare eller billigare i inköp än en cavalier king charles spaniel?;Tibetansk mastiff;Cavalier king charles spaniel;45000;14000;kr;Hur många kronor skiljer det i valppris?
-Är en lagotto romagnolo dyrare eller billigare i inköp än en cavalier king charles spaniel?;Lagotto romagnolo;Cavalier king charles spaniel;22000;14000;kr;Hur många kronor skiljer det i valppris?
-Är en tibetansk mastiff dyrare eller billigare i inköp än en dalmatiner?;Tibetansk mastiff;Dalmatiner;50000;13000;kr;Hur många kronor skiljer det i valppris?
-Är en newfoundlandshund dyrare eller billigare i inköp än en whippet?;Newfoundlandshund;Whippet;25000;16000;kr;Hur många kronor skiljer det i valppris?
-Är en lagotto romagnolo dyrare eller billigare i inköp än en korthårig vorsteh?;Lagotto romagnolo;Korthårig vorsteh;30000;11000;kr;Hur många kronor skiljer det i valppris?
-Har en shetland sheepdog högre eller lägre mankhöjd än en weimaraner?;Shetland sheepdog;Weimaraner;37;64;cm;Hur många cm skiljer det i mankhöjd?
-Har en welsh corgi högre eller lägre mankhöjd än en akita?;Welsh corgi;Akita;28;67;cm;Hur många cm skiljer det i mankhöjd?
-Har en ungersk vizsla högre eller lägre mankhöjd än en riesenschnauzer?;Ungersk vizsla;Riesenschnauzer;58;65;cm;Hur många cm skiljer det i mankhöjd?
-Har en shih tzu högre eller lägre mankhöjd än en afghanhund?;Shih tzu;Afghanhund;25;70;cm;Hur många cm skiljer det i mankhöjd?
-Har en samojed högre eller lägre mankhöjd än en bullterrier?;Samojed;Bullterrier;54;45;cm;Hur många cm skiljer det i mankhöjd?
-Har en basset hound högre eller lägre mankhöjd än en gordonsetter?;Basset hound;Gordonsetter;35;64;cm;Hur många cm skiljer det i mankhöjd?
-Har en pekinges högre eller lägre mankhöjd än en riesenschnauzer?;Pekingese;Riesenschnauzer;20;65;cm;Hur många cm skiljer det i mankhöjd?
-Väger en dvärgpinscher mer eller mindre än en alaskan malamute?;Dvärgpinscher;Alaskan malamute;5;38;kg;Hur många kg skiljer det i vikt?
-Väger en pekinges mer eller mindre än en engelsk mastiff?;Pekingese;Engelsk mastiff;5;75;kg;Hur många kg skiljer det i vikt?
-Väger en springer spaniel mer eller mindre än en riesenschnauzer?;Springer spaniel;Riesenschnauzer;20;35;kg;Hur många kg skiljer det i vikt?
-Väger en welsh corgi mer eller mindre än en greyhound?;Welsh corgi;Greyhound;12;30;kg;Hur många kg skiljer det i vikt?
-Väger en pekinges mer eller mindre än en greyhound?;Pekingese;Greyhound;5;30;kg;Hur många kg skiljer det i vikt?
-Väger en bichon frisé mer eller mindre än en alaskan malamute?;Bichon frisé;Alaskan malamute;5;38;kg;Hur många kg skiljer det i vikt?
-Väger en dvärgpinscher mer eller mindre än en engelsk mastiff?;Dvärgpinscher;Engelsk mastiff;5;75;kg;Hur många kg skiljer det i vikt?
 Har en engelsk mastiff längre eller kortare livslängd än en schipperke?;Engelsk mastiff;Schipperke;8;15;år;Hur många år skiljer det i livslängd?
 Har en berner sennenhund längre eller kortare livslängd än en dvärgpinscher?;Berner sennenhund;Dvärgpinscher;8;14;år;Hur många år skiljer det i livslängd?
-Har en schipperke längre eller kortare livslängd än en berner sennenhund?;Schipperke;Berner sennenhund;15;7;år;Hur många år skiljer det i livslängd?
-Har en bichon frisé längre eller kortare livslängd än en alaskan malamute?;Bichon frisé;Alaskan malamute;15;11;år;Hur många år skiljer det i livslängd?
 Har en springer spaniel längre eller kortare livslängd än en greyhound?;Springer spaniel;Greyhound;14;12;år;Hur många år skiljer det i livslängd?
 Har en welsh corgi längre eller kortare livslängd än en berner sennenhund?;Welsh corgi;Berner sennenhund;13;8;år;Hur många år skiljer det i livslängd?
-Är en engelsk bulldogg dyrare eller billigare i inköp än en springer spaniel?;Engelsk bulldogg;Springer spaniel;40000;18000;kr;Hur många kronor skiljer det i valppris?
-Har en australian shepherd högre eller lägre mankhöjd än en flatcoated retriever?;Australian shepherd;Flatcoated retriever;53;59;cm;Hur många cm skiljer det i mankhöjd?
-Har en brittany högre eller lägre mankhöjd än en rhodesian ridgeback?;Brittany;Rhodesian ridgeback;49;65;cm;Hur många cm skiljer det i mankhöjd?
-Har en kleiner münsterländer högre eller lägre mankhöjd än en irländsk röd setter?;Kleiner münsterländer;Irländsk röd setter;52;63;cm;Hur många cm skiljer det i mankhöjd?
-Har en eurasier högre eller lägre mankhöjd än en barbet?;Eurasier;Barbet;56;60;cm;Hur många cm skiljer det i mankhöjd?
-Har en bracco italiano högre eller lägre mankhöjd än en norfolkterrier?;Bracco italiano;Norfolkterrier;67;25;cm;Hur många cm skiljer det i mankhöjd?
-Har en pyrenéerhund högre eller lägre mankhöjd än en cairnterrier?;Pyrenéerhund;Cairnterrier;72;30;cm;Hur många cm skiljer det i mankhöjd?
-Har en bordeauxdogg högre eller lägre mankhöjd än en västgötaspets?;Bordeauxdogg;Västgötaspets;64;32;cm;Hur många cm skiljer det i mankhöjd?
-Väger en anatolisk herdehund mer eller mindre än en lhasa apso?;Anatolisk herdehund;Lhasa apso;60;7;kg;Hur många kg skiljer det i vikt?
-Väger en old english sheepdog mer eller mindre än en coton de tuléar?;Old english sheepdog;Coton de tuléar;36;5;kg;Hur många kg skiljer det i vikt?
-Väger en curly coated retriever mer eller mindre än en italiensk vinthund?;Curly coated retriever;Italiensk vinthund;36;4;kg;Hur många kg skiljer det i vikt?
-Väger en kuvasz mer eller mindre än en shiba inu?;Kuvasz;Shiba inu;50;10;kg;Hur många kg skiljer det i vikt?
-Väger en nova scotia duck tolling retriever mer eller mindre än en dvärgspets?;Nova scotia duck tolling retriever;Dvärgspets;20;3;kg;Hur många kg skiljer det i vikt?
-Väger en briard mer eller mindre än en petit basset griffon vendéen?;Briard;Petit basset griffon vendéen;35;16;kg;Hur många kg skiljer det i vikt?
-Väger en spansk vattenhund mer eller mindre än en leonberger?;Spansk vattenhund;Leonberger;18;65;kg;Hur många kg skiljer det i vikt?
-Väger en shiba inu mer eller mindre än en otterhound?;Shiba inu;Otterhound;10;40;kg;Hur många kg skiljer det i vikt?
 Har en irländsk röd setter längre eller kortare livslängd än en australian terrier?;Irländsk röd setter;Australian terrier;12;14;år;Hur många år skiljer det i livslängd?
 Har en lhasa apso längre eller kortare livslängd än en bordeauxdogg?;Lhasa apso;Bordeauxdogg;14;9;år;Hur många år skiljer det i livslängd?
 Har en italiensk vinthund längre eller kortare livslängd än en anatolisk herdehund?;Italiensk vinthund;Anatolisk herdehund;14;11;år;Hur många år skiljer det i livslängd?
-Väger en italiensk vinthund mer eller mindre än en anatolisk herdehund?;Italiensk vinthund;Anatolisk herdehund;4;60;kg;Hur många kg skiljer det i vikt?
+Har en wachtelhund längre eller kortare livslängd än en irländsk varghund?;Wachtelhund;Irländsk varghund;13;7;år;Hur många år skiljer det i livslängd?
+Har en norsk lundehund längre eller kortare livslängd än en bullmastiff?;Norsk lundehund;Bullmastiff;12;9;år;Hur många år skiljer det i livslängd?
+Har en affenpinscher längre eller kortare livslängd än en borzoi?;Affenpinscher;Borzoi;14;11;år;Hur många år skiljer det i livslängd?
+Har en norsk buhund längre eller kortare livslängd än en mastino napoletano?;Norsk buhund;Mastino napoletano;13;8;år;Hur många år skiljer det i livslängd?
+Har en schipperke längre eller kortare livslängd än en berner sennenhund?;Schipperke;Berner sennenhund;15;7;år;Hur många år skiljer det i livslängd?
+Är en tibetansk mastiff dyrare eller billigare i inköp än en cavalier king charles spaniel? (2025);Tibetansk mastiff;Cavalier king charles spaniel;45000;14000;kr;Hur många kronor skiljer det i valppris?
+Är en lagotto romagnolo dyrare eller billigare i inköp än en cavalier king charles spaniel? (2025);Lagotto romagnolo;Cavalier king charles spaniel;22000;14000;kr;Hur många kronor skiljer det i valppris?
+Är en tibetansk mastiff dyrare eller billigare i inköp än en dalmatiner? (2025);Tibetansk mastiff;Dalmatiner;50000;13000;kr;Hur många kronor skiljer det i valppris?
+Är en newfoundlandshund dyrare eller billigare i inköp än en whippet? (2025);Newfoundlandshund;Whippet;25000;16000;kr;Hur många kronor skiljer det i valppris?
+Är en lagotto romagnolo dyrare eller billigare i inköp än en korthårig vorsteh? (2025);Lagotto romagnolo;Korthårig vorsteh;30000;11000;kr;Hur många kronor skiljer det i valppris?
+Är en engelsk bulldogg dyrare eller billigare i inköp än en springer spaniel? (2025);Engelsk bulldogg;Springer spaniel;40000;18000;kr;Hur många kronor skiljer det i valppris?
 Registrerades det fler eller färre labrador retriever än golden retriever hos SKK 2023?;Labrador retriever;Golden retriever;2939;1682;registreringar/år;Hur många registreringar skiljer det?
 Registrerades det fler eller färre shetland sheepdog än jämthund hos SKK 2023?;Shetland sheepdog;Jämthund;860;1243;registreringar/år;Hur många registreringar skiljer det?
 Registrerades det fler eller färre fransk bulldogg än australian shepherd hos SKK 2023?;Fransk bulldogg;Australian shepherd;667;602;registreringar/år;Hur många registreringar skiljer det?
@@ -73,104 +52,125 @@ Registrerades det fler eller färre drever än labrador retriever hos SKK 2023?;
 Registrerades det fler eller färre finsk spets än golden retriever hos SKK 2023?;Finsk spets;Golden retriever;120;1682;registreringar/år;Hur många registreringar skiljer det?
 Registrerades det fler eller färre barbet än papillon hos SKK 2023?;Barbet;Papillon;40;350;registreringar/år;Hur många registreringar skiljer det?
 Registrerades det fler eller färre affenpinscher än dalmatiner hos SKK 2023?;Affenpinscher;Dalmatiner;15;200;registreringar/år;Hur många registreringar skiljer det?
-Har en chinese crested högre eller lägre mankhöjd än en deerhound?;Chinese crested;Deerhound;30;76;cm;Hur många cm skiljer det i mankhöjd?
-Har en boston terrier högre eller lägre mankhöjd än en wachtelhund?;Boston terrier;Wachtelhund;40;48;cm;Hur många cm skiljer det i mankhöjd?
-Har en saluki högre eller lägre mankhöjd än en silky terrier?;Saluki;Silky terrier;70;23;cm;Hur många cm skiljer det i mankhöjd?
-Har en deerhound högre eller lägre mankhöjd än en boston terrier?;Deerhound;Boston terrier;76;40;cm;Hur många cm skiljer det i mankhöjd?
-Har en hovawart högre eller lägre mankhöjd än en kooikerhondje?;Hovawart;Kooikerhondje;65;38;cm;Hur många cm skiljer det i mankhöjd?
-Väger en keeshond mer eller mindre än en landseer?;Keeshond;Landseer;18;65;kg;Hur många kg skiljer det i vikt?
-Väger en gammel dansk hönsehund mer eller mindre än en norsk lundehund?;Gammel dansk hönsehund;Norsk lundehund;30;6;kg;Hur många kg skiljer det i vikt?
-Väger en welsh terrier mer eller mindre än en cane corso?;Welsh terrier;Cane corso;9;45;kg;Hur många kg skiljer det i vikt?
-Väger en grosser schweizer sennenhund mer eller mindre än en jämthund?;Grosser schweizer sennenhund;Jämthund;55;30;kg;Hur många kg skiljer det i vikt?
-Väger en dansk-svensk gårdshund mer eller mindre än en bullmastiff?;Dansk-svensk gårdshund;Bullmastiff;12;55;kg;Hur många kg skiljer det i vikt?
-Väger en bullmastiff mer eller mindre än en wheaten terrier?;Bullmastiff;Wheaten terrier;55;18;kg;Hur många kg skiljer det i vikt?
-Väger en kerry blue terrier mer eller mindre än en clumber spaniel?;Kerry blue terrier;Clumber spaniel;15;32;kg;Hur många kg skiljer det i vikt?
-Har en cairnterrier längre eller kortare livslängd än en dogue de bordeaux?;Cairnterrier;Dogue de bordeaux;14;8;år;Hur många år skiljer det i livslängd?
-Har en wachtelhund längre eller kortare livslängd än en irländsk varghund?;Wachtelhund;Irländsk varghund;13;7;år;Hur många år skiljer det i livslängd?
-Har en norsk lundehund längre eller kortare livslängd än en bullmastiff?;Norsk lundehund;Bullmastiff;12;9;år;Hur många år skiljer det i livslängd?
-Har en engelsk setter högre eller lägre mankhöjd än en pointer?;Engelsk setter;Pointer;65;63;cm;Hur många cm skiljer det i mankhöjd?
-Väger en sealyhamterrier mer eller mindre än en lakelandterrier?;Sealyhamterrier;Lakelandterrier;9;8;kg;Hur många kg skiljer det i vikt?
-Har en komondor högre eller lägre mankhöjd än en puli?;Komondor;Puli;70;43;cm;Hur många cm skiljer det i mankhöjd?
-Har en beauceron högre eller lägre mankhöjd än en polski owczarek nizinny?;Beauceron;Polski owczarek nizinny;68;47;cm;Hur många cm skiljer det i mankhöjd?
-Har en mudi högre eller lägre mankhöjd än en cão da serra da estrela?;Mudi;Cão da serra da estrela;43;65;cm;Hur många cm skiljer det i mankhöjd?
-Har en manchesterterrier högre eller lägre mankhöjd än en grosspudel?;Manchesterterrier;Grosspudel;40;55;cm;Hur många cm skiljer det i mankhöjd?
-Väger en black and tan coonhound mer eller mindre än en entlebucher sennenhund?;Black and tan coonhound;Entlebucher sennenhund;34;25;kg;Hur många kg skiljer det i vikt?
-Väger en catahoula leopard dog mer eller mindre än en american staffordshire terrier?;Catahoula leopard dog;American staffordshire terrier;35;28;kg;Hur många kg skiljer det i vikt?
-Väger en smålandsstövare mer eller mindre än en hamiltonstövare?;Smålandsstövare;Hamiltonstövare;16;25;kg;Hur många kg skiljer det i vikt?
-Har en perro de presa canario längre eller kortare livslängd än en manchesterterrier?;Perro de presa canario;Manchesterterrier;11;16;år;Hur många år skiljer det i livslängd?
-Har en spansk mastiff längre eller kortare livslängd än en puli?;Spansk mastiff;Puli;10;14;år;Hur många år skiljer det i livslängd?
 Registrerades det fler eller färre cavalier king charles spaniel än bichon havanais hos SKK 2023?;Cavalier king charles spaniel;Bichon havanais;600;850;registreringar/år;Hur många registreringar skiljer det?
-Har en pražský krysařík högre eller lägre mankhöjd än en perro de presa canario?;Pražský krysařík;Perro de presa canario;22;62;cm;Hur många cm skiljer det i mankhöjd?
-Väger en tosa mer eller mindre än en schnauzer?;Tosa;Schnauzer;60;18;kg;Hur många kg skiljer det i vikt?
-Väger en sussex spaniel mer eller mindre än en pyreneisk mastiff?;Sussex spaniel;Pyreneisk mastiff;20;70;kg;Hur många kg skiljer det i vikt?
-Väger en norsk älghund grå mer eller mindre än en spansk mastiff?;Norsk älghund grå;Spansk mastiff;23;80;kg;Hur många kg skiljer det i vikt?
-Väger en kromfohrländer mer eller mindre än en maremmano-abruzzese?;Kromfohrländer;Maremmano-abruzzese;14;40;kg;Hur många kg skiljer det i vikt?
-Väger en cão de água português mer eller mindre än en spansk mastiff?;Cão de água português;Spansk mastiff;22;80;kg;Hur många kg skiljer det i vikt?
-Väger en pyreneisk mastiff mer eller mindre än en entlebucher sennenhund?;Pyreneisk mastiff;Entlebucher sennenhund;75;25;kg;Hur många kg skiljer det i vikt?
-Har en spinone italiano högre eller lägre mankhöjd än en pražský krysařík?;Spinone italiano;Pražský krysařík;67;22;cm;Hur många cm skiljer det i mankhöjd?
-Väger en king charles spaniel mer eller mindre än en maremmano-abruzzese?;King charles spaniel;Maremmano-abruzzese;5;40;kg;Hur många kg skiljer det i vikt?
-Väger en tervueren mer eller mindre än en pražský krysařík?;Tervueren;Pražský krysařík;28;3;kg;Hur många kg skiljer det i vikt?
 Registrerades det fler eller färre staffordshire bullterrier än perro de presa canario hos SKK 2023?;Staffordshire bullterrier;Perro de presa canario;700;90;registreringar/år;Hur många registreringar skiljer det?
-Väger en lakelandterrier mer eller mindre än en pyreneisk mastiff?;Lakelandterrier;Pyreneisk mastiff;8;80;kg;Hur många kg skiljer det i vikt?
-Har en azawakh högre eller lägre mankhöjd än en sloughi?;Azawakh;Sloughi;70;68;cm;Hur många cm skiljer det i mankhöjd?
-Har en bergamasco högre eller lägre mankhöjd än en schapendoes?;Bergamasco;Schapendoes;60;47;cm;Hur många cm skiljer det i mankhöjd?
-Har en schillerstövare högre eller lägre mankhöjd än en pumi?;Schillerstövare;Pumi;57;41;cm;Hur många cm skiljer det i mankhöjd?
-Har en tibetansk terrier högre eller lägre mankhöjd än en plott?;Tibetansk terrier;Plott;38;60;cm;Hur många cm skiljer det i mankhöjd?
-Har en volpino italiano högre eller lägre mankhöjd än en ariégeois?;Volpino italiano;Ariégeois;28;56;cm;Hur många cm skiljer det i mankhöjd?
-Har en chodsky pes högre eller lägre mankhöjd än en slovensky cuvac?;Chodsky pes;Slovensky cuvac;53;66;cm;Hur många cm skiljer det i mankhöjd?
-Har en drentsche patrijshond högre eller lägre mankhöjd än en groenendael?;Drentsche patrijshond;Groenendael;59;62;cm;Hur många cm skiljer det i mankhöjd?
-Väger en broholmer mer eller mindre än en pudelpointer?;Broholmer;Pudelpointer;60;28;kg;Hur många kg skiljer det i vikt?
-Väger en norwich terrier mer eller mindre än en dogo argentino?;Norwich terrier;Dogo argentino;6;45;kg;Hur många kg skiljer det i vikt?
-Väger en cesky terrier mer eller mindre än en fila brasileiro?;Cesky terrier;Fila brasileiro;8;50;kg;Hur många kg skiljer det i vikt?
-Väger en kaukasisk ovtcharka mer eller mindre än en cirneco dell'etna?;Kaukasisk ovtcharka;Cirneco dell'etna;70;11;kg;Hur många kg skiljer det i vikt?
-Väger en drentsche patrijshond mer eller mindre än en lancashire heeler?;Drentsche patrijshond;Lancashire heeler;28;6;kg;Hur många kg skiljer det i vikt?
-Väger en phalène mer eller mindre än en tornjak?;Phalène;Tornjak;4;50;kg;Hur många kg skiljer det i vikt?
-Väger en lancashire heeler mer eller mindre än en tatrahund?;Lancashire heeler;Tatrahund;6;45;kg;Hur många kg skiljer det i vikt?
-Väger en finsk lapphund mer eller mindre än en strävhårig vizsla?;Finsk lapphund;Strävhårig vizsla;19;25;kg;Hur många kg skiljer det i vikt?
-Väger en chodsky pes mer eller mindre än en estrelaberghund?;Chodsky pes;Estrelaberghund;22;50;kg;Hur många kg skiljer det i vikt?
-Väger en slovensky cuvac mer eller mindre än en schapendoes?;Slovensky cuvac;Schapendoes;40;18;kg;Hur många kg skiljer det i vikt?
-Har en tibetansk terrier längre eller kortare livslängd än en broholmer?;Tibetansk terrier;Broholmer;15;9;år;Hur många år skiljer det i livslängd?
-Har en cirneco dell'etna längre eller kortare livslängd än en dogo argentino?;Cirneco dell'etna;Dogo argentino;14;11;år;Hur många år skiljer det i livslängd?
-Har en pumi längre eller kortare livslängd än en fila brasileiro?;Pumi;Fila brasileiro;14;10;år;Hur många år skiljer det i livslängd?
-Har en sloughi längre eller kortare livslängd än en norwich terrier?;Sloughi;Norwich terrier;13;14;år;Hur många år skiljer det i livslängd?
-Har en phalène längre eller kortare livslängd än en kaukasisk ovtcharka?;Phalène;Kaukasisk ovtcharka;15;11;år;Hur många år skiljer det i livslängd?
 Registrerades det fler eller färre flatcoated retriever än finsk lapphund hos SKK 2023?;Flatcoated retriever;Finsk lapphund;649;691;registreringar/år;Hur många registreringar skiljer det?
 Registrerades det fler eller färre hälleforshund än tysk jaktterrier hos SKK 2023?;Hälleforshund;Tysk jaktterrier;55;310;registreringar/år;Hur många registreringar skiljer det?
-Har en bloodhound högre eller lägre mankhöjd än en tysk pinscher?;Bloodhound;Tysk pinscher;67;48;cm;Hur många cm skiljer det i mankhöjd?
-Har en skye terrier högre eller lägre mankhöjd än en otterhound?;Skye terrier;Otterhound;25;67;cm;Hur många cm skiljer det i mankhöjd?
-Har en norsk buhund högre eller lägre mankhöjd än en bearded collie?;Norsk buhund;Bearded collie;45;53;cm;Hur många cm skiljer det i mankhöjd?
-Har en skotsk terrier högre eller lägre mankhöjd än en bloodhound?;Skotsk terrier;Bloodhound;26;67;cm;Hur många cm skiljer det i mankhöjd?
-Har en bedlingtonterrier högre eller lägre mankhöjd än en borzoi?;Bedlingtonterrier;Borzoi;41;75;cm;Hur många cm skiljer det i mankhöjd?
-Har en bouvier des flandres högre eller lägre mankhöjd än en dvärgtax?;Bouvier des flandres;Dvärgtax;65;15;cm;Hur många cm skiljer det i mankhöjd?
-Har en tysk pinscher högre eller lägre mankhöjd än en berger picard?;Tysk pinscher;Berger picard;48;60;cm;Hur många cm skiljer det i mankhöjd?
-Har en norsk buhund högre eller lägre mankhöjd än en borzoi?;Norsk buhund;Borzoi;45;75;cm;Hur många cm skiljer det i mankhöjd?
-Väger en bloodhound mer eller mindre än en bedlingtonterrier?;Bloodhound;Bedlingtonterrier;45;9;kg;Hur många kg skiljer det i vikt?
-Väger en stabyhoun mer eller mindre än en bouvier des flandres?;Stabyhoun;Bouvier des flandres;23;40;kg;Hur många kg skiljer det i vikt?
-Väger en bearded collie mer eller mindre än en dvärgtax?;Bearded collie;Dvärgtax;22;5;kg;Hur många kg skiljer det i vikt?
-Väger en skotsk terrier mer eller mindre än en wetterhoun?;Skotsk terrier;Wetterhoun;9;30;kg;Hur många kg skiljer det i vikt?
-Väger en berger picard mer eller mindre än en affenpinscher?;Berger picard;Affenpinscher;32;4;kg;Hur många kg skiljer det i vikt?
-Väger en glen of imaal terrier mer eller mindre än en mastino napoletano?;Glen of imaal terrier;Mastino napoletano;16;65;kg;Hur många kg skiljer det i vikt?
-Väger en mastino napoletano mer eller mindre än en tysk pinscher?;Mastino napoletano;Tysk pinscher;65;18;kg;Hur många kg skiljer det i vikt?
-Väger en bearded collie mer eller mindre än en wetterhoun?;Bearded collie;Wetterhoun;22;30;kg;Hur många kg skiljer det i vikt?
-Väger en dvärgtax mer eller mindre än en bloodhound?;Dvärgtax;Bloodhound;5;45;kg;Hur många kg skiljer det i vikt?
-Väger en berger picard mer eller mindre än en norsk buhund?;Berger picard;Norsk buhund;32;16;kg;Hur många kg skiljer det i vikt?
-Har en bedlingtonterrier längre eller kortare livslängd än en mastino napoletano?;Bedlingtonterrier;Mastino napoletano;14;8;år;Hur många år skiljer det i livslängd?
-Har en affenpinscher längre eller kortare livslängd än en borzoi?;Affenpinscher;Borzoi;14;11;år;Hur många år skiljer det i livslängd?
-Har en skotsk terrier längre eller kortare livslängd än en bouvier des flandres?;Skotsk terrier;Bouvier des flandres;13;11;år;Hur många år skiljer det i livslängd?
-Har en norsk buhund längre eller kortare livslängd än en mastino napoletano?;Norsk buhund;Mastino napoletano;13;8;år;Hur många år skiljer det i livslängd?
-Har en dvärgtax längre eller kortare livslängd än en otterhound?;Dvärgtax;Otterhound;14;11;år;Hur många år skiljer det i livslängd?
 Registrerades det fler eller färre berger picard än borzoi hos SKK 2023?;Berger picard;Borzoi;5;150;registreringar/år;Hur många registreringar skiljer det?
 Registrerades det fler eller färre otterhound än bichon bolognese hos SKK 2023?;Otterhound;Bichon bolognese;0;40;registreringar/år;Hur många registreringar skiljer det?
 Registrerades det fler eller färre glen of imaal terrier än tysk pinscher hos SKK 2023?;Glen of imaal terrier;Tysk pinscher;5;100;registreringar/år;Hur många registreringar skiljer det?
-Har en border terrier högre eller lägre mankhöjd än en engelsk springer spaniel?;Border terrier;Engelsk springer spaniel;34;51;cm;Hur många cm skiljer det i mankhöjd?
+Har en schäfer högre eller lägre mankhöjd än en rottweiler?;Schäfer;Rottweiler;63;64;cm;Hur många cm skiljer det i mankhöjd?
 Har en border collie högre eller lägre mankhöjd än en eurasier?;Border collie;Eurasier;53;56;cm;Hur många cm skiljer det i mankhöjd?
+Väger en golden retriever mer eller mindre än en labrador?;Golden retriever;Labrador;32;30;kg;Hur många kg skiljer det i vikt?
 Väger en schnauzer mer eller mindre än en engelsk springer spaniel?;Schnauzer;Engelsk springer spaniel;18;22;kg;Hur många kg skiljer det i vikt?
-Har en vit herdehund högre eller lägre mankhöjd än en beagle?;Vit herdehund;Beagle;63;38;cm;Hur många cm skiljer det i mankhöjd?
-Väger en nova scotia duck tolling retriever mer eller mindre än en border terrier?;Nova scotia duck tolling retriever;Border terrier;20;6;kg;Hur många kg skiljer det i vikt?
-Väger en wachtelhund mer eller mindre än en pomeranian?;Wachtelhund;Pomeranian;20;2,5;kg;Hur många kg skiljer det i vikt?
-Väger en eurasier mer eller mindre än en schnauzer?;Eurasier;Schnauzer;26;18;kg;Hur många kg skiljer det i vikt?
-Väger en bichon frisé mer eller mindre än en whippet?;Bichon frisé;Whippet;5;13;kg;Hur många kg skiljer det i vikt?
-Väger en akita mer eller mindre än en border terrier?;Akita;Border terrier;40;6;kg;Hur många kg skiljer det i vikt?
-Har en eurasier högre eller lägre mankhöjd än en pomeranian?;Eurasier;Pomeranian;56;22;cm;Hur många cm skiljer det i mankhöjd?
+Har en tax högre eller lägre mankhöjd än en cocker spaniel?;Tax;Cocker spaniel;22;39;cm;Hur många cm skiljer det i mankhöjd?
+Har en beagle högre eller lägre mankhöjd än en jack russell-terrier?;Beagle;Jack russell-terrier;38;28;cm;Hur många cm skiljer det i mankhöjd?
+Har en shetland sheepdog högre eller lägre mankhöjd än en weimaraner?;Shetland sheepdog;Weimaraner;37;64;cm;Hur många cm skiljer det i mankhöjd?
+Har en welsh corgi högre eller lägre mankhöjd än en akita?;Welsh corgi;Akita;28;67;cm;Hur många cm skiljer det i mankhöjd?
+Har en dobermann högre eller lägre mankhöjd än en pomeranian?;Dobermann;Pomeranian;68;22;cm;Hur många cm skiljer det i mankhöjd?
+Har en border terrier högre eller lägre mankhöjd än en engelsk springer spaniel?;Border terrier;Engelsk springer spaniel;34;51;cm;Hur många cm skiljer det i mankhöjd?
+Väger en schäfer mer eller mindre än en border collie?;Schäfer;Border collie;33;18;kg;Hur många kg skiljer det i vikt?
+Väger en springer spaniel mer eller mindre än en riesenschnauzer?;Springer spaniel;Riesenschnauzer;20;35;kg;Hur många kg skiljer det i vikt?
+Väger en welsh corgi mer eller mindre än en greyhound?;Welsh corgi;Greyhound;12;30;kg;Hur många kg skiljer det i vikt?
 Väger en shiba inu mer eller mindre än en engelsk springer spaniel?;Shiba inu;Engelsk springer spaniel;10;22;kg;Hur många kg skiljer det i vikt?
-Har en border terrier högre eller lägre mankhöjd än en pointer?;Border terrier;Pointer;34;63;cm;Hur många cm skiljer det i mankhöjd?
+Har en grand danois högre eller lägre mankhöjd än en chihuahua?;Grand danois;Chihuahua;80;18;cm;Hur många cm skiljer det i mankhöjd?
+Har en irländsk varghund högre eller lägre mankhöjd än en mops?;Irländsk varghund;Mops;81;30;cm;Hur många cm skiljer det i mankhöjd?
+Har en shih tzu högre eller lägre mankhöjd än en afghanhund?;Shih tzu;Afghanhund;25;70;cm;Hur många cm skiljer det i mankhöjd?
+Väger en bernhardshund mer eller mindre än en beagle?;Bernhardshund;Beagle;75;12;kg;Hur många kg skiljer det i vikt?
+Väger en boxer mer eller mindre än en mastiff?;Boxer;Mastiff;30;80;kg;Hur många kg skiljer det i vikt?
+Väger en pekingese mer eller mindre än en greyhound?;Pekingese;Greyhound;5;30;kg;Hur många kg skiljer det i vikt?
+Väger en akita mer eller mindre än en border terrier?;Akita;Border terrier;40;6;kg;Hur många kg skiljer det i vikt?
+Väger en leonberger mer eller mindre än en papillon?;Leonberger;Papillon;60;4;kg;Hur många kg skiljer det i vikt?
+Väger en yorkshireterrier mer eller mindre än en rottweiler?;Yorkshireterrier;Rottweiler;3;50;kg;Hur många kg skiljer det i vikt?
+Väger en dvärgpinscher mer eller mindre än en alaskan malamute?;Dvärgpinscher;Alaskan malamute;5;38;kg;Hur många kg skiljer det i vikt?
+Väger en newfoundlandshund mer eller mindre än en tax?;Newfoundlandshund;Tax;65;9;kg;Hur många kg skiljer det i vikt?
+Får en chihuahua fler eller färre valpar i en genomsnittlig kull än en grand danois?;Chihuahua;Grand danois;3;8,5;valpar;Hur många valpar skiljer det i snittkull?
+Får en pomeranian fler eller färre valpar i en genomsnittlig kull än en newfoundlandshund?;Pomeranian;Newfoundlandshund;2,5;8,5;valpar;Hur många valpar skiljer det i snittkull?
+Får en mastiff fler eller färre valpar i en genomsnittlig kull än en maltese?;Mastiff;Maltese;8;3;valpar;Hur många valpar skiljer det i snittkull?
+Får en dvärgspets fler eller färre valpar i en genomsnittlig kull än en bloodhound?;Dvärgspets;Bloodhound;2,5;8;valpar;Hur många valpar skiljer det i snittkull?
+Får en pyrenéerhund fler eller färre valpar i en genomsnittlig kull än en papillon?;Pyrenéerhund;Papillon;8;3;valpar;Hur många valpar skiljer det i snittkull?
+Får en cane corso fler eller färre valpar i en genomsnittlig kull än en shih tzu?;Cane corso;Shih tzu;7,5;3,5;valpar;Hur många valpar skiljer det i snittkull?
+Får en pekingese fler eller färre valpar i en genomsnittlig kull än en samojed?;Pekingese;Samojed;3;6;valpar;Hur många valpar skiljer det i snittkull?
+Får en siberian husky fler eller färre valpar i en genomsnittlig kull än en mops?;Siberian husky;Mops;6;4;valpar;Hur många valpar skiljer det i snittkull?
+Får en cocker spaniel fler eller färre valpar i en genomsnittlig kull än en toypudel?;Cocker spaniel;Toypudel;6;3;valpar;Hur många valpar skiljer det i snittkull?
+Får en gordonsetter fler eller färre valpar i en genomsnittlig kull än en dvärgtax?;Gordonsetter;Dvärgtax;7;3,5;valpar;Hur många valpar skiljer det i snittkull?
+Får en bullmastiff fler eller färre valpar i en genomsnittlig kull än en whippet?;Bullmastiff;Whippet;8;5;valpar;Hur många valpar skiljer det i snittkull?
+Får en bichon frisé fler eller färre valpar i en genomsnittlig kull än en briard?;Bichon frisé;Briard;4;8;valpar;Hur många valpar skiljer det i snittkull?
+Får en dobermann fler eller färre valpar i en genomsnittlig kull än en basset hound?;Dobermann;Basset hound;7,5;6;valpar;Hur många valpar skiljer det i snittkull?
+Får en pointer fler eller färre valpar i en genomsnittlig kull än en engelsk setter?;Pointer;Engelsk setter;7;7,5;valpar;Hur många valpar skiljer det i snittkull?
+Får en vizsla fler eller färre valpar i en genomsnittlig kull än en flatcoated retriever?;Vizsla;Flatcoated retriever;6,5;7;valpar;Hur många valpar skiljer det i snittkull?
+Får en komondor fler eller färre valpar i en genomsnittlig kull än en bordeauxdogg?;Komondor;Bordeauxdogg;6;8;valpar;Hur många valpar skiljer det i snittkull?
+Får en bullterrier fler eller färre valpar i en genomsnittlig kull än en coton de tuléar?;Bullterrier;Coton de tuléar;5;3,5;valpar;Hur många valpar skiljer det i snittkull?
+Får en boxer fler eller färre valpar i en genomsnittlig kull än en rysk vinthund?;Boxer;Rysk vinthund;6,5;7;valpar;Hur många valpar skiljer det i snittkull?
+Får en alaskan malamute fler eller färre valpar i en genomsnittlig kull än en yorkshireterrier?;Alaskan malamute;Yorkshireterrier;6,5;3,5;valpar;Hur många valpar skiljer det i snittkull?
+Får en tysk schäferhund fler eller färre valpar i en genomsnittlig kull än en fransk bulldogg?;Tysk schäferhund;Fransk bulldogg;8;3,5;valpar;Hur många valpar skiljer det i snittkull?
+Får en labrador fler eller färre valpar i en genomsnittlig kull än en engelsk bulldogg?;Labrador;Engelsk bulldogg;7,5;4;valpar;Hur många valpar skiljer det i snittkull?
+Får en irländsk röd setter fler eller färre valpar i en genomsnittlig kull än en beagle?;Irländsk röd setter;Beagle;9;6;valpar;Hur många valpar skiljer det i snittkull?
+Får en dvärgpinscher fler eller färre valpar i en genomsnittlig kull än en rysk svart terrier?;Dvärgpinscher;Rysk svart terrier;3;9;valpar;Hur många valpar skiljer det i snittkull?
+Får en affenpinscher fler eller färre valpar i en genomsnittlig kull än en weimaraner?;Affenpinscher;Weimaraner;3;7;valpar;Hur många valpar skiljer det i snittkull?
+Är hundrasen saluki en äldre eller yngre ras än cane corso, räknat från det år rasen erkändes?;Saluki;Cane corso;103;19;år;Hur många år skiljer det i rasens ålder?
+Är hundrasen lagotto romagnolo en äldre eller yngre ras än afghanhund, räknat från det år rasen erkändes?;Lagotto romagnolo;Afghanhund;31;65;år;Hur många år skiljer det i rasens ålder?
+Är hundrasen pekingese en äldre eller yngre ras än cesky terrier, räknat från det år rasen erkändes?;Pekingese;Cesky terrier;128;63;år;Hur många år skiljer det i rasens ålder?
+Är hundrasen dobermann en äldre eller yngre ras än pharaohhund, räknat från det år rasen erkändes?;Dobermann;Pharaohhund;126;63;år;Hur många år skiljer det i rasens ålder?
+Är hundrasen bernhardshund en äldre eller yngre ras än dalmatiner, räknat från det år rasen erkändes?;Bernhardshund;Dalmatiner;139;136;år;Hur många år skiljer det i rasens ålder?
+Är hundrasen boxer en äldre eller yngre ras än weimaraner, räknat från det år rasen erkändes?;Boxer;Weimaraner;131;130;år;Hur många år skiljer det i rasens ålder?
+Är hundrasen bullmastiff en äldre eller yngre ras än rhodesian ridgeback, räknat från det år rasen erkändes?;Bullmastiff;Rhodesian ridgeback;102;104;år;Hur många år skiljer det i rasens ålder?
+Är hundrasen akita en äldre eller yngre ras än dogo argentino, räknat från det år rasen erkändes?;Akita;Dogo argentino;95;98;år;Hur många år skiljer det i rasens ålder?
+Är hundrasen leonberger en äldre eller yngre ras än rottweiler, räknat från det år rasen erkändes?;Leonberger;Rottweiler;135;125;år;Hur många år skiljer det i rasens ålder?
+Är hundrasen staffordshire bullterrier en äldre eller yngre ras än bullterrier, räknat från det år rasen erkändes?;Staffordshire bullterrier;Bullterrier;91;138;år;Hur många år skiljer det i rasens ålder?
+Är hundrasen whippet en äldre eller yngre ras än cesky terrier, räknat från det år rasen erkändes?;Whippet;Cesky terrier;135;63;år;Hur många år skiljer det i rasens ålder?
+Är hundrasen eurasier en äldre eller yngre ras än rottweiler, räknat från det år rasen erkändes?;Eurasier;Rottweiler;53;125;år;Hur många år skiljer det i rasens ålder?
+Är hundrasen staffordshire bullterrier en äldre eller yngre ras än shar pei, räknat från det år rasen erkändes?;Staffordshire bullterrier;Shar pei;91;45;år;Hur många år skiljer det i rasens ålder?
+Är hundrasen svart terrier en äldre eller yngre ras än dogo argentino, räknat från det år rasen erkändes?;Svart terrier;Dogo argentino;42;98;år;Hur många år skiljer det i rasens ålder?
+Är hundrasen bullmastiff en äldre eller yngre ras än shar pei, räknat från det år rasen erkändes?;Bullmastiff;Shar pei;102;45;år;Hur många år skiljer det i rasens ålder?
+Är hundrasen jack russell-terrier en äldre eller yngre ras än nova scotia duck tolling retriever, räknat från det år rasen erkändes?;Jack russell-terrier;Nova scotia duck tolling retriever;26;81;år;Hur många år skiljer det i rasens ålder?
+Är hundrasen shar pei en äldre eller yngre ras än jack russell-terrier, räknat från det år rasen erkändes?;Shar pei;Jack russell-terrier;45;26;år;Hur många år skiljer det i rasens ålder?
+Är hundrasen svart terrier en äldre eller yngre ras än bullterrier, räknat från det år rasen erkändes?;Svart terrier;Bullterrier;42;138;år;Hur många år skiljer det i rasens ålder?
+Är hundrasen leonberger en äldre eller yngre ras än nova scotia duck tolling retriever, räknat från det år rasen erkändes?;Leonberger;Nova scotia duck tolling retriever;135;81;år;Hur många år skiljer det i rasens ålder?
+Är hundrasen lagotto romagnolo en äldre eller yngre ras än dalmatiner, räknat från det år rasen erkändes?;Lagotto romagnolo;Dalmatiner;31;136;år;Hur många år skiljer det i rasens ålder?
+Är hundrasen weimaraner en äldre eller yngre ras än cane corso, räknat från det år rasen erkändes?;Weimaraner;Cane corso;130;19;år;Hur många år skiljer det i rasens ålder?
+Är hundrasen dobermann en äldre eller yngre ras än shar pei, räknat från det år rasen erkändes?;Dobermann;Shar pei;126;45;år;Hur många år skiljer det i rasens ålder?
+Är hundrasen eurasier en äldre eller yngre ras än bernhardshund, räknat från det år rasen erkändes?;Eurasier;Bernhardshund;53;139;år;Hur många år skiljer det i rasens ålder?
+Registrerades det fler eller färre bichon havanais än labrador retriever hos SKK 2023?;Bichon havanais;Labrador retriever;849;2939;registreringar/år;Hur många registreringar skiljer det?
+Registrerades det fler eller färre drever än tysk schäferhund hos SKK 2023?;Drever;Tysk schäferhund;594;1543;registreringar/år;Hur många registreringar skiljer det?
+Registrerades det fler eller färre finsk lapphund än labrador retriever hos SKK 2023?;Finsk lapphund;Labrador retriever;691;2939;registreringar/år;Hur många registreringar skiljer det?
+Registrerades det fler eller färre jämthund än australian shepherd hos SKK 2023?;Jämthund;Australian shepherd;1243;602;registreringar/år;Hur många registreringar skiljer det?
+Registrerades det fler eller färre jämthund än finsk lapphund hos SKK 2023?;Jämthund;Finsk lapphund;1243;691;registreringar/år;Hur många registreringar skiljer det?
+Springer en italiensk vinthund snabbare eller långsammare än en greyhound?;Italiensk vinthund;Greyhound;40;72;km/h;Hur många km/h skiljer det i toppfart?
+Springer en saluki snabbare eller långsammare än en sloughi?;Saluki;Sloughi;68;67;km/h;Hur många km/h skiljer det i toppfart?
+Springer en tysk schäferhund snabbare eller långsammare än en vizsla?;Tysk schäferhund;Vizsla;48;64;km/h;Hur många km/h skiljer det i toppfart?
+Springer en afghanhund snabbare eller långsammare än en borzoi?;Afghanhund;Borzoi;64;58;km/h;Hur många km/h skiljer det i toppfart?
+Springer en pharaohhund snabbare eller långsammare än en azawakh?;Pharaohhund;Azawakh;56;64;km/h;Hur många km/h skiljer det i toppfart?
+Har en brittany högre eller lägre andel höftledsdysplasi än en chow chow?;Brittany;Chow chow;6;50;%;Hur många procentenheter skiljer det i höftledsdysplasi?
+Har en sussex spaniel högre eller lägre andel höftledsdysplasi än en chesapeake bay retriever?;Sussex spaniel;Chesapeake bay retriever;42;12;%;Hur många procentenheter skiljer det i höftledsdysplasi?
+Har en pointer högre eller lägre andel höftledsdysplasi än en gammal dansk hönsehund?;Pointer;Gammal dansk hönsehund;6;30;%;Hur många procentenheter skiljer det i höftledsdysplasi?
+Har en bloodhound högre eller lägre andel höftledsdysplasi än en kuvasz?;Bloodhound;Kuvasz;26;14;%;Hur många procentenheter skiljer det i höftledsdysplasi?
+Har en gordonsetter högre eller lägre andel höftledsdysplasi än en american staffordshire terrier?;Gordonsetter;American staffordshire terrier;21;25;%;Hur många procentenheter skiljer det i höftledsdysplasi?
+Har en pudelpointer högre eller lägre andel höftledsdysplasi än en briard?;Pudelpointer;Briard;7;22;%;Hur många procentenheter skiljer det i höftledsdysplasi?
+Har en russkiy toy högre eller lägre mankhöjd än en kaukasisk ovtjarka?;Russkiy toy;Kaukasisk ovtjarka;25;72;cm;Hur många cm skiljer det i mankhöjd?
+Har en pyreneisk mastiff högre eller lägre mankhöjd än en pražský krysařík?;Pyreneisk mastiff;Pražský krysařík;77;22;cm;Hur många cm skiljer det i mankhöjd?
+Har en broholmer högre eller lägre mankhöjd än en volpino italiano?;Broholmer;Volpino italiano;75;28;cm;Hur många cm skiljer det i mankhöjd?
+Har en kleinspitz högre eller lägre mankhöjd än en fila brasileiro?;Kleinspitz;Fila brasileiro;27;70;cm;Hur många cm skiljer det i mankhöjd?
+Har en russkiy toy högre eller lägre mankhöjd än en broholmer?;Russkiy toy;Broholmer;25;75;cm;Hur många cm skiljer det i mankhöjd?
+Har en kaukasisk ovtjarka högre eller lägre mankhöjd än en volpino italiano?;Kaukasisk ovtjarka;Volpino italiano;72;28;cm;Hur många cm skiljer det i mankhöjd?
+Väger en pražský krysařík mer eller mindre än en pyreneisk mastiff?;Pražský krysařík;Pyreneisk mastiff;2,6;70;kg;Hur många kg skiljer det i vikt?
+Väger en fila brasileiro mer eller mindre än en volpino italiano?;Fila brasileiro;Volpino italiano;50;5;kg;Hur många kg skiljer det i vikt?
+Är en fransk bulldogg dyrare eller billigare i inköp än en pomeranian? (2025);Fransk bulldogg;Pomeranian;25000;13000;kr;Hur många kronor skiljer det i valppris?
+Är en cocker spaniel dyrare eller billigare i inköp än en tax? (2025);Cocker spaniel;Tax;20000;12000;kr;Hur många kronor skiljer det i valppris?
+Är en berner sennenhund dyrare eller billigare i inköp än en golden retriever? (2025);Berner sennenhund;Golden retriever;24000;18000;kr;Hur många kronor skiljer det i valppris?
+Är en cavalier king charles spaniel dyrare eller billigare i inköp än en bichon havanais? (2025);Cavalier king charles spaniel;Bichon havanais;14000;16000;kr;Hur många kronor skiljer det i valppris?
+Är en akita dyrare eller billigare i inköp än en shiba inu? (2025);Akita;Shiba inu;18000;15000;kr;Hur många kronor skiljer det i valppris?
+Är en border collie dyrare eller billigare i inköp än en australian shepherd? (2025);Border collie;Australian shepherd;16000;22000;kr;Hur många kronor skiljer det i valppris?
+Är en rhodesian ridgeback dyrare eller billigare i inköp än en beagle? (2025);Rhodesian ridgeback;Beagle;24000;16000;kr;Hur många kronor skiljer det i valppris?
+Är en chihuahua dyrare eller billigare i inköp än en tibetansk mastiff? (2025);Chihuahua;Tibetansk mastiff;15000;38000;kr;Hur många kronor skiljer det i valppris?
+Är en vizsla dyrare eller billigare i inköp än en leonberger? (2025);Vizsla;Leonberger;20000;28000;kr;Hur många kronor skiljer det i valppris?
+Är en staffordshire bullterrier dyrare eller billigare i inköp än en bichon frisé? (2025);Staffordshire bullterrier;Bichon frisé;15000;22000;kr;Hur många kronor skiljer det i valppris?
+Är en siberian husky dyrare eller billigare i inköp än en cane corso? (2025);Siberian husky;Cane corso;12000;30000;kr;Hur många kronor skiljer det i valppris?
+Är en mellanpudel dyrare eller billigare i inköp än en welsh corgi? (2025);Mellanpudel;Welsh corgi;30000;22000;kr;Hur många kronor skiljer det i valppris?
+Är en eurasier dyrare eller billigare i inköp än en shih tzu? (2025);Eurasier;Shih tzu;22000;18000;kr;Hur många kronor skiljer det i valppris?
+Är en italiensk vinthund dyrare eller billigare i inköp än en tibetansk mastiff? (2025);Italiensk vinthund;Tibetansk mastiff;14000;38000;kr;Hur många kronor skiljer det i valppris?
+Är en saluki dyrare eller billigare i inköp än en drever? (2025);Saluki;Drever;22000;10000;kr;Hur många kronor skiljer det i valppris?
+Är en pyrenéerhund dyrare eller billigare i inköp än en affenpinscher? (2025);Pyrenéerhund;Affenpinscher;28000;10000;kr;Hur många kronor skiljer det i valppris?
+Registrerades det fler eller färre shetland sheepdog än chihuahua (långhårig) hos SKK 2023?;Shetland sheepdog;Chihuahua (långhårig);860;622;registreringar/år;Hur många registreringar skiljer det?
+Registrerades det fler eller färre drever än wachtelhund hos SKK 2023?;Drever;Wachtelhund;594;60;registreringar/år;Hur många registreringar skiljer det?
+Registrerades det fler eller färre australian shepherd än breton hos SKK 2023?;Australian shepherd;Breton;602;65;registreringar/år;Hur många registreringar skiljer det?

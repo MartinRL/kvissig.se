@@ -233,6 +233,47 @@ likadan varje gång. Sex metriker, var och en med en **namnfri, enhetlig stam** 
   par får finnas en gång *per mått* men inte två gånger inom samma mått. Mät:
   `report --staging --dir question-staging/loggor-mini --targets 10,35,35,20 --key metricpair`.
 
+## Hund (hundraser-mini)
+
+Gäller NÄR pack-slug = `hundraser-mini` (delta mot basfilosofin ovan). Leken jämför hundraser
+kvantitativt. **HÅRD REGEL: bryt enmetrik-monotonin.** En tidig version blev 123/175 ren
+kroppsstorlek (vikt + mankhöjd) → spelaren upplever "varenda fråga handlar om vikt". Leken ska
+spänna över **allt möjligt om hundraser**, fortfarande som verifierbara mer/mindre-jämförelser
+med per-ras-värden (faktagranskaren gatekeepar — ej källbart = förkasta).
+
+**Åtta verifierbara dimensioner, ingen får dominera (cap ~25 kort/dimension):**
+
+| Dimension | `enhet` | källa | målantal |
+|---|---|---|---|
+| Storlek (mankhöjd) | cm | FCI/SKK rasstandard | ~25 totalt med vikt |
+| Storlek (vikt) | kg | FCI/SKK rasstandard | (ingår i ~25 ovan) |
+| Livslängd | år | Agria/AniCura/rasdata | ~22 |
+| SKK-popularitet | registreringar/år | SKK årsstatistik (år-pinnad) | ~22 |
+| Valppris | kr | svenska kennlar/Agria (år-pinnad) | ~18 |
+| Ras-ålder | år | år sedan rasstandard erkändes | ~22 |
+| Kullstorlek | valpar | SKK Avelsdata/raslitteratur | ~22 |
+| Höftledsdysplasi | % | ofa.org "Disease Statistics by Breed" | ~22 |
+| Maxhastighet | km/h | Guinness/racing — bara vinthundar/sporthundar | ~8 (litet block med flit) |
+
+**Coren intelligensrank = SKIP** (rank 1 = klokast är inverterad → tydlighetsgranskaren
+förkastar). Debunkat/ej källbart och därför EJ med: bettstyrka, agility-vinster per ras.
+
+**Riktnings-/tydlighetsfällor att baka in (annars trasiga kort):**
+- **Ras-ålder:** värde = `nuvarande år − erkännandeår` i ÅR. ALDRIG årtalet (temporal utan
+  magnitud = förkastas, se "Otydlig riktning"). Större = äldre = "mer".
+- **Höftledsdysplasi %:** högre % = mer dysplasi. Fråga: "Har X högre eller lägre andel
+  höftledsdysplasi än Y?" Rent komparativ.
+- **Maxhastighet / kullstorlek / livslängd / pris / storlek:** naturligt komparativ, högre = "mer".
+- **Volatila (pris, SKK-reg):** år-pinnas i frågetext + sidecar.
+- **Riktning ~50/50**, sakA behöver ej hålla det största värdet.
+
+**Pool:** ≥88 distinkta raser (ItemCap=4 pack-wide). SKK erkänner ~300 → gott om utrymme. En ras
+≤4 ggr TOTALT över alla dimensioner; styr med cap-varningarna i `report`.
+
+**Mät enhetsfördelningen varje batch:** `report --staging --dir question-staging/hund
+--key question` → **Top units får inte visa någon enhet >~25** (~8 enheter representerade).
+Bandmål 15/40/30/15, riktning ~50/50.
+
 ### Mini- vs prod-skala
 
 En pack-slug som innehåller `mini` = koncept-pack: **175 kort, 7-frågors omgång**, undantas
