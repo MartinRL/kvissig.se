@@ -1,0 +1,105 @@
+@* GET /spel-som-more-or-less — SEO/GEO comparison landing page targeting the English/
+   international "More or Less spel" angle. Honest, white-hat comparison (no brand imitation).
+   FAQ here MUST stay in sync with the FAQPage JSON-LD in @code (FaqJsonLd). *@
+<MainLayout Title="Spel som More or Less — Mer eller Mindre"
+            Description="Gillar du More or Less? Mer eller Mindre är ett svenskt frågespel som tar mer/mindre-mekaniken ett steg längre: gissa först riktning, sedan hur stor skillnaden är. Online men tillsammans i samma rum."
+            CanonicalPath="/spel-som-more-or-less"
+            JsonLd="@FaqJsonLd">
+    <div class="wrap content">
+        <div class="brand">
+            <a class="logo" href="/"><span class="mer">Mer</span> eller <span class="mindre">Mindre</span></a>
+        </div>
+
+        @* 1. Hero / pitch *@
+        <h1>Spel som More or Less? Mer eller Mindre tar det ett steg längre</h1>
+        <p class="sub">
+            <strong>Mer eller Mindre</strong> (eng. <em>More or Less</em>) är ett svenskt
+            frågespel som bygger vidare på mer/mindre-mekaniken med en tvåstegs-twist: gissa
+            först <em>riktningen</em> (är A mer eller mindre än B?), sedan <em>hur stor</em>
+            skillnaden är. Online men tillsammans i samma rum, en skärm var.
+        </p>
+        <a class="btn" href="/">Spela Mer eller Mindre</a>
+
+        @* 2. Vad är More or Less? — neutralt, ärligt *@
+        <div class="card">
+            <h2>Vad är More or Less?</h2>
+            <p>
+                More or Less är ett gissningsspel där du svarar på om en sak är <em>mer</em>
+                eller <em>mindre</em> än en annan — ett enkelt, snabbt format som finns i många
+                varianter, både som kortspel och digitalt. Du behöver inte kunna exakta siffror,
+                bara känna åt vilket håll det lutar.
+            </p>
+        </div>
+
+        @* 3. Så skiljer sig Mer eller Mindre — tvåstegsraketen + online-tillsammans *@
+        <div class="card">
+            <h2>Så skiljer sig Mer eller Mindre</h2>
+            <p>
+                Där More or Less stannar vid mer eller mindre lägger Mer eller Mindre till ett
+                andra steg: <em>hur stor</em> är skillnaden? Först den snabba magkänslan, sedan
+                den nervösa skattningen. Rätt riktning ger bonus, närmast facit på storleken
+                vinner, och lägst total avgör. Allt spelas online men tillsammans i samma rum,
+                med automatisk poäng och färska, kurerade frågor.
+            </p>
+        </div>
+
+        @* 4. Jämförelsetabell — featured-snippet/GEO-bränsle *@
+        <div class="card">
+            <h2>More or Less och Mer eller Mindre sida vid sida</h2>
+            <table>
+                <thead>
+                    <tr><th></th><th>More or Less</th><th>Mer eller Mindre</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Svar per fråga</td><td>Mer eller mindre</td><td>Två steg: riktning, sedan skillnad</td></tr>
+                    <tr><td>Format</td><td>Varierar (kort/digitalt)</td><td>Spelas i webbläsaren</td></tr>
+                    <tr><td>Poäng</td><td>Rätt/fel på riktningen</td><td>Närmast facit, bonus för rätt riktning, lägst total vinner</td></tr>
+                    <tr><td>Tillsammans</td><td>Varierar</td><td>Online men i samma rum, en skärm var</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        @* 5. CTA + interna länkar *@
+        <a class="btn" href="/">Spela Mer eller Mindre</a>
+        <p><a href="/spel-som-0-100">Spel som 0-100</a> &middot;
+           <a href="/om-spelet#sa-spelar-du">Läs reglerna</a></p>
+
+        @* 6. FAQ (matchar FaqJsonLd nedan) *@
+        <div class="card">
+            <h2>Frågor &amp; svar</h2>
+
+            <h3>Finns det ett spel som liknar More or Less?</h3>
+            <p>Ja. Mer eller Mindre bygger på samma mer/mindre-idé, men lägger till ett andra
+               steg: hur stor är skillnaden? Mer eller Mindre är faktiskt det svenska namnet för
+               just den mekaniken.</p>
+
+            <h3>Vad är skillnaden mellan More or Less och Mer eller Mindre?</h3>
+            <p>I More or Less svarar du bara mer eller mindre. I Mer eller Mindre gissar du först
+               riktningen och sedan hur stor skillnaden är. Rätt riktning ger bonus, och lägst
+               total vinner.</p>
+
+            <h3>Kan man spela ett More or Less-liknande spel online tillsammans?</h3>
+            <p>Ja. Mer eller Mindre spelas i webbläsaren med en skärm var, tänkt för er som
+               sitter i samma rum — som ett sällskapsspel, fast appen sköter frågor och poäng.</p>
+
+            <h3>Är spelet på svenska?</h3>
+            <p>Ja. Frågorna är ett kurerat svenskt korpus med faktagranskade kort i flera teman,
+               och fler är på väg.</p>
+        </div>
+
+        <a class="back" href="/">← Tillbaka till kvissarna</a>
+    </div>
+</MainLayout>
+
+@code {
+    // FAQPage schema for rich results / LLM citation. Keep the Q&A in sync with the FAQ
+    // section above. Serialized object only (MainLayout wraps it in <script>).
+    private const string FaqJsonLd = """
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+      {"@type":"Question","name":"Finns det ett spel som liknar More or Less?","acceptedAnswer":{"@type":"Answer","text":"Ja. Mer eller Mindre bygger på samma mer/mindre-idé, men lägger till ett andra steg: hur stor är skillnaden? Mer eller Mindre är faktiskt det svenska namnet för just den mekaniken."}},
+      {"@type":"Question","name":"Vad är skillnaden mellan More or Less och Mer eller Mindre?","acceptedAnswer":{"@type":"Answer","text":"I More or Less svarar du bara mer eller mindre. I Mer eller Mindre gissar du först riktningen och sedan hur stor skillnaden är. Rätt riktning ger bonus, och lägst total vinner."}},
+      {"@type":"Question","name":"Kan man spela ett More or Less-liknande spel online tillsammans?","acceptedAnswer":{"@type":"Answer","text":"Ja. Mer eller Mindre spelas i webbläsaren med en skärm var, tänkt för er som sitter i samma rum — som ett sällskapsspel, fast appen sköter frågor och poäng."}},
+      {"@type":"Question","name":"Är spelet på svenska?","acceptedAnswer":{"@type":"Answer","text":"Ja. Frågorna är ett kurerat svenskt korpus med faktagranskade kort i flera teman, och fler är på väg."}}
+    ]}
+    """;
+}

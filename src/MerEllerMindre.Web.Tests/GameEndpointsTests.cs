@@ -112,6 +112,26 @@ public class GameEndpointsTests : IClassFixture<TestAppFactory>
     }
 
     [Fact]
+    public async Task FragespelOnline_RendersContentAndSchema()
+    {
+        var html = await (await NewClient().GetAsync("/fragespel-online")).Content.ReadAsStringAsync();
+
+        html.Should().Contain("\"@type\":\"FAQPage\"");
+        html.Should().Contain("rel=\"canonical\"");
+        html.Should().Contain("/fragespel-online");
+    }
+
+    [Fact]
+    public async Task SpelSomMoreOrLess_RendersContentAndSchema()
+    {
+        var html = await (await NewClient().GetAsync("/spel-som-more-or-less")).Content.ReadAsStringAsync();
+
+        html.Should().Contain("\"@type\":\"FAQPage\"");
+        html.Should().Contain("rel=\"canonical\"");
+        html.Should().Contain("/spel-som-more-or-less");
+    }
+
+    [Fact]
     public async Task UnknownUrl_Returns404WithCustomPage()
     {
         var resp = await NewClient().GetAsync("/finns-inte");
@@ -129,6 +149,8 @@ public class GameEndpointsTests : IClassFixture<TestAppFactory>
         var xml = await resp.Content.ReadAsStringAsync();
         xml.Should().Contain("<urlset");
         xml.Should().Contain("/om-spelet</loc>");
+        xml.Should().Contain("/fragespel-online</loc>");
+        xml.Should().Contain("/spel-som-more-or-less</loc>");
         xml.Should().Contain("/games/new/mer-eller-mindre</loc>");
     }
 

@@ -35,8 +35,11 @@ köparen redan letar efter ett *spel som vårt*:
 | Jämförelse | "spel som 0-100" | `/spel-som-0-100` |
 | Jämförelse | "alternativ till 0-100" | `/spel-som-0-100` |
 | Online | "0-100 online" | `/spel-som-0-100` |
-| Online tillsammans | "frågespel online tillsammans" | backlog `/fragespel-online` |
-| Engelsk vinkel | "More or Less spel" | backlog |
+| Tema (mini) | "hund frågesport" | `/hund-fragesport-tillsammans` |
+| Tema (mini) | "elbil frågesport" / "bästa elbilen jämförelse" | `/elbil-fragesport-tillsammans` |
+| Tema (mini) | "fotboll frågesport" / "Allsvenskan marknadsvärde" | `/fotboll-fragesport-tillsammans` |
+| Online tillsammans | "frågespel online tillsammans" | `/fragespel-online` |
+| Engelsk vinkel | "More or Less spel" / "spel som More or Less" | `/spel-som-more-or-less` |
 | Brand | "Mer eller Mindre" (spel) | `/` |
 
 ---
@@ -51,11 +54,17 @@ köparen redan letar efter ett *spel som vårt*:
   OAI-SearchBot, ChatGPT-User, ClaudeBot, Claude-Web, PerplexityBot, Google-Extended;
   `Sitemap:`-rad.
 - [x] Dynamisk `/sitemap.xml` (`GameEndpoints.cs`) — `/`, `/om-spelet`, `/om-mig`,
-  `/spel-som-0-100` + en `/games/new/{packId}` per pack.
+  `/spel-som-0-100`, `/fragespel-online`, `/spel-som-more-or-less`, per-tema mini-sidor
+  (`/hund-`, `/elbil-`, `/fotboll-fragesport-tillsammans`) + en `/games/new/{packId}` per pack.
 - [x] `wwwroot/llms.txt` — sammanfattning + sidlista (Om spelet, Välj kviss,
-  Spel som 0-100).
+  Spel som 0-100, Frågespel online, Spel som More or Less, per-tema frågesport-tillsammans-sidor).
 - [x] Content-sidor med FAQPage-schema: `/om-spelet` (`Components/OmSpelet.razor`),
-  `/spel-som-0-100` (`Components/SpelSom0100.razor`); `/om-mig`.
+  `/spel-som-0-100` (`Components/SpelSom0100.razor`), `/fragespel-online`
+  (`Components/FragespelOnline.razor`), `/spel-som-more-or-less`
+  (`Components/SpelSomMoreOrLess.razor`); `/om-mig`. Per-tema mini-sidor
+  (samma mönster): `/hund-fragesport-tillsammans` (`Components/HundFragesport.razor`),
+  `/elbil-fragesport-tillsammans` (`ElbilFragesport.razor`),
+  `/fotboll-fragesport-tillsammans` (`FotbollFragesport.razor`) — CTA → `/games/new/{tema}-mini`.
 - [x] Egen 404-sida; PWA-manifest + service worker; https via fly-edge.
 - [x] Plausible privacy-analytics (game_created/joined/started/completed).
 
@@ -65,7 +74,8 @@ köparen redan letar efter ett *spel som vårt*:
 
 - [x] **AI-crawler-allow** i robots.txt (se §3) — ingen anmälningsportal, bara tillåtelse.
 - [x] **llms.txt** — kortfattad sajtsammanfattning + sidlista för LLM-upptäckt.
-- [x] **JSON-LD** FAQPage (Om spelet, Spel som 0-100) + Game — strukturerad data AI/sökmotor
+- [x] **JSON-LD** FAQPage (Om spelet, Spel som 0-100, Frågespel online, Spel som More or
+  Less) + Game — strukturerad data AI/sökmotor
   kan citera och Google kan visa som featured snippet.
 - [x] **Jämförelsetabeller** i content (featured-snippet-vänligt format).
 - **Mönster för ny content (citerbarhet):** naturliga frågerubriker (`<h2>` som en fråga)
@@ -80,15 +90,15 @@ Flyttat hit från tasks.md. Verifiering via Cloudflare DNS TXT (hela domänen, i
 kodändring).
 
 ### Google Search Console
-- [ ] Skapa Domain-property `kvissig.se` på https://search.google.com/search-console
-- [ ] Verifiera via DNS TXT i Cloudflare (klistra in `google-site-verification=...` på apex)
-- [ ] Skicka in `https://kvissig.se/sitemap.xml`
-- [ ] Begär indexering av `/`, `/om-spelet`, `/spel-som-0-100` (URL-inspektion)
+- [x] Skapa Domain-property `kvissig.se` på https://search.google.com/search-console
+- [x] Verifiera via DNS TXT i Cloudflare (klistra in `google-site-verification=...` på apex)
+- [x] Skicka in `https://kvissig.se/sitemap.xml`
+- [x] Begär indexering av `/`, `/om-spelet`, `/spel-som-0-100` (URL-inspektion)
 
 ### Bing Webmaster Tools
-- [ ] Lägg till sajten på https://www.bing.com/webmasters
-- [ ] Importera från GSC (snabbast) ELLER verifiera via Cloudflare DNS TXT
-- [ ] Skicka in `https://kvissig.se/sitemap.xml`
+- [x] Lägg till sajten på https://www.bing.com/webmasters
+- [x] Importera från GSC (snabbast) ELLER verifiera via Cloudflare DNS TXT
+- [x] Skicka in `https://kvissig.se/sitemap.xml`
 
 ### Uppföljning efter GSC
 - [ ] Följ "spel som 0-100" / "alternativ till 0-100"-queries i Search Console och
@@ -103,9 +113,10 @@ följer ALLA samma mönster som `SpelSom0100`/`OmSpelet`: MainLayout + `.wrap.co
 `FaqJsonLd` (const string via `JsonLd=`) + endpoint i `GameEndpoints.cs` + slug i
 sitemap-urls-listan + llms.txt.
 
-1. **`/fragespel-online`** — "frågespel online tillsammans"-intent. Hög prio: bred,
-   icke-PlayMIG-beroende long-tail.
-2. **`/spel-som-more-or-less`** — engelsk/internationell vinkel ("More or Less spel").
+1. ~~**`/fragespel-online`** — "frågespel online tillsammans"-intent.~~ ✅ LIVE
+   (`Components/FragespelOnline.razor`).
+2. ~~**`/spel-som-more-or-less`** — engelsk/internationell vinkel ("More or Less spel").~~
+   ✅ LIVE (`Components/SpelSomMoreOrLess.razor`).
 3. **Per-pack-/temasidor** — landningssidor per kviss/tema när korpus växer (t.ex. en sida
    per pack-slug).
 4. **Utbyggd intern länkning** mellan content-sidorna (OmSpelet ↔ SpelSom0100 ↔ nya sidor)

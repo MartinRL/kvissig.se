@@ -1,0 +1,101 @@
+@* GET /fragespel-online — SEO/GEO landing page targeting "frågespel online tillsammans"
+   intent. Broad, non-PlayMIG long-tail. Fråge-rubriker + definitionssvar först (GEO). FAQ
+   here MUST stay in sync with the FAQPage JSON-LD in @code (FaqJsonLd). *@
+<MainLayout Title="Frågespel online tillsammans — Mer eller Mindre"
+            Description="Mer eller Mindre är ett frågespel online — men tillsammans i samma rum. En skärm var, ingen app att installera, appen sköter frågor och poäng. Gissa först riktning (mer/mindre), sedan hur stor skillnaden är."
+            CanonicalPath="/fragespel-online"
+            JsonLd="@FaqJsonLd">
+    <div class="wrap content">
+        <div class="brand">
+            <a class="logo" href="/"><span class="mer">Mer</span> eller <span class="mindre">Mindre</span></a>
+        </div>
+
+        @* 1. Hero / pitch *@
+        <h1>Frågespel online — men tillsammans i samma rum</h1>
+        <p class="sub">
+            <strong>Mer eller Mindre</strong> är ett frågespel ni spelar online, fast tänkt för
+            er som sitter i <em>samma rum</em>: en skärm var, ingen app att installera. Gissa
+            först <em>riktningen</em> (är A mer eller mindre än B?), sedan <em>hur stor</em>
+            skillnaden är. Appen drar fram frågorna och räknar poängen åt er.
+        </p>
+        <a class="btn" href="/">Spela Mer eller Mindre</a>
+
+        @* 2. Vad är ett frågespel online? — definition först *@
+        <div class="card">
+            <h2>Vad är ett frågespel online?</h2>
+            <p>
+                Ett frågespel online är ett quiz ni spelar i webbläsaren i stället för med
+                fysiska kort eller en spelplan. Frågorna visas på skärmen, svaren och poängen
+                hanteras automatiskt, och flera spelare kan vara med samtidigt på var sin enhet
+                utan att något behöver laddas ner.
+            </p>
+        </div>
+
+        @* 3. Samma-rum-vinkeln (kilen, återanvänd från OmSpelet §3) *@
+        <div class="card">
+            <h2>Online men tillsammans — så funkar samma-rum-formatet</h2>
+            <p>
+                Det här är inte ett vanligt onlinespel mot främlingar på distans. Tanken är att
+                ni sitter i samma rum, var och en med sin egen skärm, precis som runt ett
+                sällskapsspel. Värden startar en omgång, övriga ansluter med en kod eller QR-kod,
+                sedan svarar var och en på sin telefon.
+            </p>
+            <ul class="bullets">
+                <li><strong>Inget att blanda:</strong> appen drar fram frågorna åt er.</li>
+                <li><strong>Ingen poängräkning för hand:</strong> poängen räknas automatiskt.</li>
+                <li><strong>Inget att installera,</strong> och nya, färska frågor varje gång.</li>
+            </ul>
+        </div>
+
+        @* 4. Så kommer ni igång *@
+        <div class="card">
+            <h2>Så kommer ni igång</h2>
+            <ol class="steps">
+                <li><strong>Värden väljer en kviss</strong> och visar en QR-kod på sin skärm.</li>
+                <li><strong>Alla andra skannar</strong> och ansluter med var sin telefon.</li>
+                <li><strong>Spela.</strong> Varje fråga jämför A och B — gissa riktning, sedan
+                    skillnad. Lägst total efter @Decider.FullGameSize frågor vinner.</li>
+            </ol>
+        </div>
+
+        @* 5. CTA + interna länkar *@
+        <a class="btn" href="/">Spela Mer eller Mindre</a>
+        <p><a href="/om-spelet#sa-spelar-du">Läs reglerna</a> &middot;
+           <a href="/spel-som-0-100">Spel som 0-100</a></p>
+
+        @* 6. FAQ (matchar FaqJsonLd nedan) *@
+        <div class="card">
+            <h2>Frågor &amp; svar</h2>
+
+            <h3>Kan man spela frågespel online tillsammans?</h3>
+            <p>Ja. Mer eller Mindre spelas i webbläsaren med en skärm var, tänkt för er som
+               sitter i samma rum — som ett sällskapsspel, fast appen sköter frågor och poäng.</p>
+
+            <h3>Behöver man installera en app?</h3>
+            <p>Nej. Det spelas direkt i webbläsaren, ingen nedladdning. Den som är värd öppnar en
+               omgång och delar koden eller QR-koden.</p>
+
+            <h3>Hur många kan vara med?</h3>
+            <p>Från 2 spelare och uppåt. Varje deltagare använder sin egen skärm.</p>
+
+            <h3>Måste alla sitta i samma rum?</h3>
+            <p>Spelet är gjort för det: en skärm var, alla i samma rum. Det fungerar tekniskt på
+               distans också (t.ex. över videosamtal), men det är roligast tillsammans.</p>
+        </div>
+
+        <a class="back" href="/">← Tillbaka till kvissarna</a>
+    </div>
+</MainLayout>
+
+@code {
+    // FAQPage schema for rich results / LLM citation. Keep the Q&A in sync with the FAQ
+    // section above. Serialized object only (MainLayout wraps it in <script>).
+    private const string FaqJsonLd = """
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+      {"@type":"Question","name":"Kan man spela frågespel online tillsammans?","acceptedAnswer":{"@type":"Answer","text":"Ja. Mer eller Mindre spelas i webbläsaren med en skärm var, tänkt för er som sitter i samma rum — som ett sällskapsspel, fast appen sköter frågor och poäng."}},
+      {"@type":"Question","name":"Behöver man installera en app?","acceptedAnswer":{"@type":"Answer","text":"Nej. Det spelas direkt i webbläsaren, ingen nedladdning. Den som är värd öppnar en omgång och delar koden eller QR-koden."}},
+      {"@type":"Question","name":"Hur många kan vara med?","acceptedAnswer":{"@type":"Answer","text":"Från 2 spelare och uppåt. Varje deltagare använder sin egen skärm."}},
+      {"@type":"Question","name":"Måste alla sitta i samma rum?","acceptedAnswer":{"@type":"Answer","text":"Spelet är gjort för det: en skärm var, alla i samma rum. Det fungerar tekniskt på distans också, men det är roligast tillsammans."}}
+    ]}
+    """;
+}

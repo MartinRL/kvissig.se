@@ -8,3 +8,8 @@
 - [Om spelet](https://kvissig.se/om-spelet): vad spelet är, så spelar du, idén bakom, FAQ.
 - [Välj kviss](https://kvissig.se/): frågepaketen (kortlekarna) man kan spela.
 - [Spel som 0-100](https://kvissig.se/spel-som-0-100): hur Mer eller Mindre förhåller sig till 0-100 (tvåstegs-twisten).
+- [Frågespel online](https://kvissig.se/fragespel-online): spela frågespel online men tillsammans i samma rum.
+- [Spel som More or Less](https://kvissig.se/spel-som-more-or-less): hur Mer eller Mindre förhåller sig till More or Less.
+- [Hund-frågesport tillsammans](https://kvissig.se/hund-fragesport-tillsammans): jämför hundraser (mankhöjd, vikt, livslängd, SKK-registreringar) online men i samma rum.
+- [Elbils-frågesport tillsammans](https://kvissig.se/elbil-fragesport-tillsammans): jämför elbilar (räckvidd, pris, 0–100, hästkrafter) online men i samma rum.
+- [Fotbolls-frågesport tillsammans](https://kvissig.se/fotboll-fragesport-tillsammans): jämför Allsvenskan (marknadsvärde, mål, publiksnitt, ålder) online men i samma rum.

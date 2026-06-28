@@ -20,7 +20,8 @@ namespace MerEllerMindre.Web;
 public static class GameEndpoints
 {
     // Web-only "new pack" markers: drop a slug here when its deck stops being new.
-    static readonly HashSet<string> NewPacks = new(StringComparer.Ordinal) { "loggor-mini-1" };
+    static readonly HashSet<string> NewPacks = new(StringComparer.Ordinal)
+        { "loggor-mini-1", "hundraser-mini", "elbil-mini", "fotboll-mini" };
 
     public static void MapGameEndpoints(this WebApplication app)
     {
@@ -39,12 +40,22 @@ public static class GameEndpoints
 
         app.MapGet("/spel-som-0-100", () => new RazorComponentResult<SpelSom0100>());
 
+        app.MapGet("/fragespel-online", () => new RazorComponentResult<FragespelOnline>());
+
+        app.MapGet("/spel-som-more-or-less", () => new RazorComponentResult<SpelSomMoreOrLess>());
+
+        app.MapGet("/hund-fragesport-tillsammans", () => new RazorComponentResult<HundFragesport>());
+
+        app.MapGet("/elbil-fragesport-tillsammans", () => new RazorComponentResult<ElbilFragesport>());
+
+        app.MapGet("/fotboll-fragesport-tillsammans", () => new RazorComponentResult<FotbollFragesport>());
+
         app.MapGet("/404", () => new RazorComponentResult<Components.NotFound>());
 
         app.MapGet("/sitemap.xml", (FileSystemQuestionPackCatalog catalog, HttpContext http) =>
         {
             var root = $"{http.Request.Scheme}://{http.Request.Host}";
-            var urls = new List<string> { "/", "/om-spelet", "/om-mig", "/spel-som-0-100" };
+            var urls = new List<string> { "/", "/om-spelet", "/om-mig", "/spel-som-0-100", "/fragespel-online", "/spel-som-more-or-less", "/hund-fragesport-tillsammans", "/elbil-fragesport-tillsammans", "/fotboll-fragesport-tillsammans" };
             urls.AddRange(catalog.Packs.Select(p => $"/games/new/{p.PackId}"));
             var body = string.Concat(urls.Select(u =>
                 $"<url><loc>{System.Security.SecurityElement.Escape(root + u)}</loc></url>"));
