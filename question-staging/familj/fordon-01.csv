@@ -1,0 +1,22 @@
+﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Har en rymdraket högre eller lägre toppfart än en jumbojet?;Rymdraket;Jumbojet;28000;900;km/h;Hur många km/h skiljer det?
+Har en personbil högre eller lägre toppfart än en Formel 1-bil?;Personbil;Formel 1-bil;180;360;km/h;Hur många km/h skiljer det?
+Har ett höghastighetståg högre eller lägre toppfart än en buss?;Höghastighetståg;Buss;300;90;km/h;Hur många km/h skiljer det?
+Har en cykel högre eller lägre toppfart än en motorcykel?;Cykel;Motorcykel;25;200;km/h;Hur många km/h skiljer det?
+Har en helikopter högre eller lägre toppfart än en ångbåt?;Helikopter;Ångbåt;260;80;km/h;Hur många km/h skiljer det?
+Har en segelbåt högre eller lägre toppfart än en motorcykel?;Segelbåt;Motorcykel;35;200;km/h;Hur många km/h skiljer det?
+Är en segelbåt längre eller kortare än ett lastfartyg?;Segelbåt;Lastfartyg;12;300;meter;Hur många meter skiljer det?
+Är ett godståg längre eller kortare än en buss?;Godståg;Buss;700;12;meter;Hur många meter skiljer det?
+Är en brandbil längre eller kortare än en jumbojet?;Brandbil;Jumbojet;11;70;meter;Hur många meter skiljer det?
+Är ett kryssningsfartyg längre eller kortare än en kanot?;Kryssningsfartyg;Kanot;300;5;meter;Hur många meter skiljer det?
+Är en lastbil längre eller kortare än en helikopter?;Lastbil;Helikopter;7;18;meter;Hur många meter skiljer det?
+Är en traktor längre eller kortare än en motorcykel?;Traktor;Motorcykel;4,5;2,2;meter;Hur många meter skiljer det?
+Väger en brandbil mer eller mindre än en ambulans?;Brandbil;Ambulans;12000;3500;kilo;Hur många kilo skiljer det?
+Väger en personbil mer eller mindre än en traktor?;Personbil;Traktor;1500;5000;kilo;Hur många kilo skiljer det?
+Väger en cykel mer eller mindre än en motorcykel?;Cykel;Motorcykel;14;200;kilo;Hur många kilo skiljer det?
+Väger en rymdraket mer eller mindre än en jumbojet?;Rymdraket;Jumbojet;2900000;180000;kilo;Hur många kilo skiljer det?
+Väger en lastbil mer eller mindre än en traktor?;Lastbil;Traktor;15000;5000;kilo;Hur många kilo skiljer det?
+Har en personbil fler eller färre säten än en buss?;Personbil;Buss;5;50;säten;Hur många säten skiljer det?
+Har en lastbil fler eller färre hjul än en personbil?;Lastbil;Personbil;18;4;hjul;Hur många hjul skiljer det?
+Tar en buss fler eller färre passagerare än en jumbojet?;Buss;Jumbojet;50;400;passagerare;Hur många passagerare skiljer det?
+Har en lastbil fler eller färre hjul än en traktor?;Lastbil;Traktor;18;4;hjul;Hur många hjul skiljer det?

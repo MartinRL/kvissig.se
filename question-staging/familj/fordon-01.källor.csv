@@ -1,0 +1,22 @@
+﻿fråga;källa;år
+Har en rymdraket högre eller lägre toppfart än en jumbojet?;NASA (omloppshastighet ~28 000 km/h) / Boeing 747 cruise ~900 km/h;2024
+Har en personbil högre eller lägre toppfart än en Formel 1-bil?;Formula1.com (F1 ~360 km/h) / typisk personbil ~180 km/h;2024
+Har ett höghastighetståg högre eller lägre toppfart än en buss?;SNCF TGV/SJ X2000 ~300 km/h / stadsbuss ~90 km/h;2024
+Har en cykel högre eller lägre toppfart än en motorcykel?;tillverkarspec motorcykel ~200 km/h / cykel ~25 km/h;2024
+Har en helikopter högre eller lägre toppfart än en ångbåt?;helikopter ~260 km/h / snabb ångbåt ~80 km/h (43 knop);2024
+Har en segelbåt högre eller lägre toppfart än en motorcykel?;motorcykel ~200 km/h / segelbåt ~35 km/h (19 knop);2024
+Är en segelbåt längre eller kortare än ett lastfartyg?;containerfartyg ~300 m / fritidssegelbåt ~12 m;2024
+Är ett godståg längre eller kortare än en buss?;svenskt godståg upp till ~700 m / buss ~12 m;2024
+Är en brandbil längre eller kortare än en jumbojet?;Boeing 747 ~70 m / brandbil ~10 m;2024
+Är ett kryssningsfartyg längre eller kortare än en kanot?;stort kryssningsfartyg ~300 m / kanot ~5 m;2024
+Är en lastbil längre eller kortare än en helikopter?;medelstor helikopter ~18 m (med rotor) / lastbil ~7 m;2024
+Är en traktor längre eller kortare än en motorcykel?;traktor ~4,5 m / motorcykel ~2,2 m;2024
+Väger en brandbil mer eller mindre än en ambulans?;brandbil ~12 ton / ambulans ~3,5 ton;2024
+Väger en personbil mer eller mindre än en traktor?;medelstor traktor ~5 ton / personbil ~1,5 ton;2024
+Väger en cykel mer eller mindre än en motorcykel?;motorcykel ~200 kg / cykel ~14 kg;2024
+Väger en rymdraket mer eller mindre än en jumbojet?;Saturn V/rymdraket ~2900 ton vid start / Boeing 747 ~180 ton;2024
+Väger en lastbil mer eller mindre än en traktor?;tung lastbil ~15 ton / traktor ~5 ton;2024
+Har en personbil fler eller färre säten än en buss?;stadsbuss ~50 säten / personbil 5 säten;2024
+Har en lastbil fler eller färre hjul än en personbil?;lastbil med släp ~18 hjul / personbil 4 hjul;2024
+Tar en buss fler eller färre passagerare än en jumbojet?;Boeing 747 ~400 passagerare / buss ~50;2024
+Har en lastbil fler eller färre hjul än en traktor?;lastbil med släp ~18 hjul / traktor 4 hjul;2024
