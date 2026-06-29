@@ -1,0 +1,28 @@
+﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Väger en tiger mer eller mindre än ett lejon?;Tiger;Lejon;220;190;kilo;Hur många kilo skiljer det?
+Väger en gris mer eller mindre än en ko?;Gris;Ko;110;600;kilo;Hur många kilo skiljer det?
+Väger en varg mer eller mindre än en räv?;Varg;Räv;45;7;kilo;Hur många kilo skiljer det?
+Väger en blåval mer eller mindre än en elefant?;Blåval;Afrikansk elefant;150000;6000;kilo;Hur många kilo skiljer det?
+Är en elefant högre eller lägre än en giraff?;Afrikansk elefant;Giraff;3,3;5,5;meter;Hur många meter skiljer det?
+Är en struts högre eller lägre än en pingvin?;Struts;Kejsarpingvin;2,7;1,1;meter;Hur många meter skiljer det?
+Är en blåval längre eller kortare än en delfin?;Blåval;Delfin;30;2,5;meter;Hur många meter skiljer det?
+Är en människa längre eller kortare än en haj?;Människa;Vithaj;1,8;6;meter;Hur många meter skiljer det?
+Väger en igelkott mer eller mindre än en kanin?;Igelkott;Kanin;1;2;kilo;Hur många kilo skiljer det?
+Väger en igelkott mer eller mindre än en ekorre?;Igelkott;Ekorre;1;0,3;kilo;Hur många kilo skiljer det?
+Väger ett bi mer eller mindre än en myra?;Bi;Myra;0,1;0,005;gram;Hur många gram skiljer det?
+Väger ett bi mer eller mindre än en fjäril?;Bi;Monarkfjäril;0,1;0,5;gram;Hur många gram skiljer det?
+Springer en häst snabbare eller långsammare än en gepard?;Häst;Gepard;70;110;km/h;Hur många km/h skiljer det?
+Springer en gepard snabbare eller långsammare än en igelkott?;Gepard;Igelkott;110;8;km/h;Hur många km/h skiljer det?
+Springer en struts snabbare eller långsammare än en elefant?;Struts;Afrikansk elefant;70;40;km/h;Hur många km/h skiljer det?
+Lever en hund längre eller kortare än en jättesköldpadda?;Hund;Jättesköldpadda;13;150;år;Hur många år skiljer det?
+Lever en papegoja längre eller kortare än en katt?;Papegoja;Katt;60;16;år;Hur många år skiljer det?
+Lever en kanin längre eller kortare än en get?;Kanin;Get;9;18;år;Hur många år skiljer det?
+Lever en örn längre eller kortare än en uggla?;Örn;Uggla;30;20;år;Hur många år skiljer det?
+Väger en katt mer eller mindre än en kejsarpingvin?;Katt;Kejsarpingvin;4,5;30;kilo;Hur många kilo skiljer det?
+Väger en krokodil mer eller mindre än en get?;Krokodil;Get;1000;60;kilo;Hur många kilo skiljer det?
+Väger en varg mer eller mindre än en isbjörn?;Varg;Isbjörn;45;450;kilo;Hur många kilo skiljer det?
+Väger en känguru mer eller mindre än en räv?;Känguru;Räv;90;7;kilo;Hur många kilo skiljer det?
+Väger en hund mer eller mindre än en gris?;Hund;Gris;30;110;kilo;Hur många kilo skiljer det?
+Väger ett får mer eller mindre än en häst?;Får;Häst;80;500;kilo;Hur många kilo skiljer det?
+Väger en tiger mer eller mindre än en giraff?;Tiger;Giraff;220;800;kilo;Hur många kilo skiljer det?
+Är en delfin längre eller kortare än en späckhuggare?;Delfin;Späckhuggare;2,5;8;meter;Hur många meter skiljer det?
