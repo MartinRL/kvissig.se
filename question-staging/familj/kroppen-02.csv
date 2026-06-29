@@ -1,0 +1,28 @@
+﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Väger hjärnan mer eller mindre än levern hos en vuxen?;Hjärnan;Levern;1400;1500;gram;Hur många gram skiljer det?
+Väger hjärtat mer eller mindre än en njure?;Hjärtat;Njuren;300;140;gram;Hur många gram skiljer det?
+Väger bukspottkörteln mer eller mindre än mjälten?;Bukspottkörteln;Mjälten;100;150;gram;Hur många gram skiljer det?
+Väger skelettet mer eller mindre än huden?;Skelettet;Huden;12;4;kilo;Hur många kilo skiljer det?
+Väger båda lungorna tillsammans mer eller mindre än levern?;Lungorna;Levern;1000;1500;gram;Hur många gram skiljer det?
+Blinkar man fler eller färre gånger per minut än man andas?;Blinkningar;Andetag;20;15;antal;Hur många fler gånger per minut skiljer det?
+Har skelettet fler eller färre ben än kroppen har leder?;Antal ben;Antal leder;206;360;antal;Hur många fler leder finns det?
+Producerar man mer eller mindre saliv per dag än man har blod i kroppen?;Saliv per dag;Blod i kroppen;1,5;5;liter;Hur många liter skiljer det?
+Är tunntarmen längre eller kortare än tjocktarmen?;Tunntarmen;Tjocktarmen;6;1,5;meter;Hur många meter skiljer det?
+Har skelettet fler eller färre ben än kroppen har muskler?;Antal ben;Antal muskler;206;600;antal;Hur många fler muskler finns det?
+Är en vuxen längre eller kortare än hela matsmältningskanalen?;Kroppslängd;Matsmältningskanalen;1,8;8;meter;Hur många meter skiljer det?
+Växer håret på huvudet fler eller färre millimeter per månad än naglarna?;Hårväxt;Nagelväxt;10,5;3,5;millimeter;Hur många millimeter skiljer det?
+Är underarmen längre eller kortare än skenbenet?;Underarmen;Skenbenet;26;40;centimeter;Hur många centimeter skiljer det?
+Väger alla skelettmusklerna tillsammans mer eller mindre än huden?;Skelettmusklerna;Huden;30;4;kilo;Hur många kilo skiljer det?
+Slår hjärtat fler eller färre slag per dygn än man tar andetag?;Hjärtslag per dygn;Andetag per dygn;100000;22000;antal;Hur många fler slag per dygn skiljer det?
+Pumpar hjärtat mer eller mindre blod per dygn än kroppen rymmer?;Blod pumpat per dygn;Blod i kroppen;7000;5;liter;Hur många liter skiljer det?
+Har kroppen fler eller färre mjölktänder än smaklökar?;Mjölktänder;Smaklökar;20;10000;antal;Hur många fler smaklökar finns det?
+Har en människa fler eller färre sinnen än skelettmuskler?;Sinnena;Skelettmusklerna;5;600;antal;Hur många fler muskler finns det?
+Är lårbenet längre eller kortare än det minsta benet i örat?;Lårbenet;Minsta örbenet;45;0,3;centimeter;Hur många centimeter skiljer det?
+Har en vuxen fler eller färre hårsäckar på huvudet än svettkörtlar?;Hårsäckar på huvudet;Svettkörtlar;100000;3000000;antal;Hur många fler svettkörtlar finns det?
+Är en feberhög kroppstemperatur högre eller lägre än en normal?;Febertemperatur;Normal kroppstemperatur;40;37;°C;Hur många grader skiljer det?
+Väger en njure mer eller mindre än båda lungorna tillsammans?;Njuren;Lungorna;140;1000;gram;Hur många gram skiljer det?
+Är magsäcken rymligare eller mindre rymlig än urinblåsan?;Magsäcken;Urinblåsan;1,5;0,5;liter;Hur många liter skiljer det?
+Har en vuxen fler eller färre fingrar och tår tillsammans än kotor i ryggraden?;Fingrar och tår;Kotor i ryggraden;20;33;antal;Hur många fler kotor finns det?
+Väger levern mer eller mindre än hjärtat?;Levern;Hjärtat;1500;300;gram;Hur många gram skiljer det?
+Väger hjärnan mer eller mindre än båda njurarna tillsammans?;Hjärnan;Njurarna;1400;280;gram;Hur många gram skiljer det?
+Har man fler eller färre halskotor än fingrar på en hand?;Halskotor;Fingrar på en hand;7;5;antal;Hur många fler är det?
