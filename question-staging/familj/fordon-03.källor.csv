@@ -1,0 +1,28 @@
+fråga;källa;år
+Har ett segelflygplan högre eller lägre toppfart än en luftballong?;SimpleFlying/Blackmountains Gliding (segelflyg VNE ~250-290 km/h) / varmluftsballong driver med vinden ~ enstaka km/h;2024
+Har en vespa högre eller lägre toppfart än en hästvagn?;Piaggio Vespa specifikationer (~90 km/h) / hästvagn trav ~13-19 km/h (horseyhooves.com);2024
+Har en skidlift högre eller lägre toppfart än en linbana?;sv.wikipedia Gondolbana/Kabinbana (kabinbana max ~10-12 m/s ≈ 36-43 km/h, släplift ~9 km/h);2024
+Har en skateboard högre eller lägre toppfart än ett par inlines?;Allmän åkfart skateboard/inlines (motionsdata);2023
+Har en sportbil högre eller lägre toppfart än en veteranbil?;Tillverkarspecar sportbil (~250 km/h) / typisk veteranbilsklass ~90 km/h;2024
+Har en isbrytare högre eller lägre toppfart än en bogserbåt?;Sjöfartsverket isbrytardata (~16 knop) / bogserbåt marschfart (~12 knop);2023
+Har en bandvagn högre eller lägre toppfart än en stridsvagn?;sv.wikipedia Bandvagn 206 (52 km/h) / en.wikipedia Leopard 2 (~68-72 km/h);2024
+Är en zeppelinare längre eller kortare än en eka?;en.wikipedia LZ 129 Hindenburg (245 m) / typisk eka ~4 m;2024
+Är en dubbeldäckarbuss längre eller kortare än en limousine?;Tillverkardata dubbeldäckare (~12 m) / sträckt limousine ~8-10 m (nashvillechauffeur.com);2024
+Är en minibuss längre eller kortare än en skolbuss?;Mercedes Sprinter (~5,5 m) / amerikansk skolbuss ~10-11 m;2024
+Är en pråm längre eller kortare än en bogserbåt?;Inlandssjöfart pråmdata (38-110 m) / bogserbåt 5-30 m (en.wikipedia Tugboat);2023
+Är en jolle längre eller kortare än en gondol?;Optimist/segeljolle ~4 m / venetiansk gondol 11 m (veneziaautentica.com);2024
+Är en gaffeltruck längre eller kortare än en skördetröska?;Motviktstruck ~3 m / skördetröska ~9 m (Bruder-skala/tillverkardata);2024
+Är en taxi längre eller kortare än en limousine?;Volvo/Mercedes taxibil ~4,8 m / sträckt limousine ~8-10 m;2024
+Väger en stridsvagn mer eller mindre än en skördetröska?;en.wikipedia Leopard 2 (~60 ton) / skördetröska tjänstevikt ~15 ton (Michelin/LECTURA);2024
+Väger en eka mer eller mindre än en jolle?;Typisk träeka / segeljolle tjänstevikt;2024
+Väger en taxi mer eller mindre än en limousine?;Volvo taxi tjänstevikt (~1600 kg) / sträckt limousine ~2500 kg;2024
+Väger en pickup mer eller mindre än en stadsjeep?;Ford Ranger tjänstevikt ~2100-2300 kg / mellanstor SUV ~2000 kg;2024
+Väger en lådcykel mer eller mindre än en trehjuling?;Christiania lådcykel ~40 kg / barntrehjuling ~12 kg;2024
+Väger en pulka mer eller mindre än en gaffeltruck?;Standardpulka ~5 kg / motviktstruck ~3500 kg (Toyota);2024
+Väger en pickup mer eller mindre än en skolbuss?;Ford Ranger ~2200 kg / amerikansk skolbuss tjänstevikt ~9000 kg;2024
+Tar en dubbeldäckarbuss fler eller färre passagerare än en minibuss?;Tillverkardata dubbeldäckare ~80 / Sprinter minibuss ~16 (thevansmith.com);2024
+Tar en taxi fler eller färre passagerare än en minibuss?;Taxibil (4) / Sprinter minibuss ~16 sittplatser;2024
+Har en lådcykel fler eller färre hjul än en stadsjeep?;Trehjulig lådcykel (3) / fyrhjulig SUV (4);2024
+Är en surfbräda längre eller kortare än en kajak?;Surfbräda ~2,2 m / havskajak ~4,3-5,5 m (kajaksidan.se/aterra.se);2024
+Rymmer en vespa mer eller mindre bränsle i tanken än en skolbuss?;Piaggio Vespa tankvolym (8 L, autoX) / skolbuss dieseltank ~200-300 L;2024
+Rymmer en stridsvagn mer eller mindre bränsle i tanken än en stadsjeep?;en.wikipedia Leopard 2 (~1160-1200 L) / SUV tankvolym ~70 L (bitauto/coverfox);2024

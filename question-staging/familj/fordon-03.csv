@@ -1,0 +1,28 @@
+﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Har ett segelflygplan högre eller lägre toppfart än en luftballong?;Segelflygplan;Luftballong;200;8;km/h;Hur många km/h skiljer det?
+Har en vespa högre eller lägre toppfart än en hästvagn?;Vespa;Hästvagn;90;20;km/h;Hur många km/h skiljer det?
+Har en skidlift högre eller lägre toppfart än en linbana?;Skidlift;Linbana;18;40;km/h;Hur många km/h skiljer det?
+Har en skateboard högre eller lägre toppfart än ett par inlines?;Skateboard;Inlines;30;35;km/h;Hur många km/h skiljer det?
+Har en sportbil högre eller lägre toppfart än en veteranbil?;Sportbil;Veteranbil;250;90;km/h;Hur många km/h skiljer det?
+Har en isbrytare högre eller lägre toppfart än en bogserbåt?;Isbrytare;Bogserbåt;30;22;km/h;Hur många km/h skiljer det?
+Har en bandvagn högre eller lägre toppfart än en stridsvagn?;Bandvagn;Stridsvagn;50;70;km/h;Hur många km/h skiljer det?
+Är en zeppelinare längre eller kortare än en eka?;Zeppelinare;Eka;240;4;meter;Hur många meter skiljer det?
+Är en dubbeldäckarbuss längre eller kortare än en limousine?;Dubbeldäckarbuss;Limousine;12;8;meter;Hur många meter skiljer det?
+Är en minibuss längre eller kortare än en skolbuss?;Minibuss;Skolbuss;5,5;11;meter;Hur många meter skiljer det?
+Är en pråm längre eller kortare än en bogserbåt?;Pråm;Bogserbåt;60;25;meter;Hur många meter skiljer det?
+Är en jolle längre eller kortare än en gondol?;Jolle;Gondol;4;11;meter;Hur många meter skiljer det?
+Är en gaffeltruck längre eller kortare än en skördetröska?;Gaffeltruck;Skördetröska;3;9;meter;Hur många meter skiljer det?
+Är en taxi längre eller kortare än en limousine?;Taxi;Limousine;4,8;8;meter;Hur många meter skiljer det?
+Väger en stridsvagn mer eller mindre än en skördetröska?;Stridsvagn;Skördetröska;60000;15000;kilo;Hur många kilo skiljer det?
+Väger en eka mer eller mindre än en jolle?;Eka;Jolle;60;45;kilo;Hur många kilo skiljer det?
+Väger en taxi mer eller mindre än en limousine?;Taxi;Limousine;1600;2500;kilo;Hur många kilo skiljer det?
+Väger en pickup mer eller mindre än en stadsjeep?;Pickup;Stadsjeep;2200;2000;kilo;Hur många kilo skiljer det?
+Väger en lådcykel mer eller mindre än en trehjuling?;Lådcykel;Trehjuling;40;12;kilo;Hur många kilo skiljer det?
+Väger en pulka mer eller mindre än en gaffeltruck?;Pulka;Gaffeltruck;5;3500;kilo;Hur många kilo skiljer det?
+Väger en pickup mer eller mindre än en skolbuss?;Pickup;Skolbuss;2200;9000;kilo;Hur många kilo skiljer det?
+Tar en dubbeldäckarbuss fler eller färre passagerare än en minibuss?;Dubbeldäckarbuss;Minibuss;80;16;passagerare;Hur många passagerare skiljer det?
+Tar en taxi fler eller färre passagerare än en minibuss?;Taxi;Minibuss;4;16;passagerare;Hur många passagerare skiljer det?
+Har en lådcykel fler eller färre hjul än en stadsjeep?;Lådcykel;Stadsjeep;3;4;hjul;Hur många hjul skiljer det?
+Är en surfbräda längre eller kortare än en kajak?;Surfbräda;Kajak;2,2;5,2;meter;Hur många meter skiljer det?
+Rymmer en vespa mer eller mindre bränsle i tanken än en skolbuss?;Vespa;Skolbuss;8;200;liter;Hur många liter skiljer det?
+Rymmer en stridsvagn mer eller mindre bränsle i tanken än en stadsjeep?;Stridsvagn;Stadsjeep;1200;70;liter;Hur många liter skiljer det?
