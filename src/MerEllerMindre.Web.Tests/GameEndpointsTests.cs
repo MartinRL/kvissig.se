@@ -38,7 +38,7 @@ public class GameEndpointsTests : IClassFixture<TestAppFactory>
         return new FormUrlEncodedContent(data);
     }
 
-    private static Task<string> CreateGame(HttpClient host) => CreateGame(host, "mer-eller-mindre");
+    private static Task<string> CreateGame(HttpClient host) => CreateGame(host, "alla-aldrar");
 
     private static async Task<string> CreateGame(HttpClient host, string packId)
     {
@@ -80,11 +80,11 @@ public class GameEndpointsTests : IClassFixture<TestAppFactory>
         var html = await (await NewClient().GetAsync("/")).Content.ReadAsStringAsync();
 
         html.Should().Contain("Mer eller Mindre");
-        html.Should().Contain("/games/new/mer-eller-mindre");
+        html.Should().Contain("/games/new/alla-aldrar");
 
-        // New pack gets a "Nytt" pill + is-new card, and bubbles right after the base deck.
+        // New pack gets a "Nytt" pill + is-new card; the featured alla-aldrar deck pins first.
         html.Should().Contain("<span class=\"pill new\">Nytt</span>");
-        html.IndexOf("/games/new/mer-eller-mindre", StringComparison.Ordinal)
+        html.IndexOf("/games/new/alla-aldrar", StringComparison.Ordinal)
             .Should().BeLessThan(html.IndexOf("/games/new/loggor-mini-1", StringComparison.Ordinal));
     }
 
@@ -151,13 +151,13 @@ public class GameEndpointsTests : IClassFixture<TestAppFactory>
         xml.Should().Contain("/om-spelet</loc>");
         xml.Should().Contain("/fragespel-online</loc>");
         xml.Should().Contain("/spel-som-more-or-less</loc>");
-        xml.Should().Contain("/games/new/mer-eller-mindre</loc>");
+        xml.Should().Contain("/games/new/alla-aldrar</loc>");
     }
 
     [Fact]
     public async Task HostForm_ShowsANameInputForTheChosenPack()
     {
-        var html = await (await NewClient().GetAsync("/games/new/mer-eller-mindre")).Content.ReadAsStringAsync();
+        var html = await (await NewClient().GetAsync("/games/new/alla-aldrar")).Content.ReadAsStringAsync();
 
         html.Should().Contain("Mer eller Mindre");
         html.Should().Contain("name=\"hostName\"");

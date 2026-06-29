@@ -121,8 +121,8 @@ public static class QuestionPackCsvParser
     // Slug→display-name overrides where the slug can't round-trip (lost å/ä/ö, en-dash, …).
     private static readonly Dictionary<string, string> DisplayNameOverrides = new()
     {
-        ["alla-aldrar"] = "Mer eller Mindre – alla åldrar",
-        ["mer-eller-mindre"] = "Mer eller Mindre",
+        ["alla-aldrar"] = "Mer eller Mindre",
+        ["mer-eller-mindre"] = "Mer eller Mindre – svår",
         ["loggor-mini-1"] = "Mer eller Mindre Mini - Loggor",
         ["hundraser-mini"] = "Mer eller Mindre Mini – Hundraser",
         ["elbil-mini"] = "Mer eller Mindre Mini – Elbilar",
