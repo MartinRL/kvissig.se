@@ -10,6 +10,8 @@
 //                                                     cap item frequency, park overflow
 //   --min N                minimum card count for check (default 175)
 //   --tol N                band tolerance in percentage points for check (default 5)
+//   --cap N                item-frequency cap for report/check (default 4; raise to let
+//                          recurring anchors like famous landmarks repeat as height/age refs)
 //   --dir <stagingDir>     scan a different staging dir (report --staging + merge); default question-staging
 //   --targets a,b,c,d      override band-target display percentages; default 15,40,30,15
 //   --key question|pair|metricpair   dedup + duplicate-flag key (report + merge); default question.
@@ -31,7 +33,8 @@ var stagingDir = "question-staging";
 int[] thresholds = [20, 60, 85];
 string[] bandLabels = ["0-20", "21-60", "61-85", "86-100"];
 int[] targets = [15, 40, 30, 15];
-const int ItemCap = 4; // report flags items appearing more than this in the live pack
+int ItemCap = 4; // items appearing more than this are flagged; --cap overrides
+                 // (raised for the Familj deck so famous landmarks may recur as height/age anchors)
 
 var argv = new List<string>(args);
 var command = argv.Count > 0 && !argv[0].StartsWith('-') ? argv[0] : "report";
@@ -44,6 +47,7 @@ string? parkPath = TakeOption("--park");
 string? maxOpt = TakeOption("--max");
 int minOpt = int.Parse(TakeOption("--min") ?? "175");
 int tolOpt = int.Parse(TakeOption("--tol") ?? "5");
+ItemCap = int.Parse(TakeOption("--cap") ?? "4");
 stagingDir = TakeOption("--dir") ?? stagingDir;
 var targetsOpt = TakeOption("--targets");
 if (targetsOpt is not null) targets = targetsOpt.Split(',').Select(int.Parse).ToArray();
