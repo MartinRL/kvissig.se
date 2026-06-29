@@ -1,0 +1,26 @@
+﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Var Diplodocus längre eller kortare än Carnotaurus?;Diplodocus;Carnotaurus;26;8;meter;Hur många meter skiljer det?
+Var Stegosaurus längre eller kortare än Brachiosaurus?;Stegosaurus;Brachiosaurus;9;22;meter;Hur många meter skiljer det?
+Var Spinosaurus längre eller kortare än Gallimimus?;Spinosaurus;Gallimimus;15;6;meter;Hur många meter skiljer det?
+Var T. rex längre eller kortare än Argentinosaurus?;T. rex;Argentinosaurus;12;35;meter;Hur många meter skiljer det?
+Var Argentinosaurus längre eller kortare än Triceratops?;Argentinosaurus;Triceratops;35;9;meter;Hur många meter skiljer det?
+Var Iguanodon längre eller kortare än Brontosaurus?;Iguanodon;Brontosaurus;10;22;meter;Hur många meter skiljer det?
+Var Allosaurus längre eller kortare än Diplodocus?;Allosaurus;Diplodocus;9,5;26;meter;Hur många meter skiljer det?
+Var Dilophosaurus längre eller kortare än Ankylosaurus?;Dilophosaurus;Ankylosaurus;6;8;meter;Hur många meter skiljer det?
+Var Parasaurolophus längre eller kortare än Allosaurus?;Parasaurolophus;Allosaurus;10;9,5;meter;Hur många meter skiljer det?
+Var Brachiosaurus högre eller lägre än Stegosaurus?;Brachiosaurus;Stegosaurus;12;4;meter;Hur många meter skiljer det?
+Var Triceratops högre eller lägre än Brachiosaurus?;Triceratops;Brachiosaurus;3;12;meter;Hur många meter skiljer det?
+Vägde Brachiosaurus mer eller mindre än Carnotaurus?;Brachiosaurus;Carnotaurus;35000;1300;kilo;Hur många kilo skiljer det?
+Vägde Pteranodon mer eller mindre än Stegosaurus?;Pteranodon;Stegosaurus;25;3500;kilo;Hur många kilo skiljer det?
+Vägde T. rex mer eller mindre än Velociraptor?;T. rex;Velociraptor;7000;15;kilo;Hur många kilo skiljer det?
+Vägde Triceratops mer eller mindre än Diplodocus?;Triceratops;Diplodocus;8000;12000;kilo;Hur många kilo skiljer det?
+Vägde Ankylosaurus mer eller mindre än Gallimimus?;Ankylosaurus;Gallimimus;6000;440;kilo;Hur många kilo skiljer det?
+Vägde Stegosaurus mer eller mindre än Spinosaurus?;Stegosaurus;Spinosaurus;3500;7400;kilo;Hur många kilo skiljer det?
+Vägde Brontosaurus mer eller mindre än Pteranodon?;Brontosaurus;Pteranodon;15000;25;kilo;Hur många kilo skiljer det?
+Vägde Iguanodon mer eller mindre än Argentinosaurus?;Iguanodon;Argentinosaurus;3000;75000;kilo;Hur många kilo skiljer det?
+Sprang Velociraptor fortare eller långsammare än T. rex?;Velociraptor;T. rex;40;24;km/h;Hur många km/h skiljer det?
+Sprang Dilophosaurus fortare eller långsammare än Gallimimus?;Dilophosaurus;Gallimimus;38;50;km/h;Hur många km/h skiljer det?
+Simmade Mosasaurus fortare eller långsammare än Spinosaurus sprang?;Mosasaurus;Spinosaurus;14;24;km/h;Hur många km/h skiljer det?
+Hade T. rex längre eller kortare tänder än Velociraptor hade klor?;T. rex;Velociraptor;30;7;centimeter;Hur många centimeter skiljer det?
+Hade Triceratops längre eller kortare horn än Velociraptor hade klor?;Triceratops;Velociraptor;100;7;centimeter;Hur många centimeter skiljer det?
+Var Mosasaurus längre eller kortare än Spinosaurus?;Mosasaurus;Spinosaurus;17;15;meter;Hur många meter skiljer det?
