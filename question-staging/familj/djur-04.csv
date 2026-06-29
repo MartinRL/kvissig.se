@@ -1,0 +1,28 @@
+﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Väger en manat mer eller mindre än en tapir?;Manat;Tapir;450;300;kilo;Hur många kilo skiljer det?
+Väger en bison mer eller mindre än en vattenbuffel?;Bison;Vattenbuffel;800;900;kilo;Hur många kilo skiljer det?
+Väger en impala mer eller mindre än en gnu?;Impala;Gnu;55;250;kilo;Hur många kilo skiljer det?
+Väger en mandrill mer eller mindre än en babian?;Mandrill;Babian;32;25;kilo;Hur många kilo skiljer det?
+Väger ett bältdjur mer eller mindre än en myrkott?;Bältdjur;Myrkott;6;12;kilo;Hur många kilo skiljer det?
+Väger en vombat mer eller mindre än en lemur?;Vombat;Lemur;26;2;kilo;Hur många kilo skiljer det?
+Väger en hermelin mer eller mindre än en iller?;Hermelin;Iller;0,25;1,2;kilo;Hur många kilo skiljer det?
+Väger ett marsvin mer eller mindre än en hamster?;Marsvin;Hamster;1;0,12;kilo;Hur många kilo skiljer det?
+Väger en näbbmus mer eller mindre än en mygga?;Näbbmus;Mygga;10;0,0025;gram;Hur många gram skiljer det?
+Väger en präriehund mer eller mindre än ett murmeldjur?;Präriehund;Murmeldjur;1;5;kilo;Hur många kilo skiljer det?
+Är en tumlare längre eller kortare än en manat?;Tumlare;Manat;1,6;3;meter;Hur många meter skiljer det?
+Är en gnu högre eller lägre än en impala?;Gnu;Impala;1,4;0,9;meter;Hur många meter skiljer det?
+Är en babian högre eller lägre än en bison?;Babian;Bison;0,7;1,9;meter;Hur många meter skiljer det?
+Är en kameleont längre eller kortare än en gecko?;Kameleont;Gecko;0,3;0,2;meter;Hur många meter skiljer det?
+Är en iguana längre eller kortare än en salamander?;Iguana;Salamander;1,5;0,2;meter;Hur många meter skiljer det?
+Är en kakadua längre eller kortare än en tukan?;Kakadua;Tukan;0,5;0,55;meter;Hur många meter skiljer det?
+Är en lunnefågel längre eller kortare än en skarv?;Lunnefågel;Skarv;0,3;0,9;meter;Hur många meter skiljer det?
+Springer en impala snabbare eller långsammare än en gnu?;Impala;Gnu;90;80;km/h;Hur många km/h skiljer det?
+Springer ett murmeldjur snabbare eller långsammare än en vattenbuffel?;Murmeldjur;Vattenbuffel;15;50;km/h;Hur många km/h skiljer det?
+Springer en gasell snabbare eller långsammare än en tapir?;Gasell;Tapir;80;45;km/h;Hur många km/h skiljer det?
+Lever en tumlare längre eller kortare än ett marsvin?;Tumlare;Marsvin;20;6;år;Hur många år skiljer det?
+Lever en hamster längre eller kortare än en kakadua?;Hamster;Kakadua;3;50;år;Hur många år skiljer det?
+Lever en lemur längre eller kortare än en iller?;Lemur;Iller;20;8;år;Hur många år skiljer det?
+Lever en salamander längre eller kortare än en iguana?;Salamander;Iguana;10;15;år;Hur många år skiljer det?
+Lever ett bältdjur längre eller kortare än en näbbmus?;Bältdjur;Näbbmus;12;2;år;Hur många år skiljer det?
+Har en spindel fler eller färre ben än en gräshoppa?;Spindel;Gräshoppa;8;6;antal;Hur många ben skiljer det?
+Har en tusenfoting fler eller färre ben än en skorpion?;Tusenfoting;Skorpion;100;8;antal;Hur många ben skiljer det?
