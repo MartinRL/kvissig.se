@@ -1,28 +1,28 @@
 ﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
-Väger en aprikos mer eller mindre än en papaya?;Aprikos;Papaya;40;600;gram;Hur många gram skiljer det?
-Väger en sötpotatis mer eller mindre än en palsternacka?;Sötpotatis;Palsternacka;200;160;gram;Hur många gram skiljer det?
-Väger ett knippe ruccola mer eller mindre än ett knippe spenat?;Ruccolaknippe;Spenatknippe;45;150;gram;Hur många gram skiljer det?
-Väger ett fänkålshuvud mer eller mindre än en kronärtskocka?;Fänkål;Kronärtskocka;320;130;gram;Hur många gram skiljer det?
-Väger en schalottenlök mer eller mindre än en vinbärsklase?;Schalottenlök;Vinbärsklase;30;25;gram;Hur många gram skiljer det?
-Väger en sockerärtsskida mer eller mindre än en sparrisstjälk?;Sockerärtsskida;Sparrisstjälk;6;16;gram;Hur många gram skiljer det?
-Väger en physalis mer eller mindre än ett brysselkålshuvud?;Physalis;Brysselkål;5;18;gram;Hur många gram skiljer det?
-Väger ett ägg mer eller mindre än en tranbärsklase?;Ägg;Tranbärsklase;60;15;gram;Hur många gram skiljer det?
-Väger en pekannöt mer eller mindre än en paranöt?;Pekannöt;Paranöt;2;5;gram;Hur många gram skiljer det?
-Väger ett sesamfrö mer eller mindre än en pumpakärna?;Sesamfrö;Pumpakärna;0,003;0,15;gram;Hur många gram skiljer det?
-Väger en bit fetaost mer eller mindre än en bit brieost?;Fetaost;Brieost;200;150;gram;Hur många gram skiljer det?
-Väger en burk keso mer eller mindre än en bit parmesan?;Keso;Parmesan;500;150;gram;Hur många gram skiljer det?
-Väger en senapsburk mer eller mindre än en ketchupflaska?;Senapsburk;Ketchupflaska;180;500;gram;Hur många gram skiljer det?
-Har en bit briox fler eller färre kalorier än en biskvi?;Briox;Biskvi;120;180;kalorier;Hur många kalorier skiljer det?
-Har en lussekatt fler eller färre kalorier än en cupcake?;Lussekatt;Cupcake;170;320;kalorier;Hur många kalorier skiljer det?
-Har en bit äppelpaj fler eller färre kalorier än en maräng?;Äppelpaj;Maräng;300;90;kalorier;Hur många kalorier skiljer det?
-Är en polkagris längre eller kortare än en lakritsstång?;Polkagris;Lakritsstång;10;30;centimeter;Hur många centimeter skiljer det?
-Mäter en ciabatta på längden mer eller mindre än en donut mäter tvärs över?;Ciabatta;Donut;25;9;centimeter;Hur många centimeter skiljer det?
-Väger ett chiafrö mer eller mindre än en gummibjörn?;Chiafrö;Gummibjörn;0,001;2;gram;Hur många gram skiljer det?
-Väger en gelébjörn mer eller mindre än ett linfrö?;Gelébjörn;Linfrö;2;0,006;gram;Hur många gram skiljer det?
-Rymmer en läskburk mer eller mindre än en vattenflaska?;Läskburk;Vattenflaska;330;500;milliliter;Hur många milliliter skiljer det?
-Har gräddfil fler eller färre kalorier än crème fraiche per 100 gram?;Gräddfil;Crème fraiche;100;290;kalorier;Hur många kalorier skiljer det?
-Väger en hel melon mer eller mindre än ett körsbär?;Melon;Körsbär;1500;8;gram;Hur många gram skiljer det?
-Väger en kikärt mer eller mindre än en hel sötpotatis?;Kikärt;Sötpotatis;0,5;200;gram;Hur många gram skiljer det?
-Har kokta vita bönor fler eller färre kalorier än kokta linser per 100 gram?;Vita bönor;Linser;130;115;kalorier;Hur många kalorier skiljer det?
-Har en gröna kuddar fler eller färre kalorier än en skumtomte?;Gröna kuddar;Skumtomte;6;22;kalorier;Hur många kalorier skiljer det?
-Väger en hel mandelpotatis mer eller mindre än en enda paranöt?;Mandelpotatis;Paranöt;90;5;gram;Hur många gram skiljer det?
+Väger en vindruva mer eller mindre än en apelsin?;Vindruva;Apelsin;6;140;gram;Hur många gram skiljer det?
+Väger en köttbulle mer eller mindre än en hamburgare?;Köttbulle;Hamburgare;20;140;gram;Hur många gram skiljer det?
+Väger en ostbit mer eller mindre än en smörgås?;Ostbit;Smörgås;20;90;gram;Hur många gram skiljer det?
+Väger ett ägg mer eller mindre än en potatis?;Ägg;Potatis;60;100;gram;Hur många gram skiljer det?
+Väger en morot mer eller mindre än en banan?;Morot;Banan;80;120;gram;Hur många gram skiljer det?
+Väger en jordgubbe mer eller mindre än ett äpple?;Jordgubbe;Äpple;15;150;gram;Hur många gram skiljer det?
+Väger ett glas mjölk mer eller mindre än en flaska läsk?;Glas mjölk;Flaska läsk;200;500;gram;Hur många gram skiljer det?
+Väger en kula glass mer eller mindre än en kanelbulle?;Kula glass;Kanelbulle;60;75;gram;Hur många gram skiljer det?
+Väger en skål popcorn mer eller mindre än en godispåse?;Popcorn;Godispåse;40;150;gram;Hur många gram skiljer det?
+Väger ett Mariekex mer eller mindre än en chokladkaka?;Mariekex;Chokladkaka;6;100;gram;Hur många gram skiljer det?
+Väger en bit lösgodis mer eller mindre än en glasspinne?;Lösgodis;Glasspinne;20;70;gram;Hur många gram skiljer det?
+Har en pannkaka fler eller färre kalorier än en hamburgare?;Pannkaka;Hamburgare;90;250;kalorier;Hur många kalorier skiljer det?
+Har en smörgås fler eller färre kalorier än en kanelbulle?;Smörgås;Kanelbulle;150;280;kalorier;Hur många kalorier skiljer det?
+Har en burk läsk fler eller färre kalorier än en glasstrut?;Burk läsk;Glasstrut;140;200;kalorier;Hur många kalorier skiljer det?
+Har en morot fler eller färre kalorier än ett äpple?;Morot;Äpple;35;80;kalorier;Hur många kalorier skiljer det?
+Har en apelsin fler eller färre kalorier än en pizzabit?;Apelsin;Pizzabit;60;285;kalorier;Hur många kalorier skiljer det?
+Har en vindruva fler eller färre kalorier än en banan?;Vindruva;Banan;3;105;kalorier;Hur många kalorier skiljer det?
+Har en jordgubbe fler eller färre kalorier än en chokladkaka?;Jordgubbe;Chokladkaka;8;550;kalorier;Hur många kalorier skiljer det?
+Har en potatis fler eller färre kalorier än en pizzabit?;Potatis;Pizzabit;85;285;kalorier;Hur många kalorier skiljer det?
+Väger en hel pizza mer eller mindre än en kula glass?;Hel pizza;Kula glass;350;60;gram;Hur många gram skiljer det?
+Väger en godispåse mer eller mindre än en ostbit?;Godispåse;Ostbit;150;20;gram;Hur många gram skiljer det?
+Väger en köttbulle mer eller mindre än ett Mariekex?;Köttbulle;Mariekex;20;6;gram;Hur många gram skiljer det?
+Har ett glas mjölk fler eller färre kalorier än en pannkaka?;Glas mjölk;Pannkaka;120;90;kalorier;Hur många kalorier skiljer det?
+Har en skål popcorn fler eller färre kalorier än ett ägg?;Popcorn;Ägg;120;78;kalorier;Hur många kalorier skiljer det?
+Har en korv med bröd fler eller färre kalorier än en glasstrut?;Korv med bröd;Glasstrut;300;200;kalorier;Hur många kalorier skiljer det?
+Väger en korv med bröd mer eller mindre än en sockerbit?;Korv med bröd;Sockerbit;125;3;gram;Hur många gram skiljer det?
+Väger en glasspinne mer eller mindre än en sockerbit?;Glasspinne;Sockerbit;70;3;gram;Hur många gram skiljer det?
