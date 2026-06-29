@@ -122,6 +122,7 @@ public static class QuestionPackCsvParser
     private static readonly Dictionary<string, string> DisplayNameOverrides = new()
     {
         ["alla-aldrar"] = "Mer eller Mindre",
+        ["familj"] = "Mer eller Mindre – Familj",
         ["mer-eller-mindre"] = "Mer eller Mindre – svår",
         ["loggor-mini-1"] = "Mer eller Mindre Mini - Loggor",
         ["hundraser-mini"] = "Mer eller Mindre Mini – Hundraser",

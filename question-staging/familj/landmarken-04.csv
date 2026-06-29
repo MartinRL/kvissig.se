@@ -1,0 +1,28 @@
+﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Är Lutande tornet i Pisa högre eller lägre än Sydney Operahus?;Lutande tornet i Pisa;Sydney Operahus;56;65;meter;Hur många meter skiljer det?
+Är Space Needle högre eller lägre än Washington Monument?;Space Needle;Washington Monument;184;169;meter;Hur många meter skiljer det?
+Är London Eye högre eller lägre än Chrysler Building?;London Eye;Chrysler Building;135;319;meter;Hur många meter skiljer det?
+Är Notre-Dame högre eller lägre än Space Needle?;Notre-Dame;Space Needle;96;184;meter;Hur många meter skiljer det?
+Är Atomium högre eller lägre än Sagrada Familia?;Atomium;Sagrada Familia;102;172;meter;Hur många meter skiljer det?
+Är Willis Tower högre eller lägre än Chrysler Building?;Willis Tower;Chrysler Building;442;319;meter;Hur många meter skiljer det?
+Är Taipei 101 högre eller lägre än Eiffeltornet?;Taipei 101;Eiffeltornet;508;330;meter;Hur många meter skiljer det?
+Är Storkyrkan äldre eller yngre än Sagrada Familia?;Storkyrkan;Sagrada Familia;720;143;år;Hur många år skiljer det?
+Är Notre-Dame högre eller lägre än Petronas Towers?;Notre-Dame;Petronas Towers;96;452;meter;Hur många meter skiljer det?
+Är Eiffeltornet högre eller lägre än Lutande tornet i Pisa?;Eiffeltornet;Lutande tornet i Pisa;330;56;meter;Hur många meter skiljer det?
+Är Empire State Building högre eller lägre än Sydney Operahus?;Empire State Building;Sydney Operahus;443;65;meter;Hur många meter skiljer det?
+Är Chrysler Building högre eller lägre än Triumfbågen i Paris?;Chrysler Building;Triumfbågen i Paris;319;50;meter;Hur många meter skiljer det?
+Är London Eye högre eller lägre än Taipei 101?;London Eye;Taipei 101;135;508;meter;Hur många meter skiljer det?
+Är Atomium högre eller lägre än Petronas Towers?;Atomium;Petronas Towers;102;452;meter;Hur många meter skiljer det?
+Är Willis Tower högre eller lägre än Sydney Operahus?;Willis Tower;Sydney Operahus;442;65;meter;Hur många meter skiljer det?
+Är Empire State Building högre eller lägre än Sagrada Familia?;Empire State Building;Sagrada Familia;443;172;meter;Hur många meter skiljer det?
+Är Washington Monument högre eller lägre än London Eye?;Washington Monument;London Eye;169;135;meter;Hur många meter skiljer det?
+Är Notre-Dame äldre eller yngre än Kinesiska muren?;Notre-Dame;Kinesiska muren;860;2300;år;Hur många år skiljer det?
+Är Storkyrkan äldre eller yngre än Parthenon på Akropolis?;Storkyrkan;Parthenon på Akropolis;720;2470;år;Hur många år skiljer det?
+Är Stonehenge äldre eller yngre än Taj Mahal?;Stonehenge;Taj Mahal;5000;373;år;Hur många år skiljer det?
+Är Sfinxen i Giza äldre eller yngre än Stockholms slott?;Sfinxen i Giza;Stockholms slott;4500;272;år;Hur många år skiljer det?
+Är Petra äldre eller yngre än Uppsala domkyrka?;Petra;Uppsala domkyrka;2300;590;år;Hur många år skiljer det?
+Är Atomium högre eller lägre än Golden Gate-bron?;Atomium;Golden Gate-bron;102;227;meter;Hur många meter skiljer det?
+Är Eiffeltornet äldre eller yngre än Sfinxen i Giza?;Eiffeltornet;Sfinxen i Giza;137;4500;år;Hur många år skiljer det?
+Är Taj Mahal äldre eller yngre än Stonehenge?;Taj Mahal;Stonehenge;373;5000;år;Hur många år skiljer det?
+Är Washington Monument högre eller lägre än Empire State Building?;Washington Monument;Empire State Building;169;443;meter;Hur många meter skiljer det?
+Är Sydney Operahus äldre eller yngre än Storkyrkan?;Sydney Operahus;Storkyrkan;53;720;år;Hur många år skiljer det?

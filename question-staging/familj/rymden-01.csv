@@ -1,0 +1,21 @@
+﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Är Merkurius större eller mindre i diameter än Jorden?;Merkurius;Jorden;4879;12742;km;Hur många kilometer skiljer det?
+Är Neptunus större eller mindre i diameter än Jupiter?;Neptunus;Jupiter;49528;142984;km;Hur många kilometer skiljer det?
+Är Jupiter större eller mindre i diameter än Uranus?;Jupiter;Uranus;142984;51118;km;Hur många kilometer skiljer det?
+Ligger Merkurius längre bort eller närmare Solen än Mars?;Merkurius;Mars;58;228;miljoner km;Hur många miljoner km skiljer det?
+Ligger Mars längre bort eller närmare Solen än Saturnus?;Mars;Saturnus;228;1432;miljoner km;Hur många miljoner km skiljer det?
+Tar ett år längre eller kortare tid på Venus än på Mars?;Venus;Mars;225;687;dagar;Hur många dagar skiljer det?
+Ligger Neptunus längre bort eller närmare Solen än Saturnus?;Neptunus;Saturnus;4515;1432;miljoner km;Hur många miljoner km skiljer det?
+Är dvärgplaneten Pluto större eller mindre i diameter än Jorden?;Pluto;Jorden;2377;12742;km;Hur många kilometer skiljer det?
+Tar ett år längre eller kortare tid på Venus än på Merkurius?;Venus;Merkurius;225;88;dagar;Hur många dagar skiljer det?
+Har Uranus fler eller färre månar än Neptunus?;Uranus;Neptunus;28;16;månar;Hur många månar skiljer det?
+Är Månen större eller mindre i diameter än dvärgplaneten Pluto?;Månen;Pluto;3475;2377;km;Hur många kilometer skiljer det?
+Ligger Uranus längre bort eller närmare Solen än dvärgplaneten Pluto?;Uranus;Pluto;2867;5906;miljoner km;Hur många miljoner km skiljer det?
+Är Saturnus större eller mindre i diameter än Neptunus?;Saturnus;Neptunus;120536;49528;km;Hur många kilometer skiljer det?
+Är Merkurius större eller mindre i diameter än Mars?;Merkurius;Mars;4879;6779;km;Hur många kilometer skiljer det?
+Är Solen större eller mindre i diameter än Jupiter?;Solen;Jupiter;1392000;142984;km;Hur många kilometer skiljer det?
+Är det varmare eller kallare på Venus än på Solens yta?;Venus;Solens yta;464;5500;°C;Hur många grader skiljer det?
+Har Saturnus fler eller färre månar än Jorden?;Saturnus;Jorden;274;1;månar;Hur många månar skiljer det?
+Har Månen fler eller färre månar än Jupiter?;Månen;Jupiter;0;97;månar;Hur många månar skiljer det?
+Tar ett dygn längre eller kortare tid på Venus än på Jorden?;Venus;Jorden;243;1;dagar;Hur många dagar skiljer det?
+Flyger Rymdstationen ISS snabbare eller långsammare än ett passagerarflygplan?;Rymdstationen ISS;Passagerarflygplan;28000;900;km/h;Hur många km/h skiljer det?

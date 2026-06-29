@@ -1,0 +1,28 @@
+﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Väger en rugbyboll mer eller mindre än en fotboll?;Rugbyboll;Fotboll;450;430;gram;Hur många gram skiljer det?
+Är en fotbolls omkrets större eller mindre än en handbolls omkrets?;Fotboll;Handboll;70;58;centimeter;Hur många centimeter skiljer det?
+Är ett maratonlopp längre eller kortare än ett halvmaraton?;Maraton;Halvmaraton;42;21;kilometer;Hur många kilometer skiljer det?
+Väger en volleyboll mer eller mindre än en handboll?;Volleyboll;Handboll;270;450;gram;Hur många gram skiljer det?
+Är en volleybollplan längre eller kortare än en badmintonbana?;Volleybollplan;Badmintonbana;18;13,4;meter;Hur många meter skiljer det?
+Är en biljardboll större eller mindre i diameter än en squashboll?;Biljardboll;Squashboll;5,7;4;centimeter;Hur många centimeter skiljer det?
+Är en simbassäng i OS bredare eller längre, alltså är bredden mer eller mindre än längden?;Bassängens bredd;Bassängens längd;25;50;meter;Hur många meter skiljer det?
+Sitter en basketkorg högre eller lägre än en dartavlas mitt?;Basketkorg;Dartavla;3,05;1,73;meter;Hur många meter skiljer det?
+Är en ishockeyrink längre eller kortare än en fotbollsplan?;Ishockeyrink;Fotbollsplan;60;105;meter;Hur många meter skiljer det?
+Väger en boulekula mer eller mindre än en biljardboll?;Boulekula;Biljardboll;700;170;gram;Hur många gram skiljer det?
+Är ett halvmaraton längre eller kortare än ett tiokilometerslopp?;Halvmaraton;Tiokilometerslopp;21;10;kilometer;Hur många kilometer skiljer det?
+Är en basketplan längre eller kortare än en boxningsring är bred?;Basketplan;Boxningsring;28;6,1;meter;Hur många meter skiljer det?
+Är ett basebollträ längre eller kortare än en stafettpinne?;Basebollträ;Stafettpinne;84;28;centimeter;Hur många centimeter skiljer det?
+Är en etapp i Tour de France längre eller kortare än ett maratonlopp?;Touretapp;Maraton;200;42;kilometer;Hur många kilometer skiljer det?
+Är ett tennisnät högre eller lägre än ett bordtennisnät?;Tennisnät;Bordtennisnät;91,4;15,25;centimeter;Hur många centimeter skiljer det?
+Är ett varv på en galoppbana längre eller kortare än ett varv på en löparbana?;Galoppbana;Löparbana;2400;400;meter;Hur många meter skiljer det?
+Är en stavhoppsstav längre eller kortare än ett par längdskidor?;Stavhoppsstav;Längdskidor;5,2;2;meter;Hur många meter skiljer det?
+Är en surfingbräda längre eller kortare än en snowboard?;Surfingbräda;Snowboard;2,7;1,5;meter;Hur många meter skiljer det?
+Sitter en basketkorg högre eller lägre än ett bordtennisbord är högt?;Basketkorg;Bordtennisbord;3,05;0,76;meter;Hur många meter skiljer det?
+Väger en boxningssäck mer eller mindre än en boxningshandske?;Boxningssäck;Boxningshandske;30000;280;gram;Hur många gram skiljer det?
+Är en bobsleighbana längre eller kortare än ett hundrameterslopp?;Bobsleighbana;Hundrameterslopp;1500;100;meter;Hur många meter skiljer det?
+Flyger ett spjut i ett långt kast längre eller kortare än en kula i kulstötning?;Spjutkast;Kulstötning;98;23;meter;Hur många meter skiljer det?
+Är hela Tour de France-loppet längre eller kortare än ett maratonlopp?;Tour de France;Maraton;3400;42;kilometer;Hur många kilometer skiljer det?
+Är en ishockeyklubba längre eller kortare i diameter än en ishockeypuck?;Ishockeyklubba;Ishockeypuck;190;7,6;centimeter;Hur många centimeter skiljer det?
+Är ett tiotusenmeterslopp längre eller kortare än ett hundrameterslopp?;Tiotusenmeterslopp;Hundrameterslopp;10000;100;meter;Hur många meter skiljer det?
+Är Vasaloppet längre eller kortare än ett maratonlopp?;Vasaloppet;Maraton;90;42;kilometer;Hur många kilometer skiljer det?
+Flyger en slägga i ett långt kast längre eller kortare än ett höjdhoppsrekord är högt?;Släggkast;Höjdhopp;86,74;2,45;meter;Hur många meter skiljer det?

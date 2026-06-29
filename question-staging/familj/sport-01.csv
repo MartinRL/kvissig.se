@@ -1,6 +1,6 @@
 ﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
 Är en basketboll större eller mindre i diameter än en tennisboll?;Basketboll;Tennisboll;24;6,7;centimeter;Hur många centimeter skiljer det?
-Är en pingisboll större eller mindre i diameter än en fotboll?;Pingisboll;Fotboll;4;22;centimeter;Hur många centimeter skiljer det?
+Är en pingisboll större eller mindre i diameter än en volleyboll?;Pingisboll;Volleyboll;4;21;centimeter;Hur många centimeter skiljer det?
 Är ett bowlingklot större eller mindre i diameter än en golfboll?;Bowlingklot;Golfboll;21,8;4,3;centimeter;Hur många centimeter skiljer det?
 Är en tennisboll större eller mindre i diameter än en handboll?;Tennisboll;Handboll;6,7;19;centimeter;Hur många centimeter skiljer det?
 Väger en ishockeypuck mer eller mindre än en pingisboll?;Ishockeypuck;Pingisboll;170;2,7;gram;Hur många gram skiljer det?

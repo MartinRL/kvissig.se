@@ -4,22 +4,22 @@ Har en moped högre eller lägre toppfart än ett passagerarflygplan?;Transports
 Väger en kanot mer eller mindre än en ambulans?;Tillverkardata kanot (~20 kg) + ambulansvikt (Volvo/Mercedes ~3,5 ton);2025
 Har en luftballong högre eller lägre toppfart än en helikopter?;Ballongdata (vindberoende ~8 km/h) + helikopterdata (~260 km/h);2025
 Är en skateboard längre eller kortare än ett tåg?;Skateboarddata (~0,8 m) + tågdata (~200 m);2025
-Väger en trampbil mer eller mindre än en traktor?;Leksaksdata trampbil (~12 kg) + jordbrukstraktor (~5 ton);2025
-Väger en brandbil mer eller mindre än en cykel?;Brandbilsdata (~12 ton) + cykeldata (~14 kg);2025
+Väger en trampbil mer eller mindre än en grävmaskin?;Barntrampbil ~10-12 kg; medelstor grävmaskin ~20 ton (10-45 ton-klass, Volvo CE);2025
+Väger en brandbil mer eller mindre än en mountainbike?;Brandbil ~12 ton; mountainbike ~13 kg (snitt 13,2 kg, bikethesites);2025
 Är en färja längre eller kortare än en eka?;Färjedata (~180 m) + ekadata (~4 m);2025
-Väger en personbil mer eller mindre än en surfbräda?;Personbilsdata (~1,5 ton) + surfbrädedata (~12 kg);2025
-Har en tunnelbana högre eller lägre toppfart än en cykel?;SL tunnelbanedata (~80 km/h) + cykeldata (~25 km/h);2025
+Väger en golfbil mer eller mindre än en surfbräda?;golfcartsearch.com (golf cart weight); surfbrädsdata;2026
+Har en tunnelbana högre eller lägre toppfart än en elsparkcykel?;Transportstyrelsen (elsparkcykel max 20 km/h); Wikipedia (tunnelbana);2026
 Har ett höghastighetståg högre eller lägre toppfart än en vespa?;Höghastighetståg (~300 km/h) + vespa/scooter (~90 km/h);2025
 Väger en snöplogbil mer eller mindre än ett tåglok?;Snöplog-/lastbilsdata (~18 ton) + lokdata (~90 ton);2025
 Är en segelbåt längre eller kortare än en roddbåt?;Segelbåtsdata (~12 m) + roddbåtsdata (~4 m);2025
 Är en zeppelinare längre eller kortare än ett godståg?;Zeppelinardata (~240 m) + godstågsdata (~700 m);2025
 Är en gondol längre eller kortare än en pråm?;Venetiansk gondol (~11 m) + prämdata (~60 m);2025
-Har en hästvagn högre eller lägre toppfart än en sopbil?;Hästvagnsdata (~20 km/h) + sopbilsdata (~80 km/h);2025
+Har en hästvagn högre eller lägre toppfart än en bärgningsbil?;Hästvagn ~20 km/h; bärgningsbil ~90 km/h (tung lastbil, modeller ~80-120 km/h);2025
 Väger en polisbil mer eller mindre än en hästkärra?;Polisbilsdata (~1,9 ton) + hästkärredata (~350 kg);2025
 Väger en skolbuss mer eller mindre än en polisbil?;Skolbussdata (~9 ton) + polisbilsdata (~1,9 ton);2025
-Har en veteranbil högre eller lägre toppfart än ett höghastighetståg?;Veteranbilsdata (~80 km/h) + höghastighetståg (~300 km/h);2025
+Har en tuk-tuk högre eller lägre toppfart än ett höghastighetståg?;Tuk-tuk ~50 km/h (standard 45-55 km/h); höghastighetståg ~300 km/h;2025
 Har en mountainbike högre eller lägre toppfart än en vespa?;Mountainbikedata (~30 km/h) + vespa/scooter (~90 km/h);2025
-Väger en stadsjeep mer eller mindre än en hästkärra?;Stadsjeep/SUV-data (~2 ton) + hästkärredata (~350 kg);2025
+Väger en stadsjeep mer eller mindre än en släpvagn?;Stadsjeep ~2000 kg; lätt släpvagn tjänstevikt ~300 kg (150-500 kg-spann, Valeryd);2025
 Har en postbil högre eller lägre toppfart än en tuk-tuk?;Postbilsdata (~130 km/h) + tuk-tuk-data (~50 km/h);2025
 Väger en bärgningsbil mer eller mindre än en skåpbil?;Bärgningsbilsdata (~12 ton) + skåpbilsdata (~2,2 ton);2025
 Väger en trehjuling mer eller mindre än en lådcykel?;Barntrehjulingsdata (~12 kg) + lådcykeldata (~40 kg);2025

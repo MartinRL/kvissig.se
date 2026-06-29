@@ -1,6 +1,6 @@
 ﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
 Väger hjärnan mer eller mindre än levern hos en vuxen?;Hjärnan;Levern;1400;1500;gram;Hur många gram skiljer det?
-Väger hjärtat mer eller mindre än en njure?;Hjärtat;Njuren;300;140;gram;Hur många gram skiljer det?
+Väger mjälten mer eller mindre än en njure?;Mjälten;Njuren;150;140;gram;Hur många gram skiljer det?
 Väger bukspottkörteln mer eller mindre än mjälten?;Bukspottkörteln;Mjälten;100;150;gram;Hur många gram skiljer det?
 Väger skelettet mer eller mindre än huden?;Skelettet;Huden;12;4;kilo;Hur många kilo skiljer det?
 Väger båda lungorna tillsammans mer eller mindre än levern?;Lungorna;Levern;1000;1500;gram;Hur många gram skiljer det?

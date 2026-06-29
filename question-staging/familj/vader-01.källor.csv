@@ -16,10 +16,10 @@ Blåser det mer eller mindre vid en svag vind än vid kuling?;SMHI Beaufortskala
 Är det varmare eller kallare en svensk sommardag än i en bastu?;Svensk bastutemperatur ~80-100 °C; SMHI sommardag definition (>20-25 °C);2024
 Är snödjupet en vanlig vinter större eller mindre i Östersund än i Göteborg?;SMHI snödjupsstatistik (Östersund ~0,5-0,6 m, Göteborg ~0,1 m);2024
 Är det varmare eller kallare på natten i Sahara än mitt på dagen i Sahara?;Klimatdata Sahara (dagstemp ~40-45 °C, natt ner mot ~5-10 °C);2024
-Lyser solen fler eller färre timmar om året på Gran Canaria än i Bergen?;AEMET Las Palmas de Gran Canaria (~2830 soltimmar) + yr.no Bergen (~1100-1135);2024
+Lyser solen fler eller färre timmar om året på Gran Canaria än i Reykjavik?;Gran Canaria ~2830 soltimmar; Reykjavik ~1250-1330 soltimmar (weather-and-climate.com);2024
 Blåser det mer eller mindre en vanlig blåsig dag än i en höststorm?;SMHI vindskalor (storm 24,5-28,4 m/s ≈ 88-102 km/h; här ~130 km/h byvind);2024
 Lyser solen fler eller färre timmar om året i soliga Spanien än i Sverige?;AEMET/SMHI (södra Spanien ~2800 soltimmar; Sverige snitt ~1700-1900);2024
-Faller det mer eller mindre regn på ett år i Stockholm än i Göteborg?;mittresvader.se Göteborg (776 mm) + Miljöbarometern Stockholm (547 mm);2024
+Faller det mer eller mindre regn på ett år i Uppsala än i Göteborg?;SMHI (Uppsala/östra Svealand ~550-660 mm/år) + Göteborg ~776 mm;2024
 Är det varmare eller kallare i juli i Malmö än i Kiruna?;SMHI normalvärden juli medeltemp (Malmö ~17-18 °C, Kiruna ~13 °C);2024
 Blåser det mer eller mindre en blåsig dag än en lugn dag?;SMHI Beaufortskala (frisk vind ~11 m/s ≈ 40 km/h; lätt vind ~5 m/s ≈ 18 km/h);2024
 Regnar det fler eller färre dagar om året i London än i Stockholm?;SMHI Stockholm (~165-170 nederbördsdagar) + Met Office London (~109 regndagar);2024

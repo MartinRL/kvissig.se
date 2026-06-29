@@ -1,24 +1,24 @@
 ﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
-Väger hjärtat mer eller mindre än mjälten?;Hjärtat;Mjälten;300;100;gram;Hur många gram skiljer det?
+Väger magsäcken mer eller mindre än mjälten?;Magsäcken;Mjälten;150;100;gram;Hur många gram skiljer det?
 Väger hjärtat mer eller mindre än båda lungorna tillsammans?;Hjärtat;Lungorna;300;1000;gram;Hur många gram skiljer det?
 Väger hela skelettet mer eller mindre än ett finger?;Skelettet;Ett finger;10000;30;gram;Hur många gram skiljer det?
 Har man fler eller färre hårstrån på huvudet än tänder i munnen?;Hårstrån på huvudet;Tänder;100000;32;antal;Hur många fler hårstrån är det?
-Väger hjärnan mer eller mindre än en ögonfrans?;Hjärnan;En ögonfrans;1400;0,001;gram;Hur många gram skiljer det?
+Väger båda lungorna mer eller mindre än en ögonfrans?;Lungorna;En ögonfrans;1000;0,001;gram;Hur många gram skiljer det?
 Är ett finger längre eller kortare än lårbenet?;Ett finger;Lårbenet;8;45;centimeter;Hur många centimeter skiljer det?
 Har en vuxen fler eller färre svettkörtlar än tänder?;Svettkörtlar;Tänder;3000000;32;antal;Hur många fler svettkörtlar är det?
 Är en vuxen längre eller kortare än alla sina tarmar tillsammans?;Kroppslängden;Tarmarna;180;800;centimeter;Hur många centimeter skiljer det?
 Har man fler eller färre smaklökar än fingrar och tår tillsammans?;Smaklökar;Fingrar och tår;10000;20;antal;Hur många fler smaklökar är det?
-Är en vuxen längre eller kortare än bredden på ett hårstrå?;Vuxen;Ett hårstrå tjockt;175;0,01;centimeter;Hur många centimeter skiljer det?
+Är en tioåring längre eller kortare än bredden på ett hårstrå?;Tioåring;Ett hårstrå tjockt;140;0,01;centimeter;Hur många centimeter skiljer det?
 Väger ett hjärta mer eller mindre än en hel vuxen man?;Hjärtat;Vuxen man;0,3;85;kilo;Hur många kilo skiljer det?
 Är en tand längre eller kortare än tungan?;En tand;Tungan;2,5;8,5;centimeter;Hur många centimeter skiljer det?
-Slår en människas hjärta fler eller färre slag per minut än en katts?;Människa;Katt;70;160;slag/minut;Hur många slag per minut skiljer det?
+Slår en människas hjärta fler eller färre slag per minut än ett marsvins?;Människa;Marsvin;70;250;slag/minut;Hur många slag per minut skiljer det?
 Väger levern mer eller mindre än båda njurarna tillsammans?;Levern;Njurarna;1500;280;gram;Hur många gram skiljer det?
 Har en vuxen fler eller färre muskler i kroppen än fingrar på en hand?;Muskler;Fingrar på en hand;600;5;antal;Hur många fler muskler är det?
 Är en mormor äldre eller yngre än en tonåring?;Mormor;Tonåring;70;14;år;Hur många år skiljer det?
 Väger en vuxen man mer eller mindre än en tioåring?;Vuxen man;Tioåring;85;32;kilo;Hur många kilo skiljer det?
 Är handleden större eller mindre i omkrets än låret?;Handleden;Låret;16;55;centimeter;Hur många centimeter skiljer det?
 Är en hand längre eller kortare än en hel arm?;En hand;En arm;19;70;centimeter;Hur många centimeter skiljer det?
-Väger ett nyfött barn mer eller mindre än en ettåring?;Nyfött barn;Ettåring;3,5;10;kilo;Hur många kilo skiljer det?
+Väger en femåring mer eller mindre än en ettåring?;Femåring;Ettåring;18;10;kilo;Hur många kilo skiljer det?
 Är handleden större eller mindre i omkrets än midjan?;Handleden;Midjan;16;85;centimeter;Hur många centimeter skiljer det?
 Är en farfar äldre eller yngre än sitt tonårsbarnbarn?;Farfar;Tonåring;70;15;år;Hur många år skiljer det?
 Är ett finger längre eller kortare än en hel fot?;Ett finger;En fot;8;26;centimeter;Hur många centimeter skiljer det?

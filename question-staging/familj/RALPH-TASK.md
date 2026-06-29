@@ -47,7 +47,10 @@ dinosaurier · sport  (dir = `question-staging/familj/<tema>/` or `<tema>-NN.csv
    `DisplayNameOverrides` (Questions.cs), commit.
 
 ## Stop
-Write `FAMILJ-DONE` when familj.csv = exactly 1085 clean cards AND `dotnet test` green.
+When familj.csv = exactly 1085 clean cards, the `["familj"]` display-name override is added to
+`DisplayNameOverrides` (Questions.cs), AND `dotnet test` is green: write a file `FAMILJ-DONE`
+and output the completion promise tag with text `FAMILJ-DONE`. Output the promise ONLY when all
+three are unequivocally true.
 
 ## Escape hatches
 - Pool short of distinct family-recognizable entities for a band → STOP, report the gap, never invent.
