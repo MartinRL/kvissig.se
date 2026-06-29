@@ -1,0 +1,28 @@
+﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Är ett simhoppstorn högre eller lägre än en svikt i simhopp?;Simhoppstorn;Svikt;10;3;meter;Hur många meter skiljer det?
+Åker en längdskidåkare fortare eller långsammare än en alpin störtloppsåkare?;Längdskidåkare;Störtloppsåkare;25;110;km/h;Hur många km/h skiljer det?
+Väger ett skidskyttegevär mer eller mindre än en tennisracket?;Skidskyttegevär;Tennisracket;4500;300;gram;Hur många gram skiljer det?
+Är en vilopaus i boxning längre eller kortare än en boxningsrond?;Vilopaus;Boxningsrond;1;3;minuter;Hur många minuter skiljer det?
+Studsar en gymnast på trampolin högre eller lägre upp än vad ett basketmål sitter?;Trampolinstuds;Basketmål;8;3,05;meter;Hur många meter skiljer det?
+Väger en fotbollssko mer eller mindre än en bowlingkägla?;Fotbollssko;Bowlingkägla;200;1530;gram;Hur många gram skiljer det?
+Springer en gepard fortare eller långsammare än en sprinter i 100 meter?;Gepard;Sprinter;110;37;km/h;Hur många km/h skiljer det?
+Är en golfklubba längre eller kortare än en längdskidåkares stav?;Golfklubba;Skidstav;115;160;centimeter;Hur många centimeter skiljer det?
+Väger en stötkula för herrar mer eller mindre än en bowlingkägla?;Stötkula;Bowlingkägla;7260;1530;gram;Hur många gram skiljer det?
+Är ett bordtennisbord längre eller kortare än en badmintonbana?;Bordtennisbord;Badmintonbana;2,74;13,4;meter;Hur många meter skiljer det?
+Är ett tennisnät bredare eller smalare än ett badmintonnät?;Tennisnät;Badmintonnät;12,8;6,1;meter;Hur många meter skiljer det?
+Bränner en timmes bowling fler eller färre kalorier än en timmes skidåkning?;Bowling;Skidåkning;220;600;kalorier;Hur många kalorier skiljer det?
+Bränner en timmes boxning fler eller färre kalorier än en timmes ridning?;Boxning;Ridning;800;350;kalorier;Hur många kalorier skiljer det?
+Bränner en timmes cykling fler eller färre kalorier än en timmes promenad?;Cykling;Promenad;500;300;kalorier;Hur många kalorier skiljer det?
+Är luften på en golfbana en sommardag varmare eller svalare än inne i en ishall?;Golfbana;Ishall;22;6;°C;Hur många grader skiljer det?
+Är isen i en ishockeyrink kallare eller varmare än vattnet i en tävlingsbassäng?;Ishockeyis;Tävlingsbassäng;-6;27;°C;Hur många grader skiljer det?
+Är det fler eller färre hål på en full golfbana än rutor längs en sida på ett schackbräde?;Golfhål;Schackbrädessida;18;8;antal;Hur många skiljer det?
+Är det fler eller färre spelare i ett basketlag på planen än i ett vattenpololag?;Basketlag;Vattenpololag;5;7;antal;Hur många skiljer det?
+Är det fler eller färre ringar i en olympisk flagga än hål på en golfbana?;Olympiska ringar;Golfhål;5;18;antal;Hur många skiljer det?
+Flyger ett spjut i ett långt kast längre eller kortare än en diskus i ett långt kast?;Spjutkast;Diskuskast;98;74;meter;Hur många meter skiljer det?
+Är en hoppbacke i backhoppning högre eller lägre än ett tiovåningshus?;Hoppbacke;Tiovåningshus;120;30;meter;Hur många meter skiljer det?
+Är ett varv på en löparbana längre eller kortare än en simbassäng i OS?;Löparbana;Simbassäng;400;50;meter;Hur många meter skiljer det?
+Är en cykel i landsvägslopp lättare eller tyngre än en motocrossmotorcykel?;Tävlingscykel;Motocrossmotorcykel;7;100;kilo;Hur många kilo skiljer det?
+Är en frisbee i discgolf större eller mindre i diameter än en golfboll?;Discgolffrisbee;Golfboll;21;4,3;centimeter;Hur många centimeter skiljer det?
+Är ett par längdskidor längre eller kortare än en backhoppares skidor?;Längdskidor;Hoppskidor;200;260;centimeter;Hur många centimeter skiljer det?
+Är en tennisbana längre eller kortare än en handbollsplan?;Tennisbana;Handbollsplan;23,77;40;meter;Hur många meter skiljer det?
+Väger en cykelhjälm mer eller mindre än ett par fotbollsskor?;Cykelhjälm;Fotbollsskor;300;400;gram;Hur många gram skiljer det?
