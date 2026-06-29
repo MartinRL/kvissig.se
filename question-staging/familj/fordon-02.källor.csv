@@ -1,0 +1,26 @@
+﻿fråga;källa;år
+Har en sparkcykel högre eller lägre toppfart än en spårvagn?;Transportstyrelsen / Wikipedia (spårvagn);2024
+Har en tunnelbana högre eller lägre toppfart än ett pendeltåg?;Wikipedia (Tunnelbana 80 km/h) / Stockholms pendeltåg (160 km/h);2024
+Har ett propellerplan högre eller lägre toppfart än en snöskoter?;Wikipedia (turbopropflygplan, snöskoter);2024
+Har en moped högre eller lägre toppfart än en gokart?;Transportstyrelsen (moped klass I) / kartingdata;2024
+Har en vattenskoter högre eller lägre toppfart än en roddbåt?;Tillverkarspec vattenskoter / roddbåtsdata;2024
+Har en sopbil högre eller lägre toppfart än en fyrhjuling?;Tillverkarspec sopbil / fyrhjuling;2024
+Är en färja längre eller kortare än en gummibåt?;Rederispec färja / gummibåtsdata;2024
+Är en husvagn längre eller kortare än en husbil?;Tillverkarspec husvagn/husbil;2024
+Är en ubåt längre eller kortare än en spårvagn?;Wikipedia/Försvarsmakten (Gotland-klass 60 m) / Göteborgs Spårvägar (M32 ca 30 m);2024
+Är en grävmaskin längre eller kortare än ett tåglok?;Tillverkarspec 20-tons grävmaskin / järnväg.net (Rc-lok 15,5 m);2024
+Är en betongbil längre eller kortare än en sopbil?;Tillverkarspec betongbil/sopbil;2024
+Är ett pendeltåg längre eller kortare än en spårvagn?;järnväg.net (X60 ca 107 m) / Göteborgs Spårvägar (M32 ca 30 m);2024
+Väger en grävmaskin mer eller mindre än en fyrhjuling?;Tillverkarspec grävmaskin/fyrhjuling;2024
+Väger en husvagn mer eller mindre än en husbil?;Tillverkarspec husvagn/husbil;2024
+Väger en sopbil mer eller mindre än en betongbil?;Tillverkarspec sopbil/betongbil;2024
+Väger en snöskoter mer eller mindre än en moped?;Tillverkarspec snöskoter / moped;2024
+Väger en gokart mer eller mindre än en vattenskoter?;Kartingdata / tillverkarspec vattenskoter;2024
+Väger ett tåglok mer eller mindre än en grävmaskin?;järnväg.net (Rc/Rm-lok 78-92 ton) / tillverkarspec 20-tons grävmaskin;2024
+Väger en kanot mer eller mindre än en roddbåt?;Kanotdata / roddbåtsdata;2024
+Tar ett pendeltåg fler eller färre passagerare än en spårvagn?;järnväg.net/Wikipedia (X60 ca 1800 totalt) / spårvagnsdata (ca 200);2024
+Har en gokart fler eller färre säten än en husbil?;Kartingdata / tillverkarspec husbil;2024
+Har en fyrhjuling fler eller färre hjul än en sopbil?;Allmän fordonsdata;2024
+Tar en tunnelbana fler eller färre passagerare än en färja?;Wikipedia (C20 trevagnståg ca 1000-1200) / rederispec färja;2024
+Rymmer en husbil mer eller mindre bränsle i tanken än en moped?;Tillverkarspec husbil / moped;2024
+Rymmer en hjullastare mer eller mindre bränsle i tanken än en gokart?;Tillverkarspec hjullastare / kartingdata;2024

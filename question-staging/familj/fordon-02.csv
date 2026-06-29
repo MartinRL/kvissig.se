@@ -1,0 +1,26 @@
+﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Har en sparkcykel högre eller lägre toppfart än en spårvagn?;Sparkcykel;Spårvagn;20;60;km/h;Hur många km/h skiljer det?
+Har en tunnelbana högre eller lägre toppfart än ett pendeltåg?;Tunnelbana;Pendeltåg;80;160;km/h;Hur många km/h skiljer det?
+Har ett propellerplan högre eller lägre toppfart än en snöskoter?;Propellerplan;Snöskoter;550;70;km/h;Hur många km/h skiljer det?
+Har en moped högre eller lägre toppfart än en gokart?;Moped;Gokart;45;60;km/h;Hur många km/h skiljer det?
+Har en vattenskoter högre eller lägre toppfart än en roddbåt?;Vattenskoter;Roddbåt;100;8;km/h;Hur många km/h skiljer det?
+Har en sopbil högre eller lägre toppfart än en fyrhjuling?;Sopbil;Fyrhjuling;80;90;km/h;Hur många km/h skiljer det?
+Är en färja längre eller kortare än en gummibåt?;Färja;Gummibåt;180;4;meter;Hur många meter skiljer det?
+Är en husvagn längre eller kortare än en husbil?;Husvagn;Husbil;6;7;meter;Hur många meter skiljer det?
+Är en ubåt längre eller kortare än en spårvagn?;Ubåt;Spårvagn;60;30;meter;Hur många meter skiljer det?
+Är en grävmaskin längre eller kortare än ett tåglok?;Grävmaskin;Tåglok;8;16;meter;Hur många meter skiljer det?
+Är en betongbil längre eller kortare än en sopbil?;Betongbil;Sopbil;9;9,5;meter;Hur många meter skiljer det?
+Är ett pendeltåg längre eller kortare än en spårvagn?;Pendeltåg;Spårvagn;100;30;meter;Hur många meter skiljer det?
+Väger en grävmaskin mer eller mindre än en fyrhjuling?;Grävmaskin;Fyrhjuling;20000;300;kilo;Hur många kilo skiljer det?
+Väger en husvagn mer eller mindre än en husbil?;Husvagn;Husbil;1300;3500;kilo;Hur många kilo skiljer det?
+Väger en sopbil mer eller mindre än en betongbil?;Sopbil;Betongbil;12000;26000;kilo;Hur många kilo skiljer det?
+Väger en snöskoter mer eller mindre än en moped?;Snöskoter;Moped;250;90;kilo;Hur många kilo skiljer det?
+Väger en gokart mer eller mindre än en vattenskoter?;Gokart;Vattenskoter;150;350;kilo;Hur många kilo skiljer det?
+Väger ett tåglok mer eller mindre än en grävmaskin?;Tåglok;Grävmaskin;90000;20000;kilo;Hur många kilo skiljer det?
+Väger en kanot mer eller mindre än en roddbåt?;Kanot;Roddbåt;20;60;kilo;Hur många kilo skiljer det?
+Tar ett pendeltåg fler eller färre passagerare än en spårvagn?;Pendeltåg;Spårvagn;1200;200;passagerare;Hur många passagerare skiljer det?
+Har en gokart fler eller färre säten än en husbil?;Gokart;Husbil;1;6;säten;Hur många säten skiljer det?
+Har en fyrhjuling fler eller färre hjul än en sopbil?;Fyrhjuling;Sopbil;4;6;hjul;Hur många hjul skiljer det?
+Tar en tunnelbana fler eller färre passagerare än en färja?;Tunnelbana;Färja;1000;600;passagerare;Hur många passagerare skiljer det?
+Rymmer en husbil mer eller mindre bränsle i tanken än en moped?;Husbil;Moped;90;5;liter;Hur många liter skiljer det?
+Rymmer en hjullastare mer eller mindre bränsle i tanken än en gokart?;Hjullastare;Gokart;250;8;liter;Hur många liter skiljer det?
