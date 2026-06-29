@@ -1,0 +1,22 @@
+﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Är Tokyo Skytree högre eller lägre än CN-tornet?;Tokyo Skytree;CN-tornet;634;553;meter;Hur många meter skiljer det?
+Är Tokyo Skytree högre eller lägre än Brandenburger Tor?;Tokyo Skytree;Brandenburger Tor;634;26;meter;Hur många meter skiljer det?
+Är Notre-Dame högre eller lägre än Sagrada Familia?;Notre-Dame;Sagrada Familia;96;172;meter;Hur många meter skiljer det?
+Är Brandenburger Tor högre eller lägre än Tower Bridge?;Brandenburger Tor;Tower Bridge;26;65;meter;Hur många meter skiljer det?
+Är Sydney Operahus högre eller lägre än London Eye?;Sydney Operahus;London Eye;65;135;meter;Hur många meter skiljer det?
+Är Sfinxen högre eller lägre än Stonehenge?;Sfinxen;Stonehenge;20;7;meter;Hur många meter skiljer det?
+Är Parthenon på Akropolis högre eller lägre än Tokyo Skytree?;Parthenon på Akropolis;Tokyo Skytree;14;634;meter;Hur många meter skiljer det?
+Är Öresundsbron längre eller kortare än Brooklyn Bridge?;Öresundsbron;Brooklyn Bridge;7845;1834;meter;Hur många meter skiljer det?
+Är Tower Bridge längre eller kortare än Brooklyn Bridge?;Tower Bridge;Brooklyn Bridge;244;1834;meter;Hur många meter skiljer det?
+Är Stonehenge äldre eller yngre än Storkyrkan?;Stonehenge;Storkyrkan;5000;720;år;Hur många år skiljer det?
+Är Petra äldre eller yngre än Angkor Wat?;Petra;Angkor Wat;2300;900;år;Hur många år skiljer det?
+Är Machu Picchu äldre eller yngre än Parthenon på Akropolis?;Machu Picchu;Parthenon på Akropolis;580;2470;år;Hur många år skiljer det?
+Är Notre-Dame äldre eller yngre än Uppsala domkyrka?;Notre-Dame;Uppsala domkyrka;860;590;år;Hur många år skiljer det?
+Är Sydney Operahus äldre eller yngre än Brandenburger Tor?;Sydney Operahus;Brandenburger Tor;53;235;år;Hur många år skiljer det?
+Är Storkyrkan äldre eller yngre än Sydney Operahus?;Storkyrkan;Sydney Operahus;720;53;år;Hur många år skiljer det?
+Är Moai-statyerna på Påskön äldre eller yngre än Sydney Operahus?;Moai-statyerna på Påskön;Sydney Operahus;700;53;år;Hur många år skiljer det?
+Är Angkor Wat äldre eller yngre än Stonehenge?;Angkor Wat;Stonehenge;900;5000;år;Hur många år skiljer det?
+Är Petra äldre eller yngre än Tower Bridge?;Petra;Tower Bridge;2300;132;år;Hur många år skiljer det?
+Är CN-tornet högre eller lägre än Brandenburger Tor?;CN-tornet;Brandenburger Tor;553;26;meter;Hur många meter skiljer det?
+Är Kebnekaise högre eller lägre än CN-tornet?;Kebnekaise;CN-tornet;2096;553;meter;Hur många meter skiljer det?
+Är Brooklyn Bridge högre eller lägre än Hoover-dammen?;Brooklyn Bridge;Hoover-dammen;84;221;meter;Hur många meter skiljer det?
