@@ -1,0 +1,28 @@
+﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Är en basketboll större eller mindre i diameter än en tennisboll?;Basketboll;Tennisboll;24;6,7;centimeter;Hur många centimeter skiljer det?
+Är en pingisboll större eller mindre i diameter än en fotboll?;Pingisboll;Fotboll;4;22;centimeter;Hur många centimeter skiljer det?
+Är ett bowlingklot större eller mindre i diameter än en golfboll?;Bowlingklot;Golfboll;21,8;4,3;centimeter;Hur många centimeter skiljer det?
+Är en tennisboll större eller mindre i diameter än en handboll?;Tennisboll;Handboll;6,7;19;centimeter;Hur många centimeter skiljer det?
+Väger en ishockeypuck mer eller mindre än en pingisboll?;Ishockeypuck;Pingisboll;170;2,7;gram;Hur många gram skiljer det?
+Väger en pingisboll mer eller mindre än ett bowlingklot?;Pingisboll;Bowlingklot;2,7;7000;gram;Hur många gram skiljer det?
+Väger ett bowlingklot mer eller mindre än en golfboll?;Bowlingklot;Golfboll;7000;46;gram;Hur många gram skiljer det?
+Väger en pingisboll mer eller mindre än en fotboll?;Pingisboll;Fotboll;2,7;430;gram;Hur många gram skiljer det?
+Väger en basketboll mer eller mindre än en tennisboll?;Basketboll;Tennisboll;600;57;gram;Hur många gram skiljer det?
+Väger en golfboll mer eller mindre än en handboll?;Golfboll;Handboll;46;450;gram;Hur många gram skiljer det?
+Väger en ishockeypuck mer eller mindre än en tennisboll?;Ishockeypuck;Tennisboll;170;57;gram;Hur många gram skiljer det?
+Är det fler eller färre spelare i ett ishockeylag på isen än i ett fotbollslag?;Ishockeylag;Fotbollslag;6;11;antal;Hur många spelare skiljer det?
+Är det fler eller färre spelare på planen i ett handbollslag än i ett basketlag?;Handbollslag;Basketlag;7;5;antal;Hur många spelare skiljer det?
+Är det fler eller färre spelare på planen i ett basketlag än i ett fotbollslag?;Basketlag;Fotbollslag;5;11;antal;Hur många spelare skiljer det?
+Är det fler eller färre spelare på planen i ett volleybollag än i ett handbollslag?;Volleybollag;Handbollslag;6;7;antal;Hur många spelare skiljer det?
+Är en basketplan längre eller kortare än en fotbollsplan?;Basketplan;Fotbollsplan;28;105;meter;Hur många meter skiljer det?
+Är en simbassäng i OS längre eller kortare än en tennisbana?;Simbassäng;Tennisbana;50;23,77;meter;Hur många meter skiljer det?
+Är en ishockeyrink längre eller kortare än en basketplan?;Ishockeyrink;Basketplan;60;28;meter;Hur många meter skiljer det?
+Är en tennisbana bredare eller smalare än en fotbollsplan?;Tennisbana;Fotbollsplan;10,97;68;meter;Hur många meter skiljer det?
+Är ett hundrameterslopp längre eller kortare än ett maratonlopp?;Hundrameterslopp;Maratonlopp;100;42195;meter;Hur många meter skiljer det?
+Slår en tennisserve fortare eller långsammare än ett ishockeyslagskott?;Tennisserve;Ishockeyslagskott;200;160;km/h;Hur många km/h skiljer det?
+Slår ett hårt fotbollsskott fortare eller långsammare än ett ishockeyslagskott?;Fotbollsskott;Ishockeyslagskott;120;160;km/h;Hur många km/h skiljer det?
+Slår en tennisserve fortare eller långsammare än ett hårt fotbollsskott?;Tennisserve;Fotbollsskott;200;120;km/h;Hur många km/h skiljer det?
+Är en tennisbana längre eller kortare än en fotbollsplan?;Tennisbana;Fotbollsplan;23,77;105;meter;Hur många meter skiljer det?
+Är världsrekordet i stavhopp högre eller lägre än rekordet i höjdhopp?;Stavhopp;Höjdhopp;6,3;2,45;meter;Hur många meter skiljer det?
+Är världsrekordet i längdhopp längre eller kortare än rekordet i stavhopp?;Längdhopp;Stavhopp;8,95;6,3;meter;Hur många meter skiljer det?
+Är en ishockeymatch längre eller kortare i speltid än en fotbollsmatch?;Ishockeymatch;Fotbollsmatch;60;90;minuter;Hur många minuter skiljer det?
