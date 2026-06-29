@@ -1,0 +1,28 @@
+﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Väger en hjullastare mer eller mindre än en skateboard?;Hjullastare;Skateboard;18000;3;kilo;Hur många kilo skiljer det?
+Väger en skördetröska mer eller mindre än en trampbil?;Skördetröska;Trampbil;14000;12;kilo;Hur många kilo skiljer det?
+Väger en bärgningsbil mer eller mindre än ett par inlines?;Bärgningsbil;Inlines;12000;2;kilo;Hur många kilo skiljer det?
+Väger en tankbil mer eller mindre än en lastcykel?;Tankbil;Lastcykel;26000;45;kilo;Hur många kilo skiljer det?
+Väger en polisbil mer eller mindre än en stridsvagn?;Polisbil;Stridsvagn;1900;60000;kilo;Hur många kilo skiljer det?
+Väger en mjölkbil mer eller mindre än en snöplogbil?;Mjölkbil;Snöplogbil;1900;18000;kilo;Hur många kilo skiljer det?
+Väger en skåpbil mer eller mindre än en hästkärra?;Skåpbil;Hästkärra;2200;350;kilo;Hur många kilo skiljer det?
+Väger en pickup mer eller mindre än en tankbil?;Pickup;Tankbil;2400;26000;kilo;Hur många kilo skiljer det?
+Är en skateboard längre eller kortare än en linbanekabin?;Skateboard;Linbanekabin;0,8;4;meter;Hur många meter skiljer det?
+Är en trehjuling längre eller kortare än en veteranbil?;Trehjuling;Veteranbil;0,7;4,5;meter;Hur många meter skiljer det?
+Är en pråm längre eller kortare än en roddbåt?;Pråm;Roddbåt;60;4;meter;Hur många meter skiljer det?
+Är en skördetröska längre eller kortare än en lastcykel?;Skördetröska;Lastcykel;9;2,5;meter;Hur många meter skiljer det?
+Är en taxi längre eller kortare än en skåpbil?;Taxi;Skåpbil;4,9;5,5;meter;Hur många meter skiljer det?
+Är en pickup längre eller kortare än en polisbil?;Pickup;Polisbil;5,3;4,8;meter;Hur många meter skiljer det?
+Har ett linjeflygplan högre eller lägre toppfart än en postbil?;Linjeflygplan;Postbil;900;130;km/h;Hur många km/h skiljer det?
+Har en sportbil högre eller lägre toppfart än en snöplogbil?;Sportbil;Snöplogbil;300;60;km/h;Hur många km/h skiljer det?
+Har en mjölkbil högre eller lägre toppfart än en sportbil?;Mjölkbil;Sportbil;90;300;km/h;Hur många km/h skiljer det?
+Har en veteranbil högre eller lägre toppfart än ett linjeflygplan?;Veteranbil;Linjeflygplan;80;900;km/h;Hur många km/h skiljer det?
+Har en hästkärra högre eller lägre toppfart än en mountainbike?;Hästkärra;Mountainbike;15;30;km/h;Hur många km/h skiljer det?
+Har en tuk-tuk högre eller lägre toppfart än en sportbil?;Tuk-tuk;Sportbil;50;250;km/h;Hur många km/h skiljer det?
+Tar ett linjeflygplan fler eller färre passagerare än en tuk-tuk?;Linjeflygplan;Tuk-tuk;180;3;passagerare;Hur många passagerare skiljer det?
+Har en pickup fler eller färre säten än en linbanekabin?;Pickup;Linbanekabin;2;6;säten;Hur många säten skiljer det?
+Har en tankbil fler eller färre hjul än en trehjuling?;Tankbil;Trehjuling;10;3;hjul;Hur många hjul skiljer det?
+Har en bärgningsbil fler eller färre hjul än en veteranbil?;Bärgningsbil;Veteranbil;6;4;hjul;Hur många hjul skiljer det?
+Har ett par inlines fler eller färre hjul än en hästkärra?;Inlines;Hästkärra;8;4;hjul;Hur många hjul skiljer det?
+Väger en pråm mer eller mindre än en pulka?;Pråm;Pulka;80000;5;kilo;Hur många kilo skiljer det?
+Väger en snöplogbil mer eller mindre än en glassbil?;Snöplogbil;Glassbil;9000;2500;kilo;Hur många kilo skiljer det?

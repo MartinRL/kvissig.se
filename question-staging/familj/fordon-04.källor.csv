@@ -1,0 +1,28 @@
+﻿fråga;källa;år
+Väger en hjullastare mer eller mindre än en skateboard?;Hjullastare (medelstor/större) tjänstevikt ~11-18 ton, Volvo CE/Wikipedia; skateboard ~2-3 kg;2025
+Väger en skördetröska mer eller mindre än en trampbil?;Skördetröska tjänstevikt ~14 ton (mellanklass 7-19 ton, John Deere/Wikipedia); barntrampbil ~10-12 kg;2025
+Väger en bärgningsbil mer eller mindre än ett par inlines?;Tung bärgningsbil ~12 ton tillverkarspec; inlines ~2 kg;2025
+Väger en tankbil mer eller mindre än en lastcykel?;Tankbil totalvikt ~26 ton; ellastcykel ~40-50 kg;2025
+Väger en polisbil mer eller mindre än en stridsvagn?;Polisbil (personbil) ~1,9 ton; Strv 122/Leopard 2 tjänstevikt ~60,4 ton, en.wikipedia.org/wiki/Stridsvagn_122;2025
+Väger en mjölkbil mer eller mindre än en snöplogbil?;Mjölkbil/leveransbil ~1,9 ton; snöplogbil (lastbil med plog) ~18 ton;2025
+Väger en skåpbil mer eller mindre än en hästkärra?;Skåpbil tjänstevikt ~2,2 ton; hästkärra (vagn) ~300-400 kg;2025
+Väger en pickup mer eller mindre än en tankbil?;Pickup tjänstevikt ~2,4 ton tillverkarspec; tankbil ~26 ton;2025
+Är en skateboard längre eller kortare än en linbanekabin?;Skateboard ~0,8 m; linbanekabin ~4 m;2025
+Är en trehjuling längre eller kortare än en veteranbil?;Barntrehjuling ~0,7 m; veteranbil ~4,5 m;2025
+Är en pråm längre eller kortare än en roddbåt?;Inlandspråm ~38-135 m (~60 m typisk); roddbåt ~4 m;2025
+Är en skördetröska längre eller kortare än en lastcykel?;Skördetröska ~8-9 m (NH TX 8,1 m utan skärbord); lastcykel ~2,5 m;2025
+Är en taxi längre eller kortare än en skåpbil?;Taxi (personbil) ~4,9 m; skåpbil ~5,5 m;2025
+Är en pickup längre eller kortare än en polisbil?;Pickup ~5,3 m (Ford Ranger 5,37/Toyota Hilux 5,33 m); polisbil (personbil) ~4,8 m;2025
+Har ett linjeflygplan högre eller lägre toppfart än en postbil?;Linjeflygplan marschfart ~800-900 km/h (Boeing 737 ~830 km/h, Mach 0,78); postbil ~130 km/h;2025
+Har en sportbil högre eller lägre toppfart än en snöplogbil?;Sportbil ~300 km/h; snöplogbil ~60 km/h;2025
+Har en mjölkbil högre eller lägre toppfart än en sportbil?;Mjölkbil/leveransbil ~90 km/h; sportbil ~300 km/h;2025
+Har en veteranbil högre eller lägre toppfart än ett linjeflygplan?;Veteranbil ~80 km/h; linjeflygplan ~900 km/h;2025
+Har en hästkärra högre eller lägre toppfart än en mountainbike?;Hästkärra ~15 km/h; mountainbike ~30 km/h;2025
+Har en tuk-tuk högre eller lägre toppfart än en sportbil?;Tuk-tuk ~50 km/h; sportbil ~250 km/h;2025
+Tar ett linjeflygplan fler eller färre passagerare än en tuk-tuk?;Linjeflygplan ~180 passagerare (Boeing 737-800 162-189 säten); tuk-tuk ~3;2025
+Har en pickup fler eller färre säten än en linbanekabin?;Pickup ~2 framsäten; linbanekabin ~6;2025
+Har en tankbil fler eller färre hjul än en trehjuling?;Tankbil ~10 hjul; trehjuling 3;2025
+Har en bärgningsbil fler eller färre hjul än en veteranbil?;Bärgningsbil ~6 hjul; veteranbil 4;2025
+Har ett par inlines fler eller färre hjul än en hästkärra?;Inlines 8 hjul (2x4); hästkärra 4;2025
+Väger en pråm mer eller mindre än en pulka?;Inlandspråm (tom) ~80 ton, ~38-135 m, Transportstyrelsen/Wikipedia; pulka ~5 kg;2025
+Väger en snöplogbil mer eller mindre än en glassbil?;Snöplogbil ~9 ton; glassbil (liten lastbil) ~2,5 ton;2025
