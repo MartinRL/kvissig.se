@@ -1,0 +1,28 @@
+﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Väger en björn mer eller mindre än en älg?;Björn;Älg;300;400;kilo;Hur många kilo skiljer det?
+Väger en noshörning mer eller mindre än en flodhäst?;Noshörning;Flodhäst;2300;1500;kilo;Hur många kilo skiljer det?
+Väger en bäver mer eller mindre än en säl?;Bäver;Säl;20;150;kilo;Hur många kilo skiljer det?
+Väger en panda mer eller mindre än en koala?;Panda;Koala;100;9;kilo;Hur många kilo skiljer det?
+Väger en zebra mer eller mindre än en åsna?;Zebra;Åsna;350;200;kilo;Hur många kilo skiljer det?
+Väger ett vildsvin mer eller mindre än en lama?;Vildsvin;Lama;90;140;kilo;Hur många kilo skiljer det?
+Väger en valross mer eller mindre än ett lodjur?;Valross;Lodjur;1000;22;kilo;Hur många kilo skiljer det?
+Väger en kejsarpingvin mer eller mindre än en struts?;Kejsarpingvin;Struts;30;110;kilo;Hur många kilo skiljer det?
+Väger en flodhäst mer eller mindre än en björn?;Flodhäst;Björn;1500;300;kilo;Hur många kilo skiljer det?
+Väger en noshörning mer eller mindre än en kamel?;Noshörning;Kamel;2300;600;kilo;Hur många kilo skiljer det?
+Väger ett lodjur mer eller mindre än en panda?;Lodjur;Panda;22;100;kilo;Hur många kilo skiljer det?
+Är en kobra längre eller kortare än en pyton?;Kobra;Pyton;3,5;6;meter;Hur många meter skiljer det?
+Är en kamel högre eller lägre än en åsna?;Kamel;Åsna;2,1;1,2;meter;Hur många meter skiljer det?
+Är en hummer längre eller kortare än en bläckfisk?;Hummer;Bläckfisk;0,5;4;meter;Hur många meter skiljer det?
+Är en tupp högre eller lägre än en emu?;Tupp;Emu;0,7;1,9;meter;Hur många meter skiljer det?
+Väger ett vildsvin mer eller mindre än en zebra?;Vildsvin;Zebra;90;350;kilo;Hur många kilo skiljer det?
+Lever en anka längre eller kortare än en papegoja?;Anka;Papegoja;10;60;år;Hur många år skiljer det?
+Rör sig en fladdermus snabbare eller långsammare än en snigel?;Fladdermus;Snigel;40;0,05;km/h;Hur många km/h skiljer det?
+Springer en älg snabbare eller långsammare än en bäver?;Älg;Bäver;55;6;km/h;Hur många km/h skiljer det?
+Lever en mullvad längre eller kortare än en säl?;Mullvad;Säl;4;30;år;Hur många år skiljer det?
+Lever en flamingo längre eller kortare än en mus?;Flamingo;Mus;40;2;år;Hur många år skiljer det?
+Är en mullvad längre eller kortare än en bäver?;Mullvad;Bäver;0,15;1;meter;Hur många meter skiljer det?
+Lever ett vildsvin längre eller kortare än en lama?;Vildsvin;Lama;12;20;år;Hur många år skiljer det?
+Lever en säl längre eller kortare än en groda?;Säl;Groda;30;10;år;Hur många år skiljer det?
+Lever en groda längre eller kortare än en flamingo?;Groda;Flamingo;10;40;år;Hur många år skiljer det?
+Har en bläckfisk fler eller färre armar än en sjöstjärna?;Bläckfisk;Sjöstjärna;8;5;antal;Hur många armar skiljer det?
+Väger en valross mer eller mindre än en pelikan?;Valross;Pelikan;1000;7;kilo;Hur många kilo skiljer det?
