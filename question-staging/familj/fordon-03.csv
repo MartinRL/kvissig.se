@@ -19,7 +19,7 @@ Väger en taxi mer eller mindre än en limousine?;Taxi;Limousine;1600;2500;kilo;
 Väger en pickup mer eller mindre än en stadsjeep?;Pickup;Stadsjeep;2200;2000;kilo;Hur många kilo skiljer det?
 Väger en lådcykel mer eller mindre än en trehjuling?;Lådcykel;Trehjuling;40;12;kilo;Hur många kilo skiljer det?
 Väger en pulka mer eller mindre än en gaffeltruck?;Pulka;Gaffeltruck;5;3500;kilo;Hur många kilo skiljer det?
-Väger en pickup mer eller mindre än en skolbuss?;Pickup;Skolbuss;2200;9000;kilo;Hur många kilo skiljer det?
+Väger en ambulans mer eller mindre än en skolbuss?;Ambulans;Skolbuss;3500;9000;kilo;Hur många kilo skiljer det?
 Tar en dubbeldäckarbuss fler eller färre passagerare än en minibuss?;Dubbeldäckarbuss;Minibuss;80;16;passagerare;Hur många passagerare skiljer det?
 Tar en taxi fler eller färre passagerare än en minibuss?;Taxi;Minibuss;4;16;passagerare;Hur många passagerare skiljer det?
 Har en lådcykel fler eller färre hjul än en stadsjeep?;Lådcykel;Stadsjeep;3;4;hjul;Hur många hjul skiljer det?
