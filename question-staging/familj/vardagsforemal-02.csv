@@ -1,0 +1,27 @@
+﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Är en penna längre eller kortare än en sked?;Penna;Sked;15;19;centimeter;Hur många centimeter skiljer det?
+Är en gaffel längre eller kortare än en kniv?;Gaffel;Kniv;20;24;centimeter;Hur många centimeter skiljer det?
+Är en säng längre eller kortare än en penna?;Säng;Penna;200;15;centimeter;Hur många centimeter skiljer det?
+Är en soffa längre eller kortare än ett suddgummi?;Soffa;Suddgummi;200;4;centimeter;Hur många centimeter skiljer det?
+Väger en dammsugare mer eller mindre än en hårborste?;Dammsugare;Hårborste;6000;80;gram;Hur många gram skiljer det?
+Är ett paraply längre eller kortare än en linjal?;Paraply;Linjal;90;30;centimeter;Hur många centimeter skiljer det?
+Väger en hammare mer eller mindre än en spik?;Hammare;Spik;500;5;gram;Hur många gram skiljer det?
+Väger en kudde mer eller mindre än en madrass?;Kudde;Madrass;800;15000;gram;Hur många gram skiljer det?
+Väger en tvål mer eller mindre än en schampoflaska?;Tvål;Schampoflaska;100;400;gram;Hur många gram skiljer det?
+Väger en mugg mer eller mindre än en hink?;Mugg;Hink;300;1200;gram;Hur många gram skiljer det?
+Är en kam längre eller kortare än en handduk?;Kam;Handduk;18;100;centimeter;Hur många centimeter skiljer det?
+Är ett bord längre eller kortare än en fjärrkontroll?;Bord;Fjärrkontroll;120;18;centimeter;Hur många centimeter skiljer det?
+Väger en laptop mer eller mindre än en surfplatta?;Laptop;Surfplatta;1500;500;gram;Hur många gram skiljer det?
+Väger ett par hörlurar mer eller mindre än en ryggsäck?;Hörlurar;Ryggsäck;250;800;gram;Hur många gram skiljer det?
+Väger en skolväska mer eller mindre än en pennvässare?;Skolväska;Pennvässare;1200;20;gram;Hur många gram skiljer det?
+Väger en vattenkokare mer eller mindre än en brödrost?;Vattenkokare;Brödrost;1000;1500;gram;Hur många gram skiljer det?
+Väger ett glas mer eller mindre än en kastrull?;Glas;Kastrull;200;900;gram;Hur många gram skiljer det?
+Är en fåtölj högre eller lägre än en pall?;Fåtölj;Pall;90;45;centimeter;Hur många centimeter skiljer det?
+Är en bokhylla högre eller lägre än en spegel?;Bokhylla;Spegel;200;120;centimeter;Hur många centimeter skiljer det?
+Är en matta längre eller kortare än en gardin?;Matta;Gardin;200;280;centimeter;Hur många centimeter skiljer det?
+Är en blomkruka högre eller lägre än en mugg?;Blomkruka;Mugg;25;12;centimeter;Hur många centimeter skiljer det?
+Är en pulka längre eller kortare än en kälke?;Pulka;Kälke;90;100;centimeter;Hur många centimeter skiljer det?
+Väger ett par skridskor mer eller mindre än en spik?;Skridskor;Spik;800;5;gram;Hur många gram skiljer det?
+Är en linjal längre eller kortare än en kvast?;Linjal;Kvast;30;130;centimeter;Hur många centimeter skiljer det?
+Väger en väggklocka mer eller mindre än ett armbandsur?;Väggklocka;Armbandsur;800;50;gram;Hur många gram skiljer det?
+Väger en nyckel mer eller mindre än en plånbok?;Nyckel;Plånbok;15;150;gram;Hur många gram skiljer det?
