@@ -1,0 +1,28 @@
+﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Är en sparkcykel längre eller kortare än ett tåg?;Sparkcykel;Tåg;1,5;200;meter;Hur många meter skiljer det?
+Har en moped högre eller lägre toppfart än ett passagerarflygplan?;Moped;Passagerarflygplan;45;900;km/h;Hur många km/h skiljer det?
+Väger en kanot mer eller mindre än en ambulans?;Kanot;Ambulans;20;3500;kilo;Hur många kilo skiljer det?
+Har en luftballong högre eller lägre toppfart än en helikopter?;Luftballong;Helikopter;8;260;km/h;Hur många km/h skiljer det?
+Är en skateboard längre eller kortare än ett tåg?;Skateboard;Tåg;0,8;200;meter;Hur många meter skiljer det?
+Väger en trampbil mer eller mindre än en traktor?;Trampbil;Traktor;12;5000;kilo;Hur många kilo skiljer det?
+Väger en brandbil mer eller mindre än en cykel?;Brandbil;Cykel;12000;14;kilo;Hur många kilo skiljer det?
+Är en färja längre eller kortare än en eka?;Färja;Eka;180;4;meter;Hur många meter skiljer det?
+Väger en personbil mer eller mindre än en surfbräda?;Personbil;Surfbräda;1500;12;kilo;Hur många kilo skiljer det?
+Har en tunnelbana högre eller lägre toppfart än en cykel?;Tunnelbana;Cykel;80;25;km/h;Hur många km/h skiljer det?
+Har ett höghastighetståg högre eller lägre toppfart än en vespa?;Höghastighetståg;Vespa;300;90;km/h;Hur många km/h skiljer det?
+Väger en snöplogbil mer eller mindre än ett tåglok?;Snöplogbil;Tåglok;18000;90000;kilo;Hur många kilo skiljer det?
+Är en segelbåt längre eller kortare än en roddbåt?;Segelbåt;Roddbåt;12;4;meter;Hur många meter skiljer det?
+Är en zeppelinare längre eller kortare än ett godståg?;Zeppelinare;Godståg;240;700;meter;Hur många meter skiljer det?
+Är en gondol längre eller kortare än en pråm?;Gondol;Pråm;11;60;meter;Hur många meter skiljer det?
+Har en hästvagn högre eller lägre toppfart än en sopbil?;Hästvagn;Sopbil;20;80;km/h;Hur många km/h skiljer det?
+Väger en polisbil mer eller mindre än en hästkärra?;Polisbil;Hästkärra;1900;350;kilo;Hur många kilo skiljer det?
+Väger en skolbuss mer eller mindre än en polisbil?;Skolbuss;Polisbil;9000;1900;kilo;Hur många kilo skiljer det?
+Har en veteranbil högre eller lägre toppfart än ett höghastighetståg?;Veteranbil;Höghastighetståg;80;300;km/h;Hur många km/h skiljer det?
+Har en mountainbike högre eller lägre toppfart än en vespa?;Mountainbike;Vespa;30;90;km/h;Hur många km/h skiljer det?
+Väger en stadsjeep mer eller mindre än en hästkärra?;Stadsjeep;Hästkärra;2000;350;kilo;Hur många kilo skiljer det?
+Har en postbil högre eller lägre toppfart än en tuk-tuk?;Postbil;Tuk-tuk;130;50;km/h;Hur många km/h skiljer det?
+Väger en bärgningsbil mer eller mindre än en skåpbil?;Bärgningsbil;Skåpbil;12000;2200;kilo;Hur många kilo skiljer det?
+Väger en trehjuling mer eller mindre än en lådcykel?;Trehjuling;Lådcykel;12;40;kilo;Hur många kilo skiljer det?
+Är en minibuss längre eller kortare än en jolle?;Minibuss;Jolle;5,5;4;meter;Hur många meter skiljer det?
+Väger en glassbil mer eller mindre än en mjölkbil?;Glassbil;Mjölkbil;2500;1900;kilo;Hur många kilo skiljer det?
+Väger en gaffeltruck mer eller mindre än en skåpbil?;Gaffeltruck;Skåpbil;3500;2200;kilo;Hur många kilo skiljer det?
