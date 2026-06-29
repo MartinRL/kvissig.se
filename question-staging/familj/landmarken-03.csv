@@ -1,0 +1,27 @@
+﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Är Shanghai Tower högre eller lägre än Taipei 101?;Shanghai Tower;Taipei 101;632;508;meter;Hur många meter skiljer det?
+Är Petronas Towers högre eller lägre än Willis Tower?;Petronas Towers;Willis Tower;452;442;meter;Hur många meter skiljer det?
+Är Triumfbågen i Paris högre eller lägre än Lutande tornet i Pisa?;Triumfbågen i Paris;Lutande tornet i Pisa;50;56;meter;Hur många meter skiljer det?
+Är London Eye högre eller lägre än Sagrada Familia?;London Eye;Sagrada Familia;135;172;meter;Hur många meter skiljer det?
+Är Petronas Towers högre eller lägre än Gateway Arch?;Petronas Towers;Gateway Arch;452;192;meter;Hur många meter skiljer det?
+Är Christusstatyn i Rio högre eller lägre än Colosseum?;Christusstatyn i Rio;Colosseum;38;48;meter;Hur många meter skiljer det?
+Är Notre-Dame högre eller lägre än London Eye?;Notre-Dame;London Eye;96;135;meter;Hur många meter skiljer det?
+Är Big Ben högre eller lägre än Triumfbågen i Paris?;Big Ben;Triumfbågen i Paris;96;50;meter;Hur många meter skiljer det?
+Är Atomium högre eller lägre än Gateway Arch?;Atomium;Gateway Arch;102;192;meter;Hur många meter skiljer det?
+Är Chrysler Building högre eller lägre än Sagrada Familia?;Chrysler Building;Sagrada Familia;319;172;meter;Hur många meter skiljer det?
+Är Colosseum högre eller lägre än Chrysler Building?;Colosseum;Chrysler Building;48;319;meter;Hur många meter skiljer det?
+Är Pariserhjulet Wiener Riesenrad i Wien högre eller lägre än Washington Monument?;Wiener Riesenrad;Washington Monument;65;169;meter;Hur många meter skiljer det?
+Är Space Needle högre eller lägre än Pariserhjulet Wiener Riesenrad i Wien?;Space Needle;Wiener Riesenrad;184;65;meter;Hur många meter skiljer det?
+Är Washington Monument högre eller lägre än Willis Tower?;Washington Monument;Willis Tower;169;442;meter;Hur många meter skiljer det?
+Är Taipei 101 högre eller lägre än Atomium?;Taipei 101;Atomium;508;102;meter;Hur många meter skiljer det?
+Är London Eye högre eller lägre än Petronas Towers?;London Eye;Petronas Towers;135;452;meter;Hur många meter skiljer det?
+Är Christusstatyn i Rio högre eller lägre än CN-tornet?;Christusstatyn i Rio;CN-tornet;38;553;meter;Hur många meter skiljer det?
+Är Shanghai Tower högre eller lägre än Pariserhjulet Wiener Riesenrad i Wien?;Shanghai Tower;Wiener Riesenrad;632;65;meter;Hur många meter skiljer det?
+Är Big Ben högre eller lägre än Willis Tower?;Big Ben;Willis Tower;96;442;meter;Hur många meter skiljer det?
+Är Hagia Sofia äldre eller yngre än Pantheon i Rom?;Hagia Sofia;Pantheon i Rom;1489;1900;år;Hur många år skiljer det?
+Är Alhambra äldre eller yngre än Förbjudna staden i Peking?;Alhambra;Förbjudna staden;700;605;år;Hur många år skiljer det?
+Är Förbjudna staden i Peking äldre eller yngre än Himeji slott?;Förbjudna staden;Himeji slott;605;415;år;Hur många år skiljer det?
+Är Sacré-Cœur i Paris äldre eller yngre än Vasilijkatedralen i Moskva?;Sacré-Cœur;Vasilijkatedralen;112;465;år;Hur många år skiljer det?
+Är Pantheon i Rom äldre eller yngre än Sacré-Cœur i Paris?;Pantheon i Rom;Sacré-Cœur;1900;112;år;Hur många år skiljer det?
+Är Alhambra äldre eller yngre än Sacré-Cœur i Paris?;Alhambra;Sacré-Cœur;700;112;år;Hur många år skiljer det?
+Är Storebæltsbron längre eller kortare än Akashi Kaikyō-bron?;Storebæltsbron;Akashi Kaikyō-bron;6790;3911;meter;Hur många meter skiljer det?
