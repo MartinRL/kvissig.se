@@ -1,0 +1,24 @@
+﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Blåser det mer eller mindre vid frisk vind än vid hård vind?;Frisk vind;Hård vind;35;55;km/h;Hur många km/h skiljer det?
+Är det varmare eller kallare en frostig höstmorgon än en mild höstdag?;Frostig höstmorgon;Mild höstdag;3;12;°C;Hur många grader skiljer det?
+Är en vanlig istapp längre eller kortare än en riktigt stor istapp på ett hustak?;Vanlig istapp;Riktigt stor istapp;25;100;centimeter;Hur många centimeter skiljer det?
+Blåser det mer eller mindre i en frisk vind än i en kraftig storm?;Frisk vind;Kraftig storm;40;110;km/h;Hur många km/h skiljer det?
+Faller det mer eller mindre regn i ett kraftigt skyfall på en timme än vid ett måttligt regn?;Kraftigt skyfall;Måttligt regn;40;18;millimeter;Hur många millimeter skiljer det?
+Är ett vanligt snödjup på vintern större eller mindre än det djupaste snödjup som uppmätts?;Vanligt snödjup på vintern;Djupaste uppmätta snödjupet;40;1146;centimeter;Hur många centimeter skiljer det?
+Ligger ett tunt slöjmoln högre eller lägre upp i luften än ett vanligt regnmoln?;Slöjmoln;Vanligt regnmoln;9000;2000;meter;Hur många meter skiljer det?
+Är ett vanligt hagelkorn tyngre eller lättare än det tyngsta hagelkorn som vägts?;Vanligt hagelkorn;Tyngsta uppmätta hagelkornet;1;1000;gram;Hur många gram skiljer det?
+Är det varmare eller kallare en het sommardag än en sval kväll?;Het sommardag;Sval kväll;30;14;°C;Hur många grader skiljer det?
+Är det varmare eller kallare på den varmaste plats som uppmätts på jorden än en het bastu?;Varmaste uppmätta platsen;Het bastu;57;90;°C;Hur många grader skiljer det?
+Lyser solen fler eller färre timmar en kort vinterdag än en lång sommardag?;Kort vinterdag;Lång sommardag;6;18;timmar;Hur många timmar skiljer det?
+Är det varmare eller kallare i ett varmt sommarregn än i ett kallt höstregn?;Varmt sommarregn;Kallt höstregn;20;9;°C;Hur många grader skiljer det?
+Är det varmare eller kallare på solens yta än inuti en blixt?;Solens yta;Blixt;5500;30000;°C;Hur många grader skiljer det?
+Blåser det mer eller mindre i en kraftig tromb än i en frisk kuling?;Kraftig tromb;Frisk kuling;180;55;km/h;Hur många km/h skiljer det?
+Når ett lågt stackmoln högre eller lägre upp i luften än ett högt åskmoln?;Lågt stackmoln;Högt åskmoln;4000;12000;meter;Hur många meter skiljer det?
+Faller det mer eller mindre snö i en kraftig snöstorm på ett dygn än vid ett vanligt snöfall?;Kraftig snöstorm;Vanligt snöfall;50;18;centimeter;Hur många centimeter skiljer det?
+Är det varmare eller kallare en kylig regnig dag än en varm soldag?;Kylig regnig dag;Varm soldag;9;26;°C;Hur många grader skiljer det?
+Pågår den längsta regnperiod som uppmätts fler eller färre dagar i sträck än en vanlig regnig vecka?;Längsta uppmätta regnperioden;Vanlig regnig vecka;331;5;dagar;Hur många dagar skiljer det?
+Ser man längre eller kortare en klar dag än i tjock dimma?;Klar dag;Tjock dimma;20000;50;meter;Hur många meter skiljer det?
+Slår blixten ner fler eller färre gånger på jorden på en dag än på en hel timme?;På en dag;På en timme;8000000;333000;antal;Hur många blixtnedslag skiljer det?
+Är det varmare eller kallare på en het ökendag än under en mild svensk sommardag?;Het ökendag;Mild svensk sommardag;48;22;°C;Hur många grader skiljer det?
+Blåser det mer eller mindre i en kraftig storm än i den starkaste vindby som uppmätts på jorden?;Kraftig storm;Starkaste uppmätta vindbyn;110;408;km/h;Hur många km/h skiljer det?
+Är en vanlig snöflinga bredare eller smalare än den största snöflinga som uppmätts?;Vanlig snöflinga;Största uppmätta snöflingan;1;38;centimeter;Hur många centimeter skiljer det?
