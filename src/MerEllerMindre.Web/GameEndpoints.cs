@@ -29,7 +29,13 @@ public static class GameEndpoints
         {
             var packs = catalog.Packs
                 .Select(p => new PackVm(p.PackId, p.Name, p.QuestionCount, NewPacks.Contains(p.PackId)))
-                .OrderBy(p => p.PackId == "alla-aldrar" ? 0 : p.IsNew ? 1 : 2)
+                .OrderBy(p => p.PackId switch
+                {
+                    "familj" => 0,
+                    "alla-aldrar" => 1,
+                    "mer-eller-mindre" => 2,
+                    _ => p.IsNew ? 3 : 4,
+                })
                 .ToList();
             return new RazorComponentResult<QuizCatalog>(new { Model = new CatalogVm(packs) });
         });

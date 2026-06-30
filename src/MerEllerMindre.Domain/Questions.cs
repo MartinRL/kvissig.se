@@ -123,7 +123,7 @@ public static class QuestionPackCsvParser
     {
         ["alla-aldrar"] = "Mer eller Mindre",
         ["familj"] = "Mer eller Mindre – Familj",
-        ["mer-eller-mindre"] = "Mer eller Mindre – svår",
+        ["mer-eller-mindre"] = "Mer eller Mindre – Svår",
         ["loggor-mini-1"] = "Mer eller Mindre Mini - Loggor",
         ["hundraser-mini"] = "Mer eller Mindre Mini – Hundraser",
         ["elbil-mini"] = "Mer eller Mindre Mini – Elbilar",
