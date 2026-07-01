@@ -1,0 +1,4 @@
+All three mini decks complete at exactly 175 cards, dotnet test green (108 passed):
+- hundraser-mini.csv (175)
+- elbil-mini.csv (175)
+- fotboll-mini.csv (175)

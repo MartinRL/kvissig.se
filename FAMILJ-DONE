@@ -1,0 +1,11 @@
+FAMILJ-DONE
+
+Familj PROD-deck klar: src/MerEllerMindre.Domain/data/packs/familj.csv = exakt 1085 rena kort.
+
+- CHECK PASS (--min 1085 --targets 5,25,40,30 --cap 8)
+- Band: 0-20 5,5% / 21-60 27,7% / 61-85 37,8% / 86-100 28,9% (alla inom ±5)
+- Riktning: Mer 51,0% / Mindre 49,0%
+- Item-cap: non-landmärken ≤4; kända landmärken undantagna (höjd-/ålderankare) via pack.cs --cap
+- 0 dubbletter, 0 same-entity-smell, 0 "gratis"-ord
+- DisplayNameOverrides["familj"] = "Mer eller Mindre – Familj" (Questions.cs)
+- dotnet test grönt (110 tester, inkl. EveryFullDeckIsExactly1085Cards)
