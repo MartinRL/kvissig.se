@@ -2,6 +2,7 @@
 Har en Polestar 2 Long Range längre eller kortare räckvidd än en Tesla Model 3 Long Range?;Polestar 2 Long Range Single Motor;Tesla Model 3 Long Range;655;702;km;Hur många km skiljer WLTP-räckvidden?
 Har en Hyundai Ioniq 6 längre eller kortare räckvidd än en Tesla Model S?;Hyundai Ioniq 6 Long Range;Tesla Model S;614;634;km;Hur många km skiljer WLTP-räckvidden?
 Har en Kia EV6 längre eller kortare räckvidd än en Hyundai Ioniq 5?;Kia EV6 Long Range;Hyundai Ioniq 5 Long Range;528;507;km;Hur många km skiljer WLTP-räckvidden?
+Har en Tesla Model S Plaid fler eller färre hästkrafter än en Porsche Taycan Turbo GT?;Tesla Model S Plaid;Porsche Taycan Turbo GT;1020;1108;hk;Hur många hästkrafter skiljer det?
 Tar en BMW i4 M50 längre eller kortare tid på 0–100 km/h än en Tesla Model 3 Performance?;BMW i4 M50;Tesla Model 3 Performance;3,9;3,1;sekunder;Hur många sekunder skiljer accelerationen?
 Tar en Polestar 2 Dual Motor längre eller kortare tid på 0–100 km/h än en Nissan Leaf?;Polestar 2 Dual Motor;Nissan Leaf;4,5;7,9;sekunder;Hur många sekunder skiljer accelerationen?
 Kostade en Kia EV6 mer eller mindre än en MG4? (2024);Kia EV6;MG4;549900;329900;kr;Hur många kronor skiljer priset?
@@ -10,31 +11,47 @@ Kostade en BMW i7 mer eller mindre än en BMW i4 eDrive40? (2024);BMW i7 xDrive6
 Har en Audi Q4 e-tron större eller mindre användbar batterikapacitet än en Mercedes EQS?;Audi Q4 e-tron;Mercedes-Benz EQS 450+;77;118;kWh;Hur många kWh skiljer batterikapaciteten?
 Har en Volkswagen ID.4 större eller mindre användbar batterikapacitet än en Renault 5 E-Tech?;Volkswagen ID.4 Pro;Renault 5 E-Tech;77;52;kWh;Hur många kWh skiljer batterikapaciteten?
 Har en Cupra Born större eller mindre användbar batterikapacitet än en Tesla Model 3 Long Range?;Cupra Born;Tesla Model 3 Long Range;58;75;kWh;Hur många kWh skiljer batterikapaciteten?
+Har en BMW i4 M50 fler eller färre hästkrafter än en Volkswagen ID.4 GTX?;BMW i4 M50;Volkswagen ID.4 GTX;544;340;hk;Hur många hästkrafter skiljer det?
 Har en Volkswagen ID.4 Pro längre eller kortare räckvidd än en Mercedes EQS?;Volkswagen ID.4 Pro;Mercedes-Benz EQS 450+;529;782;km;Hur många km skiljer WLTP-räckvidden?
 Har en BMW i4 eDrive40 längre eller kortare räckvidd än en Cupra Born?;BMW i4 eDrive40;Cupra Born;590;425;km;Hur många km skiljer WLTP-räckvidden?
 Tar en Renault 5 E-Tech längre eller kortare tid på 0–100 km/h än en Tesla Model 3 Performance?;Renault 5 E-Tech;Tesla Model 3 Performance;7,9;3,1;sekunder;Hur många sekunder skiljer accelerationen?
 Tar en Tesla Model S Plaid längre eller kortare tid på 0–100 km/h än en MG4?;Tesla Model S Plaid;MG4 SE;2,1;7,7;sekunder;Hur många sekunder skiljer accelerationen?
+Har en Nissan Leaf fler eller färre hästkrafter än en Audi RS e-tron GT?;Nissan Leaf;Audi RS e-tron GT;218;646;hk;Hur många hästkrafter skiljer det?
 Har en Mercedes EQS större eller mindre användbar batterikapacitet än en Nissan Leaf?;Mercedes-Benz EQS 450+;Nissan Leaf;118;39;kWh;Hur många kWh skiljer batterikapaciteten?
 Kostade en Volvo EX30 mer eller mindre än en Porsche Taycan Turbo GT? (2024);Volvo EX30;Porsche Taycan Turbo GT;429000;2770000;kr;Hur många kronor skiljer priset?
 Har en Mercedes EQS längre eller kortare räckvidd än en Mazda MX-30?;Mercedes-Benz EQS 450+;Mazda MX-30;782;200;km;Hur många km skiljer WLTP-räckvidden?
 Har en Mazda MX-30 längre eller kortare räckvidd än en Hyundai Ioniq 6?;Mazda MX-30;Hyundai Ioniq 6 Long Range;200;614;km;Hur många km skiljer WLTP-räckvidden?
+Har en Tesla Model S Plaid fler eller färre hästkrafter än en Nissan Leaf?;Tesla Model S Plaid;Nissan Leaf;1020;218;hk;Hur många hästkrafter skiljer det?
 Kostade en MG4 mer eller mindre än en BMW i7? (2024);MG4;BMW i7 xDrive60;329900;1725000;kr;Hur många kronor skiljer priset?
+Har en Porsche Taycan Turbo GT fler eller färre hästkrafter än en MG4?;Porsche Taycan Turbo GT;MG4 SE;1108;170;hk;Hur många hästkrafter skiljer det?
 Kostade en Renault 5 E-Tech mer eller mindre än en Porsche Taycan Turbo GT? (2024);Renault 5 E-Tech;Porsche Taycan Turbo GT;349900;2770000;kr;Hur många kronor skiljer priset?
+Har en Tesla Model S Plaid fler eller färre hästkrafter än en Renault 5 E-Tech?;Tesla Model S Plaid;Renault 5 E-Tech;1020;150;hk;Hur många hästkrafter skiljer det?
 Har en Kia Niro EV längre eller kortare räckvidd än en Hyundai Kona Electric?;Kia Niro EV;Hyundai Kona Electric Long Range;460;514;km;Hur många km skiljer WLTP-räckvidden?
+Har en Audi Q8 e-tron fler eller färre hästkrafter än en Jaguar I-Pace?;Audi Q8 e-tron 55;Jaguar I-Pace;408;400;hk;Hur många hästkrafter skiljer effekten?
 Tar en Ford Mustang Mach-E AWD längre eller kortare tid på 0–100 km/h än en Subaru Solterra?;Ford Mustang Mach-E AWD;Subaru Solterra;5,1;6,9;sekunder;Hur många sekunder skiljer accelerationen?
 Har en Peugeot e-2008 längre eller kortare räckvidd än en MG ZS EV?;Peugeot e-2008;MG ZS EV;406;320;km;Hur många km skiljer WLTP-räckvidden?
+Har en Skoda Enyaq fler eller färre hästkrafter än en Kia EV9 GT-Line?;Skoda Enyaq 85;Kia EV9 GT-Line;286;384;hk;Hur många hästkrafter skiljer effekten?
 Kostade en Volvo EX40 mer eller mindre än en Hyundai Kona Electric? (2024);Volvo EX40;Hyundai Kona Electric;549900;474900;kr;Hur många kronor skiljer priset?
 Har en Toyota bZ4X längre eller kortare räckvidd än en Audi Q6 e-tron?;Toyota bZ4X;Audi Q6 e-tron quattro;436;625;km;Hur många km skiljer WLTP-räckvidden?
 Tar en Tesla Model Y Long Range längre eller kortare tid på 0–100 km/h än en Ford Mustang Mach-E GT?;Tesla Model Y Long Range;Ford Mustang Mach-E GT;4,8;3,7;sekunder;Hur många sekunder skiljer accelerationen?
 Kostade en Nissan Ariya mer eller mindre än en Genesis GV60? (2024);Nissan Ariya;Genesis GV60;525200;631800;kr;Hur många kronor skiljer priset?
 Har en Kia EV9 GT-Line större eller mindre användbar batterikapacitet än en BMW iX3?;Kia EV9 GT-Line;BMW iX3;96;74;kWh;Hur många kWh skiljer batterikapaciteten?
 Har en Polestar 4 längre eller kortare räckvidd än en Renault Megane E-Tech?;Polestar 4 Long Range;Renault Megane E-Tech;610;450;km;Hur många km skiljer WLTP-räckvidden?
+Har en Audi Q6 e-tron fler eller färre hästkrafter än en Volvo EX40?;Audi Q6 e-tron quattro;Volvo EX40;387;252;hk;Hur många hästkrafter skiljer effekten?
+Har en Mercedes EQE 350 fler eller färre hästkrafter än en BMW iX xDrive50?;Mercedes-Benz EQE 350;BMW iX xDrive50;292;523;hk;Hur många hästkrafter skiljer effekten?
 Tar en Toyota bZ4X längre eller kortare tid på 0–100 km/h än en Genesis GV60 Performance?;Toyota bZ4X;Genesis GV60 Performance;6,9;4,0;sekunder;Hur många sekunder skiljer accelerationen?
 Kostade en Volvo EX90 mer eller mindre än en Mercedes EQE SUV? (2024);Volvo EX90;Mercedes-Benz EQE SUV;997000;899000;kr;Hur många kronor skiljer priset?
 Har en Mercedes EQE 350 längre eller kortare räckvidd än en Peugeot e-2008?;Mercedes-Benz EQE 350;Peugeot e-2008;626;406;km;Hur många km skiljer WLTP-räckvidden?
+Har en MG ZS EV fler eller färre hästkrafter än en BMW iX xDrive50?;MG ZS EV;BMW iX xDrive50;174;523;hk;Hur många hästkrafter skiljer effekten?
 Kostade en Smart #1 mer eller mindre än en Volvo EX90? (2024);Smart #1;Volvo EX90;419900;997000;kr;Hur många kronor skiljer priset?
 Har en Fiat 500e längre eller kortare räckvidd än en Lucid Air Grand Touring?;Fiat 500e;Lucid Air Grand Touring;320;823;km;Hur många km skiljer WLTP-räckvidden?
+Har en Citroën ë-C3 fler eller färre hästkrafter än en Lotus Eletre R?;Citroën ë-C3;Lotus Eletre R;113;905;hk;Hur många hästkrafter skiljer effekten?
+Har en Rimac Nevera fler eller färre hästkrafter än en Subaru Solterra?;Rimac Nevera;Subaru Solterra;1914;215;hk;Hur många hästkrafter skiljer effekten?
+Har en Lotus Eletre R fler eller färre hästkrafter än en Fiat 500e?;Lotus Eletre R;Fiat 500e;905;118;hk;Hur många hästkrafter skiljer effekten?
+Har en Pininfarina Battista fler eller färre hästkrafter än en Polestar 4?;Pininfarina Battista;Polestar 4 Single Motor;1900;272;hk;Hur många hästkrafter skiljer effekten?
 Kostade en Citroën ë-C3 mer eller mindre än en Rolls-Royce Spectre? (2024);Citroën ë-C3;Rolls-Royce Spectre;299990;6400000;kr;Hur många kronor skiljer priset?
+Har en Renault Megane E-Tech fler eller färre hästkrafter än en Rimac Nevera?;Renault Megane E-Tech;Rimac Nevera;220;1914;hk;Hur många hästkrafter skiljer effekten?
+Har en Smart #1 fler eller färre hästkrafter än en Pininfarina Battista?;Smart #1;Pininfarina Battista;272;1900;hk;Hur många hästkrafter skiljer effekten?
 Har en Skoda Enyaq längre eller kortare räckvidd än en Volvo EX30 Single Motor?;Skoda Enyaq 85;Volvo EX30 Single Motor;563;344;km;Hur många km skiljer WLTP-räckvidden?
 Har en BYD Atto 3 längre eller kortare räckvidd än en Polestar 3 Long Range?;BYD Atto 3;Polestar 3 Long Range Single Motor;420;650;km;Hur många km skiljer WLTP-räckvidden?
 Har en Opel Mokka Electric längre eller kortare räckvidd än en Jeep Avenger?;Opel Mokka Electric;Jeep Avenger;338;400;km;Hur många km skiljer WLTP-räckvidden?
@@ -46,17 +63,33 @@ Tar en Kia EV6 GT längre eller kortare tid på 0–100 km/h än en Volvo EX30 T
 Tar en BYD Seal Performance längre eller kortare tid på 0–100 km/h än en Subaru Solterra?;BYD Seal Performance;Subaru Solterra;3,8;6,9;sekunder;Hur många sekunder skiljer accelerationen?
 Tar en Opel Mokka Electric längre eller kortare tid på 0–100 km/h än en Citroën ë-C3?;Opel Mokka Electric;Citroën ë-C3;9,0;11,0;sekunder;Hur många sekunder skiljer accelerationen?
 Tar en XPeng G9 Performance längre eller kortare tid på 0–100 km/h än en Zeekr 001?;XPeng G9 AWD Performance;Zeekr 001 Long Range;3,9;7,2;sekunder;Hur många sekunder skiljer accelerationen?
+Har en Toyota bZ4X fler eller färre hästkrafter än en Subaru Solterra?;Toyota bZ4X FWD;Subaru Solterra;204;218;hk;Hur många hästkrafter skiljer det?
+Har en Honda e:Ny1 fler eller färre hästkrafter än en Opel Mokka Electric?;Honda e:Ny1;Opel Mokka Electric;204;156;hk;Hur många hästkrafter skiljer det?
+Har en Opel Mokka Electric fler eller färre hästkrafter än en Kia EV6 GT?;Opel Mokka Electric;Kia EV6 GT;156;585;hk;Hur många hästkrafter skiljer det?
+Har en Kia EV6 GT fler eller färre hästkrafter än en Jeep Avenger?;Kia EV6 GT;Jeep Avenger;585;156;hk;Hur många hästkrafter skiljer det?
+Har en BYD Seal Performance fler eller färre hästkrafter än en XPeng G9 Performance?;BYD Seal Performance;XPeng G9 AWD Performance;530;551;hk;Hur många hästkrafter skiljer det?
+Har en Citroën ë-C3 fler eller färre hästkrafter än en XPeng G9 Performance?;Citroën ë-C3;XPeng G9 AWD Performance;113;551;hk;Hur många hästkrafter skiljer det?
+Har en Dacia Spring fler eller färre hästkrafter än en Lotus Eletre R?;Dacia Spring;Lotus Eletre R;65;905;hk;Hur många hästkrafter skiljer det?
 Har en Volvo EX30 Extended Range större eller mindre användbar batterikapacitet än en BYD Atto 3?;Volvo EX30 Extended Range;BYD Atto 3;64;60,5;kWh;Hur många kWh skiljer batterikapaciteten?
 Har en Smart #1 större eller mindre användbar batterikapacitet än en BMW iX?;Smart #1;BMW iX xDrive50;62;105,2;kWh;Hur många kWh skiljer batterikapaciteten?
 Har en Volkswagen ID.7 Pro längre eller kortare räckvidd än en Cupra Tavascan?;Volkswagen ID.7 Pro;Cupra Tavascan;621;568;km;Hur många km skiljer WLTP-räckvidden?
+Har en Polestar 3 Long Range Dual Motor fler eller färre hästkrafter än en Volvo EX90 Twin Motor?;Polestar 3 Long Range Dual Motor;Volvo EX90 Twin Motor;489;408;hk;Hur många hästkrafter skiljer det?
+Har en Zeekr X fler eller färre hästkrafter än en Skoda Elroq 85?;Zeekr X;Skoda Elroq 85;428;286;hk;Hur många hästkrafter skiljer det?
 Har en Polestar 3 Long Range Dual Motor längre eller kortare räckvidd än en MG ZS EV?;Polestar 3 Long Range Dual Motor;MG ZS EV;631;440;km;Hur många km skiljer WLTP-räckvidden?
+Har en Kia EV9 GT-Line fler eller färre hästkrafter än en Skoda Elroq 85?;Kia EV9 GT-Line;Skoda Elroq 85;385;286;hk;Hur många hästkrafter skiljer det?
 Har en Nio ET7 större eller mindre användbar batterikapacitet än en MG ZS EV?;Nio ET7;MG ZS EV;90;49;kWh;Hur många kWh skiljer batterikapaciteten?
 Har en BMW iX3 50 längre eller kortare räckvidd än en Nissan Ariya?;BMW iX3 50 xDrive;Nissan Ariya;678;533;km;Hur många km skiljer WLTP-räckvidden?
 Tar en Cupra Tavascan VZ längre eller kortare tid på 0–100 km/h än en Zeekr X?;Cupra Tavascan VZ;Zeekr X;5,5;3,8;sekunder;Hur många sekunder skiljer accelerationen?
 Har en Volkswagen ID.7 Pro S längre eller kortare räckvidd än en Nissan Ariya?;Volkswagen ID.7 Pro S;Nissan Ariya;709;533;km;Hur många km skiljer WLTP-räckvidden?
 Har en Kia EV9 GT-Line större eller mindre användbar batterikapacitet än en Cupra Tavascan?;Kia EV9 GT-Line;Cupra Tavascan;98;77;kWh;Hur många kWh skiljer batterikapaciteten?
+Har en Maserati GranTurismo Folgore fler eller färre hästkrafter än en Skoda Elroq 85?;Maserati GranTurismo Folgore;Skoda Elroq 85;761;286;hk;Hur många hästkrafter skiljer det?
+Har en Honda e:Ny1 fler eller färre hästkrafter än en Maserati GranTurismo Folgore?;Honda e:Ny1;Maserati GranTurismo Folgore;204;761;hk;Hur många hästkrafter skiljer det?
 Har en Mazda MX-30 längre eller kortare räckvidd än en Volkswagen ID.7 Pro?;Mazda MX-30;Volkswagen ID.7 Pro;200;621;km;Hur många km skiljer WLTP-räckvidden?
 Kostade en Audi RS e-tron GT performance mer eller mindre än en Cupra Tavascan? (2024);Audi RS e-tron GT performance;Cupra Tavascan;1860000;564900;kr;Hur många kronor skiljer priset?
+Har en Audi RS e-tron GT performance fler eller färre hästkrafter än en Honda e:Ny1?;Audi RS e-tron GT performance;Honda e:Ny1;925;204;hk;Hur många hästkrafter skiljer det?
+Har en Nio ET7 fler eller färre hästkrafter än en Dacia Spring?;Nio ET7;Dacia Spring;653;65;hk;Hur många hästkrafter skiljer det?
+Har en Dacia Spring fler eller färre hästkrafter än en Audi RS e-tron GT performance?;Dacia Spring;Audi RS e-tron GT performance;65;925;hk;Hur många hästkrafter skiljer det?
+Har en Maserati GranTurismo Folgore fler eller färre hästkrafter än en Dacia Spring?;Maserati GranTurismo Folgore;Dacia Spring;761;65;hk;Hur många hästkrafter skiljer det?
 Har en Lucid Air Touring längre eller kortare räckvidd än en Volkswagen ID.3?;Lucid Air Touring;Volkswagen ID.3 Pro;725;429;km;Hur många km skiljer WLTP-räckvidden?
 Har en Kia EV3 längre eller kortare räckvidd än en Mini Cooper SE?;Kia EV3 Long Range;Mini Cooper SE;605;234;km;Hur många km skiljer WLTP-räckvidden?
 Har en Mini Cooper SE längre eller kortare räckvidd än en BMW i5?;Mini Cooper SE;BMW i5 eDrive40;234;582;km;Hur många km skiljer WLTP-räckvidden?
@@ -66,111 +99,78 @@ Har en Volvo C40 längre eller kortare räckvidd än en Hyundai Ioniq 6?;Volvo C
 Har en Renault Scénic E-Tech längre eller kortare räckvidd än en Citroën ë-C4?;Renault Scénic E-Tech Long Range;Citroën ë-C4;625;357;km;Hur många km skiljer WLTP-räckvidden?
 Har en Ford Explorer EV längre eller kortare räckvidd än en Smart #3?;Ford Explorer EV Extended Range;Smart #3;602;455;km;Hur många km skiljer WLTP-räckvidden?
 Har en Lexus RZ 450e längre eller kortare räckvidd än en Volkswagen ID.7?;Lexus RZ 450e;Volkswagen ID.7 Pro;440;621;km;Hur många km skiljer WLTP-räckvidden?
+Har en Lucid Air Sapphire fler eller färre hästkrafter än en Citroën ë-C4?;Lucid Air Sapphire;Citroën ë-C4;1234;136;hk;Hur många hästkrafter skiljer det?
+Har en Peugeot e-208 fler eller färre hästkrafter än en Lucid Air Sapphire?;Peugeot e-208;Lucid Air Sapphire;156;1234;hk;Hur många hästkrafter skiljer det?
+Har en Mercedes EQA fler eller färre hästkrafter än en Cadillac Lyriq?;Mercedes-Benz EQA 250;Cadillac Lyriq AWD;190;515;hk;Hur många hästkrafter skiljer det?
+Har en BYD Han fler eller färre hästkrafter än en Volkswagen ID.4?;BYD Han;Volkswagen ID.4 Pro;517;204;hk;Hur många hästkrafter skiljer det?
+Har en XPeng G6 fler eller färre hästkrafter än en Lucid Air Grand Touring?;XPeng G6 Long Range;Lucid Air Grand Touring;296;819;hk;Hur många hästkrafter skiljer det?
+Har en Fisker Ocean fler eller färre hästkrafter än en BMW iX3?;Fisker Ocean Extreme;BMW iX3;564;286;hk;Hur många hästkrafter skiljer det?
+Har en BMW i4 eDrive40 fler eller färre hästkrafter än en BMW i5 M60?;BMW i4 eDrive40;BMW i5 M60;340;601;hk;Hur många hästkrafter skiljer det?
+Har en BYD Seal U fler eller färre hästkrafter än en Genesis GV70 Electrified?;BYD Seal U;Genesis GV70 Electrified;218;490;hk;Hur många hästkrafter skiljer det?
+Har en Smart #3 Brabus fler eller färre hästkrafter än en Mercedes EQB?;Smart #3 Brabus;Mercedes-Benz EQB 350;428;292;hk;Hur många hästkrafter skiljer det?
 Tar en Volkswagen ID.Buzz längre eller kortare tid på 0–100 km/h än en Tesla Model Y Performance?;Volkswagen ID.Buzz Pro;Tesla Model Y Performance;10,2;3,5;sekunder;Hur många sekunder skiljer accelerationen?
 Tar en Genesis GV70 Electrified längre eller kortare tid på 0–100 km/h än en Hyundai Ioniq 6?;Genesis GV70 Electrified;Hyundai Ioniq 6 Long Range;4,2;7,4;sekunder;Hur många sekunder skiljer accelerationen?
 Tar en Mercedes EQA längre eller kortare tid på 0–100 km/h än en BMW i5 M60?;Mercedes-Benz EQA 250;BMW i5 M60;8,6;3,8;sekunder;Hur många sekunder skiljer accelerationen?
 Tar en Volvo C40 längre eller kortare tid på 0–100 km/h än en Fisker Ocean?;Volvo C40;Fisker Ocean Extreme;7,4;3,9;sekunder;Hur många sekunder skiljer accelerationen?
 Har en Volkswagen ID.7 större eller mindre användbar batterikapacitet än en Peugeot e-208?;Volkswagen ID.7 Pro;Peugeot e-208;77;48,1;kWh;Hur många kWh skiljer batterikapaciteten?
 Har en BMW iX2 större eller mindre användbar batterikapacitet än en Lucid Air Grand Touring?;BMW iX2 xDrive30;Lucid Air Grand Touring;64,8;112;kWh;Hur många kWh skiljer batterikapaciteten?
+Har en Lucid Air Sapphire fler eller färre hästkrafter än en Hyundai Inster?;Lucid Air Sapphire;Hyundai Inster;1234;97;hk;Hur många hästkrafter skiljer det?
+Har en Citroën ë-C4 fler eller färre hästkrafter än en Lucid Air Sapphire?;Citroën ë-C4;Lucid Air Sapphire;136;1234;hk;Hur många hästkrafter skiljer det?
+Har en Audi RS e-tron GT performance fler eller färre hästkrafter än en Hyundai Inster?;Audi RS e-tron GT performance;Hyundai Inster;912;97;hk;Hur många hästkrafter skiljer det?
 Kostade en MG4 mer eller mindre än en Rolls-Royce Spectre? (2024);MG4;Rolls-Royce Spectre;330000;6400000;kr;Hur många kronor skiljer priset?
+Har en Genesis GV60 Performance fler eller färre hästkrafter än en Mini Cooper SE?;Genesis GV60 Performance;Mini Cooper SE;490;181;hk;Hur många hästkrafter skiljer det?
+Har en Kia Niro EV fler eller färre hästkrafter än en BMW i7 M70?;Kia Niro EV;BMW i7 M70;204;660;hk;Hur många hästkrafter skiljer det?
+Har en Ford Mustang Mach-E GT fler eller färre hästkrafter än en Peugeot e-208?;Ford Mustang Mach-E GT;Peugeot e-208;487;154;hk;Hur många hästkrafter skiljer det?
+Har en BYD Dolphin fler eller färre hästkrafter än en Hyundai Ioniq 5 N?;BYD Dolphin;Hyundai Ioniq 5 N;204;650;hk;Hur många hästkrafter skiljer det?
+Har en Kia EV9 GT fler eller färre hästkrafter än en MG4?;Kia EV9 GT;MG4;501;170;hk;Hur många hästkrafter skiljer det?
+Har en Hyundai Kona Electric fler eller färre hästkrafter än en Mercedes-AMG EQE 53?;Hyundai Kona Electric;Mercedes-AMG EQE 53;218;626;hk;Hur många hästkrafter skiljer det?
+Har en Mercedes-AMG EQS 53 fler eller färre hästkrafter än en Renault Mégane E-Tech?;Mercedes-AMG EQS 53;Renault Mégane E-Tech;658;220;hk;Hur många hästkrafter skiljer det?
+Har en Peugeot e-2008 fler eller färre hästkrafter än en Cadillac Lyriq?;Peugeot e-2008;Cadillac Lyriq AWD;156;515;hk;Hur många hästkrafter skiljer det?
+Har en BMW i5 M60 fler eller färre hästkrafter än en BYD Atto 3?;BMW i5 M60;BYD Atto 3;601;204;hk;Hur många hästkrafter skiljer det?
+Har en Kia EV3 fler eller färre hästkrafter än en Polestar 4?;Kia EV3;Polestar 4 Long Range Dual Motor;204;544;hk;Hur många hästkrafter skiljer det?
+Har en Volvo EX90 fler eller färre hästkrafter än en Volkswagen ID.3?;Volvo EX90;Volkswagen ID.3 Pro;517;204;hk;Hur många hästkrafter skiljer det?
+Har en Peugeot e-2008 fler eller färre hästkrafter än en Genesis GV70 Electrified?;Peugeot e-2008;Genesis GV70 Electrified;156;490;hk;Hur många hästkrafter skiljer det?
+Har en BMW iX M60 fler eller färre hästkrafter än en Kia EV3?;BMW iX M60;Kia EV3;619;204;hk;Hur många hästkrafter skiljer det?
+Har en BMW i4 M50 fler eller färre hästkrafter än en BYD Dolphin?;BMW i4 M50;BYD Dolphin;544;204;hk;Hur många hästkrafter skiljer det?
+Har en Kia Niro EV fler eller färre hästkrafter än en Volvo EX90?;Kia Niro EV;Volvo EX90;204;517;hk;Hur många hästkrafter skiljer det?
+Har en BMW i5 M60 fler eller färre hästkrafter än en Hyundai Kona Electric?;BMW i5 M60;Hyundai Kona Electric;601;218;hk;Hur många hästkrafter skiljer det?
+Har en Volkswagen ID.3 fler eller färre hästkrafter än en Hyundai Ioniq 5 N?;Volkswagen ID.3 Pro;Hyundai Ioniq 5 N;204;650;hk;Hur många hästkrafter skiljer det?
+Har en Mercedes-AMG EQS 53 fler eller färre hästkrafter än en BYD Atto 3?;Mercedes-AMG EQS 53;BYD Atto 3;658;204;hk;Hur många hästkrafter skiljer det?
+Har en Renault Mégane E-Tech fler eller färre hästkrafter än en BMW iX M60?;Renault Mégane E-Tech;BMW iX M60;220;619;hk;Hur många hästkrafter skiljer det?
 Har en Volvo C40 längre eller kortare räckvidd än en Polestar 4?;Volvo C40;Polestar 4 Long Range Dual Motor;434;590;km;Hur många km skiljer WLTP-räckvidden?
 Tar en Lexus RZ 450e längre eller kortare tid på 0–100 km/h än en Tesla Model 3 Performance?;Lexus RZ 450e;Tesla Model 3 Performance;5,3;3,1;sekunder;Hur många sekunder skiljer accelerationen?
 Har en BMW i4 M50 större eller mindre användbar batterikapacitet än en Volvo EX30?;BMW i4 M50;Volvo EX30;80,7;64;kWh;Hur många kWh skiljer batterikapaciteten?
 Har en Tesla Model 3 Long Range längre eller kortare räckvidd än en Smart #3?;Tesla Model 3 Long Range;Smart #3;629;455;km;Hur många km skiljer WLTP-räckvidden?
 Tar en Renault Scénic E-Tech längre eller kortare tid på 0–100 km/h än en Genesis GV70 Electrified?;Renault Scénic E-Tech;Genesis GV70 Electrified;7,9;4,4;sekunder;Hur många sekunder skiljer accelerationen?
 Har en Genesis GV60 Performance större eller mindre användbar batterikapacitet än en Cadillac Lyriq?;Genesis GV60 Performance;Cadillac Lyriq AWD;74;102;kWh;Hur många kWh skiljer batterikapaciteten?
+Har en Polestar 2 Long Range fler eller färre hästkrafter än en Tesla Model 3 Long Range?;Polestar 2 Long Range;Tesla Model 3 Long Range;299;283;hk;Hur många hästkrafter skiljer det?
+Har en BYD Seal U fler eller färre hästkrafter än en Renault Mégane E-Tech?;BYD Seal U;Renault Mégane E-Tech;218;220;hk;Hur många hästkrafter skiljer det?
 Har en Kia EV3 längre eller kortare räckvidd än en Polestar 4?;Kia EV3 Long Range;Polestar 4 Long Range Single Motor;605;610;km;Hur många km skiljer WLTP-räckvidden?
 Har en Hyundai Kona Electric längre eller kortare räckvidd än en BYD Han?;Hyundai Kona Electric Long Range;BYD Han;514;521;km;Hur många km skiljer WLTP-räckvidden?
 Har en Smart #3 längre eller kortare räckvidd än en Volvo C40?;Smart #3;Volvo C40;455;476;km;Hur många km skiljer WLTP-räckvidden?
 Har en Audi Q8 e-tron 55 längre eller kortare räckvidd än en Polestar 3?;Audi Q8 e-tron 55;Polestar 3 Long Range Dual Motor;582;560;km;Hur många km skiljer WLTP-räckvidden?
 Har en Volvo EX30 större eller mindre användbar batterikapacitet än en Hyundai Kona Electric?;Volvo EX30 Single Motor;Hyundai Kona Electric Long Range;64;65;kWh;Hur många kWh skiljer batterikapaciteten?
+Har en Genesis GV60 Performance fler eller färre hästkrafter än en Tesla Model 3 Performance?;Genesis GV60 Performance;Tesla Model 3 Performance;490;460;hk;Hur många hästkrafter skiljer det?
 Har en XPeng G6 längre eller kortare räckvidd än en BMW i4 eDrive40?;XPeng G6 Long Range;BMW i4 eDrive40;570;590;km;Hur många km skiljer WLTP-räckvidden?
+Har en Cupra Tavascan fler eller färre hästkrafter än en Hyundai Ioniq 5?;Cupra Tavascan;Hyundai Ioniq 5 Long Range;340;229;hk;Hur många hästkrafter skiljer det?
+Har en Hyundai Ioniq 5 fler eller färre hästkrafter än en Polestar 3?;Hyundai Ioniq 5 Long Range;Polestar 3 Long Range Dual Motor;229;489;hk;Hur många hästkrafter skiljer det?
+Har en Cadillac Lyriq fler eller färre hästkrafter än en Audi Q4 e-tron?;Cadillac Lyriq AWD;Audi Q4 e-tron;515;286;hk;Hur många hästkrafter skiljer det?
 Har en Lexus RZ 450e längre eller kortare räckvidd än en XPeng G6?;Lexus RZ 450e;XPeng G6 Long Range;440;570;km;Hur många km skiljer WLTP-räckvidden?
+Har en Ford Mustang Mach-E AWD fler eller färre hästkrafter än en Smart #3?;Ford Mustang Mach-E AWD;Smart #3;351;272;hk;Hur många hästkrafter skiljer det?
+Har en Mercedes-Benz EQB 350 fler eller färre hästkrafter än en Audi Q8 e-tron 55?;Mercedes-Benz EQB 350;Audi Q8 e-tron 55;292;408;hk;Hur många hästkrafter skiljer det?
 Har en Renault Scénic E-Tech längre eller kortare räckvidd än en Mercedes-Benz EQB 350?;Renault Scénic E-Tech;Mercedes-Benz EQB 350;625;423;km;Hur många km skiljer WLTP-räckvidden?
 Har en Volkswagen ID.Buzz Pro längre eller kortare räckvidd än en Ford Explorer EV?;Volkswagen ID.Buzz Pro;Ford Explorer EV Extended Range;423;602;km;Hur många km skiljer WLTP-räckvidden?
+Har en BYD Han fler eller färre hästkrafter än en Tesla Model Y?;BYD Han;Tesla Model Y;517;295;hk;Hur många hästkrafter skiljer det?
+Har en Genesis GV60 fler eller färre hästkrafter än en XPeng G9?;Genesis GV60;XPeng G9 RWD Long Range;234;313;hk;Hur många hästkrafter skiljer det?
 Har en Renault Scénic E-Tech längre eller kortare räckvidd än en Volvo EX30?;Renault Scénic E-Tech;Volvo EX30 Single Motor;625;480;km;Hur många km skiljer WLTP-räckvidden?
+Har en BMW iX2 xDrive30 fler eller färre hästkrafter än en Mercedes-Benz EQA 250?;BMW iX2 xDrive30;Mercedes-Benz EQA 250;313;190;hk;Hur många hästkrafter skiljer det?
 Har en Jaguar I-Pace längre eller kortare räckvidd än en Polestar 4?;Jaguar I-Pace;Polestar 4 Long Range Single Motor;470;610;km;Hur många km skiljer WLTP-räckvidden?
+Har en Renault Mégane E-Tech fler eller färre hästkrafter än en Nio ET7?;Renault Mégane E-Tech;Nio ET7;220;653;hk;Hur många hästkrafter skiljer det?
+Har en BMW i7 fler eller färre hästkrafter än en Volkswagen ID.3?;BMW i7 xDrive60;Volkswagen ID.3 Pro;544;204;hk;Hur många hästkrafter skiljer det?
+Har en Mercedes-Benz EQA 250 fler eller färre hästkrafter än en Fisker Ocean Extreme?;Mercedes-Benz EQA 250;Fisker Ocean Extreme;190;564;hk;Hur många hästkrafter skiljer det?
+Har en BMW i7 fler eller färre hästkrafter än en Hyundai Kona Electric?;BMW i7 xDrive60;Hyundai Kona Electric;544;156;hk;Hur många hästkrafter skiljer det?
+Har en Nio ET7 fler eller färre hästkrafter än en BYD Seal U?;Nio ET7;BYD Seal U;653;218;hk;Hur många hästkrafter skiljer det?
 Kostar en Mercedes-Maybach EQS SUV 680 mer eller mindre än en Kia EV3 Long Range? (2024);Mercedes-Maybach EQS SUV 680;Kia EV3 Long Range;2790000;429000;kr;Hur många kronor skiljer priset?
+Har en Fisker Ocean Extreme fler eller färre hästkrafter än en Kia EV3?;Fisker Ocean Extreme;Kia EV3 Long Range;564;204;hk;Hur många hästkrafter skiljer det?
 Har en Mercedes-Benz EQB 350 längre eller kortare räckvidd än en Polestar 4?;Mercedes-Benz EQB 350;Polestar 4 Long Range Single Motor;423;610;km;Hur många km skiljer WLTP-räckvidden?
 Har en Ford Explorer EV längre eller kortare räckvidd än en Volkswagen ID.Buzz Pro?;Ford Explorer EV Extended Range;Volkswagen ID.Buzz Pro;602;423;km;Hur många km skiljer WLTP-räckvidden?
-Har en Tesla Model S Plaid fler eller färre hästkrafter än en Porsche Taycan Turbo GT?;Tesla Model S Plaid;Porsche Taycan Turbo GT;1020;1108;hk;Hur många hästkrafter skiljer det?
-Har en BMW i4 M50 fler eller färre hästkrafter än en Volkswagen ID.4 GTX?;BMW i4 M50;Volkswagen ID.4 GTX;544;340;hk;Hur många hästkrafter skiljer det?
-Har en Nissan Leaf fler eller färre hästkrafter än en Audi RS e-tron GT?;Nissan Leaf;Audi RS e-tron GT;218;646;hk;Hur många hästkrafter skiljer det?
-Har en Tesla Model S Plaid fler eller färre hästkrafter än en Nissan Leaf?;Tesla Model S Plaid;Nissan Leaf;1020;218;hk;Hur många hästkrafter skiljer det?
-Har en Porsche Taycan Turbo GT fler eller färre hästkrafter än en MG4?;Porsche Taycan Turbo GT;MG4 SE;1108;170;hk;Hur många hästkrafter skiljer det?
-Har en Tesla Model S Plaid fler eller färre hästkrafter än en Renault 5 E-Tech?;Tesla Model S Plaid;Renault 5 E-Tech;1020;150;hk;Hur många hästkrafter skiljer det?
-Har en Skoda Enyaq fler eller färre hästkrafter än en Kia EV9 GT-Line?;Skoda Enyaq 85;Kia EV9 GT-Line;286;384;hk;Hur många hästkrafter skiljer effekten?
-Har en Audi Q6 e-tron fler eller färre hästkrafter än en Volvo EX40?;Audi Q6 e-tron quattro;Volvo EX40;387;252;hk;Hur många hästkrafter skiljer effekten?
-Har en Mercedes EQE 350 fler eller färre hästkrafter än en BMW iX xDrive50?;Mercedes-Benz EQE 350;BMW iX xDrive50;292;523;hk;Hur många hästkrafter skiljer effekten?
-Har en MG ZS EV fler eller färre hästkrafter än en BMW iX xDrive50?;MG ZS EV;BMW iX xDrive50;174;523;hk;Hur många hästkrafter skiljer effekten?
-Har en Citroën ë-C3 fler eller färre hästkrafter än en Lotus Eletre R?;Citroën ë-C3;Lotus Eletre R;113;905;hk;Hur många hästkrafter skiljer effekten?
-Har en Rimac Nevera fler eller färre hästkrafter än en Subaru Solterra?;Rimac Nevera;Subaru Solterra;1914;215;hk;Hur många hästkrafter skiljer effekten?
-Har en Lotus Eletre R fler eller färre hästkrafter än en Fiat 500e?;Lotus Eletre R;Fiat 500e;905;118;hk;Hur många hästkrafter skiljer effekten?
-Har en Pininfarina Battista fler eller färre hästkrafter än en Polestar 4?;Pininfarina Battista;Polestar 4 Single Motor;1900;272;hk;Hur många hästkrafter skiljer effekten?
-Har en Renault Megane E-Tech fler eller färre hästkrafter än en Rimac Nevera?;Renault Megane E-Tech;Rimac Nevera;220;1914;hk;Hur många hästkrafter skiljer effekten?
-Har en Smart #1 fler eller färre hästkrafter än en Pininfarina Battista?;Smart #1;Pininfarina Battista;272;1900;hk;Hur många hästkrafter skiljer effekten?
-Har en Honda e:Ny1 fler eller färre hästkrafter än en Opel Mokka Electric?;Honda e:Ny1;Opel Mokka Electric;204;156;hk;Hur många hästkrafter skiljer det?
-Har en Opel Mokka Electric fler eller färre hästkrafter än en Kia EV6 GT?;Opel Mokka Electric;Kia EV6 GT;156;585;hk;Hur många hästkrafter skiljer det?
-Har en Kia EV6 GT fler eller färre hästkrafter än en Jeep Avenger?;Kia EV6 GT;Jeep Avenger;585;156;hk;Hur många hästkrafter skiljer det?
-Har en BYD Seal Performance fler eller färre hästkrafter än en XPeng G9 Performance?;BYD Seal Performance;XPeng G9 AWD Performance;530;551;hk;Hur många hästkrafter skiljer det?
-Har en Citroën ë-C3 fler eller färre hästkrafter än en XPeng G9 Performance?;Citroën ë-C3;XPeng G9 AWD Performance;113;551;hk;Hur många hästkrafter skiljer det?
-Har en Dacia Spring fler eller färre hästkrafter än en Lotus Eletre R?;Dacia Spring;Lotus Eletre R;65;905;hk;Hur många hästkrafter skiljer det?
-Har en Polestar 3 Long Range Dual Motor fler eller färre hästkrafter än en Volvo EX90 Twin Motor?;Polestar 3 Long Range Dual Motor;Volvo EX90 Twin Motor;489;408;hk;Hur många hästkrafter skiljer det?
-Har en Zeekr X fler eller färre hästkrafter än en Skoda Elroq 85?;Zeekr X;Skoda Elroq 85;428;286;hk;Hur många hästkrafter skiljer det?
-Har en Kia EV9 GT-Line fler eller färre hästkrafter än en Skoda Elroq 85?;Kia EV9 GT-Line;Skoda Elroq 85;385;286;hk;Hur många hästkrafter skiljer det?
-Har en Maserati GranTurismo Folgore fler eller färre hästkrafter än en Skoda Elroq 85?;Maserati GranTurismo Folgore;Skoda Elroq 85;761;286;hk;Hur många hästkrafter skiljer det?
-Har en Honda e:Ny1 fler eller färre hästkrafter än en Maserati GranTurismo Folgore?;Honda e:Ny1;Maserati GranTurismo Folgore;204;761;hk;Hur många hästkrafter skiljer det?
-Har en Audi RS e-tron GT performance fler eller färre hästkrafter än en Honda e:Ny1?;Audi RS e-tron GT performance;Honda e:Ny1;925;204;hk;Hur många hästkrafter skiljer det?
-Har en Nio ET7 fler eller färre hästkrafter än en Dacia Spring?;Nio ET7;Dacia Spring;653;65;hk;Hur många hästkrafter skiljer det?
-Har en Dacia Spring fler eller färre hästkrafter än en Audi RS e-tron GT performance?;Dacia Spring;Audi RS e-tron GT performance;65;925;hk;Hur många hästkrafter skiljer det?
-Har en Maserati GranTurismo Folgore fler eller färre hästkrafter än en Dacia Spring?;Maserati GranTurismo Folgore;Dacia Spring;761;65;hk;Hur många hästkrafter skiljer det?
-Har en Lucid Air Sapphire fler eller färre hästkrafter än en Citroën ë-C4?;Lucid Air Sapphire;Citroën ë-C4;1234;136;hk;Hur många hästkrafter skiljer det?
-Har en Peugeot e-208 fler eller färre hästkrafter än en Lucid Air Sapphire?;Peugeot e-208;Lucid Air Sapphire;156;1234;hk;Hur många hästkrafter skiljer det?
-Har en Mercedes EQA fler eller färre hästkrafter än en Cadillac Lyriq?;Mercedes-Benz EQA 250;Cadillac Lyriq AWD;190;515;hk;Hur många hästkrafter skiljer det?
-Har en BYD Han fler eller färre hästkrafter än en Volkswagen ID.4?;BYD Han;Volkswagen ID.4 Pro;517;204;hk;Hur många hästkrafter skiljer det?
-Har en Hyundai Ioniq 6 Long Range högre eller lägre toppfart än en Tesla Model 3 Long Range?;Hyundai Ioniq 6 Long Range;Tesla Model 3 Long Range;185;201;km/h;Hur många km/h skiljer toppfarten?
-Har en Polestar 2 Long Range Single Motor högre eller lägre toppfart än en BMW i4 eDrive40?;Polestar 2 Long Range Single Motor;BMW i4 eDrive40;205;190;km/h;Hur många km/h skiljer toppfarten?
-Har en Kia EV6 Long Range högre eller lägre toppfart än en Skoda Enyaq 85?;Kia EV6 Long Range;Skoda Enyaq 85;185;180;km/h;Hur många km/h skiljer toppfarten?
-Har en Volvo EX30 Single Motor högre eller lägre toppfart än en Cupra Born?;Volvo EX30 Single Motor;Cupra Born;180;160;km/h;Hur många km/h skiljer toppfarten?
-Har en Renault Mégane E-Tech högre eller lägre toppfart än en Peugeot e-208?;Renault Mégane E-Tech;Peugeot e-208;160;150;km/h;Hur många km/h skiljer toppfarten?
-Har en Nissan Leaf högre eller lägre toppfart än en Dacia Spring?;Nissan Leaf;Dacia Spring;144;125;km/h;Hur många km/h skiljer toppfarten?
-Har en Tesla Model Y Performance högre eller lägre toppfart än en Hyundai Kona Electric?;Tesla Model Y Performance;Hyundai Kona Electric;250;167;km/h;Hur många km/h skiljer toppfarten?
-Har en Porsche Taycan Turbo S högre eller lägre toppfart än en BYD Atto 3?;Porsche Taycan Turbo S;BYD Atto 3;260;160;km/h;Hur många km/h skiljer toppfarten?
-Har en Audi Q4 e-tron högre eller lägre toppfart än en Audi RS e-tron GT?;Audi Q4 e-tron;Audi RS e-tron GT;180;250;km/h;Hur många km/h skiljer toppfarten?
-Har en Mercedes-Benz EQE 350 högre eller lägre toppfart än en Lucid Air Grand Touring?;Mercedes-Benz EQE 350;Lucid Air Grand Touring;210;270;km/h;Hur många km/h skiljer toppfarten?
-Har en BMW iX xDrive50 högre eller lägre toppfart än en Maserati GranTurismo Folgore?;BMW iX xDrive50;Maserati GranTurismo Folgore;200;320;km/h;Hur många km/h skiljer toppfarten?
-Har en Genesis GV60 Performance högre eller lägre toppfart än en Fiat 500e?;Genesis GV60 Performance;Fiat 500e;235;150;km/h;Hur många km/h skiljer toppfarten?
-Har en Ford Mustang Mach-E GT högre eller lägre toppfart än en Hyundai Ioniq 5 N?;Ford Mustang Mach-E GT;Hyundai Ioniq 5 N;200;260;km/h;Hur många km/h skiljer toppfarten?
-Har en Kia EV9 GT-Line högre eller lägre toppfart än en Mini Cooper SE?;Kia EV9 GT-Line;Mini Cooper SE;200;150;km/h;Hur många km/h skiljer toppfarten?
-Har en Cadillac Lyriq AWD högre eller lägre toppfart än en Lotus Eletre R?;Cadillac Lyriq AWD;Lotus Eletre R;210;265;km/h;Hur många km/h skiljer toppfarten?
-Har en Subaru Solterra högre eller lägre toppfart än en Mercedes-AMG EQE 53?;Subaru Solterra;Mercedes-AMG EQE 53;160;220;km/h;Hur många km/h skiljer toppfarten?
-Har en BMW i5 M60 högre eller lägre toppfart än en Volvo C40?;BMW i5 M60;Volvo C40;230;180;km/h;Hur många km/h skiljer toppfarten?
-Har en Mercedes-AMG EQS 53 högre eller lägre toppfart än en Volkswagen ID.4 Pro?;Mercedes-AMG EQS 53;Volkswagen ID.4 Pro;250;160;km/h;Hur många km/h skiljer toppfarten?
-Har en Fiat 500e högre eller lägre toppfart än en Rimac Nevera?;Fiat 500e;Rimac Nevera;150;412;km/h;Hur många km/h skiljer toppfarten?
-Har en Dacia Spring högre eller lägre toppfart än en Maserati GranTurismo Folgore?;Dacia Spring;Maserati GranTurismo Folgore;125;320;km/h;Hur många km/h skiljer toppfarten?
-Har en Citroën ë-C3 högre eller lägre toppfart än en Rimac Nevera?;Citroën ë-C3;Rimac Nevera;135;412;km/h;Hur många km/h skiljer toppfarten?
-Har en Hyundai Inster högre eller lägre toppfart än en Pininfarina Battista?;Hyundai Inster;Pininfarina Battista;140;350;km/h;Hur många km/h skiljer toppfarten?
-Har en Mazda MX-30 högre eller lägre toppfart än en Pininfarina Battista?;Mazda MX-30;Pininfarina Battista;140;350;km/h;Hur många km/h skiljer toppfarten?
-Har en Toyota bZ4X högre eller lägre toppfart än en Rimac Nevera?;Toyota bZ4X;Rimac Nevera;160;412;km/h;Hur många km/h skiljer toppfarten?
-Väger en Skoda Enyaq 85 mer eller mindre än en Toyota bZ4X?;Skoda Enyaq 85;Toyota bZ4X;2123;1995;kg;Hur många kg skiljer tjänstevikten?
-Väger en Lexus RZ 450e mer eller mindre än en Genesis GV60?;Lexus RZ 450e;Genesis GV60;2000;2160;kg;Hur många kg skiljer tjänstevikten?
-Väger en Volvo EX30 Single Motor mer eller mindre än en Cadillac Lyriq?;Volvo EX30 Single Motor;Cadillac Lyriq;1830;2577;kg;Hur många kg skiljer tjänstevikten?
-Väger en Renault Mégane E-Tech mer eller mindre än en Fiat 500e?;Renault Mégane E-Tech;Fiat 500e;1711;1290;kg;Hur många kg skiljer tjänstevikten?
-Väger en Dacia Spring mer eller mindre än en Citroën ë-C3?;Dacia Spring;Citroën ë-C3;1045;1450;kg;Hur många kg skiljer tjänstevikten?
-Väger en Polestar 2 Long Range Single Motor mer eller mindre än en MG4?;Polestar 2 Long Range Single Motor;MG4;2113;1635;kg;Hur många kg skiljer tjänstevikten?
-Väger en BMW iX xDrive50 mer eller mindre än en Nissan Leaf?;BMW iX xDrive50;Nissan Leaf;2510;1580;kg;Hur många kg skiljer tjänstevikten?
-Väger en Hyundai Inster mer eller mindre än en Cupra Born?;Hyundai Inster;Cupra Born;1300;1862;kg;Hur många kg skiljer tjänstevikten?
-Väger en Mercedes-Benz EQS SUV 450 mer eller mindre än en Cupra Born?;Mercedes-Benz EQS SUV 450;Cupra Born;2890;1862;kg;Hur många kg skiljer tjänstevikten?
-Väger en Smart #1 mer eller mindre än en Nio ET7?;Smart #1;Nio ET7;1788;2365;kg;Hur många kg skiljer tjänstevikten?
-Väger en Kia EV9 mer eller mindre än en Microlino?;Kia EV9;Microlino;2620;535;kg;Hur många kg skiljer tjänstevikten?
-Väger en Lucid Air Grand Touring mer eller mindre än en Nissan Leaf?;Lucid Air Grand Touring;Nissan Leaf;2360;1580;kg;Hur många kg skiljer tjänstevikten?
-Väger en Kia EV6 Long Range mer eller mindre än en Peugeot e-208?;Kia EV6 Long Range;Peugeot e-208;2015;1455;kg;Hur många kg skiljer tjänstevikten?
-Väger en Peugeot e-208 mer eller mindre än en Subaru Solterra?;Peugeot e-208;Subaru Solterra;1455;2020;kg;Hur många kg skiljer tjänstevikten?
-Väger en Volvo EX90 mer eller mindre än en Citroën Ami?;Volvo EX90;Citroën Ami;2670;471;kg;Hur många kg skiljer tjänstevikten?
-Väger en Dacia Spring mer eller mindre än en Rivian R1T?;Dacia Spring;Rivian R1T;1045;3175;kg;Hur många kg skiljer tjänstevikten?
-Väger en Microlino mer eller mindre än en Volvo EX90?;Microlino;Volvo EX90;535;2670;kg;Hur många kg skiljer tjänstevikten?
-Väger en Citroën Ami mer eller mindre än en Smart #1?;Citroën Ami;Smart #1;471;1788;kg;Hur många kg skiljer tjänstevikten?
-Väger en Renault Twizy mer eller mindre än en Hyundai Ioniq 5?;Renault Twizy;Hyundai Ioniq 5;474;2020;kg;Hur många kg skiljer tjänstevikten?
-Väger en Microlino mer eller mindre än en Mercedes-Benz EQS SUV 450?;Microlino;Mercedes-Benz EQS SUV 450;535;2890;kg;Hur många kg skiljer tjänstevikten?
-Väger en Citroën Ami mer eller mindre än en GMC Hummer EV?;Citroën Ami;GMC Hummer EV;471;4100;kg;Hur många kg skiljer tjänstevikten?
-Väger en Renault Twizy mer eller mindre än en GMC Hummer EV?;Renault Twizy;GMC Hummer EV;474;4100;kg;Hur många kg skiljer tjänstevikten?

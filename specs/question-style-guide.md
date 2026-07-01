@@ -274,6 +274,51 @@ förkastar). Debunkat/ej källbart och därför EJ med: bettstyrka, agility-vins
 --key question` → **Top units får inte visa någon enhet >~25** (~8 enheter representerade).
 Bandmål 15/40/30/15, riktning ~50/50.
 
+## Elbil (elbil-mini)
+
+Gäller NÄR pack-slug = `elbil-mini` (delta mot basfilosofin ovan). Leken jämför elbilsmodeller
+kvantitativt. **HÅRD REGEL: bryt enmetrik-monotonin.** En tidig version blev 81/175 ren
+hästkraft (hk) → spelaren upplever "varenda fråga handlar om effekt". Leken ska spänna över
+**allt mätbart om elbilar**, fortfarande som verifierbara mer/mindre-jämförelser med per-modell-
+värden (faktagranskaren gatekeepar — ej källbart = förkasta). Källa: ev-database.org,
+tillverkarspecar, carwow/biltester.
+
+**Nio verifierbara dimensioner, ingen får dominera (cap ~28 kort/dimension):**
+
+| Dimension | `enhet` | källa | målantal |
+|---|---|---|---|
+| Effekt | hk | tillverkarspec/ev-database | ~26 |
+| Räckvidd (WLTP) | km | ev-database WLTP | ~28 |
+| Acceleration 0–100 | sekunder | tillverkarspec | ~18 |
+| Batterikapacitet (användbar) | kWh | ev-database "usable" | ~15 |
+| Pris (år-pinnat) | kr | svensk prislista (år-pinnad) | ~15 |
+| Toppfart | km/h | tillverkarspec/ev-database | ~22 |
+| Tjänstevikt | kg | tillverkarspec/ev-database | ~22 |
+| Laddeffekt (max DC) | kW | ev-database fastcharge | ~20 |
+| Förbrukning (WLTP) | kWh/100km | ev-database efficiency | ~9 |
+
+**Riktnings-/tydlighetsfällor att baka in:**
+- **Acceleration 0–100 sek + förbrukning kWh/100km är "lägre = bättre" men frågan är ren
+  magnitud** — "Tar X längre eller kortare tid…?" / "Drar X mer eller mindre…?". Komparativ
+  pekar rätt mot [Mer]/[Mindre]; det är OK (snabbast/snålast ≠ "mer", men frågan frågar inte
+  om bäst utan om magnitud). Lägre sekundtal = kortare tid = "mindre".
+- **Alla andra (hk/km/kWh/kr/km/h/kg/kW):** naturligt komparativ, högre = "mer".
+- **Pris:** volatilt → år-pinnas i frågetext (t.ex. "(2024)") + sidecar.
+- **Enheter som krockar:** `kWh` (batteri) vs `kWh/100km` (förbrukning) vs `kW` (laddeffekt)
+  är OLIKA enhetssträngar — håll dem distinkta i `enhet`-kolumnen. `km` (räckvidd) vs `km/h`
+  (toppfart) likaså.
+- **Riktning ~50/50**, sakA behöver ej hålla det största värdet.
+
+**Pool:** ≥88 distinkta modeller (ItemCap=4 pack-wide). Hundratals elbilsmodeller finns →
+gott om utrymme, MEN populära modeller (Tesla/Polestar/BMW) fylls snabbt över flera
+dimensioner → sprid på färska modeller, styr med cap-varningarna i `report`. Använd EXAKTA
+modellnamn med variant (t.ex. "Tesla Model 3 Long Range") konsekvent — `report` räknar exakta
+strängar, så "Tesla Model 3" ≠ "Tesla Model 3 Long Range".
+
+**Mät enhetsfördelningen varje batch:** `report --staging --dir question-staging/elbil
+--key question` → **Top units får inte visa någon enhet >~28** (~9 enheter representerade).
+Bandmål 15/40/30/15, riktning ~50/50.
+
 ### Mini- vs prod-skala
 
 En pack-slug som innehåller `mini` = koncept-pack: **175 kort, 7-frågors omgång**, undantas
