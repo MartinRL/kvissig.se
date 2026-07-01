@@ -1,0 +1,33 @@
+@* GET /blindbudet — the auction catalog. The host picks a lott-lek; "Spela" links to
+   /blindbudet/new/{packId} where the host enters their name before the auction is created. *@
+<MainLayout Title="Blindbudet: budgivning där högst total vinner"
+            Description="Blindbudet är budspelet ni spelar online men tillsammans i samma rum, var och en på sin skärm. Lägg ditt hemliga bud på varje lott — högsta budet vinner och betalar sitt bud. Vinst = sant värde minus betalt bud. Högst total vinner."
+            CanonicalPath="/blindbudet">
+    <div class="wrap">
+        <div class="brand">
+            <div class="logo"><span class="mer">Blind</span><span class="mindre">budet</span></div>
+            <ShareButton />
+            <span class="pill soft">Värd</span>
+        </div>
+
+        <h1>Välj lott-lek</h1>
+        <p class="sub">Du blir värd och första spelaren. Högst total vinner.</p>
+
+        @foreach (var pack in Model.Packs)
+        {
+            <div class="card">
+                <div class="pack">
+                    <div class="info">
+                        <div class="name">@pack.Name</div>
+                        <div class="count">@pack.LotCount lotter i leken</div>
+                    </div>
+                    <a class="btn" href="/blindbudet/new/@pack.PackId">Spela</a>
+                </div>
+            </div>
+        }
+    </div>
+</MainLayout>
+
+@code {
+    [Parameter] public required AuctionCatalogVm Model { get; set; }
+}

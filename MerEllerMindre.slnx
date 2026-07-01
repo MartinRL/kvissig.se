@@ -6,6 +6,8 @@
     <Platform Name="x86" />
   </Configurations>
   <Folder Name="/src/">
+    <Project Path="src/Blindbudet.Domain/Blindbudet.Domain.csproj" />
+    <Project Path="src/Blindbudet.Domain.Tests/Blindbudet.Domain.Tests.csproj" />
     <Project Path="src/MerEllerMindre.Domain.Tests/MerEllerMindre.Domain.Tests.csproj" />
     <Project Path="src/MerEllerMindre.Domain/MerEllerMindre.Domain.csproj" />
     <Project Path="src/MerEllerMindre.Web/MerEllerMindre.Web.csproj" />

@@ -1,0 +1,54 @@
+@* Lobby as the host sees it: the QR to share, the live player list, and the Start button
+   (enabled at 2+ players). Polls every 2 s to pick up joiners and the start. *@
+<div hx-get="@StatePath" hx-trigger="every 2s" hx-target="#screen" hx-swap="innerHTML">
+    <div class="card center">
+        <h1>Skanna för att gå med</h1>
+        <p class="sub">Övriga spelare går med genom att skanna QR-koden.</p>
+        <div class="qr">@((MarkupString)Model.QrSvg)</div>
+        @if (Model.ShowJoinUrl)
+        {
+            <p class="joinlink muted">…eller gå till <a href="@Model.JoinUrl">@Model.JoinUrl</a></p>
+        }
+    </div>
+
+    <div class="card">
+        <div class="cardhead">Spelare <span class="pill">@Model.Players.Count med</span></div>
+        <ul class="players">
+            @foreach (var p in Model.Players)
+            {
+                <li>
+                    <span class="dot"></span>
+                    <span class="who">@p.Name@(p.IsHost ? " (värd)" : "")</span>
+                    <span class="tag">@(p.IsYou ? "du" : "med")</span>
+                </li>
+            }
+        </ul>
+    </div>
+
+    <div class="card">
+        <div class="cardhead">Så funkar det</div>
+        <ol class="steps">
+            <li><strong>Lägg ett hemligt bud</strong> på varje lott — vad tror du den är värd?</li>
+            <li><strong>Högsta budet vinner</strong> och betalar sitt eget bud. Vinst =
+                sant värde − betalt bud (bjud du över så blir vinsten negativ).</li>
+            <li><strong>Högst total vinner.</strong></li>
+        </ol>
+    </div>
+
+    @if (Model.CanStart)
+    {
+        <form hx-post="@($"/blindbudet/{Model.JoinCode:N}/start")" hx-target="#screen" hx-swap="innerHTML">
+            <input type="hidden" name="__RequestVerificationToken" value="@Model.AntiforgeryToken" />
+            <button type="submit" class="btn">Starta auktion</button>
+        </form>
+    }
+    else
+    {
+        <p class="muted center">Behöver minst 2 spelare · @Model.Players.Count ansluten(a)</p>
+    }
+</div>
+
+@code {
+    [Parameter] public required AuctionLobbyVm Model { get; set; }
+    private string StatePath => $"/blindbudet/{Model.JoinCode:N}/state{(Model.ShowJoinUrl ? "?url" : "")}";
+}

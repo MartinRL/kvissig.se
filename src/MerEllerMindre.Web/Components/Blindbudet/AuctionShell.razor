@@ -1,0 +1,21 @@
+@* GET /blindbudet/{code} — the persistent shell every player keeps open. A single #screen div
+   loads the current screen fragment from /state on load; each fragment drives its own 2 s poll
+   (or posts a bid). Full page. Sister to MEM's GameShell. *@
+<MainLayout Title="Blindbudet" ShowMenu="false">
+    <div class="wrap">
+        <div class="brand">
+            <div class="logo"><span class="mer">Blind</span><span class="mindre">budet</span></div>
+            <span class="pill soft">kvissig.se</span>
+        </div>
+
+        <div id="screen" hx-get="@StatePath" hx-trigger="load" hx-target="#screen" hx-swap="innerHTML">
+            <div class="card center"><p class="busy">Laddar…</p></div>
+        </div>
+    </div>
+</MainLayout>
+
+@code {
+    [Parameter] public Guid JoinCode { get; set; }
+    [Parameter] public bool ShowJoinUrl { get; set; }
+    private string StatePath => $"/blindbudet/{JoinCode:N}/state{(ShowJoinUrl ? "?url" : "")}";
+}

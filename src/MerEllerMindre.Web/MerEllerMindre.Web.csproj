@@ -9,6 +9,7 @@
   <ItemGroup>
     <PackageReference Include="QRCoder" Version="1.6.0" />
     <ProjectReference Include="..\MerEllerMindre.Domain\MerEllerMindre.Domain.csproj" />
+    <ProjectReference Include="..\Blindbudet.Domain\Blindbudet.Domain.csproj" />
   </ItemGroup>
 
 </Project>

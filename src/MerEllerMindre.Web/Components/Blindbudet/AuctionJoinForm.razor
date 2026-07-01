@@ -1,0 +1,26 @@
+@* GET /blindbudet/{code}/join — a player enters their name. Posting joins the auction
+   (JoinAuction) and the server HX-Redirects to the auction shell. Full page. *@
+<MainLayout Title="Blindbudet: Gå med">
+    <div class="wrap">
+        <div class="brand">
+            <div class="logo"><span class="mer">Blind</span><span class="mindre">budet</span></div>
+            <span class="pill soft">Gå med</span>
+        </div>
+
+        <div class="card">
+            <h1>Gå med i auktionen</h1>
+            <p class="sub">@Model.HostName (värd)</p>
+
+            <form hx-post="@($"/blindbudet/{Model.JoinCode:N}/join")" hx-swap="none">
+                <input type="hidden" name="__RequestVerificationToken" value="@Model.AntiforgeryToken" />
+                <label for="name">Ditt namn</label>
+                <input type="text" id="name" name="playerName" placeholder="Skriv ditt namn" autofocus required />
+                <button type="submit" class="btn">Gå med</button>
+            </form>
+        </div>
+    </div>
+</MainLayout>
+
+@code {
+    [Parameter] public required AuctionJoinFormVm Model { get; set; }
+}

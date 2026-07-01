@@ -21,6 +21,12 @@ builder.Services.AddSingleton(new FileSystemQuestionPackCatalog(packsDirectory))
 var logosDirectory = Path.Combine(AppContext.BaseDirectory, "data", "logos");
 builder.Services.AddSingleton(new LogoCatalog(logosDirectory));
 
+// Blindbudet (sealed-bid auction) lot catalog — a SEPARATE directory from the quiz packs so
+// the two games' decks never mix. Loaded fail-fast at startup, same CSV-catalog convention.
+var auctionPacksDirectory = Path.Combine(AppContext.BaseDirectory, "data", "auction-packs");
+builder.Services.AddSingleton(new FileSystemAuctionPackCatalog(auctionPacksDirectory));
+builder.Services.AddSingleton<AuctionApplicationService>();
+
 // Razor Components in STATIC SSR (no interactive render mode → no circuit, no WebSocket,
 // no blazor.web.js). Endpoints return RazorComponentResult<T>. See ADR 007.
 builder.Services.AddRazorComponents();
@@ -72,6 +78,7 @@ app.UseAntiforgery();
 app.MapGet("/healthz", () => Results.Ok("ok"));
 
 app.MapGameEndpoints();
+app.MapAuctionEndpoints();
 
 app.Run();
 
