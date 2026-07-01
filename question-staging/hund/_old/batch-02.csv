@@ -1,0 +1,24 @@
+﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Har en shetland sheepdog högre eller lägre mankhöjd än en weimaraner?;Shetland sheepdog;Weimaraner;37;64;cm;Hur många cm skiljer det i mankhöjd?
+Har en welsh corgi högre eller lägre mankhöjd än en akita?;Welsh corgi;Akita;28;67;cm;Hur många cm skiljer det i mankhöjd?
+Har en ungersk vizsla högre eller lägre mankhöjd än en riesenschnauzer?;Ungersk vizsla;Riesenschnauzer;58;65;cm;Hur många cm skiljer det i mankhöjd?
+Har en shih tzu högre eller lägre mankhöjd än en afghanhund?;Shih tzu;Afghanhund;25;70;cm;Hur många cm skiljer det i mankhöjd?
+Har en samojed högre eller lägre mankhöjd än en bullterrier?;Samojed;Bullterrier;54;45;cm;Hur många cm skiljer det i mankhöjd?
+Har en basset hound högre eller lägre mankhöjd än en gordonsetter?;Basset hound;Gordonsetter;35;64;cm;Hur många cm skiljer det i mankhöjd?
+Har en pekinges högre eller lägre mankhöjd än en riesenschnauzer?;Pekingese;Riesenschnauzer;20;65;cm;Hur många cm skiljer det i mankhöjd?
+Väger en dvärgpinscher mer eller mindre än en alaskan malamute?;Dvärgpinscher;Alaskan malamute;5;38;kg;Hur många kg skiljer det i vikt?
+Väger en pekinges mer eller mindre än en engelsk mastiff?;Pekingese;Engelsk mastiff;5;75;kg;Hur många kg skiljer det i vikt?
+Väger en springer spaniel mer eller mindre än en riesenschnauzer?;Springer spaniel;Riesenschnauzer;20;35;kg;Hur många kg skiljer det i vikt?
+Väger en welsh corgi mer eller mindre än en greyhound?;Welsh corgi;Greyhound;12;30;kg;Hur många kg skiljer det i vikt?
+Väger en pekinges mer eller mindre än en greyhound?;Pekingese;Greyhound;5;30;kg;Hur många kg skiljer det i vikt?
+Väger en bichon frisé mer eller mindre än en alaskan malamute?;Bichon frisé;Alaskan malamute;5;38;kg;Hur många kg skiljer det i vikt?
+Väger en dvärgpinscher mer eller mindre än en engelsk mastiff?;Dvärgpinscher;Engelsk mastiff;5;75;kg;Hur många kg skiljer det i vikt?
+Har en engelsk mastiff längre eller kortare livslängd än en schipperke?;Engelsk mastiff;Schipperke;8;15;år;Hur många år skiljer det i livslängd?
+Har en berner sennenhund längre eller kortare livslängd än en dvärgpinscher?;Berner sennenhund;Dvärgpinscher;8;14;år;Hur många år skiljer det i livslängd?
+Har en schipperke längre eller kortare livslängd än en berner sennenhund?;Schipperke;Berner sennenhund;15;7;år;Hur många år skiljer det i livslängd?
+Har en bichon frisé längre eller kortare livslängd än en alaskan malamute?;Bichon frisé;Alaskan malamute;15;11;år;Hur många år skiljer det i livslängd?
+Har en springer spaniel längre eller kortare livslängd än en greyhound?;Springer spaniel;Greyhound;14;12;år;Hur många år skiljer det i livslängd?
+Har en welsh corgi längre eller kortare livslängd än en berner sennenhund?;Welsh corgi;Berner sennenhund;13;8;år;Hur många år skiljer det i livslängd?
+Är en samojed dyrare eller billigare i inköp än en akita?;Samojed;Akita;12000;16000;kr;Hur många kronor skiljer det i valppris?
+Är en engelsk bulldogg dyrare eller billigare i inköp än en springer spaniel?;Engelsk bulldogg;Springer spaniel;40000;18000;kr;Hur många kronor skiljer det i valppris?
+Är en weimaraner dyrare eller billigare i inköp än en engelsk mastiff?;Weimaraner;Engelsk mastiff;16000;35000;kr;Hur många kronor skiljer det i valppris?

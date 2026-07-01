@@ -1,0 +1,20 @@
+﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Har en australian shepherd högre eller lägre mankhöjd än en flatcoated retriever?;Australian shepherd;Flatcoated retriever;53;59;cm;Hur många cm skiljer det i mankhöjd?
+Har en brittany högre eller lägre mankhöjd än en rhodesian ridgeback?;Brittany;Rhodesian ridgeback;49;65;cm;Hur många cm skiljer det i mankhöjd?
+Har en kleiner münsterländer högre eller lägre mankhöjd än en irländsk röd setter?;Kleiner münsterländer;Irländsk röd setter;52;63;cm;Hur många cm skiljer det i mankhöjd?
+Har en eurasier högre eller lägre mankhöjd än en barbet?;Eurasier;Barbet;56;60;cm;Hur många cm skiljer det i mankhöjd?
+Har en bracco italiano högre eller lägre mankhöjd än en norfolkterrier?;Bracco italiano;Norfolkterrier;67;25;cm;Hur många cm skiljer det i mankhöjd?
+Har en pyrenéerhund högre eller lägre mankhöjd än en cairnterrier?;Pyrenéerhund;Cairnterrier;72;30;cm;Hur många cm skiljer det i mankhöjd?
+Har en bordeauxdogg högre eller lägre mankhöjd än en västgötaspets?;Bordeauxdogg;Västgötaspets;64;32;cm;Hur många cm skiljer det i mankhöjd?
+Väger en anatolisk herdehund mer eller mindre än en lhasa apso?;Anatolisk herdehund;Lhasa apso;60;7;kg;Hur många kg skiljer det i vikt?
+Väger en old english sheepdog mer eller mindre än en coton de tuléar?;Old english sheepdog;Coton de tuléar;36;5;kg;Hur många kg skiljer det i vikt?
+Väger en curly coated retriever mer eller mindre än en italiensk vinthund?;Curly coated retriever;Italiensk vinthund;36;4;kg;Hur många kg skiljer det i vikt?
+Väger en kuvasz mer eller mindre än en shiba inu?;Kuvasz;Shiba inu;50;10;kg;Hur många kg skiljer det i vikt?
+Väger en nova scotia duck tolling retriever mer eller mindre än en dvärgspets?;Nova scotia duck tolling retriever;Dvärgspets;20;3;kg;Hur många kg skiljer det i vikt?
+Väger en briard mer eller mindre än en petit basset griffon vendéen?;Briard;Petit basset griffon vendéen;35;16;kg;Hur många kg skiljer det i vikt?
+Väger en spansk vattenhund mer eller mindre än en leonberger?;Spansk vattenhund;Leonberger;18;65;kg;Hur många kg skiljer det i vikt?
+Väger en shiba inu mer eller mindre än en otterhound?;Shiba inu;Otterhound;10;40;kg;Hur många kg skiljer det i vikt?
+Har en irländsk röd setter längre eller kortare livslängd än en australian terrier?;Irländsk röd setter;Australian terrier;12;14;år;Hur många år skiljer det i livslängd?
+Har en lhasa apso längre eller kortare livslängd än en bordeauxdogg?;Lhasa apso;Bordeauxdogg;14;9;år;Hur många år skiljer det i livslängd?
+Har en italiensk vinthund längre eller kortare livslängd än en anatolisk herdehund?;Italiensk vinthund;Anatolisk herdehund;14;11;år;Hur många år skiljer det i livslängd?
+Väger en italiensk vinthund mer eller mindre än en anatolisk herdehund?;Italiensk vinthund;Anatolisk herdehund;4;60;kg;Hur många kg skiljer det i vikt?

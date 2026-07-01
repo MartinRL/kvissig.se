@@ -1,0 +1,28 @@
+﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Har en schäfer högre eller lägre mankhöjd än en rottweiler?;Schäfer;Rottweiler;63;64;cm;Hur många cm skiljer det i mankhöjd?
+Har en tax högre eller lägre mankhöjd än en cocker spaniel?;Tax;Cocker spaniel;22;39;cm;Hur många cm skiljer det i mankhöjd?
+Har en beagle högre eller lägre mankhöjd än en jack russell-terrier?;Beagle;Jack russell-terrier;38;28;cm;Hur många cm skiljer det i mankhöjd?
+Har en grand danois högre eller lägre mankhöjd än en chihuahua?;Grand danois;Chihuahua;80;18;cm;Hur många cm skiljer det i mankhöjd?
+Har en irländsk varghund högre eller lägre mankhöjd än en mops?;Irländsk varghund;Mops;81;30;cm;Hur många cm skiljer det i mankhöjd?
+Har en dobermann högre eller lägre mankhöjd än en pomeranian?;Dobermann;Pomeranian;68;22;cm;Hur många cm skiljer det i mankhöjd?
+Väger en golden retriever mer eller mindre än en labrador?;Golden retriever;Labrador;32;30;kg;Hur många kg skiljer det i vikt?
+Väger en bernhardshund mer eller mindre än en beagle?;Bernhardshund;Beagle;75;12;kg;Hur många kg skiljer det i vikt?
+Väger en schäfer mer eller mindre än en border collie?;Schäfer;Border collie;33;18;kg;Hur många kg skiljer det i vikt?
+Väger en korthårig vorsteh mer eller mindre än en mellanpudel?;Korthårig vorsteh;Mellanpudel;28;11;kg;Hur många kg skiljer det i vikt?
+Väger en leonberger mer eller mindre än en papillon?;Leonberger;Papillon;60;4;kg;Hur många kg skiljer det i vikt?
+Väger en newfoundlandshund mer eller mindre än en tax?;Newfoundlandshund;Tax;65;9;kg;Hur många kg skiljer det i vikt?
+Väger en yorkshireterrier mer eller mindre än en rottweiler?;Yorkshireterrier;Rottweiler;3;50;kg;Hur många kg skiljer det i vikt?
+Väger en boxer mer eller mindre än en mastiff?;Boxer;Mastiff;30;80;kg;Hur många kg skiljer det i vikt?
+Har en dvärgschnauzer längre eller kortare livslängd än en cocker spaniel?;Dvärgschnauzer;Cocker spaniel;14;13;år;Hur många år skiljer det i livslängd?
+Har en fransk bulldogg längre eller kortare livslängd än en labrador?;Fransk bulldogg;Labrador;11;13;år;Hur många år skiljer det i livslängd?
+Har en jack russell-terrier längre eller kortare livslängd än en grand danois?;Jack russell-terrier;Grand danois;16;8;år;Hur många år skiljer det i livslängd?
+Har en pomeranian längre eller kortare livslängd än en bernhardshund?;Pomeranian;Bernhardshund;15;9;år;Hur många år skiljer det i livslängd?
+Har en border collie längre eller kortare livslängd än en irländsk varghund?;Border collie;Irländsk varghund;14;7;år;Hur många år skiljer det i livslängd?
+Har en mellanpudel längre eller kortare livslängd än en boxer?;Mellanpudel;Boxer;15;11;år;Hur många år skiljer det i livslängd?
+Är en tibetansk mastiff dyrare eller billigare i inköp än en cavalier king charles spaniel?;Tibetansk mastiff;Cavalier king charles spaniel;45000;14000;kr;Hur många kronor skiljer det i valppris?
+Är en fransk bulldogg dyrare eller billigare i inköp än en whippet?;Fransk bulldogg;Whippet;35000;16000;kr;Hur många kronor skiljer det i valppris?
+Är en lagotto romagnolo dyrare eller billigare i inköp än en cavalier king charles spaniel?;Lagotto romagnolo;Cavalier king charles spaniel;22000;14000;kr;Hur många kronor skiljer det i valppris?
+Är en golden retriever dyrare eller billigare i inköp än en dalmatiner?;Golden retriever;Dalmatiner;23000;15000;kr;Hur många kronor skiljer det i valppris?
+Är en tibetansk mastiff dyrare eller billigare i inköp än en dalmatiner?;Tibetansk mastiff;Dalmatiner;50000;13000;kr;Hur många kronor skiljer det i valppris?
+Är en newfoundlandshund dyrare eller billigare i inköp än en whippet?;Newfoundlandshund;Whippet;25000;16000;kr;Hur många kronor skiljer det i valppris?
+Är en lagotto romagnolo dyrare eller billigare i inköp än en korthårig vorsteh?;Lagotto romagnolo;Korthårig vorsteh;30000;11000;kr;Hur många kronor skiljer det i valppris?

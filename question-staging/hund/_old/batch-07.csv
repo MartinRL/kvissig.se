@@ -1,0 +1,27 @@
+﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Har en bloodhound högre eller lägre mankhöjd än en tysk pinscher?;Bloodhound;Tysk pinscher;67;48;cm;Hur många cm skiljer det i mankhöjd?
+Har en skye terrier högre eller lägre mankhöjd än en otterhound?;Skye terrier;Otterhound;25;67;cm;Hur många cm skiljer det i mankhöjd?
+Har en norsk buhund högre eller lägre mankhöjd än en bearded collie?;Norsk buhund;Bearded collie;45;53;cm;Hur många cm skiljer det i mankhöjd?
+Har en skotsk terrier högre eller lägre mankhöjd än en bloodhound?;Skotsk terrier;Bloodhound;26;67;cm;Hur många cm skiljer det i mankhöjd?
+Har en bedlingtonterrier högre eller lägre mankhöjd än en borzoi?;Bedlingtonterrier;Borzoi;41;75;cm;Hur många cm skiljer det i mankhöjd?
+Har en bouvier des flandres högre eller lägre mankhöjd än en dvärgtax?;Bouvier des flandres;Dvärgtax;65;15;cm;Hur många cm skiljer det i mankhöjd?
+Har en tysk pinscher högre eller lägre mankhöjd än en berger picard?;Tysk pinscher;Berger picard;48;60;cm;Hur många cm skiljer det i mankhöjd?
+Har en norsk buhund högre eller lägre mankhöjd än en borzoi?;Norsk buhund;Borzoi;45;75;cm;Hur många cm skiljer det i mankhöjd?
+Väger en bloodhound mer eller mindre än en bedlingtonterrier?;Bloodhound;Bedlingtonterrier;45;9;kg;Hur många kg skiljer det i vikt?
+Väger en stabyhoun mer eller mindre än en bouvier des flandres?;Stabyhoun;Bouvier des flandres;23;40;kg;Hur många kg skiljer det i vikt?
+Väger en bearded collie mer eller mindre än en dvärgtax?;Bearded collie;Dvärgtax;22;5;kg;Hur många kg skiljer det i vikt?
+Väger en skotsk terrier mer eller mindre än en wetterhoun?;Skotsk terrier;Wetterhoun;9;30;kg;Hur många kg skiljer det i vikt?
+Väger en berger picard mer eller mindre än en affenpinscher?;Berger picard;Affenpinscher;32;4;kg;Hur många kg skiljer det i vikt?
+Väger en glen of imaal terrier mer eller mindre än en mastino napoletano?;Glen of imaal terrier;Mastino napoletano;16;65;kg;Hur många kg skiljer det i vikt?
+Väger en mastino napoletano mer eller mindre än en tysk pinscher?;Mastino napoletano;Tysk pinscher;65;18;kg;Hur många kg skiljer det i vikt?
+Väger en bearded collie mer eller mindre än en wetterhoun?;Bearded collie;Wetterhoun;22;30;kg;Hur många kg skiljer det i vikt?
+Väger en dvärgtax mer eller mindre än en bloodhound?;Dvärgtax;Bloodhound;5;45;kg;Hur många kg skiljer det i vikt?
+Väger en berger picard mer eller mindre än en norsk buhund?;Berger picard;Norsk buhund;32;16;kg;Hur många kg skiljer det i vikt?
+Har en bedlingtonterrier längre eller kortare livslängd än en mastino napoletano?;Bedlingtonterrier;Mastino napoletano;14;8;år;Hur många år skiljer det i livslängd?
+Har en affenpinscher längre eller kortare livslängd än en borzoi?;Affenpinscher;Borzoi;14;11;år;Hur många år skiljer det i livslängd?
+Har en skotsk terrier längre eller kortare livslängd än en bouvier des flandres?;Skotsk terrier;Bouvier des flandres;13;11;år;Hur många år skiljer det i livslängd?
+Har en norsk buhund längre eller kortare livslängd än en mastino napoletano?;Norsk buhund;Mastino napoletano;13;8;år;Hur många år skiljer det i livslängd?
+Har en dvärgtax längre eller kortare livslängd än en otterhound?;Dvärgtax;Otterhound;14;11;år;Hur många år skiljer det i livslängd?
+Registrerades det fler eller färre berger picard än borzoi hos SKK 2023?;Berger picard;Borzoi;5;150;registreringar/år;Hur många registreringar skiljer det?
+Registrerades det fler eller färre otterhound än bichon bolognese hos SKK 2023?;Otterhound;Bichon bolognese;0;40;registreringar/år;Hur många registreringar skiljer det?
+Registrerades det fler eller färre glen of imaal terrier än tysk pinscher hos SKK 2023?;Glen of imaal terrier;Tysk pinscher;5;100;registreringar/år;Hur många registreringar skiljer det?
