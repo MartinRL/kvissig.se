@@ -1,0 +1,245 @@
+@* GET /lev-som-du-lar — svensk on-site version av artikeln (tidigare engelsk "Practise What
+   You Preach" på extern blogg). Handskriven Razor (ingen markdown-rendering), samma mönster som
+   OmSpelet/SpelSom0100. Källtext: articles/practise-what-you-preach/practise-what-you-preach.md. *@
+<MainLayout Title="Lev som du lär | Mer eller Mindre"
+            Description="Hur Mer eller Mindre byggdes solo på en helg — och varför övad ingenjörsmetod, inte AI-typing, är multiplikatorn. En 47 år gammal kostnadsmodell prissätter helgen till en halv miljon dollar."
+            CanonicalPath="/lev-som-du-lar"
+            OgImage="/artiklar/lev-som-du-lar/cover.png"
+            JsonLd="@ArticleJsonLd">
+    <div class="wrap content">
+        <div class="brand">
+            <a class="logo" href="/"><span class="mer">Mer</span> eller <span class="mindre">Mindre</span></a>
+        </div>
+
+        <h1>Lev som du lär</h1>
+        <p class="sub">En 47 år gammal kostnadsmodell prissätter min helg till $492 788.</p>
+
+        <h2>Ankaret</h2>
+        <p>
+            En 47 år gammal kostnadsmodell prissätter min helg till <strong>$492 788</strong>.
+        </p>
+        <p>
+            Jag körde <code>scc</code> — ett verktyg som räknar rader kod — på ett multi-player
+            quizspel jag byggde solo på en helg. Det spottade ut COCOMO-skattningen nedan. Cost
+            inringad i magenta, för säkerhets skull:
+        </p>
+        <figure><img src="/artiklar/lev-som-du-lar/cocomo.png" alt="COCOMO-skattning från scc: uppskattad kostnad, tidsåtgång och antal personer, med kostnaden inringad." /></figure>
+        <p>
+            Nästan en halv miljon dollar. <strong>10,51 månader. 4,17 personer.</strong> För en
+            helg, ensam.
+        </p>
+        <p>
+            Innan vi går vidare: lägg märke till vad den siffran just gjorde med dig. Du har nu en
+            referenspunkt. Allt jag säger härnäst kommer du omedvetet att mäta mot en halv miljon
+            dollar. Det är inget olycksfall — det är ett <strong>ankare</strong> (Kahneman &amp;
+            Tversky: vi klamrar oss fast vid det första talet vi ser, hur godtyckligt det än är).
+            Jag namnger det med flit, så att jag är med på skämtet och inte offer för det. Siffran
+            är fel. Men titta på vad den gör med din förväntan.
+        </p>
+        <p>
+            Och innan någon ingenjör i baksätet sätter sitt eget mot-ankare — <em>"pfft, ett
+            vibe-codat helgleksak, värt typ $0"</em> — nej. Det är lika fel, åt andra hållet. Den
+            här texten handlar om vad som ligger emellan, och varför avståndet inte mäts i rader
+            kod.
+        </p>
+
+        <h2>Ankaret ljuger åt två håll</h2>
+        <p>
+            COCOMO (Constructive Cost Model, Barry Boehm, <strong>1981</strong>) skattar kostnad ur
+            en enda ingång: antal rader kod, körda genom en takt kalibrerad mot vattenfallsprojekt
+            på stordatorer. Den ljuger på två sätt samtidigt.
+        </p>
+        <p>
+            <strong>Den inflaterar.</strong> Av de 18 988 raderna <code>scc</code> räknade är
+            massor inte handskriven applikationslogik: 5 306 rader CSV-frågedata, 4 542 rader
+            Markdown (specs, ADR:er, den här sortens dokument), genererad och konfigurerad kod. Och
+            även den äkta koden prissätts i 1981 års takt — en epok utan ramverk, pakethanterare
+            eller en standardbibliotek som gör det tunga lyftet.
+        </p>
+        <p>
+            Skala ner till <strong>enbart ren kod</strong> — C#, Razor, CSS — och modellen säger:
+        </p>
+        <blockquote>$126 384 · 6,27 månader · 1,79 personer (4 347 rader kod)</blockquote>
+        <p>
+            Mer ärligt. Fortfarande absurt för en solo-helg.
+        </p>
+        <p>
+            <strong>Den är blind.</strong> Det COCOMO <em>inte</em> kan se är där allt arbete
+            faktiskt ligger: specifikationen som är sanningskälla, de sju arkitekturbesluten,
+            testdesignen, agent-pipelinen som granskar frågedatan. Och inte bara det osynliga
+            <em>tankearbetet</em> — också det konkreta arbete som inte är applikationskod alls.
+            <strong>1 085 frågekort</strong>, vart och ett författat, faktagranskat mot källa och
+            språkputsat — modellen ser 5 306 textrader att prissätta som om de vore kod, men inte
+            timmarna av kurering bakom dem. Och allt som krävdes för att det här ens skulle finnas
+            på en adress: köpa domänen, konfigurera DNS, skriva CI/CD-pipelinen i GitHub Actions,
+            deploya till fly.io. Noll rader, i modellens ögon. Den största delen av arbetet väger
+            ingenting.
+        </p>
+        <p>
+            Det är pudelns kärna: <strong>modellen mäter skuggan, inte det som kastar den.</strong>
+            Rader kod är skuggan. Det som kastar skuggan — övad metod — syns inte i en
+            SLOC-räknare.
+        </p>
+
+        <h2>Vad som faktiskt gjorde det snabbt: övad metod, inte AI-typing</h2>
+        <p>
+            Hävstången var inte att jag skrev fort, och inte att en AI skrev åt mig. Den var att
+            <em>besluten redan var fattade</em> — av en uppsättning seniora discipliner jag har
+            <strong>övat</strong> tills de blivit reflex. Tre av dem är ryggraden, och de landar
+            alla i samma form: <strong>Given–When–Then</strong>.
+        </p>
+
+        <h3>Vertical Slice Architecture</h3>
+        <p>
+            Bygg en funktion åt gången, hela vägen genom: en self-contained slice. Ingen kod delas
+            spekulativt mellan funktioner — varje slice är ett <strong>oberoende verifierbart
+            Given–When–Then-kontrakt</strong>.
+        </p>
+        <figure><img src="/artiklar/lev-som-du-lar/vertical-slice.svg" alt="Diagram över Vertical Slice Architecture: varje funktion byggs hela vägen genom lagren som en oberoende skiva." /></figure>
+        <p>
+            För ledaren: du kan leverera och verifiera en funktion utan att rota i tio andra. För
+            ingenjören: ingen prematur abstraktion, inga lager-för-lagrets-skull, koppling hålls
+            inom slicen.
+        </p>
+
+        <h3>Functional Core / Imperative Shell</h3>
+        <p>
+            All beslutslogik bor i en <strong>ren kärna</strong> — inga databaser, ingen klocka,
+            inget nätverk, helt deterministisk. Allt stökigt (I/O, tid, anrop) trycks ut i ett
+            tunt yttre skal.
+        </p>
+        <figure><img src="/artiklar/lev-som-du-lar/functional-core.svg" alt="Diagram över Functional Core / Imperative Shell: ren kärna i mitten, stökigt I/O-skal runtom." /></figure>
+        <p>
+            Konsekvensen står i bilden: <em>beteendet är simulerbart — kör tusentals scenarier utan
+            databas, verifierbart innan det ens är byggt.</em> Du behöver inte starta något för att
+            veta att logiken stämmer. Det är därför testerna är bombsäkra (mer om det strax).
+        </p>
+
+        <h3>Decider + Event Sourcing</h3>
+        <p>
+            Spelet är en <strong>Decider</strong>: två totala funktioner.
+        </p>
+        <pre><code>decide:  (State, Command)  &rarr;  Result&lt;Event[]&gt;
+evolve:  (State, Event)    &rarr;  State</code></pre>
+        <figure><img src="/artiklar/lev-som-du-lar/decider-pattern.svg" alt="Diagram över Decider-mönstret: decide tar tillstånd och kommando till events, evolve viktar events till nytt tillstånd." /></figure>
+        <p>
+            Loopen <em>är</em> Given–When–Then: <strong>Given</strong> ett tillstånd (vikta
+            tidigare events via <code>evolve</code>), <strong>When</strong> ett kommando,
+            <strong>Then</strong> events — eller en avvisning. Samma form som slicen, samma form
+            som testet. Designen och testet talar samma språk. (Inledande och slutliga tillstånd
+            utelämnade för läsbarhet.)
+        </p>
+        <p>
+            Alla tre mönstren härleds ur <strong>en enda källa</strong>: en emlang event
+            modeling-spec som ritar hela spelets flöde — trigger, kommando, event, vy — innan en
+            rad kod skrivs.
+        </p>
+        <figure><img src="/artiklar/lev-som-du-lar/game-flow-em.png" alt="Event modeling-spec över hela spelets flöde: triggers, kommandon, events och vyer i tidsordning." /></figure>
+
+        <h3>Stödbalkarna</h3>
+        <p>
+            Det här är inte tre lösryckta mönster — de hänger på en gemensam ställning:
+        </p>
+        <ul class="bullets">
+            <li><strong>Spec som sanningskälla.</strong> Allt beteende definieras först i en
+                emlang-spec (event modeling) — inte i koden, inte i mitt huvud. Koden följer
+                specen.</li>
+            <li><strong>Architectural Decision Records.</strong> Varje vägval (event sourcing
+                in-memory, Decider, HTMX-polling, CSV, ROP, Razor static SSR) är ett skrivet
+                beslut med ett <em>varför</em>. Inget omförhandlas i varje commit.</li>
+            <li><strong>Result / Railway-Oriented Programming</strong> via native unions. Affärsfel
+                är <em>värden på ett felspår</em>, aldrig kastade undantag. Kärnan förblir
+                total.</li>
+            <li><strong>Constraints som feature.</strong> Ingen SignalR, ingen Entity Framework,
+                ingen Blazor-circuit. Färre rörliga delar = färre fellägen. Begränsningen är
+                designen.</li>
+            <li><strong>Determinism via <code>GameContext</code>.</strong> Klocka och id-generator
+                <em>injiceras</em>. Därför är kärnan deterministisk, och därför är FC-testerna
+                bombsäkra — rena och förutsägbara, helt utan mocks.</li>
+        </ul>
+        <p>
+            Inget av det här är talang. Det är <em>övad ingenjörsdisciplin</em>. Det är repetition
+            tills besluten sitter i ryggmärgen och beslutskostnaden går mot noll.
+        </p>
+
+        <h2>Kvalitet påstås inte — den upprätthålls</h2>
+        <p>
+            "Snabbt och billigt" betyder ingenting om det går sönder. Så det här är inte ett
+            påstående om kvalitet — det är en <em>mekanism</em> för den.
+        </p>
+        <ul class="bullets">
+            <li><strong>Bombsäkra FC-tester.</strong> Given–When–Then- och Given–Then-fall i
+                <code>DeciderTests</code>, <code>EvolveTests</code>, <code>ProjectionTests</code>.
+                Den rena kärnan gör dem deterministiska och mock-fria — testet kör samma loop som
+                designen.</li>
+            <li><strong>Arkitekturtester.</strong> <code>ArchitectureTests</code> upprätthåller
+                FC/IS-gränsen <em>i CI</em>. Om någon smyger in I/O i kärnan failar bygget.
+                Disciplinen är automatiserad, inte hoppfull.</li>
+            <li><strong>End-to-end.</strong> <code>GameEndpointsTests</code> mot en
+                <code>TestAppFactory</code> kör hela vägen genom det imperativa skalet.</li>
+            <li><strong>EvalOps.</strong> När ett test fallerar matas det tillbaka in i minnet —
+                felet blir en permanent läxa, inte en upprepad miss.</li>
+            <li><strong>Context management som mekanism.</strong> En <code>CLAUDE.md</code>, en
+                constitution, ett auto-minne. Inte "jag försöker komma ihåg" — en skriven, laddad
+                kontrakt-yta. Mekanismen, inte bara intentionen.</li>
+            <li><strong>Förenkling som inte behövs.</strong> Jag kör ponytail i Claude Code — en
+                agent vars enda jobb är att jaga överarbete och föreslå det enklaste som fungerar.
+                Poängen: den hittar nästan aldrig något. Vertical slices, functional core och
+                constraints-as-feature förebygger bloat <em>vid källan</em> — komplexiteten skrivs
+                aldrig, så det finns inget att städa bort i efterhand. Den billigaste förenklingen
+                är den man aldrig behövde göra.</li>
+        </ul>
+
+        <h2>Och inte bara kod — content också</h2>
+        <p>
+            Frågedatan är inte hopkastad. Varje kort passerar en pipeline av specialiserade agenter
+            innan det når det live-paketet:
+        </p>
+        <figure><img src="/artiklar/lev-som-du-lar/agent-pipeline.svg" alt="Diagram över agent-pipelinen: frågesättare, faktagranskare, språkgranskare och kurator i följd." /></figure>
+        <p>
+            <strong>frågesättare</strong> författar batchar mot svårighetsbanden →
+            <strong>faktagranskare</strong> verifierar <em>varje</em> värde och riktning mot källa
+            och pinnar årtalet (overifierbart = förkastat) → <strong>språkgranskare</strong> putsar
+            svenskan utan att röra en enda siffra → <strong>kurator</strong>
+            (<code>tools/pack.cs merge</code>) dedupar och kontrollerar bandhistogrammet in i
+            live-paketet.
+        </p>
+        <p>
+            Hög kvalitet, stor människa/AI-insats — och <strong>noll rader kod</strong>. Lika
+            osynligt för COCOMO som arkitekturen. Content är hantverk på samma villkor som
+            mjukvaran.
+        </p>
+
+        <h2>Lev som du lär</h2>
+        <p>
+            Skickligheten <em>är</em> det jag lär ut, och läran är övad. Det var aldrig AI:n och
+            aldrig tangenttrycken — det var att besluten redan var fattade, av discipliner jag
+            tränat tills de blivit billiga. Metoden är multiplikatorn.
+        </p>
+        <p>
+            Och här är meta-beviset: den här artikeln är själv ett exempel på tesen. Argumentet,
+            illustrationerna — hämtade ur mitt eget mönsterbibliotek, samma visuella språk som
+            spelets diagram — och draftandet följde exakt samma övade metod som koden.
+        </p>
+        <p>
+            Ankaret var aldrig poängen. Disciplinen är det. Jag lever som jag lär.
+        </p>
+
+        <h2>Spela</h2>
+        <p>
+            Nog teori — spelet är till för att spelas. Samla gänget, öppna kvissig.se och se vem
+            som gissar närmast. Mer eller mindre?
+        </p>
+
+        <a class="btn" href="/">Välj kviss och spela</a>
+        <a class="back" href="/">← Tillbaka till kvissarna</a>
+    </div>
+</MainLayout>
+
+@code {
+    // BlogPosting schema for rich results / LLM citation, matches the site's JSON-LD-everywhere
+    // pattern. Serialized object only (MainLayout wraps it in <script>).
+    private const string ArticleJsonLd = """
+    {"@context":"https://schema.org","@type":"BlogPosting","headline":"Lev som du lär","inLanguage":"sv","author":{"@type":"Person","name":"Martin Rosén-Lidholm"},"publisher":{"@type":"Organization","name":"Mer eller Mindre"},"description":"Hur Mer eller Mindre byggdes solo på en helg — och varför övad ingenjörsmetod, inte AI-typing, är multiplikatorn."}
+    """;
+}

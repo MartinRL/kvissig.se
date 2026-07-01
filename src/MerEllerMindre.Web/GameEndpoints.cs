@@ -46,6 +46,8 @@ public static class GameEndpoints
 
         app.MapGet("/spel-som-0-100", () => new RazorComponentResult<SpelSom0100>());
 
+        app.MapGet("/lev-som-du-lar", () => new RazorComponentResult<LevSomDuLar>());
+
         app.MapGet("/fragespel-online", () => new RazorComponentResult<FragespelOnline>());
 
         app.MapGet("/spel-som-more-or-less", () => new RazorComponentResult<SpelSomMoreOrLess>());
@@ -61,7 +63,7 @@ public static class GameEndpoints
         app.MapGet("/sitemap.xml", (FileSystemQuestionPackCatalog catalog, HttpContext http) =>
         {
             var root = $"{http.Request.Scheme}://{http.Request.Host}";
-            var urls = new List<string> { "/", "/om-spelet", "/om-mig", "/spel-som-0-100", "/fragespel-online", "/spel-som-more-or-less", "/hund-fragesport-tillsammans", "/elbil-fragesport-tillsammans", "/fotboll-fragesport-tillsammans" };
+            var urls = new List<string> { "/", "/om-spelet", "/om-mig", "/spel-som-0-100", "/lev-som-du-lar", "/fragespel-online", "/spel-som-more-or-less", "/hund-fragesport-tillsammans", "/elbil-fragesport-tillsammans", "/fotboll-fragesport-tillsammans" };
             urls.AddRange(catalog.Packs.Select(p => $"/games/new/{p.PackId}"));
             var body = string.Concat(urls.Select(u =>
                 $"<url><loc>{System.Security.SecurityElement.Escape(root + u)}</loc></url>"));

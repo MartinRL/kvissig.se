@@ -282,6 +282,10 @@ input[type=text]:focus { outline: none; border-color: var(--accent); }
 .content table { width: 100%; border-collapse: collapse; margin: .5rem 0; font-size: .92rem; }
 .content th, .content td { border: 1px solid var(--line); padding: .5rem .6rem; text-align: left; vertical-align: top; }
 .content th { background: var(--bg); }
+.content figure { margin: 1rem 0; }
+.content figure img { max-width: 100%; height: auto; border-radius: 10px; }
+.content blockquote { margin: 1rem 0; padding: .6rem 1rem; border-left: 3px solid var(--line); font-weight: 700; }
+.content pre { background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: .7rem .9rem; overflow-x: auto; font-size: .85rem; }
 a.logo { text-decoration: none; }
 
 /* ---- global htmx error banner ---- */

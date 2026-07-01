@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <defs>
+    <!-- Background -->
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f8fafc"/>
+      <stop offset="1" stop-color="#eef2ff"/>
+    </linearGradient>
+    <!-- Imperative shell ring gradient (slate) -->
+    <linearGradient id="shellGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#64748b"/>
+      <stop offset="1" stop-color="#475569"/>
+    </linearGradient>
+    <!-- Pure core gradient (indigo) -->
+    <radialGradient id="coreGrad" cx="0.5" cy="0.42" r="0.7">
+      <stop offset="0" stop-color="#7c3aed"/>
+      <stop offset="1" stop-color="#4f46e5"/>
+    </radialGradient>
+    <!-- decide/evolve function chip -->
+    <linearGradient id="fnGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#e0e7ff"/>
+    </linearGradient>
+    <!-- shell side-effect chip -->
+    <linearGradient id="seGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f1f5f9"/>
+      <stop offset="1" stop-color="#e2e8f0"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#1e1b4b" flood-opacity="0.22"/>
+    </filter>
+    <filter id="softShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#312e81" flood-opacity="0.18"/>
+    </filter>
+    <!-- command IN (blue) -->
+    <marker id="arrIn" markerWidth="11" markerHeight="11" refX="8" refY="3.2" orient="auto">
+      <path d="M0,0 L8,3.2 L0,6.4 Z" fill="#3498db"/>
+    </marker>
+    <!-- events OUT (orange) -->
+    <marker id="arrOut" markerWidth="11" markerHeight="11" refX="8" refY="3.2" orient="auto">
+      <path d="M0,0 L8,3.2 L0,6.4 Z" fill="#e67e22"/>
+    </marker>
+    <!-- side-effect (slate) -->
+    <marker id="arrSE" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#475569"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="560" fill="url(#bgGrad)"/>
+
+  <!-- Title -->
+  <text x="60" y="52" font-size="30" font-weight="800" fill="#1e1b4b">Functional Core / Imperative Shell</text>
+  <text x="61" y="80" font-size="15" font-weight="500" fill="#64748b">Pure decision logic in the core; all side effects pushed to a thin outer shell</text>
+
+  <!-- ============== IMPERATIVE SHELL (outer rounded zone) ============== -->
+  <g filter="url(#shadow)">
+    <rect x="290" y="108" width="320" height="344" rx="26" fill="url(#shellGrad)"/>
+  </g>
+  <text x="450" y="136" font-size="16" font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="0.5">IMPERATIVE SHELL</text>
+  <text x="450" y="156" font-size="11.5" font-weight="500" fill="#cbd5e1" text-anchor="middle">all I/O lives here &#8212; messier than it looks</text>
+
+  <!-- shell side-effect chips (this codebase's real I/O) -->
+  <g filter="url(#softShadow)">
+    <rect x="306" y="174" width="132" height="40" rx="10" fill="url(#seGrad)" stroke="#94a3b8" stroke-width="1.5"/>
+  </g>
+  <text x="372" y="199" font-size="12.5" font-weight="700" fill="#334155" text-anchor="middle">Event store</text>
+
+  <g filter="url(#softShadow)">
+    <rect x="448" y="174" width="132" height="40" rx="10" fill="url(#seGrad)" stroke="#94a3b8" stroke-width="1.5"/>
+  </g>
+  <text x="514" y="199" font-size="12.5" font-weight="700" fill="#334155" text-anchor="middle">Pack catalog (CSV)</text>
+
+  <g filter="url(#softShadow)">
+    <rect x="306" y="346" width="132" height="40" rx="10" fill="url(#seGrad)" stroke="#94a3b8" stroke-width="1.5"/>
+  </g>
+  <text x="372" y="371" font-size="12.5" font-weight="700" fill="#334155" text-anchor="middle">Web server &#183; HTTP</text>
+
+  <g filter="url(#softShadow)">
+    <rect x="448" y="346" width="132" height="40" rx="10" fill="url(#seGrad)" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5 4"/>
+  </g>
+  <text x="514" y="364" font-size="12.5" font-weight="700" fill="#334155" text-anchor="middle">DI &#183; config &#183; logging</text>
+  <text x="514" y="378" font-size="9.5" font-weight="500" fill="#64748b" text-anchor="middle">&#8230; and the rest</text>
+
+  <!-- ============== PURE CORE (inner zone) ============== -->
+  <g filter="url(#shadow)">
+    <rect x="326" y="230" width="248" height="112" rx="18" fill="url(#coreGrad)"/>
+  </g>
+  <text x="450" y="256" font-size="15" font-weight="900" fill="#ffffff" text-anchor="middle" letter-spacing="0.5">PURE CORE</text>
+  <text x="450" y="274" font-size="10.5" font-weight="600" fill="#c7d2fe" text-anchor="middle">no I/O &#183; no clock &#183; deterministic</text>
+
+  <!-- decide / evolve function chips -->
+  <g filter="url(#softShadow)">
+    <rect x="342" y="286" width="104" height="46" rx="11" fill="url(#fnGrad)" stroke="#7c3aed" stroke-width="2"/>
+  </g>
+  <text x="394" y="307" font-size="13" font-weight="800" fill="#5b21b6" text-anchor="middle">decide</text>
+  <text x="394" y="323" font-size="9.5" font-weight="500" fill="#6d28d9" text-anchor="middle">state,cmd &#8594; events</text>
+
+  <g filter="url(#softShadow)">
+    <rect x="454" y="286" width="104" height="46" rx="11" fill="url(#fnGrad)" stroke="#7c3aed" stroke-width="2"/>
+  </g>
+  <text x="506" y="307" font-size="13" font-weight="800" fill="#5b21b6" text-anchor="middle">evolve</text>
+  <text x="506" y="323" font-size="9.5" font-weight="500" fill="#6d28d9" text-anchor="middle">state,evt &#8594; state</text>
+
+  <!-- ============== LEFT: command IN ============== -->
+  <g filter="url(#softShadow)">
+    <rect x="40" y="252" width="158" height="72" rx="16" fill="#3498db"/>
+  </g>
+  <text x="119" y="284" font-size="14" font-weight="800" fill="#ffffff" text-anchor="middle">Shell loads state</text>
+  <text x="119" y="306" font-size="12" font-weight="600" fill="#eaf4fc" text-anchor="middle">+ delivers command</text>
+  <!-- arrow into core -->
+  <path d="M198,290 C250,290 290,288 324,288" fill="none" stroke="#3498db" stroke-width="3.5" marker-end="url(#arrIn)"/>
+  <text x="258" y="277" font-size="11.5" font-weight="800" fill="#2980b9" text-anchor="middle">state + command</text>
+
+  <!-- ============== RIGHT: events OUT ============== -->
+  <g filter="url(#softShadow)">
+    <rect x="702" y="252" width="158" height="72" rx="16" fill="#e67e22"/>
+  </g>
+  <text x="781" y="284" font-size="14" font-weight="800" fill="#ffffff" text-anchor="middle">Core returns events</text>
+  <text x="781" y="306" font-size="12" font-weight="600" fill="#fdebd9" text-anchor="middle">shell performs effects</text>
+  <!-- arrow out of core -->
+  <path d="M574,296 C630,296 670,294 700,294" fill="none" stroke="#e67e22" stroke-width="3.5" marker-end="url(#arrOut)"/>
+  <text x="638" y="283" font-size="11.5" font-weight="800" fill="#ca6f1e" text-anchor="middle">events</text>
+
+  <!-- side-effect arrows from the OUT box back to shell chips -->
+  <path d="M772,252 C740,228 640,210 582,200" fill="none" stroke="#475569" stroke-width="2.6" stroke-dasharray="7 5" marker-end="url(#arrSE)"/>
+  <path d="M772,324 C740,348 640,366 582,372" fill="none" stroke="#475569" stroke-width="2.6" stroke-dasharray="7 5" marker-end="url(#arrSE)"/>
+  <text x="690" y="348" font-size="11" font-weight="700" fill="#475569" text-anchor="middle">perform side effects</text>
+
+  <!-- ============== EMPHASIS LABEL ============== -->
+  <g filter="url(#shadow)">
+    <rect x="40" y="478" width="820" height="58" rx="16" fill="#1e1b4b"/>
+  </g>
+  <text x="450" y="503" font-size="16" font-weight="900" fill="#ffffff" text-anchor="middle">Behavior is simulatable &#8212; run thousands of scenarios with no database</text>
+  <text x="450" y="525" font-size="14" font-weight="900" fill="#fbbf24" text-anchor="middle">verifiable before it is built.</text>
+</svg>

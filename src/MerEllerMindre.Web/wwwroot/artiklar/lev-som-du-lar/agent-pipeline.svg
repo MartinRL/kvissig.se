@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f8fafc"/>
+      <stop offset="1" stop-color="#eef2ff"/>
+    </linearGradient>
+    <!-- author (blue) -->
+    <linearGradient id="authorGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3498db"/>
+      <stop offset="1" stop-color="#2980b9"/>
+    </linearGradient>
+    <!-- fact-check (orange) -->
+    <linearGradient id="factGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e67e22"/>
+      <stop offset="1" stop-color="#ca6f1e"/>
+    </linearGradient>
+    <!-- language (purple) -->
+    <linearGradient id="langGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7c3aed"/>
+      <stop offset="1" stop-color="#5b21b6"/>
+    </linearGradient>
+    <!-- curator (indigo dark) -->
+    <linearGradient id="curGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4f46e5"/>
+      <stop offset="1" stop-color="#312e81"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#1e1b4b" flood-opacity="0.22"/>
+    </filter>
+    <filter id="softShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#312e81" flood-opacity="0.18"/>
+    </filter>
+    <marker id="arr" markerWidth="11" markerHeight="11" refX="8" refY="3.2" orient="auto">
+      <path d="M0,0 L8,3.2 L0,6.4 Z" fill="#475569"/>
+    </marker>
+    <marker id="arrReject" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#dc2626"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="600" fill="url(#bgGrad)"/>
+
+  <!-- Title -->
+  <text x="60" y="58" font-size="34" font-weight="800" fill="#1e1b4b">Agent Pipeline &#8212; Question Data</text>
+  <text x="61" y="86" font-size="16" font-weight="500" fill="#64748b">Every card passes four gates before it reaches the live pack &#8212; work COCOMO never counts</text>
+
+  <!-- ============ STAGE 1: Author ============ -->
+  <g filter="url(#shadow)">
+    <rect x="56" y="170" width="248" height="150" rx="20" fill="url(#authorGrad)"/>
+  </g>
+  <text x="180" y="206" font-size="18" font-weight="900" fill="#ffffff" text-anchor="middle">Author</text>
+  <text x="180" y="262" font-size="12.5" font-weight="500" fill="#eaf4fc" text-anchor="middle">writes batches of ~25&#8211;30</text>
+  <text x="180" y="282" font-size="12.5" font-weight="500" fill="#eaf4fc" text-anchor="middle">cards against the</text>
+  <text x="180" y="302" font-size="12.5" font-weight="700" fill="#ffffff" text-anchor="middle">style-guide bands</text>
+
+  <!-- ============ STAGE 2: Fact-checker ============ -->
+  <g filter="url(#shadow)">
+    <rect x="356" y="170" width="248" height="150" rx="20" fill="url(#factGrad)"/>
+  </g>
+  <text x="480" y="206" font-size="18" font-weight="900" fill="#ffffff" text-anchor="middle">Fact-checker</text>
+  <text x="480" y="262" font-size="12.5" font-weight="500" fill="#fdebd9" text-anchor="middle">verifies every value +</text>
+  <text x="480" y="282" font-size="12.5" font-weight="500" fill="#fdebd9" text-anchor="middle">direction vs. source,</text>
+  <text x="480" y="302" font-size="12.5" font-weight="700" fill="#ffffff" text-anchor="middle">pins the year</text>
+
+  <!-- ============ STAGE 3: Language editor ============ -->
+  <g filter="url(#shadow)">
+    <rect x="656" y="170" width="248" height="150" rx="20" fill="url(#langGrad)"/>
+  </g>
+  <text x="780" y="206" font-size="18" font-weight="900" fill="#ffffff" text-anchor="middle">Language editor</text>
+  <text x="780" y="262" font-size="12.5" font-weight="500" fill="#ddd6fe" text-anchor="middle">polishes Swedish &#8212;</text>
+  <text x="780" y="282" font-size="12.5" font-weight="500" fill="#ddd6fe" text-anchor="middle">grammar, flow, comparatives;</text>
+  <text x="780" y="302" font-size="12.5" font-weight="700" fill="#ffffff" text-anchor="middle">never touches the facts</text>
+
+  <!-- ============ STAGE 4: Curator ============ -->
+  <g filter="url(#shadow)">
+    <rect x="956" y="170" width="188" height="150" rx="20" fill="url(#curGrad)"/>
+  </g>
+  <text x="1050" y="206" font-size="18" font-weight="900" fill="#ffffff" text-anchor="middle">Curator</text>
+  <text x="1050" y="230" font-size="12" font-weight="600" fill="#c7d2fe" text-anchor="middle">pack.cs</text>
+  <text x="1050" y="262" font-size="12.5" font-weight="500" fill="#c7d2fe" text-anchor="middle">merge + dedup,</text>
+  <text x="1050" y="282" font-size="12.5" font-weight="500" fill="#c7d2fe" text-anchor="middle">band histogram,</text>
+  <text x="1050" y="302" font-size="12.5" font-weight="700" fill="#ffffff" text-anchor="middle">into the live pack</text>
+
+  <!-- flow arrows -->
+  <path d="M304,245 L352,245" fill="none" stroke="#475569" stroke-width="3.5" marker-end="url(#arr)"/>
+  <path d="M604,245 L652,245" fill="none" stroke="#475569" stroke-width="3.5" marker-end="url(#arr)"/>
+  <path d="M904,245 L952,245" fill="none" stroke="#475569" stroke-width="3.5" marker-end="url(#arr)"/>
+
+  <!-- reject loop from fact-check back to author -->
+  <path d="M420,320 C420,380 240,380 200,322" fill="none" stroke="#dc2626" stroke-width="2.6" stroke-dasharray="7 5" marker-end="url(#arrReject)"/>
+  <text x="320" y="398" font-size="12" font-weight="700" fill="#dc2626" text-anchor="middle">unverifiable &#8594; rejected</text>
+
+  <!-- staging vs live labels -->
+  <text x="480" y="146" font-size="12.5" font-weight="700" fill="#94a3b8" text-anchor="middle">question-staging/*.csv</text>
+  <text x="1050" y="146" font-size="12.5" font-weight="700" fill="#4f46e5" text-anchor="middle">data/packs/*.csv (live)</text>
+
+  <!-- emphasis bar -->
+  <g filter="url(#shadow)">
+    <rect x="56" y="430" width="1088" height="64" rx="18" fill="#1e1b4b"/>
+  </g>
+  <text x="600" y="458" font-size="19" font-weight="900" fill="#ffffff" text-anchor="middle">Every fact verified, every sentence polished &#8212; before a single card ships.</text>
+  <text x="600" y="482" font-size="16" font-weight="900" fill="#fbbf24" text-anchor="middle">Zero lines of code. Invisible to the cost model.</text>
+
+  <!-- legend -->
+  <g font-size="12" font-weight="600" fill="#475569">
+    <line x1="56" y1="556" x2="88" y2="556" stroke="#475569" stroke-width="3.5" marker-end="url(#arr)"/>
+    <text x="96" y="560">passes the gate (next stage)</text>
+
+    <line x1="380" y1="556" x2="412" y2="556" stroke="#dc2626" stroke-width="2.6" stroke-dasharray="7 5" marker-end="url(#arrReject)"/>
+    <text x="420" y="560">fails &#8594; corrected or rejected</text>
+  </g>
+</svg>
