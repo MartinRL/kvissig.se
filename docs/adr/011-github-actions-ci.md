@@ -4,7 +4,6 @@ type: operations
 created: 2026-06-21
 revised:
 ---
-
 # ADR 011: GitHub Actions for CI/CD
 
 ## Context

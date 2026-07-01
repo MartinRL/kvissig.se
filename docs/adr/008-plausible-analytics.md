@@ -7,7 +7,7 @@ revised:
 # ADR 008: Plausible Cloud for Analytics
 
 ## Context
-The site shipped with no analytics (`specs/tasks.md` had an open `analytics (GA2?)` TODO).
+The site shipped with no analytics (`specs/tasks.md` had an open `analytics (GA2?)` TODO, i.e. GA4).
 We want two things and nothing more:
 
 1. **Traffic / vanity metrics** — pageviews, referrers, countries, devices.

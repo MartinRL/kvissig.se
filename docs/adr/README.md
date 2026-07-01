@@ -22,3 +22,4 @@ and **`game-design`** (product / game-rule decisions: how the game plays, not ho
 | [011](011-github-actions-ci.md) | GitHub Actions for CI/CD | operations | Accepted |
 | [012](012-difficulty-banded-deck.md) | Difficulty-Banded Deck Balancing | game-design | Accepted |
 | [013](013-balanced-card-draw.md) | Balanced 21-Card Draw per Game | game-design | Accepted |
+| [014](014-ralph-loop-over-goal.md) | Ralph Loop over Built-in /goal for Autonomous Pack Builds | operations | Accepted |

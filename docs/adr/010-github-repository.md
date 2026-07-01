@@ -4,7 +4,6 @@ type: operations
 created: 2026-06-21
 revised:
 ---
-
 # ADR 010: GitHub for Repository Hosting
 
 ## Context

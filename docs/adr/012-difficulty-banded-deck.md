@@ -3,7 +3,6 @@ status: Accepted
 type: game-design
 created: 2026-06-21
 ---
-
 # ADR 012: Difficulty-Banded Deck Balancing
 
 ## Context
