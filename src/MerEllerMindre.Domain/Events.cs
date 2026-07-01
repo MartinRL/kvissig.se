@@ -4,7 +4,7 @@ namespace MerEllerMindre.Domain;
 /// Events represent facts that happened — immutable history. Modeled as a native C# 15
 /// union (closed, exhaustive switches, no default arm). Each event carries its own
 /// explicit timestamp (*At) per spec. Derived from event (`e:`) elements in
-/// specs/game-flows.yaml.
+/// specs/mer-eller-mindre-event-model.yaml.
 /// </summary>
 public record LobbyOpened(
     Guid GameId,

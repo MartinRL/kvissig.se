@@ -3,7 +3,7 @@
 ## Core Principles
 
 ### 1. Specification First
-- The `specs/game-flows.yaml` file is the **single source of truth**
+- The `specs/mer-eller-mindre-event-model.yaml` file is the **single source of truth**
 - All behavior must be specified in emlang before implementation
 - Tests are derived from `tests:` (given/when/then) blocks, not invented
 
@@ -53,7 +53,7 @@
 
 ## Workflow
 
-1. **Spec** → Update `specs/game-flows.yaml`
+1. **Spec** → Update `specs/mer-eller-mindre-event-model.yaml`
 2. **Types** → Add/update records in Domain
 3. **Decider** → Update `Evolve` and `Decide` switches
 4. **Tests** → Implement GTs and GWTs from spec

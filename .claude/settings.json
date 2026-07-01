@@ -9,8 +9,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "if grep -q 'game-flows\\.yaml'; then export PATH=\"$PATH:/c/Program Files/Go/bin:$HOME/go/bin\"; emlang diagram specs/game-flows.yaml -o specs/game-flows.html; fi 2>/dev/null || true",
-            "statusMessage": "Regenerating game-flows.html"
+            "command": "if grep -qE '(mer-eller-mindre|blindbudet)-event-model\\.yaml'; then export PATH=\"$PATH:/c/Program Files/Go/bin:$HOME/go/bin\"; emlang diagram specs/mer-eller-mindre-event-model.yaml -o specs/mer-eller-mindre-event-model.html; emlang diagram specs/blindbudet-event-model.yaml -o specs/blindbudet-event-model.html; fi 2>/dev/null || true",
+            "statusMessage": "Regenerating event-model diagrams"
           }
         ]
       }

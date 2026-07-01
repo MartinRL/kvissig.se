@@ -58,7 +58,7 @@ stateful RNG side effect.
 ### Frozen on the event, never re-drawn
 `DecideOpenLobby` (`Decider.cs:139-154`) calls `PickBalanced` once and stamps the 21
 cards onto `LobbyOpened.Questions` (`Events.cs`). `Evolve` replays the stored deck and
-never re-selects (`specs/game-flows.yaml:147-148`). No RNG seed is persisted — it isn't
+never re-selects (`specs/mer-eller-mindre-event-model.yaml:147-148`). No RNG seed is persisted — it isn't
 needed, because the resulting deck is already on the event.
 
 ## References

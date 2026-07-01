@@ -21,7 +21,7 @@ Imperative Shell). This ADR records *how* failures are represented as values and
 which C# construct carries them.
 
 A related question is the relationship to the emlang spec. The spec
-(`specs/game-flows.yaml`) uses `x:` "exception" elements (e.g. `x: GameNotFound`).
+(`specs/mer-eller-mindre-event-model.yaml`) uses `x:` "exception" elements (e.g. `x: GameNotFound`).
 In Event Modeling an `x:` is a **business failure outcome in a swimlane**, not a
 thrown exception.
 
@@ -85,7 +85,7 @@ so it too is a union once the case set stabilizes.
   (e.g. OneOf) and read better than positional `T0/T1` cases. Named case types
   (`Ok<T>`, `Err`) carry intent.
 - **Spec alignment**: the one-to-one `x:` ⇒ `Error` mapping keeps
-  `specs/game-flows.yaml` the single source of truth and makes GWT
+  `specs/mer-eller-mindre-event-model.yaml` the single source of truth and makes GWT
   `then: [{ x: ... }]` cases mechanical to implement.
 
 ## Consequences

@@ -5,7 +5,7 @@ using static MerEllerMindre.Domain.Tests.Fixtures;
 namespace MerEllerMindre.Domain.Tests;
 
 /// <summary>
-/// Decider-true GWTs from specs/game-flows.yaml: given a GameState built DIRECTLY
+/// Decider-true GWTs from specs/mer-eller-mindre-event-model.yaml: given a GameState built DIRECTLY
 /// (never event-replay), when a command, then events | an error. One per ✍️ slice.
 /// </summary>
 public class DeciderTests

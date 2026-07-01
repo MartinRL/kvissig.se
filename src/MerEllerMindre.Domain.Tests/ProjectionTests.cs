@@ -5,7 +5,7 @@ using static MerEllerMindre.Domain.Tests.Fixtures;
 namespace MerEllerMindre.Domain.Tests;
 
 /// <summary>
-/// Projection GTs from specs/game-flows.yaml: given prior events, fold via Decider.Fold,
+/// Projection GTs from specs/mer-eller-mindre-event-model.yaml: given prior events, fold via Decider.Fold,
 /// then project the view and assert the spec's `then:` props.
 /// </summary>
 public class ProjectionTests

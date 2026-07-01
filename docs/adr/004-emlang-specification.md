@@ -15,7 +15,7 @@ We need to specify game behavior in a way that:
 
 ## Decision
 Use **emlang YAML** (Event Modeling Language, CLI v1.0.0) as the single source of
-truth for game flows. The spec lives in `specs/game-flows.yaml`.
+truth for game flows. The spec lives in `specs/mer-eller-mindre-event-model.yaml`.
 
 The root is a single `slices:` map. Each slice is either:
 

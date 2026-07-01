@@ -5,7 +5,7 @@ using static MerEllerMindre.Domain.Tests.Fixtures;
 namespace MerEllerMindre.Domain.Tests;
 
 /// <summary>
-/// Decision-Model fold GTs from specs/game-flows.yaml: given prior events, then the
+/// Decision-Model fold GTs from specs/mer-eller-mindre-event-model.yaml: given prior events, then the
 /// folded GameState (verifies Evolve / Fold via event-replay).
 /// </summary>
 public class EvolveTests

@@ -22,7 +22,7 @@ Human judgment is encoded in artifacts the agent loads every session, not held i
 - `CLAUDE.md` — project rules, constraints (no SignalR/EF/Blazor-circuit), workflow.
 - `.claude/constitution.md` — coding standards.
 - Auto-memory (`~/.claude/.../memory/`) — confirmed conventions persisted across sessions.
-- `specs/game-flows.yaml` — emlang spec as single source of truth; code maps to it 1:1.
+- `specs/mer-eller-mindre-event-model.yaml` — emlang spec as single source of truth; code maps to it 1:1.
 - 7 ADRs — every architectural choice is a written decision with a *why*.
 
 ### L3 — Measured (partial: the trust half, not the metrics half)

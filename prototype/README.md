@@ -39,11 +39,11 @@ prototype/<lib>/theme.css  ← that library's MEM brand + responsive rules
 ## Designval (spec-trogna — dokumenterade, inte frågade)
 
 1. **Differens = 0-100-slider** med live **två-staplar-visualisering** (lika→0, hälften→50,
-   en tiondel→90 — enligt poängrubriken i `specs/game-flows.yaml`). Brädans kg-knappsats
+   en tiondel→90 — enligt poängrubriken i `specs/mer-eller-mindre-event-model.yaml`). Brädans kg-knappsats
    föregick spec:ens 0-100-normalisering (`guessedDifference: int (0-100)`), så slidern är
    det spec-trogna valet.
 2. **Riktning + differens på en Question-skärm, en submit** = ett `SubmitGuess`-kommando
-   (matchar ASSUMPTION i `game-flows.yaml` rad 63-65). Steg 1: tryck vilket alternativ som
+   (matchar ASSUMPTION i `mer-eller-mindre-event-model.yaml` rad 63-65). Steg 1: tryck vilket alternativ som
    är "mer", steg 2: dra differensen, en "Ställ"-knapp.
 3. **Gå med = skanna GM:s QR + tryck-länk, kort kod som reserv.** UI:t visar en kort
    mänsklig kod (skalet mappar den till `joinCode`-Guid senare). QR:n är en platshållar-SVG.

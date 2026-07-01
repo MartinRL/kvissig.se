@@ -194,7 +194,7 @@ public class ArchitectureTests
 
     private static HashSet<string> SpecElementNames()
     {
-        var yaml = Read("specs/game-flows.yaml");
+        var yaml = Read("specs/mer-eller-mindre-event-model.yaml");
         var names = new HashSet<string>(StringComparer.Ordinal);
         foreach (Match m in SpecElementPattern.Matches(yaml))
         {

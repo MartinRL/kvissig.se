@@ -70,7 +70,7 @@ dotnet run --project src/MerEllerMindre.Web
 - **Frågepaket som CSV-kort** i `src/MerEllerMindre.Domain/data/packs`, redigerbara i
   Excel — se ADR 005
 - **.NET 11 preview** + C# 15 union-typer för `Result<T>` och domänen
-- **emlang-spec** — `specs/game-flows.yaml` är sanningskällan
+- **emlang-spec** — `specs/mer-eller-mindre-event-model.yaml` är sanningskällan
 
 ## Licens
 

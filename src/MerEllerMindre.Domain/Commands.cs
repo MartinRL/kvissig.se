@@ -3,7 +3,7 @@ namespace MerEllerMindre.Domain;
 /// <summary>
 /// Commands represent player/system intentions. Modeled as a native C# 15 union
 /// (closed, exhaustive switches, no default arm). Derived from command (`c:`)
-/// elements in specs/game-flows.yaml.
+/// elements in specs/mer-eller-mindre-event-model.yaml.
 /// </summary>
 public record OpenLobby(
     string HostName,
