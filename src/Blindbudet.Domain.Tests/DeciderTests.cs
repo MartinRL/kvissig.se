@@ -55,6 +55,18 @@ public class DeciderTests
         (error.Error is AuctionPackNotFound).Should().BeTrue();
     }
 
+    [Fact]
+    public void mini_pack_is_sampled_to_a_short_round()
+    {
+        var opened = Gwt.GivenInitial()
+            .When(new OpenAuction("Martin", "blindbudet-mini"))
+            .Events()
+            .Opened();
+
+        opened.Lots.Should().HaveCount(Decider.MiniAuctionSize);
+        opened.Lots.Should().OnlyContain(l => MiniPack.Lots.Contains(l));
+    }
+
     // --- Join Auction --------------------------------------------------------
 
     [Fact]

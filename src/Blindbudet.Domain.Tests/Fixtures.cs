@@ -23,14 +23,27 @@ public static class Fixtures
 
     public static readonly AuctionPack Pack = new("blindbudet", "Blindbudet", [Lot0, Lot1]);
 
+    /// <summary>A 10-lot "mini"-slug pool, to exercise round-sampling (MiniAuctionSize = 7).</summary>
+    public static readonly AuctionPack MiniPack = new(
+        "blindbudet-mini",
+        "Blindbudet mini",
+        [.. Enumerable.Range(0, 10).Select(i => new Lot($"lot{i}", 10m * i, "u"))]);
+
     /// <summary>
-    /// Stub context: FindPack resolves the 2-lot fixture pack for "blindbudet", else null.
-    /// NewGuid/Now are real (minted values asserted only by presence).
+    /// Stub context: FindPack resolves the 2-lot fixture pack for "blindbudet" and the 10-lot
+    /// MiniPack for "blindbudet-mini", else null. NextRandom is fixed to 0 so Fisher-Yates is
+    /// deterministic in tests. NewGuid/Now are real (minted values asserted only by presence).
     /// </summary>
     public static readonly AuctionContext Context = new(
         NewGuid: Guid.NewGuid,
         Now: () => DateTimeOffset.UtcNow,
-        FindPack: slug => slug == "blindbudet" ? Pack : null
+        FindPack: slug => slug switch
+        {
+            "blindbudet" => Pack,
+            "blindbudet-mini" => MiniPack,
+            _ => null
+        },
+        NextRandom: _ => 0
     );
 
     /// <summary>Build a LotRound inline, mirroring the spec's flow-map fixtures.</summary>

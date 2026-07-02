@@ -12,6 +12,12 @@ namespace Blindbudet.Domain;
 public static class Decider
 {
     /// <summary>
+    /// A "mini" (concept-scale) pack is a large pool of lots sampled down to this many per game
+    /// — mirrors MEM's MiniGameSize. Prod-size auction decks (no "mini" marker) play in full.
+    /// </summary>
+    public const int MiniAuctionSize = 7;
+
+    /// <summary>
     /// Evolve applies an event to produce new state. Pure, no side effects.
     /// </summary>
     public static AuctionState Evolve(AuctionState state, AuctionEvent @event) =>
@@ -107,9 +113,31 @@ public static class Decider
         var hostPlayerId = context.NewGuid();
         var joinCode = context.NewGuid();
 
+        // "mini"-slug packs are a large pool sampled to a short round (mirrors MEM's mini marker).
+        // ponytail: single-value lots have no bands to balance, so a plain shuffle + take — not
+        // MEM's PickBalanced. Add a FullAuctionSize cap here when a prod-size auction deck ships.
+        var lots = command.PackId.Contains("mini")
+            ? SampleLots(pack.Lots, MiniAuctionSize, context.NextRandom)
+            : pack.Lots;
+
         return new Ok<AuctionEvent[]>([
-            new AuctionOpened(gameId, hostPlayerId, command.HostName, joinCode, command.PackId, pack.Lots, context.Now())
+            new AuctionOpened(gameId, hostPlayerId, command.HostName, joinCode, command.PackId, lots, context.Now())
         ]);
+    }
+
+    /// <summary>Fisher-Yates shuffle a copy of the pool, then take the first <paramref name="count"/>.</summary>
+    private static IReadOnlyList<Lot> SampleLots(IReadOnlyList<Lot> pool, int count, Func<int, int> next)
+    {
+        if (pool.Count <= count)
+            return pool;
+
+        var copy = pool.ToList();
+        for (var i = copy.Count - 1; i > 0; i--)
+        {
+            var j = next(i + 1);
+            (copy[i], copy[j]) = (copy[j], copy[i]);
+        }
+        return copy.Take(count).ToList();
     }
 
     private static Result<AuctionEvent[]> DecideJoinAuction(AuctionState state, JoinAuction command, AuctionContext context)
@@ -248,13 +276,15 @@ public static class Decider
 public record AuctionContext(
     Func<Guid> NewGuid,
     Func<DateTimeOffset> Now,
-    Func<string, AuctionPack?> FindPack
+    Func<string, AuctionPack?> FindPack,
+    Func<int, int> NextRandom
 )
 {
     public static AuctionContext Default => new(
         NewGuid: Guid.NewGuid,
         Now: () => DateTimeOffset.UtcNow,
-        FindPack: _ => null
+        FindPack: _ => null,
+        NextRandom: Random.Shared.Next
     );
 }
 

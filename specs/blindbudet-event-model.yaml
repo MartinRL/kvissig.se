@@ -97,6 +97,11 @@ slices:
   # the first player (hostPlayerId), so an auction is never empty. x: AuctionPackNotFound when
   # the slug resolves to no pack.
   #
+  # ASSUMPTION: a "mini"-slug pack is a large concept-scale pool (175 lots) sampled down to a
+  # short round of Decider.MiniAuctionSize (7) lots at open — mirrors MEM's MiniGameSize
+  # marker. Non-"mini" packs play in full (no prod-size auction deck exists yet). Lots carry no
+  # difference/direction, so sampling is a plain shuffle + take (no MEM band-balancing).
+  #
   # Test fixtures (referenced by name in the cases below):
   #   pack blindbudet = [ lot0, lot1 ]  (the default deck)
   #   lot0 = Lot { description: lot0, trueWorth: 100, unit: lot0U }

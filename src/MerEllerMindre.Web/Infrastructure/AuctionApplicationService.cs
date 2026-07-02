@@ -24,7 +24,7 @@ public sealed class AuctionApplicationService
     private readonly AuctionContext _context;
 
     public AuctionApplicationService(FileSystemAuctionPackCatalog catalog) =>
-        _context = new AuctionContext(Guid.NewGuid, () => DateTimeOffset.UtcNow, catalog.Find);
+        _context = new AuctionContext(Guid.NewGuid, () => DateTimeOffset.UtcNow, catalog.Find, Random.Shared.Next);
 
     public AuctionState Load(Guid gameId)
     {
