@@ -223,7 +223,7 @@ public static class Decider
         foreach (var player in state.Players)
         {
             var isWinner = player.PlayerId == winnerId;
-            var profit = isWinner ? (int)Math.Round(trueWorth - pricePaid, MidpointRounding.AwayFromZero) : 0;
+            var profit = isWinner ? NormalizedProfit(trueWorth, pricePaid) : 0;
             var totalScore = state.TotalScore(player.PlayerId) + profit;
 
             events.Add(new RoundScored(state.GameId, command.LotIndex, player.PlayerId, profit, totalScore));
@@ -231,6 +231,16 @@ public static class Decider
 
         return new Ok<AuctionEvent[]>([.. events]);
     }
+
+    // Vinst som % av lottens eget värde så lotter av vitt skilda magnituder poängsätts
+    // jämförbart (en Everest-höjd-lott dränker inte längre en banan-kalori-lott). Bud 0 → +100;
+    // överbud golvas vid −100 (värsta vinnarens förbannelse). ponytail: santVärde > 0 alltid (CSV).
+    private static int NormalizedProfit(decimal trueWorth, decimal pricePaid) =>
+        trueWorth <= 0
+            ? 0
+            : Math.Clamp(
+                (int)Math.Round((trueWorth - pricePaid) / trueWorth * 100m, MidpointRounding.AwayFromZero),
+                -100, 100);
 
     private static Result<AuctionEvent[]> DecideAskNextLot(AuctionState state, AskNextLot command) =>
         new Ok<AuctionEvent[]>([

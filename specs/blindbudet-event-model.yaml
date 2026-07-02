@@ -33,11 +33,15 @@
 # (one stage: hidden bid -> reveal + score):
 #   Each round a LOT with a hidden trueWorth is shown. Every player places ONE hidden
 #   bid. Once all bids are in, the System reveals: the HIGHEST bid wins the lot and the
-#   winner PAYS THEIR OWN BID (first-price). Per-player score:
-#     profit = winner ? round(trueWorth - pricePaid) : 0
-#   Overbidding the lot's worth yields a NEGATIVE profit ("vinnarens förbannelse") —
-#   the whole tension, mirroring MEM's negative scores. Bids & worths are decimal (the
-#   author types real figures, sv-SE); profit/totalScore are whole points (int).
+#   winner PAYS THEIR OWN BID (first-price). Per-player score — NORMALIZED to % of the
+#   lot's own trueWorth so lots of wildly different magnitudes score comparably (an
+#   Everest-height lot no longer drowns a banana-calorie lot; mirrors MEM's normalize-by-
+#   magnitude philosophy). Bids are still placed in real units; only scoring normalizes:
+#     profit = winner ? clamp(round((trueWorth - pricePaid) / trueWorth * 100), -100, 100) : 0
+#   Bid 0 → +100 (bids can't be negative, so +100 is the ceiling). Overbidding the lot's
+#   worth yields a NEGATIVE profit ("vinnarens förbannelse"), floored at -100 (worst
+#   curse bounded) — the whole tension, mirroring MEM's negative scores. Bids & worths are
+#   decimal (the author types real figures, sv-SE); profit/totalScore are whole points (int).
 #
 #   *** HIGHEST total wins *** — the OPPOSITE of MEM (lowest wins). This MUST be glasklart
 #   in all copy and in the End Auction winnerIds rule (winnerIds = all players tied at the
@@ -67,8 +71,9 @@
 #   timestamps (*At)       DateTimeOffset
 #   bids & worths          decimal       (amount, trueWorth, pricePaid — real magnitudes,
 #                                         exact author figures, clean sv-SE display; amount >= 0)
-#   points/scores          int           (profit, totalScore — signed, may be negative per
-#                                         the winner's-curse rule)
+#   points/scores          int           (profit bounded -100..100 — % of the lot's own
+#                                         trueWorth, floored at -100 per the winner's-curse
+#                                         rule; totalScore signed, sum of profits)
 #   index/count            int           (lotIndex, totalLots, resolvedLotCount)
 #   per-player State maps   IReadOnlyDictionary<Guid, T>  (each LotRound's bids and profits)
 #     The folded decision model keys per-player data by playerId for O(1) lookup, so these
@@ -509,7 +514,8 @@ slices:
 
   # The reveal processor: once Outstanding bids shows allBidsIn, the System reveals the lot.
   # PURE resolver: the highest bid wins; the winner pays their own bid (first-price); profit =
-  # round(trueWorth - pricePaid) for the winner, 0 for everyone else. Emits one LotRevealed
+  # clamp(round((trueWorth - pricePaid)/trueWorth*100), -100, 100) for the winner (% of the
+  # lot's own worth so magnitudes score comparably), 0 for everyone else. Emits one LotRevealed
   # (once) plus one RoundScored per player. TIE on the highest bid is broken by bid order in
   # the event log — the earliest BidPlaced wins (free ES property; the bids map is folded in
   # stream order, so the first top bidder in iteration order is the earliest).
@@ -541,7 +547,7 @@ slices:
           gameId: Guid
           lotIndex: int
           playerId: Guid
-          profit: int                          # winner ? round(trueWorth - pricePaid) : 0
+          profit: int                          # winner ? clamp(round((trueWorth - pricePaid)/trueWorth*100), -100, 100) : 0
           totalScore: int                      # running sum over resolved lots (signed)
       - v: Screen / Round results
     # Decider-true GWT: given the folded State / Game, when RevealLot, then the events |
@@ -626,7 +632,7 @@ slices:
           - e: Game / LotRevealed
             props: { lotIndex: 1, trueWorth: 50, winnerId: martinId, pricePaid: 40 }
           - e: Game / RoundScored
-            props: { playerId: martinId, profit: 10, totalScore: 10 }   # 50 - 40 = 10; running 0 + 10
+            props: { playerId: martinId, profit: 20, totalScore: 20 }   # (50-40)/50*100 = 20; running 0 + 20
           - e: Game / RoundScored
             props: { playerId: nilsId, profit: 0, totalScore: 10 }       # running 10 + 0
       cannot reveal before all bids in:

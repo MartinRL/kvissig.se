@@ -278,7 +278,7 @@ public class DeciderTests
         revealed.WinnerId.Should().Be(MartinId);
         revealed.PricePaid.Should().Be(40m);
 
-        events.ScoredFor(MartinId).Should().BeEquivalentTo(new { Profit = 10, TotalScore = 10 });
+        events.ScoredFor(MartinId).Should().BeEquivalentTo(new { Profit = 20, TotalScore = 20 });
         events.ScoredFor(NilsId).Should().BeEquivalentTo(new { Profit = 0, TotalScore = 10 });
     }
 

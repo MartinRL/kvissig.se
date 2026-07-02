@@ -123,9 +123,12 @@ avslöjade värde − betalt bud. Flest netto över N rundor vinner. Spänningen
 vinna, lågt nog att gå med vinst + bluffa om värdet.
 
 **Modell (en-stegs, MEM-tvilling utan tvåstegsraket):** dolt first-price-bud → reveal + score.
-Vinnaren betalar sitt eget bud; `profit = vinnare ? (santVärde − betaltBud) : 0`. Överbjud >
+Vinnaren betalar sitt eget bud; poängen normaliseras till % av lottens eget värde:
+`profit = vinnare ? clamp(round((santVärde − betaltBud)/santVärde*100), −100, 100) : 0`.
+Normaliseringen krävdes när mini-poolens spridning (single-digit → miljoner) lät den största
+lotten dränka alla andra — magnitud, inte budskicklighet, avgjorde. Överbjud >
 sant värde ⇒ NEGATIV profit ("vinnarens förbannelse" = hela spänningen, speglar MEMs negativa
-poäng). **HÖGST total vinner** (OBS motsatt MEM som har lägst-vinner — måste vara glasklart i
+poäng), golvad vid −100. **HÖGST total vinner** (OBS motsatt MEM som har lägst-vinner — måste vara glasklart i
 copy/spec). INGEN budget i v1 (ponytail — vinnarens förbannelse ersätter budget-bokföring).
 
 **Tie-regel (lat, ES-snygg):** lika toppbud bryts av bud-ordning i event-loggen (tidigaste
