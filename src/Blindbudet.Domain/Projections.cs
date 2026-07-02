@@ -50,7 +50,7 @@ public record RoundResultsView(
     Guid GameId,
     int LotIndex,
     decimal TrueWorth,
-    Guid WinnerId,
+    IReadOnlyList<Guid> WinnerIds,
     decimal PricePaid,
     IReadOnlyList<PlayerProfit> PlayerProfits
 );
@@ -114,7 +114,7 @@ public static class Projections
             state.GameId,
             i,
             round.TrueWorth!.Value,
-            round.WinnerId!.Value,
+            round.WinnerIds,
             round.PricePaid!.Value,
             playerProfits);
     }

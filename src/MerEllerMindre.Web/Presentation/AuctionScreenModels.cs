@@ -52,6 +52,7 @@ public sealed record AuctionRoundResultRowVm(
     bool IsHost,
     string Bid,
     bool IsWinner,
+    bool IsOverbid,
     int Profit,
     int TotalSoFar);
 
@@ -62,7 +63,7 @@ public sealed record AuctionRoundResultsVm(
     string Description,
     string Unit,
     string TrueWorth,
-    string WinnerName,
+    IReadOnlyList<string> WinnerNames,
     string PricePaid,
     IReadOnlyList<AuctionRoundResultRowVm> Rows,
     bool ViewerIsHost,

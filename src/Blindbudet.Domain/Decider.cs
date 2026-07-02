@@ -60,7 +60,7 @@ public static class Decider
                 Lots = MapLot(state.Lots, e.LotIndex, l => l with
                 {
                     TrueWorth = e.TrueWorth,
-                    WinnerId = e.WinnerId,
+                    WinnerIds = e.WinnerIds,
                     PricePaid = e.PricePaid,
                     Resolved = true
                 })
@@ -203,27 +203,41 @@ public static class Decider
         var round = state.Lots[command.LotIndex];
         var trueWorth = round.Lot.TrueWorth;
 
-        // Highest bid wins; ties -> earliest BidPlaced (bids folded in event-log order, so the
-        // first occurrence of the max in iteration order is the earliest bid). First-price:
-        // the winner pays their own bid.
-        var winnerId = Guid.Empty;
-        var pricePaid = decimal.MinValue;
-        foreach (var (playerId, amount) in round.Bids)
-            if (amount > pricePaid)
-            {
-                pricePaid = amount;
-                winnerId = playerId;
-            }
+        // 0-100-artad regel: överbud (bud > santVärde) diskas — 0 poäng, aldrig vinnare, aldrig
+        // negativt. Bland de giltiga buden (≤ santVärde) vinner det högsta; DELAD vinst → alla
+        // på det budet vinner (Players-ordning = stabil, ingen tiebreak). Alla bjöd över → ingen
+        // vinnare. Vinnarpoäng: exakt (bud == santVärde) → platt 10; annars vinst-% av santVärde.
+        var validBids = round.Bids.Where(kv => kv.Value <= trueWorth).ToList();
+        IReadOnlyList<Guid> winnerIds;
+        decimal winningBid;
+        if (validBids.Count == 0)
+        {
+            winnerIds = [];
+            winningBid = 0m;
+        }
+        else
+        {
+            winningBid = validBids.Max(kv => kv.Value);
+            winnerIds = state.Players
+                .Where(p => round.Bids.TryGetValue(p.PlayerId, out var b) && b == winningBid)
+                .Select(p => p.PlayerId)
+                .ToList();
+        }
+
+        var winnerProfit = winnerIds.Count == 0
+            ? 0
+            : winningBid == trueWorth
+                ? 10
+                : (int)Math.Round((trueWorth - winningBid) / trueWorth * 100m, MidpointRounding.AwayFromZero);
 
         var events = new List<AuctionEvent>
         {
-            new LotRevealed(state.GameId, command.LotIndex, trueWorth, winnerId, pricePaid)
+            new LotRevealed(state.GameId, command.LotIndex, trueWorth, winnerIds, winningBid)
         };
 
         foreach (var player in state.Players)
         {
-            var isWinner = player.PlayerId == winnerId;
-            var profit = isWinner ? NormalizedProfit(trueWorth, pricePaid) : 0;
+            var profit = winnerIds.Contains(player.PlayerId) ? winnerProfit : 0;
             var totalScore = state.TotalScore(player.PlayerId) + profit;
 
             events.Add(new RoundScored(state.GameId, command.LotIndex, player.PlayerId, profit, totalScore));
@@ -231,16 +245,6 @@ public static class Decider
 
         return new Ok<AuctionEvent[]>([.. events]);
     }
-
-    // Vinst som % av lottens eget värde så lotter av vitt skilda magnituder poängsätts
-    // jämförbart (en Everest-höjd-lott dränker inte längre en banan-kalori-lott). Bud 0 → +100;
-    // överbud golvas vid −100 (värsta vinnarens förbannelse). ponytail: santVärde > 0 alltid (CSV).
-    private static int NormalizedProfit(decimal trueWorth, decimal pricePaid) =>
-        trueWorth <= 0
-            ? 0
-            : Math.Clamp(
-                (int)Math.Round((trueWorth - pricePaid) / trueWorth * 100m, MidpointRounding.AwayFromZero),
-                -100, 100);
 
     private static Result<AuctionEvent[]> DecideAskNextLot(AuctionState state, AskNextLot command) =>
         new Ok<AuctionEvent[]>([

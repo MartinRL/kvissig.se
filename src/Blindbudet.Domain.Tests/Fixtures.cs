@@ -51,7 +51,7 @@ public static class Fixtures
         Lot lot,
         IReadOnlyDictionary<Guid, decimal>? bids = null,
         decimal? trueWorth = null,
-        Guid? winnerId = null,
+        IReadOnlyList<Guid>? winnerIds = null,
         decimal? pricePaid = null,
         IReadOnlyDictionary<Guid, int>? profits = null,
         bool resolved = false) =>
@@ -60,7 +60,7 @@ public static class Fixtures
             Lot = lot,
             Bids = bids ?? new Dictionary<Guid, decimal>(),
             TrueWorth = trueWorth,
-            WinnerId = winnerId,
+            WinnerIds = winnerIds ?? [],
             PricePaid = pricePaid,
             Profits = profits ?? new Dictionary<Guid, int>(),
             Resolved = resolved

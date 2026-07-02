@@ -48,7 +48,7 @@ public class EvolveTests
             new AuctionStarted(GameId, 0, At),
             new BidPlaced(GameId, MartinId, 0, 70m, At),
             new BidPlaced(GameId, NilsId, 0, 90m, At),
-            new LotRevealed(GameId, 0, 100m, NilsId, 90m),
+            new LotRevealed(GameId, 0, 100m, [NilsId], 90m),
             new RoundScored(GameId, 0, MartinId, 0, 0),
             new RoundScored(GameId, 0, NilsId, 10, 10));
 
@@ -57,7 +57,7 @@ public class EvolveTests
         var lot0 = state.Lots[0];
         lot0.Resolved.Should().BeTrue();
         lot0.TrueWorth.Should().Be(100m);
-        lot0.WinnerId.Should().Be(NilsId);
+        lot0.WinnerIds.Should().Equal(NilsId);
         lot0.PricePaid.Should().Be(90m);
         lot0.Bids.Should().Equal(new Dictionary<Guid, decimal> { [MartinId] = 70m, [NilsId] = 90m });
         lot0.Profits.Should().Equal(new Dictionary<Guid, int> { [MartinId] = 0, [NilsId] = 10 });

@@ -20,9 +20,9 @@ public record Player(
 
 /// <summary>
 /// The immutable lot card plus how it is being bid on. The deck is loaded up front (one
-/// LotRound per lot). Each hidden bid folds into Bids in event-log order (earliest top bid
-/// wins ties). At reveal, TrueWorth/WinnerId/PricePaid + the per-player Profits are set and
-/// Resolved flips true.
+/// LotRound per lot). Each hidden bid folds into Bids in event-log order. At reveal,
+/// TrueWorth/WinnerIds/PricePaid + the per-player Profits are set and Resolved flips true
+/// (WinnerIds may hold several players on a shared winning bid, or none if all overbid).
 ///
 /// The per-player maps are keyed by playerId — a deliberate deviation from the constitution's
 /// IReadOnlyList&lt;T&gt; rule for the keyed decision model (see spec). Wire events stay flat
@@ -33,7 +33,7 @@ public record LotRound
     public required Lot Lot { get; init; }
     public IReadOnlyDictionary<Guid, decimal> Bids { get; init; } = new Dictionary<Guid, decimal>();
     public decimal? TrueWorth { get; init; }
-    public Guid? WinnerId { get; init; }
+    public IReadOnlyList<Guid> WinnerIds { get; init; } = [];
     public decimal? PricePaid { get; init; }
     public IReadOnlyDictionary<Guid, int> Profits { get; init; } = new Dictionary<Guid, int>();
     public bool Resolved { get; init; }

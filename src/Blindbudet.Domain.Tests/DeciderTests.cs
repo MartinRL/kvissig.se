@@ -195,7 +195,7 @@ public class DeciderTests
     {
         var resolved = Round(Lot0,
             bids: new Dictionary<Guid, decimal> { [MartinId] = 60m, [NilsId] = 90m },
-            trueWorth: 100m, winnerId: NilsId, pricePaid: 90m,
+            trueWorth: 100m, winnerIds: [NilsId], pricePaid: 90m,
             profits: new Dictionary<Guid, int> { [MartinId] = 0, [NilsId] = 10 }, resolved: true);
 
         var error = Gwt.Given(State(AuctionPhase.Started, [HostMartin, PlayerNils], 0, resolved))
@@ -219,7 +219,7 @@ public class DeciderTests
         var revealed = events.Revealed();
         revealed.LotIndex.Should().Be(0);
         revealed.TrueWorth.Should().Be(100m);
-        revealed.WinnerId.Should().Be(NilsId);
+        revealed.WinnerIds.Should().Equal(NilsId);
         revealed.PricePaid.Should().Be(90m);
 
         events.ScoredFor(MartinId).Should().BeEquivalentTo(new { Profit = 0, TotalScore = 0 });
@@ -227,8 +227,10 @@ public class DeciderTests
     }
 
     [Fact]
-    public void overbidding_the_worth_yields_a_negative_profit()
+    public void overbidding_excludes_from_winning_no_negative()
     {
+        // Martin bids 120 (> worth 100) -> disqualified, 0, never negative. Nils 80 (valid,
+        // highest) wins with profit round((100-80)/100*100) = 20.
         var events = Gwt.Given(State(AuctionPhase.Started, [HostMartin, PlayerNils], 0,
                 Round(Lot0, bids: new Dictionary<Guid, decimal> { [MartinId] = 120m, [NilsId] = 80m }),
                 Round(Lot1)))
@@ -236,17 +238,17 @@ public class DeciderTests
             .Events();
 
         var revealed = events.Revealed();
-        revealed.WinnerId.Should().Be(MartinId);
-        revealed.PricePaid.Should().Be(120m);
+        revealed.WinnerIds.Should().Equal(NilsId);
+        revealed.PricePaid.Should().Be(80m);
 
-        events.ScoredFor(MartinId).Should().BeEquivalentTo(new { Profit = -20, TotalScore = -20 });
-        events.ScoredFor(NilsId).Should().BeEquivalentTo(new { Profit = 0, TotalScore = 0 });
+        events.ScoredFor(MartinId).Should().BeEquivalentTo(new { Profit = 0, TotalScore = 0 });
+        events.ScoredFor(NilsId).Should().BeEquivalentTo(new { Profit = 20, TotalScore = 20 });
     }
 
     [Fact]
-    public void tie_on_highest_bid_broken_by_earliest_bid()
+    public void tie_on_winning_bid_is_shared()
     {
-        // martin bid first (folded earlier) -> wins the tie.
+        // Both bid 80 (the winning bid) -> shared win, both get the profit, no tiebreak.
         var bids = new Dictionary<Guid, decimal> { [MartinId] = 80m, [NilsId] = 80m };
 
         var events = Gwt.Given(State(AuctionPhase.Started, [HostMartin, PlayerNils], 0,
@@ -255,16 +257,52 @@ public class DeciderTests
             .Events();
 
         var revealed = events.Revealed();
-        revealed.WinnerId.Should().Be(MartinId);
+        revealed.WinnerIds.Should().Equal(MartinId, NilsId);
         revealed.PricePaid.Should().Be(80m);
         events.ScoredFor(MartinId).Profit.Should().Be(20);
+        events.ScoredFor(NilsId).Profit.Should().Be(20);
+    }
+
+    [Fact]
+    public void exact_guess_scores_ten_for_all()
+    {
+        // Both bid exactly the worth (100) -> both win, both get the flat exact score of 10.
+        var bids = new Dictionary<Guid, decimal> { [MartinId] = 100m, [NilsId] = 100m };
+
+        var events = Gwt.Given(State(AuctionPhase.Started, [HostMartin, PlayerNils], 0,
+                Round(Lot0, bids: bids), Round(Lot1)))
+            .When(new RevealLot(GameId, 0))
+            .Events();
+
+        var revealed = events.Revealed();
+        revealed.WinnerIds.Should().Equal(MartinId, NilsId);
+        revealed.PricePaid.Should().Be(100m);
+        events.ScoredFor(MartinId).Profit.Should().Be(10);
+        events.ScoredFor(NilsId).Profit.Should().Be(10);
+    }
+
+    [Fact]
+    public void all_overbid_yields_no_winner()
+    {
+        // Everyone bids above the worth -> no valid bid, no winner, everyone scores 0.
+        var bids = new Dictionary<Guid, decimal> { [MartinId] = 120m, [NilsId] = 150m };
+
+        var events = Gwt.Given(State(AuctionPhase.Started, [HostMartin, PlayerNils], 0,
+                Round(Lot0, bids: bids), Round(Lot1)))
+            .When(new RevealLot(GameId, 0))
+            .Events();
+
+        var revealed = events.Revealed();
+        revealed.WinnerIds.Should().BeEmpty();
+        revealed.PricePaid.Should().Be(0m);
+        events.ScoredFor(MartinId).Profit.Should().Be(0);
         events.ScoredFor(NilsId).Profit.Should().Be(0);
     }
 
     [Fact]
     public void scores_accumulate_across_lots()
     {
-        var lot0 = Round(Lot0, trueWorth: 100m, winnerId: NilsId, pricePaid: 90m,
+        var lot0 = Round(Lot0, trueWorth: 100m, winnerIds: [NilsId], pricePaid: 90m,
             profits: new Dictionary<Guid, int> { [MartinId] = 0, [NilsId] = 10 }, resolved: true);
         var lot1 = Round(Lot1, bids: new Dictionary<Guid, decimal> { [MartinId] = 40m, [NilsId] = 30m });
 
@@ -275,7 +313,7 @@ public class DeciderTests
         var revealed = events.Revealed();
         revealed.LotIndex.Should().Be(1);
         revealed.TrueWorth.Should().Be(50m);
-        revealed.WinnerId.Should().Be(MartinId);
+        revealed.WinnerIds.Should().Equal(MartinId);
         revealed.PricePaid.Should().Be(40m);
 
         events.ScoredFor(MartinId).Should().BeEquivalentTo(new { Profit = 20, TotalScore = 20 });
@@ -297,7 +335,7 @@ public class DeciderTests
     [Fact]
     public void cannot_reveal_an_already_resolved_lot()
     {
-        var resolved = Round(Lot0, trueWorth: 100m, winnerId: NilsId, pricePaid: 90m,
+        var resolved = Round(Lot0, trueWorth: 100m, winnerIds: [NilsId], pricePaid: 90m,
             bids: new Dictionary<Guid, decimal> { [MartinId] = 70m, [NilsId] = 90m },
             profits: new Dictionary<Guid, int> { [MartinId] = 0, [NilsId] = 10 }, resolved: true);
 
@@ -313,7 +351,7 @@ public class DeciderTests
     [Fact]
     public void next_lot_presented_when_one_remains()
     {
-        var lot0 = Round(Lot0, trueWorth: 100m, winnerId: NilsId, pricePaid: 90m,
+        var lot0 = Round(Lot0, trueWorth: 100m, winnerIds: [NilsId], pricePaid: 90m,
             profits: new Dictionary<Guid, int> { [MartinId] = 0, [NilsId] = 10 }, resolved: true);
 
         var next = Gwt.Given(State(AuctionPhase.Started, [HostMartin, PlayerNils], 0, lot0, Round(Lot1)))

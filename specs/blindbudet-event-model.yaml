@@ -29,31 +29,33 @@
 # The auction is co-located (one room) so gears fire on a STATE CONDITION, never a
 # clock — NO timeouts.
 #
-# GAME MODEL — sealed first-price auction, the MEM-tvilling WITHOUT the twåstegsraket
-# (one stage: hidden bid -> reveal + score):
+# GAME MODEL — sealed bid, 0-100-artad (overbid is disqualified), the MEM-tvilling
+# WITHOUT the twåstegsraket (one stage: hidden bid -> reveal + score):
 #   Each round a LOT with a hidden trueWorth is shown. Every player places ONE hidden
-#   bid. Once all bids are in, the System reveals: the HIGHEST bid wins the lot and the
-#   winner PAYS THEIR OWN BID (first-price). Per-player score — NORMALIZED to % of the
-#   lot's own trueWorth so lots of wildly different magnitudes score comparably (an
-#   Everest-height lot no longer drowns a banana-calorie lot; mirrors MEM's normalize-by-
-#   magnitude philosophy). Bids are still placed in real units; only scoring normalizes:
-#     profit = winner ? clamp(round((trueWorth - pricePaid) / trueWorth * 100), -100, 100) : 0
-#   Bid 0 → +100 (bids can't be negative, so +100 is the ceiling). Overbidding the lot's
-#   worth yields a NEGATIVE profit ("vinnarens förbannelse"), floored at -100 (worst
-#   curse bounded) — the whole tension, mirroring MEM's negative scores. Bids & worths are
-#   decimal (the author types real figures, sv-SE); profit/totalScore are whole points (int).
+#   bid. Once all bids are in, the System reveals + scores by the 0-100 rule:
+#     validBids   = bids ≤ trueWorth        (OVERBID → 0 points, marked ✗, never a winner)
+#     winningBid  = the HIGHEST valid bid    (none if ALL players overbid → no winner)
+#     winnerIds   = ALL players whose bid == winningBid (SHARED win, no tiebreak)
+#     winnerProfit = winningBid == trueWorth ? 10                                 (exact = flat 10)
+#                  : round((trueWorth - winningBid) / trueWorth * 100)  // 0-100, NEVER negative
+#     non-winners = 0
+#   Per-player score is NORMALIZED to % of the lot's own trueWorth so lots of wildly
+#   different magnitudes score comparably (an Everest-height lot no longer drowns a
+#   banana-calorie lot; mirrors MEM's normalize-by-magnitude philosophy). Bids are placed
+#   in real units; only scoring normalizes. Overbidding is DISQUALIFIED (0, ✗) — there is
+#   NO negative profit / no "vinnarens förbannelse". An exact bid is lifted from raw-profit
+#   0 to a flat 10 ("du prickade rätt"). Bids & worths are decimal (the author types real
+#   figures, sv-SE); profit/totalScore are whole points (int).
 #
 #   *** HIGHEST total wins *** — the OPPOSITE of MEM (lowest wins). This MUST be glasklart
 #   in all copy and in the End Auction winnerIds rule (winnerIds = all players tied at the
 #   HIGHEST total). Keep the two games' winner rules strictly apart.
 #
-#   NO budget in v1 (ponytail — the winner's curse replaces budget-bookkeeping; a bid
-#   ceiling can be added later if play demands it).
+#   NO budget in v1 (ponytail — a bid ceiling can be added later if play demands it).
 #
-#   TIE on the highest bid is broken by BID ORDER IN THE EVENT LOG: among equal top bids,
-#   the earliest Game / BidPlaced wins. evolve folds BidPlaced in stream order, so the
-#   bids map is built in that order — "first top bidder in iteration order" == earliest
-#   bid. A free event-sourcing property; NO extra state, NO tiebreak field.
+#   SHARED WIN on the winning bid: every player whose bid equals winningBid wins and gets
+#   the full winnerProfit (no tiebreak). winnerIds is a Guid[] (empty if all overbid). A
+#   free event-sourcing property; the winners are read straight off the folded bids.
 #
 # ASSUMPTION: lot content (description, unit, the hidden trueWorth) is snapshotted onto
 # Game / AuctionOpened (lots: Lot[]). OpenAuction resolves the chosen pack via a
@@ -63,17 +65,18 @@
 # winner/pricePaid/profit are derived by the decider at RevealLot from the bids + trueWorth.
 #
 # Prop types (these annotations ARE the intended C# types; see specs/CLAUDE.md):
-#   ids                    Guid          (gameId, playerId, hostPlayerId, joinCode, winnerId;
-#                                         Guid[] for *PlayerIds and winnerIds — tied HIGHEST
-#                                         totals share the win)
+#   ids                    Guid          (gameId, playerId, hostPlayerId, joinCode;
+#                                         Guid[] for *PlayerIds and winnerIds — the per-lot
+#                                         winnerIds (shared winning bid) AND the End Auction
+#                                         winnerIds (tied HIGHEST totals) both share the win)
 #   pack ids               string        (packId — a filename slug, e.g. "blindbudet"; the
 #                                         file-based CSV catalog keys packs by slug, not Guid)
 #   timestamps (*At)       DateTimeOffset
 #   bids & worths          decimal       (amount, trueWorth, pricePaid — real magnitudes,
 #                                         exact author figures, clean sv-SE display; amount >= 0)
-#   points/scores          int           (profit bounded -100..100 — % of the lot's own
-#                                         trueWorth, floored at -100 per the winner's-curse
-#                                         rule; totalScore signed, sum of profits)
+#   points/scores          int           (profit is 0-100 or a flat 10 for an exact bid —
+#                                         % of the lot's own trueWorth, NEVER negative
+#                                         (overbid = 0); totalScore = sum of profits)
 #   index/count            int           (lotIndex, totalLots, resolvedLotCount)
 #   per-player State maps   IReadOnlyDictionary<Guid, T>  (each LotRound's bids and profits)
 #     The folded decision model keys per-player data by playerId for O(1) lookup, so these
@@ -417,7 +420,7 @@ slices:
               currentLotIndex: 0
               players: [hostMartin, playerNils]
               lots:
-                - { lot: lot0, bids: { martinId: 60, nilsId: 90 }, trueWorth: 100, winnerId: nilsId, pricePaid: 90, profits: { martinId: 0, nilsId: 10 }, resolved: true }
+                - { lot: lot0, bids: { martinId: 60, nilsId: 90 }, trueWorth: 100, winnerIds: [nilsId], pricePaid: 90, profits: { martinId: 0, nilsId: 10 }, resolved: true }
         when:
           - c: PlaceBid
             props: { gameId: gameId, playerId: martinId, lotIndex: 0, amount: 80 }
@@ -513,12 +516,13 @@ slices:
                 - { lotIndex: 1, pendingPlayerIds: [martinId, nilsId], allBidsIn: false }
 
   # The reveal processor: once Outstanding bids shows allBidsIn, the System reveals the lot.
-  # PURE resolver: the highest bid wins; the winner pays their own bid (first-price); profit =
-  # clamp(round((trueWorth - pricePaid)/trueWorth*100), -100, 100) for the winner (% of the
-  # lot's own worth so magnitudes score comparably), 0 for everyone else. Emits one LotRevealed
-  # (once) plus one RoundScored per player. TIE on the highest bid is broken by bid order in
-  # the event log — the earliest BidPlaced wins (free ES property; the bids map is folded in
-  # stream order, so the first top bidder in iteration order is the earliest).
+  # PURE 0-100 resolver: OVERBID (bid > trueWorth) is disqualified (0 points, ✗, never a
+  # winner). Among validBids (≤ trueWorth) the highest is the winningBid; ALL players on it
+  # SHARE the win (winnerIds, no tiebreak). winnerProfit = winningBid == trueWorth ? 10 (exact)
+  # : round((trueWorth - winningBid)/trueWorth*100) — 0-100, NEVER negative (% of the lot's own
+  # worth so magnitudes score comparably). Non-winners score 0. If ALL players overbid there is
+  # no winner (winnerIds empty, pricePaid 0, everyone 0). Emits one LotRevealed (once) plus one
+  # RoundScored per player.
   # Failures are Result failure-track values (see docs/adr/006), never thrown:
   #   x: NotAllBidsIn        — a player is still pending this lot.
   #   x: LotAlreadyResolved  — already revealed (guards a double fire).
@@ -540,14 +544,14 @@ slices:
           gameId: Guid
           lotIndex: int
           trueWorth: decimal                  # from the folded lot card
-          winnerId: Guid                       # highest bid; ties -> earliest BidPlaced
-          pricePaid: decimal                   # = the winner's own bid (first-price)
+          winnerIds: Guid[]                    # all players on the winning bid (empty if all overbid)
+          pricePaid: decimal                   # = the winning bid (0 if no winner)
       - e: Game / RoundScored       # one per player
         props:
           gameId: Guid
           lotIndex: int
           playerId: Guid
-          profit: int                          # winner ? clamp(round((trueWorth - pricePaid)/trueWorth*100), -100, 100) : 0
+          profit: int                          # winner ? (winningBid == trueWorth ? 10 : round((trueWorth - winningBid)/trueWorth*100)) : 0
           totalScore: int                      # running sum over resolved lots (signed)
       - v: Screen / Round results
     # Decider-true GWT: given the folded State / Game, when RevealLot, then the events |
@@ -569,12 +573,12 @@ slices:
             props: { gameId: gameId, lotIndex: 0 }
         then:
           - e: Game / LotRevealed
-            props: { lotIndex: 0, trueWorth: 100, winnerId: nilsId, pricePaid: 90 }
+            props: { lotIndex: 0, trueWorth: 100, winnerIds: [nilsId], pricePaid: 90 }
           - e: Game / RoundScored
             props: { playerId: martinId, profit: 0, totalScore: 0 }
           - e: Game / RoundScored
             props: { playerId: nilsId, profit: 10, totalScore: 10 }   # 100 - 90
-      overbidding the worth yields a negative profit:
+      overbidding excludes from winning, never negative:
         given:
           - v: State / Game
             props:
@@ -582,19 +586,19 @@ slices:
               currentLotIndex: 0
               players: [hostMartin, playerNils]
               lots:
-                - { lot: lot0, bids: { martinId: 120, nilsId: 80 }, resolved: false }   # martin overbids the worth (100)
+                - { lot: lot0, bids: { martinId: 120, nilsId: 80 }, resolved: false }   # martin overbids the worth (100) -> disqualified
                 - { lot: lot1, bids: {}, resolved: false }
         when:
           - c: RevealLot
             props: { gameId: gameId, lotIndex: 0 }
         then:
           - e: Game / LotRevealed
-            props: { lotIndex: 0, trueWorth: 100, winnerId: martinId, pricePaid: 120 }
+            props: { lotIndex: 0, trueWorth: 100, winnerIds: [nilsId], pricePaid: 80 }   # nils is the highest valid bid
           - e: Game / RoundScored
-            props: { playerId: martinId, profit: -20, totalScore: -20 }   # 100 - 120 = winner's curse
+            props: { playerId: martinId, profit: 0, totalScore: 0 }   # overbid -> disqualified, 0, never negative
           - e: Game / RoundScored
-            props: { playerId: nilsId, profit: 0, totalScore: 0 }
-      tie on highest bid broken by earliest bid:
+            props: { playerId: nilsId, profit: 20, totalScore: 20 }   # (100-80)/100*100
+      tie on the winning bid is shared:
         given:
           - v: State / Game
             props:
@@ -602,16 +606,56 @@ slices:
               currentLotIndex: 0
               players: [hostMartin, playerNils]
               lots:
-                - { lot: lot0, bids: { martinId: 80, nilsId: 80 }, resolved: false }   # equal top bids; martin bid first (folded earlier)
+                - { lot: lot0, bids: { martinId: 80, nilsId: 80 }, resolved: false }   # equal top valid bids -> shared win
                 - { lot: lot1, bids: {}, resolved: false }
         when:
           - c: RevealLot
             props: { gameId: gameId, lotIndex: 0 }
         then:
           - e: Game / LotRevealed
-            props: { lotIndex: 0, trueWorth: 100, winnerId: martinId, pricePaid: 80 }   # earliest top bid wins
+            props: { lotIndex: 0, trueWorth: 100, winnerIds: [martinId, nilsId], pricePaid: 80 }   # both share
           - e: Game / RoundScored
             props: { playerId: martinId, profit: 20, totalScore: 20 }
+          - e: Game / RoundScored
+            props: { playerId: nilsId, profit: 20, totalScore: 20 }
+      exact guess scores ten for all:
+        given:
+          - v: State / Game
+            props:
+              phase: started
+              currentLotIndex: 0
+              players: [hostMartin, playerNils]
+              lots:
+                - { lot: lot0, bids: { martinId: 100, nilsId: 100 }, resolved: false }   # both hit the worth exactly
+                - { lot: lot1, bids: {}, resolved: false }
+        when:
+          - c: RevealLot
+            props: { gameId: gameId, lotIndex: 0 }
+        then:
+          - e: Game / LotRevealed
+            props: { lotIndex: 0, trueWorth: 100, winnerIds: [martinId, nilsId], pricePaid: 100 }
+          - e: Game / RoundScored
+            props: { playerId: martinId, profit: 10, totalScore: 10 }   # exact -> flat 10
+          - e: Game / RoundScored
+            props: { playerId: nilsId, profit: 10, totalScore: 10 }
+      all overbid yields no winner:
+        given:
+          - v: State / Game
+            props:
+              phase: started
+              currentLotIndex: 0
+              players: [hostMartin, playerNils]
+              lots:
+                - { lot: lot0, bids: { martinId: 120, nilsId: 150 }, resolved: false }   # everyone overbids the worth (100)
+                - { lot: lot1, bids: {}, resolved: false }
+        when:
+          - c: RevealLot
+            props: { gameId: gameId, lotIndex: 0 }
+        then:
+          - e: Game / LotRevealed
+            props: { lotIndex: 0, trueWorth: 100, winnerIds: [], pricePaid: 0 }   # no valid bid -> no winner
+          - e: Game / RoundScored
+            props: { playerId: martinId, profit: 0, totalScore: 0 }
           - e: Game / RoundScored
             props: { playerId: nilsId, profit: 0, totalScore: 0 }
       scores accumulate across lots:
@@ -623,14 +667,14 @@ slices:
               players: [hostMartin, playerNils]
               lots:
                 # lot0 already resolved -> its profits are the source of the running total
-                - { lot: lot0, trueWorth: 100, winnerId: nilsId, pricePaid: 90, profits: { martinId: 0, nilsId: 10 }, resolved: true }
+                - { lot: lot0, trueWorth: 100, winnerIds: [nilsId], pricePaid: 90, profits: { martinId: 0, nilsId: 10 }, resolved: true }
                 - { lot: lot1, bids: { martinId: 40, nilsId: 30 }, resolved: false }
         when:
           - c: RevealLot
             props: { gameId: gameId, lotIndex: 1 }
         then:
           - e: Game / LotRevealed
-            props: { lotIndex: 1, trueWorth: 50, winnerId: martinId, pricePaid: 40 }
+            props: { lotIndex: 1, trueWorth: 50, winnerIds: [martinId], pricePaid: 40 }
           - e: Game / RoundScored
             props: { playerId: martinId, profit: 20, totalScore: 20 }   # (50-40)/50*100 = 20; running 0 + 20
           - e: Game / RoundScored
@@ -658,7 +702,7 @@ slices:
               currentLotIndex: 0
               players: [hostMartin, playerNils]
               lots:
-                - { lot: lot0, trueWorth: 100, winnerId: nilsId, pricePaid: 90, profits: { martinId: 0, nilsId: 10 }, resolved: true }   # already resolved -> double fire guarded
+                - { lot: lot0, trueWorth: 100, winnerIds: [nilsId], pricePaid: 90, profits: { martinId: 0, nilsId: 10 }, resolved: true }   # already resolved -> double fire guarded
                 - { lot: lot1, bids: {}, resolved: false }
         when:
           - c: RevealLot
@@ -673,7 +717,7 @@ slices:
           gameId: Guid
           lotIndex: int
           trueWorth: decimal              # from LotRevealed
-          winnerId: Guid                   # from LotRevealed
+          winnerIds: Guid[]                # from LotRevealed
           pricePaid: decimal               # from LotRevealed
           playerProfits: PlayerProfit[]    # { playerId: Guid, profit: int, totalScore: int } from per-player RoundScored
     # Projection GT: given the lot revealed (reveal + one RoundScored per player), then the
@@ -692,7 +736,7 @@ slices:
           - e: Game / BidPlaced
             props: { playerId: nilsId, lotIndex: 0, amount: 90 }
           - e: Game / LotRevealed
-            props: { lotIndex: 0, trueWorth: 100, winnerId: nilsId, pricePaid: 90 }
+            props: { lotIndex: 0, trueWorth: 100, winnerIds: [nilsId], pricePaid: 90 }
           - e: Game / RoundScored
             props: { lotIndex: 0, playerId: martinId, profit: 0, totalScore: 0 }
           - e: Game / RoundScored
@@ -702,7 +746,7 @@ slices:
             props:
               lotIndex: 0
               trueWorth: 100
-              winnerId: nilsId
+              winnerIds: [nilsId]
               pricePaid: 90
               playerProfits:
                 - { playerId: martinId, profit: 0, totalScore: 0 }
@@ -732,7 +776,7 @@ slices:
             props: { playerId: nilsId, playerName: Nils }
           - e: Game / AuctionStarted
           - e: Game / LotRevealed
-            props: { lotIndex: 0, trueWorth: 100, winnerId: nilsId, pricePaid: 90 }
+            props: { lotIndex: 0, trueWorth: 100, winnerIds: [nilsId], pricePaid: 90 }
         then:
           - v: Todo / Auction progress
             props: { lotIndex: 0, totalLots: 2, resolvedLotCount: 1, hasNextLot: true }
@@ -744,11 +788,11 @@ slices:
             props: { playerId: nilsId, playerName: Nils }
           - e: Game / AuctionStarted
           - e: Game / LotRevealed
-            props: { lotIndex: 0, trueWorth: 100, winnerId: nilsId, pricePaid: 90 }
+            props: { lotIndex: 0, trueWorth: 100, winnerIds: [nilsId], pricePaid: 90 }
           - e: Game / NextLotStarted
             props: { lotIndex: 1 }
           - e: Game / LotRevealed
-            props: { lotIndex: 1, trueWorth: 50, winnerId: martinId, pricePaid: 40 }
+            props: { lotIndex: 1, trueWorth: 50, winnerIds: [martinId], pricePaid: 40 }
         then:
           - v: Todo / Auction progress
             props: { lotIndex: 1, totalLots: 2, resolvedLotCount: 2, hasNextLot: false }
@@ -778,7 +822,7 @@ slices:
               phase: started
               currentLotIndex: 0
               lots:
-                - { lot: lot0, trueWorth: 100, winnerId: nilsId, pricePaid: 90, profits: { martinId: 0, nilsId: 10 }, resolved: true }
+                - { lot: lot0, trueWorth: 100, winnerIds: [nilsId], pricePaid: 90, profits: { martinId: 0, nilsId: 10 }, resolved: true }
                 - { lot: lot1, bids: {}, resolved: false }
         when:
           - c: AskNextLot
@@ -926,10 +970,10 @@ slices:
           lots: IReadOnlyList<LotRound>  # the fixed deck loaded up front + how each is being bid on
           # LotRound = {
           #   lot: Lot,                                       # immutable card from AuctionOpened: { description, unit: string; trueWorth: decimal } — hidden worth, no precomputed result
-          #   bids: IReadOnlyDictionary<Guid, decimal>,       # this lot's hidden bids; key=playerId, value=amount; folded in event-log order (earliest top bid wins ties)
+          #   bids: IReadOnlyDictionary<Guid, decimal>,       # this lot's hidden bids; key=playerId, value=amount; folded in event-log order
           #   trueWorth: decimal?,                            # revealed at reveal (null before) = lot.trueWorth surfaced onto the stream
-          #   winnerId: Guid?,                                # highest bidder (null before reveal)
-          #   pricePaid: decimal?,                            # the winner's own bid (null before reveal)
+          #   winnerIds: IReadOnlyList<Guid>,                 # all players on the winning bid (empty before reveal / if all overbid)
+          #   pricePaid: decimal?,                            # the winning bid (null before reveal; 0 if no winner)
           #   profits: IReadOnlyDictionary<Guid, int>,        # per-player profit, set at reveal; key=playerId
           #   resolved: bool }
           # DERIVED (computed, NOT stored — single source of truth in lots + players):
@@ -969,7 +1013,7 @@ slices:
           - e: Game / BidPlaced
             props: { playerId: nilsId, lotIndex: 0, amount: 90 }
           - e: Game / LotRevealed
-            props: { lotIndex: 0, trueWorth: 100, winnerId: nilsId, pricePaid: 90 }
+            props: { lotIndex: 0, trueWorth: 100, winnerIds: [nilsId], pricePaid: 90 }
           - e: Game / RoundScored
             props: { lotIndex: 0, playerId: martinId, profit: 0, totalScore: 0 }
           - e: Game / RoundScored
@@ -982,5 +1026,5 @@ slices:
               lots:
                 # lot0 fully resolved: reveal + per-player profits folded in
                 # (totalScore is DERIVED by summing profits across resolved lots: martin 0, nils 10)
-                - { lot: lot0, bids: { martinId: 70, nilsId: 90 }, trueWorth: 100, winnerId: nilsId, pricePaid: 90, profits: { martinId: 0, nilsId: 10 }, resolved: true }
+                - { lot: lot0, bids: { martinId: 70, nilsId: 90 }, trueWorth: 100, winnerIds: [nilsId], pricePaid: 90, profits: { martinId: 0, nilsId: 10 }, resolved: true }
                 - { lot: lot1, bids: {}, resolved: false }

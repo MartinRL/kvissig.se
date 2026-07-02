@@ -67,7 +67,7 @@ Wordle/Connections/geo-gissning är STÄNGDA i alla språk (mättat, reklamdrive
 
 ### 3. Monetisering (rekommendation)
 
-Lagrad trio, inget "gratis" som kil:
+Lagrad trio, ingen nollprissättning som kil:
 
 1. **Engångsköp "en köper, alla spelar"** (Jackbox-modell; ingen billing-infra,
    tiny-team-vänligt, högst fit).
@@ -118,21 +118,22 @@ marknad/intäkt måste valideras = Jackbox-voting (men det är ej decider-darlin
 ## Koncept-skiss A — Sealed-bid auktion ("Blindbudet") — VALD
 
 **Loop:** varje runda visas en *lott* (tema-laddad, dolt sant värde). Spelare lägger ett DOLT
-bud. Vid reveal: högsta bud vinner lotten och **betalar sitt bud**; nettovinst = lottens
-avslöjade värde − betalt bud. Flest netto över N rundor vinner. Spänningen = bjud högt nog att
-vinna, lågt nog att gå med vinst + bluffa om värdet.
+bud utan att bjuda över. Vid reveal: närmast under (eller exakt) sant värde vinner lotten.
+Flest poäng över N rundor vinner. Spänningen = bjud högt nog att vinna, men aldrig över — då
+diskas du.
 
-**Modell (en-stegs, MEM-tvilling utan tvåstegsraket):** dolt first-price-bud → reveal + score.
-Vinnaren betalar sitt eget bud; poängen normaliseras till % av lottens eget värde:
-`profit = vinnare ? clamp(round((santVärde − betaltBud)/santVärde*100), −100, 100) : 0`.
-Normaliseringen krävdes när mini-poolens spridning (single-digit → miljoner) lät den största
-lotten dränka alla andra — magnitud, inte budskicklighet, avgjorde. Överbjud >
-sant värde ⇒ NEGATIV profit ("vinnarens förbannelse" = hela spänningen, speglar MEMs negativa
-poäng), golvad vid −100. **HÖGST total vinner** (OBS motsatt MEM som har lägst-vinner — måste vara glasklart i
-copy/spec). INGEN budget i v1 (ponytail — vinnarens förbannelse ersätter budget-bokföring).
+**Modell (en-stegs, MEM-tvilling utan tvåstegsraket, 0-100-artad):** dolt bud → reveal + score.
+Överbud (bud > sant värde) diskas: 0 poäng, aldrig vinnare, ALDRIG negativt. Bland de giltiga
+buden (≤ sant värde) vinner det högsta; poängen normaliseras till % av lottens eget värde:
+`profit = vinnare ? (budet == santVärde ? 10 : round((santVärde − budet)/santVärde*100)) : 0`
+(0–100, aldrig negativ). Exakt rätt bud ger platt **10** ("du prickade rätt"). Normaliseringen
+krävdes när mini-poolens spridning (single-digit → miljoner) lät den största lotten dränka alla
+andra — magnitud, inte budskicklighet, avgjorde. **HÖGST total vinner** (OBS motsatt MEM som har
+lägst-vinner — måste vara glasklart i copy/spec). INGEN budget i v1 (ponytail).
 
-**Tie-regel (lat, ES-snygg):** lika toppbud bryts av bud-ordning i event-loggen (tidigaste
-`BidPlaced` vinner deterministiskt — gratis ES-egenskap, ingen extra state).
+**Delad vinst:** flera spelare på samma vinnande bud vinner alla och får poängen (ingen
+tiebreak). Bjöd alla över finns ingen vinnare (alla 0). Vinnarna läses direkt ur de foldade
+buden — ren ES-egenskap, ingen extra state.
 
 **UI:** lott-kort + sifferfält (bud) + reveal-lista + scoreboard. Återanvänder MEMs shell nästan
 rakt av (dold numerisk input + reveal + projektioner finns redan).

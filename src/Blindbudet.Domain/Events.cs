@@ -42,7 +42,7 @@ public record LotRevealed(
     Guid GameId,
     int LotIndex,
     decimal TrueWorth,
-    Guid WinnerId,
+    IReadOnlyList<Guid> WinnerIds,
     decimal PricePaid
 );
 

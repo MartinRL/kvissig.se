@@ -88,15 +88,23 @@ public static class AuctionScreens
         var round = state.Lots[i];
         var names = state.Players.ToDictionary(p => p.PlayerId, p => p.Name);
 
+        var winners = round.WinnerIds.ToHashSet();
+        var worth = round.TrueWorth ?? 0m;
+
         var rows = state.Players
             .Select(p => new AuctionRoundResultRowVm(
                 p.Name,
                 p.PlayerId == viewer,
                 p.PlayerId == state.HostPlayerId,
                 Money(round.Bids.TryGetValue(p.PlayerId, out var b) ? b : 0m),
-                p.PlayerId == round.WinnerId,
+                winners.Contains(p.PlayerId),
+                round.Bids.TryGetValue(p.PlayerId, out var bid) && bid > worth,
                 round.Profits.TryGetValue(p.PlayerId, out var prof) ? prof : 0,
                 state.TotalScore(p.PlayerId)))
+            .ToList();
+
+        var winnerNames = round.WinnerIds
+            .Select(id => names.TryGetValue(id, out var n) ? n : "")
             .ToList();
 
         return new AuctionRoundResultsVm(
@@ -105,8 +113,8 @@ public static class AuctionScreens
             TotalLots: state.Lots.Count,
             round.Lot.Description,
             round.Lot.Unit,
-            TrueWorth: Money(round.TrueWorth ?? 0m),
-            WinnerName: round.WinnerId is { } w && names.TryGetValue(w, out var n) ? n : "",
+            TrueWorth: Money(worth),
+            WinnerNames: winnerNames,
             PricePaid: Money(round.PricePaid ?? 0m),
             rows,
             ViewerIsHost: viewer == state.HostPlayerId,

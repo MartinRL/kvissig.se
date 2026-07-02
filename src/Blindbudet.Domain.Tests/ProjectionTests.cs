@@ -112,13 +112,13 @@ public class ProjectionTests
             new AuctionStarted(GameId, 0, At),
             new BidPlaced(GameId, MartinId, 0, 70m, At),
             new BidPlaced(GameId, NilsId, 0, 90m, At),
-            new LotRevealed(GameId, 0, 100m, NilsId, 90m),
+            new LotRevealed(GameId, 0, 100m, [NilsId], 90m),
             new RoundScored(GameId, 0, MartinId, 0, 0),
             new RoundScored(GameId, 0, NilsId, 10, 10)));
 
         view.LotIndex.Should().Be(0);
         view.TrueWorth.Should().Be(100m);
-        view.WinnerId.Should().Be(NilsId);
+        view.WinnerIds.Should().Equal(NilsId);
         view.PricePaid.Should().Be(90m);
         view.PlayerProfits.Should().BeEquivalentTo(new[]
         {
@@ -134,7 +134,7 @@ public class ProjectionTests
             Opened(),
             new PlayerJoined(GameId, NilsId, "Nils", At),
             new AuctionStarted(GameId, 0, At),
-            new LotRevealed(GameId, 0, 100m, NilsId, 90m)));
+            new LotRevealed(GameId, 0, 100m, [NilsId], 90m)));
 
         view.LotIndex.Should().Be(0);
         view.TotalLots.Should().Be(2);
@@ -149,9 +149,9 @@ public class ProjectionTests
             Opened(),
             new PlayerJoined(GameId, NilsId, "Nils", At),
             new AuctionStarted(GameId, 0, At),
-            new LotRevealed(GameId, 0, 100m, NilsId, 90m),
+            new LotRevealed(GameId, 0, 100m, [NilsId], 90m),
             new NextLotStarted(GameId, 1),
-            new LotRevealed(GameId, 1, 50m, MartinId, 40m)));
+            new LotRevealed(GameId, 1, 50m, [MartinId], 40m)));
 
         view.LotIndex.Should().Be(1);
         view.TotalLots.Should().Be(2);
