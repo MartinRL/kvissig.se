@@ -1,0 +1,2 @@
+blindbudet-mini.csv reached exactly 175 lot rows (176 lines incl. header).
+Dedup check clean, dotnet test green, "gratis"-lint 0 hits.
