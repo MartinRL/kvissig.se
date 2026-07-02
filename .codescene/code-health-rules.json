@@ -1,0 +1,51 @@
+{
+  "rule_sets" : [ {
+    "matching_content_path" : "**/Decider.cs",
+    "thresholds" : [ {
+      "name" : "function_cyclomatic_complexity_warning",
+      "value" : 12
+    } ]
+  }, {
+    "matching_content_path" : "**/*Endpoints.cs",
+    "thresholds" : [ {
+      "name" : "function_cyclomatic_complexity_warning",
+      "value" : 18
+    } ],
+    "rules" : [ {
+      "name" : "Primitive Obsession",
+      "weight" : 0.0
+    } ]
+  }, {
+    "matching_content_path" : "**/Questions.cs",
+    "thresholds" : [ {
+      "name" : "function_cyclomatic_complexity_warning",
+      "value" : 12
+    }, {
+      "name" : "function_max_arguments",
+      "value" : 5
+    } ],
+    "rules" : [ {
+      "name" : "Primitive Obsession",
+      "weight" : 0.0
+    }, {
+      "name" : "String Heavy Function Arguments",
+      "weight" : 0.0
+    } ]
+  }, {
+    "matching_content_path" : "**/Lots.cs",
+    "thresholds" : [ {
+      "name" : "function_cyclomatic_complexity_warning",
+      "value" : 12
+    }, {
+      "name" : "function_max_arguments",
+      "value" : 5
+    } ],
+    "rules" : [ {
+      "name" : "Primitive Obsession",
+      "weight" : 0.0
+    }, {
+      "name" : "String Heavy Function Arguments",
+      "weight" : 0.0
+    } ]
+  } ]
+}

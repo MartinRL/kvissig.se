@@ -24,3 +24,18 @@ jobs:
 
       - name: Test
         run: dotnet test -c Release --no-build
+
+  code-health:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install cs (CodeScene devtools CLI)
+        run: curl -sL https://downloads.codescene.io/enterprise/cli/install-codescene-cli.sh | sh
+
+      - name: CodeHealth gate (CH >= 9.4)
+        env:
+          CS_ACCESS_TOKEN: ${{ secrets.CS_ACCESS_TOKEN }}
+        run: bash .claude/hooks/codehealth.sh --all

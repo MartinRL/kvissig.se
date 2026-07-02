@@ -141,4 +141,9 @@ source, no GT).
 - [ ] level 5
 - [ ] level 6
 
+- [ ] CodeHealth as a part of the harness/evalops
+
 ## SEO/GEO → se specs/seo-geo.md
+
+## feedback/crowdsourcing
+- [ ] kunna skicka feedback (efter avslutat spel?)

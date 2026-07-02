@@ -156,8 +156,6 @@ public static class QuestionPackCsvParser
         var rows = new List<List<string>>();
         var row = new List<string>();
         var field = new StringBuilder();
-        var inQuotes = false;
-        var sawAny = false;
 
         void EndField()
         {
@@ -175,57 +173,48 @@ public static class QuestionPackCsvParser
         for (var i = 0; i < text.Length; i++)
         {
             var c = text[i];
-            sawAny = true;
-
-            if (inQuotes)
-            {
-                if (c == '"')
-                {
-                    if (i + 1 < text.Length && text[i + 1] == '"')
-                    {
-                        field.Append('"');
-                        i++;
-                    }
-                    else
-                    {
-                        inQuotes = false;
-                    }
-                }
-                else
-                {
-                    field.Append(c);
-                }
-                continue;
-            }
-
-            switch (c)
-            {
-                case '"':
-                    inQuotes = true;
-                    break;
-                case ';':
-                    EndField();
-                    break;
-                case '\r':
-                    if (i + 1 < text.Length && text[i + 1] == '\n')
-                        i++;
-                    EndRow();
-                    break;
-                case '\n':
-                    EndRow();
-                    break;
-                default:
-                    field.Append(c);
-                    break;
-            }
+            if (c == '"') { i = ReadQuoted(text, i + 1, field); continue; }
+            if (c == ';') { EndField(); continue; }
+            if (IsLineBreak(c)) { i = SkipPairedLf(text, i); EndRow(); continue; }
+            field.Append(c);
         }
 
-        // Flush a trailing record that did not end with a newline.
+        // Flush a trailing record with no closing newline...
         if (field.Length > 0 || row.Count > 0)
             EndRow();
-        else if (sawAny && rows.Count == 0)
+        // ...or a lone quoted/empty field that produced no row at all.
+        else if (text.Length > 0 && rows.Count == 0)
             EndRow();
 
         return rows;
+    }
+
+    private static bool IsLineBreak(char c) => c == '\n' || c == '\r';
+
+    // '\r\n' is one record break: if at '\r' followed by '\n', return the '\n' index so the loop skips it.
+    private static int SkipPairedLf(string text, int i) =>
+        text[i] == '\r' && i + 1 < text.Length && text[i + 1] == '\n' ? i + 1 : i;
+
+    // Reads a quoted field starting just after its opening quote; "" is an escaped quote.
+    // Returns the index of the closing quote (or the last char, if unterminated) so the
+    // caller's loop advances past it.
+    private static int ReadQuoted(string text, int start, StringBuilder field)
+    {
+        for (var i = start; i < text.Length; i++)
+        {
+            if (text[i] != '"')
+            {
+                field.Append(text[i]);
+                continue;
+            }
+            if (i + 1 < text.Length && text[i + 1] == '"')
+            {
+                field.Append('"');
+                i++;
+                continue;
+            }
+            return i;
+        }
+        return text.Length - 1;
     }
 }

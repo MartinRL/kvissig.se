@@ -397,63 +397,104 @@ public static class QuestionSelection
         if (pool.Count <= count)
             return pool;
 
-        var bands = new List<Question>[BandWeights.Length];
-        for (var b = 0; b < bands.Length; b++)
-            bands[b] = [];
-        foreach (var q in pool)
-            bands[BandOf(q)].Add(q);
-
+        var bands = BucketIntoBands(pool);
         var quotas = Apportion(count, BandWeights);
+        var picker = new BandPicker(count, TopicCap(pool, count));
 
-        var distinctTopics = pool.Select(q => q.QuestionText)
-            .Distinct(StringComparer.OrdinalIgnoreCase).Count();
-        var topicCap = (int)Math.Ceiling((double)count / Math.Max(1, distinctTopics));
-
-        var picked = new List<Question>();
-        var pickedSet = new HashSet<Question>();
+        // Per band, take up to its quota (item-distinct + under the topic cap); anything
+        // not taken (over quota or guard-rejected) drops into leftover for the fill passes.
         var leftover = new List<Question>();
-        var usedItems = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-        var topicCounts = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
-
-        bool TryUse(Question q)
-        {
-            if (usedItems.Contains(q.ItemA) || usedItems.Contains(q.ItemB)) return false;
-            if (topicCounts.GetValueOrDefault(q.QuestionText) >= topicCap) return false;
-            usedItems.Add(q.ItemA);
-            usedItems.Add(q.ItemB);
-            topicCounts[q.QuestionText] = topicCounts.GetValueOrDefault(q.QuestionText) + 1;
-            return true;
-        }
-
         for (var b = 0; b < bands.Length; b++)
         {
             Shuffle(bands[b], next);
             var taken = 0;
             foreach (var q in bands[b])
-                if (taken < quotas[b] && TryUse(q)) { picked.Add(q); pickedSet.Add(q); taken++; }
+            {
+                if (taken < quotas[b] && picker.TryTake(q)) taken++;
                 else leftover.Add(q);
+            }
         }
 
-        // Fill band deficits from leftover, still item-distinct.
         Shuffle(leftover, next);
-        foreach (var q in leftover)
-        {
-            if (picked.Count >= count) break;
-            if (TryUse(q)) { picked.Add(q); pickedSet.Add(q); }
-        }
+        picker.Fill(leftover); // fill band deficits, still item-distinct
 
         // ponytail: item-distinct is best-effort. If the pool can't yield `count` item-distinct
         // cards (never hits the live pack) — fill without the guard so the game isn't short.
-        if (picked.Count < count)
-            foreach (var q in leftover)
-            {
-                if (picked.Count >= count) break;
-                if (pickedSet.Add(q)) picked.Add(q);
-            }
+        picker.TopUp(leftover);
 
         // Shuffle the final selection so bands don't cluster in play order.
-        Shuffle(picked, next);
-        return picked;
+        Shuffle(picker.Picked, next);
+        return picker.Picked;
+    }
+
+    private static List<Question>[] BucketIntoBands(IReadOnlyList<Question> pool)
+    {
+        var bands = new List<Question>[BandWeights.Length];
+        for (var b = 0; b < bands.Length; b++)
+            bands[b] = [];
+        foreach (var q in pool)
+            bands[BandOf(q)].Add(q);
+        return bands;
+    }
+
+    // At most ceil(count / distinct-topics) cards per topic, so no category dominates a round.
+    private static int TopicCap(IReadOnlyList<Question> pool, int count)
+    {
+        var distinctTopics = pool.Select(q => q.QuestionText)
+            .Distinct(StringComparer.OrdinalIgnoreCase).Count();
+        return (int)Math.Ceiling((double)count / Math.Max(1, distinctTopics));
+    }
+
+    /// <summary>
+    /// The mutable selection state that the three pick passes share: the chosen cards plus the
+    /// item- and topic-distinctness bookkeeping. Kept together so no pass leaks the guards.
+    /// </summary>
+    private sealed class BandPicker(int count, int topicCap)
+    {
+        public List<Question> Picked { get; } = [];
+        private readonly HashSet<Question> _seen = [];
+        private readonly HashSet<string> _usedItems = new(StringComparer.OrdinalIgnoreCase);
+        private readonly Dictionary<string, int> _topicCounts = new(StringComparer.OrdinalIgnoreCase);
+
+        private bool Full => Picked.Count >= count;
+
+        // Guarded take: only if both items are unused and the topic is under its cap.
+        public bool TryTake(Question q)
+        {
+            if (_usedItems.Contains(q.ItemA) || _usedItems.Contains(q.ItemB)) return false;
+            if (_topicCounts.GetValueOrDefault(q.QuestionText) >= topicCap) return false;
+            _usedItems.Add(q.ItemA);
+            _usedItems.Add(q.ItemB);
+            _topicCounts[q.QuestionText] = _topicCounts.GetValueOrDefault(q.QuestionText) + 1;
+            Add(q);
+            return true;
+        }
+
+        // Fill any deficit from the pool, still item-distinct, stopping once full.
+        public void Fill(IEnumerable<Question> pool)
+        {
+            foreach (var q in pool)
+            {
+                if (Full) return;
+                TryTake(q);
+            }
+        }
+
+        // Last resort: take any not-yet-picked card, ignoring the item/topic guards.
+        public void TopUp(IEnumerable<Question> pool)
+        {
+            foreach (var q in pool)
+            {
+                if (Full) return;
+                Add(q);
+            }
+        }
+
+        private void Add(Question q)
+        {
+            if (_seen.Add(q))
+                Picked.Add(q);
+        }
     }
 
     private static int BandOf(Question q)

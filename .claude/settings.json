@@ -22,6 +22,11 @@
             "type": "command",
             "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/arch-fitness.sh\"",
             "statusMessage": "Checking architecture fitness"
+          },
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/codehealth.sh\" --changed",
+            "statusMessage": "Checking code health (CH >= 9.4)"
           }
         ]
       }
