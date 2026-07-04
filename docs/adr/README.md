@@ -23,3 +23,4 @@ and **`game-design`** (product / game-rule decisions: how the game plays, not ho
 | [012](012-difficulty-banded-deck.md) | Difficulty-Banded Deck Balancing | game-design | Accepted |
 | [013](013-balanced-card-draw.md) | Balanced 21-Card Draw per Game | game-design | Accepted |
 | [014](014-ralph-loop-over-goal.md) | Ralph Loop over Built-in /goal for Autonomous Pack Builds | operations | Accepted |
+| [015](015-entydigt-santvarde.md) | Entydigt verifierbart santVärde per lott | game-design | Accepted |

@@ -1,4 +1,4 @@
-﻿beskrivning;santVärde;tema;enhet
+beskrivning;santVärde;tema;enhet
 Höjden på Mount Everest över havet;8849;Geografi;meter
 Jordens omkrets vid ekvatorn;40075;Geografi;km
 Medelavståndet från jorden till månen;384400;Rymden;km
@@ -26,8 +26,8 @@ Längden på en Brachiosaurus;22;Dinosaurier;meter
 Längden på en T. rex;12;Dinosaurier;meter
 Längden på en megalodon;18;Dinosaurier;meter
 Yttemperaturen på Venus;464;Rymden;grader Celsius
-Toppfarten för en rymdraket;28000;Teknik;km/h
-Toppfarten för en jumbojet;900;Fordon;km/h
+Farten för rymdstationen ISS i omloppsbana;28000;Rymden;km/h
+Marschfarten för en Boeing 747;900;Fordon;km/h
 Huvudomkretsen på en nyfödd bebis;35;Kroppen;centimeter
 Djupet till Challengerdjupet i Marianergraven;10935;Geografi;meter
 Höjden på Burj Khalifa;828;Byggnader;meter
@@ -54,13 +54,13 @@ Vikten av en flodhäst;1500;Djur;kg
 Vikten av ett lejon;190;Djur;kg
 Vikten av en kaskelot;40000;Djur;kg
 Vikten av en valross;1000;Djur;kg
-Vikten av en brandbil;12000;Fordon;kg
-Vikten av en ambulans;3500;Fordon;kg
-Vikten av en personbil;1500;Fordon;kg
-Vikten av en traktor;5000;Fordon;kg
-Vikten av en lastbil;15000;Fordon;kg
-Vikten av en motorcykel;200;Fordon;kg
-Vikten av ett tåglok;90000;Fordon;kg
+Vikten av en Ford Model T (1908);544;Fordon;kg
+Vikten av en Mini Cooper (3-dörrars);1250;Fordon;kg
+Vikten av en Tesla Model S;2265;Fordon;kg
+Vikten av en John Deere 6155M-traktor;6700;Fordon;kg
+Tjänstevikten på en Tesla Semi utan last;10433;Fordon;kg
+Vikten av en Harley-Davidson Fat Boy;317;Fordon;kg
+Vikten av ett svenskt Rc6-lok;78000;Fordon;kg
 Höjden på Frihetsgudinnan;93;Landmärken;meter
 Höjden på Cheopspyramiden;139;Landmärken;meter
 Höjden på Lutande tornet i Pisa;56;Landmärken;meter
@@ -71,8 +71,8 @@ Höjden på Colosseum;48;Landmärken;meter
 Höjden på Golden Gate-brons pyloner;227;Landmärken;meter
 Höjden på Triumfbågen i Paris;50;Landmärken;meter
 Höjden på Kebnekaise;2096;Geografi;meter
-Toppfarten för en sportbil;300;Fordon;km/h
-Toppfarten för ett propellerplan;550;Fordon;km/h
+Toppfarten för en Bugatti Chiron Super Sport 300+;490;Fordon;km/h
+Marschfarten för en Cessna 172;226;Fordon;km/h
 Regnmängd på en timme vid skyfall;50;Väder;millimeter
 Temperaturen i en het bastu;90;Vardag;grader Celsius
 Kroppstemperaturen hos en hund;38,5;Djur;grader Celsius
@@ -92,12 +92,12 @@ Antal ben i en människofot;26;Kroppen;stycken
 Antal revben hos en människa;24;Kroppen;stycken
 Höjden på Turning Torso i Malmö;190;Byggnader;meter
 Höjden på Avicii Arena i Stockholm;85;Byggnader;meter
-Toppfarten för en Formel 1-bil;360;Fordon;km/h
-Toppfarten för ett höghastighetståg;300;Fordon;km/h
-Vikten av en stridsvagn;60000;Fordon;kg
-Längden på ett godståg;700;Fordon;meter
-Längden på ett kryssningsfartyg;300;Fordon;meter
-Antal passagerare i en fullsatt jumbojet;400;Fordon;personer
+Det högsta uppmätta i en Formel 1-bil (Bottas 2016);378;Fordon;km/h
+Hastighetsrekordet för ett TGV-tåg;574,8;Fordon;km/h
+Vikten av stridsvagnen Leopard 2A6;62300;Fordon;kg
+Den längsta tillåtna längden på ett godståg i Sverige;730;Fordon;meter
+Längden på kryssningsfartyget Wonder of the Seas;362;Fordon;meter
+Det maximala antalet passagerare en Boeing 747-400 är certifierad för;660;Fordon;personer
 Vikten av en gorilla;170;Djur;kg
 Höjden på en giraff;5,5;Djur;meter
 Höjden på en afrikansk elefant;3,3;Djur;meter
@@ -121,16 +121,16 @@ Höjden på Notre-Dame i Paris;96;Landmärken;meter
 Längden på Öresundsbron;7845;Landmärken;meter
 Längden på Storebæltsbron;6790;Landmärken;meter
 Höjden på Niagarafallen;57;Natur;meter
-Vikten av en vattenmelon;3000;Mat;gram
-Vikten av en ananas;1000;Mat;gram
-Vikten av en hel kyckling;1500;Mat;gram
-Vikten av ett hönsägg;60;Mat;gram
-Antal kalorier i en banan;105;Mat;kalorier
-Antal kalorier i en kanelbulle;240;Mat;kalorier
-Antal kalorier i en pizzabit;285;Mat;kalorier
-Antal kalorier i en chokladkaka;550;Mat;kalorier
-Vikten av en prinsesstårta;1200;Mat;gram
-Vikten av en morot;80;Mat;gram
+Vikten av en Big Mac;219;Mat;gram
+Volymen i en Coca-Cola-burk (33 cl);330;Mat;milliliter
+Antal gram socker i en burk Coca-Cola (33 cl);35;Mat;gram
+Den nedre viktgränsen för ett ägg i EU-storlek M;53;Mat;gram
+Antal kalorier i en Big Mac;580;Mat;kalorier
+Antal kalorier i 100 gram Marabou mjölkchoklad;550;Mat;kalorier
+Antal kalorier i en burk Coca-Cola (33 cl);139;Mat;kalorier
+Antal kalorier i 100 gram olivolja;884;Mat;kalorier
+Antal gram socker i 100 gram Marabou mjölkchoklad;58;Mat;gram
+Antal gram fett i 100 gram Marabou mjölkchoklad;32;Mat;gram
 Merkurius avstånd till solen;58;Rymden;miljoner km
 Mars avstånd till solen;228;Rymden;miljoner km
 Längden på ett år på Venus;225;Rymden;dagar
@@ -157,18 +157,18 @@ Höjden på ett fotbollsmål;2,44;Sport;meter
 Bredden på ett fotbollsmål;7,32;Sport;meter
 Världsrekordet i höjdhopp;2,45;Sport;meter
 Världsrekordet i längdhopp;8,95;Sport;meter
-Toppfarten på en tennisserve;200;Sport;km/h
+Hastighetsrekordet för en tennisserve (Sam Groth);263;Sport;km/h
 Längden på Vasaloppet;90;Sport;km
-Längden på hela Tour de France;3400;Sport;km
+Längden på Tour de France 2024;3492;Sport;km
 Höjden på ett simhoppstorn;10;Sport;meter
 Åskådarplatser på fotbollsarenan Camp Nou;99000;Sport;personer
 Antal pjäser på ett schackbräde vid start;32;Spel;stycken
 Antal rutor på ett schackbräde;64;Spel;stycken
 Temperaturen inuti en blixt;30000;Väder;grader Celsius
 Längden på den längsta uppmätta blixten;768;Väder;km
-Toppfarten i en tornado;480;Väder;km/h
-Toppfarten i en orkan;250;Väder;km/h
-Vikten av ett vanligt regnmoln;500000;Väder;kg
+Den högsta uppmätta vindhastigheten i en tornado (1999);484;Väder;km/h
+Vindhastigheten där en orkan klassas som kategori 5;252;Väder;km/h
+Den högsta lufttemperatur som uppmätts på jorden;56,7;Väder;grader Celsius
 Diametern på asteroiden Ceres;940;Rymden;km
 Höjden på Hubbleteleskopets bana över jorden;540;Rymden;km
 Toppfarten för rymdsonden Voyager;61000;Rymden;km/h
