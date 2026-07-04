@@ -33,7 +33,11 @@ jobs:
           fetch-depth: 0
 
       - name: Install cs (CodeScene devtools CLI)
-        run: curl -sL https://downloads.codescene.io/enterprise/cli/install-codescene-cli.sh | sh
+        # The installer drops cs into ~/.local/bin, then dies (exit 2) on an interactive
+        # /dev/tty PATH prompt. Swallow that and put the dir on PATH ourselves.
+        run: |
+          curl -sL https://downloads.codescene.io/enterprise/cli/install-codescene-cli.sh | sh || true
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
 
       - name: CodeHealth gate (CH >= 9.4)
         env:
