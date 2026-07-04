@@ -113,6 +113,16 @@ New game ideas are proven in **mini-scale** before full prod, to test the concep
   + grow content to 1085 → it automatically becomes a 21-question prod deck the 1085 test
   guards.
 
+## Copy / typografi (svensk site-copy)
+
+- **Ingen em dash (—) i svensk copy.** Läses som osvenskt/AI-genererat. Struktura om med
+  komma, parentes eller kolon. Gäller ENDAST kvissig.se site-copy, INTE artiklar utanför
+  sajten, INTE kod/engelska kommentarer. En dash (–, tankstreck) och `Given–When–Then` är OK.
+- **SEO-titlar med brand-suffix är OK att behålla** (t.ex. `Spel som 0-100 — prova Mer eller
+  Mindre` / `... | Mer eller Mindre`) — separatorn får stå.
+- **Ordet "gratis" får ALDRIG förekomma** (UI, copy, schema, docs) — kilen är twist +
+  online-tillsammans, aldrig pris.
+
 ## Naming
 
 - Commands: verb noun (`OpenLobby`, `SubmitGuess`)
