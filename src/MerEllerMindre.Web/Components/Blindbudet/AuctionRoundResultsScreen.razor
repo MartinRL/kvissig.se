@@ -3,7 +3,7 @@
    "Nästa" (which fires the progression gear → next lot or the final standings). *@
 <div hx-get="@StatePath" hx-trigger="every 2s" hx-target="#screen" hx-swap="innerHTML">
     <div class="card center">
-        <span class="pill">Lott @Model.LotNumber / @Model.TotalLots</span>
+        <span class="pill">Budrunda @Model.LotNumber / @Model.TotalLots</span>
         <h1 style="margin-top:1.1rem">@Model.Description</h1>
         <p class="answer">Sant värde: <span class="mer">@Model.TrueWorth @Model.Unit</span></p>
         <p class="sub">@WinnerLine</p>
@@ -32,7 +32,7 @@
     {
         <form hx-post="@($"/blindbudet/{Model.JoinCode:N}/next")" hx-target="#screen" hx-swap="innerHTML">
             <input type="hidden" name="__RequestVerificationToken" value="@Model.AntiforgeryToken" />
-            <button type="submit" class="btn">@(Model.HasNextLot ? "Nästa lott" : "Visa slutställning")</button>
+            <button type="submit" class="btn">@(Model.HasNextLot ? "Nästa budrunda" : "Visa slutställning")</button>
         </form>
     }
     else

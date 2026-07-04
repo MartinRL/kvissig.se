@@ -2,7 +2,7 @@
    appears automatically once the reveal gear fires (all bids in). *@
 <div hx-get="@StatePath" hx-trigger="every 2s" hx-target="#screen" hx-swap="innerHTML">
     <div class="card center">
-        <span class="pill">Lott @Model.LotNumber / @Model.TotalLots</span>
+        <span class="pill">Budrunda @Model.LotNumber / @Model.TotalLots</span>
         <h1 style="margin-top:1.1rem">Ditt bud är lagt ✓</h1>
         <p class="busy">@Model.DoneCount av @Model.TotalCount klara</p>
     </div>
