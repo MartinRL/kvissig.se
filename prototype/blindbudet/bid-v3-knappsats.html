@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BlindBudet — Bud v3: Lekfull knappsats</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #fff7ec; --bg-2: #ffeccf; --ink: #2b2118; --ink-soft: #7a6a58;
+      --card: #fffdf9; --line: #f0e0c8; --accent: #ff5d73;
+      --radius: 22px; --shadow: 0 10px 24px -12px rgba(120,80,20,.45); --shadow-lift: 0 18px 36px -14px rgba(120,80,20,.5);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; font-family: 'Nunito', system-ui, sans-serif; color: var(--ink);
+      background: radial-gradient(120% 80% at 50% -10%, var(--bg-2), transparent 60%), var(--bg);
+      min-height: 100vh; -webkit-font-smoothing: antialiased;
+    }
+    .wrap { max-width: 520px; margin-inline: auto; padding: 1.25rem 1.1rem 3rem; }
+    .brand { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; }
+    .logo { font-family: 'Baloo 2', cursive; font-weight: 800; font-size: 1.35rem; }
+    .pill { font-family: 'Baloo 2', cursive; font-weight: 700; font-size: .8rem;
+      background: var(--ink); color: var(--bg); padding: .35rem .8rem; border-radius: 999px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+      box-shadow: var(--shadow); padding: 1.5rem 1.35rem; margin-bottom: 1.5rem; }
+    h1 { font-family: 'Baloo 2', cursive; font-weight: 800; font-size: 1.7rem; line-height: 1.1; margin: 0 0 .35rem; }
+    .sub { color: var(--ink-soft); margin: 0 0 1.4rem; font-size: .95rem; }
+    label { display: block; font-family: 'Baloo 2', cursive; font-weight: 700; font-size: .95rem; margin: 0 0 .6rem; }
+
+    .display {
+      display: flex; align-items: baseline; justify-content: center; gap: .5rem;
+      background: var(--bg); border: 2px solid var(--line); border-radius: 16px;
+      padding: 1rem; margin-bottom: 1rem; min-height: 4.4rem;
+    }
+    .display .num { font-family: 'Baloo 2', cursive; font-weight: 800; font-size: 2.6rem; color: var(--accent); line-height: 1; }
+    .display .num.empty { color: var(--line); }
+    .display .unit { font-family: 'Baloo 2', cursive; font-weight: 700; font-size: 1.05rem; color: var(--ink-soft); }
+
+    .keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: .6rem; }
+    .key {
+      appearance: none; cursor: pointer; border: 2px solid var(--line); background: var(--card);
+      color: var(--ink); border-radius: 16px; padding: 1rem 0; font-family: 'Baloo 2', cursive;
+      font-weight: 800; font-size: 1.6rem; transition: transform .1s, background .1s, border-color .1s;
+    }
+    .key:active { transform: scale(.94); background: var(--bg-2); border-color: var(--accent); }
+    .key.util { color: var(--accent); }
+    .submit { appearance: none; cursor: pointer; width: 100%; margin-top: 1.25rem;
+      border: none; border-radius: 16px; padding: 1.05rem; font-family: 'Baloo 2', cursive;
+      font-weight: 800; font-size: 1.15rem; color: #fff;
+      background: linear-gradient(135deg, var(--accent), #ff8a3d);
+      box-shadow: 0 10px 22px -8px rgba(255,93,115,.7); transition: transform .12s; }
+    .submit:active { transform: scale(.98); }
+    .back { display: block; text-align: center; margin-top: .5rem; color: var(--ink-soft); font-size: .85rem; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="brand">
+      <div class="logo">Blind<span style="color:var(--accent)">Budet</span></div>
+      <span class="pill">v3 · Knappsats</span>
+    </div>
+
+    <div class="card" data-keypad data-unit="meter">
+      <div class="pill" style="background:var(--bg-2);color:var(--ink-soft);display:inline-block;margin-bottom:1rem">Lott 3 / 7</div>
+      <h1>Höjden på Mount Everest över havet</h1>
+      <p class="sub">Vad tror du den är värd? Ditt bud är hemligt tills alla har bjudit.</p>
+
+      <label>Ditt bud</label>
+      <div class="display">
+        <span class="num empty" data-num>0</span>
+        <span class="unit">meter</span>
+      </div>
+      <div class="keypad">
+        <button type="button" class="key" data-k="7">7</button>
+        <button type="button" class="key" data-k="8">8</button>
+        <button type="button" class="key" data-k="9">9</button>
+        <button type="button" class="key" data-k="4">4</button>
+        <button type="button" class="key" data-k="5">5</button>
+        <button type="button" class="key" data-k="6">6</button>
+        <button type="button" class="key" data-k="1">1</button>
+        <button type="button" class="key" data-k="2">2</button>
+        <button type="button" class="key" data-k="3">3</button>
+        <button type="button" class="key util" data-k=",">,</button>
+        <button type="button" class="key" data-k="0">0</button>
+        <button type="button" class="key util" data-k="del">⌫</button>
+      </div>
+      <!-- hidden field the form would POST: always invariant dot-decimal -->
+      <input type="hidden" name="amount" data-amount value="" />
+      <button type="button" class="submit">Lägg bud!</button>
+    </div>
+
+    <div class="card" data-keypad data-unit="km/h">
+      <div class="pill" style="background:var(--bg-2);color:var(--ink-soft);display:inline-block;margin-bottom:1rem">Lott 5 / 7</div>
+      <h1>Toppfarten för en sengångare</h1>
+      <p class="sub">Decimaler funkar — tryck komma. Det dolda budet skickas med punkt.</p>
+
+      <label>Ditt bud</label>
+      <div class="display">
+        <span class="num empty" data-num>0</span>
+        <span class="unit">km/h</span>
+      </div>
+      <div class="keypad">
+        <button type="button" class="key" data-k="7">7</button>
+        <button type="button" class="key" data-k="8">8</button>
+        <button type="button" class="key" data-k="9">9</button>
+        <button type="button" class="key" data-k="4">4</button>
+        <button type="button" class="key" data-k="5">5</button>
+        <button type="button" class="key" data-k="6">6</button>
+        <button type="button" class="key" data-k="1">1</button>
+        <button type="button" class="key" data-k="2">2</button>
+        <button type="button" class="key" data-k="3">3</button>
+        <button type="button" class="key util" data-k=",">,</button>
+        <button type="button" class="key" data-k="0">0</button>
+        <button type="button" class="key util" data-k="del">⌫</button>
+      </div>
+      <input type="hidden" name="amount" data-amount value="" />
+      <button type="button" class="submit">Lägg bud!</button>
+    </div>
+
+    <a class="back" href="bid-compare.html">← Tillbaka till jämförelsen</a>
+  </div>
+
+  <script>
+    document.querySelectorAll('[data-keypad]').forEach(card => {
+      const numEl = card.querySelector('[data-num]');
+      const hidden = card.querySelector('[data-amount]');
+      let raw = ''; // display string, comma as decimal sep
+
+      function render() {
+        numEl.textContent = raw === '' ? '0' : raw;
+        numEl.classList.toggle('empty', raw === '');
+        // hidden/posted value: invariant dot-decimal, never Swedish comma
+        hidden.value = raw === '' ? '' : raw.replace(',', '.');
+      }
+      card.querySelectorAll('.key').forEach(key => {
+        key.addEventListener('click', () => {
+          const k = key.dataset.k;
+          if (k === 'del') raw = raw.slice(0, -1);
+          else if (k === ',') { if (!raw.includes(',')) raw = (raw === '' ? '0' : raw) + ','; }
+          else raw = (raw === '0' ? '' : raw) + k;
+          render();
+        });
+      });
+      render();
+    });
+  </script>
+</body>
+</html>

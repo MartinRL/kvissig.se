@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BlindBudet — Budinmatning: jämför tre</title>
+  <style>
+    body { margin: 0; font-family: system-ui, sans-serif; background: #f4f4f5; color: #18181b; }
+    .wrap { max-width: 760px; margin-inline: auto; padding: 2.5rem 1.25rem; }
+    h1 { font-size: 1.5rem; }
+    p { color: #52525b; line-height: 1.5; }
+    .grid { display: grid; grid-template-columns: 1fr; gap: 1rem; margin-top: 1.5rem; }
+    a.card { display: block; text-decoration: none; color: inherit; border-radius: 16px;
+      padding: 1.35rem 1.5rem; border: 1px solid #e4e4e7; background: linear-gradient(135deg, #fff7ec, #ffeccf); }
+    a.card strong { font-size: 1.15rem; display: block; margin-bottom: .4rem; color: #2b2118; }
+    a.card .desc { font-size: .9rem; color: #7a6a58; margin-bottom: .5rem; }
+    a.card .pro { font-size: .82rem; color: #12805c; }
+    a.card .con { font-size: .82rem; color: #c2410c; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>BlindBudet — tre sätt att lägga bud</h1>
+    <p>Budet är ett RÅTT värde i lotets egen enhet med enormt spann (0,24 → 150&nbsp;000&nbsp;000), så
+      0-100-slidern funkar inte. Alla tre visar samma två mock-lott — Everest (8849 m) och en
+      sengångare (0,24 km/h) — så du kan känna på både stora och små tal. Ingen native spinbox,
+      korall-fokus, tumstora ytor. Välj en.</p>
+    <div class="grid">
+      <a class="card" href="bid-v1-ruta.html">
+        <strong>v1 · Ren sifferruta</strong>
+        <div class="desc">Restylad number-ruta med enhets-pill. OS:ets sifferklaviatur via inputmode.</div>
+        <div class="pro">+ Minsta äkta fixen, noll JS, mest robust.</div>
+        <div class="con">− Ingen finjustering, förlitar sig på OS-tangentbordet.</div>
+      </a>
+      <a class="card" href="bid-v2-steg.html">
+        <strong>v2 · Sifferruta + steg-knappar</strong>
+        <div class="desc">Rutan flankeras av stora −/+ med kontextuellt steg (8849 stegar i 100-tal, 0,24 i hundradelar).</div>
+        <div class="pro">+ Snabb finjustering, taktilt, behåller OS-tangentbord.</div>
+        <div class="con">− Lite JS; steget kan förvåna vid gränsvärden.</div>
+      </a>
+      <a class="card" href="bid-v3-knappsats.html">
+        <strong>v3 · Lekfull knappsats</strong>
+        <div class="desc">Egen sifferpanel (0-9, komma, ⌫) i playful-stil, stor korall-display. Inget OS-tangentbord.</div>
+        <div class="pro">+ Mest "kvissig"-känsla, tumvänlig, full kontroll på look.</div>
+        <div class="con">− Mest JS; komma→punkt-normalisering krävs innan submit.</div>
+      </a>
+    </div>
+  </div>
+</body>
+</html>

@@ -224,6 +224,20 @@ input[type=text] {
 }
 input[type=text]:focus { outline: none; border-color: var(--accent); }
 
+/* ---- BlindBudet bid keypad (v3) ---- */
+.bid-display { display: flex; align-items: baseline; justify-content: center; gap: .5rem;
+  background: var(--bg); border: 2px solid var(--line); border-radius: var(--radius-sm);
+  padding: 1rem; margin-bottom: 1rem; min-height: 4.4rem; }
+.bid-display .num { font-family: var(--display); font-weight: 800; font-size: 2.6rem; color: var(--accent); line-height: 1; }
+.bid-display .num.empty { color: var(--line); }
+.bid-display .unit { font-family: var(--display); font-weight: 700; font-size: 1.05rem; color: var(--ink-soft); }
+.keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: .6rem; }
+.keypad .key { appearance: none; cursor: pointer; border: 2px solid var(--line); background: var(--card);
+  color: var(--ink); border-radius: var(--radius-sm); padding: 1rem 0; font-family: var(--display);
+  font-weight: 800; font-size: 1.6rem; transition: transform .1s, background .1s, border-color .1s; }
+.keypad .key:active { transform: scale(.94); background: var(--bg-2); border-color: var(--accent); }
+.keypad .key.util { color: var(--accent); }
+
 /* ---- QR / join code ---- */
 .qr { width: 180px; height: 180px; border-radius: var(--radius-sm); border: 2px solid var(--line); padding: 8px; background: #fff; margin: 1rem auto; display: block; }
 .qr svg { width: 100%; height: 100%; display: block; }
