@@ -19,8 +19,8 @@
                 {
                     <tr class="@(r.IsWinner ? "winner" : null)">
                         <td class="who">@r.Name@(r.IsHost ? " (värd)" : "")@(r.IsYou ? " · du" : "")</td>
-                        <td>@r.Bid@(r.IsOverbid ? (MarkupString)" <span class=\"mark bad\">✗</span>" : (MarkupString)"")</td>
-                        <td>@r.Profit</td>
+                        <td class="round" data-label="Bud">@r.Bid@(r.IsOverbid ? (MarkupString)" <span class=\"mark bad\">✗</span>" : (MarkupString)"")</td>
+                        <td class="round" data-label="Poäng">@r.Profit</td>
                         <td class="total">@r.TotalSoFar</td>
                     </tr>
                 }
