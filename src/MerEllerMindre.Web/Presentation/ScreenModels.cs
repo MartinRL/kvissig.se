@@ -120,7 +120,9 @@ public sealed record ResultsVm(
     string AntiforgeryToken,
     // Logo mode: PNGs revealed alongside the Larger/Smaller names.
     string? LargerLogo = null,
-    string? SmallerLogo = null);
+    string? SmallerLogo = null,
+    // Optional per-card citation (loggor-mini); null hides the "Källa" disclosure.
+    string? Source = null);
 
 public sealed record StandingRowVm(int Rank, string Name, bool IsYou, bool IsHost, int TotalScore, bool IsWinner);
 

@@ -18,6 +18,13 @@
         </div>
 
         <p style="margin-top:2.2rem">Facit: mindre är <span class="diffnum">@Model.SmallerBarPercent</span>% av mer</p>
+        @if (Model.Source is not null)
+        {
+            <details class="source">
+                <summary>Källa</summary>
+                <div class="muted">@((MarkupString)Linkify(Model.Source))</div>
+            </details>
+        }
     </div>
 
     <div class="card">
@@ -61,4 +68,16 @@
     private string StatePath => $"/games/{Model.JoinCode:N}/state";
     private static string Fmt(decimal d) => d.ToString("0.##", CultureInfo.InvariantCulture);
     private static string Signed(int n) => n > 0 ? $"+{n}" : n.ToString(CultureInfo.InvariantCulture);
+
+    private static readonly System.Text.RegularExpressions.Regex UrlRe =
+        new(@"https?://\S+", System.Text.RegularExpressions.RegexOptions.Compiled);
+
+    // HTML-encode the whole citation first (boundary hygiene even though pack data is trusted),
+    // then turn well-formed http(s) URLs into links. Bare domains (arla.com) stay plain text.
+    private static string Linkify(string source)
+    {
+        var encoded = System.Net.WebUtility.HtmlEncode(source);
+        return UrlRe.Replace(encoded, m =>
+            $"<a href=\"{m.Value}\" target=\"_blank\" rel=\"noopener\">{m.Value}</a>");
+    }
 }

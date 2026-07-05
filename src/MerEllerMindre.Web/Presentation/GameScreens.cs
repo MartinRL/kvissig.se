@@ -200,7 +200,8 @@ public static class GameScreens
             state.HasNextQuestion,
             token,
             LargerLogo: logo(largerItem),
-            SmallerLogo: logo(smallerItem));
+            SmallerLogo: logo(smallerItem),
+            Source: card.Source);
     }
 
     /// <summary>

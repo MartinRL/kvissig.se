@@ -11,6 +11,8 @@ namespace MerEllerMindre.Domain;
 /// DifferencePrompt is the per-card wording for the raw-difference guess (e.g.
 /// "Hur många miljoner invånare skiljer det?") — the player answers it in the card's unit.
 /// Raw values are decimal so the author's exact figures round-trip without binary drift.
+/// Source is the optional citation shown on the results screen (loggor-mini packs carry it;
+/// 7-column packs leave it null).
 /// </summary>
 public record Question(
     string QuestionText,
@@ -19,7 +21,8 @@ public record Question(
     decimal ValueA,
     decimal ValueB,
     string Unit,
-    string DifferencePrompt
+    string DifferencePrompt,
+    string? Source = null
 );
 
 /// <summary>
@@ -51,6 +54,7 @@ public static class QuestionPackCsvParser
     private const string ColValueB = "värdeB";
     private const string ColUnit = "enhet";
     private const string ColDifferencePrompt = "differensfråga";
+    private const string ColSource = "källa"; // optional 8th column (loggor-mini); absent => Source null
 
     public static QuestionPack Parse(string slug, string text)
     {
@@ -75,7 +79,8 @@ public static class QuestionPackCsvParser
                 ValueA: ParseValue(slug, Field(slug, fields, index, ColValueA, r), ColValueA, r),
                 ValueB: ParseValue(slug, Field(slug, fields, index, ColValueB, r), ColValueB, r),
                 Unit: Field(slug, fields, index, ColUnit, r),
-                DifferencePrompt: Field(slug, fields, index, ColDifferencePrompt, r)
+                DifferencePrompt: Field(slug, fields, index, ColDifferencePrompt, r),
+                Source: OptionalField(fields, index, ColSource)
             ));
         }
 
@@ -108,6 +113,15 @@ public static class QuestionPackCsvParser
         if (col >= fields.Count)
             throw new FormatException($"Question pack '{slug}' row {row} is missing column '{column}'.");
         return fields[col].Trim();
+    }
+
+    // Optional column: null when the header is absent (7-col packs) or the cell is blank.
+    private static string? OptionalField(IReadOnlyList<string> fields, IReadOnlyDictionary<string, int> index, string column)
+    {
+        if (!index.TryGetValue(column, out var col) || col >= fields.Count)
+            return null;
+        var value = fields[col].Trim();
+        return value.Length == 0 ? null : value;
     }
 
     private static decimal ParseValue(string slug, string raw, string column, int row)

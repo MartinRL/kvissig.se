@@ -155,6 +155,9 @@ input[type=range]::-moz-range-thumb {
 .twobars-legend { display: flex; justify-content: space-around; margin-top: 2rem; gap: 1rem; }
 .twobars-legend > span { flex: 1; text-align: center; color: var(--ink-soft); font-size: .8rem; }
 .barpct { display: block; font-size: .8rem; color: var(--ink-soft); }
+.source { margin-top: .8rem; }
+.source summary { cursor: pointer; font-size: .8rem; color: var(--ink-soft); }
+.source > div { font-size: .8rem; margin-top: .4rem; }
 .answer { font-family: var(--display); font-weight: 700; font-size: 1.2rem; }
 .answer .mer { color: var(--mer-deep); }
 .answer .mindre { color: var(--mindre-deep); }

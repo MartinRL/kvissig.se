@@ -114,6 +114,46 @@ List<Question> LoadCards(IEnumerable<string> files)
     return cards;
 }
 
+// Merge-only: zip each staging file with its "<name>.källor.csv" sidecar POSITIONALLY
+// (csv data-row N ↔ sidecar data-row N) so the merged pack carries a Source per card.
+// Sidecars lack sakA/sakB and repeat the fråga, so position is the only reliable join.
+// ponytail: positional zip, assumes neither file has blank rows (the loggor-mini staging has none).
+List<Question> LoadCardsWithSources(IEnumerable<string> files)
+{
+    var cards = new List<Question>();
+    foreach (var file in files)
+    {
+        var slug = Path.GetFileNameWithoutExtension(file);
+        var pack = QuestionPackCsvParser.Parse(slug, File.ReadAllText(file));
+        var sources = LoadSidecarSources(file);
+        for (var i = 0; i < pack.Questions.Count; i++)
+        {
+            var src = i < sources.Count && sources[i].Length > 0 ? sources[i] : null;
+            cards.Add(src is null ? pack.Questions[i] : pack.Questions[i] with { Source = src });
+        }
+    }
+    return cards;
+}
+
+// Reads the källa column (fråga;källa;år) from the sidecar. källa is everything between the
+// first and last ';' so it tolerates commas/parens inside the citation; år is always last.
+List<string> LoadSidecarSources(string stagingFile)
+{
+    var dir = Path.GetDirectoryName(stagingFile) ?? ".";
+    var sidecar = Path.Combine(dir, Path.GetFileNameWithoutExtension(stagingFile) + ".källor.csv");
+    if (!File.Exists(sidecar)) return [];
+    var lines = File.ReadAllText(sidecar).TrimStart('\uFEFF')
+        .Split('\n').Select(l => l.TrimEnd('\r')).Where(l => l.Length > 0).ToList();
+    var sources = new List<string>();
+    foreach (var line in lines.Skip(1)) // skip header
+    {
+        var first = line.IndexOf(';');
+        var last = line.LastIndexOf(';');
+        sources.Add(first >= 0 && last > first ? line[(first + 1)..last].Trim() : "");
+    }
+    return sources;
+}
+
 // Dedup/duplicate-flag key. pair = unordered {sakA,sakB} so a single-metric logo deck
 // sharing one frågestam dedups on the pair, not the identical text. metricpair prepends the
 // frågestam so a mixed-metric deck allows the same pair once per metric but not twice within one.
@@ -268,7 +308,7 @@ void Merge()
         return;
     }
 
-    var cards = LoadCards(StagingFiles());
+    var cards = LoadCardsWithSources(StagingFiles());
     var seen = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
     var kept = new List<Question>();
     var dropped = 0;
@@ -329,15 +369,24 @@ void Cap()
 
 void WritePack(List<Question> cards, string path)
 {
+    var withSource = cards.Any(c => c.Source is not null); // loggor-mini => 8 cols; other packs stay 7
     var sb = new StringBuilder();
     sb.Append('\uFEFF'); // BOM so Excel reads sv-SE UTF-8
-    sb.Append("fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga\n");
+    sb.Append(withSource
+        ? "fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga;källa\n"
+        : "fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga\n");
     var sv = CultureInfo.GetCultureInfo("sv-SE");
     foreach (var c in cards)
-        sb.Append(string.Join(';',
+    {
+        var fields = new List<string>
+        {
             Q(c.QuestionText), Q(c.ItemA), Q(c.ItemB),
             Q(c.ValueA.ToString(sv)), Q(c.ValueB.ToString(sv)),
-            Q(c.Unit), Q(c.DifferencePrompt))).Append('\n');
+            Q(c.Unit), Q(c.DifferencePrompt)
+        };
+        if (withSource) fields.Add(Q(c.Source ?? ""));
+        sb.Append(string.Join(';', fields)).Append('\n');
+    }
     File.WriteAllText(path, sb.ToString(), new UTF8Encoding(false));
 }
 

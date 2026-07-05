@@ -72,6 +72,18 @@ public class QuestionPackCsvParserTests
     }
 
     [Fact]
+    public void ReadsOptionalSourceColumnWhenPresentAndNullOtherwise()
+    {
+        var without = QuestionPackCsvParser.Parse("p",
+            Header + "\n" + "Q;A;B;10;5;kg;Hur många kg skiljer det?\n").Questions[0];
+        without.Source.Should().BeNull("a 7-column pack carries no citation");
+
+        var with = QuestionPackCsvParser.Parse("p",
+            Header + ";källa\n" + "Q;A;B;10;5;kg;Hur många kg skiljer det?;A väger 10 kg (example.com)\n").Questions[0];
+        with.Source.Should().Be("A väger 10 kg (example.com)");
+    }
+
+    [Fact]
     public void MapsColumnsByHeaderNameRegardlessOfOrder()
     {
         var csv = "enhet;värdeB;värdeA;sakB;sakA;fråga;differensfråga\n" +
