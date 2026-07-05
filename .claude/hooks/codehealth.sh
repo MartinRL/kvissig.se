@@ -23,8 +23,9 @@ THRESHOLD=9.4
 # Documented per-file exemptions: presentation screen-selectors sit at CH 9.38 — the exhaustive
 # per-screen render dispatch that rounds to 9.4. Splitting them would only scatter the switch,
 # not remove complexity, so they are grandfathered (like the mini-deck 1085-card exemption).
+# TankScreens.cs is the same pattern (Tänk Till Tusen's 6-screen selector, CH 9.38).
 # NEVER lower the global THRESHOLD; add a line here (with the CH + reason) instead.
-EXEMPT_RE='src/MerEllerMindre\.Web/Presentation/(Auction|Game)Screens\.cs'
+EXEMPT_RE='src/MerEllerMindre\.Web/Presentation/(Auction|Game|Tank)Screens\.cs'
 
 mode="${1:---changed}"
 
@@ -38,11 +39,14 @@ fi
 
 cd "${CLAUDE_PROJECT_DIR:-$(git rev-parse --show-toplevel)}" || exit 0
 
-# Prod C# scope: backend Domains + Web .cs. Exclude obj/bin/Tests/generated. git-tracked only.
+# Prod C# scope: backend Domains + Web .cs. Exclude obj/bin/Tests/generated.
+# Tracked + untracked-not-ignored, so a brand-new feature's files are scored BEFORE first commit
+# (regression 2026-07-06: git-tracked-only silently passed the whole new TankTillTusen.Domain).
 # Trailing slash after ".Domain" excludes the sibling ".Domain.Tests/" dirs.
+# NOTE: every new game's Domain project MUST be added to the regex or its files are never scored.
 scope_files() {
-  git ls-files -- '*.cs' \
-    | grep -E '^src/(MerEllerMindre\.Domain|Blindbudet\.Domain|MerEllerMindre\.Web)/' \
+  { git ls-files -- '*.cs'; git ls-files --others --exclude-standard -- '*.cs'; } | sort -u \
+    | grep -E '^src/(MerEllerMindre\.Domain|Blindbudet\.Domain|TankTillTusen\.Domain|MerEllerMindre\.Web)/' \
     | grep -viE '(/obj/|/bin/|\.Tests/|\.g\.cs$)'
 }
 
@@ -84,7 +88,8 @@ case "$mode" in
     files="$(scope_files)"
     ;;
   --changed)
-    changed="$( { git diff --name-only HEAD; git diff --name-only --cached; } | sort -u )"
+    changed="$( { git diff --name-only HEAD; git diff --name-only --cached; \
+                  git ls-files --others --exclude-standard; } | sort -u )"
     files="$(comm -12 <(scope_files | sort) <(echo "$changed" | sort))"
     ;;
   *)
