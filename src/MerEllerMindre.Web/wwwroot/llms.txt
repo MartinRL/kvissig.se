@@ -14,3 +14,4 @@
 - [Hund-frågesport tillsammans](https://kvissig.se/hund-fragesport-tillsammans): jämför hundraser (mankhöjd, vikt, livslängd, SKK-registreringar) online men i samma rum.
 - [Elbils-frågesport tillsammans](https://kvissig.se/elbil-fragesport-tillsammans): jämför elbilar (räckvidd, pris, 0–100, hästkrafter) online men i samma rum.
 - [Fotbolls-frågesport tillsammans](https://kvissig.se/fotboll-fragesport-tillsammans): jämför Allsvenskan (marknadsvärde, mål, publiksnitt, ålder) online men i samma rum.
+- [Tänk Till Tusen](https://kvissig.se/tank-till-tusen): sifferspelet där alla får samma sex tal och samma mål och kappas mot klockan om att nå det med de fyra räknesätten. Lägst total vinner. Online men tillsammans i samma rum.

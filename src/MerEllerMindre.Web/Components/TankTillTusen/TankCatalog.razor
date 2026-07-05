@@ -1,0 +1,30 @@
+@* GET /tank-till-tusen — the game's entry. Single fixed v1 (puzzles are generated per game, no
+   pack to pick); "Spela" links to /tank-till-tusen/new where the host enters their name. *@
+<MainLayout Title="Tänk Till Tusen: sifferspelet där lägst total vinner"
+            Description="Tänk Till Tusen är sifferspelet ni spelar online men tillsammans i samma rum, var och en på sin skärm. Alla får samma sex tal och samma mål: nå det med de fyra räknesätten innan tiden är ute. Närmast (eller exakt) vinner rundan. Lägst total vinner."
+            CanonicalPath="/tank-till-tusen">
+    <div class="wrap">
+        <div class="brand">
+            <div class="logo"><span class="mer">Tänk Till</span> <span class="mindre">Tusen</span></div>
+            <ShareButton />
+            <span class="pill soft">Värd</span>
+        </div>
+
+        <h1>Tänk Till Tusen</h1>
+        <p class="sub">Sex tal, ett mål, 45 sekunder. Du blir värd och första spelaren. Lägst total vinner.</p>
+
+        <div class="card">
+            <div class="pack">
+                <div class="info">
+                    <div class="name">Nå målet</div>
+                    <div class="count">@RoundCount pussel i spelet · 45 sekunder per pussel</div>
+                </div>
+                <a class="btn" href="/tank-till-tusen/new">Spela</a>
+            </div>
+        </div>
+    </div>
+</MainLayout>
+
+@code {
+    private static int RoundCount => global::TankTillTusen.Domain.Decider.RoundCount;
+}

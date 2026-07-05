@@ -1,0 +1,27 @@
+@* GET /tank-till-tusen/new — the host enters their name before the game is created. Posting
+   creates the game (OpenLobby via POST /tank-till-tusen) and the server HX-Redirects to the
+   game shell. Full page. *@
+<MainLayout Title="Tänk Till Tusen: Skapa spel">
+    <div class="wrap">
+        <div class="brand">
+            <div class="logo"><span class="mer">Tänk Till</span> <span class="mindre">Tusen</span></div>
+            <span class="pill soft">Värd</span>
+        </div>
+
+        <div class="card">
+            <h1>Skapa spel</h1>
+            <p class="sub">Nå målet med de fyra räknesätten.</p>
+
+            <form hx-post="/tank-till-tusen" hx-swap="none">
+                <input type="hidden" name="__RequestVerificationToken" value="@Model.AntiforgeryToken" />
+                <label for="name">Ditt namn</label>
+                <input type="text" id="name" name="hostName" placeholder="Skriv ditt namn" autofocus required />
+                <button type="submit" class="btn">Skapa spel</button>
+            </form>
+        </div>
+    </div>
+</MainLayout>
+
+@code {
+    [Parameter] public required TankHostFormVm Model { get; set; }
+}

@@ -1,0 +1,205 @@
+using System.Text.Json;
+using MerEllerMindre.Web.Components.TankTillTusen;
+using MerEllerMindre.Web.Infrastructure;
+using MerEllerMindre.Web.Presentation;
+using Microsoft.AspNetCore.Antiforgery;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
+using TankTillTusen.Domain;
+using TankOk = TankTillTusen.Domain.Ok<TankTillTusen.Domain.TankEvent[]>;
+
+namespace MerEllerMindre.Web;
+
+/// <summary>The DI services every Tank handler needs, bound as one <c>[AsParameters]</c> arg.</summary>
+public record TankDeps(
+    TankApplicationService Svc,
+    PlayerIdentity Identity,
+    IAntiforgery Antiforgery);
+
+/// <summary>Everything a screen fragment needs to render, so RenderState takes one argument.</summary>
+public record TankRenderContext(
+    TankState State,
+    Guid? Viewer,
+    string Token,
+    string JoinUrl,
+    DateTimeOffset Now,
+    bool ShowJoinUrl = false);
+
+/// <summary>
+/// Tänk Till Tusen (Countdown-style number game) HTTP endpoints, mounted under /tank-till-tusen —
+/// parallel to MEM's /games and Blindbudet's /blindbudet, sharing the same static-SSR + htmx-poll
+/// shell, PlayerIdentity cookie and antiforgery. Screens are RazorComponentResult fragments; the
+/// create/join POSTs answer with HX-Redirect. No pack catalog — puzzles are generated per game.
+/// </summary>
+public static class TankEndpoints
+{
+    public static void MapTankEndpoints(this WebApplication app)
+    {
+        app.MapGet("/tank-till-tusen", GetCatalog);
+        app.MapGet("/tank-till-tusen/new", GetNew);
+        app.MapPost("/tank-till-tusen", PostOpen);
+        app.MapGet("/tank-till-tusen/{code}/join", GetJoin);
+        app.MapPost("/tank-till-tusen/{code}/join", PostJoin);
+        app.MapGet("/tank-till-tusen/{code}", GetGame);
+        app.MapGet("/tank-till-tusen/{code}/state", GetState);
+        app.MapPost("/tank-till-tusen/{code}/start", PostStart);
+        app.MapPost("/tank-till-tusen/{code}/solution", PostSolution);
+        app.MapPost("/tank-till-tusen/{code}/next", PostNext);
+    }
+
+    private static IResult GetCatalog() => new RazorComponentResult<TankCatalog>();
+
+    private static IResult GetNew(IAntiforgery antiforgery, HttpContext http)
+    {
+        var token = antiforgery.GetAndStoreTokens(http).RequestToken!;
+        return new RazorComponentResult<TankHostForm>(new { Model = new TankHostFormVm(token) });
+    }
+
+    private static IResult PostOpen([FromForm] string hostName, [AsParameters] TankDeps d, HttpContext http)
+    {
+        var result = d.Svc.Open(new OpenLobby(hostName));
+        if (result is not TankOk ok || ok.Value is not [LobbyOpened opened, ..])
+            return Results.BadRequest(result is Err err ? Describe(err.Error) : "Något gick fel.");
+
+        d.Identity.SetPlayer(http, opened.GameId, opened.HostPlayerId);
+        http.Response.Headers["HX-Redirect"] = $"/tank-till-tusen/{opened.JoinCode:N}";
+        return Results.Ok();
+    }
+
+    private static IResult GetJoin(string code, [AsParameters] TankDeps d, HttpContext http)
+    {
+        if (Resolve(d.Svc, code) is not var (_, state))
+            return Results.NotFound("Spelet hittades inte.");
+
+        var token = d.Antiforgery.GetAndStoreTokens(http).RequestToken!;
+        var hostName = state.Players.FirstOrDefault(p => p.IsHost)?.Name ?? "";
+        return new RazorComponentResult<TankJoinForm>(new { Model = new TankJoinFormVm(state.JoinCode, hostName, token) });
+    }
+
+    private static IResult PostJoin(string code, [FromForm] string playerName, [AsParameters] TankDeps d, HttpContext http)
+    {
+        if (Resolve(d.Svc, code) is not var (gameId, state))
+            return Results.NotFound("Spelet hittades inte.");
+
+        var result = d.Svc.Execute(gameId, new JoinGame(state.JoinCode, playerName));
+        if (result is not TankOk ok || ok.Value is not [PlayerJoined joined, ..])
+            return Results.BadRequest(result is Err err ? Describe(err.Error) : "Något gick fel.");
+
+        d.Identity.SetPlayer(http, gameId, joined.PlayerId);
+        http.Response.Headers["HX-Redirect"] = $"/tank-till-tusen/{state.JoinCode:N}";
+        return Results.Ok();
+    }
+
+    private static IResult GetGame(string code, [AsParameters] TankDeps d, HttpContext http)
+    {
+        if (Resolve(d.Svc, code) is not var (_, state))
+            return Results.NotFound("Spelet hittades inte.");
+        return new RazorComponentResult<TankShell>(new { JoinCode = state.JoinCode, ShowJoinUrl = http.Request.Query.ContainsKey("url") });
+    }
+
+    private static IResult GetState(string code, [AsParameters] TankDeps d, HttpContext http)
+    {
+        if (Resolve(d.Svc, code) is not var (gameId, _))
+            return Results.NotFound("Spelet hittades inte.");
+
+        // Any poll (waiting screen / a stuck puzzle screen) closes an expired round server-side.
+        d.Svc.RunScoreGear(gameId);
+        return Rendered(d.Svc.Load(gameId), d.Identity.GetPlayer(http, gameId), d, http);
+    }
+
+    private static IResult PostStart(string code, [AsParameters] TankDeps d, HttpContext http)
+    {
+        if (Resolve(d.Svc, code) is not var (gameId, _))
+            return Results.NotFound("Spelet hittades inte.");
+
+        d.Svc.Execute(gameId, new StartGame(gameId));
+        return Rendered(d.Svc.Load(gameId), d.Identity.GetPlayer(http, gameId), d, http);
+    }
+
+    private static IResult PostSolution(string code, [FromForm] string solution, [AsParameters] TankDeps d, HttpContext http)
+    {
+        if (Resolve(d.Svc, code) is not var (gameId, state))
+            return Results.NotFound("Spelet hittades inte.");
+
+        var viewer = d.Identity.GetPlayer(http, gameId);
+        if (viewer is { } playerId && Parse(solution) is { } parsed)
+            d.Svc.Execute(gameId, new SubmitSolution(gameId, playerId, state.CurrentRoundIndex, parsed));
+
+        // Whether the build was valid or the timer just expired: close the round if it's ready.
+        d.Svc.RunScoreGear(gameId);
+        return Rendered(d.Svc.Load(gameId), viewer, d, http);
+    }
+
+    private static IResult PostNext(string code, [AsParameters] TankDeps d, HttpContext http)
+    {
+        if (Resolve(d.Svc, code) is not var (gameId, _))
+            return Results.NotFound("Spelet hittades inte.");
+
+        d.Svc.RunNextGear(gameId);
+        return Rendered(d.Svc.Load(gameId), d.Identity.GetPlayer(http, gameId), d, http);
+    }
+
+    /// <summary>Parse the client's posted build (JSON: steps[] + answerIndex). Null = malformed.</summary>
+    private static Solution? Parse(string json)
+    {
+        try
+        {
+            var dto = JsonSerializer.Deserialize<SolutionDto>(json);
+            if (dto is null)
+                return null;
+            var steps = (dto.Steps ?? []).Select(s => new Step(s.LeftIndex, (Operator)s.Op, s.RightIndex)).ToList();
+            return new Solution(steps, dto.AnswerIndex);
+        }
+        catch (JsonException)
+        {
+            return null;
+        }
+    }
+
+    private sealed record SolutionDto(IReadOnlyList<StepDto>? Steps, int AnswerIndex);
+    private sealed record StepDto(int LeftIndex, int Op, int RightIndex);
+
+    private static string AbsoluteJoinUrl(HttpContext http, Guid joinCode) =>
+        $"{http.Request.Scheme}://{http.Request.Host}/tank-till-tusen/{joinCode:N}/join";
+
+    private static IResult Rendered(TankState state, Guid? viewer, TankDeps d, HttpContext http) =>
+        RenderState(new TankRenderContext(
+            state, viewer,
+            d.Antiforgery.GetAndStoreTokens(http).RequestToken!,
+            AbsoluteJoinUrl(http, state.JoinCode),
+            d.Svc.Now,
+            http.Request.Query.ContainsKey("url")));
+
+    private static IResult RenderState(TankRenderContext c) =>
+        TankScreens.Select(c.State, c.Viewer) switch
+        {
+            TankScreenKind.LobbyHost => new RazorComponentResult<TankLobbyHostScreen>(new { Model = TankScreens.Lobby(c.State, c.Viewer, c.Token, c.JoinUrl, c.ShowJoinUrl) }),
+            TankScreenKind.LobbyPlayer => new RazorComponentResult<TankLobbyPlayerScreen>(new { Model = TankScreens.Lobby(c.State, c.Viewer, c.Token, c.JoinUrl, showJoinUrl: false) }),
+            TankScreenKind.Puzzle => new RazorComponentResult<PuzzleScreen>(new { Model = TankScreens.Puzzle(c.State, c.Now, c.Token) }),
+            TankScreenKind.Waiting => new RazorComponentResult<TankWaitingScreen>(new { Model = TankScreens.Waiting(c.State, c.Viewer) }),
+            TankScreenKind.RoundResults => new RazorComponentResult<TankRoundResultsScreen>(new { Model = TankScreens.RoundResults(c.State, c.Viewer, c.Token) }),
+            TankScreenKind.Standings => new RazorComponentResult<TankStandingsScreen>(new { Model = TankScreens.Standings(c.State) }),
+            _ => throw new InvalidOperationException($"Unhandled tank screen kind for game {c.State.GameId}.")
+        };
+
+    private static (Guid GameId, TankState State)? Resolve(TankApplicationService svc, string code)
+    {
+        if (!Guid.TryParse(code, out var joinCode))
+            return null;
+        var gameId = svc.ResolveJoinCode(joinCode);
+        return gameId is null ? null : (gameId.Value, svc.Load(gameId.Value));
+    }
+
+    private static string Describe(TankError error) => error switch
+    {
+        GameNotFound => "Spelet hittades inte.",
+        GameAlreadyStarted => "Spelet har redan startat.",
+        NameAlreadyTaken => "Namnet är upptaget.",
+        NotEnoughPlayers => "Det behövs minst 2 spelare.",
+        AlreadySubmitted => "Du har redan låst ett svar på det här pusslet.",
+        RoundAlreadyScored => "Pusslet är redan avslöjat.",
+        DeadlinePassed => "Tiden är ute för det här pusslet.",
+        InvalidSolution => "Ogiltigt svar.",
+        NotReadyToScore => "Alla har inte svarat än."
+    };
+}

@@ -1,0 +1,188 @@
+@* The Puzzle screen — the chosen Phase-0 interaction (v2 · Räknartejp): tap a tal, a räknesätt,
+   then a second tal → they merge into a new result tal on the tape; ⌫ undoes the last step. The
+   answer is the last tal on the tape. A cosmetic 45 s countdown ticks client-side and auto-locks
+   on expiry; the SERVER owns the real deadline (rejects late builds, scores non-submitters 100).
+   Interactive, so it does NOT poll: locking swaps in the Waiting screen. *@
+<div class="tank-puzzle">
+    <div class="card">
+        <div class="toprow">
+            <span class="pill">Pussel @Model.RoundNumber / @Model.TotalRounds · Tänk Till Tusen</span>
+            <span class="clock" id="clock">0:@Model.RemainingSeconds.ToString("00")</span>
+        </div>
+
+        <div class="target">
+            <div class="lbl">Nå så nära du kan</div>
+            <div class="num">@Model.Target</div>
+        </div>
+
+        <div class="tape" id="tape"></div>
+        <div class="tiles" id="tiles"></div>
+        <div class="ops" id="ops"></div>
+
+        <p class="status" id="status">Tryck ett tal, ett räknesätt, sen ett tal till. Varje rad blir ett nytt tal.</p>
+
+        <form hx-post="@($"/tank-till-tusen/{Model.JoinCode:N}/solution")" hx-target="#screen" hx-swap="innerHTML">
+            <input type="hidden" name="__RequestVerificationToken" value="@Model.AntiforgeryToken" />
+            <input type="hidden" name="solution" id="solutionInput" value="" />
+            <div class="row">
+                <button type="button" class="undo" id="undo">⌫</button>
+                <button type="button" class="submit" id="lock">Lås svar!</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<style>
+    .tank-puzzle .toprow { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+    .tank-puzzle .clock { font-weight: 800; font-size: 1.15rem; background: var(--bg-2, #ffeccf); color: var(--ink, #2b2118); padding: .3rem .8rem; border-radius: 999px; }
+    .tank-puzzle .clock.low { background: var(--accent, #ff5d73); color: #fff; }
+    .tank-puzzle .target { text-align: center; margin: 0 0 1rem; }
+    .tank-puzzle .target .lbl { color: var(--ink-soft, #7a6a58); font-size: .9rem; }
+    .tank-puzzle .target .num { font-weight: 800; font-size: 3rem; line-height: 1; color: var(--accent, #ff5d73); }
+    .tank-puzzle .tape { background: var(--bg, #fff7ec); border: 2px dashed var(--line, #f0e0c8); border-radius: 16px; padding: .8rem 1rem; min-height: 4.5rem; margin-bottom: 1rem; font-variant-numeric: tabular-nums; }
+    .tank-puzzle .tape .line { font-weight: 700; font-size: 1.15rem; padding: .15rem 0; }
+    .tank-puzzle .tape .line .eq { color: var(--good, #12805c); }
+    .tank-puzzle .tape .empty { color: var(--line, #f0e0c8); font-size: 1rem; }
+    .tank-puzzle .tape .cur { color: var(--accent, #ff5d73); }
+    .tank-puzzle .tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: .6rem; margin-bottom: .8rem; }
+    .tank-puzzle .tile { appearance: none; cursor: pointer; border: 2px solid var(--line, #f0e0c8); background: var(--bg, #fff7ec); border-radius: 14px; padding: .85rem .5rem; font-weight: 800; font-size: 1.5rem; color: var(--ink, #2b2118); transition: transform .1s, opacity .12s, border-color .12s; }
+    .tank-puzzle .tile:active { transform: scale(.95); }
+    .tank-puzzle .tile.used { opacity: .28; pointer-events: none; }
+    .tank-puzzle .tile.sel { border-color: var(--accent, #ff5d73); box-shadow: 0 0 0 4px rgba(255,93,115,.18); }
+    .tank-puzzle .tile.res { border-style: dashed; border-color: var(--good, #12805c); color: var(--good, #12805c); }
+    .tank-puzzle .ops { display: grid; grid-template-columns: repeat(4, 1fr); gap: .6rem; }
+    .tank-puzzle .op { appearance: none; cursor: pointer; border: 2px solid var(--line, #f0e0c8); background: var(--bg-2, #ffeccf); border-radius: 14px; padding: .8rem; font-weight: 800; font-size: 1.4rem; color: var(--ink, #2b2118); }
+    .tank-puzzle .op.sel { background: var(--accent, #ff5d73); color: #fff; border-color: var(--accent, #ff5d73); }
+    .tank-puzzle .op:active { transform: scale(.94); }
+    .tank-puzzle .status { text-align: center; min-height: 1.3rem; margin: .9rem 0 0; color: var(--ink-soft, #7a6a58); font-size: .95rem; }
+    .tank-puzzle .row { display: flex; gap: .6rem; margin-top: 1rem; }
+    .tank-puzzle .undo { flex: 0 0 auto; cursor: pointer; border: 2px solid var(--line, #f0e0c8); background: var(--bg, #fff7ec); border-radius: 14px; padding: .9rem 1.1rem; font-weight: 800; font-size: 1.1rem; }
+    .tank-puzzle .submit { flex: 1; }
+</style>
+
+<script>
+    (function () {
+        // Operator order MUST match TankTillTusen.Domain.Operator { Add, Sub, Mul, Div } — the op
+        // index is posted straight through and cast back to the enum server-side.
+        const OPS = [['+', (a,b)=>a+b], ['−', (a,b)=>a-b], ['×', (a,b)=>a*b], ['÷', (a,b)=>a/b]];
+        const START = @Numbers;
+
+        let ops = START.map(v => ({ val: v, used: false }));
+        let steps = [];   // {leftIndex, op, rightIndex} — indices into `ops` at build time
+        let selTile = null, selOp = null, locked = false;
+
+        const tapeEl = document.getElementById('tape');
+        const tilesEl = document.getElementById('tiles');
+        const opsEl = document.getElementById('ops');
+        const statusEl = document.getElementById('status');
+        const form = tapeEl.closest('.card').querySelector('form');
+        const solutionInput = document.getElementById('solutionInput');
+
+        OPS.forEach(([sym], i) => {
+            const b = document.createElement('button');
+            b.type = 'button'; b.className = 'op'; b.textContent = sym; b.dataset.op = i;
+            b.onclick = () => { selOp = (selOp === i ? null : i); render(); };
+            opsEl.appendChild(b);
+        });
+
+        function clickTile(i) {
+            if (ops[i].used) return;
+            if (selTile === null) { selTile = i; render(); return; }
+            if (selTile === i) { selTile = null; render(); return; }
+            if (selOp === null) { selTile = i; render(); return; }
+            const a = ops[selTile].val, b = ops[i].val;
+            const res = OPS[selOp][1](a, b);
+            if (!Number.isInteger(res) || res <= 0) {
+                statusEl.textContent = 'Ogiltigt: resultatet måste bli ett positivt heltal.';
+                selOp = null; render(); return;
+            }
+            steps.push({ leftIndex: selTile, op: selOp, rightIndex: i });
+            ops[selTile].used = true; ops[i].used = true;
+            ops.push({ val: res, used: false });
+            selTile = null; selOp = null;
+            statusEl.textContent = 'Resultatet blev ett nytt tal du kan bygga vidare på.';
+            render();
+        }
+
+        document.getElementById('undo').onclick = () => {
+            const last = steps.pop();
+            if (!last) { selTile = null; selOp = null; render(); return; }
+            ops.pop();                       // drop the result operand
+            ops[last.leftIndex].used = false;
+            ops[last.rightIndex].used = false;
+            selTile = null; selOp = null;
+            statusEl.textContent = 'Rev senaste raden.';
+            render();
+        };
+
+        function lockAnswer() {
+            if (locked) return;
+            locked = true;
+            // The answer is the last tal on the tape (last result, or the last starting tal if
+            // no steps were built). answerIndex = the final operand index.
+            solutionInput.value = JSON.stringify({ steps, answerIndex: ops.length - 1 });
+            form.requestSubmit();
+        }
+        document.getElementById('lock').onclick = lockAnswer;
+
+        function render() {
+            tapeEl.innerHTML = '';
+            if (!steps.length && selTile === null) {
+                tapeEl.innerHTML = '<div class="empty">Tejpen är tom…</div>';
+            } else {
+                let live = START.slice();
+                steps.forEach(s => {
+                    const a = live[s.leftIndex], b = live[s.rightIndex], res = OPS[s.op][1](a, b);
+                    live.push(res);
+                    const d = document.createElement('div');
+                    d.className = 'line';
+                    d.innerHTML = a + ' ' + OPS[s.op][0] + ' ' + b + ' <span class="eq">= ' + res + '</span>';
+                    tapeEl.appendChild(d);
+                });
+                if (selTile !== null) {
+                    const d = document.createElement('div');
+                    d.className = 'line cur';
+                    d.textContent = ops[selTile].val + ' ' + (selOp !== null ? OPS[selOp][0] : '…') + ' …';
+                    tapeEl.appendChild(d);
+                }
+            }
+            tilesEl.innerHTML = '';
+            ops.forEach((o, i) => {
+                const b = document.createElement('button');
+                let cls = 'tile';
+                if (o.used) cls += ' used';
+                if (i === selTile) cls += ' sel';
+                if (i >= START.length) cls += ' res';
+                b.type = 'button'; b.className = cls; b.textContent = o.val;
+                b.onclick = () => clickTile(i);
+                tilesEl.appendChild(b);
+            });
+            [...opsEl.children].forEach((b, i) => b.classList.toggle('sel', i === selOp));
+        }
+        render();
+
+        // cosmetic countdown — server owns the real deadline. Starts from the server's remaining
+        // seconds so a late-joining tab shows the right time.
+        let t = @Model.RemainingSeconds;
+        const clock = document.getElementById('clock');
+        clock.classList.toggle('low', t <= 10);
+        const timer = setInterval(() => {
+            if (t <= 0) { clearInterval(timer); return; }
+            t--;
+            clock.textContent = '0:' + String(t).padStart(2, '0');
+            clock.classList.toggle('low', t <= 10);
+            if (t === 0) {
+                clearInterval(timer);
+                clock.textContent = '0:00';
+                statusEl.textContent = 'Tiden är ute! Ditt sista tal skickas in.';
+                lockAnswer();
+            }
+        }, 1000);
+        if (t <= 0) lockAnswer();
+    })();
+</script>
+
+@code {
+    [Parameter] public required TankPuzzleVm Model { get; set; }
+    private string Numbers => "[" + string.Join(",", Model.Numbers) + "]";
+}

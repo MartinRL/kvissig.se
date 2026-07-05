@@ -27,6 +27,9 @@ var auctionPacksDirectory = Path.Combine(AppContext.BaseDirectory, "data", "auct
 builder.Services.AddSingleton(new FileSystemAuctionPackCatalog(auctionPacksDirectory));
 builder.Services.AddSingleton<AuctionApplicationService>();
 
+// Tänk Till Tusen (Countdown-style number game) — no catalog: puzzles are generated per game.
+builder.Services.AddSingleton<TankApplicationService>();
+
 // Razor Components in STATIC SSR (no interactive render mode → no circuit, no WebSocket,
 // no blazor.web.js). Endpoints return RazorComponentResult<T>. See ADR 007.
 builder.Services.AddRazorComponents();
@@ -79,6 +82,7 @@ app.MapGet("/healthz", () => Results.Ok("ok"));
 
 app.MapGameEndpoints();
 app.MapAuctionEndpoints();
+app.MapTankEndpoints();
 
 app.Run();
 

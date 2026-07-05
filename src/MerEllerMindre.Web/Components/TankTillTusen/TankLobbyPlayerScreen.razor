@@ -1,0 +1,38 @@
+@* Lobby as a joined player sees it: waiting for the host to start. Polls every 2 s so the
+   first puzzle appears the moment the host starts. *@
+<div hx-get="@StatePath" hx-trigger="every 2s" hx-target="#screen" hx-swap="innerHTML">
+    <div class="card center">
+        <h1>Du är med! 🎉</h1>
+        <p class="sub">Väntar på att @Model.HostName startar spelet…</p>
+        <p class="busy">Inväntar start</p>
+    </div>
+
+    <div class="card">
+        <div class="cardhead">Spelare <span class="pill">@Model.Players.Count med</span></div>
+        <ul class="players">
+            @foreach (var p in Model.Players)
+            {
+                <li>
+                    <span class="dot"></span>
+                    <span class="who">@p.Name@(p.IsHost ? " (värd)" : "")</span>
+                    <span class="tag">@(p.IsYou ? "du" : "med")</span>
+                </li>
+            }
+        </ul>
+    </div>
+
+    <div class="card">
+        <div class="cardhead">Så funkar det</div>
+        <ol class="steps">
+            <li><strong>Alla får samma sex tal</strong> och samma mål när tiden startar.</li>
+            <li><strong>Nå målet</strong> med de fyra räknesätten: kombinera två tal i taget till ett nytt.
+                Pricka målet exakt så får du 0 poäng. Ju längre ifrån, desto fler poäng (upp till 100).</li>
+            <li><strong>Lägst total vinner.</strong></li>
+        </ol>
+    </div>
+</div>
+
+@code {
+    [Parameter] public required TankLobbyVm Model { get; set; }
+    private string StatePath => $"/tank-till-tusen/{Model.JoinCode:N}/state";
+}

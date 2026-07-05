@@ -15,13 +15,20 @@ Just open `index.html` in a browser — no build step, no server required. Each 
 loads purely from a CDN `<link>`/`<script>`.
 
 ```
-prototype/index.html      ← comparison hub: pick a library, walk the GM or Player flow
-prototype/<lib>/*.html     ← the 8 screens for one library
-prototype/<lib>/theme.css  ← that library's MEM brand + responsive rules
+prototypes/index.html      ← comparison hub: pick a library, walk the GM or Player flow
+prototypes/<lib>/*.html     ← the 8 screens for one library
+prototypes/<lib>/theme.css  ← that library's MEM brand + responsive rules
 ```
 
 > Internet access is required the first time (the CDN files are fetched live). If you are
 > offline the components will not render.
+
+## Andra spel
+
+- `blindbudet/bid-compare.html` — tre sätt att lägga bud i BlindBudet (v1 ruta, v2 steg, v3 knappsats).
+- `tank-till-tusen/solve-compare.html` — tre sätt att lösa pusslet i Tänk Till Tusen (v1 kombinera,
+  v2 räknartejp, v3 miniräknare). Samma mock-pussel (tal 50 75 3 8 2 10, mål 812), 45 sek nedräkning.
+  Den valda interaktionen blir `PuzzleScreen.razor`.
 
 ## The 8 screens (1:1 with the spec's `Screen /` views)
 

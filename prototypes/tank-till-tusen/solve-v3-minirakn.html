@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tänk Till Tusen – Lös v3: Miniräknare</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #fff7ec; --bg-2: #ffeccf; --ink: #2b2118; --ink-soft: #7a6a58;
+      --card: #fffdf9; --line: #f0e0c8; --accent: #ff5d73; --good: #12805c;
+      --radius: 22px; --shadow: 0 10px 24px -12px rgba(120,80,20,.45);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; font-family: 'Nunito', system-ui, sans-serif; color: var(--ink);
+      background: radial-gradient(120% 80% at 50% -10%, var(--bg-2), transparent 60%), var(--bg);
+      min-height: 100vh; -webkit-font-smoothing: antialiased;
+    }
+    .wrap { max-width: 520px; margin-inline: auto; padding: 1.25rem 1.1rem 3rem; }
+    .brand { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+    .logo { font-family: 'Baloo 2', cursive; font-weight: 800; font-size: 1.35rem; }
+    .pill { font-family: 'Baloo 2', cursive; font-weight: 700; font-size: .8rem;
+      background: var(--ink); color: var(--bg); padding: .35rem .8rem; border-radius: 999px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+      box-shadow: var(--shadow); padding: 1.35rem 1.2rem; margin-bottom: 1.25rem; }
+
+    .toprow { display: flex; align-items: center; justify-content: space-between; margin-bottom: .9rem; }
+    .clock { font-family: 'Baloo 2', cursive; font-weight: 800; font-size: 1.15rem;
+      background: var(--bg-2); color: var(--ink); padding: .3rem .8rem; border-radius: 999px; }
+    .clock.low { background: var(--accent); color: #fff; }
+
+    .display { background: var(--ink); color: var(--bg); border-radius: 16px; padding: 1rem 1.2rem; margin-bottom: 1rem; }
+    .display .goal { font-family: 'Baloo 2', cursive; font-size: .85rem; opacity: .7; }
+    .display .expr { font-family: 'Baloo 2', cursive; font-weight: 700; font-size: 1rem; min-height: 1.3rem; opacity: .85; }
+    .display .val { font-family: 'Baloo 2', cursive; font-weight: 800; font-size: 2.6rem; line-height: 1.1; text-align: right; }
+    .display .val.hit { color: #7bffcf; }
+
+    .keys { display: grid; grid-template-columns: repeat(3, 1fr); gap: .6rem; }
+    .num { appearance: none; cursor: pointer; border: 2px solid var(--line); background: var(--bg);
+      border-radius: 14px; padding: .95rem .5rem; font-family: 'Baloo 2', cursive; font-weight: 800;
+      font-size: 1.6rem; color: var(--ink); transition: transform .1s, opacity .12s; }
+    .num:active { transform: scale(.95); }
+    .num.used { opacity: .26; pointer-events: none; }
+
+    .oprow { display: grid; grid-template-columns: repeat(4, 1fr); gap: .6rem; margin-top: .8rem; }
+    .op { appearance: none; cursor: pointer; border: none; border-radius: 14px; padding: .9rem;
+      font-family: 'Baloo 2', cursive; font-weight: 800; font-size: 1.4rem; color: #fff;
+      background: linear-gradient(135deg, var(--accent), #ff8a3d); }
+    .op.sel { outline: 3px solid var(--ink); }
+    .op:active { transform: scale(.94); }
+
+    .status { text-align: center; min-height: 1.3rem; margin: .9rem 0 0; color: var(--ink-soft); font-size: .95rem; }
+    .row { display: flex; gap: .6rem; margin-top: 1rem; }
+    .clear { flex: 0 0 auto; cursor: pointer; border: 2px solid var(--line); background: var(--bg);
+      border-radius: 14px; padding: .9rem 1.1rem; font-family: 'Baloo 2', cursive; font-weight: 800; font-size: 1rem; }
+    .submit { flex: 1; appearance: none; cursor: pointer; border: none; border-radius: 14px; padding: .95rem;
+      font-family: 'Baloo 2', cursive; font-weight: 800; font-size: 1.1rem; color: #fff;
+      background: var(--good); box-shadow: 0 10px 22px -8px rgba(18,128,92,.6); }
+    .submit:active { transform: scale(.98); }
+    .back { display: block; text-align: center; margin-top: 1.25rem; color: var(--ink-soft); font-size: .85rem; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="brand">
+      <div class="logo">Tänk Till <span style="color:var(--accent)">Tusen</span></div>
+      <span class="pill">v3 · Miniräknare</span>
+    </div>
+
+    <div class="card">
+      <div class="toprow">
+        <span class="pill" style="background:var(--bg-2);color:var(--ink-soft)">Pussel 3 / 5</span>
+        <span class="clock" id="clock">0:45</span>
+      </div>
+
+      <div class="display">
+        <div class="goal">Mål: 812</div>
+        <div class="expr" id="expr">&nbsp;</div>
+        <div class="val" id="val">0</div>
+      </div>
+
+      <div class="keys" id="keys"></div>
+      <div class="oprow" id="ops"></div>
+
+      <p class="status" id="status">Tryck ett tal, ett räknesätt, sen nästa tal. Varje tal går bara en gång.</p>
+
+      <div class="row">
+        <button type="button" class="clear" id="clear">Rensa</button>
+        <button type="button" class="submit" id="submit">Lås svar!</button>
+      </div>
+    </div>
+
+    <a class="back" href="solve-compare.html">← Tillbaka till jämförelsen</a>
+  </div>
+
+  <script>
+    const TARGET = 812;
+    const START = [50, 75, 3, 8, 2, 10];
+    const OPS = [['+', (a,b)=>a+b], ['−', (a,b)=>a-b], ['×', (a,b)=>a*b], ['÷', (a,b)=>a/b]];
+
+    let used = new Array(START.length).fill(false);
+    let acc = null;        // running value
+    let pendingOp = null;  // index into OPS
+    let exprParts = [];    // display strings
+
+    const keysEl = document.getElementById('keys');
+    const opsEl = document.getElementById('ops');
+    const valEl = document.getElementById('val');
+    const exprEl = document.getElementById('expr');
+    const statusEl = document.getElementById('status');
+
+    OPS.forEach(([sym], i) => {
+      const b = document.createElement('button');
+      b.className = 'op'; b.textContent = sym; b.dataset.op = i;
+      b.onclick = () => {
+        if (acc === null) { statusEl.textContent = 'Tryck ett tal först.'; return; }
+        pendingOp = i; render();
+      };
+      opsEl.appendChild(b);
+    });
+
+    function pressNum(i) {
+      if (used[i]) return;
+      const n = START[i];
+      if (acc === null) { acc = n; used[i] = true; exprParts = [String(n)]; render(); return; }
+      if (pendingOp === null) { statusEl.textContent = 'Välj ett räknesätt innan nästa tal.'; return; }
+      const res = OPS[pendingOp][1](acc, n);
+      if (!Number.isInteger(res) || res <= 0) {
+        statusEl.textContent = 'Ogiltigt: resultatet måste bli ett positivt heltal.';
+        return;
+      }
+      acc = res; used[i] = true;
+      exprParts.push(OPS[pendingOp][0], String(n));
+      pendingOp = null;
+      statusEl.textContent = 'Fortsätt, eller lås svaret.';
+      render();
+    }
+
+    document.getElementById('clear').onclick = () => {
+      used = new Array(START.length).fill(false);
+      acc = null; pendingOp = null; exprParts = [];
+      statusEl.textContent = 'Rensat. Börja om.';
+      render();
+    };
+
+    document.getElementById('submit').onclick = () => {
+      alert('Låst svar: ' + (acc === null ? '–' : acc) + ' (mål 812). Nu väntar vi på de andra.');
+    };
+
+    function render() {
+      keysEl.innerHTML = '';
+      START.forEach((n, i) => {
+        const b = document.createElement('button');
+        b.className = 'num' + (used[i] ? ' used' : '');
+        b.textContent = n;
+        b.onclick = () => pressNum(i);
+        keysEl.appendChild(b);
+      });
+      [...opsEl.children].forEach((b, i) => b.classList.toggle('sel', i === pendingOp));
+      exprEl.innerHTML = exprParts.length ? exprParts.join(' ') : '&nbsp;';
+      valEl.textContent = acc === null ? '0' : acc;
+      valEl.classList.toggle('hit', acc === TARGET);
+    }
+    render();
+
+    // cosmetic 45s countdown – server owns the real deadline
+    let t = 45;
+    const clock = document.getElementById('clock');
+    setInterval(() => {
+      if (t <= 0) return;
+      t--;
+      clock.textContent = '0:' + String(t).padStart(2, '0');
+      clock.classList.toggle('low', t <= 10);
+      if (t === 0) { clock.textContent = '0:00'; statusEl.textContent = 'Tiden är ute! Ditt värde skickas in.'; }
+    }, 1000);
+  </script>
+</body>
+</html>

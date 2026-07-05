@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tänk Till Tusen – Lös pusslet: jämför tre</title>
+  <style>
+    body { margin: 0; font-family: system-ui, sans-serif; background: #f4f4f5; color: #18181b; }
+    .wrap { max-width: 760px; margin-inline: auto; padding: 2.5rem 1.25rem; }
+    h1 { font-size: 1.5rem; }
+    p { color: #52525b; line-height: 1.5; }
+    .grid { display: grid; grid-template-columns: 1fr; gap: 1rem; margin-top: 1.5rem; }
+    a.card { display: block; text-decoration: none; color: inherit; border-radius: 16px;
+      padding: 1.35rem 1.5rem; border: 1px solid #e4e4e7; background: linear-gradient(135deg, #fff7ec, #ffeccf); }
+    a.card strong { font-size: 1.15rem; display: block; margin-bottom: .4rem; color: #2b2118; }
+    a.card .desc { font-size: .9rem; color: #7a6a58; margin-bottom: .5rem; }
+    a.card .pro { font-size: .82rem; color: #12805c; }
+    a.card .con { font-size: .82rem; color: #c2410c; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Tänk Till Tusen – tre sätt att lösa pusslet</h1>
+    <p>Alla får samma sex tal och samma mål, en 45-sekunders nedräkning, och når målet med de
+      fyra räknesätten. Klienten bygger bara giltiga steg, servern räknar om och äger klockan.
+      Alla tre visar samma mock-pussel (tal 50, 75, 3, 8, 2, 10 · mål 812) så de är jämförbara.
+      Prova tidspressen. Välj en.</p>
+    <div class="grid">
+      <a class="card" href="solve-v1-kombinera.html">
+        <strong>v1 · Kombinera</strong>
+        <div class="desc">Tryck en bricka, ett räknesätt, en bricka till: de slås ihop till en ny resultatbricka. Använda brickor gråas ut, ↩ ångrar, brickan närmast målet är ditt svar.</div>
+        <div class="pro">+ Mest direkt bild av modellen, bara tryck, inga olagliga steg möjliga.</div>
+        <div class="con">− Många brickor på skärmen sent i pusslet.</div>
+      </a>
+      <a class="card" href="solve-v2-raknartejp.html">
+        <strong>v2 · Räknartejp</strong>
+        <div class="desc">Varje steg skrivs som en rad på en tejp (50 × 8 = 400), resultatet blir ett nytt tal att bygga vidare på. Live-resultat, ⌫ river senaste raden.</div>
+        <div class="pro">+ Läsbar historik, lätt att följa sin egen tankegång.</div>
+        <div class="con">− Två ytor att titta på (tejp + brickor).</div>
+      </a>
+      <a class="card" href="solve-v3-minirakn.html">
+        <strong>v3 · Miniräknare</strong>
+        <div class="desc">Klassisk knappsats: de sex talen är engångsknappar som gråas ut, räknesätt, stor display med löpande värde. Bygger uttrycket vänster till höger.</div>
+        <div class="pro">+ Känns bekant direkt, kompakt, en enda display.</div>
+        <div class="con">− Ingen fri gruppering: strikt vänster-till-höger utan parenteser.</div>
+      </a>
+    </div>
+  </div>
+</body>
+</html>

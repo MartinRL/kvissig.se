@@ -7,7 +7,7 @@ revised:
 # ADR 007: Razor Components in Static SSR as the Renderer
 
 ## Context
-The UI/UX direction is locked (the "Lekfull kortlek" design, `prototype/pico/`), but
+The UI/UX direction is locked (the "Lekfull kortlek" design, `prototypes/pico/`), but
 nothing was wired into the app — the whole Web shell (`src/MerEllerMindre.Web`) was a stub.
 We need to pick a *server-side renderer* that turns projected view-models into HTML for both
 full pages and the HTML fragments htmx swaps in.

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tänk Till Tusen – Lös v1: Kombinera</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #fff7ec; --bg-2: #ffeccf; --ink: #2b2118; --ink-soft: #7a6a58;
+      --card: #fffdf9; --line: #f0e0c8; --accent: #ff5d73; --good: #12805c;
+      --radius: 22px; --shadow: 0 10px 24px -12px rgba(120,80,20,.45);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; font-family: 'Nunito', system-ui, sans-serif; color: var(--ink);
+      background: radial-gradient(120% 80% at 50% -10%, var(--bg-2), transparent 60%), var(--bg);
+      min-height: 100vh; -webkit-font-smoothing: antialiased;
+    }
+    .wrap { max-width: 520px; margin-inline: auto; padding: 1.25rem 1.1rem 3rem; }
+    .brand { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+    .logo { font-family: 'Baloo 2', cursive; font-weight: 800; font-size: 1.35rem; }
+    .pill { font-family: 'Baloo 2', cursive; font-weight: 700; font-size: .8rem;
+      background: var(--ink); color: var(--bg); padding: .35rem .8rem; border-radius: 999px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+      box-shadow: var(--shadow); padding: 1.35rem 1.2rem; margin-bottom: 1.25rem; }
+
+    .toprow { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+    .clock { font-family: 'Baloo 2', cursive; font-weight: 800; font-size: 1.15rem;
+      background: var(--bg-2); color: var(--ink); padding: .3rem .8rem; border-radius: 999px; }
+    .clock.low { background: var(--accent); color: #fff; }
+
+    .target { text-align: center; margin: 0 0 1.25rem; }
+    .target .lbl { font-family: 'Baloo 2', cursive; color: var(--ink-soft); font-size: .9rem; }
+    .target .num { font-family: 'Baloo 2', cursive; font-weight: 800; font-size: 3rem; line-height: 1; color: var(--accent); }
+
+    .tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: .7rem; }
+    .tile {
+      appearance: none; cursor: pointer; border: 2px solid var(--line); background: var(--bg);
+      border-radius: 16px; padding: 1rem .5rem; font-family: 'Baloo 2', cursive; font-weight: 800;
+      font-size: 1.7rem; color: var(--ink); transition: transform .1s, border-color .12s, background .12s, opacity .12s;
+    }
+    .tile:active { transform: scale(.95); }
+    .tile.sel { border-color: var(--accent); background: #fff; box-shadow: 0 0 0 4px rgba(255,93,115,.18); }
+    .tile.used { opacity: .28; pointer-events: none; }
+    .tile.result { border-style: dashed; border-color: var(--good); color: var(--good); }
+    .tile.best { box-shadow: 0 0 0 4px rgba(18,128,92,.22); }
+
+    .ops { display: flex; justify-content: center; gap: .7rem; margin: 1.1rem 0; }
+    .op {
+      appearance: none; cursor: pointer; width: 3.2rem; height: 3.2rem; border-radius: 50%;
+      border: 2px solid var(--line); background: var(--bg-2); font-family: 'Baloo 2', cursive;
+      font-weight: 800; font-size: 1.6rem; color: var(--ink); transition: transform .1s, background .12s;
+    }
+    .op:active { transform: scale(.92); }
+    .op.sel { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+    .status { text-align: center; min-height: 1.4rem; margin: .2rem 0 0; color: var(--ink-soft); font-size: .95rem; }
+    .answer { text-align: center; margin-top: 1rem; font-family: 'Baloo 2', cursive; }
+    .answer .v { font-weight: 800; font-size: 1.5rem; color: var(--good); }
+    .answer .d { color: var(--ink-soft); font-size: .9rem; }
+
+    .row { display: flex; gap: .6rem; margin-top: 1rem; }
+    .undo { flex: 0 0 auto; cursor: pointer; border: 2px solid var(--line); background: var(--bg);
+      border-radius: 14px; padding: .9rem 1.1rem; font-family: 'Baloo 2', cursive; font-weight: 800; font-size: 1.1rem; }
+    .submit { flex: 1; appearance: none; cursor: pointer; border: none; border-radius: 14px; padding: .95rem;
+      font-family: 'Baloo 2', cursive; font-weight: 800; font-size: 1.1rem; color: #fff;
+      background: linear-gradient(135deg, var(--accent), #ff8a3d); box-shadow: 0 10px 22px -8px rgba(255,93,115,.7); }
+    .submit:active { transform: scale(.98); }
+    .back { display: block; text-align: center; margin-top: 1.25rem; color: var(--ink-soft); font-size: .85rem; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="brand">
+      <div class="logo">Tänk Till <span style="color:var(--accent)">Tusen</span></div>
+      <span class="pill">v1 · Kombinera</span>
+    </div>
+
+    <div class="card">
+      <div class="toprow">
+        <span class="pill" style="background:var(--bg-2);color:var(--ink-soft)">Pussel 3 / 5</span>
+        <span class="clock" id="clock">0:45</span>
+      </div>
+
+      <div class="target">
+        <div class="lbl">Nå så nära du kan</div>
+        <div class="num">812</div>
+      </div>
+
+      <div class="tiles" id="tiles"></div>
+      <div class="ops" id="ops"></div>
+
+      <p class="status" id="status">Tryck en bricka, ett räknesätt, sen en bricka till.</p>
+
+      <div class="answer">
+        <div class="v" id="answerVal">–</div>
+        <div class="d" id="answerDelta">Ditt svar blir den bricka som ligger närmast målet.</div>
+      </div>
+
+      <div class="row">
+        <button type="button" class="undo" id="undo">↩</button>
+        <button type="button" class="submit" id="submit">Lås svar!</button>
+      </div>
+    </div>
+
+    <a class="back" href="solve-compare.html">← Tillbaka till jämförelsen</a>
+  </div>
+
+  <script>
+    const TARGET = 812;
+    const START = [50, 75, 3, 8, 2, 10];
+    const OPS = [['+', (a,b)=>a+b], ['−', (a,b)=>a-b], ['×', (a,b)=>a*b], ['÷', (a,b)=>a/b]];
+
+    // operands: {val, used}. steps for undo.
+    let ops = START.map(v => ({ val: v, used: false }));
+    let steps = []; // {removed:[i,j], op}
+    let selTile = null, selOp = null;
+
+    const tilesEl = document.getElementById('tiles');
+    const opsEl = document.getElementById('ops');
+    const statusEl = document.getElementById('status');
+    const answerVal = document.getElementById('answerVal');
+    const answerDelta = document.getElementById('answerDelta');
+
+    OPS.forEach(([sym], i) => {
+      const b = document.createElement('button');
+      b.className = 'op'; b.textContent = sym; b.dataset.op = i;
+      b.onclick = () => { selOp = (selOp === i ? null : i); render(); };
+      opsEl.appendChild(b);
+    });
+
+    function bestIndex() {
+      let bi = -1, bd = Infinity;
+      ops.forEach((o, i) => { if (!o.used) { const d = Math.abs(o.val - TARGET); if (d < bd) { bd = d; bi = i; } } });
+      return bi;
+    }
+
+    function clickTile(i) {
+      if (ops[i].used) return;
+      if (selTile === null) { selTile = i; render(); return; }
+      if (selTile === i) { selTile = null; render(); return; }
+      if (selOp === null) { selTile = i; render(); return; }
+      const a = ops[selTile].val, b = ops[i].val;
+      const res = OPS[selOp][1](a, b);
+      if (!Number.isInteger(res) || res <= 0) {
+        statusEl.textContent = 'Ogiltigt: resultatet måste bli ett positivt heltal.';
+        selOp = null; render(); return;
+      }
+      ops[selTile].used = true; ops[i].used = true;
+      ops.push({ val: res, used: false });
+      steps.push({ a: selTile, b: i });
+      selTile = null; selOp = null;
+      statusEl.textContent = 'Bra! Fortsätt kombinera brickorna.';
+      render();
+    }
+
+    document.getElementById('undo').onclick = () => {
+      const last = steps.pop();
+      if (!last) return;
+      ops.pop(); // remove the result
+      ops[last.a].used = false; ops[last.b].used = false;
+      selTile = null; selOp = null;
+      statusEl.textContent = 'Ångrade senaste steget.';
+      render();
+    };
+
+    document.getElementById('submit').onclick = () => {
+      const bi = bestIndex();
+      const v = bi >= 0 ? ops[bi].val : '–';
+      alert('Låst svar: ' + v + ' (mål 812). Nu väntar vi på de andra.');
+    };
+
+    function render() {
+      const best = bestIndex();
+      tilesEl.innerHTML = '';
+      ops.forEach((o, i) => {
+        const b = document.createElement('button');
+        let cls = 'tile';
+        if (o.used) cls += ' used';
+        if (i === selTile) cls += ' sel';
+        if (i >= START.length) cls += ' result';
+        if (!o.used && i === best) cls += ' best';
+        b.className = cls; b.textContent = o.val;
+        b.onclick = () => clickTile(i);
+        tilesEl.appendChild(b);
+      });
+      [...opsEl.children].forEach((b, i) => b.classList.toggle('sel', i === selOp));
+      if (best >= 0) {
+        answerVal.textContent = ops[best].val;
+        const d = Math.abs(ops[best].val - TARGET);
+        answerDelta.textContent = d === 0 ? 'Precis på målet!' : (d + ' från målet');
+      }
+    }
+    render();
+
+    // cosmetic 45s countdown – server owns the real deadline
+    let t = 45;
+    const clock = document.getElementById('clock');
+    setInterval(() => {
+      if (t <= 0) return;
+      t--;
+      clock.textContent = '0:' + String(t).padStart(2, '0');
+      clock.classList.toggle('low', t <= 10);
+      if (t === 0) { clock.textContent = '0:00'; statusEl.textContent = 'Tiden är ute! Ditt bästa svar skickas in.'; }
+    }, 1000);
+  </script>
+</body>
+</html>

@@ -1,0 +1,960 @@
+# Tänk Till Tusen — Event-Modeling spec for one arithmetic-puzzle game ("omgång").
+# Third sister spec, beside mer-eller-mindre-event-model.yaml (MEM) and
+# blindbudet-event-model.yaml (BlindBudet). Same emlang dialect & conventions; see
+# specs/CLAUDE.md. This is a THIRD Decider (TankState + its own Commands/Events/Errors)
+# living beside MEM and BlindBudet — it does NOT touch theirs.
+#
+# Conventions (identical to the sisters):
+#   triggers carry the actor role + originating screen
+#                                  (host / Quiz catalog, Player / Puzzle, System / ...)
+#   commands are bare              (OpenLobby, SubmitSolution)
+#   events carry the stream        (Game / LobbyOpened)
+#   exceptions are bare            (GameNotFound)
+#   views carry a view lane        (Screen / Puzzle, Todo / Outstanding solutions)
+#
+# View lanes:
+#   State / ...   the decider's decision model (folded TankState); read by `decide`
+#   Screen / ...  human screens players & the host actually see
+#   Todo / ...    processor-facing read-models the System observes (never shown)
+#
+# Verification is decider-true: Given -> State / Game (prior events folded via evolve),
+# When -> command, Then -> events | x. Every command/processor slice expresses its Given
+# as the View State / Game (the single folded decision model — one Decider per game, one
+# State). A GWT case asserts only the props its `decide` actually reads.
+#
+# Automations are the Event-Modeling PROCESSOR pattern (no cog element):
+#   event(s) -> Todo read-model -> System trigger -> command -> event(s) -> Screen.
+#
+# GAME MODEL — the Countdown numbers game ("Le compte est bon"). Each round every player
+# gets the SAME six tal + the SAME mål (target) and a HARD 45-second countdown to reach the
+# target with the four räknesätt (+ − × ÷). This is the first game with a clock and a
+# multi-step answer.
+#
+#   TIMER: round start stamps startedAt; deadline = startedAt + 45s. The client ticks a
+#   COSMETIC clock and auto-submits on expiry (same mold as MEM's slider script — no new
+#   client capability, no WebSockets/SignalR/SSE, ADR 007). The SERVER owns the deadline:
+#   SubmitSolution after the deadline is rejected (DeadlinePassed); non-submitters score the
+#   worst (100). The score gear fires on a STATE-OR-CLOCK condition: allSolutionsIn OR the
+#   deadline has passed.
+#
+#   ANSWER = a replayable list of steps. Each Step merges two operands via one operator into
+#   a NEW operand. The client only ever builds legal steps; the SERVER re-validates by replay
+#   (trust boundary): the operand exists & is unused, op ∈ +−×÷, and the result is a POSITIVE
+#   INTEGER (÷ divides evenly, − stays > 0). The player's answer = a chosen operand
+#   (answerIndex). An invalid solution is rejected at submit (InvalidSolution).
+#
+#   SCORING (mirrors MEM — LOWEST total wins):
+#     reachedValue = replay(solution)   (the value at answerIndex)
+#     Δ            = |reachedValue − target|
+#     roundScore   = round(min(100, Δ / target * 100))   // 0-100, exact hit -> 0 (best)
+#     No submission / no answer -> roundScore 100 (worst). LOWEST total wins (like MEM,
+#     OPPOSITE of BlindBudet). A single ScoreRound emits one PuzzleRevealed (once, surfacing
+#     the generator's sample solution) plus one RoundScored per player.
+#
+# ASSUMPTION: puzzles are GENERATED per game, not curated (NO CSV, no pack catalog). A pure
+# PuzzleGenerator draws tal + target and a bounded brute-force Solver guarantees the puzzle is
+# solvable and yields a sample solution. OpenLobby resolves the generator via a TankContext
+# dependency (same pattern that mints gameId/joinCode/openedAt) and stamps the full puzzle set
+# onto Game / LobbyOpened (puzzles: Puzzle[]). Each Puzzle carries its hidden sampleSolution
+# (like BlindBudet's hidden trueWorth) — Screen / Puzzle shows only numbers + target; the
+# sample is surfaced only at reveal (Screen / Round results). The Quiz catalog is a single
+# fixed v1 ("Spela") — no pack selection.
+#
+# Prop types (these annotations ARE the intended C# types; see specs/CLAUDE.md):
+#   ids                    Guid          (gameId, playerId, hostPlayerId, joinCode;
+#                                         Guid[] for *PlayerIds and winnerIds)
+#   timestamps (*At)       DateTimeOffset (openedAt, joinedAt, startedAt, submittedAt, ...)
+#   deadline               DateTimeOffset (= round.startedAt + 45s; derived, not stored)
+#   tal / target / value   int           (numbers, target, reachedValue — puzzles are integer)
+#   points/scores          int           (roundScore 0-100, exact 0, none 100; totalScore = sum)
+#   index/count            int           (roundIndex, totalRounds, resolvedRoundCount)
+#   per-player State maps   IReadOnlyDictionary<Guid, T>  (each PuzzleRound's solutions/reached/scores)
+#     The folded decision model keys per-player data by playerId for O(1) lookup (a deliberate
+#     deviation from the constitution's collection rule, same as the sisters). Wire EVENTS stay
+#     flat with an explicit playerId (SolutionSubmitted, RoundScored); only the folded State is keyed.
+#   Puzzle                 { numbers: int[], target: int, sampleSolution: Solution }  (hidden sample)
+#   Operator               enum Add|Sub|Mul|Div
+#   Step                   { leftIndex: int, op: Operator, rightIndex: int }
+#   Solution               { steps: Step[], answerIndex: int }
+
+slices:
+
+  # --- Catalog / Setup -----------------------------------------------------
+
+  # ASSUMPTION: the catalog is NOT on the Game stream. Tänk Till Tusen has a single fixed v1
+  # difficulty, so the catalog is one row ("Spela") — no pack, no CSV. Choosing to play mints a
+  # game whose puzzles are generated at open.
+  👀 Quiz Catalog:
+    - v: Screen / Quiz catalog
+
+  # OpenLobby mints the game and stamps a freshly GENERATED puzzle set onto LobbyOpened (same
+  # pattern that stamps gameId/joinCode/openedAt). The host is the first player (hostPlayerId),
+  # so a game is never empty. Each generated Puzzle is guaranteed solvable and carries its
+  # hidden sampleSolution.
+  #
+  # Test fixtures (referenced by name below):
+  #   puzzle0 = Puzzle { numbers: [10, 10], target: 100, sampleSolution: sampleSol0 }
+  #   puzzle1 = Puzzle { numbers: [5, 20],  target: 100, sampleSolution: sampleSol1 }
+  #   sampleSol0 = Solution { steps: [{ leftIndex: 0, op: mul, rightIndex: 1 }], answerIndex: 2 }  # 10×10=100
+  #   sampleSol1 = Solution { steps: [{ leftIndex: 0, op: mul, rightIndex: 1 }], answerIndex: 2 }  # 5×20=100
+  #   host hostName = Martin ; minted joinCode = joinCode
+  ✍️ Open Lobby:
+    steps:
+      - t: 🧑‍🏫 host /Quiz catalog
+      - c: OpenLobby
+      - e: Game / LobbyOpened
+        props:
+          gameId: Guid
+          hostPlayerId: Guid
+          hostName: string        # the host is the first player; their name lives here (never goes through JoinGame)
+          joinCode: Guid
+          puzzles: Puzzle[]       # { numbers: int[], target: int, sampleSolution: Solution } — hidden sample; generated, always solvable
+          openedAt: DateTimeOffset
+      - v: Screen / Game lobby
+    tests:
+      game can be created:
+        given: []
+        when:
+          - c: OpenLobby
+            props: { hostName: Martin }
+        then:
+          - e: Game / LobbyOpened
+            props:
+              hostPlayerId: hostPlayerId
+              hostName: Martin
+              joinCode: joinCode
+              puzzles: [puzzle0, puzzle1]
+              openedAt: openedAt
+
+  👀 Game Lobby:
+    steps:
+      - v: Screen / Game lobby
+        props:
+          gameId: Guid
+          joinCode: Guid
+          players: Player[]   # { playerId: Guid, name: string, isHost: bool }
+    tests:
+      lobby lists the host and joined players:
+        given:
+          - e: Game / LobbyOpened
+            props: { hostPlayerId: martinId, hostName: Martin, joinCode: joinCode, puzzles: [puzzle0, puzzle1] }
+          - e: Game / PlayerJoined
+            props: { playerId: nilsId, playerName: Nils }
+        then:
+          - v: Screen / Game lobby
+            props:
+              joinCode: joinCode
+              players: [hostMartin, playerNils]
+
+  # JoinGame keys on the minted joinCode from LobbyOpened. Failures are Result failure-track
+  # values (see docs/adr/006):
+  #   x: GameNotFound        — joinCode resolves to no open game (empty/unknown stream).
+  #   x: GameAlreadyStarted  — the game has started; the lobby no longer accepts joins.
+  #   x: NameAlreadyTaken    — a name already present (incl. the host's, the first player).
+  ✍️ Join Game:
+    steps:
+      - t: 🧑‍🎓 Player /Join form
+      - c: JoinGame
+        props:
+          joinCode: Guid
+          playerName: string
+      - x: GameNotFound
+      - x: GameAlreadyStarted
+      - x: NameAlreadyTaken
+      - e: Game / PlayerJoined
+        props:
+          gameId: Guid
+          playerId: Guid
+          playerName: string
+          joinedAt: DateTimeOffset
+      - v: Screen / Game lobby
+    tests:
+      player can join lobby:
+        given:
+          - v: State / Game
+            props:
+              phase: lobby
+              joinCode: joinCode
+              players: [hostMartin]
+        when:
+          - c: JoinGame
+            props: { joinCode: joinCode, playerName: Nils }
+        then:
+          - e: Game / PlayerJoined
+            props: { playerId: playerId, playerName: Nils, joinedAt: joinedAt }
+      cannot join nonexistent game:
+        given: []
+        when:
+          - c: JoinGame
+            props: { joinCode: unknown, playerName: Nils }
+        then:
+          - x: GameNotFound
+      cannot join started game:
+        given:
+          - v: State / Game
+            props:
+              phase: started
+              joinCode: joinCode
+              players: [hostMartin, playerNils]
+        when:
+          - c: JoinGame
+            props: { joinCode: joinCode, playerName: Sven }
+        then:
+          - x: GameAlreadyStarted
+      cannot join with name already taken:
+        given:
+          - v: State / Game
+            props:
+              phase: lobby
+              joinCode: joinCode
+              players: [hostMartin, playerNils]
+        when:
+          - c: JoinGame
+            props: { joinCode: joinCode, playerName: Nils }
+        then:
+          - x: NameAlreadyTaken
+
+  # --- Play ----------------------------------------------------------------
+
+  # StartGame presents the first puzzle by index and STAMPS its startedAt (the clock starts).
+  # The Puzzle read-model resolves numbers + target from the folded state.
+  #   x: GameNotFound      — gameId resolves to no open game (empty/unknown stream).
+  #   x: NotEnoughPlayers  — at least 2 players (host + >=1 join) are required to start.
+  ✍️ Start Game:
+    steps:
+      - t: 🧑‍🏫 host /Game lobby
+      - c: StartGame
+        props:
+          gameId: Guid
+      - x: GameNotFound
+      - x: NotEnoughPlayers
+      - e: Game / GameStarted
+        props:
+          gameId: Guid
+          firstRoundIndex: int
+          startedAt: DateTimeOffset   # the round-0 deadline anchor (deadline = startedAt + 45s)
+      - v: Screen / Puzzle
+    tests:
+      game can be started:
+        given:
+          - v: State / Game
+            props:
+              phase: lobby
+              players: [hostMartin, playerNils]
+        when:
+          - c: StartGame
+            props: { gameId: gameId }
+        then:
+          - e: Game / GameStarted
+            props: { firstRoundIndex: 0, startedAt: startedAt }
+      cannot start nonexistent game:
+        given: []
+        when:
+          - c: StartGame
+            props: { gameId: unknown }
+        then:
+          - x: GameNotFound
+      cannot start without enough players:
+        given:
+          - v: State / Game
+            props:
+              phase: lobby
+              players: [hostMartin]
+        when:
+          - c: StartGame
+            props: { gameId: gameId }
+        then:
+          - x: NotEnoughPlayers
+
+  👀 Puzzle:
+    steps:
+      - v: Screen / Puzzle
+        props:
+          gameId: Guid
+          roundIndex: int
+          totalRounds: int
+          numbers: int[]
+          target: int
+          deadline: DateTimeOffset   # = round.startedAt + 45s; the cosmetic client clock counts down to it
+    # Projection GT: given the puzzles loaded + game started, then the current puzzle resolved
+    # by index from the folded puzzles. The hidden sampleSolution is NOT shown — only at reveal.
+    tests:
+      current puzzle presented with tal, mål and progress:
+        given:
+          - e: Game / LobbyOpened
+            props: { hostPlayerId: martinId, hostName: Martin, puzzles: [puzzle0, puzzle1] }
+          - e: Game / GameStarted
+            props: { firstRoundIndex: 0, startedAt: startedAt }
+        then:
+          - v: Screen / Puzzle
+            props:
+              roundIndex: 0
+              totalRounds: 2
+              numbers: [10, 10]
+              target: 100
+
+  # --- Submitting ----------------------------------------------------------
+
+  # The host also plays: Martin (id0) submits through this same Player / slice, like Nils (id1).
+  # Each player submits ONE solution per round. The SERVER re-validates by replay (trust
+  # boundary) and rejects an illegal build. Failures are Result failure-track values
+  # (see docs/adr/006), never thrown:
+  #   x: GameNotFound      — gameId resolves to no game (empty/unknown stream).
+  #   x: AlreadySubmitted  — this player already submitted this round.
+  #   x: RoundAlreadyScored — this round is already scored; submission is closed.
+  #   x: DeadlinePassed    — now is past this round's deadline (startedAt + 45s); late submit.
+  #   x: InvalidSolution   — replay fails (operand missing/reused, ÷ uneven, result not > 0,
+  #                          answerIndex out of range).
+  # SubmitSolution carries roundIndex; SolutionSubmitted stamps it back.
+  ✍️ Submit Solution:
+    steps:
+      - t: 🧑‍🎓 Player /Puzzle
+      - c: SubmitSolution
+        props:
+          gameId: Guid
+          playerId: Guid
+          roundIndex: int
+          solution: Solution      # { steps: Step[], answerIndex: int } — the replayable build
+      - x: GameNotFound
+      - x: AlreadySubmitted
+      - x: RoundAlreadyScored
+      - x: DeadlinePassed
+      - x: InvalidSolution
+      - e: Game / SolutionSubmitted
+        props:
+          gameId: Guid
+          playerId: Guid
+          roundIndex: int
+          solution: Solution
+          submittedAt: DateTimeOffset
+      - v: Screen / Waiting for others
+    # Decider-true GWT: given the folded State / Game props `decide` reads — the current round's
+    # solutions (AlreadySubmitted), scored flag (RoundAlreadyScored), startedAt (DeadlinePassed
+    # vs context.Now) — when SubmitSolution, then SolutionSubmitted | rejection. GameNotFound =
+    # empty stream. Solution fixtures (on puzzle0 = [10, 10], target 100):
+    #   solHit  = Solution { steps: [{ leftIndex: 0, op: mul, rightIndex: 1 }], answerIndex: 2 }  # 10×10=100 (exact)
+    #   solMiss = Solution { steps: [{ leftIndex: 0, op: add, rightIndex: 1 }], answerIndex: 2 }  # 10+10=20
+    #   solBad  = Solution { steps: [{ leftIndex: 0, op: sub, rightIndex: 1 }], answerIndex: 2 }  # 10−10=0, not > 0 -> invalid
+    tests:
+      solution submitted successfully:
+        given:
+          - v: State / Game
+            props:
+              phase: started
+              currentRoundIndex: 0
+              players: [hostMartin, playerNils]
+              rounds:
+                - { puzzle: puzzle0, startedAt: startedAt, solutions: {}, scored: false }   # context.Now is within the 45s window
+        when:
+          - c: SubmitSolution
+            props: { gameId: gameId, playerId: nilsId, roundIndex: 0, solution: solHit }
+        then:
+          - e: Game / SolutionSubmitted
+            props: { playerId: nilsId, roundIndex: 0, solution: solHit, submittedAt: submittedAt }
+      cannot submit in nonexistent game:
+        given: []
+        when:
+          - c: SubmitSolution
+            props: { gameId: unknown, playerId: nilsId, roundIndex: 0, solution: solHit }
+        then:
+          - x: GameNotFound
+      invalid solution rejected:
+        given:
+          - v: State / Game
+            props:
+              phase: started
+              currentRoundIndex: 0
+              players: [hostMartin, playerNils]
+              rounds:
+                - { puzzle: puzzle0, startedAt: startedAt, solutions: {}, scored: false }
+        when:
+          - c: SubmitSolution
+            props: { gameId: gameId, playerId: nilsId, roundIndex: 0, solution: solBad }   # 10−10=0, not a positive integer
+        then:
+          - x: InvalidSolution
+      cannot submit twice on same round:
+        given:
+          - v: State / Game
+            props:
+              phase: started
+              currentRoundIndex: 0
+              players: [hostMartin, playerNils]
+              rounds:
+                - { puzzle: puzzle0, startedAt: startedAt, solutions: { nilsId: solMiss }, scored: false }
+        when:
+          - c: SubmitSolution
+            props: { gameId: gameId, playerId: nilsId, roundIndex: 0, solution: solHit }
+        then:
+          - x: AlreadySubmitted
+      cannot submit after the deadline:
+        given:
+          - v: State / Game
+            props:
+              phase: started
+              currentRoundIndex: 0
+              players: [hostMartin, playerNils]
+              rounds:
+                - { puzzle: puzzle0, startedAt: startedAtExpired, solutions: {}, scored: false }   # context.Now > startedAtExpired + 45s
+        when:
+          - c: SubmitSolution
+            props: { gameId: gameId, playerId: nilsId, roundIndex: 0, solution: solHit }
+        then:
+          - x: DeadlinePassed
+      cannot submit to a scored round:
+        given:
+          - v: State / Game
+            props:
+              phase: started
+              currentRoundIndex: 0
+              players: [hostMartin, playerNils]
+              rounds:
+                - { puzzle: puzzle0, startedAt: startedAt, solutions: { martinId: solMiss, nilsId: solHit }, sampleSolution: sampleSol0, reachedValues: { martinId: 20, nilsId: 100 }, roundScores: { martinId: 80, nilsId: 0 }, scored: true }
+        when:
+          - c: SubmitSolution
+            props: { gameId: gameId, playerId: martinId, roundIndex: 0, solution: solHit }
+        then:
+          - x: RoundAlreadyScored
+
+  👀 Waiting For Others:
+    steps:
+      - v: Screen / Waiting for others
+        props:
+          gameId: Guid
+          roundIndex: int
+          submittedPlayerIds: Guid[]
+          pendingPlayerIds: Guid[]
+    # Projection GT: given the current round received one solution, then the screen splits
+    # players into who has submitted vs who is still pending (derived from the round's solutions).
+    tests:
+      shows who has submitted and who is still pending:
+        given:
+          - e: Game / LobbyOpened
+            props: { hostPlayerId: martinId, hostName: Martin, puzzles: [puzzle0, puzzle1] }
+          - e: Game / PlayerJoined
+            props: { playerId: nilsId, playerName: Nils }
+          - e: Game / GameStarted
+            props: { firstRoundIndex: 0, startedAt: startedAt }
+          - e: Game / SolutionSubmitted
+            props: { playerId: martinId, roundIndex: 0, solution: solMiss }
+        then:
+          - v: Screen / Waiting for others
+            props:
+              roundIndex: 0
+              submittedPlayerIds: [martinId]
+              pendingPlayerIds: [nilsId]
+
+  # --- Reveal & scoring (System processor) ---------------------------------
+
+  # Minimal Todo read-model the score gear gates on. ONE row per round. Co-located play means
+  # only the CURRENT round receives input. The gear's readyToScore = allSolutionsIn OR the
+  # deadline has passed (now >= deadline) — the deadline column carries the pure anchor
+  # (startedAt + 45s) and the gear compares it to the clock. deadline is null before the round
+  # starts.
+  📋 Outstanding Solutions:
+    steps:
+      - v: Todo / Outstanding solutions
+        props:
+          gameId: Guid
+          rounds: OutstandingSolution[]   # one row per round; { roundIndex: int, pendingPlayerIds: Guid[], allSolutionsIn: bool, deadline: DateTimeOffset }
+    tests:
+      every round opens for every player when the game starts:
+        given:
+          - e: Game / LobbyOpened
+            props: { joinCode: joinCode, hostPlayerId: martinId, puzzles: [puzzle0, puzzle1] }
+          - e: Game / PlayerJoined
+            props: { playerId: nilsId, playerName: Nils }
+          - e: Game / GameStarted
+            props: { firstRoundIndex: 0, startedAt: startedAt }
+        then:
+          - v: Todo / Outstanding solutions
+            props:
+              rounds:
+                - { roundIndex: 0, pendingPlayerIds: [martinId, nilsId], allSolutionsIn: false, deadline: deadline }
+                - { roundIndex: 1, pendingPlayerIds: [martinId, nilsId], allSolutionsIn: false }
+      a submitted solution checks off that player on its round:
+        given:
+          - e: Game / LobbyOpened
+            props: { joinCode: joinCode, hostPlayerId: martinId, puzzles: [puzzle0, puzzle1] }
+          - e: Game / PlayerJoined
+            props: { playerId: nilsId, playerName: Nils }
+          - e: Game / GameStarted
+            props: { firstRoundIndex: 0, startedAt: startedAt }
+          - e: Game / SolutionSubmitted
+            props: { playerId: martinId, roundIndex: 0, solution: solMiss }
+        then:
+          - v: Todo / Outstanding solutions
+            props:
+              rounds:
+                - { roundIndex: 0, pendingPlayerIds: [nilsId], allSolutionsIn: false }
+                - { roundIndex: 1, pendingPlayerIds: [martinId, nilsId], allSolutionsIn: false }
+      a round shows all solutions in once every player has submitted:
+        given:
+          - e: Game / LobbyOpened
+            props: { joinCode: joinCode, hostPlayerId: martinId, puzzles: [puzzle0, puzzle1] }
+          - e: Game / PlayerJoined
+            props: { playerId: nilsId, playerName: Nils }
+          - e: Game / GameStarted
+            props: { firstRoundIndex: 0, startedAt: startedAt }
+          - e: Game / SolutionSubmitted
+            props: { playerId: martinId, roundIndex: 0, solution: solMiss }
+          - e: Game / SolutionSubmitted
+            props: { playerId: nilsId, roundIndex: 0, solution: solHit }
+        then:
+          - v: Todo / Outstanding solutions
+            props:
+              rounds:
+                - { roundIndex: 0, pendingPlayerIds: [], allSolutionsIn: true }
+                - { roundIndex: 1, pendingPlayerIds: [martinId, nilsId], allSolutionsIn: false }
+
+  # The score processor: once Outstanding solutions shows readyToScore (allSolutionsIn OR the
+  # deadline passed), the System scores the round. PURE distance-penalty resolver: replay each
+  # stored solution to its reachedValue, roundScore = round(min(100, |reached − target| / target
+  # * 100)) — 0-100, exact hit -> 0 (best). A player with NO submission has no reachedValue and
+  # scores 100 (worst). Emits one PuzzleRevealed (once, surfacing the generator's sampleSolution)
+  # plus one RoundScored per player. LOWEST total wins.
+  # Failures are Result failure-track values (see docs/adr/006), never thrown:
+  #   x: NotReadyToScore     — a player is still pending AND the deadline has not passed.
+  #   x: RoundAlreadyScored  — already scored (guards a double fire).
+  # 'lowest total wins' is winner determination and lives on End Game, not here.
+  ✍️ Score Round:
+    steps:
+      - e: Game / SolutionSubmitted
+      - v: Todo / Outstanding solutions
+      - t: ⚙️ System / Score round
+      - c: ScoreRound
+        props:
+          gameId: Guid
+          roundIndex: int
+      - x: NotReadyToScore
+      - x: RoundAlreadyScored
+      - e: Game / PuzzleRevealed
+        props:
+          gameId: Guid
+          roundIndex: int
+          sampleSolution: Solution            # the generator's proof, surfaced from the hidden puzzle card
+      - e: Game / RoundScored       # one per player
+        props:
+          gameId: Guid
+          roundIndex: int
+          playerId: Guid
+          reachedValue: int?                   # replay of that player's solution; null if no submission
+          roundScore: int                      # round(min(100, |reached − target| / target * 100)); 100 if none/invalid
+          totalScore: int                      # running sum over scored rounds
+      - v: Screen / Round results
+    # Decider-true GWT: given the folded State / Game, when ScoreRound, then the events |
+    # rejection. allSolutionsIn is DERIVED: players == the current round's solutions keys.
+    # totalScore is the running sum of roundScores across scored rounds.
+    tests:
+      exact solution scores zero, a miss scores by distance:
+        given:
+          - v: State / Game
+            props:
+              phase: started
+              currentRoundIndex: 0
+              players: [hostMartin, playerNils]
+              rounds:
+                - { puzzle: puzzle0, startedAt: startedAt, solutions: { martinId: solMiss, nilsId: solHit }, scored: false }   # both in -> allSolutionsIn derived true
+                - { puzzle: puzzle1, solutions: {}, scored: false }
+        when:
+          - c: ScoreRound
+            props: { gameId: gameId, roundIndex: 0 }
+        then:
+          - e: Game / PuzzleRevealed
+            props: { roundIndex: 0, sampleSolution: sampleSol0 }
+          - e: Game / RoundScored
+            props: { playerId: martinId, reachedValue: 20, roundScore: 80, totalScore: 80 }   # |20−100|/100*100
+          - e: Game / RoundScored
+            props: { playerId: nilsId, reachedValue: 100, roundScore: 0, totalScore: 0 }       # exact hit
+      a non-submitter scores the worst once the deadline passes:
+        given:
+          - v: State / Game
+            props:
+              phase: started
+              currentRoundIndex: 0
+              players: [hostMartin, playerNils]
+              rounds:
+                - { puzzle: puzzle0, startedAt: startedAtExpired, solutions: { martinId: solHit }, scored: false }   # nilsId pending; context.Now > deadline -> readyToScore
+                - { puzzle: puzzle1, solutions: {}, scored: false }
+        when:
+          - c: ScoreRound
+            props: { gameId: gameId, roundIndex: 0 }
+        then:
+          - e: Game / PuzzleRevealed
+            props: { roundIndex: 0, sampleSolution: sampleSol0 }
+          - e: Game / RoundScored
+            props: { playerId: martinId, reachedValue: 100, roundScore: 0, totalScore: 0 }
+          - e: Game / RoundScored
+            props: { playerId: nilsId, roundScore: 100, totalScore: 100 }   # no submission -> worst
+      scores accumulate across rounds:
+        given:
+          - v: State / Game
+            props:
+              phase: started
+              currentRoundIndex: 1
+              players: [hostMartin, playerNils]
+              rounds:
+                # round0 already scored -> its roundScores are the source of the running total
+                - { puzzle: puzzle0, sampleSolution: sampleSol0, reachedValues: { martinId: 20, nilsId: 100 }, roundScores: { martinId: 80, nilsId: 0 }, scored: true }
+                - { puzzle: puzzle1, startedAt: startedAt, solutions: { martinId: solHit, nilsId: solMiss }, scored: false }
+        when:
+          - c: ScoreRound
+            props: { gameId: gameId, roundIndex: 1 }
+        then:
+          - e: Game / PuzzleRevealed
+            props: { roundIndex: 1, sampleSolution: sampleSol1 }
+          - e: Game / RoundScored
+            props: { playerId: martinId, reachedValue: 100, roundScore: 0, totalScore: 80 }    # solHit 5×20=100 (exact); running 80 + 0
+          - e: Game / RoundScored
+            props: { playerId: nilsId, reachedValue: 25, roundScore: 75, totalScore: 75 }        # solMiss 5+20=25 on puzzle1; |25−100|/100*100; running 0 + 75
+      cannot score before ready:
+        given:
+          - v: State / Game
+            props:
+              phase: started
+              currentRoundIndex: 0
+              players: [hostMartin, playerNils]
+              rounds:
+                - { puzzle: puzzle0, startedAt: startedAt, solutions: { martinId: solHit }, scored: false }   # nilsId pending AND context.Now within the window
+                - { puzzle: puzzle1, solutions: {}, scored: false }
+        when:
+          - c: ScoreRound
+            props: { gameId: gameId, roundIndex: 0 }
+        then:
+          - x: NotReadyToScore
+      cannot score an already-scored round:
+        given:
+          - v: State / Game
+            props:
+              phase: started
+              currentRoundIndex: 0
+              players: [hostMartin, playerNils]
+              rounds:
+                - { puzzle: puzzle0, startedAt: startedAt, solutions: { martinId: solMiss, nilsId: solHit }, sampleSolution: sampleSol0, reachedValues: { martinId: 20, nilsId: 100 }, roundScores: { martinId: 80, nilsId: 0 }, scored: true }   # double fire guarded
+                - { puzzle: puzzle1, solutions: {}, scored: false }
+        when:
+          - c: ScoreRound
+            props: { gameId: gameId, roundIndex: 0 }
+        then:
+          - x: RoundAlreadyScored
+
+  👀 Round Results:
+    steps:
+      - v: Screen / Round results
+        props:
+          gameId: Guid
+          roundIndex: int
+          target: int                      # from the folded puzzle card
+          sampleSolution: Solution          # from PuzzleRevealed
+          playerResults: PlayerResult[]     # { playerId: Guid, reachedValue: int?, roundScore: int, totalScore: int } from per-player RoundScored
+    # Projection GT: given the round scored (reveal + one RoundScored per player), then the
+    # results screen shows the target, the sample solution and each player's reached value +
+    # round score + running total.
+    tests:
+      reveals the target, sample solution and per-player result once scored:
+        given:
+          - e: Game / LobbyOpened
+            props: { hostPlayerId: martinId, hostName: Martin, puzzles: [puzzle0, puzzle1] }
+          - e: Game / PlayerJoined
+            props: { playerId: nilsId, playerName: Nils }
+          - e: Game / GameStarted
+            props: { firstRoundIndex: 0, startedAt: startedAt }
+          - e: Game / SolutionSubmitted
+            props: { playerId: martinId, roundIndex: 0, solution: solMiss }
+          - e: Game / SolutionSubmitted
+            props: { playerId: nilsId, roundIndex: 0, solution: solHit }
+          - e: Game / PuzzleRevealed
+            props: { roundIndex: 0, sampleSolution: sampleSol0 }
+          - e: Game / RoundScored
+            props: { roundIndex: 0, playerId: martinId, reachedValue: 20, roundScore: 80, totalScore: 80 }
+          - e: Game / RoundScored
+            props: { roundIndex: 0, playerId: nilsId, reachedValue: 100, roundScore: 0, totalScore: 0 }
+        then:
+          - v: Screen / Round results
+            props:
+              roundIndex: 0
+              target: 100
+              sampleSolution: sampleSol0
+              playerResults:
+                - { playerId: martinId, reachedValue: 20, roundScore: 80, totalScore: 80 }
+                - { playerId: nilsId, reachedValue: 100, roundScore: 0, totalScore: 0 }
+
+  # --- Progression (System processor) --------------------------------------
+
+  # Minimal Todo read-model the progression processors gate on. The whole set is on the stream
+  # (LobbyOpened carries puzzles), so totalRounds = puzzles.Count and resolvedRoundCount /
+  # hasNextPuzzle are projected as each round is scored. hasNextPuzzle is the gate: true ->
+  # ⚙️ Next puzzle, false -> ⚙️ End game (mutually exclusive). SEPARATE from State / Game.
+  📋 Game Progress:
+    steps:
+      - v: Todo / Game progress
+        props:
+          gameId: Guid
+          roundIndex: int
+          totalRounds: int
+          resolvedRoundCount: int
+          hasNextPuzzle: bool
+    tests:
+      progress shows a next puzzle while rounds remain:
+        given:
+          - e: Game / LobbyOpened
+            props: { joinCode: joinCode, hostPlayerId: martinId, puzzles: [puzzle0, puzzle1] }
+          - e: Game / PlayerJoined
+            props: { playerId: nilsId, playerName: Nils }
+          - e: Game / GameStarted
+            props: { firstRoundIndex: 0, startedAt: startedAt }
+          - e: Game / PuzzleRevealed
+            props: { roundIndex: 0, sampleSolution: sampleSol0 }
+        then:
+          - v: Todo / Game progress
+            props: { roundIndex: 0, totalRounds: 2, resolvedRoundCount: 1, hasNextPuzzle: true }
+      progress shows no next puzzle once the last is scored:
+        given:
+          - e: Game / LobbyOpened
+            props: { joinCode: joinCode, hostPlayerId: martinId, puzzles: [puzzle0, puzzle1] }
+          - e: Game / PlayerJoined
+            props: { playerId: nilsId, playerName: Nils }
+          - e: Game / GameStarted
+            props: { firstRoundIndex: 0, startedAt: startedAt }
+          - e: Game / PuzzleRevealed
+            props: { roundIndex: 0, sampleSolution: sampleSol0 }
+          - e: Game / NextPuzzleStarted
+            props: { roundIndex: 1, startedAt: startedAt }
+          - e: Game / PuzzleRevealed
+            props: { roundIndex: 1, sampleSolution: sampleSol1 }
+        then:
+          - v: Todo / Game progress
+            props: { roundIndex: 1, totalRounds: 2, resolvedRoundCount: 2, hasNextPuzzle: false }
+
+  # Fires when Game progress shows hasNextPuzzle. Presents the next puzzle by index and STAMPS
+  # its startedAt (the next round's clock starts).
+  ✍️ Ask Next Puzzle:
+    steps:
+      - e: Game / PuzzleRevealed
+      - v: Todo / Game progress
+      - t: ⚙️ System / Ask next puzzle
+      - c: AskNextPuzzle
+        props:
+          gameId: Guid
+      - e: Game / NextPuzzleStarted
+        props:
+          gameId: Guid
+          roundIndex: int
+          startedAt: DateTimeOffset   # the next round's deadline anchor
+      - v: Screen / Puzzle
+    # Decider-true GWT: given the folded State / Game (current round scored, another remains —
+    # hasNextPuzzle derived true), when AskNextPuzzle, then NextPuzzleStarted at the next index.
+    tests:
+      next puzzle presented when one remains:
+        given:
+          - v: State / Game
+            props:
+              phase: started
+              currentRoundIndex: 0
+              rounds:
+                - { puzzle: puzzle0, sampleSolution: sampleSol0, reachedValues: { martinId: 20, nilsId: 100 }, roundScores: { martinId: 80, nilsId: 0 }, scored: true }
+                - { puzzle: puzzle1, solutions: {}, scored: false }
+        when:
+          - c: AskNextPuzzle
+            props: { gameId: gameId }
+        then:
+          - e: Game / NextPuzzleStarted
+            props: { roundIndex: 1, startedAt: startedAt }
+
+  # --- End (System processor) ----------------------------------------------
+
+  # Fires when Game progress shows NOT hasNextPuzzle (mutually exclusive with Ask Next Puzzle;
+  # both react to PuzzleRevealed and the gate decides which fires). Computes the final
+  # scoreboard from each player's DERIVED totalScore; winnerIds = ALL players tied at the
+  # LOWEST total (LOWEST wins — like MEM, the OPPOSITE of BlindBudet; ties share the win).
+  ✍️ End Game:
+    steps:
+      - e: Game / PuzzleRevealed
+      - v: Todo / Game progress
+      - t: ⚙️ System / End game
+      - c: EndGame
+        props:
+          gameId: Guid
+      - e: Game / GameEnded
+        props:
+          gameId: Guid
+          finalScoreboard: ScoreboardEntry[]   # { playerId: Guid, playerName: string, totalScore: int }
+          winnerIds: Guid[]                     # all players tied at the LOWEST total
+          endedAt: DateTimeOffset
+      - v: Screen / Final standings
+    # Decider-true GWT: given the folded State / Game (all rounds scored, none left -> hasNextPuzzle
+    # derived false), when EndGame, then GameEnded with the scoreboard and the LOWEST-total
+    # winner(s). No x: — the hasNextPuzzle gate makes End Game / Ask Next Puzzle mutually
+    # exclusive and each fires once per PuzzleRevealed.
+    tests:
+      lowest score wins:
+        given:
+          - v: State / Game
+            props:
+              phase: started
+              currentRoundIndex: 1
+              players: [hostMartin, playerNils]
+              rounds:
+                - { puzzle: puzzle0, roundScores: { martinId: 0, nilsId: 80 }, scored: true }
+                - { puzzle: puzzle1, roundScores: { martinId: 5, nilsId: 0 }, scored: true }
+        when:
+          - c: EndGame
+            props: { gameId: gameId }
+        then:
+          - e: Game / GameEnded
+            props:
+              finalScoreboard:
+                - { playerId: martinId, playerName: Martin, totalScore: 5 }
+                - { playerId: nilsId, playerName: Nils, totalScore: 80 }
+              winnerIds: [martinId]   # martin lowest total (5 < 80)
+              endedAt: endedAt
+      tied lowest totals share the win:
+        given:
+          - v: State / Game
+            props:
+              phase: started
+              currentRoundIndex: 1
+              players: [hostMartin, playerNils]
+              rounds:
+                - { puzzle: puzzle0, roundScores: { martinId: 10, nilsId: 10 }, scored: true }
+                - { puzzle: puzzle1, roundScores: { martinId: 5, nilsId: 5 }, scored: true }
+        when:
+          - c: EndGame
+            props: { gameId: gameId }
+        then:
+          - e: Game / GameEnded
+            props:
+              finalScoreboard:
+                - { playerId: martinId, playerName: Martin, totalScore: 15 }
+                - { playerId: nilsId, playerName: Nils, totalScore: 15 }
+              winnerIds: [martinId, nilsId]   # equal lowest total -> shared win
+              endedAt: endedAt
+
+  👀 Final Standings:
+    steps:
+      - v: Screen / Final standings
+        props:
+          gameId: Guid
+          finalScoreboard: ScoreboardEntry[]   # { playerId: Guid, playerName: string, totalScore: int }
+          winnerIds: Guid[]   # all players tied at the LOWEST total
+    # Projection GT: GameEnded already carries the computed scoreboard + winnerIds (LOWEST total
+    # wins; ties share), so the final screen projects them straight through.
+    tests:
+      shows the final scoreboard and winner:
+        given:
+          - e: Game / GameEnded
+            props:
+              finalScoreboard:
+                - { playerId: martinId, playerName: Martin, totalScore: 5 }
+                - { playerId: nilsId, playerName: Nils, totalScore: 80 }
+              winnerIds: [martinId]
+              endedAt: endedAt
+        then:
+          - v: Screen / Final standings
+            props:
+              finalScoreboard:
+                - { playerId: martinId, playerName: Martin, totalScore: 5 }
+                - { playerId: nilsId, playerName: Nils, totalScore: 80 }
+              winnerIds: [martinId]
+
+  # --- Decision model (decider State) — APPENDIX, not a timeline step ------
+
+  # Placed LAST on purpose: the slices above read top-to-bottom as the story
+  # (catalog -> lobby -> join -> start -> submit -> score -> next -> end). This box is NOT a
+  # moment in that timeline — it is the folded TankState the decider's `decide` reads,
+  # referenced by the Given of every command/processor slice above. State / Game is the SINGLE
+  # decision model (one Decider per game, one State). A GWT case asserts only the props its
+  # `decide` actually reads.
+  #
+  # The game loads the WHOLE set up front (rounds: PuzzleRound[]) and players' solutions fold
+  # into each round as they arrive — one cohesive structure. A PuzzleRound is the immutable
+  # puzzle card plus how it is being solved. Progress/pending/totals are DERIVED from rounds +
+  # players, so the fold keeps a single source of truth and no redundant flags.
+  #
+  # PuzzleRound fixtures (puzzle = a Puzzle fixture; solutions/reachedValues/roundScores are maps
+  # keyed by playerId). Tests build rounds inline as flow-maps, e.g.
+  # { puzzle: puzzle0, startedAt: startedAt, solutions: { martinId: solHit }, scored: false }.
+  #
+  # Player fixtures (Player = { playerId: Guid, name: string, isHost: bool }), reused by the
+  # Join / Start / Submit GWTs:
+  #   hostMartin = { playerId: martinId, name: Martin, isHost: true }
+  #   playerNils = { playerId: nilsId,   name: Nils,   isHost: false }
+  #   playerSven = { playerId: svenId,   name: Sven,   isHost: false }
+  #
+  # Timestamp fixtures:
+  #   startedAt        = a round start within the 45s window relative to context.Now
+  #   startedAtExpired = a round start whose deadline (startedAt + 45s) is BEFORE context.Now
+  👀 Decision Model:
+    steps:
+      - v: State / Game
+        props:
+          gameId: Guid
+          joinCode: Guid
+          phase: TankPhase (lobby|started|ended)
+          hostPlayerId: Guid
+          players: Player[]                # { playerId: Guid, name: string, isHost: bool }
+          currentRoundIndex: int
+          rounds: IReadOnlyList<PuzzleRound>  # the fixed set loaded up front + how each is being solved
+          # PuzzleRound = {
+          #   puzzle: Puzzle,                                 # immutable card from LobbyOpened: { numbers: int[], target: int, sampleSolution: Solution } — hidden sample
+          #   startedAt: DateTimeOffset?,                     # stamped at GameStarted (round 0) / NextPuzzleStarted; null before this round starts
+          #   solutions: IReadOnlyDictionary<Guid, Solution>, # this round's submissions; key=playerId; folded in event-log order
+          #   sampleSolution: Solution?,                      # surfaced at reveal (null before) = puzzle.sampleSolution onto the stream
+          #   reachedValues: IReadOnlyDictionary<Guid, int>,  # per-player replayed value, set at score; key=playerId
+          #   roundScores: IReadOnlyDictionary<Guid, int>,    # per-player score, set at score; key=playerId
+          #   scored: bool }
+          # DERIVED (computed, NOT stored — single source of truth in rounds + players):
+          #   pendingPlayerIds(i)   = players.Keys − rounds[i].solutions.Keys
+          #   allSolutionsIn(i)     = pendingPlayerIds(i) is empty
+          #   deadline(i)           = rounds[i].startedAt + 45s (null if not started)
+          #   deadlinePassed(i,now) = rounds[i].startedAt is set AND now >= deadline(i)
+          #   readyToScore(i,now)   = allSolutionsIn(i) OR deadlinePassed(i,now)
+          #   currentRoundScored    = rounds[currentRoundIndex].scored
+          #   hasNextPuzzle         = currentRoundIndex + 1 < rounds.Count
+          #   totalScore(p)         = Σ over scored rounds of roundScores[p]
+    tests:
+      state folds a submitted solution into the decision model:
+        given:
+          - e: Game / LobbyOpened
+            props: { joinCode: joinCode, hostPlayerId: martinId, puzzles: [puzzle0, puzzle1] }
+          - e: Game / PlayerJoined
+            props: { playerId: nilsId, playerName: Nils }
+          - e: Game / GameStarted
+            props: { firstRoundIndex: 0, startedAt: startedAt }
+          - e: Game / SolutionSubmitted
+            props: { playerId: martinId, roundIndex: 0, solution: solMiss }
+        then:
+          - v: State / Game
+            props:
+              phase: started
+              hostPlayerId: martinId
+              currentRoundIndex: 0
+              rounds:
+                - { puzzle: puzzle0, startedAt: startedAt, solutions: { martinId: solMiss }, scored: false }   # nilsId still pending (derived)
+                - { puzzle: puzzle1, solutions: {}, scored: false }
+      scoring a round folds the reveal and scores into that round:
+        given:
+          - e: Game / LobbyOpened
+            props: { joinCode: joinCode, hostPlayerId: martinId, puzzles: [puzzle0, puzzle1] }
+          - e: Game / PlayerJoined
+            props: { playerId: nilsId, playerName: Nils }
+          - e: Game / GameStarted
+            props: { firstRoundIndex: 0, startedAt: startedAt }
+          - e: Game / SolutionSubmitted
+            props: { playerId: martinId, roundIndex: 0, solution: solMiss }
+          - e: Game / SolutionSubmitted
+            props: { playerId: nilsId, roundIndex: 0, solution: solHit }
+          - e: Game / PuzzleRevealed
+            props: { roundIndex: 0, sampleSolution: sampleSol0 }
+          - e: Game / RoundScored
+            props: { roundIndex: 0, playerId: martinId, reachedValue: 20, roundScore: 80, totalScore: 80 }
+          - e: Game / RoundScored
+            props: { roundIndex: 0, playerId: nilsId, reachedValue: 100, roundScore: 0, totalScore: 0 }
+        then:
+          - v: State / Game
+            props:
+              phase: started
+              currentRoundIndex: 0   # scoring does not advance; AskNextPuzzle does
+              rounds:
+                # round0 fully scored: reveal + per-player reached/scores folded in
+                - { puzzle: puzzle0, startedAt: startedAt, solutions: { martinId: solMiss, nilsId: solHit }, sampleSolution: sampleSol0, reachedValues: { martinId: 20, nilsId: 100 }, roundScores: { martinId: 80, nilsId: 0 }, scored: true }
+                - { puzzle: puzzle1, solutions: {}, scored: false }
