@@ -46,7 +46,7 @@
 #   SCORING (mirrors MEM — LOWEST total wins):
 #     reachedValue = replay(solution)   (the value at answerIndex)
 #     Δ            = |reachedValue − target|
-#     roundScore   = round(min(100, Δ / target * 100))   // 0-100, exact hit -> 0 (best)
+#     roundScore   = round(min(100, Δ / target * 100))   // 0-100, exact hit -> -10 (best, bonus)
 #     No submission / no answer -> roundScore 100 (worst). LOWEST total wins (like MEM,
 #     OPPOSITE of BlindBudet). A single ScoreRound emits one PuzzleRevealed (once, surfacing
 #     the generator's sample solution) plus one RoundScored per player.
@@ -538,7 +538,7 @@ slices:
           roundIndex: int
           playerId: Guid
           reachedValue: int?                   # replay of that player's solution; null if no submission
-          roundScore: int                      # round(min(100, |reached − target| / target * 100)); 100 if none/invalid
+          roundScore: int                      # round(min(100, |reached − target| / target * 100)); -10 if exact; 100 if none/invalid
           totalScore: int                      # running sum over scored rounds
       - v: Screen / Round results
     # Decider-true GWT: given the folded State / Game, when ScoreRound, then the events |
@@ -564,7 +564,7 @@ slices:
           - e: Game / RoundScored
             props: { playerId: martinId, reachedValue: 20, roundScore: 80, totalScore: 80 }   # |20−100|/100*100
           - e: Game / RoundScored
-            props: { playerId: nilsId, reachedValue: 100, roundScore: 0, totalScore: 0 }       # exact hit
+            props: { playerId: nilsId, reachedValue: 100, roundScore: -10, totalScore: -10 }   # exact hit -> bonus
       a non-submitter scores the worst once the deadline passes:
         given:
           - v: State / Game
@@ -582,7 +582,7 @@ slices:
           - e: Game / PuzzleRevealed
             props: { roundIndex: 0, sampleSolution: sampleSol0 }
           - e: Game / RoundScored
-            props: { playerId: martinId, reachedValue: 100, roundScore: 0, totalScore: 0 }
+            props: { playerId: martinId, reachedValue: 100, roundScore: -10, totalScore: -10 }   # exact hit -> bonus
           - e: Game / RoundScored
             props: { playerId: nilsId, roundScore: 100, totalScore: 100 }   # no submission -> worst
       scores accumulate across rounds:
@@ -594,7 +594,7 @@ slices:
               players: [hostMartin, playerNils]
               rounds:
                 # round0 already scored -> its roundScores are the source of the running total
-                - { puzzle: puzzle0, sampleSolution: sampleSol0, reachedValues: { martinId: 20, nilsId: 100 }, roundScores: { martinId: 80, nilsId: 0 }, scored: true }
+                - { puzzle: puzzle0, sampleSolution: sampleSol0, reachedValues: { martinId: 20, nilsId: 100 }, roundScores: { martinId: 80, nilsId: -10 }, scored: true }
                 - { puzzle: puzzle1, startedAt: startedAt, solutions: { martinId: solHit, nilsId: solMiss }, scored: false }
         when:
           - c: ScoreRound
@@ -603,9 +603,9 @@ slices:
           - e: Game / PuzzleRevealed
             props: { roundIndex: 1, sampleSolution: sampleSol1 }
           - e: Game / RoundScored
-            props: { playerId: martinId, reachedValue: 100, roundScore: 0, totalScore: 80 }    # solHit 5×20=100 (exact); running 80 + 0
+            props: { playerId: martinId, reachedValue: 100, roundScore: -10, totalScore: 70 }    # solHit 5×20=100 (exact); running 80 + (-10)
           - e: Game / RoundScored
-            props: { playerId: nilsId, reachedValue: 25, roundScore: 75, totalScore: 75 }        # solMiss 5+20=25 on puzzle1; |25−100|/100*100; running 0 + 75
+            props: { playerId: nilsId, reachedValue: 25, roundScore: 75, totalScore: 65 }        # solMiss 5+20=25 on puzzle1; |25−100|/100*100; running -10 + 75
       cannot score before ready:
         given:
           - v: State / Game

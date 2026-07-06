@@ -49,7 +49,7 @@ public class EvolveTests
             new SolutionSubmitted(GameId, NilsId, 0, SolHit, StartedAt),
             new PuzzleRevealed(GameId, 0, SampleSol0),
             new RoundScored(GameId, 0, MartinId, 20, 80, 80),
-            new RoundScored(GameId, 0, NilsId, 100, 0, 0));
+            new RoundScored(GameId, 0, NilsId, 100, -10, -10));
 
         state.CurrentRoundIndex.Should().Be(0); // scoring does not advance; AskNextPuzzle does
 
@@ -58,12 +58,12 @@ public class EvolveTests
         round0.SampleSolution.Should().Be(SampleSol0);
         round0.Solutions.Should().Equal(new Dictionary<Guid, Solution> { [MartinId] = SolMiss, [NilsId] = SolHit });
         round0.ReachedValues.Should().Equal(new Dictionary<Guid, int> { [MartinId] = 20, [NilsId] = 100 });
-        round0.RoundScores.Should().Equal(new Dictionary<Guid, int> { [MartinId] = 80, [NilsId] = 0 });
+        round0.RoundScores.Should().Equal(new Dictionary<Guid, int> { [MartinId] = 80, [NilsId] = -10 });
 
         state.Rounds[1].Scored.Should().BeFalse();
 
         // totalScore is DERIVED by summing round scores across scored rounds.
         state.TotalScore(MartinId).Should().Be(80);
-        state.TotalScore(NilsId).Should().Be(0);
+        state.TotalScore(NilsId).Should().Be(-10);
     }
 }

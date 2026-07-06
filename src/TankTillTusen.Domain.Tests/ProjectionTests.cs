@@ -115,7 +115,7 @@ public class ProjectionTests
             new SolutionSubmitted(GameId, NilsId, 0, SolHit, StartedAt),
             new PuzzleRevealed(GameId, 0, SampleSol0),
             new RoundScored(GameId, 0, MartinId, 20, 80, 80),
-            new RoundScored(GameId, 0, NilsId, 100, 0, 0)));
+            new RoundScored(GameId, 0, NilsId, 100, -10, -10)));
 
         view.RoundIndex.Should().Be(0);
         view.Target.Should().Be(100);
@@ -123,7 +123,7 @@ public class ProjectionTests
         view.PlayerResults.Should().BeEquivalentTo(new[]
         {
             new PlayerResult(MartinId, 20, 80, 80),
-            new PlayerResult(NilsId, 100, 0, 0)
+            new PlayerResult(NilsId, 100, -10, -10)
         }, o => o.WithStrictOrdering());
     }
 

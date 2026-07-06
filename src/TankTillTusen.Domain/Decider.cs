@@ -203,7 +203,9 @@ public static class Decider
                 : null;
 
             var roundScore = reached is { } value
-                ? (int)Math.Round(Math.Min(100m, Math.Abs(value - target) / (decimal)target * 100m), MidpointRounding.AwayFromZero)
+                ? (value == target
+                    ? -10                                   // exakt = perfektions-bonus (som MEM)
+                    : (int)Math.Round(Math.Min(100m, Math.Abs(value - target) / (decimal)target * 100m), MidpointRounding.AwayFromZero))
                 : 100;
 
             var totalScore = state.TotalScore(player.PlayerId) + roundScore;

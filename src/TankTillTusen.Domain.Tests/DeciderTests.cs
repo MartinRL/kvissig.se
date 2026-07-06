@@ -210,7 +210,7 @@ public class DeciderTests
 
         events.Revealed().SampleSolution.Should().Be(SampleSol0);
         events.ScoredFor(MartinId).Should().BeEquivalentTo(new { ReachedValue = (int?)20, RoundScore = 80, TotalScore = 80 });
-        events.ScoredFor(NilsId).Should().BeEquivalentTo(new { ReachedValue = (int?)100, RoundScore = 0, TotalScore = 0 });
+        events.ScoredFor(NilsId).Should().BeEquivalentTo(new { ReachedValue = (int?)100, RoundScore = -10, TotalScore = -10 });
     }
 
     [Fact]
@@ -224,7 +224,7 @@ public class DeciderTests
             .Events();
 
         events.Revealed().SampleSolution.Should().Be(SampleSol0);
-        events.ScoredFor(MartinId).Should().BeEquivalentTo(new { ReachedValue = (int?)100, RoundScore = 0, TotalScore = 0 });
+        events.ScoredFor(MartinId).Should().BeEquivalentTo(new { ReachedValue = (int?)100, RoundScore = -10, TotalScore = -10 });
         events.ScoredFor(NilsId).Should().BeEquivalentTo(new { ReachedValue = (int?)null, RoundScore = 100, TotalScore = 100 });
     }
 
@@ -233,7 +233,7 @@ public class DeciderTests
     {
         var round0 = Round(Puzzle0, sampleSolution: SampleSol0,
             reachedValues: new Dictionary<Guid, int> { [MartinId] = 20, [NilsId] = 100 },
-            roundScores: new Dictionary<Guid, int> { [MartinId] = 80, [NilsId] = 0 },
+            roundScores: new Dictionary<Guid, int> { [MartinId] = 80, [NilsId] = -10 },
             scored: true);
         var round1 = Round(Puzzle1, startedAt: StartedAt,
             solutions: new Dictionary<Guid, Solution> { [MartinId] = SolHit, [NilsId] = SolMiss });
@@ -243,10 +243,10 @@ public class DeciderTests
             .Events();
 
         events.Revealed().SampleSolution.Should().Be(SampleSol1);
-        // solHit 5×20=100 (exact); running 80 + 0.
-        events.ScoredFor(MartinId).Should().BeEquivalentTo(new { ReachedValue = (int?)100, RoundScore = 0, TotalScore = 80 });
-        // solMiss 5+20=25 on puzzle1; |25−100|/100*100 = 75; running 0 + 75.
-        events.ScoredFor(NilsId).Should().BeEquivalentTo(new { ReachedValue = (int?)25, RoundScore = 75, TotalScore = 75 });
+        // solHit 5×20=100 (exact); running 80 + (-10) = 70.
+        events.ScoredFor(MartinId).Should().BeEquivalentTo(new { ReachedValue = (int?)100, RoundScore = -10, TotalScore = 70 });
+        // solMiss 5+20=25 on puzzle1; |25−100|/100*100 = 75; running -10 + 75 = 65.
+        events.ScoredFor(NilsId).Should().BeEquivalentTo(new { ReachedValue = (int?)25, RoundScore = 75, TotalScore = 65 });
     }
 
     [Fact]
