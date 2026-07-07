@@ -51,4 +51,4 @@ beside MEM and BlindBudet; generated puzzles, hard 45 s countdown, LOWEST total 
 - [x] E2E (two cookie jars over HTTP): catalog → new game → 2nd player joins → start → puzzle
       (tal/mål/45 s clock) → both submit → score gear closes round → round results (sample
       solution + per-player reached/score/total) → 5 rounds → final standings (tie shares the
-      win, lowest total wins). Deadline/non-submitter→100 + exact→0 covered by DeciderTests.
+      win, lowest total wins). Deadline/non-submitter→100 + exact→−10 covered by DeciderTests.

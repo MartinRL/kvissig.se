@@ -43,10 +43,15 @@
 #   INTEGER (÷ divides evenly, − stays > 0). The player's answer = a chosen operand
 #   (answerIndex). An invalid solution is rejected at submit (InvalidSolution).
 #
-#   SCORING (mirrors MEM — LOWEST total wins):
+#   SCORING (mirrors MEM — LOWEST total wins). Hybrid with a floored denominator:
 #     reachedValue = replay(solution)   (the value at answerIndex)
 #     Δ            = |reachedValue − target|
-#     roundScore   = round(min(100, Δ / target * 100))   // 0-100, exact hit -> -10 (best, bonus)
+#     worstΔ       = max Δ among players WITH a valid submission (non-submitters excluded)
+#     roundScore   = round(Δ / max(worstΔ, 100) * 100)   // 0-100, exact hit -> -10 (best, bonus)
+#     Whole field within 100 of the target -> the score IS the raw distance ("5 ifrån = 5
+#     poäng"); a wilder miss rescales the round so the worst valid Δ = 100 and the rest scale
+#     proportionally. No round can cost more than 100 (Δ ≤ worstΔ ≤ denominator), no division
+#     by zero (denominator ≥ 100).
 #     No submission / no answer -> roundScore 100 (worst). LOWEST total wins (like MEM,
 #     OPPOSITE of BlindBudet). A single ScoreRound emits one PuzzleRevealed (once, surfacing
 #     the generator's sample solution) plus one RoundScored per player.
@@ -66,7 +71,7 @@
 #   timestamps (*At)       DateTimeOffset (openedAt, joinedAt, startedAt, submittedAt, ...)
 #   deadline               DateTimeOffset (= round.startedAt + 45s; derived, not stored)
 #   tal / target / value   int           (numbers, target, reachedValue — puzzles are integer)
-#   points/scores          int           (roundScore 0-100, exact 0, none 100; totalScore = sum)
+#   points/scores          int           (roundScore 0-100, exact -10, none 100; totalScore = sum)
 #   index/count            int           (roundIndex, totalRounds, resolvedRoundCount)
 #   per-player State maps   IReadOnlyDictionary<Guid, T>  (each PuzzleRound's solutions/reached/scores)
 #     The folded decision model keys per-player data by playerId for O(1) lookup (a deliberate
@@ -507,11 +512,18 @@ slices:
                 - { roundIndex: 1, pendingPlayerIds: [martinId, nilsId], allSolutionsIn: false }
 
   # The score processor: once Outstanding solutions shows readyToScore (allSolutionsIn OR the
-  # deadline passed), the System scores the round. PURE distance-penalty resolver: replay each
-  # stored solution to its reachedValue, roundScore = round(min(100, |reached − target| / target
-  # * 100)) — 0-100, exact hit -> 0 (best). A player with NO submission has no reachedValue and
-  # scores 100 (worst). Emits one PuzzleRevealed (once, surfacing the generator's sampleSolution)
+  # deadline passed), the System scores the round. PURE distance-penalty resolver with a
+  # floored denominator: replay each stored solution to its reachedValue, Δ = |reached −
+  # target|, worstΔ = max Δ among players WITH a valid submission, roundScore =
+  # round(Δ / max(worstΔ, 100) * 100) — 0-100, exact hit -> -10 (best, bonus). Whole field
+  # within 100 -> score = raw distance; a wilder miss rescales so the worst valid Δ = 100. A
+  # player with NO submission has no reachedValue and scores 100 flat — NOT counted into worstΔ.
+  # Emits one PuzzleRevealed (once, surfacing the generator's sampleSolution)
   # plus one RoundScored per player. LOWEST total wins.
+  # Extra fixtures (on puzzle800 = Puzzle { numbers: [500, 300, 20], target: 800, sampleSolution: solExact800 }):
+  #   solExact800 = Solution { steps: [{ leftIndex: 0, op: add, rightIndex: 1 }], answerIndex: 3 }  # 500+300=800 (exact)
+  #   sol780      = Solution { steps: [{ leftIndex: 0, op: add, rightIndex: 1 }, { leftIndex: 3, op: sub, rightIndex: 2 }], answerIndex: 4 }  # 500+300−20=780 (Δ20)
+  #   sol520      = Solution { steps: [{ leftIndex: 0, op: add, rightIndex: 2 }], answerIndex: 3 }  # 500+20=520 (Δ280)
   # Failures are Result failure-track values (see docs/adr/006), never thrown:
   #   x: NotReadyToScore     — a player is still pending AND the deadline has not passed.
   #   x: RoundAlreadyScored  — already scored (guards a double fire).
@@ -538,7 +550,7 @@ slices:
           roundIndex: int
           playerId: Guid
           reachedValue: int?                   # replay of that player's solution; null if no submission
-          roundScore: int                      # round(min(100, |reached − target| / target * 100)); -10 if exact; 100 if none/invalid
+          roundScore: int                      # round(Δ / max(worstΔ, 100) * 100); -10 if exact; 100 if none/invalid (excluded from worstΔ)
           totalScore: int                      # running sum over scored rounds
       - v: Screen / Round results
     # Decider-true GWT: given the folded State / Game, when ScoreRound, then the events |
@@ -562,7 +574,7 @@ slices:
           - e: Game / PuzzleRevealed
             props: { roundIndex: 0, sampleSolution: sampleSol0 }
           - e: Game / RoundScored
-            props: { playerId: martinId, reachedValue: 20, roundScore: 80, totalScore: 80 }   # |20−100|/100*100
+            props: { playerId: martinId, reachedValue: 20, roundScore: 80, totalScore: 80 }   # Δ80, nämnare max(80,100)=100
           - e: Game / RoundScored
             props: { playerId: nilsId, reachedValue: 100, roundScore: -10, totalScore: -10 }   # exact hit -> bonus
       a non-submitter scores the worst once the deadline passes:
@@ -605,7 +617,67 @@ slices:
           - e: Game / RoundScored
             props: { playerId: martinId, reachedValue: 100, roundScore: -10, totalScore: 70 }    # solHit 5×20=100 (exact); running 80 + (-10)
           - e: Game / RoundScored
-            props: { playerId: nilsId, reachedValue: 25, roundScore: 75, totalScore: 65 }        # solMiss 5+20=25 on puzzle1; |25−100|/100*100; running -10 + 75
+            props: { playerId: nilsId, reachedValue: 25, roundScore: 75, totalScore: 65 }        # solMiss 5+20=25 on puzzle1; Δ75, nämnare max(75,100)=100; running -10 + 75
+      a close field scores its raw distance:
+        given:
+          - v: State / Game
+            props:
+              phase: started
+              currentRoundIndex: 0
+              players: [hostMartin, playerNils]
+              rounds:
+                - { puzzle: puzzle800, startedAt: startedAt, solutions: { martinId: sol780, nilsId: solExact800 }, scored: false }
+                - { puzzle: puzzle1, solutions: {}, scored: false }
+        when:
+          - c: ScoreRound
+            props: { gameId: gameId, roundIndex: 0 }
+        then:
+          - e: Game / PuzzleRevealed
+            props: { roundIndex: 0, sampleSolution: solExact800 }
+          - e: Game / RoundScored
+            props: { playerId: martinId, reachedValue: 780, roundScore: 20, totalScore: 20 }   # Δ20, nämnare max(20,100)=100 -> rå distans
+          - e: Game / RoundScored
+            props: { playerId: nilsId, reachedValue: 800, roundScore: -10, totalScore: -10 }   # exact hit -> bonus (Δ0 in worstΔ is harmless under the floor)
+      a wild miss rescales the round so the worst is 100:
+        given:
+          - v: State / Game
+            props:
+              phase: started
+              currentRoundIndex: 0
+              players: [hostMartin, playerNils]
+              rounds:
+                - { puzzle: puzzle800, startedAt: startedAt, solutions: { martinId: sol780, nilsId: sol520 }, scored: false }
+                - { puzzle: puzzle1, solutions: {}, scored: false }
+        when:
+          - c: ScoreRound
+            props: { gameId: gameId, roundIndex: 0 }
+        then:
+          - e: Game / PuzzleRevealed
+            props: { roundIndex: 0, sampleSolution: solExact800 }
+          - e: Game / RoundScored
+            props: { playerId: martinId, reachedValue: 780, roundScore: 7, totalScore: 7 }     # worstΔ=280 -> round(20/280*100)=round(7,14)
+          - e: Game / RoundScored
+            props: { playerId: nilsId, reachedValue: 520, roundScore: 100, totalScore: 100 }   # worst valid Δ -> exactly 100
+      a non-submitter does not stretch the denominator:
+        given:
+          - v: State / Game
+            props:
+              phase: started
+              currentRoundIndex: 0
+              players: [hostMartin, playerNils]
+              rounds:
+                - { puzzle: puzzle800, startedAt: startedAtExpired, solutions: { martinId: sol780 }, scored: false }   # nilsId pending; context.Now > deadline -> readyToScore
+                - { puzzle: puzzle1, solutions: {}, scored: false }
+        when:
+          - c: ScoreRound
+            props: { gameId: gameId, roundIndex: 0 }
+        then:
+          - e: Game / PuzzleRevealed
+            props: { roundIndex: 0, sampleSolution: solExact800 }
+          - e: Game / RoundScored
+            props: { playerId: martinId, reachedValue: 780, roundScore: 20, totalScore: 20 }   # nilsId's 100 flat är EJ ett Δ; nämnare max(20,100)=100
+          - e: Game / RoundScored
+            props: { playerId: nilsId, roundScore: 100, totalScore: 100 }                      # no submission -> worst, excluded from worstΔ
       cannot score before ready:
         given:
           - v: State / Game

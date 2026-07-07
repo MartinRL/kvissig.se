@@ -250,6 +250,52 @@ public class DeciderTests
     }
 
     [Fact]
+    public void a_close_field_scores_its_raw_distance()
+    {
+        var events = Gwt.Given(State(TankPhase.Started, [HostMartin, PlayerNils], 0,
+                Round(Puzzle800, startedAt: StartedAt,
+                    solutions: new Dictionary<Guid, Solution> { [MartinId] = Sol780, [NilsId] = SolExact800 }),
+                Round(Puzzle1)))
+            .When(new ScoreRound(GameId, 0))
+            .Events();
+
+        events.Revealed().SampleSolution.Should().Be(SolExact800);
+        // Δ20, nämnare max(20, 100) = 100 -> poängen = rå distans.
+        events.ScoredFor(MartinId).Should().BeEquivalentTo(new { ReachedValue = (int?)780, RoundScore = 20, TotalScore = 20 });
+        events.ScoredFor(NilsId).Should().BeEquivalentTo(new { ReachedValue = (int?)800, RoundScore = -10, TotalScore = -10 });
+    }
+
+    [Fact]
+    public void a_wild_miss_rescales_the_round_so_the_worst_is_100()
+    {
+        var events = Gwt.Given(State(TankPhase.Started, [HostMartin, PlayerNils], 0,
+                Round(Puzzle800, startedAt: StartedAt,
+                    solutions: new Dictionary<Guid, Solution> { [MartinId] = Sol780, [NilsId] = Sol520 }),
+                Round(Puzzle1)))
+            .When(new ScoreRound(GameId, 0))
+            .Events();
+
+        // worstΔ = 280 -> martin round(20/280×100) = round(7,14) = 7; nils = exactly 100.
+        events.ScoredFor(MartinId).Should().BeEquivalentTo(new { ReachedValue = (int?)780, RoundScore = 7, TotalScore = 7 });
+        events.ScoredFor(NilsId).Should().BeEquivalentTo(new { ReachedValue = (int?)520, RoundScore = 100, TotalScore = 100 });
+    }
+
+    [Fact]
+    public void a_non_submitter_does_not_stretch_the_denominator()
+    {
+        var events = Gwt.Given(State(TankPhase.Started, [HostMartin, PlayerNils], 0,
+                Round(Puzzle800, startedAt: StartedAtExpired,
+                    solutions: new Dictionary<Guid, Solution> { [MartinId] = Sol780 }),
+                Round(Puzzle1)))
+            .When(new ScoreRound(GameId, 0))
+            .Events();
+
+        // Nils 100 flat är EJ ett Δ; nämnare = max(20, 100) = 100 -> martin behåller rå distans.
+        events.ScoredFor(MartinId).Should().BeEquivalentTo(new { ReachedValue = (int?)780, RoundScore = 20, TotalScore = 20 });
+        events.ScoredFor(NilsId).Should().BeEquivalentTo(new { ReachedValue = (int?)null, RoundScore = 100, TotalScore = 100 });
+    }
+
+    [Fact]
     public void cannot_score_before_ready()
     {
         var error = Gwt.Given(State(TankPhase.Started, [HostMartin, PlayerNils], 0,

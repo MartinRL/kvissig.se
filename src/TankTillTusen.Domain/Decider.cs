@@ -189,6 +189,25 @@ public static class Decider
 
         var target = round.Puzzle.Target;
 
+        // Pass 1: replay each submission. A non-submitter has no reachedValue and scores the
+        // worst (100 flat) — excluded from worstΔ below. A stored solution is already validated
+        // at submit, so replay yields a value.
+        var reachedByPlayer = state.Players.ToDictionary(
+            p => p.PlayerId,
+            p => round.Solutions.TryGetValue(p.PlayerId, out var solution)
+                ? SolutionValidator.Validate(round.Puzzle, solution)
+                : null);
+
+        // Hybrid with a floored denominator: whole field within 100 of the target -> the score
+        // IS the raw distance; a wilder miss rescales the round so the worst valid Δ = 100.
+        // Δ ≤ worstΔ ≤ denominator caps every round at 100; the 100-floor bars division by zero.
+        var worstDelta = reachedByPlayer.Values
+            .Where(v => v.HasValue)
+            .Select(v => Math.Abs(v!.Value - target))
+            .DefaultIfEmpty(0)
+            .Max();
+        var denominator = Math.Max(worstDelta, 100);
+
         var events = new List<TankEvent>
         {
             new PuzzleRevealed(state.GameId, command.RoundIndex, round.Puzzle.SampleSolution)
@@ -196,16 +215,12 @@ public static class Decider
 
         foreach (var player in state.Players)
         {
-            // A non-submitter has no reachedValue and scores the worst (100). A stored solution is
-            // already validated at submit, so replay yields a value; distance sets the score.
-            var reached = round.Solutions.TryGetValue(player.PlayerId, out var solution)
-                ? SolutionValidator.Validate(round.Puzzle, solution)
-                : null;
+            var reached = reachedByPlayer[player.PlayerId];
 
             var roundScore = reached is { } value
                 ? (value == target
                     ? -10                                   // exakt = perfektions-bonus (som MEM)
-                    : (int)Math.Round(Math.Min(100m, Math.Abs(value - target) / (decimal)target * 100m), MidpointRounding.AwayFromZero))
+                    : (int)Math.Round(Math.Abs(value - target) / (decimal)denominator * 100m, MidpointRounding.AwayFromZero))
                 : 100;
 
             var totalScore = state.TotalScore(player.PlayerId) + roundScore;

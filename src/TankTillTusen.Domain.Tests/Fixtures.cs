@@ -31,6 +31,14 @@ public static class Fixtures
     public static readonly Solution SolMiss = new([new Step(0, Operator.Add, 1)], 2); // 10+10=20 (5+20=25 on puzzle1)
     public static readonly Solution SolBad = new([new Step(0, Operator.Sub, 1)], 2);  // 10−10=0, not > 0 -> invalid
 
+    // Hybrid-scoring fixtures (on puzzle800 = [500, 300, 20], target 800; declared before the
+    // puzzle so the sample-solution field initializer sees a non-null value).
+    public static readonly Solution SolExact800 = new([new Step(0, Operator.Add, 1)], 3); // 500+300=800 (exact)
+    public static readonly Solution Sol780 = new([new Step(0, Operator.Add, 1), new Step(3, Operator.Sub, 2)], 4); // 500+300−20=780 (Δ20)
+    public static readonly Solution Sol520 = new([new Step(0, Operator.Add, 2)], 3); // 500+20=520 (Δ280)
+
+    public static readonly Puzzle Puzzle800 = new([500, 300, 20], 800, SolExact800);
+
     /// <summary>A fixed clock so the 45s deadline is deterministic in tests.</summary>
     public static readonly DateTimeOffset Now = new(2026, 1, 1, 12, 0, 0, TimeSpan.Zero);
 
