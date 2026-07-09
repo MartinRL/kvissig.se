@@ -2,7 +2,7 @@
 status: Accepted
 type: architecture
 created: 2026-01-27
-revised: 2026-05-31
+revised: 2026-07-09
 ---
 # ADR 004: emlang YAML for Behavior Specification
 
@@ -41,10 +41,11 @@ slices:
     tests:
       PlayerJoins:
         given:
-          - e: Game / LobbyOpened
+          - v: State / Game
+            props: { phase: lobby, joinCode: joinCode, players: [hostMartin] }
         when:
           - c: JoinGame
-            props: { playerName: Nils }
+            props: { joinCode: joinCode, playerName: Nils }
         then:
           - e: Game / PlayerJoined
             props: { playerName: Nils }
@@ -53,16 +54,33 @@ slices:
 ### Element types
 Exactly one type key per element, plus an optional `props` map:
 
-| Type      | Key  | Carries                          |
-|-----------|------|----------------------------------|
-| Trigger   | `t:` | actor role + originating screen  |
-| Command   | `c:` | bare command name                |
-| Event     | `e:` | the stream (e.g. `Game / …`)     |
-| Exception | `x:` | bare error name                  |
-| View      | `v:` | a view lane read model           |
+| Type      | Key  | Carries                         |
+| --------- | ---- | ------------------------------- |
+| Trigger   | `t:` | actor role + originating screen |
+| Command   | `c:` | bare command name               |
+| Event     | `e:` | the stream (e.g. `Game / …`)    |
+| Exception | `x:` | bare error name                 |
+| View      | `v:` | a view lane read model          |
 
-Tests are `given` / `when` / `then`: `given` takes events + views, `when` takes
-commands, `then` takes events + views + exceptions.
+Tests are `given` / `when` / `then`: `when` takes commands, `then` takes events +
+views + exceptions. emlang itself allows both events and views in `given`, but this
+spec restricts it — see the test-shape rule below.
+
+### Test shapes: GWT takes state, GT takes events
+
+Two test shapes, mirroring the two functions of the Decider:
+
+| Shape | Slice type | given | when | then | Verifies |
+|-------|-----------|-------|------|------|----------|
+| **GWT** | command/processor | `v: State / Game` only | command | events / exceptions | `Decide: (State, Command) → Result<Event[]>` |
+| **GT** | view (read model) | events | — | the view | `Evolve`/fold (the eval): events → state |
+
+**A GWT `given` never replays events — it asserts state (`v`) only.** `Decide` takes
+*State*, not an event history; a GWT that starts from events would be testing fold +
+decide at once, blurring which function failed. Instead, every state (`v`) used as a
+GWT input has its own preceding GT (given events → then view) proving the fold
+produces that state. The two shapes together correspond 1:1 with the Decider:
+GT covers `Evolve`, GWT covers `Decide`, and the state `v` is the seam between them.
 
 ## Rationale
 - **Lintable & diagrammable**: `emlang lint | parse | fmt | diagram` validate
@@ -81,7 +99,8 @@ commands, `then` takes events + views + exceptions.
 | `e:` event    | `record EventName(...);`                    |
 | `x:` exception| `record ErrorName(...);` returned in `Result`|
 | `v:` view     | read-model / projection                     |
-| `tests:`      | xUnit test method (Given-When-Then)         |
+| `tests:` GWT  | xUnit test of `Decide` (state in, events out)|
+| `tests:` GT   | xUnit test of `Evolve`/fold (events in, view out)|
 
 The `Game /` prefix on events is just the **stream label**, not an aggregate — this
 is the Decider pattern, not DDD. There is no "aggregate" vocabulary.
