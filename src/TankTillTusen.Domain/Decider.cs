@@ -12,7 +12,14 @@ namespace TankTillTusen.Domain;
 public static class Decider
 {
     /// <summary>The hard per-round countdown: deadline = round.StartedAt + this many seconds.</summary>
-    public const int CountdownSeconds = 45;
+    public const int CountdownSeconds = 60;
+
+    /// <summary>
+    /// Server-side grace after the visible deadline before DeadlinePassed/ReadyToScore trip.
+    /// Covers the client clock's ceil-rounding + latency so the timeout auto-lock lands in
+    /// time. The clock still SHOWS 60s (Deadline is unchanged).
+    /// </summary>
+    public const int GraceSeconds = 3;
 
     /// <summary>How many puzzles a game generates (the default context stamps this many rounds).</summary>
     public const int RoundCount = 5;
@@ -189,24 +196,13 @@ public static class Decider
 
         var target = round.Puzzle.Target;
 
-        // Pass 1: replay each submission. A non-submitter has no reachedValue and scores the
-        // worst (100 flat) — excluded from worstΔ below. A stored solution is already validated
-        // at submit, so replay yields a value.
+        // Replay each submission. A non-submitter has no reachedValue and scores the worst
+        // (100 flat). A stored solution is already validated at submit, so replay yields a value.
         var reachedByPlayer = state.Players.ToDictionary(
             p => p.PlayerId,
             p => round.Solutions.TryGetValue(p.PlayerId, out var solution)
                 ? SolutionValidator.Validate(round.Puzzle, solution)
                 : null);
-
-        // Hybrid with a floored denominator: whole field within 100 of the target -> the score
-        // IS the raw distance; a wilder miss rescales the round so the worst valid Δ = 100.
-        // Δ ≤ worstΔ ≤ denominator caps every round at 100; the 100-floor bars division by zero.
-        var worstDelta = reachedByPlayer.Values
-            .Where(v => v.HasValue)
-            .Select(v => Math.Abs(v!.Value - target))
-            .DefaultIfEmpty(0)
-            .Max();
-        var denominator = Math.Max(worstDelta, 100);
 
         var events = new List<TankEvent>
         {
@@ -217,10 +213,11 @@ public static class Decider
         {
             var reached = reachedByPlayer[player.PlayerId];
 
+            // Ren distans: "5 ifrån = 5 poäng", samma skala varje runda, cappad på 100.
             var roundScore = reached is { } value
                 ? (value == target
                     ? -10                                   // exakt = perfektions-bonus (som MEM)
-                    : (int)Math.Round(Math.Abs(value - target) / (decimal)denominator * 100m, MidpointRounding.AwayFromZero))
+                    : Math.Min(Math.Abs(value - target), 100))
                 : 100;
 
             var totalScore = state.TotalScore(player.PlayerId) + roundScore;

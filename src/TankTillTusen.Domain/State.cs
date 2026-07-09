@@ -79,15 +79,19 @@ public record TankState
     /// <summary>True once every player has submitted for round i.</summary>
     public bool AllSolutionsIn(int i) => PendingPlayerIds(i).Count == 0;
 
-    /// <summary>The hard deadline for round i (startedAt + 45s), or null before it starts.</summary>
+    /// <summary>The hard deadline for round i (startedAt + 60s), or null before it starts.</summary>
     public DateTimeOffset? Deadline(int i) =>
         Rounds[i].StartedAt is { } startedAt
             ? startedAt.AddSeconds(Decider.CountdownSeconds)
             : null;
 
-    /// <summary>True once now is at/past round i's deadline (the round must have started).</summary>
+    /// <summary>
+    /// True once now is at/past round i's deadline + grace (the round must have started).
+    /// The grace lets the client's timeout auto-lock (ceil-rounded clock + latency) land;
+    /// the visible clock still counts down to the ungraced Deadline.
+    /// </summary>
     public bool DeadlinePassed(int i, DateTimeOffset now) =>
-        Deadline(i) is { } deadline && now >= deadline;
+        Deadline(i) is { } deadline && now >= deadline.AddSeconds(Decider.GraceSeconds);
 
     /// <summary>The score gear's gate: every solution is in OR the clock has run out.</summary>
     public bool ReadyToScore(int i, DateTimeOffset now) =>

@@ -26,16 +26,18 @@
 #   event(s) -> Todo read-model -> System trigger -> command -> event(s) -> Screen.
 #
 # GAME MODEL — the Countdown numbers game ("Le compte est bon"). Each round every player
-# gets the SAME six tal + the SAME mål (target) and a HARD 45-second countdown to reach the
+# gets the SAME six tal + the SAME mål (target) and a HARD 60-second countdown to reach the
 # target with the four räknesätt (+ − × ÷). This is the first game with a clock and a
 # multi-step answer.
 #
-#   TIMER: round start stamps startedAt; deadline = startedAt + 45s. The client ticks a
+#   TIMER: round start stamps startedAt; deadline = startedAt + 60s. The client ticks a
 #   COSMETIC clock and auto-submits on expiry (same mold as MEM's slider script — no new
-#   client capability, no WebSockets/SignalR/SSE, ADR 007). The SERVER owns the deadline:
-#   SubmitSolution after the deadline is rejected (DeadlinePassed); non-submitters score the
-#   worst (100). The score gear fires on a STATE-OR-CLOCK condition: allSolutionsIn OR the
-#   deadline has passed.
+#   client capability, no WebSockets/SignalR/SSE, ADR 007). The SERVER owns the deadline,
+#   with a 3s GRACE (deadlinePassed = now >= deadline + 3s) so the timeout auto-lock's
+#   ceil-rounded clock + latency still lands: SubmitSolution after deadline + grace is
+#   rejected (DeadlinePassed); non-submitters score the worst (100). The score gear fires on
+#   a STATE-OR-CLOCK condition: allSolutionsIn OR deadline + grace has passed. The clock
+#   still SHOWS 60s (deadline itself is ungraced).
 #
 #   ANSWER = a replayable list of steps. Each Step merges two operands via one operator into
 #   a NEW operand. The client only ever builds legal steps; the SERVER re-validates by replay
@@ -43,15 +45,12 @@
 #   INTEGER (÷ divides evenly, − stays > 0). The player's answer = a chosen operand
 #   (answerIndex). An invalid solution is rejected at submit (InvalidSolution).
 #
-#   SCORING (mirrors MEM — LOWEST total wins). Hybrid with a floored denominator:
+#   SCORING (mirrors MEM — LOWEST total wins). Pure distance:
 #     reachedValue = replay(solution)   (the value at answerIndex)
 #     Δ            = |reachedValue − target|
-#     worstΔ       = max Δ among players WITH a valid submission (non-submitters excluded)
-#     roundScore   = round(Δ / max(worstΔ, 100) * 100)   // 0-100, exact hit -> -10 (best, bonus)
-#     Whole field within 100 of the target -> the score IS the raw distance ("5 ifrån = 5
-#     poäng"); a wilder miss rescales the round so the worst valid Δ = 100 and the rest scale
-#     proportionally. No round can cost more than 100 (Δ ≤ worstΔ ≤ denominator), no division
-#     by zero (denominator ≥ 100).
+#     roundScore   = min(Δ, 100)   // exact hit -> -10 (best, bonus)
+#     The score IS the raw distance ("5 ifrån = 5 poäng") — the same scale every round,
+#     explainable at the kitchen table; a wild miss caps at 100 so no round costs more.
 #     No submission / no answer -> roundScore 100 (worst). LOWEST total wins (like MEM,
 #     OPPOSITE of BlindBudet). A single ScoreRound emits one PuzzleRevealed (once, surfacing
 #     the generator's sample solution) plus one RoundScored per player.
@@ -69,9 +68,9 @@
 #   ids                    Guid          (gameId, playerId, hostPlayerId, joinCode;
 #                                         Guid[] for *PlayerIds and winnerIds)
 #   timestamps (*At)       DateTimeOffset (openedAt, joinedAt, startedAt, submittedAt, ...)
-#   deadline               DateTimeOffset (= round.startedAt + 45s; derived, not stored)
+#   deadline               DateTimeOffset (= round.startedAt + 60s; derived, not stored)
 #   tal / target / value   int           (numbers, target, reachedValue — puzzles are integer)
-#   points/scores          int           (roundScore 0-100, exact -10, none 100; totalScore = sum)
+#   points/scores          int           (roundScore = min(Δ, 100), exact -10, none 100; totalScore = sum)
 #   index/count            int           (roundIndex, totalRounds, resolvedRoundCount)
 #   per-player State maps   IReadOnlyDictionary<Guid, T>  (each PuzzleRound's solutions/reached/scores)
 #     The folded decision model keys per-player data by playerId for O(1) lookup (a deliberate
@@ -237,7 +236,7 @@ slices:
         props:
           gameId: Guid
           firstRoundIndex: int
-          startedAt: DateTimeOffset   # the round-0 deadline anchor (deadline = startedAt + 45s)
+          startedAt: DateTimeOffset   # the round-0 deadline anchor (deadline = startedAt + 60s)
       - v: Screen / Puzzle
     tests:
       game can be started:
@@ -280,7 +279,7 @@ slices:
           totalRounds: int
           numbers: int[]
           target: int
-          deadline: DateTimeOffset   # = round.startedAt + 45s; the cosmetic client clock counts down to it
+          deadline: DateTimeOffset   # = round.startedAt + 60s; the cosmetic client clock counts down to it
     # Projection GT: given the puzzles loaded + game started, then the current puzzle resolved
     # by index from the folded puzzles. The hidden sampleSolution is NOT shown — only at reveal.
     tests:
@@ -307,7 +306,7 @@ slices:
   #   x: GameNotFound      — gameId resolves to no game (empty/unknown stream).
   #   x: AlreadySubmitted  — this player already submitted this round.
   #   x: RoundAlreadyScored — this round is already scored; submission is closed.
-  #   x: DeadlinePassed    — now is past this round's deadline (startedAt + 45s); late submit.
+  #   x: DeadlinePassed    — now is past this round's deadline + 3s grace; late submit.
   #   x: InvalidSolution   — replay fails (operand missing/reused, ÷ uneven, result not > 0,
   #                          answerIndex out of range).
   # SubmitSolution carries roundIndex; SolutionSubmitted stamps it back.
@@ -349,7 +348,7 @@ slices:
               currentRoundIndex: 0
               players: [hostMartin, playerNils]
               rounds:
-                - { puzzle: puzzle0, startedAt: startedAt, solutions: {}, scored: false }   # context.Now is within the 45s window
+                - { puzzle: puzzle0, startedAt: startedAt, solutions: {}, scored: false }   # context.Now is within the 60s window
         when:
           - c: SubmitSolution
             props: { gameId: gameId, playerId: nilsId, roundIndex: 0, solution: solHit }
@@ -391,7 +390,7 @@ slices:
             props: { gameId: gameId, playerId: nilsId, roundIndex: 0, solution: solHit }
         then:
           - x: AlreadySubmitted
-      cannot submit after the deadline:
+      can submit within the grace window:
         given:
           - v: State / Game
             props:
@@ -399,7 +398,22 @@ slices:
               currentRoundIndex: 0
               players: [hostMartin, playerNils]
               rounds:
-                - { puzzle: puzzle0, startedAt: startedAtExpired, solutions: {}, scored: false }   # context.Now > startedAtExpired + 45s
+                - { puzzle: puzzle0, startedAt: startedAtJustExpired, solutions: {}, scored: false }   # deadline passed 1s ago, inside the 3s grace
+        when:
+          - c: SubmitSolution
+            props: { gameId: gameId, playerId: nilsId, roundIndex: 0, solution: solHit }
+        then:
+          - e: Game / SolutionSubmitted
+            props: { playerId: nilsId, roundIndex: 0, solution: solHit, submittedAt: submittedAt }
+      cannot submit after the deadline plus grace:
+        given:
+          - v: State / Game
+            props:
+              phase: started
+              currentRoundIndex: 0
+              players: [hostMartin, playerNils]
+              rounds:
+                - { puzzle: puzzle0, startedAt: startedAtExpired, solutions: {}, scored: false }   # context.Now > startedAtExpired + 60s + grace
         when:
           - c: SubmitSolution
             props: { gameId: gameId, playerId: nilsId, roundIndex: 0, solution: solHit }
@@ -413,7 +427,7 @@ slices:
               currentRoundIndex: 0
               players: [hostMartin, playerNils]
               rounds:
-                - { puzzle: puzzle0, startedAt: startedAt, solutions: { martinId: solMiss, nilsId: solHit }, sampleSolution: sampleSol0, reachedValues: { martinId: 20, nilsId: 100 }, roundScores: { martinId: 80, nilsId: 0 }, scored: true }
+                - { puzzle: puzzle0, startedAt: startedAt, solutions: { martinId: solMiss, nilsId: solHit }, sampleSolution: sampleSol0, reachedValues: { martinId: 20, nilsId: 100 }, roundScores: { martinId: 80, nilsId: -10 }, scored: true }
         when:
           - c: SubmitSolution
             props: { gameId: gameId, playerId: martinId, roundIndex: 0, solution: solHit }
@@ -452,9 +466,9 @@ slices:
 
   # Minimal Todo read-model the score gear gates on. ONE row per round. Co-located play means
   # only the CURRENT round receives input. The gear's readyToScore = allSolutionsIn OR the
-  # deadline has passed (now >= deadline) — the deadline column carries the pure anchor
-  # (startedAt + 45s) and the gear compares it to the clock. deadline is null before the round
-  # starts.
+  # deadline has passed (now >= deadline + 3s grace) — the deadline column carries the pure
+  # anchor (startedAt + 60s; what the clock shows) and the gear compares it + grace to the
+  # clock. deadline is null before the round starts.
   📋 Outstanding Solutions:
     steps:
       - v: Todo / Outstanding solutions
@@ -511,13 +525,12 @@ slices:
                 - { roundIndex: 0, pendingPlayerIds: [], allSolutionsIn: true }
                 - { roundIndex: 1, pendingPlayerIds: [martinId, nilsId], allSolutionsIn: false }
 
-  # The score processor: once Outstanding solutions shows readyToScore (allSolutionsIn OR the
-  # deadline passed), the System scores the round. PURE distance-penalty resolver with a
-  # floored denominator: replay each stored solution to its reachedValue, Δ = |reached −
-  # target|, worstΔ = max Δ among players WITH a valid submission, roundScore =
-  # round(Δ / max(worstΔ, 100) * 100) — 0-100, exact hit -> -10 (best, bonus). Whole field
-  # within 100 -> score = raw distance; a wilder miss rescales so the worst valid Δ = 100. A
-  # player with NO submission has no reachedValue and scores 100 flat — NOT counted into worstΔ.
+  # The score processor: once Outstanding solutions shows readyToScore (allSolutionsIn OR
+  # deadline + grace passed), the System scores the round. PURE distance-penalty resolver:
+  # replay each stored solution to its reachedValue, Δ = |reached − target|, roundScore =
+  # min(Δ, 100) — exact hit -> -10 (best, bonus). The score IS the raw distance ("5 ifrån =
+  # 5 poäng"), the same scale every round; a wild miss caps at 100. A player with NO
+  # submission has no reachedValue and scores 100 flat.
   # Emits one PuzzleRevealed (once, surfacing the generator's sampleSolution)
   # plus one RoundScored per player. LOWEST total wins.
   # Extra fixtures (on puzzle800 = Puzzle { numbers: [500, 300, 20], target: 800, sampleSolution: solExact800 }):
@@ -550,14 +563,14 @@ slices:
           roundIndex: int
           playerId: Guid
           reachedValue: int?                   # replay of that player's solution; null if no submission
-          roundScore: int                      # round(Δ / max(worstΔ, 100) * 100); -10 if exact; 100 if none/invalid (excluded from worstΔ)
+          roundScore: int                      # min(Δ, 100); -10 if exact; 100 if none/invalid
           totalScore: int                      # running sum over scored rounds
       - v: Screen / Round results
     # Decider-true GWT: given the folded State / Game, when ScoreRound, then the events |
     # rejection. allSolutionsIn is DERIVED: players == the current round's solutions keys.
     # totalScore is the running sum of roundScores across scored rounds.
     tests:
-      exact solution scores zero, a miss scores by distance:
+      exact solution scores the bonus, a miss scores by distance:
         given:
           - v: State / Game
             props:
@@ -574,7 +587,7 @@ slices:
           - e: Game / PuzzleRevealed
             props: { roundIndex: 0, sampleSolution: sampleSol0 }
           - e: Game / RoundScored
-            props: { playerId: martinId, reachedValue: 20, roundScore: 80, totalScore: 80 }   # Δ80, nämnare max(80,100)=100
+            props: { playerId: martinId, reachedValue: 20, roundScore: 80, totalScore: 80 }   # Δ80 -> 80 (rå distans)
           - e: Game / RoundScored
             props: { playerId: nilsId, reachedValue: 100, roundScore: -10, totalScore: -10 }   # exact hit -> bonus
       a non-submitter scores the worst once the deadline passes:
@@ -617,7 +630,7 @@ slices:
           - e: Game / RoundScored
             props: { playerId: martinId, reachedValue: 100, roundScore: -10, totalScore: 70 }    # solHit 5×20=100 (exact); running 80 + (-10)
           - e: Game / RoundScored
-            props: { playerId: nilsId, reachedValue: 25, roundScore: 75, totalScore: 65 }        # solMiss 5+20=25 on puzzle1; Δ75, nämnare max(75,100)=100; running -10 + 75
+            props: { playerId: nilsId, reachedValue: 25, roundScore: 75, totalScore: 65 }        # solMiss 5+20=25 on puzzle1; Δ75 -> 75; running -10 + 75
       a close field scores its raw distance:
         given:
           - v: State / Game
@@ -635,10 +648,10 @@ slices:
           - e: Game / PuzzleRevealed
             props: { roundIndex: 0, sampleSolution: solExact800 }
           - e: Game / RoundScored
-            props: { playerId: martinId, reachedValue: 780, roundScore: 20, totalScore: 20 }   # Δ20, nämnare max(20,100)=100 -> rå distans
+            props: { playerId: martinId, reachedValue: 780, roundScore: 20, totalScore: 20 }   # Δ20 -> rå distans
           - e: Game / RoundScored
-            props: { playerId: nilsId, reachedValue: 800, roundScore: -10, totalScore: -10 }   # exact hit -> bonus (Δ0 in worstΔ is harmless under the floor)
-      a wild miss rescales the round so the worst is 100:
+            props: { playerId: nilsId, reachedValue: 800, roundScore: -10, totalScore: -10 }   # exact hit -> bonus
+      a wild miss caps at 100:
         given:
           - v: State / Game
             props:
@@ -655,10 +668,10 @@ slices:
           - e: Game / PuzzleRevealed
             props: { roundIndex: 0, sampleSolution: solExact800 }
           - e: Game / RoundScored
-            props: { playerId: martinId, reachedValue: 780, roundScore: 7, totalScore: 7 }     # worstΔ=280 -> round(20/280*100)=round(7,14)
+            props: { playerId: martinId, reachedValue: 780, roundScore: 20, totalScore: 20 }   # Δ20 -> rå distans (opåverkad av nils miss)
           - e: Game / RoundScored
-            props: { playerId: nilsId, reachedValue: 520, roundScore: 100, totalScore: 100 }   # worst valid Δ -> exactly 100
-      a non-submitter does not stretch the denominator:
+            props: { playerId: nilsId, reachedValue: 520, roundScore: 100, totalScore: 100 }   # Δ280 -> min-cappad 100
+      a non-submitter scores 100 beside a raw distance:
         given:
           - v: State / Game
             props:
@@ -675,9 +688,9 @@ slices:
           - e: Game / PuzzleRevealed
             props: { roundIndex: 0, sampleSolution: solExact800 }
           - e: Game / RoundScored
-            props: { playerId: martinId, reachedValue: 780, roundScore: 20, totalScore: 20 }   # nilsId's 100 flat är EJ ett Δ; nämnare max(20,100)=100
+            props: { playerId: martinId, reachedValue: 780, roundScore: 20, totalScore: 20 }   # Δ20 -> rå distans
           - e: Game / RoundScored
-            props: { playerId: nilsId, roundScore: 100, totalScore: 100 }                      # no submission -> worst, excluded from worstΔ
+            props: { playerId: nilsId, roundScore: 100, totalScore: 100 }                      # no submission -> worst
       cannot score before ready:
         given:
           - v: State / Game
@@ -701,7 +714,7 @@ slices:
               currentRoundIndex: 0
               players: [hostMartin, playerNils]
               rounds:
-                - { puzzle: puzzle0, startedAt: startedAt, solutions: { martinId: solMiss, nilsId: solHit }, sampleSolution: sampleSol0, reachedValues: { martinId: 20, nilsId: 100 }, roundScores: { martinId: 80, nilsId: 0 }, scored: true }   # double fire guarded
+                - { puzzle: puzzle0, startedAt: startedAt, solutions: { martinId: solMiss, nilsId: solHit }, sampleSolution: sampleSol0, reachedValues: { martinId: 20, nilsId: 100 }, roundScores: { martinId: 80, nilsId: -10 }, scored: true }   # double fire guarded
                 - { puzzle: puzzle1, solutions: {}, scored: false }
         when:
           - c: ScoreRound
@@ -739,7 +752,7 @@ slices:
           - e: Game / RoundScored
             props: { roundIndex: 0, playerId: martinId, reachedValue: 20, roundScore: 80, totalScore: 80 }
           - e: Game / RoundScored
-            props: { roundIndex: 0, playerId: nilsId, reachedValue: 100, roundScore: 0, totalScore: 0 }
+            props: { roundIndex: 0, playerId: nilsId, reachedValue: 100, roundScore: -10, totalScore: -10 }
         then:
           - v: Screen / Round results
             props:
@@ -748,7 +761,7 @@ slices:
               sampleSolution: sampleSol0
               playerResults:
                 - { playerId: martinId, reachedValue: 20, roundScore: 80, totalScore: 80 }
-                - { playerId: nilsId, reachedValue: 100, roundScore: 0, totalScore: 0 }
+                - { playerId: nilsId, reachedValue: 100, roundScore: -10, totalScore: -10 }
 
   # --- Progression (System processor) --------------------------------------
 
@@ -823,7 +836,7 @@ slices:
               phase: started
               currentRoundIndex: 0
               rounds:
-                - { puzzle: puzzle0, sampleSolution: sampleSol0, reachedValues: { martinId: 20, nilsId: 100 }, roundScores: { martinId: 80, nilsId: 0 }, scored: true }
+                - { puzzle: puzzle0, sampleSolution: sampleSol0, reachedValues: { martinId: 20, nilsId: 100 }, roundScores: { martinId: 80, nilsId: -10 }, scored: true }
                 - { puzzle: puzzle1, solutions: {}, scored: false }
         when:
           - c: AskNextPuzzle
@@ -953,8 +966,9 @@ slices:
   #   playerSven = { playerId: svenId,   name: Sven,   isHost: false }
   #
   # Timestamp fixtures:
-  #   startedAt        = a round start within the 45s window relative to context.Now
-  #   startedAtExpired = a round start whose deadline (startedAt + 45s) is BEFORE context.Now
+  #   startedAt            = a round start within the 60s window relative to context.Now
+  #   startedAtJustExpired = a round start whose deadline passed 1s ago — inside the 3s grace
+  #   startedAtExpired     = a round start whose deadline + grace is BEFORE context.Now
   👀 Decision Model:
     steps:
       - v: State / Game
@@ -977,8 +991,8 @@ slices:
           # DERIVED (computed, NOT stored — single source of truth in rounds + players):
           #   pendingPlayerIds(i)   = players.Keys − rounds[i].solutions.Keys
           #   allSolutionsIn(i)     = pendingPlayerIds(i) is empty
-          #   deadline(i)           = rounds[i].startedAt + 45s (null if not started)
-          #   deadlinePassed(i,now) = rounds[i].startedAt is set AND now >= deadline(i)
+          #   deadline(i)           = rounds[i].startedAt + 60s (null if not started)
+          #   deadlinePassed(i,now) = rounds[i].startedAt is set AND now >= deadline(i) + 3s grace
           #   readyToScore(i,now)   = allSolutionsIn(i) OR deadlinePassed(i,now)
           #   currentRoundScored    = rounds[currentRoundIndex].scored
           #   hasNextPuzzle         = currentRoundIndex + 1 < rounds.Count
@@ -1020,7 +1034,7 @@ slices:
           - e: Game / RoundScored
             props: { roundIndex: 0, playerId: martinId, reachedValue: 20, roundScore: 80, totalScore: 80 }
           - e: Game / RoundScored
-            props: { roundIndex: 0, playerId: nilsId, reachedValue: 100, roundScore: 0, totalScore: 0 }
+            props: { roundIndex: 0, playerId: nilsId, reachedValue: 100, roundScore: -10, totalScore: -10 }
         then:
           - v: State / Game
             props:
@@ -1028,5 +1042,5 @@ slices:
               currentRoundIndex: 0   # scoring does not advance; AskNextPuzzle does
               rounds:
                 # round0 fully scored: reveal + per-player reached/scores folded in
-                - { puzzle: puzzle0, startedAt: startedAt, solutions: { martinId: solMiss, nilsId: solHit }, sampleSolution: sampleSol0, reachedValues: { martinId: 20, nilsId: 100 }, roundScores: { martinId: 80, nilsId: 0 }, scored: true }
+                - { puzzle: puzzle0, startedAt: startedAt, solutions: { martinId: solMiss, nilsId: solHit }, sampleSolution: sampleSol0, reachedValues: { martinId: 20, nilsId: 100 }, roundScores: { martinId: 80, nilsId: -10 }, scored: true }
                 - { puzzle: puzzle1, solutions: {}, scored: false }

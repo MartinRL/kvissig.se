@@ -169,7 +169,20 @@ public class DeciderTests
     }
 
     [Fact]
-    public void cannot_submit_after_the_deadline()
+    public void can_submit_within_the_grace_window()
+    {
+        // Deadline passed 1s ago — the timeout auto-lock's ceil-rounding + latency budget.
+        var submitted = Gwt.Given(State(TankPhase.Started, [HostMartin, PlayerNils], 0,
+                Round(Puzzle0, startedAt: StartedAtJustExpired)))
+            .When(new SubmitSolution(GameId, NilsId, 0, SolHit))
+            .Events()
+            .Submitted();
+
+        submitted.PlayerId.Should().Be(NilsId);
+    }
+
+    [Fact]
+    public void cannot_submit_after_the_deadline_plus_grace()
     {
         var error = Gwt.Given(State(TankPhase.Started, [HostMartin, PlayerNils], 0,
                 Round(Puzzle0, startedAt: StartedAtExpired)))
@@ -186,7 +199,7 @@ public class DeciderTests
             solutions: new Dictionary<Guid, Solution> { [MartinId] = SolMiss, [NilsId] = SolHit },
             sampleSolution: SampleSol0,
             reachedValues: new Dictionary<Guid, int> { [MartinId] = 20, [NilsId] = 100 },
-            roundScores: new Dictionary<Guid, int> { [MartinId] = 80, [NilsId] = 0 },
+            roundScores: new Dictionary<Guid, int> { [MartinId] = 80, [NilsId] = -10 },
             scored: true);
 
         var error = Gwt.Given(State(TankPhase.Started, [HostMartin, PlayerNils], 0, scored))
@@ -199,7 +212,7 @@ public class DeciderTests
     // --- Score Round ---------------------------------------------------------
 
     [Fact]
-    public void exact_solution_scores_zero_a_miss_scores_by_distance()
+    public void exact_solution_scores_the_bonus_a_miss_scores_by_distance()
     {
         var events = Gwt.Given(State(TankPhase.Started, [HostMartin, PlayerNils], 0,
                 Round(Puzzle0, startedAt: StartedAt,
@@ -245,7 +258,7 @@ public class DeciderTests
         events.Revealed().SampleSolution.Should().Be(SampleSol1);
         // solHit 5×20=100 (exact); running 80 + (-10) = 70.
         events.ScoredFor(MartinId).Should().BeEquivalentTo(new { ReachedValue = (int?)100, RoundScore = -10, TotalScore = 70 });
-        // solMiss 5+20=25 on puzzle1; |25−100|/100*100 = 75; running -10 + 75 = 65.
+        // solMiss 5+20=25 on puzzle1; Δ75 -> 75; running -10 + 75 = 65.
         events.ScoredFor(NilsId).Should().BeEquivalentTo(new { ReachedValue = (int?)25, RoundScore = 75, TotalScore = 65 });
     }
 
@@ -260,13 +273,13 @@ public class DeciderTests
             .Events();
 
         events.Revealed().SampleSolution.Should().Be(SolExact800);
-        // Δ20, nämnare max(20, 100) = 100 -> poängen = rå distans.
+        // Δ20 -> 20: poängen ÄR den råa distansen ("5 ifrån = 5 poäng").
         events.ScoredFor(MartinId).Should().BeEquivalentTo(new { ReachedValue = (int?)780, RoundScore = 20, TotalScore = 20 });
         events.ScoredFor(NilsId).Should().BeEquivalentTo(new { ReachedValue = (int?)800, RoundScore = -10, TotalScore = -10 });
     }
 
     [Fact]
-    public void a_wild_miss_rescales_the_round_so_the_worst_is_100()
+    public void a_wild_miss_caps_at_100()
     {
         var events = Gwt.Given(State(TankPhase.Started, [HostMartin, PlayerNils], 0,
                 Round(Puzzle800, startedAt: StartedAt,
@@ -275,13 +288,13 @@ public class DeciderTests
             .When(new ScoreRound(GameId, 0))
             .Events();
 
-        // worstΔ = 280 -> martin round(20/280×100) = round(7,14) = 7; nils = exactly 100.
-        events.ScoredFor(MartinId).Should().BeEquivalentTo(new { ReachedValue = (int?)780, RoundScore = 7, TotalScore = 7 });
+        // Martin behåller sin råa distans (Δ20 -> 20); nils Δ280 min-cappas på 100.
+        events.ScoredFor(MartinId).Should().BeEquivalentTo(new { ReachedValue = (int?)780, RoundScore = 20, TotalScore = 20 });
         events.ScoredFor(NilsId).Should().BeEquivalentTo(new { ReachedValue = (int?)520, RoundScore = 100, TotalScore = 100 });
     }
 
     [Fact]
-    public void a_non_submitter_does_not_stretch_the_denominator()
+    public void a_non_submitter_scores_100_beside_a_raw_distance()
     {
         var events = Gwt.Given(State(TankPhase.Started, [HostMartin, PlayerNils], 0,
                 Round(Puzzle800, startedAt: StartedAtExpired,
@@ -290,7 +303,7 @@ public class DeciderTests
             .When(new ScoreRound(GameId, 0))
             .Events();
 
-        // Nils 100 flat är EJ ett Δ; nämnare = max(20, 100) = 100 -> martin behåller rå distans.
+        // Nils utan inlämning -> 100 flat; martin behåller rå distans (Δ20 -> 20).
         events.ScoredFor(MartinId).Should().BeEquivalentTo(new { ReachedValue = (int?)780, RoundScore = 20, TotalScore = 20 });
         events.ScoredFor(NilsId).Should().BeEquivalentTo(new { ReachedValue = (int?)null, RoundScore = 100, TotalScore = 100 });
     }
@@ -315,7 +328,7 @@ public class DeciderTests
             solutions: new Dictionary<Guid, Solution> { [MartinId] = SolMiss, [NilsId] = SolHit },
             sampleSolution: SampleSol0,
             reachedValues: new Dictionary<Guid, int> { [MartinId] = 20, [NilsId] = 100 },
-            roundScores: new Dictionary<Guid, int> { [MartinId] = 80, [NilsId] = 0 },
+            roundScores: new Dictionary<Guid, int> { [MartinId] = 80, [NilsId] = -10 },
             scored: true);
 
         var error = Gwt.Given(State(TankPhase.Started, [HostMartin, PlayerNils], 0, scored, Round(Puzzle1)))
@@ -332,7 +345,7 @@ public class DeciderTests
     {
         var round0 = Round(Puzzle0, sampleSolution: SampleSol0,
             reachedValues: new Dictionary<Guid, int> { [MartinId] = 20, [NilsId] = 100 },
-            roundScores: new Dictionary<Guid, int> { [MartinId] = 80, [NilsId] = 0 },
+            roundScores: new Dictionary<Guid, int> { [MartinId] = 80, [NilsId] = -10 },
             scored: true);
 
         var next = Gwt.Given(State(TankPhase.Started, [HostMartin, PlayerNils], 0, round0, Round(Puzzle1)))

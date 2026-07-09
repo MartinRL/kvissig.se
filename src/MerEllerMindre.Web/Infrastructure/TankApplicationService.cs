@@ -12,7 +12,7 @@ namespace MerEllerMindre.Web.Infrastructure;
 /// same shape as Blindbudet's AuctionApplicationService. Registered as a singleton.
 ///
 /// The gears fire on a STATE condition. Unlike Blindbudet this game has a HARD DEADLINE: the
-/// score gear resolves a round the moment the last solution lands OR the 45 s deadline passes
+/// score gear resolves a round the moment the last solution lands OR the 60 s deadline passes
 /// (driven by the waiting-screen poll and the /state poll), so a round closes even if someone
 /// never submits. The progression gear (host-paced from the round-results "next" button)
 /// advances to the next puzzle or ends the game.

@@ -1,13 +1,15 @@
 @* The Puzzle screen — the chosen Phase-0 interaction (v2 · Räknartejp): tap a tal, a räknesätt,
    then a second tal → they merge into a new result tal on the tape; ⌫ undoes the last step. The
-   answer is the last tal on the tape. A cosmetic 45 s countdown ticks client-side and auto-locks
-   on expiry; the SERVER owns the real deadline (rejects late builds, scores non-submitters 100).
-   Interactive, so it does NOT poll: locking swaps in the Waiting screen. *@
+   answer is the tal on the tape CLOSEST to the target, so a worse extra experiment never
+   overwrites a better number already built. A cosmetic 60 s countdown ticks client-side and
+   auto-locks on expiry; the SERVER owns the real deadline (rejects late builds after a short
+   grace, scores non-submitters 100). Interactive, so it does NOT poll: locking swaps in the
+   Waiting screen. *@
 <div class="tank-puzzle">
     <div class="card">
         <div class="toprow">
             <span class="pill">Pussel @Model.RoundNumber / @Model.TotalRounds · Tänk Till Tusen</span>
-            <span class="clock" id="clock">0:@Model.RemainingSeconds.ToString("00")</span>
+            <span class="clock" id="clock">@($"{Model.RemainingSeconds / 60}:{Model.RemainingSeconds % 60:00}")</span>
         </div>
 
         <div class="target">
@@ -66,6 +68,7 @@
         // index is posted straight through and cast back to the enum server-side.
         const OPS = [['+', (a,b)=>a+b], ['−', (a,b)=>a-b], ['×', (a,b)=>a*b], ['÷', (a,b)=>a/b]];
         const START = @Numbers;
+        const TARGET = @Model.Target;
 
         let ops = START.map(v => ({ val: v, used: false }));
         let steps = [];   // {leftIndex, op, rightIndex} — indices into `ops` at build time
@@ -118,9 +121,12 @@
         function lockAnswer() {
             if (locked) return;
             locked = true;
-            // The answer is the last tal on the tape (last result, or the last starting tal if
-            // no steps were built). answerIndex = the final operand index.
-            solutionInput.value = JSON.stringify({ steps, answerIndex: ops.length - 1 });
+            // The answer is the tal on the tape CLOSEST to the target (ties -> first). The
+            // server accepts any index in values, so a worse extra experiment never overwrites
+            // the best number already built.
+            let best = 0;
+            ops.forEach((o, i) => { if (Math.abs(o.val - TARGET) < Math.abs(ops[best].val - TARGET)) best = i; });
+            solutionInput.value = JSON.stringify({ steps, answerIndex: best });
             form.requestSubmit();
         }
         document.getElementById('lock').onclick = lockAnswer;
@@ -169,12 +175,11 @@
         const timer = setInterval(() => {
             if (t <= 0) { clearInterval(timer); return; }
             t--;
-            clock.textContent = '0:' + String(t).padStart(2, '0');
+            clock.textContent = Math.floor(t / 60) + ':' + String(t % 60).padStart(2, '0');
             clock.classList.toggle('low', t <= 10);
             if (t === 0) {
                 clearInterval(timer);
-                clock.textContent = '0:00';
-                statusEl.textContent = 'Tiden är ute! Ditt sista tal skickas in.';
+                statusEl.textContent = 'Tiden är ute! Ditt tal närmast målet skickas in.';
                 lockAnswer();
             }
         }, 1000);

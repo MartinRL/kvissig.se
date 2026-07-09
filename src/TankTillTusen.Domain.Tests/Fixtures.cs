@@ -39,14 +39,17 @@ public static class Fixtures
 
     public static readonly Puzzle Puzzle800 = new([500, 300, 20], 800, SolExact800);
 
-    /// <summary>A fixed clock so the 45s deadline is deterministic in tests.</summary>
+    /// <summary>A fixed clock so the 60s deadline is deterministic in tests.</summary>
     public static readonly DateTimeOffset Now = new(2026, 1, 1, 12, 0, 0, TimeSpan.Zero);
 
-    /// <summary>A round start within the 45s window (deadline = Now + 45s, still in the future).</summary>
+    /// <summary>A round start within the 60s window (deadline = Now + 60s, still in the future).</summary>
     public static readonly DateTimeOffset StartedAt = Now;
 
-    /// <summary>A round start whose deadline (startedAt + 45s) is BEFORE Now.</summary>
-    public static readonly DateTimeOffset StartedAtExpired = Now.AddSeconds(-(Decider.CountdownSeconds + 1));
+    /// <summary>A round start whose deadline + grace is BEFORE Now (fully expired).</summary>
+    public static readonly DateTimeOffset StartedAtExpired = Now.AddSeconds(-(Decider.CountdownSeconds + Decider.GraceSeconds + 1));
+
+    /// <summary>A round start whose deadline passed 1s ago — still INSIDE the grace window.</summary>
+    public static readonly DateTimeOffset StartedAtJustExpired = Now.AddSeconds(-(Decider.CountdownSeconds + 1));
 
     /// <summary>
     /// Stub context: a fixed clock at Now, and GeneratePuzzles returns the two fixture puzzles so
