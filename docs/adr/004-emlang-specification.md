@@ -54,13 +54,19 @@ slices:
 ### Element types
 Exactly one type key per element, plus an optional `props` map:
 
-| Type      | Key  | Carries                         |
-| --------- | ---- | ------------------------------- |
-| Trigger   | `t:` | actor role + originating screen |
-| Command   | `c:` | bare command name               |
-| Event     | `e:` | the stream (e.g. `Game / …`)    |
-| Exception | `x:` | bare error name                 |
-| View      | `v:` | a view lane read model          |
+| Type      | Key  | Carries                                            |
+| --------- | ---- | -------------------------------------------------- |
+| Trigger   | `t:` | actor role + originating screen                    |
+| Command   | `c:` | bare command name                                  |
+| Event     | `e:` | the stream (e.g. `Game / …`)                       |
+| Exception | `x:` | bare error name                                    |
+| View      | `v:` | a view lane read model                             |
+| State     | `v:` | the Decider's decision model (`v: State / Game`)   |
+
+emlang has no dedicated state element, so **State is expressed as a view on the
+`State /` lane** — it is a read model like any other, just consumed by `Decide`
+instead of a human or a processor. First-class in this spec: it is the only legal
+`given` of a GWT, and the folded target of the Decision Model slice's GT.
 
 Tests are `given` / `when` / `then`: `when` takes commands, `then` takes events +
 views + exceptions. emlang itself allows both events and views in `given`, but this
@@ -93,14 +99,14 @@ GT covers `Evolve`, GWT covers `Decide`, and the state `v` is the seam between t
 
 ## Mapping to Code
 
-| emlang        | C#                                          |
-|---------------|---------------------------------------------|
-| `c:` command  | `record CommandName(...);`                  |
-| `e:` event    | `record EventName(...);`                    |
-| `x:` exception| `record ErrorName(...);` returned in `Result`|
-| `v:` view     | read-model / projection                     |
-| `tests:` GWT  | xUnit test of `Decide` (state in, events out)|
-| `tests:` GT   | xUnit test of `Evolve`/fold (events in, view out)|
+| emlang         | C#                                                        |
+| -------------- | --------------------------------------------------------- |
+| `c:` command   | `record CommandName(...);`                                |
+| `e:` event     | `record EventName(...);`                                  |
+| `x:` exception | `record ErrorName(...);` returned in `Result`             |
+| `v:` view      | read-model / projection                                   |
+| `tests:` GWT   | xUnit test of `Decide` (state in, events out)             |
+| `tests:` GT    | xUnit test of `Evolve`/fold (events in, state (view) out) |
 
 The `Game /` prefix on events is just the **stream label**, not an aggregate — this
 is the Decider pattern, not DDD. There is no "aggregate" vocabulary.
