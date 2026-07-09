@@ -1,0 +1,375 @@
+# Code as Build Artifact — analysis + roadmap for kvissig.se
+
+> Analysis of applying the stratified thesis from
+> [`code-as-build-artifact-research.md`](https://github.com/MartinRL/MartinRL.github.io/blob/main/articles/code-as-build-artifact-research.md)
+> to this repository. Deliverable of this document: a verdict per layer, a vehicle
+> decision, mechanism details, an emlang dialect extension design, and a step-wise
+> roadmap. **No generator code exists yet** — implementation begins with step 0 and
+> warrants an ADR (016 is the next free number) when it does.
+
+## 1. Purpose and position
+
+The research article argues a three-stratum model: where the Event Model **fully
+determines** the code (records, Decider skeletons, GWT tests), code should become a
+deterministic build artifact — generated into `obj/`, never committed; where the spec
+only **constrains** (decide/evolve bodies, UX), agent-written code stays committed as
+the lockfile; and some layers should be **interpreted**, not generated at all. It names
+this repo as the empirical testbed:
+
+> "build the minimal `Emlang.Generators` (records + Decider skeleton + GWT Facts from
+> `mer-eller-mindre-event-model.yaml`), delete the corresponding hand-checked files, and
+> measure what fraction of the ~3,000 lines of domain + tests evaporates from git."
+
+Kvissig is a stronger testbed than the article assumed: there are now **three sister
+games** (MerEllerMindre, Blindbudet, TankTillTusen), each hand-transcribed 1:1 from its
+own emlang spec (`specs/*-event-model.yaml`). The transcription was done three times by
+an agent following the same conventions — the generator amortizes at n=3, directly
+answering the article's "first-project economics" risk (its objection #2).
+
+One fact makes the thesis unusually cheap to test here: **a proto-parser already
+exists**. All three `*ArchitectureTests` files carry a regex `SpecElementNames()`
+(MerEllerMindre.Domain.Tests/ArchitectureTests.cs:195) that parses `c:`/`e:`/`x:` lines
+out of the YAML and cross-checks spec↔union membership in both directions
+(`Every_spec_element_has_a_code_type`, `Every_union_case_appears_in_the_spec`). The
+spec→code contract is machine-**checked** today; it is just not machine-**generated**.
+Step 0 below supersedes that regex with a real parser and loses nothing.
+
+## 2. Stratum mapping of this repo
+
+Measured 2026-07 (LOC = physical lines, `wc -l`, excluding `obj/`/`bin/`).
+
+### Domain projects (3,246 LOC total)
+
+| File | MEM | BB | TTT | Stratum | Verdict |
+|---|---:|---:|---:|---|---|
+| Commands.cs | 62 | 51 | 50 | 1 | **Generate** — union + records, 1:1 from `c:` props |
+| Events.cs | 108 | 78 | 77 | 1 | **Generate** — union + records, 1:1 from `e:` props |
+| Errors.cs | 55 | 37 | 37 | 1 | **Generate** — parameterless markers, 1:1 from `x:` |
+| State.cs | 129 | 95 | 111 | 1/2 split | Records generate; **derived methods** (PendingPlayerIds, HasNextQuestion…) are logic — commit |
+| Decider.cs | 555 | 314 | 293 | 1/2 split | Exhaustive `switch` skeletons generate (~410 LOC across the three); **case bodies** (scoring, selection, folding) are the residue — commit |
+| Projections.cs | 202 | 138 | 137 | 1/2 split | View records generate from `v:`; projection functions are transforms — commit |
+| Questions.cs / Lots.cs / Puzzles.cs | 234 | 193 | 219 | 2 | **Commit** — CSV parsers, card/lot/puzzle logic; the spec references these types but does not define their parsing |
+| QuestionChecks.cs | 71 | — | — | 2 | **Commit** — pack-quality logic, not spec-determined |
+
+Records + unions alone (Commands/Events/Errors + pure view/state records) ≈ **620 LOC**
+of pure transcription. With switch skeletons (~410) the stratum-1 share of the domain is
+roughly **1,030 / 3,246 ≈ 32%**; the rest is genuine Reeves residue.
+
+### Test projects (3,780 LOC, 175 `[Fact]`s)
+
+| File family | MEM | BB | TTT | Stratum | Verdict |
+|---|---:|---:|---:|---|---|
+| DeciderTests + EvolveTests + ProjectionTests (GWT) | 896 | 654 | 646 | 1 | **Generate** from `tests:` blocks — 2,196 LOC ≈ 58% of test code |
+| Fixtures.cs | 125 | 177 | 193 | 2 | **Commit, human-owned** — the seam generated tests reference by identifier (§5) |
+| ArchitectureTests | 234 | 190 | 189 | 2 | Commit; the two spec-coverage facts become **redundant by construction** and get deleted at step 1 |
+| Parser/selection/solver tests | 360 | — | 116 | 2 | Commit — they test stratum-2 code |
+
+The GWT estimate matches the article's "55-60% of test LOC is scaffolding/assertion
+transcription". Combined stratum-1 share of domain + tests:
+(1,030 + 2,196) / 7,026 ≈ **46%** by raw LOC — the article predicts 60-70% for the
+layers it targets; the measured number is the falsifiable output of step 5.
+
+### Stratum 3 (interpret, don't generate)
+
+Small here: emlang's own `diagram`/`parse` commands already interpret the spec for
+docs; the pack catalogs interpret CSV at startup. No endpoint routing or read-model
+wiring is worth interpreting at this scale. Noted for completeness; no roadmap step.
+
+### The GWT blocker is concrete, not conceptual
+
+Generation of records and switches needs nothing new. Test generation does: fixtures
+(`question0`, `hostMartin`, minted `joinCode`) live in YAML **comments**
+(mer-eller-mindre-event-model.yaml:150-156); test cases reference them symbolically;
+`propName: propName` means presence-only assertion; Givens are partial `v: State / Game`
+props. None of that is machine-readable today. Step 0 therefore spikes a structured
+`fixtures:` dialect extension (§5) before any generator is built.
+
+## 3. Vehicle comparison
+
+### The architecture that dissolves most of the question
+
+All real work lives in **one pure core library**, `Emlang.CodeGen`:
+YamlDotNet parse → line-tracked model → validation → C# text emit (raw strings). The
+Roslyn incremental generator, the snapshot tests, and any CLI tool are **thin
+wrappers** over that core. Once this is fixed, "SG vs CLI vs T4" is only a question of
+where the emitted text lands, and the answer differs per target:
+
+| Target | Vehicle | Why |
+|---|---|---|
+| Records/unions, Decide/Evolve skeletons, GWT `[Fact]`s, Vm records | **Roslyn incremental generator** | Output belongs in the compilation, not on disk; `obj/` output is the article's whole point; IDE sees generated types live |
+| `.razor` screen scaffolds | **CLI, scaffold-once** | The Razor SDK compiles `.razor` from disk *before* consuming-project generators run — Razor is categorically not SG territory. Scaffolded once, human-owned after |
+| Build-time regeneration guarantee | CI job calling the same core | No MSBuild-integrated CLI: `dotnet run tools/x.cs` inside a build is too slow/flaky; if ever needed, compiled console + `Exec` + `Inputs`/`Outputs` incremental target |
+
+### T4: dominated, but weighed honestly
+
+T4 is not dead — `dotnet-t4` (mono/t4, Mono.TextTemplating) runs fine on Linux CI, and
+T4.BuildTools adds incremental build. But every hard part of this generator (YAML
+parsing, exhaustiveness model, GWT↔fixture cross-references, diagnostics) lives in the
+core library **regardless of vehicle** — so T4's contribution reduces to string
+interpolation, which C# 11+ raw string literals do without a second language. T4 also
+cannot: surface analyzer-grade diagnostics located in the YAML, regenerate at
+design-time in the IDE, or keep output out of git (on-disk output is either committed —
+defeating the goal — or wrapped in the CLI+MSBuild pattern with a worse authoring
+language). IDE support in 2026 remains poor. **Verdict: rejected**, not for being
+legacy but for adding a layer that contributes nothing once the core library exists.
+
+### Interpretation
+
+Considered per target: interpreting the spec at runtime (e.g. a generic Decider driven
+by parsed YAML) would erase the compile-time exhaustiveness guarantees that are this
+repo's strongest fitness function (exhaustive `switch`, no default arm,
+TreatWarningsAsErrors). Rejected for stratum 1 here; the spec's value *is* that the
+compiler enforces it.
+
+## 4. Mechanism details
+
+Verified against Roslyn/xunit behavior during research (sources in §8).
+
+### Analyzer wiring without NuGet (in-repo generator)
+
+```xml
+<!-- consuming Domain .csproj -->
+<ProjectReference Include="..\Emlang.Generators\Emlang.Generators.csproj"
+                  OutputItemType="Analyzer"
+                  ReferenceOutputAssembly="false" />
+<AdditionalFiles Include="..\..\specs\blindbudet-event-model.yaml" />
+```
+
+- Generator project targets **netstandard2.0** (per-project override; do not fight
+  Directory.Build.props globally).
+- Reference a deliberately **old stable** `Microsoft.CodeAnalysis.CSharp` — warning
+  CS9057 fires only when the analyzer's Roslyn is *newer* than the compiler's, so old
+  is the safe direction under a preview SDK.
+- Emitting C# 15 `union` **text** is fine: generated trees parse with the *consumer's*
+  `LangVersion=preview`, not the generator's.
+- Emitted files start with `// <auto-generated/>` and must be nullable-clean (the
+  Domain has TreatWarningsAsErrors).
+- YamlDotNet flows into the analyzer via the `GetTargetPathWithTargetPlatformMoniker`
+  target trick; the core library is **source-linked** (`<Compile Include="..\Emlang.CodeGen\**\*.cs" />`)
+  into the generator project so only one dll + YamlDotNet ship as analyzer assets.
+
+### The partial-method seam (CS8795)
+
+Generated `Decider.g.cs` shape:
+
+```csharp
+// <auto-generated/>
+public static partial class Decider
+{
+    public static GameState Evolve(GameState state, GameEvent evt) => evt switch
+    {
+        LobbyOpened e         => EvolveLobbyOpened(state, e),
+        PlayerJoined e        => EvolvePlayerJoined(state, e),
+        // ... one arm per e: in the spec, exhaustively, no default
+    };
+
+    private static partial GameState EvolveLobbyOpened(GameState state, LobbyOpened e);
+    private static partial GameState EvolvePlayerJoined(GameState state, PlayerJoined e);
+}
+```
+
+Human-owned `Decider.Impl.cs` implements the partials. A new `e:` in the spec makes the
+build fail with **CS8795** (partial method declared but not implemented) until a human
+or agent writes the body — "new spec event = compile error" is exactly achievable, and
+TreatWarningsAsErrors makes the seam stricter still.
+
+### Generated xUnit facts point at the YAML
+
+xunit.v3 discovers generator-emitted `[Fact]`s normally. Its `FactAttribute` captures
+`[CallerFilePath]`/`[CallerLineNumber]`, which honor `#line` — the same technique
+Reqnroll uses to map generated tests back to `.feature` files:
+
+```csharp
+#line 137 "specs/mer-eller-mindre-event-model.yaml"
+    [Fact]
+#line default
+    public void PlayerJoins() { /* generated GWT body */ }
+```
+
+Discipline: `#line` on the attribute only, `#line default` before the body (so stack
+traces in the body stay honest). Set `EmitCompilerGeneratedFiles=true` on test projects
+for inspection.
+
+### Shadow-mode diffing (step 0, pre-flip)
+
+`EmitCompilerGeneratedFiles` diffing is structurally impossible *before* the flip: an
+attached generator emitting types that also exist as committed files ⇒ CS0101 duplicate
+type errors. Shadow mode is instead **unit tests in the existing `*.Domain.Tests`
+projects** calling `Emlang.CodeGen` directly and comparing **structurally**: Roslyn-parse
+both the generated text and the committed file, compare the declaration surface (type
+names, union case lists, record parameter names + types). That is a strict superset of
+today's regex arch checks — valuable even if the flip never happens. Exact-text diff is
+only meaningful at flip time, when the committed file is about to be deleted.
+
+## 5. Dialect extension design: `fixtures:`
+
+Designed here, applied in a later session (step 0 spike). Goal: make the fixture
+comments at mer-eller-mindre-event-model.yaml:150-156 machine-readable without turning
+emlang into a programming language.
+
+### Shape
+
+```yaml
+fixtures:
+  question0:
+    Question:
+      questionText: question0
+      itemA: question0A
+      itemB: question0B
+      valueA: 100
+      valueB: 60
+      unit: question0U
+      differencePrompt: question0D
+  packMerEllerMindre:
+    QuestionPack: { packId: mer-eller-mindre, questions: [question0, question1] }
+  hostMartin: { hostName: Martin }
+```
+
+- A fixture is a named, typed prop bag. Bare identifiers in value position that match
+  another fixture name are references (`questions: [question0, ...]`).
+- Ids/timestamps/join codes are **not** in fixtures — they come from the deterministic
+  test `GameContext` (sequenced Guids, fixed clock), which stays in the human-owned
+  `Fixtures.cs`.
+
+### Placeholder semantics (in `tests:` blocks, unchanged syntax)
+
+| Pattern | Meaning |
+|---|---|
+| `playerName: Nils` (concrete value) | equality assertion / concrete input |
+| `playerName: playerName` (value == prop name) | **presence-only** — assert the prop exists, don't pin the value |
+| `then: - e:` props referencing a fixture name | structural equality against the fixture-built record |
+| `given: - v: State / Game` with partial props | partial-state Given: build state by folding the fixture events implied by the named phase, then apply the listed props as `with`-mutations |
+
+The partial-state rule is the riskiest piece (it encodes construction knowledge); the
+mitigation is that anything the rule cannot express stays in the human-owned
+`Fixtures.cs`/GWT scaffold, and generated tests reference those members **by plain
+identifier** — a missing fixture is a compile error, same seam philosophy as CS8795.
+
+### emlang lint compatibility — open question
+
+Whether `emlang lint` (Go CLI v1.0.0) tolerates an unknown top-level `fixtures:` key
+(or a per-slice one) is **untested** and must be checked empirically before committing
+to the shape. Fallbacks, in order: (a) `.emlang.yaml` already ignores one lint rule —
+add another; (b) sidecar file `specs/<game>-fixtures.yaml` parsed only by
+`Emlang.CodeGen`. The sidecar is the safe default if lint objects; the cost is one more
+file per spec.
+
+## 6. Step-wise roadmap (shadow-first, delete-late)
+
+### Step 0 — `Emlang.CodeGen` core + structural shadow tests
+
+- **Preconditions:** none; zero build-integration risk.
+- **Deliverable:** `src/Emlang.CodeGen` (YamlDotNet, line-tracked model, C# emitters)
+  + shadow tests in each existing `*.Domain.Tests` comparing generated vs committed
+  declaration surfaces (Roslyn structural compare, §4). **Spike the `fixtures:`
+  dialect here** — it is the highest design risk and back-propagates into the parser
+  model; test emlang lint tolerance empirically.
+- **Done-gate:** shadow tests green for all three games; the two regex spec-coverage
+  facts per game are superseded (deleted) by the structural versions. Nothing else
+  deleted.
+- **Touchpoints:** `.claude/hooks/codehealth.sh:49` scope regex whitelists only the
+  existing 4 projects — add `Emlang\.` or the new project is silently unscored (the
+  script itself warns about this).
+
+### Step 1 — Flip records + unions (pilot: Blindbudet, smallest at 906 LOC)
+
+- **Preconditions:** step 0 shadow green.
+- **Deliverable:** `Emlang.Generators` analyzer wrapper; Analyzer `ProjectReference`
+  wiring; **delete** `Commands.cs`, `Events.cs`, `Errors.cs` + pure view records
+  (~166 LOC in BB). Then repeat for MEM (~225) and TTT (~164).
+- **Done-gate:** `dotnet build` + full test suite green with generated types; deleted
+  files gone from git; shadow tests for this layer retired (the generator *is* the
+  source now).
+- **Touchpoints:** amend `Domain_project_has_no_dependencies`
+  (MerEllerMindre.Domain.Tests/ArchitectureTests.cs:65-66 and siblings) to allow
+  Analyzer-only references — an honest fitness-function change, not a
+  Directory.Build.targets workaround. `Every_spec_element_has_a_code_type` /
+  `Every_union_case_appears_in_the_spec` become redundant by construction — delete.
+
+### Step 2 — Decide/Evolve skeletons
+
+- **Preconditions:** step 1 flipped for at least one game.
+- **Deliverable:** restructure each `Decider.cs` into `Decider.Impl.cs` partial bodies;
+  generator emits the exhaustive switch + declared-only partials (CS8795 seam, §4).
+- **Done-gate:** build green; a deliberately added fake `e:` in a scratch spec fails
+  compilation with CS8795 (one-off verification); ~410 LOC of switch scaffolding gone.
+- **Touchpoints:** `Decider_is_total_and_synchronous` reads
+  `src/<Game>.Domain/Decider.cs` by path — repoint at `Decider.Impl.cs` (the generated
+  half is total/sync by construction).
+
+### Step 3 — GWT `[Fact]` generation
+
+- **Preconditions:** `fixtures:` dialect landed in the specs (step 0 spike outcome);
+  steps 1-2 flipped.
+- **Deliverable:** generator emits DeciderTests/EvolveTests/ProjectionTests from
+  `tests:` blocks with `#line`-to-YAML; **`Fixtures.cs` stays human-written** —
+  generated tests reference its members by identifier.
+- **Done-gate:** all 175 domain `[Fact]`s (or their generated equivalents) green;
+  hand-written GWT files deleted (~2,196 LOC); test failures navigate to the YAML line.
+  Non-spec tests (CSV parser, selection, solver, architecture) stay hand-written.
+- **Touchpoints:** `EmitCompilerGeneratedFiles=true` on test projects for review.
+
+### Step 4 — Web, split
+
+- **Deliverable:** Vm records (plain C#) → same SG path as step 1. `.razor` screen
+  scaffolds → CLI tool under `tools/` (repo convention: `dotnet run tools/x.cs`),
+  scaffold-once, human-owned after — **not** build artifacts (Razor SDK ordering, §3).
+- **Done-gate:** Web builds + `MerEllerMindre.Web.Tests` (23 facts) green.
+- **Touchpoints:** codehealth.sh scope again if a new project appears.
+
+### Step 5 — Process guarantees + measurement
+
+- **Deliverable:** CI invariant *artifact == f(spec, generator)* — a job that
+  regenerates and fails on divergence; `EmitCompilerGeneratedFiles` review-diff ritual
+  on generator version bumps; the **measurement**: LOC evaporated from git vs the
+  article's 60-70% prediction (baseline table in §2).
+- **Done-gate:** the number published back into the research article; ADR 016 written
+  covering the whole mechanism.
+
+## 7. Risks and falsifiable predictions
+
+1. **Preview-SDK/IDE coupling.** This repo builds on a .NET 11 preview with C# 15
+   unions. Mitigation: pin an old stable Roslyn in the generator (CS9057 only fires
+   analyzer-newer-than-compiler); CLI builds are the safe direction; accept possible
+   IDE squiggle glitches as cosmetic.
+2. **Diagnostics UX.** A YAML typo must surface as a precise diagnostic located *in the
+   yaml* (`Location.Create` from YamlDotNet Marks), with emit-nothing-on-error
+   semantics — otherwise the spec stops being the cheapest place to make a change,
+   which is the article's single operational invariant. Budget: roughly an emitter's
+   worth of work; do not skip it.
+3. **Test-semantics gap.** The `fixtures:`/placeholder dialect must express
+   presence-only asserts, folded partial-state Givens, and concrete-type extraction
+   from union-typed results — without becoming a programming language. Mitigation: the
+   human-owned `Fixtures.cs` seam absorbs everything the dialect refuses to express.
+4. **Böckeler risk + Reeves residue.** If the spec must grow so detailed to drive
+   generation that reviewing it is as hard as reviewing code, the bottleneck merely
+   moves; and if decide/evolve bodies dominate effort, the deterministic stratum
+   shrinks to scaffolding. The kvissig measurement (step 5) is the empirical answer to
+   both.
+
+**Falsifiable prediction (the experiment the article calls for):** flipping steps 1-3
+across all three games removes ≈1,030 domain LOC + ≈2,196 test LOC ≈ **46% of the
+7,026 domain+test lines** from git, against the article's 60-70% prediction for the
+spec-determined layers. Whichever way the number lands, it is the first measured data
+point for the thesis.
+
+## 8. Sources
+
+- The research article: `MartinRL.github.io/articles/code-as-build-artifact-research.md`
+- Roslyn: source generators as project references without NuGet —
+  https://github.com/dotnet/roslyn/discussions/47517
+- Roslyn: CS9057 analyzer/compiler version mismatch —
+  https://github.com/dotnet/roslyn/issues/66918
+- Andrew Lock, *Creating a source generator* series —
+  https://andrewlock.net/series/creating-a-source-generator/
+- Thinktecture, *Roslyn Source Generators* series, parts 6-7 (referencing third-party
+  assemblies from analyzers; the `GetTargetPathWithTargetPlatformMoniker` trick)
+- xunit.v3 `FactAttribute` caller-info (`[CallerFilePath]`/`[CallerLineNumber]`, honors
+  `#line`) — https://github.com/xunit/xunit
+- Reqnroll `#line` mapping of generated tests to `.feature` files —
+  https://github.com/reqnroll/Reqnroll/issues/413
+- mono/t4 (`dotnet-t4`, Mono.TextTemplating) — https://github.com/mono/t4
+- In-repo prior art: `SpecElementNames()` spec↔code cross-check,
+  `src/MerEllerMindre.Domain.Tests/ArchitectureTests.cs:140-211` (siblings in
+  Blindbudet/TankTillTusen arch tests); fixture comments,
+  `specs/mer-eller-mindre-event-model.yaml:150-156`.
