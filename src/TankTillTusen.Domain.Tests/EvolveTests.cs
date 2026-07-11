@@ -11,7 +11,7 @@ namespace TankTillTusen.Domain.Tests;
 public class EvolveTests
 {
     private static LobbyOpened Opened() =>
-        new(GameId, MartinId, "Martin", JoinCode, [Puzzle0, Puzzle1], StartedAt);
+        new(GameId, MartinId, "Martin", JoinCode, Difficulty.Klassisk, [Puzzle0, Puzzle1], StartedAt);
 
     private static TankState Fold(params TankEvent[] events) => Decider.Fold(events);
 

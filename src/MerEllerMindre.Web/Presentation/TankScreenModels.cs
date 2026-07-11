@@ -6,7 +6,7 @@ namespace MerEllerMindre.Web.Presentation;
 /// ONLY these models (built from TankState by <see cref="TankScreens"/>). Sister to MEM's
 /// ScreenModels + Blindbudet's AuctionScreenModels. LOWEST total wins (like MEM).
 /// </summary>
-public sealed record TankHostFormVm(string AntiforgeryToken);
+public sealed record TankHostFormVm(string AntiforgeryToken, string Difficulty);
 
 public sealed record TankJoinFormVm(Guid JoinCode, string HostName, string AntiforgeryToken);
 

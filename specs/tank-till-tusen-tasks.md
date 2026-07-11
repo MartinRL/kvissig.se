@@ -52,3 +52,13 @@ beside MEM and BlindBudet; generated puzzles, hard 45 s countdown, LOWEST total 
       (tal/mål/45 s clock) → both submit → score gear closes round → round results (sample
       solution + per-player reached/score/total) → 5 rounds → final standings (tie shares the
       win, lowest total wins). Deadline/non-submitter→100 + exact→−10 covered by DeciderTests.
+
+## Difficulty nivåer (familj | klassisk | svår)
+- [x] Spec: `difficulty` on OpenLobby + LobbyOpened, DIFFICULTY comment (knob = minsta antal
+      steg till målet), catalog = 3 rader; `emlang lint` OK
+- [x] Domain: `Difficulty` enum; Solver.Reachable keeps SHORTEST route per value;
+      PuzzleGenerator.Generate(difficulty, ...) filters targets (familj <= 2, klassisk allt,
+      svår >= 4 steg); TankContext.GeneratePuzzles takes Difficulty
+- [x] Tests: shortest-route self-check + familj/svår step-count theories + updated fixtures
+- [x] Web: TankCatalog 3 nivå-rader → /new?difficulty=..., TankHostForm hidden field,
+      PostOpen/GetNew ParseDifficulty (unknown → Klassisk); build + test green (224 total)

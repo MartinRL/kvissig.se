@@ -118,10 +118,10 @@ public static class Decider
         var gameId = context.NewGuid();
         var hostPlayerId = context.NewGuid();
         var joinCode = context.NewGuid();
-        var puzzles = context.GeneratePuzzles();
+        var puzzles = context.GeneratePuzzles(command.Difficulty);
 
         return new Ok<TankEvent[]>([
-            new LobbyOpened(gameId, hostPlayerId, command.HostName, joinCode, puzzles, context.Now())
+            new LobbyOpened(gameId, hostPlayerId, command.HostName, joinCode, command.Difficulty, puzzles, context.Now())
         ]);
     }
 
@@ -272,13 +272,13 @@ public static class Decider
 public record TankContext(
     Func<Guid> NewGuid,
     Func<DateTimeOffset> Now,
-    Func<IReadOnlyList<Puzzle>> GeneratePuzzles
+    Func<Difficulty, IReadOnlyList<Puzzle>> GeneratePuzzles
 )
 {
     public static TankContext Default => new(
         NewGuid: Guid.NewGuid,
         Now: () => DateTimeOffset.UtcNow,
-        GeneratePuzzles: () => PuzzleGenerator.GenerateSet(Decider.RoundCount, Random.Shared.Next)
+        GeneratePuzzles: difficulty => PuzzleGenerator.GenerateSet(Decider.RoundCount, difficulty, Random.Shared.Next)
     );
 }
 

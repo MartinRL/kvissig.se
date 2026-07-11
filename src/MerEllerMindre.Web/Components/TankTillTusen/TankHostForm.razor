@@ -10,10 +10,11 @@
 
         <div class="card">
             <h1>Skapa spel</h1>
-            <p class="sub">Nå målet med de fyra räknesätten.</p>
+            <p class="sub">Nå målet med de fyra räknesätten. Nivå: @Model.Difficulty.</p>
 
             <form hx-post="/tank-till-tusen" hx-swap="none">
                 <input type="hidden" name="__RequestVerificationToken" value="@Model.AntiforgeryToken" />
+                <input type="hidden" name="difficulty" value="@Model.Difficulty" />
                 <label for="name">Ditt namn</label>
                 <input type="text" id="name" name="hostName" placeholder="Skriv ditt namn" autofocus required />
                 <button type="submit" class="btn">Skapa spel</button>

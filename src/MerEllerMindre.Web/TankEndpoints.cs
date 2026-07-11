@@ -49,15 +49,15 @@ public static class TankEndpoints
 
     private static IResult GetCatalog() => new RazorComponentResult<TankCatalog>();
 
-    private static IResult GetNew(IAntiforgery antiforgery, HttpContext http)
+    private static IResult GetNew(string? difficulty, IAntiforgery antiforgery, HttpContext http)
     {
         var token = antiforgery.GetAndStoreTokens(http).RequestToken!;
-        return new RazorComponentResult<TankHostForm>(new { Model = new TankHostFormVm(token) });
+        return new RazorComponentResult<TankHostForm>(new { Model = new TankHostFormVm(token, ParseDifficulty(difficulty).ToString()) });
     }
 
-    private static IResult PostOpen([FromForm] string hostName, [AsParameters] TankDeps d, HttpContext http)
+    private static IResult PostOpen([FromForm] string hostName, [FromForm] string? difficulty, [AsParameters] TankDeps d, HttpContext http)
     {
-        var result = d.Svc.Open(new OpenLobby(hostName));
+        var result = d.Svc.Open(new OpenLobby(hostName, ParseDifficulty(difficulty)));
         if (result is not TankOk ok || ok.Value is not [LobbyOpened opened, ..])
             return Results.BadRequest(result is Err err ? Describe(err.Error) : "Något gick fel.");
 
@@ -138,6 +138,10 @@ public static class TankEndpoints
         d.Svc.RunNextGear(gameId);
         return Rendered(d.Svc.Load(gameId), d.Identity.GetPlayer(http, gameId), d, http);
     }
+
+    /// <summary>Trust boundary: an unknown/missing nivå falls back to Klassisk (the v1 behavior).</summary>
+    private static Difficulty ParseDifficulty(string? value) =>
+        Enum.TryParse<Difficulty>(value, ignoreCase: true, out var difficulty) ? difficulty : Difficulty.Klassisk;
 
     /// <summary>Parse the client's posted build (JSON: steps[] + answerIndex). Null = malformed.</summary>
     private static Solution? Parse(string json)

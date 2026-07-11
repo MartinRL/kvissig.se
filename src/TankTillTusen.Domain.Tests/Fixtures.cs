@@ -59,7 +59,7 @@ public static class Fixtures
     public static readonly TankContext Context = new(
         NewGuid: Guid.NewGuid,
         Now: () => Now,
-        GeneratePuzzles: () => [Puzzle0, Puzzle1]
+        GeneratePuzzles: _ => [Puzzle0, Puzzle1]
     );
 
     /// <summary>Build a PuzzleRound inline, mirroring the spec's flow-map fixtures.</summary>

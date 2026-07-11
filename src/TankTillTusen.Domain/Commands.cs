@@ -7,7 +7,8 @@ namespace TankTillTusen.Domain;
 /// GameCommand and BlindBudet's AuctionCommand — never touching theirs.
 /// </summary>
 public record OpenLobby(
-    string HostName
+    string HostName,
+    Difficulty Difficulty
 );
 
 public record JoinGame(

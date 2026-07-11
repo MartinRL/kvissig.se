@@ -113,7 +113,7 @@ public static class Solver
         public int NextIndex => Base + Steps.Count;
     }
 
-    /// <summary>Every reachable value mapped to a sample solution (first/shortest found wins).</summary>
+    /// <summary>Every reachable value mapped to its SHORTEST sample solution (fewest steps).</summary>
     public static IReadOnlyDictionary<int, Solution> Reachable(IReadOnlyList<int> numbers)
     {
         var search = new Search(numbers.Count, [], []);
@@ -128,8 +128,10 @@ public static class Solver
 
     private static void Explore(List<(int Value, int Index)> items, Search search)
     {
+        // Keep the shortest route per value: DFS visits every combine order, so the minimum
+        // Steps.Count over all visits IS the true minimum — the difficulty knob reads it.
         foreach (var it in items)
-            if (!search.Found.ContainsKey(it.Value))
+            if (!search.Found.TryGetValue(it.Value, out var known) || known.Steps.Count > search.Steps.Count)
                 search.Found[it.Value] = new Solution([.. search.Steps], it.Index);
 
         for (var a = 0; a < items.Count; a++)
@@ -168,10 +170,22 @@ public static class Solver
 }
 
 /// <summary>
+/// The catalog's three nivåer. The generation knob is the MINIMUM number of steps the target
+/// requires (the true difficulty dial of a Countdown puzzle): Familj &lt;= 2, Klassisk
+/// unfiltered, Svår &gt;= 4.
+/// </summary>
+public enum Difficulty
+{
+    Familj,
+    Klassisk,
+    Svår
+}
+
+/// <summary>
 /// Draws a solvable puzzle: six tal from the Countdown pool + a mål in 101..999 that is
 /// guaranteed reachable (the target is picked FROM the solver's reachable set, so the sample
-/// solution always hits it). Pure over the injected random source. Non-trivial logic →
-/// self-checked by PuzzleGeneratorTests.
+/// solution always hits it), filtered by the difficulty knob. Pure over the injected random
+/// source. Non-trivial logic → self-checked by PuzzleGeneratorTests.
 /// </summary>
 public static class PuzzleGenerator
 {
@@ -184,25 +198,40 @@ public static class PuzzleGenerator
     private const int MaxTarget = 999;
 
     /// <summary>Generate <paramref name="count"/> independent solvable puzzles.</summary>
-    public static IReadOnlyList<Puzzle> GenerateSet(int count, Func<int, int> nextRandom) =>
-        [.. Enumerable.Range(0, count).Select(_ => Generate(nextRandom))];
+    public static IReadOnlyList<Puzzle> GenerateSet(int count, Difficulty difficulty, Func<int, int> nextRandom) =>
+        [.. Enumerable.Range(0, count).Select(_ => Generate(difficulty, nextRandom))];
 
-    public static Puzzle Generate(Func<int, int> nextRandom)
+    public static Puzzle Generate(Difficulty difficulty, Func<int, int> nextRandom)
     {
-        // ponytail: redraw when a rare weak hand reaches nothing in 101..999. Terminates with
-        // probability 1 (most 6-tal hands reach many in-range values); no fixed cap needed.
+        // ponytail: redraw when a hand has no in-range target matching the difficulty knob.
+        // Terminates with probability 1 (most 6-tal hands reach many in-range values on every
+        // nivå); no fixed cap needed.
         while (true)
         {
             var numbers = Draw(nextRandom);
-            var targets = Solver.Reachable(numbers).Keys
-                .Where(v => v >= MinTarget && v <= MaxTarget)
+            var reachable = Solver.Reachable(numbers);
+            var targets = reachable
+                .Where(kv => kv.Key >= MinTarget && kv.Key <= MaxTarget
+                             && MatchesDifficulty(difficulty, kv.Value.Steps.Count))
+                .Select(kv => kv.Key)
                 .ToList();
             if (targets.Count == 0)
                 continue;
 
             var target = targets[nextRandom(targets.Count)];
-            return new Puzzle(numbers, target, Solver.Solve(numbers, target)!);
+            return new Puzzle(numbers, target, reachable[target]);
         }
+    }
+
+    /// <summary>
+    /// The difficulty filter over a target's MINIMUM solution length (Reachable keeps the
+    /// shortest route). Klassisk's fall-through is Klassisk by construction (enum is closed).
+    /// </summary>
+    private static bool MatchesDifficulty(Difficulty difficulty, int minSteps)
+    {
+        if (difficulty == Difficulty.Familj) return minSteps <= 2;
+        if (difficulty == Difficulty.Svår) return minSteps >= 4;
+        return true; // Klassisk — unfiltered
     }
 
     /// <summary>Fisher-Yates shuffle a copy of the pool, then take the first six.</summary>

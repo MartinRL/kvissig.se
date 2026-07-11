@@ -33,11 +33,12 @@ public class DeciderTests
     public void game_can_be_created()
     {
         var opened = Gwt.GivenInitial()
-            .When(new OpenLobby("Martin"))
+            .When(new OpenLobby("Martin", Difficulty.Klassisk))
             .Events()
             .Opened();
 
         opened.HostName.Should().Be("Martin");
+        opened.Difficulty.Should().Be(Difficulty.Klassisk);
         opened.Puzzles.Should().Equal(Puzzle0, Puzzle1);
         opened.HostPlayerId.Should().NotBe(Guid.Empty);
         opened.JoinCode.Should().NotBe(Guid.Empty);

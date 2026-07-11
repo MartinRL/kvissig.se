@@ -61,8 +61,16 @@
 # dependency (same pattern that mints gameId/joinCode/openedAt) and stamps the full puzzle set
 # onto Game / LobbyOpened (puzzles: Puzzle[]). Each Puzzle carries its hidden sampleSolution
 # (like BlindBudet's hidden trueWorth) — Screen / Puzzle shows only numbers + target; the
-# sample is surfaced only at reveal (Screen / Round results). The Quiz catalog is a single
-# fixed v1 ("Spela") — no pack selection.
+# sample is surfaced only at reveal (Screen / Round results).
+#
+# DIFFICULTY: the Quiz catalog offers three nivåer — the generation knob is the MINIMUM number
+# of steps required to reach the target (the true difficulty dial of a Countdown puzzle):
+#   familj   — the target is reachable in <= 2 steps (a two-op route always exists)
+#   klassisk — unfiltered (any solvable target; the original v1 behavior)
+#   svår     — the SHORTEST route to the target needs >= 4 steps
+# OpenLobby carries the chosen difficulty; the generator filters candidate targets by the
+# solver's shortest solution. The stamped difficulty on LobbyOpened is the record of the choice
+# (the puzzles themselves already embody it).
 #
 # Prop types (these annotations ARE the intended C# types; see specs/CLAUDE.md):
 #   ids                    Guid          (gameId, playerId, hostPlayerId, joinCode;
@@ -77,6 +85,7 @@
 #     deviation from the constitution's collection rule, same as the sisters). Wire EVENTS stay
 #     flat with an explicit playerId (SolutionSubmitted, RoundScored); only the folded State is keyed.
 #   Puzzle                 { numbers: int[], target: int, sampleSolution: Solution }  (hidden sample)
+#   difficulty             Difficulty (familj|klassisk|svår)  (the generation knob; see DIFFICULTY above)
 #   Operator               enum Add|Sub|Mul|Div
 #   Step                   { leftIndex: int, op: Operator, rightIndex: int }
 #   Solution               { steps: Step[], answerIndex: int }
@@ -85,9 +94,9 @@ slices:
 
   # --- Catalog / Setup -----------------------------------------------------
 
-  # ASSUMPTION: the catalog is NOT on the Game stream. Tänk Till Tusen has a single fixed v1
-  # difficulty, so the catalog is one row ("Spela") — no pack, no CSV. Choosing to play mints a
-  # game whose puzzles are generated at open.
+  # ASSUMPTION: the catalog is NOT on the Game stream. Tänk Till Tusen has no packs/CSV — the
+  # catalog is three fixed rows, one per difficulty (familj | klassisk | svår; see DIFFICULTY
+  # above). Choosing one mints a game whose puzzles are generated at open with that knob.
   👀 Quiz Catalog:
     - v: Screen / Quiz catalog
 
@@ -106,12 +115,16 @@ slices:
     steps:
       - t: 🧑‍🏫 host /Quiz catalog
       - c: OpenLobby
+        props:
+          hostName: string
+          difficulty: Difficulty (familj|klassisk|svår)   # the catalog row the host picked; the generation knob
       - e: Game / LobbyOpened
         props:
           gameId: Guid
           hostPlayerId: Guid
           hostName: string        # the host is the first player; their name lives here (never goes through JoinGame)
           joinCode: Guid
+          difficulty: Difficulty (familj|klassisk|svår)   # record of the choice; the puzzles embody it
           puzzles: Puzzle[]       # { numbers: int[], target: int, sampleSolution: Solution } — hidden sample; generated, always solvable
           openedAt: DateTimeOffset
       - v: Screen / Game lobby
@@ -120,13 +133,14 @@ slices:
         given: []
         when:
           - c: OpenLobby
-            props: { hostName: Martin }
+            props: { hostName: Martin, difficulty: klassisk }
         then:
           - e: Game / LobbyOpened
             props:
               hostPlayerId: hostPlayerId
               hostName: Martin
               joinCode: joinCode
+              difficulty: klassisk
               puzzles: [puzzle0, puzzle1]
               openedAt: openedAt
 

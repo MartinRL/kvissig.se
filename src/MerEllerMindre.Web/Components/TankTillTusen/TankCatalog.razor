@@ -1,5 +1,6 @@
-@* GET /tank-till-tusen — the game's entry. Single fixed v1 (puzzles are generated per game, no
-   pack to pick); "Spela" links to /tank-till-tusen/new where the host enters their name. *@
+@* GET /tank-till-tusen — the game's entry. Puzzles are generated per game (no pack to pick);
+   the host picks a nivå (familj | klassisk | svår) and lands on /tank-till-tusen/new where
+   they enter their name. The knob = minsta antal räknesteg som krävs för att nå målet. *@
 <MainLayout Title="Tänk Till Tusen: sifferspelet där lägst total vinner"
             Description="Tänk Till Tusen är sifferspelet ni spelar online men tillsammans i samma rum, var och en på sin skärm. Alla får samma sex tal och samma mål: nå det med de fyra räknesätten innan tiden är ute. Närmast (eller exakt) vinner rundan. Lägst total vinner."
             CanonicalPath="/tank-till-tusen">
@@ -10,16 +11,34 @@
             <span class="pill soft">Värd</span>
         </div>
 
-        <h1>Tänk Till Tusen</h1>
-        <p class="sub">Sex tal, ett mål, en minut. Du blir värd och första spelaren. Lägst total vinner.</p>
+        <h1>Välj nivå</h1>
+        <p class="sub">Sex tal, ett mål, en minut. Du blir värd och första spelaren. @RoundCount pussel per spel, lägst total vinner.</p>
 
         <div class="card">
             <div class="pack">
                 <div class="info">
-                    <div class="name">Nå målet</div>
-                    <div class="count">@RoundCount pussel i spelet · en minut per pussel</div>
+                    <div class="name">Familj</div>
+                    <div class="count">Lite lättare: målet går alltid att nå på två räknesteg</div>
                 </div>
-                <a class="btn" href="/tank-till-tusen/new">Spela</a>
+                <a class="btn" href="/tank-till-tusen/new?difficulty=familj">Spela</a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="pack">
+                <div class="info">
+                    <div class="name">Klassisk</div>
+                    <div class="count">Originalet: blandad svårighet</div>
+                </div>
+                <a class="btn" href="/tank-till-tusen/new?difficulty=klassisk">Spela</a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="pack">
+                <div class="info">
+                    <div class="name">Svår</div>
+                    <div class="count">För räknerävar: målet kräver minst fyra räknesteg</div>
+                </div>
+                <a class="btn" href="/tank-till-tusen/new?difficulty=svår">Spela</a>
             </div>
         </div>
     </div>

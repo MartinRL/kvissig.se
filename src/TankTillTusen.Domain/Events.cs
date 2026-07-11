@@ -12,6 +12,7 @@ public record LobbyOpened(
     Guid HostPlayerId,
     string HostName,
     Guid JoinCode,
+    Difficulty Difficulty,
     IReadOnlyList<Puzzle> Puzzles,
     DateTimeOffset OpenedAt
 );
