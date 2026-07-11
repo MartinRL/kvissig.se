@@ -136,14 +136,15 @@ source, no GT).
 ## ACMM Level-Up!
 - [x] level 1
 - [x] level 2
-- [ ] level 3 - half-way there- WIP
+- [x] level 3 - half-way there- WIP
 - [ ] level 4
 - [ ] level 5
 - [ ] level 6
 
-- [ ] CodeHealth as a part of the harness/evalops
+- [x] CodeHealth as a part of the harness/evalops
 
 ## SEO/GEO → se specs/seo-geo.md
+- [ ] SEO mattespel
 
 ## feedback/crowdsourcing
 - [ ] kunna skicka feedback (efter avslutat spel?)
