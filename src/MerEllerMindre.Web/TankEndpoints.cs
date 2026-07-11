@@ -144,10 +144,10 @@ public static class TankEndpoints
     {
         try
         {
-            var dto = JsonSerializer.Deserialize<SolutionDto>(json);
-            if (dto is null)
-                return null;
-            var steps = (dto.Steps ?? []).Select(s => new Step(s.LeftIndex, (Operator)s.Op, s.RightIndex)).ToList();
+            var dto = JsonSerializer.Deserialize<SolutionDto>(json, JsonSerializerOptions.Web);
+            if (dto?.Steps is null)
+                return null; // malformed post — a real client post always has steps (possibly empty)
+            var steps = dto.Steps.Select(s => new Step(s.LeftIndex, (Operator)s.Op, s.RightIndex)).ToList();
             return new Solution(steps, dto.AnswerIndex);
         }
         catch (JsonException)

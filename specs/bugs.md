@@ -53,6 +53,10 @@ Loggade buggar i samma anda som `tasks.md`. Mall för nya poster:
   - Förväntat: frågans jämförelseord pekar samma håll som [Mer]/[Mindre] så en familj kan enas om svaret.
   - Faktiskt: kort som "Inträffade Stockholms blodbad före eller efter Gustav Vasas trontillträde?" (1520 vs 1523) jämför *när* mot fasta [Mer]/[Mindre] — större årtal = senare = *mindre* länge sedan, en inverterad osynlig mappning, OCH sakA höll det mindre årtalet (konventionsbrott). Omöjligt att gissa rätt utan dold regel. Fix: skrev om kort med äkta magnitud (regeringslängd/ålder/höjd/antal) och ersatte rena temporala årtalskort med icke-temporala magnitud-kort i alla tre packen (antal bevarat 1085/1085/175). Ny `tydlighetsgranskare`-agent + stilguide-sektion "Otydlig riktning" fångar mönstret framåt.
 
+- [x] **TTT fel poäng #3: alla spelare fick Nådde 3 · Poäng 100** — `TankEndpoints.Parse` (TankEndpoints.cs:147, `fel-poäng-#3.jpg`)
+  - Förväntat: varje spelares faktiskt nådda tal och `min(|nådd − mål|, 100)`-poäng.
+  - Faktiskt: klienten postar camelCase (`{steps, answerIndex}`) men servern deserialiserade UTAN options → case-sensitive PascalCase band INGET → `SolutionDto(Steps: null, AnswerIndex: 0)` → tyst `Solution([],0)` = lås `Numbers[0]` (3) för alla → 100 poäng för alla. Domäntesterna passerade aldrig JSON-gränsen, därför gröna. Fix: `JsonSerializerOptions.Web` + `Steps is null`-vakt (malformed → avslag, aldrig fejk-lösning). Regressionstest `TankSolutionParseTests` låser payload-form ↔ options-kontraktet.
+
   ## Loggor
   - [x] Mer eller Mindre – Loggor (alla åldrar 1) --> Mer eller Mindre – Loggor – alla åldrar
   - [x] Mer eller Mindre – Loggor (blandat 1) --> Mer eller Mindre – Loggor
