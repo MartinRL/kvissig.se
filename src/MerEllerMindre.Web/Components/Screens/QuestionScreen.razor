@@ -1,8 +1,10 @@
 @* The Question screen, now a tvåstegsraket. Stage 1 (Direction): pick which item is MER —
    no slider. Stage 2 (Difference): the direction is already revealed, so the taller bar is
-   FIXED; a slider in the card's OWN unit (0 → max(A,B)) answers the differensfråga. No raw
-   values / facit appear here — those are revealed on the results screen. Interactive, so it
-   does NOT poll: submitting swaps in the Waiting screen. *@
+   FIXED at "100" and the question is 0-100-framed: "Om {MER} är 100, var hamnar {MINDRE}?".
+   Under the hood the slider is still RAW (0 → max(A,B)) and posts the raw value; only the
+   DISPLAY is the 0-100 placement (the server normalizes as before). No raw values / facit
+   appear here — those are revealed on the results screen. Interactive, so it does NOT poll:
+   submitting swaps in the Waiting screen. *@
 @if (Model.Stage == QuestionStage.Direction)
 {
     <div class="card">
@@ -53,18 +55,18 @@ else
             <span class="pill">Fråga @Model.QuestionNumber / @Model.TotalQuestions · skillnad</span>
         </div>
         <h1>@Model.QuestionText</h1>
-        <p class="answer">@if (MerLogo is not null) { <img class="logoimg" src="@MerLogo" alt="@MerItem" /> } <span class="mer">@MerItem</span> är <span class="mer">MER</span>. Hur stor är skillnaden?</p>
+        <p class="answer">@if (MerLogo is not null) { <img class="logoimg" src="@MerLogo" alt="@MerItem" /> } <span class="mer">@MerItem</span> är <span class="mer">MER</span>.</p>
 
         <form hx-post="@($"/games/{Model.JoinCode:N}/difference")" hx-target="#screen" hx-swap="innerHTML">
             <input type="hidden" name="__RequestVerificationToken" value="@Model.AntiforgeryToken" />
             <input type="hidden" name="guessedDifference" id="diffInput" value="0" />
 
-            <p class="steplabel">@Model.DifferencePrompt</p>
+            <p class="steplabel">Om @if (MerLogo is not null) { <img class="logoimg" src="@MerLogo" alt="@MerItem" /> } else { @MerItem } är 100, var hamnar @if (MindreLogo is not null) { <img class="logoimg" src="@MindreLogo" alt="@MindreItem" /> } else { @MindreItem }?</p>
             @* ponytail: max stays in the DOM (max="5.9") — accepted view-source ceiling for a
                co-located party game; only the *displayed* value is hidden. Upgrade path if true
                hiding is ever needed: post a 0–100 proportion instead of the raw value. *@
             <div class="diffwrap">
-                <input type="range" id="diff" min="0" max="@MaxStr" value="0" step="@StepStr" aria-label="@Model.Unit" />
+                <input type="range" id="diff" min="0" max="@MaxStr" value="0" step="@StepStr" aria-label="Skala 0 till 100" />
             </div>
 
             <div class="twobars" aria-hidden="true">
@@ -120,9 +122,9 @@ else
                 range.style.background = `linear-gradient(90deg, var(--accent) ${n}%, var(--line) ${n}%)`;
                 const pct = 100 - n;
                 short.style.height = pct + '%';
-                shortPct.textContent = `≈ ${pct}%`;
-                tallPct.textContent = '';
-                range.setAttribute('aria-valuetext', `${shortName} ${pct} procent av ${tallName}`);
+                shortPct.textContent = `≈ ${pct}`;
+                tallPct.textContent = '100';
+                range.setAttribute('aria-valuetext', `${shortName} ${pct} när ${tallName} är 100`);
             }
 
             range.addEventListener('input', render);
@@ -138,4 +140,6 @@ else
     private bool MerIsA => Model.RevealedDirection == Direction.Mer;
     private string MerItem => MerIsA ? Model.ItemA : Model.ItemB;
     private string? MerLogo => MerIsA ? Model.LogoA : Model.LogoB;
+    private string MindreItem => MerIsA ? Model.ItemB : Model.ItemA;
+    private string? MindreLogo => MerIsA ? Model.LogoB : Model.LogoA;
 }

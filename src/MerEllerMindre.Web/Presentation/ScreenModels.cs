@@ -44,8 +44,6 @@ public sealed record QuestionVm(
     string QuestionText,
     string ItemA,
     string ItemB,
-    string DifferencePrompt,
-    string Unit,
     decimal SliderMax,
     decimal SliderStep,
     QuestionStage Stage,

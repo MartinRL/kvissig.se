@@ -57,6 +57,10 @@ Loggade buggar i samma anda som `tasks.md`. Mall för nya poster:
   - Förväntat: varje spelares faktiskt nådda tal och `min(|nådd − mål|, 100)`-poäng.
   - Faktiskt: klienten postar camelCase (`{steps, answerIndex}`) men servern deserialiserade UTAN options → case-sensitive PascalCase band INGET → `SolutionDto(Steps: null, AnswerIndex: 0)` → tyst `Solution([],0)` = lås `Numbers[0]` (3) för alla → 100 poäng för alla. Domäntesterna passerade aldrig JSON-gränsen, därför gröna. Fix: `JsonSerializerOptions.Web` + `Steps is null`-vakt (malformed → avslag, aldrig fejk-lösning). Regressionstest `TankSolutionParseTests` låser payload-form ↔ options-kontraktet.
 
+- [x] **Steg 2 frågar i enheten men spelaren svarar i procent** — `QuestionScreen.razor` (stage 2, `741940416_..._n.jpg`)
+  - Förväntat: frågan och svaret på gisskärmen är i samma skala.
+  - Faktiskt: steplabeln var kortets `differensfråga` ("Hur många centimeter skiljer det?") men slidern visade aldrig ett tal, bara "≈ NN%" — spelaren gissade i praktiken en andel men avkrävdes enheten. Fix: 0-100-ramen — steplabeln genereras: "Om {MER} är 100, var hamnar {MINDRE}?" (logo-om-finns), korta stapeln visar "≈ NN", höga "100". Ren presentation: hidden input postar fortfarande rått slidervärde, servern normaliserar som förut. `DifferencePrompt`/`Unit` städade ur `QuestionVm` (domänen + CSV-kolumnen `differensfråga` orörda).
+
   ## Loggor
   - [x] Mer eller Mindre – Loggor (alla åldrar 1) --> Mer eller Mindre – Loggor – alla åldrar
   - [x] Mer eller Mindre – Loggor (blandat 1) --> Mer eller Mindre – Loggor

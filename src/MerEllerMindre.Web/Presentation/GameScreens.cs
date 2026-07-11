@@ -83,8 +83,6 @@ public static class GameScreens
             Heading(state, card.QuestionText),
             card.ItemA,
             card.ItemB,
-            card.DifferencePrompt,
-            card.Unit,
             sliderMax,
             SliderStep(sliderMax),
             stage,

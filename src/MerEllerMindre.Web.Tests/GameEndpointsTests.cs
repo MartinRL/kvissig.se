@@ -226,7 +226,7 @@ public class GameEndpointsTests : IClassFixture<TestAppFactory>
     }
 
     [Fact]
-    public async Task DifferenceScreen_ShowsAUnitSliderBoundedByTheLargerRawValueOnceDirectionRevealed()
+    public async Task DifferenceScreen_Shows0To100FramedSliderBoundedByTheLargerRawValueOnceDirectionRevealed()
     {
         var host = NewClient();
         var player = NewClient();
@@ -239,9 +239,11 @@ public class GameEndpointsTests : IClassFixture<TestAppFactory>
         await SubmitDirection(player, code, "Mindre");
 
         var slider = await (await player.GetAsync($"/games/{code}/difference")).Content.ReadAsStringAsync();
-        // Q0 = Danmark 5,9 / Norge 5,5 (miljoner invånare): slider 0 → max(A,B) in the card's unit.
+        // Q0 = Danmark 5,9 / Norge 5,5: the slider is still RAW under the hood (0 → max(A,B)),
+        // but the question is 0-100-framed — no unit on this screen.
         slider.Should().Contain("max=\"5.9\"");
-        slider.Should().Contain("miljoner invånare");
+        slider.Should().Contain("är 100, var hamnar");
+        slider.Should().NotContain("miljoner invånare skiljer");
     }
 
     [Fact]

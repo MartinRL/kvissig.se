@@ -49,9 +49,10 @@
 #   reveal + the bonus drama is the whole point of splitting the rocket.
 #
 #   STAGE 2 (skillnad): everyone then guesses the magnitude (SubmitDifference), exactly
-#   as before — regardless of whether their direction was right. They do NOT pick a 0-100
-#   number; they guess the RAW absolute difference in the card's own unit (e.g. 0,3
-#   miljoner invånare, 220 km) — answering the card's differencePrompt — and the SYSTEM
+#   as before — regardless of whether their direction was right. The PRESENTATION is
+#   0-100-framed: "om den större är 100, var hamnar den mindre?" (a 0-100 placement).
+#   The wire contract is unchanged: the slider is raw under the hood, so SubmitDifference
+#   still carries the RAW absolute difference in the card's own unit and the SYSTEM
 #   normalizes server-side. The client never sees the hidden values, so it cannot
 #   normalize: SubmitDifference carries the RAW guessedDifference and ScoreDifference
 #   (which holds the card) does the maths. With mx = max(valueA, valueB):
