@@ -576,3 +576,209 @@ added is O(1) infrastructure (708 LOC incl. tests). The breakeven point is cross
 game 4: its record layer costs ~2 csproj lines instead of ~186 LOC. The real win is
 structural, not numeric — the spec is now the single change surface for the record
 layer, enforced by the compiler.
+
+## 10. Analysis — the 1:1 spec↔implementation thesis for agentic engineering (2026-07-12)
+
+Written after step 1 completed for all three games (§9–9.3). Synthesis of a three-track
+research pass: (a) in-repo evidence inventory, (b) the 2023–2026 spec-driven-development
+literature, (c) the strongest steelmanned counter-case (MDA history, DSL critiques,
+LLM training-data distribution). The claim under test:
+
+> **Thesis.** An architecture whose implementation maps 1:1 onto a formal spec is
+> dramatically smoother for agentic engineering than "programming in English" over a
+> conventional layered/clean/onion + ORM + RDBMS stack.
+
+### 10.1 The decisive axis is the transformer, not the spec
+
+The 2025 SDD wave — GitHub Spec Kit, AWS Kiro, OpenAI's "The New Code" — already agrees
+with half the thesis: intent, not code, should be the durable artifact. But all of them
+keep an **LLM as the spec→code transformer**: markdown in, probabilistic code out. That
+is exactly why the published critiques land on them — spec drift and duplication
+("waterfall in markdown"), review burden *moving* to prose instead of shrinking
+(Böckeler's taxonomy and skepticism on martinfowler.com: spec-first artifacts go stale;
+she would rather review code than markdown), ceremony that doesn't scale down to a bug
+fix (Kiro), and the measured non-determinism of LLM codegen even at temperature 0
+(arXiv 2308.02828, 2408.04667). Non-determinism is fatal for review economics:
+regeneration produces incidental churn, so diffs don't compose and every regeneration
+is a fresh review event.
+
+What this repo does differs categorically on that axis: emlang → records is a
+**deterministic function**, and its determinism was *measured before mechanizing*
+(step 0: zero irreducible findings). Same spec in, byte-identical code out; spec-diff ↔
+code-diff correspondence is stable; CI can assert `artifact == f(spec, generator)`.
+Böckeler's non-determinism objection — the sharpest published critique of SDD —
+structurally cannot reach the deterministic stratum. Dijkstra made the underlying point
+in 1978 (EWD667): formal texts are effective precisely because their legitimacy is
+checkable by a few simple rules, while natural language excels at making nonsense
+non-obvious. Karpathy's "English is the hottest new programming language" line is the
+antithesis — but note that when he coined "vibe coding" he scoped it to throwaway
+projects himself.
+
+So the honest framing is not two points on one scale but a ladder of **who transforms
+and what verifies**:
+
+1. English prompt → LLM → code; humans review everything (vibe coding).
+2. Markdown spec → LLM → code + tests (Spec Kit, Kiro): intent captured, transformation
+   still stochastic, spec itself drifts.
+3. **Formal spec → deterministic generator for the provable stratum + agent writing the
+   residue against compiler/test oracles** ← this repo.
+4. Full formal synthesis (nobody credibly claims it).
+
+Each rung up buys review-once semantics for a larger stratum. No published source
+argues rung 3 end-to-end (closest: the "Compiled AI" pattern — run the LLM at
+generation time, validate deterministically — and event-sourced agent-state papers);
+this document is, as far as the research pass found, an original synthesis of
+documented properties, not a citation of an established result.
+
+### 10.2 Why the agent cares — mechanisms with in-repo evidence
+
+The 2025–26 practitioner consensus is that **generation is no longer the bottleneck;
+verification is**. An architecture is agent-friendly to the degree it maximizes *oracle
+density per token*: how fast and how mechanically can wrongness be detected?
+
+| Mechanism | Layered + ORM + RDBMS | This repo | Evidence |
+|---|---|---|---|
+| Transformation | LLM interprets prose per change | deterministic generator, reviewed once | §9 round-trip: 0 divergences, 3 games |
+| Strongest oracle | runtime (ORM mapping, DI resolution, SQL) | compile time (exhaustive unions, no default arms, TreatWarningsAsErrors) | new `e:` in spec ⇒ build error today; CS8795 seam in step 2 |
+| Test loop | DB/containers/migrations, minutes | 181 pure-function `[Fact]`s in **< 8 s**, no mocks, no IO | Decider determinism (Chassaing): (State, Command) → same Events, always |
+| Edit surface for one behavioral change | entity + DTO + mapper + migration + validator + controller + service + repo | spec + ~4–6 hand files, **0 generated files touched** | "add a field to SubmitGuess" trace: spec, State, Decider, endpoint, razor, test |
+| Behavioral ground truth | smeared across layers + SQL | 3,444 spec LOC describe all 3 games' surfaces (vs 2,720 hand-written domain LOC) | agent loads one artifact to know the behavior |
+| Spec↔code drift | discipline (fails) | build error — the spec is load-bearing for compilation | ADR 016 |
+
+The deepest row deserves a name: **representational redundancy**. A layered ORM stack
+states one domain fact in many representations — entity, DTO, mapper, SQL schema,
+validator, API contract — and coherent multi-site editing is precisely the failure mode
+of LLM agents (and of humans, which is why drift folklore exists). Deterministic
+derivation doesn't *manage* that redundancy, it deletes it. This also sharpens what the
+thesis is **not**: it is not anti-layering. The repo keeps the strictest boundary there
+is — functional core / imperative shell, enforced by fitness tests — because dependency
+discipline *helps* agents (small blast radius, testable seams; the pro-boundaries
+agent-era literature is right about that). What it deletes is ceremonial
+*representational* tiers. Honest note: the read side here still passes one fact through
+4–5 representations (spec → record → projection → Vm → Razor), so the thesis is only
+partially realized in-repo; steps 3–4 target part of that.
+
+Agents also change spec-first economics twice over. Keeping spec and code in sync used
+to be human toil (why "the documentation lies" became folklore); here the sync is
+compiler-enforced, and the agent makes spec-editing cheap. "Programming in English"
+does the opposite: it reinstates documentation-as-source *without* enforcement. Grove's
+indictment of current practice — teams discard the prompt and version-control its
+output, i.e. shred the source and keep the binary — applies to prompt-driven work, and
+his proposed fix (markdown specs) still lacks the deterministic bridge.
+
+### 10.3 The honest counter-case
+
+1. **Training-data distribution — the strongest single objection.** LLMs are most
+   fluent where training data is thickest: mainstream layered CRUD. emlang is a
+   zero-resource DSL; the LRPL/DSL performance gap is documented (ACM TOSEM survey,
+   arXiv 2410.03981). The agent's raw fluency is highest exactly where the thesis says
+   the architecture is worst. In-repo mitigations: the repo carries its own instruction
+   set (CLAUDE.md, specs/CLAUDE.md cheat-sheet, constitution, 16 ADRs, fitness tests) —
+   a fixed context cost replacing per-change scattered reads — and the DSL is small,
+   YAML-shaped, lint-guarded. Three 1:1 agent transcriptions and two zero-deviation
+   flips (§9.2) suggest the mitigation works, but that is anecdote; **no published
+   benchmark measures agent performance on a well-documented project-local DSL.**
+2. **MDA is the ghost at this feast.** 1:1 model→code with generated artifacts kept out
+   of source control is precisely what MDA promised, and it died on: hand-edits
+   breaking round-trip (protected regions), models as cumbersome as code, the last 20%
+   never fitting, model-level tooling gaps (den Haan's 8 reasons), and Fowler's point
+   that the model layer is itself a platform you're locked to. The experiment's
+   survival conditions, stated so a future reader can check them: (a) generation stays
+   restricted to strata whose determinism is **proved before flipping** (step 0's
+   methodology — the discipline MDA lacked); (b) generated code is never hand-edited
+   *by construction* (obj/, not disk — no protected regions to rot); (c) the escape
+   valve is a **typed seam** (partial methods, fixtures referenced by identifier) where
+   missing human code is a compile error, not a silently-lost region; (d) the language
+   doesn't creep toward general-purpose. On (d), honesty: emlang lint already rejected
+   `fixtures:`, forcing a sidecar file — the expressiveness ceiling and the governance
+   risk of a DSL we don't own are real and already touched.
+3. **The escape hatches already exist.** The 3-fact GameManifest; scoring formulas
+   present in the spec only as prose that an agent must transcribe into C#; solver,
+   sampling and banding algorithms that live only in code. Each hatch is a place where
+   "1:1" is really "1:1 for the mechanical stratum, spec-*anchored* for the rest." The
+   thesis as stated overreaches; the proven claim is the narrower one.
+4. **Toolchain liability.** netstandard2.0 freeze, incremental-caching footguns that
+   degrade the IDE silently (even Microsoft's own generators shipped non-incremental —
+   dotnet/runtime #74557), generator debugging through obj/, Roslyn version drift
+   between IDE and CLI. A compiler-adjacent component maintained by a team of one, in
+   the LLM's weakest training-data zone. §9.1's zero-pain wiring is one data point, not
+   a refutation.
+5. **Fowler's quagmire cuts both ways.** His OrmHate argument — teams that flee a
+   mainstream tool's 20% pain rebuild the 80% badly as a homegrown framework — applies
+   verbatim to homegrown spec toolchains. The step-5 measurement exists to catch this.
+6. **RDBMS/ORM persist for the read side.** Ad-hoc queries, reporting, migrations,
+   fifty years of ops tooling. A quiz game with in-memory streams *dodges* that
+   question rather than answering it. If the thesis generalizes, it generalizes to
+   systems where the write model dominates — or must show spec-generated read-side
+   schema/projections.
+7. **Scale of evidence.** n=3 small games, one author, and LOC-neutral net (+7, §9.3).
+   The numeric case is modest; the structural case (single change surface) is the real
+   claim, and it is untested under team concurrency, schema migration, or performance
+   pressure.
+8. **The disposability camp attacks from the other flank:** if agent-generated code is
+   cheap and regenerable, why build machinery to keep 557 LOC out of git? Recorded
+   answer: the machinery's value is not the LOC, it is the **contract** — determinism
+   turns regeneration from a review event into a build step. But if generator
+   maintenance ever rivals the drift it prevents, the experiment failed by its own
+   standard.
+
+### 10.4 Verdict
+
+The thesis survives in a refined form:
+
+> For agentic engineering the leverage is not "spec instead of code," nor "fewer
+> layers" — it is **maximizing the fraction of the system whose correctness is
+> machine-decided, and minimizing representational redundancy in what remains.** A 1:1
+> spec↔impl mapping with a *deterministic* generator is the strongest available form of
+> the first; a functional-core/event-sourced shape with exhaustive unions and
+> spec-derived GWT tests is the strongest available form of the second. "Programming in
+> English" over a layered ORM stack is weak on both axes at once: the transformation is
+> stochastic, and verification is diffuse, slow, and multi-representation.
+
+The agent is not the reason the architecture is good; the agent is an **amplifier of
+whatever verification regime exists**. Amplified diffuse verification yields plausible
+drift at machine speed; amplified concentrated verification yields checkable increments
+at machine speed. That asymmetry — not taste — is the content of the thesis.
+
+Falsifiers, extending §7:
+
+- **F1 (MDA relapse):** step 2/3 seams accumulate hand-maintained metadata until
+  reviewing spec + seam costs more than reviewing the code it replaces (Böckeler risk
+  realized).
+- **F2 (economics):** a 4th game's record layer costs materially more than the
+  predicted ~2 csproj lines + spec.
+- **F3 (agent benchmark):** an agent performing a comparable end-to-end change ("add a
+  field") in this repo vs a conventional stack shows no reduction in files touched,
+  tokens consumed, or review iterations. Nothing published measures this; it is worth
+  running deliberately.
+- **F4 (toolchain drag):** generator/toolchain maintenance commits start rivaling the
+  transcription commits they replaced.
+
+### 10.5 Sources (additions to §8)
+
+- Dijkstra, EWD667 *On the foolishness of "natural language programming"* —
+  https://www.cs.utexas.edu/~EWD/transcriptions/EWD06xx/EWD667.html
+- Böckeler, *Understanding Spec-Driven Development: Kiro, spec-kit, and Tessl* —
+  https://martinfowler.com/articles/exploring-gen-ai/sdd-3-tools.html
+- GitHub Spec Kit — https://github.com/github/spec-kit (+ Scott Logic critique:
+  https://blog.scottlogic.com/2025/11/26/putting-spec-kit-through-its-paces-radical-idea-or-reinvented-waterfall.html)
+- AWS Kiro, spec-driven IDE + EARS notation — https://kiro.dev/docs/specs/
+- Grove (OpenAI), *The New Code*, AI Engineer 2025 — specs as durable artifact
+- Karpathy: English-as-PL (2023) / vibe coding + its throwaway-scope caveat (2025);
+  Willison, *Not all AI-assisted programming is vibe coding* —
+  https://simonwillison.net/2025/Mar/19/vibe-coding/
+- LLM codegen non-determinism: arXiv 2308.02828; temp-0 non-determinism: arXiv
+  2408.04667; "Compiled AI" (LLM at generation time, deterministic validation): arXiv
+  2604.05150
+- LRPL/DSL performance gap survey — https://arxiv.org/abs/2410.03981
+- MDA post-mortems: Fowler *ModelDrivenArchitecture* / *UmlAsProgrammingLanguage*
+  blikis; den Haan, *8 Reasons Why Model-Driven Approaches (will) Fail* —
+  https://www.infoq.com/articles/8-reasons-why-MDE-fails/
+- Neward, *The Vietnam of Computer Science* (2006); Fowler, *OrmHate* —
+  https://martinfowler.com/bliki/OrmHate.html
+- Fowler, *Language Workbenches* (DSL lock-in/cost) —
+  https://martinfowler.com/articles/languageWorkbench.html
+- Chassaing, *Functional Event Sourcing Decider* —
+  https://thinkbeforecoding.com/post/2021/12/17/functional-event-sourcing-decider
+- .NET SG risks: Andrew Lock series parts 9–10 (incremental caching);
+  dotnet/roslyn#72777 (netstandard2.0); dotnet/runtime#74557
