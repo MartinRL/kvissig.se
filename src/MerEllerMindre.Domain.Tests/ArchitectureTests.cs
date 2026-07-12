@@ -63,7 +63,18 @@ public class ArchitectureTests
         var csproj = Read("src/MerEllerMindre.Domain/MerEllerMindre.Domain.csproj");
 
         csproj.Should().NotContain("<PackageReference", "the functional core has no NuGet deps");
-        csproj.Should().NotContain("<ProjectReference", "the functional core depends on nothing");
+
+        // ADR 016: the Emlang source generator is wired as an Analyzer-only ProjectReference
+        // (never a runtime dependency). Anything else is a real dependency and forbidden.
+        var offenders = System.Xml.Linq.XDocument.Parse(csproj)
+            .Descendants("ProjectReference")
+            .Where(r => (string?)r.Attribute("OutputItemType") != "Analyzer"
+                        || (string?)r.Attribute("ReferenceOutputAssembly") != "false")
+            .Select(r => (string?)r.Attribute("Include"))
+            .ToList();
+
+        offenders.Should().BeEmpty(
+            "the functional core depends on nothing at runtime — only Analyzer-wired generator references (ADR 016)");
     }
 
     [Fact]

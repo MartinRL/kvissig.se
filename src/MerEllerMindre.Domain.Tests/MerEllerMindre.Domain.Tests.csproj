@@ -17,7 +17,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MerEllerMindre.Domain\MerEllerMindre.Domain.csproj" />
-    <ProjectReference Include="..\Emlang.CodeGen\Emlang.CodeGen.csproj" />
   </ItemGroup>
 
 </Project>
