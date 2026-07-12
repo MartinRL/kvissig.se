@@ -9,6 +9,7 @@
     <Project Path="src/Blindbudet.Domain/Blindbudet.Domain.csproj" />
     <Project Path="src/Emlang.CodeGen/Emlang.CodeGen.csproj" />
     <Project Path="src/Emlang.CodeGen.Tests/Emlang.CodeGen.Tests.csproj" />
+    <Project Path="src/Emlang.Generators/Emlang.Generators.csproj" />
     <Project Path="src/Blindbudet.Domain.Tests/Blindbudet.Domain.Tests.csproj" />
     <Project Path="src/MerEllerMindre.Domain.Tests/MerEllerMindre.Domain.Tests.csproj" />
     <Project Path="src/MerEllerMindre.Domain/MerEllerMindre.Domain.csproj" />
