@@ -1,167 +1,229 @@
-# Representational Redundancy
+# "The Spec Is the Product" Is a Slogan Until the Code Leaves Your Repo
 
-> Last Friday I deleted 557 lines of C# from git. The build stayed green.
+> Everyone agrees verification is the bottleneck. Almost nobody draws the conclusion
+> sitting in their `.gitignore`.
 
-## The lines nobody misses
+## The bottleneck everyone agrees on
 
-Last Friday I deleted 557 lines of C# from git. The build stayed green. All 181 tests
-green. The web layer untouched.
+Here is the one thing the whole industry currently agrees on: with LLM agents, producing
+code is no longer the expensive part. *Knowing it is right* is. Verification is the
+bottleneck. Every serious writer on agentic engineering has landed there — the debates
+are about what to do about it.
 
-The lines were the record layer of three games — commands, events, errors — and they
-were deleted because they are no longer needed *as files*. They are generated on every
-build, deterministically, from the same emlang spec that was always the source of
-truth, by a Roslyn source generator straight into the compilation. They never exist on
-disk. They cannot drift, because there is nothing left to drift *from*.
+The popular answer is "programming in English": vibe coding, spec kits, spec-first IDEs.
+Capture intent in a markdown spec, let the agent transform it into code, keep the spec as
+the durable artifact. And that answer is right about exactly half of it. Intent, not
+code, *should* be the durable artifact.
 
-And here is the number that gives the game away: the net ledger in git came to
-**+7 lines**. Transcription removed: ~701. Generator infrastructure added: 708. The
-line count is a zero-sum game. So why bother?
+But look at who performs the transformation in every one of those setups: **an LLM**.
+Markdown in, probabilistic code out. Every regeneration is a fresh stochastic outcome;
+diffs don't compose; every run is a new review event. You declared the spec the product —
+and then wired the world's least deterministic compiler between the product and the thing
+that ships. The verification bottleneck you set out to relieve is now *load-bearing* on
+every regeneration.
 
-Because the lines were never the point. The point is what those 557 lines *were*: the
-same facts, stated one more time.
+There is a harder conclusion hiding under the consensus, and this article is about
+drawing it. It ends with C# files that are not source code, and a `git rm` that made a
+build *more* trustworthy.
 
 ## The enemy has a name
 
-How many places in your codebase know that a player has a name?
+Start with a question you can answer about your own codebase right now: how many places
+know that a customer has an email address?
 
-The entity. The DTO. The mapper between them. The SQL column. The migration that
-created the column. The validator. The OpenAPI schema. The TypeScript interface. The
-test fixture. Nine representations of **one** domain fact — and every behavioral change
-is a coherent edit across nine sites at once.
+The entity. The DTO. The AutoMapper profile. The EF Core configuration. The SQL column.
+The migration that created the column. The FluentValidation rule. The OpenAPI schema. The
+TypeScript interface. The test fixture. Ten representations of **one** domain fact — and
+every behavioral change is a coherent edit across ten sites at once.
 
-<!-- TODO asset: fan-out diagram — one fact, nine representations, same visual language as decider-pattern.svg -->
+<!-- TODO asset: fan-out diagram — one fact, ten representations -->
 ![[assets/one-fact-nine-places.svg|700]]
 
 This deserves its own name: **representational redundancy**. Not "layers", not
-"boilerplate" — restatement. The same truth hand-transcribed between representations
+"boilerplate" — *restatement*. The same truth hand-transcribed between representations
 that no compiler holds together.
 
-Humans have always drifted on this — it is why "the documentation lies" became
-folklore. But notice exactly what LLM agents are *worst* at: coherent editing across
-many sites. An agent produces plausible code at every individual site; it is *between*
-the sites that things break. So representational redundancy is not merely expensive the
-way it always was — it is expensive precisely where the new workforce is weakest.
+Humans have always drifted on this — it is why "the documentation lies" became folklore.
+But notice exactly what LLM agents are *worst* at: coherent editing across many sites. An
+agent produces plausible code at every individual site; it is *between* the sites that
+things break, and between the sites is precisely where no oracle lives. No compiler error
+fires when the validator disagrees with the DTO. No test fails when the OpenAPI schema
+drifts from the entity — until an integration test, minutes and containers away, maybe.
+
+So representational redundancy is not merely expensive the way it always was. It is
+expensive precisely where the new workforce is weakest, and cheap verification is
+precisely what the new workforce needs most. Every restatement you delete is a class of
+agent error that can no longer occur.
 
 Deterministic derivation does not *manage* that redundancy. It **deletes** it.
 
-## It was never the layers
+## Who transforms, what verifies
 
-Now for the objection I would shout from the back seat myself: *"oh, so architecture is
-obsolete now, just YOLO everything into one file?"* No. The thesis is not anti-layer.
-
-This repo keeps the hardest boundary there is — functional core / imperative shell —
-and enforces it in CI with architecture tests. Dependency discipline *helps* agents:
-small blast radius, testable seams, one rule ("the core touches no IO") that fails the
-build when broken.
-
-So separate two things that get lumped together in every clean/onion/n-tier debate:
-
-- **A boundary** states a *rule*, once: dependencies point that way, never this way.
-- **A tier** that restates the same fact — entity to DTO to mapper to schema — states
-  no rule at all. It transcribes.
-
-Boundaries are cheap and machine-checkable. Restatement is expensive and
-machine-uncheckable. Conventional layered architectures with ORMs institutionalize the
-restatement and call it discipline.
-
-## Who transforms?
-
-"Programming in English" is the tune of the times — vibe coding, spec kits, spec-first
-IDEs. And they are right about half of it: intent, not code, should be the durable
-artifact. But look at who performs the transformation from intent to code in every one
-of those setups: **an LLM**. Markdown in, probabilistic code out. Every regeneration is
-a fresh stochastic outcome; diffs don't compose; every run is a new review event. The
-spec drift you meant to cure moves into the spec itself.
-
-There is a ladder, and the rungs differ in *who transforms and what verifies*:
+There is a ladder, and the rungs differ in exactly two properties: *who performs the
+transformation from intent to code, and what verifies the result*.
 
 1. English → LLM → code, a human reviews everything. (Vibe coding — even the man who
    coined it scoped it to throwaway projects.)
-2. Markdown spec → LLM → code + tests. Intent captured, transformation still
-   stochastic.
+2. Markdown spec → LLM → code + tests. Intent captured; transformation still stochastic;
+   every regeneration still a review event.
 3. **Formal spec → deterministic generator for the provable stratum + an agent writing
-   the rest against compiler and test oracles.** ← where I moved last Friday.
+   the rest against compiler and test oracles.**
 4. Full formal synthesis. (Nobody serious is claiming it.)
 
 <!-- TODO asset: the ladder, four rungs, transformer + verifier per rung -->
 ![[assets/transformer-ladder.svg|700]]
 
-Every rung up buys *review-once* semantics for a larger stratum. The generator was
-reviewed once and proved against all three games — after that, regeneration is a build
-step, not a review event. Same spec in, byte-identical code out. CI can assert
-`artifact == f(spec, generator)` as an invariant, not as a hope.
+Every rung up buys *review-once* semantics for a larger stratum. On rung 2 you review the
+generated code every time, because you must — the transformer is a distribution, not a
+function. On rung 3 you review the generator once, prove it against the spec, and from
+then on regeneration is a build step. Same spec in, byte-identical code out. CI can
+assert `artifact == f(spec, generator)` as an invariant, not as a hope.
 
-Dijkstra said it in 1978, about the idea of programming in natural language: formal
-texts are effective precisely because their legitimacy can be checked by a few simple
-rules — while natural language excels at making nonsense non-obvious. Forty-eight years
-later, that is still the entire difference between rung 2 and rung 3.
+Dijkstra said it in 1978, about the idea of programming in natural language: formal texts
+are effective precisely because their legitimacy can be checked by a few simple rules —
+while natural language excels at making nonsense non-obvious. Forty-eight years later,
+that is still the entire difference between rung 2 and rung 3.
 
-## The agent is an amplifier
+But rung 3 has a trap door, and everyone who has been in .NET long enough has fallen
+through it.
 
-The expensive part of agentic engineering is no longer producing code — it is *knowing
-it is right*. Verification is the bottleneck. Which makes the interesting property of
-an architecture its **oracle density**: how fast, and how mechanically, is wrongness
-detected?
+## Three acts of generated code in .NET
 
-In this repo: a new event in the spec becomes a compile error at every site that must
-handle it (exhaustive unions, no default arms, warnings as errors). 181 pure
-Given–When–Then tests run in under eight seconds — no mocks, no database, no
-containers, because the core is two total functions. Compare the loop in a layered
-stack: migrations, test containers, minutes per iteration, and the most important
-failures surface at runtime — where the agent's feedback loop is weakest.
+**Act one, 2002.** Windows Forms v1 generated `InitializeComponent` straight into *your*
+file, fenced off with a comment: `#region Windows Form Designer generated code` and a
+stern "do not modify the contents of this method". Everyone modified the contents of this
+method. The designer overwrote their edits, or worse, half-parsed them back. The
+boundary between generated and human code was a *comment* — that is, a promise.
 
-So here is where the thesis lands, and it is not a matter of taste: **the agent is an
-amplifier of whatever verification regime already exists.** Amplified diffuse
-verification yields plausible drift at machine speed. Amplified concentrated
-verification yields checkable increments at machine speed. The architecture picks
-which.
+**Act two, 2005.** .NET 2.0 shipped partial classes, and the generated half moved into
+`Form1.Designer.cs`. Entity Framework did the same dance with EDMX and T4:
+`Model.Designer.cs`, thousands of lines of generated C#, sitting in your repo, in your
+diffs, in your merge conflicts. The boundary was now a *file* — better. But the file was
+still in git, so it was still editable, still reviewable, still mergeable, and under
+deadline pressure somebody always did edit it, because the model was regenerated "later"
+and later never came. MDA-era tooling called its version "protected regions" — marked
+blocks where hand-written code was supposed to survive regeneration. They rotted
+quietly, everywhere, and took the whole Model-Driven Architecture movement down with
+them.
+
+Both acts share one root cause: **the generated code was in the repository.** Anything in
+the repo is, by the social contract of version control, source — reviewable, editable,
+ownable. No comment fence and no file split can override that contract. As long as the
+code is in git, "the model is the product" is a slogan, because the repo says otherwise
+every time someone opens a diff.
+
+**Act three is a Roslyn source generator.** The generator runs *inside the compiler*.
+Its output exists only in the compilation — never on disk as a file you can open, edit,
+or commit. Hand-editing the generated code is not forbidden by a comment or discouraged
+by a file name; it is impossible *by construction*, the way editing the compiler's
+register allocation is impossible. And the escape valve is typed: a `partial` method
+seam, where *missing* human code is a compile error — not a protected region quietly
+rotting.
+
+This is the piece the "programming in English" conversation keeps missing, and it is C#'s
+quiet, categorical advantage. Every stack has code generation — protobuf, OpenAPI
+generators, Prisma — and nearly all of them emit files that end up committed, which puts
+them permanently in act two. The principle is stack-agnostic; the *mechanism* is not. A
+source generator makes "never versioned" a property of the toolchain instead of a
+`.gitignore` discipline.
+
+## The repo boundary is a decision boundary
+
+Nobody commits `.o` files. Nobody commits `node_modules`, or compiled CSS, or the IL that
+`csc` emits. Not because those artifacts are worthless — the shipped product is literally
+made of them — but because they are *derivable*: a pure function of things already in the
+repo. Versioning them would record no decision. Version control is for decisions.
+
+Now apply that rule with a straight face: a C# record layer that is a pure, deterministic
+function of a YAML spec **is a build artifact**. The `.cs` extension does not make it
+source. *Source* is defined by causality — is this file where the decision lives? — not
+by file type. If every byte of `Commands.cs` is determined by `spec.yaml` plus a
+generator, then `Commands.cs` in git is a cached intermediate, checked in. We have a word
+for committed caches that can drift from their inputs: bugs waiting.
+
+Deleting those files from git is therefore not housekeeping. It is a forcing function —
+the mechanism that turns the slogan structural:
+
+- **The spec becomes the only change surface.** You cannot patch the generated code under
+  deadline, because there is no file to patch. The act-two failure mode is not
+  discouraged; it is gone.
+- **Review collapses to two objects.** The spec (small, declarative, diffable) and the
+  generator (reviewed once, proven, then frozen into a build step). Regeneration stops
+  being a review event.
+- **Drift becomes unrepresentable.** The generated representation cannot disagree with
+  the spec, because it has no independent existence. There is nothing left to drift
+  *from*.
+
+That is what deleting representational redundancy actually means. Not DRY as a style
+preference — the *removal of an entire category of state* in which the system could be
+wrong.
+
+## The training-data objection, inverted
+
+The reflexive objection: LLMs are most fluent where training data is thickest —
+mainstream layered CRUD — so a project-local spec dialect starves the agent exactly where
+this architecture needs it to read and write specs.
+
+The objection assumes the spec's *semantics* are as exotic as its file extension. They
+are not. A spec for an event-sourced core is made of commands, events, business errors,
+and Given–When–Then scenarios — which is to say: CQRS, BDD, and Gherkin, some of the most
+heavily represented software concepts in any training corpus. Event modeling is a thin
+arrangement notation over primitives every agent already knows cold. The surface syntax
+is local; the semantics are high-resource.
+
+And the payoff side of the trade is lopsided. What the agent gets in exchange for
+learning a small dialect is an environment where its characteristic failure mode has been
+deleted: a new event in the spec becomes a compile error at every site that must handle
+it — exhaustive switches, no default arms, warnings as errors. Pure
+Given–When–Then tests over total functions run in seconds, no mocks, no containers. The
+agent is an amplifier of whatever verification regime already exists; amplified diffuse
+verification yields plausible drift at machine speed, amplified concentrated verification
+yields checkable increments at machine speed. Trading a sliver of syntactic fluency for
+an order-of-magnitude denser oracle field is not a weakness to mitigate. It is the whole
+point.
+
+One honest line, though: nobody has published the benchmark. This is an argument, not a
+measurement.
 
 ## Where I might be wrong
 
-Three honest holes, before someone else finds them for me.
+**The ghost of MDA is patient.** Acts one and two did not fail on day one; they failed
+when reality's last 20% arrived and the seams started accumulating hand-maintained
+metadata. If the typed seams of act three begin filling with so much human residue that
+reviewing the spec costs more than reviewing code ever did, the ghost has won and the
+correct move is to write *that* article.
 
-**The ghost of MDA.** 1:1 model→code with generated artifacts kept out of version
-control is *exactly* what Model-Driven Architecture promised in the 2000s, and it died:
-hand-edits broke the round-trip, the models grew as unwieldy as the code, the last 20%
-never fit. The differences that must stay true here: the determinism was **proven
-before** anything was flipped (shadow tests, zero divergences, three games); generated
-code cannot be hand-edited *by construction* (it exists only inside the compilation);
-and the escape valve is a typed seam where missing human code is a compile error — not
-a "protected region" quietly rotting.
+**Determinism has to be proven, not assumed.** A generator with an unnoticed
+nondeterminism — dictionary ordering, culture-sensitive formatting, a timestamp — turns
+"build step" back into "review event" silently. The contract `artifact == f(spec,
+generator)` is only worth what the round-trip test enforcing it is worth.
 
-**The training data.** LLMs are most fluent where the training data is thickest:
-mainstream layered CRUD. A project-local spec dialect is a zero-resource DSL — the
-agent's raw fluency is highest exactly where I claim the architecture is worst. The
-countermeasure is that the repo carries its own instruction set (spec cheat-sheet,
-constitution, ADRs, fitness tests) — a fixed context cost instead of scattered reads
-per change. Three flawless transcriptions and two zero-deviation flips say something.
-But that is anecdote, not measurement. Nobody has published the benchmark.
+**The provable stratum is a stratum.** Records, serialization surfaces, exhaustive
+unions — the parts of a system that are pure structure — derive beautifully. Behavior
+does not, yet, and pretending otherwise is rung 4 cosplay. The claim is not "generate
+everything"; it is "never hand-maintain what a function of the spec can emit, and give
+the agent oracles for the rest".
 
-**My own read side.** One fact still passes through spec → record → projection → view
-model → Razor in my own codebase. Four, five representations. The thesis is only partly
-realized in its own shop window. The next step of the experiment aims there — and if
-the seams then start accumulating hand-maintained metadata until reviewing the spec
-costs more than reviewing the code, the ghost of MDA has won and I will write that
-article too.
+## What happened when I did it
 
-## The contract, not the lines
+I run a workbench project for exactly these bets — a small production system, three
+event-sourced games behind one web front, functional core / imperative shell, the
+domain's behavior defined in a formal YAML spec dialect per game.
 
-If agent-generated code is cheap and regenerable — why build machinery to keep 557
-lines out of git? Because the machinery's value was never the lines. It is the
-**contract**: determinism turns regeneration into a build step instead of a review
-event, and makes the spec the single change surface for the entire stratum, enforced by
-the compiler instead of by discipline.
+Last Friday, 557 lines of C# left the repository — and not scaffolding at the edges.
+These were the domain vocabularies of all three games: every command, every event, every
+business error. The load-bearing core that everything else — deciders, projections,
+tests, the web layer — compiles against. A Roslyn source generator now emits them into
+the compilation on every build, from the same specs that were always the source of
+truth. The determinism was proven *before* anything was deleted: an emitter round-trip
+against the previously committed files, zero divergences, three games in a row.
 
-The leverage for agentic engineering is therefore not "spec instead of code", and not
-"fewer layers". It is: **maximize the fraction of the system whose correctness is
-decided by machine, and minimize representational redundancy in the rest.**
-Programming-in-English over a layered-ORM stack is weak on both axes at once — the
-transformation is stochastic and the verification is smeared. A formal spec with a
-deterministic generator and a pure, exhaustive core is strong on both.
+The ledger: 557 lines of hand-maintained core out of git, 708 lines of generator
+infrastructure in — net **+7 lines**, with the third game's flip landing on the LOC
+prediction to the digit. The build stayed green. All 181 pure Given–When–Then tests
+stayed green, running in under eight seconds. The web layer never noticed.
 
-The enemy had a name all along. It just wasn't "layers".
-
-## Play
-
-The theory lives in a game, and the game is meant to be played. Grab your crew, open
-[kvissig.se](https://kvissig.se) and see who guesses closest. More or less?
+Plus seven lines, and the repository is smaller in the way that matters: there are 557
+fewer lines it is possible to be wrong in. The specs are no longer documentation that
+compiles second. They are the only place the record layer exists at all — which is what
+"the spec is the product" was supposed to mean before it was a slogan.
