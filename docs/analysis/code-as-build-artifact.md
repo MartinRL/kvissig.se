@@ -425,3 +425,106 @@ new `Emlang.Generators` incremental generator (AdditionalFiles → manifest matc
 LOC) and TankTillTusen (~164) are now a csproj-wiring + `git rm` + shadow-test-retire
 each — the generator and manifests already handle them. Next material risk is step 2's
 partial-method Decider seam.
+
+### 9.1.1 Practical findings — netstandard2.0 retarget of the core library
+
+The §4 assumption "generator project targets netstandard2.0, core is source-linked"
+was replaced by a simpler shape: **the core itself (`Emlang.CodeGen`) retargeted to
+netstandard2.0** and ships as a dll beside the analyzer. One TFM, no multi-targeting,
+no source-linking — the net11.0 test projects consume the netstandard2.0 dll fine.
+
+Every API gap surfaced as a build error and was mechanical to fix. The complete list
+(useful as a checklist for any future library that must load in-compiler):
+
+| netstandard2.0 gap | Fix |
+|---|---|
+| Records need `IsExternalInit` | 3-line internal shim in the library (no PolySharp dep) |
+| Range/index operators on `string` (`s[1..]`, `s[..^2]`) | `Substring(...)` equivalents |
+| `string.Contains(char)` | `IndexOf(char)` — or restructure (`LastIndexOf + 1` handles the no-prefix case for free, since `-1 + 1 = 0`) |
+| `StringSplitOptions.TrimEntries` + `Split(char, StringSplitOptions)` | `Split(',')` + LINQ `Select(Trim)` / `Where(Length > 0)` |
+| `MatchCollection` is non-generic (`IEnumerable`, not `IEnumerable<Match>`) | `.Cast<Match>()` before LINQ |
+| `KeyValuePair<K,V>` has no `Deconstruct` | iterate the pair, use `.Key`/`.Value` |
+| `ImplicitUsings=enable` emits **no** default usings on netstandard2.0 (the SDK gates them on net6.0+) | explicit `using` lines per file; drop the property |
+
+What did **not** need fixing: `LangVersion=preview` features (collection expressions
+`[.. x]` incl. `IReadOnlyList<T>` targets, switch expressions, pattern matching,
+file-scoped namespaces, target-typed `new`) all compile down to netstandard2.0 — they
+are compiler features, not BCL features. `ValueTuple`, `Array.Empty<T>`,
+`[CallerFilePath]`, `EndsWith(string, StringComparison)` all exist in ns2.0.
+YamlDotNet 16.3.0 and Microsoft.CodeAnalysis.CSharp 4.14.0 both carry netstandard2.0
+assets.
+
+### 9.1.2 Practical findings — analyzer wiring (the exact recipe that worked)
+
+First attempt, zero failures. The three load-bearing pieces:
+
+1. **Roslyn pin, old-stable:** `Microsoft.CodeAnalysis.CSharp 4.14.0` with
+   `PrivateAssets="all"`. CS9057 only fires when the analyzer's Roslyn is *newer* than
+   the compiler's — under a preview SDK (11.0.100-preview.5) old is always safe.
+2. **Dependency shipping** in Emlang.Generators.csproj — every
+   `TargetPathWithTargetPlatformMoniker` item returned from `GetTargetPath` becomes an
+   Analyzer item in the consuming project, which is how Emlang.CodeGen.dll and
+   YamlDotNet.dll get into the compiler's analyzer load context:
+
+   ```xml
+   <PropertyGroup>
+     <GetTargetPathDependsOn>$(GetTargetPathDependsOn);GetDependencyTargetPaths</GetTargetPathDependsOn>
+   </PropertyGroup>
+   <Target Name="GetDependencyTargetPaths">
+     <ItemGroup>
+       <TargetPathWithTargetPlatformMoniker Include="$(PKGYamlDotNet)\lib\netstandard2.0\YamlDotNet.dll" IncludeRuntimeDependency="false" />
+       <TargetPathWithTargetPlatformMoniker Include="$(TargetDir)Emlang.CodeGen.dll" IncludeRuntimeDependency="false" />
+     </ItemGroup>
+   </Target>
+   ```
+
+   (`$(PKGYamlDotNet)` requires `GeneratePathProperty="true"` on the YamlDotNet
+   PackageReference; `$(TargetDir)Emlang.CodeGen.dll` works because the plain
+   ProjectReference copy-locals the dll into the generator's own output.)
+3. **Consumer wiring** — two lines in the Domain csproj:
+
+   ```xml
+   <AdditionalFiles Include="..\..\specs\blindbudet-event-model.yaml" />
+   <ProjectReference Include="..\Emlang.Generators\Emlang.Generators.csproj"
+                     OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+   ```
+
+Confirmations of §4's untested claims: emitting C# 15 `union` **text** from a
+netstandard2.0 analyzer works exactly as predicted — the generated tree parses with
+the *consumer's* `LangVersion=preview`. The generator emits `#nullable enable` +
+explicit `using System; using System.Collections.Generic;` so the output is
+self-contained under `TreatWarningsAsErrors` regardless of the consumer's
+ImplicitUsings.
+
+### 9.1.3 Practical findings — test architecture after a flip
+
+- **The step-0 shadow harness converts into the generator's correctness proof for
+  free.** `SurfaceEmitterTests` runs emit → `SurfaceComparer.Compare(manifest, spec,
+  emitted…)` → must be empty, for all three games. Same comparer, same 23 negative
+  cases guarding against false greens — no new proof machinery was written for step 1.
+- **A flipped game's per-game shadow test must be deleted, not kept:** it reads the
+  committed files from disk (crash post-`git rm`), and spec↔generated comparison is
+  tautological anyway. Unflipped games' shadow tests stay — their committed files can
+  still drift.
+- **Reflection-based architecture tests need no changes** — they inspect the compiled
+  assembly, so `All_public_domain_types_are_records`, the union-exhaustiveness facts
+  etc. validate generated types automatically. Path-scanning arch tests
+  (`No_reflection_or_dynamic_in_domain` globs `src/<Game>.Domain/*.cs`) silently skip
+  generated code — acceptable: the emitter is deterministic and comparer-gated.
+- **Tooling gates hold by construction:** codehealth.sh already excluded `\.g\.cs$` and
+  `/obj/`, so generated output is invisible to the CH gate; the scope regex needed
+  `Emlang\.(CodeGen|Generators)` so the generator projects themselves stay scored (all
+  new files CH 10.0).
+- The pre-verified "no test guards the Domain csproj" held for Blindbudet. **MEM is
+  different:** `Domain_project_has_no_dependencies` reads MEM's csproj text — flipping
+  MEM will require amending it to allow Analyzer-only ProjectReferences (an honest
+  fitness-function change, anticipated by §6 step 1).
+
+### 9.1.4 Flip recipe (for MEM and TankTillTusen, when decided)
+
+Per game, the whole flip is: (1) add the two wiring lines (§9.1.2 item 3, pointing at
+that game's spec) to the Domain csproj; (2) `git rm Commands.cs Events.cs Errors.cs`;
+(3) delete that game's `SpecSurfaceShadowTests.cs` and drop the now-unused
+Emlang.CodeGen ProjectReference from its Tests csproj; (4) MEM only: amend
+`Domain_project_has_no_dependencies`. The generator, manifests, and emitter self-tests
+already cover all three specs — no generator-side work remains.
