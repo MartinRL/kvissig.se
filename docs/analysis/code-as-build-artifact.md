@@ -547,3 +547,32 @@ for all three games** — no stratum-1 record file remains in git anywhere.
 game. Running total for step 1: **557 domain LOC + 3 shadow tests (87 LOC) out of
 git**. The next material risk is unchanged: step 2's partial-method Decider seam
 (CS8795).
+
+## 9.3 LOC accounting — branch vs main (2026-07-12)
+
+An honest close-of-step-1 balance sheet: how much does the branch (10 commits ahead of
+`main`) differ from `main` in committed C# source, in percent?
+
+Committed C# LOC per branch (`git ls-tree -r --name-only <ref> | grep '\.cs$'`, then
+`git show <ref>:<file> | wc -l` summed per area):
+
+| Area | main | branch | delta |
+|---|---|---|---|
+| Game prod (Domain + Web) | 6 173 | 5 616 | **−557 (−9.0 %)** |
+| Game tests | 4 372 | 4 228 | −144 (−3.3 %) |
+| Emlang.CodeGen + Emlang.Generators (new infra) | 0 | 442 | +442 |
+| Emlang.CodeGen.Tests (new) | 0 | 266 | +266 |
+| **Total .cs in git** | **10 545** | **10 552** | **+7 (+0.07 %)** |
+
+Churn (`git diff main...HEAD --shortstat` on `*.cs`): 22 files, **+729/−722** — roughly
+13.8 % of main's C# corpus touched. Non-C# churn: +336/−2 (this doc §9–9.2, ADR 016,
+csproj wiring, memory files). Infra breakdown: Emlang.CodeGen 398 LOC (SpecModel 107,
+SurfaceComparer 126, GameManifest 61, CodeSurface 58, SurfaceEmitter 42, IsExternalInit 4)
++ Emlang.Generators 44.
+
+**Interpretation (honest):** at n=3 games the experiment is **LOC-neutral** (+7 net).
+What was deleted is O(games) transcription (~186 LOC/game plus shadow tests); what was
+added is O(1) infrastructure (708 LOC incl. tests). The breakeven point is crossed with
+game 4: its record layer costs ~2 csproj lines instead of ~186 LOC. The real win is
+structural, not numeric — the spec is now the single change surface for the record
+layer, enforced by the compiler.
