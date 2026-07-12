@@ -15,8 +15,9 @@ a lockfile for information whose source of truth is `specs/*-event-model.yaml`.
 
 ## Decision
 The stratum-1 record layer (Commands.cs / Events.cs / Errors.cs: positional records +
-the closed C# 15 union per kind) is **generated at build time and deleted from git**,
-piloted on Blindbudet.
+the closed C# 15 union per kind) is **generated at build time and deleted from git**.
+Piloted on Blindbudet; since 2026-07-12 applied to **all three games** (MEM and
+TankTillTusen flipped via the same recipe, see analysis doc §9.2).
 
 ### Mechanism
 - **`Emlang.CodeGen`** (netstandard2.0) stays the pure core: `SpecModel.Parse` (YamlDotNet)
@@ -43,15 +44,16 @@ paths. These live as three literal `GameManifest` instances in code — no confi
 The step-0 shadow harness became the emitter's self-test: `SurfaceEmitterTests` feeds
 the emitted text back through `SurfaceComparer` against the real spec for **all three
 games** — zero divergences required. A flipped game's per-game shadow test retires
-(spec↔generated comparison is tautological); unflipped games (MEM, TankTillTusen) keep
-their shadow tests guarding the still-committed files.
+(spec↔generated comparison is tautological); with all three games flipped, all three
+shadow tests are retired and the emitter self-test is the sole (sufficient) gate.
 
 ## Consequences
 - **The spec is now load-bearing for compilation.** A broken or renamed
-  `blindbudet-event-model.yaml` is a build error, not a stale-test warning. The spec is
+  `*-event-model.yaml` is a build error, not a stale-test warning. The spec is
   officially the cheapest (and only) place to change the record surface.
-- **166 LOC left git** for Blindbudet (+29 LOC retired shadow test); MEM (~225) and
-  TankTillTusen (~164) follow the same flip when desired.
+- **557 LOC left git** across the three games (BB 166, MEM 225, TTT 166), plus three
+  retired shadow tests. MEM's `Domain_project_has_no_dependencies` fitness function was
+  amended to allow Analyzer-only ProjectReferences (still red on runtime deps).
 - Preview-SDK/IDE coupling: the generator emits C# 15 `union` text parsed with the
   consumer's `LangVersion=preview`; IDE squiggle glitches are possible and cosmetic.
 - Generated output is invisible to the CodeHealth gate by construction (`\.g\.cs$` +

@@ -276,7 +276,8 @@ file per spec.
 - **Preconditions:** step 0 shadow green.
 - **Deliverable:** `Emlang.Generators` analyzer wrapper; Analyzer `ProjectReference`
   wiring; **delete** `Commands.cs`, `Events.cs`, `Errors.cs` + pure view records
-  (~166 LOC in BB). Then repeat for MEM (~225) and TTT (~164).
+  (~166 LOC in BB). Then repeat for MEM (~225) and TTT (~164). **[DONE for all three
+  games — BB §9.1, MEM+TTT §9.2.]**
 - **Done-gate:** `dotnet build` + full test suite green with generated types; deleted
   files gone from git; shadow tests for this layer retired (the generator *is* the
   source now).
@@ -528,3 +529,21 @@ that game's spec) to the Domain csproj; (2) `git rm Commands.cs Events.cs Errors
 Emlang.CodeGen ProjectReference from its Tests csproj; (4) MEM only: amend
 `Domain_project_has_no_dependencies`. The generator, manifests, and emitter self-tests
 already cover all three specs — no generator-side work remains.
+
+## 9.2 Experiment log — step 1 completed for MEM + TankTillTusen (2026-07-12)
+
+The §9.1.4 recipe executed verbatim for the remaining two games; **step 1 is now DONE
+for all three games** — no stratum-1 record file remains in git anywhere.
+
+| Metric | Result |
+|---|---|
+| LOC removed from git | MEM **225** domain (Commands 62 + Events 108 + Errors 55) — exact §6 prediction; TTT **166** (Commands 51 + Events 78 + Errors 37) vs ~164 predicted. +29 LOC retired shadow test each |
+| Wiring pain | **None**, again. Two csproj blocks (AdditionalFiles + Analyzer ref), first-attempt green build for both |
+| Test delta | 247 → **245**: −2 retired shadow tests (MEM + TTT, tautological post-flip). Whole suite green; Web + all Decider/Evolve/Projection tests compile unchanged against the generated surface |
+| Fitness-function amendment (the anticipated §6 touchpoint) | `Domain_project_has_no_dependencies` now parses MEM's csproj XML: every `<ProjectReference>` must carry `OutputItemType="Analyzer"` + `ReferenceOutputAssembly="false"`; `<PackageReference>` still banned outright. Still red on any runtime dependency. TTT needed no arch-test change (`TankArchitectureTests` never reads the csproj) |
+| Deviations from the §9.1.4 recipe | None |
+
+**Interpretation:** flips after the pilot are pure mechanics, ~10 lines of csproj per
+game. Running total for step 1: **557 domain LOC + 3 shadow tests (87 LOC) out of
+git**. The next material risk is unchanged: step 2's partial-method Decider seam
+(CS8795).
