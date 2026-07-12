@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -46,9 +48,11 @@ public static class CodeSurface
 
     public static CodeUnion? Union(string source, string name) =>
         UnionPattern.Matches(source)
+            .Cast<Match>() // netstandard2.0 MatchCollection is non-generic
             .Where(m => m.Groups["name"].Value == name)
             .Select(m => new CodeUnion(name,
-                [.. m.Groups["body"].Value.Split(',',
-                    StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)]))
+                [.. m.Groups["body"].Value.Split(',')
+                    .Select(member => member.Trim())
+                    .Where(member => member.Length > 0)]))
             .FirstOrDefault();
 }

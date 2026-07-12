@@ -1,3 +1,7 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using YamlDotNet.RepresentationModel;
 
 namespace Emlang.CodeGen;
@@ -56,19 +60,19 @@ public static class SpecModel
 
     private static SpecElement? ToElement(YamlMappingNode step)
     {
-        foreach (var (keyNode, valueNode) in step.Children)
+        foreach (var child in step.Children)
         {
-            if (keyNode is not YamlScalarNode { Value: { } key } || !Kinds.TryGetValue(key, out var kind))
+            if (child.Key is not YamlScalarNode { Value: { } key } || !Kinds.TryGetValue(key, out var kind))
                 continue;
-            var raw = ((YamlScalarNode)valueNode).Value ?? string.Empty;
-            return new SpecElement(kind, BareName(raw), Props(step), (int)keyNode.Start.Line);
+            var raw = ((YamlScalarNode)child.Value).Value ?? string.Empty;
+            return new SpecElement(kind, BareName(raw), Props(step), (int)child.Key.Start.Line);
         }
         return null;
     }
 
     /// <summary>Rule: events carry the stream prefix ("Game / LobbyOpened"); strip it.</summary>
     private static string BareName(string value) =>
-        (value.Contains('/') ? value[(value.LastIndexOf('/') + 1)..] : value).Trim();
+        value.Substring(value.LastIndexOf('/') + 1).Trim(); // LastIndexOf -1 when no prefix ⇒ whole string
 
     private static IReadOnlyList<SpecProp> Props(YamlMappingNode step) =>
         step.Children.TryGetValue(new YamlScalarNode("props"), out var props) && props is YamlMappingNode map
@@ -80,7 +84,7 @@ public static class SpecModel
 
     /// <summary>Rule: spec props are camelCase, C# positional params are PascalCase.</summary>
     public static string PascalCase(string name) =>
-        name.Length == 0 ? name : char.ToUpperInvariant(name[0]) + name[1..];
+        name.Length == 0 ? name : char.ToUpperInvariant(name[0]) + name.Substring(1);
 
     /// <summary>
     /// The general annotation-to-C#-type mapping rules. Experiment metric: keep this list
@@ -90,7 +94,7 @@ public static class SpecModel
     {
         var type = StripParenthesizedNote(annotation.Trim());
         return type.EndsWith("[]", StringComparison.Ordinal)
-            ? $"IReadOnlyList<{type[..^2]}>" // rule: X[] -> IReadOnlyList<X> (constitution collections)
+            ? $"IReadOnlyList<{type.Substring(0, type.Length - 2)}>" // rule: X[] -> IReadOnlyList<X> (constitution collections)
             : type;
     }
 
@@ -98,6 +102,6 @@ public static class SpecModel
     private static string StripParenthesizedNote(string annotation)
     {
         var open = annotation.IndexOf('(');
-        return open < 0 ? annotation : annotation[..open].Trim();
+        return open < 0 ? annotation : annotation.Substring(0, open).Trim();
     }
 }

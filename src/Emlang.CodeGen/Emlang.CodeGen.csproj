@@ -1,7 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <ImplicitUsings>enable</ImplicitUsings>
+    <!-- Analyzer host requirement: Emlang.Generators loads this dll inside the compiler
+         process, which is netstandard2.0 territory (ADR 016). Overrides the repo-wide
+         net11.0 from Directory.Build.props; LangVersion preview is inherited. -->
+    <TargetFramework>netstandard2.0</TargetFramework>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
