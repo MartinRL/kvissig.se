@@ -1,0 +1,222 @@
+# Blindbudet — Experience Model (xmlang v0.1.0), reverse-engineered AS-IMPLEMENTED from
+# the shipped UI (Components/Blindbudet/*.razor, AuctionScreenModels.cs, playful.css)
+# against specs/blindbudet-event-model.yaml. Judgments were read off the running product
+# and recorded as data; nothing here is invented.
+#
+# Findings from the reverse-engineering (spec dogfood notes):
+#   1. Every EM view name trips xm-surface-shadows-view in spirit: the EM's view lanes are
+#      named `Screen / …` and `Todo / …`, i.e. the Event Model modeled SURFACES instead of
+#      data nouns. Referenced as-is per decision; a possible EM rename is deferred.
+#   2. Bare command forms exist in the real UI exactly as the strict compose rule predicts:
+#      AuctionHostForm (OpenAuction) and AuctionJoinForm (JoinAuction) compose no view and
+#      are therefore NOT surfaces here — they are served by the generator's defaults.
+#   3. EM/UI divergence: the EM has AskNextLot/EndAuction as ⚙️ System processors gated by
+#      Todo read-models; the implemented UI gives the host explicit buttons ("Nästa
+#      budrunda" / "Visa slutställning") on the round-results screen. As-implemented, both
+#      commands are composed on RundresultatVärd.
+#   4. Host/player screen variants (lobby, round results) map cleanly to `for:`-scoped
+#      surfaces; the shared view is composed twice with different salience/commands.
+#   5. The keypad bid input and the 2 s polling wait states are concrete-UI stratum:
+#      correctly inexpressible in xmlang (geometry/behavior prohibition holds).
+#   6. EM view names containing `/` and spaces force quoted YAML keys and awkward dotted
+#      label paths ("Screen / Round results".trueWorth); spec-feedback candidate.
+
+model: blindbudet-event-model.yaml
+
+personas:
+  Värd:
+    role: 🧑‍🏫 host
+    props:
+      goal: open and start the auction, drive the reveal pacing — and play along
+      device: phone in hand
+      context: co-located party, one room, everyone on their own screen
+  Spelare:
+    role: 🧑‍🎓 Player
+    props:
+      goal: join via QR/link, estimate under hidden information without overbidding
+      device: phone in hand
+      context: co-located party, one room
+
+surfaces:
+  Katalog:
+    compose:
+      - v: Screen / Auction catalog
+        fields:
+          primary: [packs]
+      - c: OpenAuction
+        prominence: primary
+
+  LobbyVärd:
+    for: [Värd]
+    compose:
+      - v: Screen / Auction lobby
+        fields:
+          primary: [joinCode, players]
+          on-demand: [gameId]
+      - c: StartAuction
+        prominence: primary
+
+  LobbySpelare:
+    for: [Spelare]
+    compose:
+      - v: Screen / Auction lobby
+        fields:
+          primary: [players]
+          on-demand: [joinCode, gameId]
+
+  Budgivning:
+    compose:
+      - v: Screen / Lot
+        fields:
+          primary: [description, unit]
+          secondary: [lotIndex, totalLots]
+          on-demand: [gameId]
+      - c: PlaceBid
+        prominence: primary
+
+  Väntan:
+    compose:
+      - v: Screen / Waiting for bids
+        fields:
+          primary: [pendingPlayerIds]
+          secondary: [submittedPlayerIds, lotIndex]
+          on-demand: [gameId]
+
+  RundresultatVärd:
+    for: [Värd]
+    compose:
+      - v: Screen / Round results
+        fields:
+          primary: [trueWorth, winnerIds, playerProfits]
+          secondary: [pricePaid, lotIndex]
+          on-demand: [gameId]
+      - c: AskNextLot        # see finding 3: System processor in the EM, host button in the UI
+        prominence: primary
+      - c: EndAuction        # see finding 3
+        prominence: primary
+
+  RundresultatSpelare:
+    for: [Spelare]
+    compose:
+      - v: Screen / Round results
+        fields:
+          primary: [trueWorth, winnerIds, playerProfits]
+          secondary: [pricePaid, lotIndex]
+          on-demand: [gameId]
+
+  Slutställning:
+    compose:
+      - v: Screen / Final standings
+        fields:
+          primary: [finalScoreboard, winnerIds]
+          on-demand: [gameId]
+
+journeys:
+  VärdensAuktion:
+    for: [Värd]
+    slices:
+      - ✍️ Open Auction
+      - ✍️ Start Auction
+      - ✍️ Place Bid
+      - ✍️ Reveal Lot
+      - ✍️ Next Lot
+      - ✍️ End Auction
+  SpelarensRunda:
+    for: [Spelare]
+    slices:
+      - ✍️ Join Auction
+      - ✍️ Place Bid
+      - ✍️ Reveal Lot
+
+# Copy harvested verbatim from the Razor components (sv-SE, playful/informal register).
+labels:
+  sv:
+    register: lekfull, informell
+    # commands
+    OpenAuction: Skapa auktion
+    JoinAuction: Gå med
+    StartAuction: Starta auktion
+    PlaceBid: Lägg bud!
+    AskNextLot: Nästa budrunda
+    EndAuction: Visa slutställning
+    # command fields
+    OpenAuction.hostName: Ditt namn
+    JoinAuction.playerName: Ditt namn
+    PlaceBid.amount: Ditt bud
+    # view fields
+    "Screen / Auction lobby.players": Spelare
+    "Screen / Waiting for bids.submittedPlayerIds": Klara
+    "Screen / Waiting for bids.pendingPlayerIds": Väntar på
+    "Screen / Round results.trueWorth": Sant värde
+    "Screen / Round results.playerProfits": Poäng
+    "Screen / Round results.pricePaid": Bud
+    "Screen / Final standings.finalScoreboard": Slutställning
+    # surfaces (their on-screen headings)
+    Katalog: Välj lek
+    LobbyVärd: Skanna för att gå med
+    LobbySpelare: Du är med! 🎉
+    Väntan: Ditt bud är lagt ✓
+    Slutställning: Slutställning
+    # personas
+    Värd: Värd
+    Spelare: Spelare
+
+# Sanctioned visual vocabulary (DTCG), transcribed from wwwroot/css/playful.css :root.
+tokens:
+  color:
+    bg:
+      $type: color
+      $value: "#fff7ec"
+    bg-2:
+      $type: color
+      $value: "#ffeccf"
+    ink:
+      $type: color
+      $value: "#2b2118"
+    ink-soft:
+      $type: color
+      $value: "#7a6a58"
+    card:
+      $type: color
+      $value: "#fffdf9"
+    line:
+      $type: color
+      $value: "#f0e0c8"
+    mer:
+      $type: color
+      $value: "#21c08a"
+    mer-deep:
+      $type: color
+      $value: "#12805c"
+    mer-ink:
+      $type: color
+      $value: "#06281f"
+    mindre:
+      $type: color
+      $value: "#ffab40"
+    mindre-deep:
+      $type: color
+      $value: "#e07f0e"
+    mindre-ink:
+      $type: color
+      $value: "#3a2300"
+    accent:
+      $type: color
+      $value: "#ff5d73"
+    accent-2:
+      $type: color
+      $value: "#ff8a3d"
+  radius:
+    md:
+      $type: dimension
+      $value: 22px
+    sm:
+      $type: dimension
+      $value: 16px
+  font:
+    display:
+      $type: fontFamily
+      $value: ["Baloo 2", system-ui, sans-serif]
+    body:
+      $type: fontFamily
+      $value: [Nunito, system-ui, sans-serif]
