@@ -1,165 +1,167 @@
-# Representationell redundans
+# Representational Redundancy
 
-> I fredags raderade jag 557 rader C# ur git. Bygget blev grönt.
+> Last Friday I deleted 557 lines of C# from git. The build stayed green.
 
-## Raderna som inte saknas
+## The lines nobody misses
 
-I fredags raderade jag 557 rader C# ur git. Bygget blev grönt. Alla 181 tester gröna.
-Webben orörd.
+Last Friday I deleted 557 lines of C# from git. The build stayed green. All 181 tests
+green. The web layer untouched.
 
-Raderna var record-lagret i tre spel — kommandon, events, fel — och de raderades för
-att de inte längre behövs *som filer*. De genereras vid varje bygge, deterministiskt,
-ur samma emlang-spec som alltid varit sanningskällan, av en Roslyn source generator
-rakt in i kompileringen. De finns aldrig på disk. De kan inte drifta, för det finns
-inget att drifta *från*.
+The lines were the record layer of three games — commands, events, errors — and they
+were deleted because they are no longer needed *as files*. They are generated on every
+build, deterministically, from the same emlang spec that was always the source of
+truth, by a Roslyn source generator straight into the compilation. They never exist on
+disk. They cannot drift, because there is nothing left to drift *from*.
 
-Och här är siffran som avslöjar vad det egentligen handlar om: nettot i git blev
-**+7 rader**. Borttagen transkription: ~701. Tillagd generator-infrastruktur: 708.
-Radräkningen är ett nollsummespel. Så varför bry sig?
+And here is the number that gives the game away: the net ledger in git came to
+**+7 lines**. Transcription removed: ~701. Generator infrastructure added: 708. The
+line count is a zero-sum game. So why bother?
 
-För att raderna aldrig var poängen. Poängen är vad de 557 raderna *var*: samma fakta,
-sagda en gång till.
+Because the lines were never the point. The point is what those 557 lines *were*: the
+same facts, stated one more time.
 
-## Fienden har ett namn
+## The enemy has a name
 
-Hur många ställen i din kodbas vet att en spelare har ett namn?
+How many places in your codebase know that a player has a name?
 
-Entiteten. DTO:n. Mappern däremellan. SQL-kolumnen. Migrationen som skapade kolumnen.
-Validatorn. OpenAPI-schemat. TypeScript-interfacet. Test-fixturen. Nio representationer
-av **ett** domänfaktum — och varje beteendeändring är en koherent redigering på nio
-ställen samtidigt.
+The entity. The DTO. The mapper between them. The SQL column. The migration that
+created the column. The validator. The OpenAPI schema. The TypeScript interface. The
+test fixture. Nine representations of **one** domain fact — and every behavioral change
+is a coherent edit across nine sites at once.
 
-<!-- TODO asset: fan-out-diagram — ett faktum, nio representationer, samma visuella språk som decider-pattern.svg -->
+<!-- TODO asset: fan-out diagram — one fact, nine representations, same visual language as decider-pattern.svg -->
 ![[assets/one-fact-nine-places.svg|700]]
 
-Det här förtjänar ett eget namn: **representationell redundans**. Inte "lager", inte
-"boilerplate" — omsägning. Samma sanning transkriberad för hand mellan representationer
-som ingen kompilator håller ihop.
+This deserves its own name: **representational redundancy**. Not "layers", not
+"boilerplate" — restatement. The same truth hand-transcribed between representations
+that no compiler holds together.
 
-Människor har alltid driftat på det här — det är därför "dokumentationen ljuger" blev
-folklore. Men lägg märke till exakt vad LLM-agenter är *sämst* på: koherent redigering
-på många ställen. En agent producerar plausibel kod på varje enskilt ställe; det är
-*mellan* ställena det brister. Representationell redundans är alltså inte bara dyr som
-förr — den är dyr precis där den nya arbetskraften är svagast.
+Humans have always drifted on this — it is why "the documentation lies" became
+folklore. But notice exactly what LLM agents are *worst* at: coherent editing across
+many sites. An agent produces plausible code at every individual site; it is *between*
+the sites that things break. So representational redundancy is not merely expensive the
+way it always was — it is expensive precisely where the new workforce is weakest.
 
-Deterministisk härledning *hanterar* inte den redundansen. Den **raderar** den.
+Deterministic derivation does not *manage* that redundancy. It **deletes** it.
 
-## Det var aldrig lagren
+## It was never the layers
 
-Nu invändningen jag själv skulle ropa från baksätet: *"jaha, så arkitektur är onödigt
-nu, bara YOLO:a allt i en fil?"* Nej. Tesen är inte anti-lager.
+Now for the objection I would shout from the back seat myself: *"oh, so architecture is
+obsolete now, just YOLO everything into one file?"* No. The thesis is not anti-layer.
 
-Det här repot behåller den hårdaste gränsen som finns — functional core / imperative
-shell — och upprätthåller den i CI med arkitekturtester. Beroendedisciplin *hjälper*
-agenter: liten sprängradie, testbara sömmar, en regel ("kärnan rör inte IO") som failar
-bygget när den bryts.
+This repo keeps the hardest boundary there is — functional core / imperative shell —
+and enforces it in CI with architecture tests. Dependency discipline *helps* agents:
+small blast radius, testable seams, one rule ("the core touches no IO") that fails the
+build when broken.
 
-Skilj alltså på två saker som klumpas ihop i varje clean/onion/n-tier-diskussion:
+So separate two things that get lumped together in every clean/onion/n-tier debate:
 
-- **En gräns** uttalar en *regel*, en gång: beroenden pekar ditåt, aldrig hitåt.
-- **En nivå** som säger om samma faktum — entity till DTO till mapper till schema —
-  uttalar ingen regel alls. Den transkriberar.
+- **A boundary** states a *rule*, once: dependencies point that way, never this way.
+- **A tier** that restates the same fact — entity to DTO to mapper to schema — states
+  no rule at all. It transcribes.
 
-Gränser är billiga och maskinellt kontrollerbara. Omsägning är dyr och maskinellt
-okontrollerbar. Konventionella lagerarkitekturer med ORM institutionaliserar
-omsägningen och kallar den disciplin.
+Boundaries are cheap and machine-checkable. Restatement is expensive and
+machine-uncheckable. Conventional layered architectures with ORMs institutionalize the
+restatement and call it discipline.
 
-## Vem transformerar?
+## Who transforms?
 
-"Programmera på engelska" är tidens melodi — vibe coding, spec-kit:ar, spec-först-IDE:er.
-Och de har rätt om halva saken: intentionen, inte koden, borde vara den beständiga
-artefakten. Men titta på vem som utför transformationen från intent till kod i varje
-sådant upplägg: **en LLM**. Markdown in, probabilistisk kod ut. Varje regenerering är
-ett nytt stokastiskt utfall; diffar komponerar inte; varje körning är en ny
-granskningshändelse. Spec-driften man skulle bota flyttar in i spec:en själv.
+"Programming in English" is the tune of the times — vibe coding, spec kits, spec-first
+IDEs. And they are right about half of it: intent, not code, should be the durable
+artifact. But look at who performs the transformation from intent to code in every one
+of those setups: **an LLM**. Markdown in, probabilistic code out. Every regeneration is
+a fresh stochastic outcome; diffs don't compose; every run is a new review event. The
+spec drift you meant to cure moves into the spec itself.
 
-Det finns en trappa, och stegen skiljer sig åt i *vem som transformerar och vad som
-verifierar*:
+There is a ladder, and the rungs differ in *who transforms and what verifies*:
 
-1. Engelska → LLM → kod, människan granskar allt. (Vibe coding — även myntaren
-   avgränsade det till slit-och-släng.)
-2. Markdown-spec → LLM → kod + tester. Intent fångad, transformationen fortfarande
-   stokastisk.
-3. **Formell spec → deterministisk generator för det bevisbara skiktet + agent som
-   skriver resten mot kompilator- och testorakel.** ← hit flyttade jag i fredags.
-4. Fullständig formell syntes. (Ingen seriös gör anspråk.)
+1. English → LLM → code, a human reviews everything. (Vibe coding — even the man who
+   coined it scoped it to throwaway projects.)
+2. Markdown spec → LLM → code + tests. Intent captured, transformation still
+   stochastic.
+3. **Formal spec → deterministic generator for the provable stratum + an agent writing
+   the rest against compiler and test oracles.** ← where I moved last Friday.
+4. Full formal synthesis. (Nobody serious is claiming it.)
 
-<!-- TODO asset: trappan, fyra steg, transformer + verifierare per steg -->
+<!-- TODO asset: the ladder, four rungs, transformer + verifier per rung -->
 ![[assets/transformer-ladder.svg|700]]
 
-Varje steg uppåt köper *granska-en-gång*-semantik för ett större skikt. Generatorn
-granskades en gång och bevisades mot alla tre spelen — därefter är regenerering ett
-byggsteg, inte en granskningshändelse. Samma spec in, byte-identisk kod ut. CI kan
-hävda `artefakt == f(spec, generator)` som en invariant, inte som en förhoppning.
+Every rung up buys *review-once* semantics for a larger stratum. The generator was
+reviewed once and proved against all three games — after that, regeneration is a build
+step, not a review event. Same spec in, byte-identical code out. CI can assert
+`artifact == f(spec, generator)` as an invariant, not as a hope.
 
-Dijkstra sa det 1978, om idén att programmera i naturligt språk: formella texter är
-effektiva just för att deras legitimitet kan kontrolleras med några få enkla regler —
-medan naturligt språk utmärker sig i att göra nonsens icke-uppenbart. Fyrtioåtta år
-senare är det fortfarande hela skillnaden mellan steg 2 och steg 3.
+Dijkstra said it in 1978, about the idea of programming in natural language: formal
+texts are effective precisely because their legitimacy can be checked by a few simple
+rules — while natural language excels at making nonsense non-obvious. Forty-eight years
+later, that is still the entire difference between rung 2 and rung 3.
 
-## Agenten är en förstärkare
+## The agent is an amplifier
 
-Det dyra i agentisk utveckling är inte längre att producera kod — det är att *veta att
-den är rätt*. Verifiering är flaskhalsen. Då är den intressanta egenskapen hos en
-arkitektur dess **orakeltäthet**: hur snabbt och hur mekaniskt upptäcks fel?
+The expensive part of agentic engineering is no longer producing code — it is *knowing
+it is right*. Verification is the bottleneck. Which makes the interesting property of
+an architecture its **oracle density**: how fast, and how mechanically, is wrongness
+detected?
 
-I det här repot: ett nytt event i spec:en blir ett kompileringsfel på varje ställe som
-måste hantera det (uttömmande unions, inga default-armar, warnings som errors). 181
-rena Given–When–Then-tester kör på under åtta sekunder — inga mocks, ingen databas,
-inga containrar, för kärnan är två totala funktioner. Jämför loopen i en lager-stack:
-migrationer, testcontainrar, minuter per varv, och de viktigaste felen upptäcks i
-runtime — där agentens återkopplingsloop är som svagast.
+In this repo: a new event in the spec becomes a compile error at every site that must
+handle it (exhaustive unions, no default arms, warnings as errors). 181 pure
+Given–When–Then tests run in under eight seconds — no mocks, no database, no
+containers, because the core is two total functions. Compare the loop in a layered
+stack: migrations, test containers, minutes per iteration, and the most important
+failures surface at runtime — where the agent's feedback loop is weakest.
 
-Så här landar tesen, och det är inte en smaksak: **agenten är en förstärkare av den
-verifieringsregim som redan finns.** Förstärkt diffus verifiering ger plausibel drift i
-maskinfart. Förstärkt koncentrerad verifiering ger kontrollerbara inkrement i
-maskinfart. Arkitekturen väljer vilket.
+So here is where the thesis lands, and it is not a matter of taste: **the agent is an
+amplifier of whatever verification regime already exists.** Amplified diffuse
+verification yields plausible drift at machine speed. Amplified concentrated
+verification yields checkable increments at machine speed. The architecture picks
+which.
 
-## Där jag kan ha fel
+## Where I might be wrong
 
-Tre ärliga hål, innan någon annan hittar dem åt mig.
+Three honest holes, before someone else finds them for me.
 
-**MDA-spöket.** 1:1 modell→kod med genererade artefakter utanför versionskontrollen är
-*exakt* vad Model-Driven Architecture lovade på 00-talet, och det dog: handredigeringar
-bröt rundresan, modellerna blev lika otympliga som koden, sista 20 % fick aldrig plats.
-Skillnaderna som måste förbli sanna här: determinismen **bevisades innan** något
-flippades (skuggtester, noll avvikelser, tre spel); genererad kod kan inte
-handredigeras *per konstruktion* (den finns bara i kompileringen); och flyktventilen är
-en typad söm där saknad mänsklig kod är ett kompileringsfel — inte en "protected
-region" som tyst ruttnar.
+**The ghost of MDA.** 1:1 model→code with generated artifacts kept out of version
+control is *exactly* what Model-Driven Architecture promised in the 2000s, and it died:
+hand-edits broke the round-trip, the models grew as unwieldy as the code, the last 20%
+never fit. The differences that must stay true here: the determinism was **proven
+before** anything was flipped (shadow tests, zero divergences, three games); generated
+code cannot be hand-edited *by construction* (it exists only inside the compilation);
+and the escape valve is a typed seam where missing human code is a compile error — not
+a "protected region" quietly rotting.
 
-**Träningsdatan.** LLM:er är som mest flytande där träningsdatan är tjockast:
-mainstream-CRUD i lager. En projektlokal spec-dialekt är en zero-resource-DSL — agentens
-råa flyt är som högst precis där jag påstår att arkitekturen är som sämst. Motmedlet är
-att repot bär sin egen instruktionsuppsättning (spec-lathund, constitution, ADR:er,
-fitness-tester) — en fast kontextkostnad i stället för spridda läsningar per ändring.
-Tre felfria transkriptioner och två avvikelsefria flips säger något. Men det är
-anekdot, inte mätning. Ingen har publicerat benchmarken.
+**The training data.** LLMs are most fluent where the training data is thickest:
+mainstream layered CRUD. A project-local spec dialect is a zero-resource DSL — the
+agent's raw fluency is highest exactly where I claim the architecture is worst. The
+countermeasure is that the repo carries its own instruction set (spec cheat-sheet,
+constitution, ADRs, fitness tests) — a fixed context cost instead of scattered reads
+per change. Three flawless transcriptions and two zero-deviation flips say something.
+But that is anecdote, not measurement. Nobody has published the benchmark.
 
-**Min egen läs-sida.** Ett faktum passerar fortfarande spec → record → projektion →
-vy-modell → Razor hos mig. Fyra, fem representationer. Tesen är bara delvis realiserad
-i sitt eget skyltfönster. Nästa steg i experimentet riktar sig dit — och om sömmarna
-då börjar samla handunderhållen metadata tills spec-granskning kostar mer än
-kodgranskning, då har MDA-spöket vunnit och jag skriver den artikeln också.
+**My own read side.** One fact still passes through spec → record → projection → view
+model → Razor in my own codebase. Four, five representations. The thesis is only partly
+realized in its own shop window. The next step of the experiment aims there — and if
+the seams then start accumulating hand-maintained metadata until reviewing the spec
+costs more than reviewing the code, the ghost of MDA has won and I will write that
+article too.
 
-## Kontraktet, inte raderna
+## The contract, not the lines
 
-Om agentgenererad kod är billig och regenererbar — varför bygga maskineri för att hålla
-557 rader ute ur git? För att maskineriets värde aldrig var raderna. Det är
-**kontraktet**: determinism gör regenerering till ett byggsteg i stället för en
-granskningshändelse, och gör spec:en till den enda ändringsytan för hela skiktet,
-upprätthållet av kompilatorn i stället för av disciplin.
+If agent-generated code is cheap and regenerable — why build machinery to keep 557
+lines out of git? Because the machinery's value was never the lines. It is the
+**contract**: determinism turns regeneration into a build step instead of a review
+event, and makes the spec the single change surface for the entire stratum, enforced by
+the compiler instead of by discipline.
 
-Hävstången för agentisk utveckling är alltså inte "spec i stället för kod", och inte
-"färre lager". Den är: **maximera andelen av systemet vars korrekthet avgörs
-maskinellt, och minimera representationell redundans i resten.** Programmera-på-engelska
-över en lager-och-ORM-stack är svag på båda axlarna samtidigt — transformationen är
-stokastisk och verifieringen är utsmetad. En formell spec med deterministisk generator
-och en ren, uttömmande kärna är stark på båda.
+The leverage for agentic engineering is therefore not "spec instead of code", and not
+"fewer layers". It is: **maximize the fraction of the system whose correctness is
+decided by machine, and minimize representational redundancy in the rest.**
+Programming-in-English over a layered-ORM stack is weak on both axes at once — the
+transformation is stochastic and the verification is smeared. A formal spec with a
+deterministic generator and a pure, exhaustive core is strong on both.
 
-Fienden hade ett namn hela tiden. Det var bara inte "lager".
+The enemy had a name all along. It just wasn't "layers".
 
-## Spela
+## Play
 
-Teorin bor i ett spel, och spelet är till för att spelas. Samla gänget, öppna
-[kvissig.se](https://kvissig.se) och se vem som gissar närmast. Mer eller mindre?
+The theory lives in a game, and the game is meant to be played. Grab your crew, open
+[kvissig.se](https://kvissig.se) and see who guesses closest. More or less?
