@@ -405,3 +405,23 @@ Proceed to **step 1** (analyzer wiring, flip Blindbudet records — separate pla
 ADR 016). Residual risks unchanged: analyzer/preview-SDK wiring (§7.1) and the
 `fixtures:` test-semantics dialect (§7.3) were *not* exercised here, except that
 Probe A now fixes the fixtures placement to a sidecar.
+
+## 9.1 Experiment log — step 1 (2026-07-12, same branch)
+
+**Flip executed: Blindbudet's Commands.cs/Events.cs/Errors.cs are generated, not
+committed.** Mechanism per ADR 016: `Emlang.CodeGen` retargeted netstandard2.0, new
+`SurfaceEmitter` (spec elements → C# text, records in spec order + closed union),
+new `Emlang.Generators` incremental generator (AdditionalFiles → manifest match →
+`AddSource`), output in `obj/` only.
+
+| Metric | Result |
+|---|---|
+| LOC removed from git | **166** domain (Commands 51 + Events 78 + Errors 37) + 29 retired shadow test = 195, vs the ~166 §6 prediction — exact hit |
+| Wiring pain (§7.1, the deferred risk) | **None.** The cookbook stack (netstandard2.0 + Roslyn pinned 4.14.0 + `GetDependencyTargetPaths` shipping Emlang.CodeGen.dll/YamlDotNet.dll) built and generated **on the first attempt** — no CS9057, no analyzer-load failures. The real cost was the netstandard2.0 retarget itself: ~8 mechanical API fixes (ranges → `Substring`, `Contains(char)`, `TrimEntries`, non-generic `MatchCollection`, KVP deconstruction, explicit usings, `IsExternalInit` shim) |
+| Test delta | 243 → **247**: −1 Blindbudet shadow test (tautological post-flip), +5 emitter self-tests. All green; Web compiles unchanged against generated types |
+| Correctness proof | emit → `SurfaceComparer` → 0 divergences for **all three** manifests against the real specs — the step-0 harness reused as the generator's own gate. Reflection arch tests (`All_public_domain_types_are_records` etc.) validate the generated types for free |
+
+**Interpretation:** the analyzer-wiring risk (§7.1) is retired empirically. MEM (~225
+LOC) and TankTillTusen (~164) are now a csproj-wiring + `git rm` + shadow-test-retire
+each — the generator and manifests already handle them. Next material risk is step 2's
+partial-method Decider seam.
