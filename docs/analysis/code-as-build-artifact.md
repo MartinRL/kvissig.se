@@ -636,14 +636,14 @@ The 2025–26 practitioner consensus is that **generation is no longer the bottl
 verification is**. An architecture is agent-friendly to the degree it maximizes *oracle
 density per token*: how fast and how mechanically can wrongness be detected?
 
-| Mechanism | Layered + ORM + RDBMS | This repo | Evidence |
-|---|---|---|---|
-| Transformation | LLM interprets prose per change | deterministic generator, reviewed once | §9 round-trip: 0 divergences, 3 games |
-| Strongest oracle | runtime (ORM mapping, DI resolution, SQL) | compile time (exhaustive unions, no default arms, TreatWarningsAsErrors) | new `e:` in spec ⇒ build error today; CS8795 seam in step 2 |
-| Test loop | DB/containers/migrations, minutes | 181 pure-function `[Fact]`s in **< 8 s**, no mocks, no IO | Decider determinism (Chassaing): (State, Command) → same Events, always |
-| Edit surface for one behavioral change | entity + DTO + mapper + migration + validator + controller + service + repo | spec + ~4–6 hand files, **0 generated files touched** | "add a field to SubmitGuess" trace: spec, State, Decider, endpoint, razor, test |
-| Behavioral ground truth | smeared across layers + SQL | 3,444 spec LOC describe all 3 games' surfaces (vs 2,720 hand-written domain LOC) | agent loads one artifact to know the behavior |
-| Spec↔code drift | discipline (fails) | build error — the spec is load-bearing for compilation | ADR 016 |
+| Mechanism                              | Layered + ORM + RDBMS                                                       | This repo                                                                        | Evidence                                                                        |
+| -------------------------------------- | --------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| Transformation                         | LLM interprets prose per change                                             | deterministic generator, reviewed once                                           | §9 round-trip: 0 divergences, 3 games                                           |
+| Strongest oracle                       | runtime (ORM mapping, DI resolution, SQL)                                   | compile time (exhaustive unions, no default arms, TreatWarningsAsErrors)         | new `e:` in spec ⇒ build error today; CS8795 seam in step 2                     |
+| Test loop                              | DB/containers/migrations, minutes                                           | 181 pure-function `[Fact]`s in **< 8 s**, no mocks, no IO                        | Decider determinism (Chassaing): (State, Command) → same Events, always         |
+| Edit surface for one behavioral change | entity + DTO + mapper + migration + validator + controller + service + repo | spec + ~4–6 hand files, **0 generated files touched**                            | "add a field to SubmitGuess" trace: spec, State, Decider, endpoint, razor, test |
+| Behavioral ground truth                | smeared across layers + SQL                                                 | 3,444 spec LOC describe all 3 games' surfaces (vs 2,720 hand-written domain LOC) | agent loads one artifact to know the behavior                                   |
+| Spec↔code drift                        | discipline (fails)                                                          | build error — the spec is load-bearing for compilation                           | ADR 016                                                                         |
 
 The deepest row deserves a name: **representational redundancy**. A layered ORM stack
 states one domain fact in many representations — entity, DTO, mapper, SQL schema,
