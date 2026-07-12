@@ -92,9 +92,9 @@ public class BlindbudetArchitectureTests
         offenders.Should().BeEmpty("the forbidden price word must never appear (hard rule) — the game may be monetised");
     }
 
-    // The emlang spec-coverage cross-check (names both directions) moved to
-    // SpecSurfaceShadowTests — the structural SurfaceComparer check is strictly stronger
-    // (prop names/types/order, union membership, namespace).
+    // The emlang spec-coverage cross-check is now redundant by construction: the
+    // Commands/Events/Errors records are GENERATED from the spec (ADR 016), and the
+    // emitter round-trips through SurfaceComparer in Emlang.CodeGen.Tests.
 
     // --- helpers ------------------------------------------------------------------------
 
