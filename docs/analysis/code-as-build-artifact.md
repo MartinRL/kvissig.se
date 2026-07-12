@@ -373,3 +373,35 @@ point for the thesis.
   `src/MerEllerMindre.Domain.Tests/ArchitectureTests.cs:140-211` (siblings in
   Blindbudet/TankTillTusen arch tests); fixture comments,
   `specs/mer-eller-mindre-event-model.yaml:150-156`.
+
+## 9. Experiment log — step 0 (2026-07-12, branch `experiment/emlang-codegen-shadow`)
+
+**Question tested:** do the specs' `c:`/`e:`/`x:` props deterministically define the
+committed record surfaces (type names, prop names, prop types, order) across all three
+games?
+
+**Answer: YES — the assumption holds, stronger than expected.** The shadow tests
+(`SpecSurfaceShadowTests` × 3, backed by `src/Emlang.CodeGen`'s
+SpecModel/CodeSurface/SurfaceComparer) went green for all three games **on the first
+run**, with an **empty findings allowlist**. The planned classification loop converged
+at iteration 0. A false green is structurally excluded: the comparison is
+bidirectional (an empty parse on either side floods missing-record /
+union-extra divergences), and 23 inline-YAML/C# negative cases prove the comparer
+fails on fabricated divergences (fake prop, extra param, wrong type, missing element,
+orphan record, swapped order, union drift both ways, wrong namespace).
+
+| Metric | Result |
+|---|---|
+| # general mapping rules | **6** — (1) camelCase → PascalCase prop names; (2) `X[]` → `IReadOnlyList<X>`; (3) strip parenthesized note (`Direction (mer\|mindre)` → `Direction`); (4) events strip the `Game / ` stream prefix; (5) surface comes from slice *steps* only (`tests:` props are fixture values); (6) the props-richest occurrence of an element defines it (bare re-occurrences are slice inputs). Inline `# comments` cost nothing (YAML scalars end at the comment). |
+| # manifest facts per game | **3 categories** (`GameManifest`, three literal instances): union names (`GameCommand`/`AuctionCommand`/`TankCommand` + Event/Error), namespace, file paths (spec + Commands/Events/Errors.cs). Exactly the per-game facts the spec structurally cannot say — confirmed by construction. |
+| # (c)-findings (irreducible spec↔code gaps) | **0** — no allowlist entries in any game. |
+| Probe A verdict | `emlang lint` v1.0.0 **hard-rejects** `fixtures:` at both placements — `unknown top-level key "fixtures"` and `unknown slice key "fixtures"` are *parse* errors, so the `.emlang.yaml` ignore fallback is dead too. **Step 3 must use sidecar `specs/<game>-fixtures.yaml`** parsed only by Emlang.CodeGen. |
+
+**Interpretation:** rules small (6), manifest tiny (3 facts/game), zero findings ⇒
+the deterministic-mapping thesis **holds** for the stratum-1 record layer. The 6 regex
+spec-coverage facts (2 × 3 games) are deleted, superseded by the strictly stronger
+structural check (adds prop names/types/order, union membership both ways, namespace).
+Proceed to **step 1** (analyzer wiring, flip Blindbudet records — separate plan +
+ADR 016). Residual risks unchanged: analyzer/preview-SDK wiring (§7.1) and the
+`fixtures:` test-semantics dialect (§7.3) were *not* exercised here, except that
+Probe A now fixes the fixtures placement to a sidecar.
