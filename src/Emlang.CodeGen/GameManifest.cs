@@ -17,8 +17,12 @@ public record GameManifest(
     string ErrorsFile,
     string CommandUnion,
     string EventUnion,
-    string ErrorUnion)
+    string ErrorUnion,
+    string StateType)
 {
+    /// <summary>Where SpecTests.g.cs lands (the sibling test project's namespace).</summary>
+    public string TestsNamespace => Namespace + ".Tests";
+
     public static readonly GameManifest MerEllerMindre = new(
         "MerEllerMindre",
         "specs/mer-eller-mindre-event-model.yaml",
@@ -26,7 +30,7 @@ public record GameManifest(
         "src/MerEllerMindre.Domain/Commands.cs",
         "src/MerEllerMindre.Domain/Events.cs",
         "src/MerEllerMindre.Domain/Errors.cs",
-        "GameCommand", "GameEvent", "GameError");
+        "GameCommand", "GameEvent", "GameError", "GameState");
 
     public static readonly GameManifest Blindbudet = new(
         "Blindbudet",
@@ -35,7 +39,7 @@ public record GameManifest(
         "src/Blindbudet.Domain/Commands.cs",
         "src/Blindbudet.Domain/Events.cs",
         "src/Blindbudet.Domain/Errors.cs",
-        "AuctionCommand", "AuctionEvent", "AuctionError");
+        "AuctionCommand", "AuctionEvent", "AuctionError", "AuctionState");
 
     public static readonly GameManifest TankTillTusen = new(
         "TankTillTusen",
@@ -44,7 +48,10 @@ public record GameManifest(
         "src/TankTillTusen.Domain/Commands.cs",
         "src/TankTillTusen.Domain/Events.cs",
         "src/TankTillTusen.Domain/Errors.cs",
-        "TankCommand", "TankEvent", "TankError");
+        "TankCommand", "TankEvent", "TankError", "TankState");
+
+    public static readonly System.Collections.Generic.IReadOnlyList<GameManifest> All =
+        [MerEllerMindre, Blindbudet, TankTillTusen];
 }
 
 /// <summary>Locates the repo root (the dir with Directory.Build.props) from this source file.</summary>

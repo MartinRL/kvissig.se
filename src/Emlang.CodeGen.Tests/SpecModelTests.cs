@@ -38,7 +38,7 @@ public class SpecModelTests
         elements.Should().BeEquivalentTo(new[]
         {
             new SpecElement('c', "DoIt", [], 3),
-            new SpecElement('e', "ItDone", [new SpecProp("GameId", "Guid", 6)], 4),
+            new SpecElement('e', "ItDone", [new SpecProp("GameId", "Guid", 6)], 4, "Game"),
         });
     }
 

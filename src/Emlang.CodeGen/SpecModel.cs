@@ -7,18 +7,24 @@ using YamlDotNet.RepresentationModel;
 namespace Emlang.CodeGen;
 
 /// <summary>
-/// One prop of a c:/e:/x: element, already mapped to the C# surface it determines
+/// One prop of a c:/e:/x:/v: element, already mapped to the C# surface it determines
 /// (name PascalCased, annotation mapped to a type). Line-tracked for findings.
+/// IsEnum records whether the annotation carried an enum note ("Difficulty (familj|klassisk|svår)").
 /// </summary>
-public record SpecProp(string Name, string Type, int Line);
-
-/// <summary>One c:/e:/x: element lifted from an emlang spec's slice steps.</summary>
-public record SpecElement(char Kind, string Name, IReadOnlyList<SpecProp> Props, int Line);
+public record SpecProp(string Name, string Type, int Line, bool IsEnum = false);
 
 /// <summary>
-/// Parses an emlang YAML spec into the record surface its c:/e:/x: elements define.
+/// One c:/e:/x:/v: element lifted from an emlang spec's slice steps. Lane is the prefix
+/// before the slash ("Game" for events, "State"/"Screen"/"Todo" for views, "" for bare
+/// commands/exceptions). 'v' elements are inert for record emission (SurfaceEmitter filters
+/// by kind); they type the `tests:` fixture values for TestsEmitter.
+/// </summary>
+public record SpecElement(char Kind, string Name, IReadOnlyList<SpecProp> Props, int Line, string Lane = "");
+
+/// <summary>
+/// Parses an emlang YAML spec into the record surface its c:/e:/x:/v: elements define.
 /// Only slice STEPS (direct-form list or `steps:`) carry type annotations; `tests:`
-/// props are fixture values and are ignored.
+/// props are fixture values and are ignored (see TestModel).
 /// </summary>
 public static class SpecModel
 {
@@ -29,14 +35,14 @@ public static class SpecModel
         var root = (YamlMappingNode)stream.Documents[0].RootNode;
         var slices = (YamlMappingNode)root.Children[new YamlScalarNode("slices")];
 
-        var byKey = new Dictionary<(char Kind, string Name), SpecElement>();
+        var byKey = new Dictionary<(char Kind, string Lane, string Name), SpecElement>();
         foreach (var step in slices.Children.Values.SelectMany(Steps))
         {
             if (ToElement(step) is not { } element)
                 continue;
             // Rule: the props-richest occurrence defines the surface — elements reappear
             // bare as slice inputs (e.g. `- e: Game / BidPlaced` feeding a processor).
-            var key = (element.Kind, element.Name);
+            var key = (element.Kind, element.Lane, element.Name);
             if (!byKey.TryGetValue(key, out var existing) || element.Props.Count > existing.Props.Count)
                 byKey[key] = element;
         }
@@ -56,6 +62,7 @@ public static class SpecModel
         ["c"] = 'c', ["command"] = 'c',
         ["e"] = 'e', ["event"] = 'e',
         ["x"] = 'x', ["exception"] = 'x',
+        ["v"] = 'v', ["view"] = 'v',
     };
 
     private static SpecElement? ToElement(YamlMappingNode step)
@@ -65,9 +72,16 @@ public static class SpecModel
             if (child.Key is not YamlScalarNode { Value: { } key } || !Kinds.TryGetValue(key, out var kind))
                 continue;
             var raw = ((YamlScalarNode)child.Value).Value ?? string.Empty;
-            return new SpecElement(kind, BareName(raw), Props(step), (int)child.Key.Start.Line);
+            return new SpecElement(kind, BareName(raw), Props(step), (int)child.Key.Start.Line, Lane(raw));
         }
         return null;
+    }
+
+    /// <summary>Rule: the prefix before the slash is the lane ("Game /", "State /", …).</summary>
+    private static string Lane(string value)
+    {
+        var slash = value.LastIndexOf('/');
+        return slash < 0 ? string.Empty : value.Substring(0, slash).Trim();
     }
 
     /// <summary>Rule: events carry the stream prefix ("Game / LobbyOpened"); strip it.</summary>
@@ -79,8 +93,16 @@ public static class SpecModel
             ? [.. map.Children.Select(p => new SpecProp(
                 PascalCase(((YamlScalarNode)p.Key).Value!),
                 MapType(((YamlScalarNode)p.Value).Value ?? string.Empty),
-                (int)p.Key.Start.Line))]
+                (int)p.Key.Start.Line,
+                IsEnumNote(((YamlScalarNode)p.Value).Value ?? string.Empty)))]
             : [];
+
+    /// <summary>Rule: a parenthesized note listing cases with '|' marks an enum type.</summary>
+    private static bool IsEnumNote(string annotation)
+    {
+        var open = annotation.IndexOf('(');
+        return open >= 0 && annotation.IndexOf('|', open) > open;
+    }
 
     /// <summary>Rule: spec props are camelCase, C# positional params are PascalCase.</summary>
     public static string PascalCase(string name) =>

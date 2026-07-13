@@ -1,11 +1,10 @@
-using Xunit;
-
 namespace TankTillTusen.Domain.Tests;
 
 /// <summary>
-/// Shared fixtures (named to match the spec's GWT cases) plus a Given/When/Then scaffold for
-/// the decider-true GWTs. puzzle0 = [10,10] target 100; puzzle1 = [5,20] target 100; host =
-/// martinId. Solution fixtures merge operand 0 with operand 1 (answerIndex 2 = the result).
+/// Shared fixtures, named exactly as the spec's `tests:` reference them (the generated
+/// SpecTests resolve bare words to Fixtures.* — a missing name is a CS0117). puzzle0 =
+/// [10,10] target 100; puzzle1 = [5,20] target 100; host = martinId. Solution fixtures
+/// merge operand 0 with operand 1 (answerIndex 2 = the result).
 /// </summary>
 public static class Fixtures
 {
@@ -51,6 +50,75 @@ public static class Fixtures
     /// <summary>A round start whose deadline passed 1s ago — still INSIDE the grace window.</summary>
     public static readonly DateTimeOffset StartedAtJustExpired = Now.AddSeconds(-(Decider.CountdownSeconds + 1));
 
+    // Timestamps the decider stamps from the fixed clock — all Now under Context.
+    public static readonly DateTimeOffset OpenedAt = Now;
+    public static readonly DateTimeOffset JoinedAt = Now;
+    public static readonly DateTimeOffset SubmittedAt = Now;
+    public static readonly DateTimeOffset EndedAt = Now;
+
+    /// <summary>Round 0's deadline once started at StartedAt (= what the projections show).</summary>
+    public static readonly DateTimeOffset Deadline = StartedAt.AddSeconds(Decider.CountdownSeconds);
+
+    /// <summary>A join code / game id that resolves to nothing.</summary>
+    public static readonly Guid Unknown = new("ffffffff-ffff-ffff-ffff-ffffffffffff");
+
+    // PuzzleRound fixtures, named as the spec's `tests:` reference them (round0Fresh, …).
+    public static readonly PuzzleRound Round0Fresh = Round(Puzzle0, startedAt: StartedAt);
+    public static readonly PuzzleRound Round0NilsMiss = Round(Puzzle0, startedAt: StartedAt,
+        solutions: new Dictionary<Guid, Solution> { [NilsId] = SolMiss });
+    public static readonly PuzzleRound Round0JustExpired = Round(Puzzle0, startedAt: StartedAtJustExpired);
+    public static readonly PuzzleRound Round0Expired = Round(Puzzle0, startedAt: StartedAtExpired);
+    public static readonly PuzzleRound Round0BothIn = Round(Puzzle0, startedAt: StartedAt,
+        solutions: new Dictionary<Guid, Solution> { [MartinId] = SolMiss, [NilsId] = SolHit });
+    public static readonly PuzzleRound Round0Scored = Round(Puzzle0, startedAt: StartedAt,
+        solutions: new Dictionary<Guid, Solution> { [MartinId] = SolMiss, [NilsId] = SolHit },
+        sampleSolution: SampleSol0,
+        reachedValues: new Dictionary<Guid, int> { [MartinId] = 20, [NilsId] = 100 },
+        roundScores: new Dictionary<Guid, int> { [MartinId] = 80, [NilsId] = -10 },
+        scored: true);
+    public static readonly PuzzleRound Round0ScoredUnstarted = Round(Puzzle0,
+        sampleSolution: SampleSol0,
+        reachedValues: new Dictionary<Guid, int> { [MartinId] = 20, [NilsId] = 100 },
+        roundScores: new Dictionary<Guid, int> { [MartinId] = 80, [NilsId] = -10 },
+        scored: true);
+    public static readonly PuzzleRound Round0MartinHitOnly = Round(Puzzle0, startedAt: StartedAt,
+        solutions: new Dictionary<Guid, Solution> { [MartinId] = SolHit });
+    public static readonly PuzzleRound Round0MartinHitExpired = Round(Puzzle0, startedAt: StartedAtExpired,
+        solutions: new Dictionary<Guid, Solution> { [MartinId] = SolHit });
+    public static readonly PuzzleRound Round0MartinMiss = Round(Puzzle0, startedAt: StartedAt,
+        solutions: new Dictionary<Guid, Solution> { [MartinId] = SolMiss });
+    public static readonly PuzzleRound Round0Scores0And80 = Round(Puzzle0,
+        roundScores: new Dictionary<Guid, int> { [MartinId] = 0, [NilsId] = 80 }, scored: true);
+    public static readonly PuzzleRound Round0Scores10Each = Round(Puzzle0,
+        roundScores: new Dictionary<Guid, int> { [MartinId] = 10, [NilsId] = 10 }, scored: true);
+    public static readonly PuzzleRound Round1Fresh = Round(Puzzle1);
+    public static readonly PuzzleRound Round1BothIn = Round(Puzzle1, startedAt: StartedAt,
+        solutions: new Dictionary<Guid, Solution> { [MartinId] = SolHit, [NilsId] = SolMiss });
+    public static readonly PuzzleRound Round1Scores5And0 = Round(Puzzle1,
+        roundScores: new Dictionary<Guid, int> { [MartinId] = 5, [NilsId] = 0 }, scored: true);
+    public static readonly PuzzleRound Round1Scores5Each = Round(Puzzle1,
+        roundScores: new Dictionary<Guid, int> { [MartinId] = 5, [NilsId] = 5 }, scored: true);
+    public static readonly PuzzleRound Round800Close = Round(Puzzle800, startedAt: StartedAt,
+        solutions: new Dictionary<Guid, Solution> { [MartinId] = Sol780, [NilsId] = SolExact800 });
+    public static readonly PuzzleRound Round800Wild = Round(Puzzle800, startedAt: StartedAt,
+        solutions: new Dictionary<Guid, Solution> { [MartinId] = Sol780, [NilsId] = Sol520 });
+    public static readonly PuzzleRound Round800MartinOnly = Round(Puzzle800, startedAt: StartedAtExpired,
+        solutions: new Dictionary<Guid, Solution> { [MartinId] = Sol780 });
+
+    // View-row fixtures (Outstanding solutions / Round results / scoreboards).
+    public static readonly OutstandingSolution Os0AllPending = new(0, [MartinId, NilsId], false, Deadline);
+    public static readonly OutstandingSolution Os0NilsPending = new(0, [NilsId], false, Deadline);
+    public static readonly OutstandingSolution Os0AllIn = new(0, [], true, Deadline);
+    public static readonly OutstandingSolution Os1AllPending = new(1, [MartinId, NilsId], false, null);
+
+    public static readonly PlayerResult PrMartin = new(MartinId, 20, 80, 80);
+    public static readonly PlayerResult PrNils = new(NilsId, 100, -10, -10);
+
+    public static readonly ScoreboardEntry SbMartin5 = new(MartinId, "Martin", 5);
+    public static readonly ScoreboardEntry SbNils80 = new(NilsId, "Nils", 80);
+    public static readonly ScoreboardEntry SbMartin15 = new(MartinId, "Martin", 15);
+    public static readonly ScoreboardEntry SbNils15 = new(NilsId, "Nils", 15);
+
     /// <summary>
     /// Stub context: a fixed clock at Now, and GeneratePuzzles returns the two fixture puzzles so
     /// the OpenLobby GWT can assert the stamped set. NewGuid is real (minted values asserted only
@@ -81,113 +149,4 @@ public static class Fixtures
             RoundScores = roundScores ?? new Dictionary<Guid, int>(),
             Scored = scored
         };
-}
-
-/// <summary>Entry point for the decider GWT scaffold: Gwt.Given(state).When(command).</summary>
-public static class Gwt
-{
-    public static GivenState Given(TankState state) => new(state);
-    public static GivenState GivenInitial() => new(TankState.Initial);
-}
-
-public sealed record GivenState(TankState State)
-{
-    public Result<TankEvent[]> When(TankCommand command) =>
-        Decider.Decide(State, command, Fixtures.Context);
-}
-
-/// <summary>
-/// Result/union extractors. Union case checks MUST use the `is`-pattern against a CONCRETE case
-/// type (the union's runtime type is the union, not the case — a generic `is T` would fall back
-/// to isinst and never match). So these helpers take concrete types only.
-/// </summary>
-public static class ResultAssertions
-{
-    public static TankEvent[] Events(this Result<TankEvent[]> result)
-    {
-        if (result is Ok<TankEvent[]> ok)
-            return ok.Value;
-        Assert.Fail("expected Ok (events), got an error");
-        return [];
-    }
-
-    public static Err Error(this Result<TankEvent[]> result)
-    {
-        if (result is Err err)
-            return err;
-        Assert.Fail("expected Err, got Ok (events)");
-        return null!;
-    }
-
-    public static LobbyOpened Opened(this TankEvent[] events)
-    {
-        foreach (var e in events)
-            if (e is LobbyOpened a)
-                return a;
-        Assert.Fail("no LobbyOpened event");
-        return null!;
-    }
-
-    public static PlayerJoined Joined(this TankEvent[] events)
-    {
-        foreach (var e in events)
-            if (e is PlayerJoined a)
-                return a;
-        Assert.Fail("no PlayerJoined event");
-        return null!;
-    }
-
-    public static GameStarted Started(this TankEvent[] events)
-    {
-        foreach (var e in events)
-            if (e is GameStarted a)
-                return a;
-        Assert.Fail("no GameStarted event");
-        return null!;
-    }
-
-    public static SolutionSubmitted Submitted(this TankEvent[] events)
-    {
-        foreach (var e in events)
-            if (e is SolutionSubmitted a)
-                return a;
-        Assert.Fail("no SolutionSubmitted event");
-        return null!;
-    }
-
-    public static PuzzleRevealed Revealed(this TankEvent[] events)
-    {
-        foreach (var e in events)
-            if (e is PuzzleRevealed a)
-                return a;
-        Assert.Fail("no PuzzleRevealed event");
-        return null!;
-    }
-
-    public static RoundScored ScoredFor(this TankEvent[] events, Guid playerId)
-    {
-        foreach (var e in events)
-            if (e is RoundScored s && s.PlayerId == playerId)
-                return s;
-        Assert.Fail($"no RoundScored for {playerId}");
-        return null!;
-    }
-
-    public static NextPuzzleStarted NextPuzzle(this TankEvent[] events)
-    {
-        foreach (var e in events)
-            if (e is NextPuzzleStarted a)
-                return a;
-        Assert.Fail("no NextPuzzleStarted event");
-        return null!;
-    }
-
-    public static GameEnded Ended(this TankEvent[] events)
-    {
-        foreach (var e in events)
-            if (e is GameEnded a)
-                return a;
-        Assert.Fail("no GameEnded event");
-        return null!;
-    }
 }

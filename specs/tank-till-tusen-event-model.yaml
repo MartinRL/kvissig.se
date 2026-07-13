@@ -137,9 +137,9 @@ slices:
         then:
           - e: Game / LobbyOpened
             props:
-              hostPlayerId: hostPlayerId
+              hostPlayerId: minted
               hostName: Martin
-              joinCode: joinCode
+              joinCode: minted
               difficulty: klassisk
               puzzles: [puzzle0, puzzle1]
               openedAt: openedAt
@@ -199,7 +199,7 @@ slices:
             props: { joinCode: joinCode, playerName: Nils }
         then:
           - e: Game / PlayerJoined
-            props: { playerId: playerId, playerName: Nils, joinedAt: joinedAt }
+            props: { playerId: minted, playerName: Nils, joinedAt: joinedAt }
       cannot join nonexistent game:
         given: []
         when:
@@ -310,6 +310,7 @@ slices:
               totalRounds: 2
               numbers: [10, 10]
               target: 100
+              deadline: deadline
 
   # --- Submitting ----------------------------------------------------------
 
@@ -362,7 +363,7 @@ slices:
               currentRoundIndex: 0
               players: [hostMartin, playerNils]
               rounds:
-                - { puzzle: puzzle0, startedAt: startedAt, solutions: {}, scored: false }   # context.Now is within the 60s window
+                - round0Fresh   # context.Now is within the 60s window
         when:
           - c: SubmitSolution
             props: { gameId: gameId, playerId: nilsId, roundIndex: 0, solution: solHit }
@@ -384,7 +385,7 @@ slices:
               currentRoundIndex: 0
               players: [hostMartin, playerNils]
               rounds:
-                - { puzzle: puzzle0, startedAt: startedAt, solutions: {}, scored: false }
+                - round0Fresh
         when:
           - c: SubmitSolution
             props: { gameId: gameId, playerId: nilsId, roundIndex: 0, solution: solBad }   # 10−10=0, not a positive integer
@@ -398,7 +399,7 @@ slices:
               currentRoundIndex: 0
               players: [hostMartin, playerNils]
               rounds:
-                - { puzzle: puzzle0, startedAt: startedAt, solutions: { nilsId: solMiss }, scored: false }
+                - round0NilsMiss
         when:
           - c: SubmitSolution
             props: { gameId: gameId, playerId: nilsId, roundIndex: 0, solution: solHit }
@@ -412,7 +413,7 @@ slices:
               currentRoundIndex: 0
               players: [hostMartin, playerNils]
               rounds:
-                - { puzzle: puzzle0, startedAt: startedAtJustExpired, solutions: {}, scored: false }   # deadline passed 1s ago, inside the 3s grace
+                - round0JustExpired   # deadline passed 1s ago, inside the 3s grace
         when:
           - c: SubmitSolution
             props: { gameId: gameId, playerId: nilsId, roundIndex: 0, solution: solHit }
@@ -427,7 +428,7 @@ slices:
               currentRoundIndex: 0
               players: [hostMartin, playerNils]
               rounds:
-                - { puzzle: puzzle0, startedAt: startedAtExpired, solutions: {}, scored: false }   # context.Now > startedAtExpired + 60s + grace
+                - round0Expired   # context.Now > startedAtExpired + 60s + grace
         when:
           - c: SubmitSolution
             props: { gameId: gameId, playerId: nilsId, roundIndex: 0, solution: solHit }
@@ -441,7 +442,7 @@ slices:
               currentRoundIndex: 0
               players: [hostMartin, playerNils]
               rounds:
-                - { puzzle: puzzle0, startedAt: startedAt, solutions: { martinId: solMiss, nilsId: solHit }, sampleSolution: sampleSol0, reachedValues: { martinId: 20, nilsId: 100 }, roundScores: { martinId: 80, nilsId: -10 }, scored: true }
+                - round0Scored
         when:
           - c: SubmitSolution
             props: { gameId: gameId, playerId: martinId, roundIndex: 0, solution: solHit }
@@ -502,8 +503,8 @@ slices:
           - v: Todo / Outstanding solutions
             props:
               rounds:
-                - { roundIndex: 0, pendingPlayerIds: [martinId, nilsId], allSolutionsIn: false, deadline: deadline }
-                - { roundIndex: 1, pendingPlayerIds: [martinId, nilsId], allSolutionsIn: false }
+                - os0AllPending
+                - os1AllPending
       a submitted solution checks off that player on its round:
         given:
           - e: Game / LobbyOpened
@@ -518,8 +519,8 @@ slices:
           - v: Todo / Outstanding solutions
             props:
               rounds:
-                - { roundIndex: 0, pendingPlayerIds: [nilsId], allSolutionsIn: false }
-                - { roundIndex: 1, pendingPlayerIds: [martinId, nilsId], allSolutionsIn: false }
+                - os0NilsPending
+                - os1AllPending
       a round shows all solutions in once every player has submitted:
         given:
           - e: Game / LobbyOpened
@@ -536,8 +537,8 @@ slices:
           - v: Todo / Outstanding solutions
             props:
               rounds:
-                - { roundIndex: 0, pendingPlayerIds: [], allSolutionsIn: true }
-                - { roundIndex: 1, pendingPlayerIds: [martinId, nilsId], allSolutionsIn: false }
+                - os0AllIn
+                - os1AllPending
 
   # The score processor: once Outstanding solutions shows readyToScore (allSolutionsIn OR
   # deadline + grace passed), the System scores the round. PURE distance-penalty resolver:
@@ -592,8 +593,8 @@ slices:
               currentRoundIndex: 0
               players: [hostMartin, playerNils]
               rounds:
-                - { puzzle: puzzle0, startedAt: startedAt, solutions: { martinId: solMiss, nilsId: solHit }, scored: false }   # both in -> allSolutionsIn derived true
-                - { puzzle: puzzle1, solutions: {}, scored: false }
+                - round0BothIn   # both in -> allSolutionsIn derived true
+                - round1Fresh
         when:
           - c: ScoreRound
             props: { gameId: gameId, roundIndex: 0 }
@@ -612,8 +613,8 @@ slices:
               currentRoundIndex: 0
               players: [hostMartin, playerNils]
               rounds:
-                - { puzzle: puzzle0, startedAt: startedAtExpired, solutions: { martinId: solHit }, scored: false }   # nilsId pending; context.Now > deadline -> readyToScore
-                - { puzzle: puzzle1, solutions: {}, scored: false }
+                - round0MartinHitExpired   # nilsId pending; context.Now > deadline -> readyToScore
+                - round1Fresh
         when:
           - c: ScoreRound
             props: { gameId: gameId, roundIndex: 0 }
@@ -623,7 +624,7 @@ slices:
           - e: Game / RoundScored
             props: { playerId: martinId, reachedValue: 100, roundScore: -10, totalScore: -10 }   # exact hit -> bonus
           - e: Game / RoundScored
-            props: { playerId: nilsId, roundScore: 100, totalScore: 100 }   # no submission -> worst
+            props: { playerId: nilsId, reachedValue: null, roundScore: 100, totalScore: 100 }   # no submission -> worst
       scores accumulate across rounds:
         given:
           - v: State / Game
@@ -633,8 +634,8 @@ slices:
               players: [hostMartin, playerNils]
               rounds:
                 # round0 already scored -> its roundScores are the source of the running total
-                - { puzzle: puzzle0, sampleSolution: sampleSol0, reachedValues: { martinId: 20, nilsId: 100 }, roundScores: { martinId: 80, nilsId: -10 }, scored: true }
-                - { puzzle: puzzle1, startedAt: startedAt, solutions: { martinId: solHit, nilsId: solMiss }, scored: false }
+                - round0ScoredUnstarted
+                - round1BothIn
         when:
           - c: ScoreRound
             props: { gameId: gameId, roundIndex: 1 }
@@ -653,8 +654,8 @@ slices:
               currentRoundIndex: 0
               players: [hostMartin, playerNils]
               rounds:
-                - { puzzle: puzzle800, startedAt: startedAt, solutions: { martinId: sol780, nilsId: solExact800 }, scored: false }
-                - { puzzle: puzzle1, solutions: {}, scored: false }
+                - round800Close
+                - round1Fresh
         when:
           - c: ScoreRound
             props: { gameId: gameId, roundIndex: 0 }
@@ -673,8 +674,8 @@ slices:
               currentRoundIndex: 0
               players: [hostMartin, playerNils]
               rounds:
-                - { puzzle: puzzle800, startedAt: startedAt, solutions: { martinId: sol780, nilsId: sol520 }, scored: false }
-                - { puzzle: puzzle1, solutions: {}, scored: false }
+                - round800Wild
+                - round1Fresh
         when:
           - c: ScoreRound
             props: { gameId: gameId, roundIndex: 0 }
@@ -693,8 +694,8 @@ slices:
               currentRoundIndex: 0
               players: [hostMartin, playerNils]
               rounds:
-                - { puzzle: puzzle800, startedAt: startedAtExpired, solutions: { martinId: sol780 }, scored: false }   # nilsId pending; context.Now > deadline -> readyToScore
-                - { puzzle: puzzle1, solutions: {}, scored: false }
+                - round800MartinOnly   # nilsId pending; context.Now > deadline -> readyToScore
+                - round1Fresh
         when:
           - c: ScoreRound
             props: { gameId: gameId, roundIndex: 0 }
@@ -704,7 +705,7 @@ slices:
           - e: Game / RoundScored
             props: { playerId: martinId, reachedValue: 780, roundScore: 20, totalScore: 20 }   # Δ20 -> rå distans
           - e: Game / RoundScored
-            props: { playerId: nilsId, roundScore: 100, totalScore: 100 }                      # no submission -> worst
+            props: { playerId: nilsId, reachedValue: null, roundScore: 100, totalScore: 100 }                      # no submission -> worst
       cannot score before ready:
         given:
           - v: State / Game
@@ -713,8 +714,8 @@ slices:
               currentRoundIndex: 0
               players: [hostMartin, playerNils]
               rounds:
-                - { puzzle: puzzle0, startedAt: startedAt, solutions: { martinId: solHit }, scored: false }   # nilsId pending AND context.Now within the window
-                - { puzzle: puzzle1, solutions: {}, scored: false }
+                - round0MartinHitOnly   # nilsId pending AND context.Now within the window
+                - round1Fresh
         when:
           - c: ScoreRound
             props: { gameId: gameId, roundIndex: 0 }
@@ -728,8 +729,8 @@ slices:
               currentRoundIndex: 0
               players: [hostMartin, playerNils]
               rounds:
-                - { puzzle: puzzle0, startedAt: startedAt, solutions: { martinId: solMiss, nilsId: solHit }, sampleSolution: sampleSol0, reachedValues: { martinId: 20, nilsId: 100 }, roundScores: { martinId: 80, nilsId: -10 }, scored: true }   # double fire guarded
-                - { puzzle: puzzle1, solutions: {}, scored: false }
+                - round0Scored   # double fire guarded
+                - round1Fresh
         when:
           - c: ScoreRound
             props: { gameId: gameId, roundIndex: 0 }
@@ -774,8 +775,8 @@ slices:
               target: 100
               sampleSolution: sampleSol0
               playerResults:
-                - { playerId: martinId, reachedValue: 20, roundScore: 80, totalScore: 80 }
-                - { playerId: nilsId, reachedValue: 100, roundScore: -10, totalScore: -10 }
+                - prMartin
+                - prNils
 
   # --- Progression (System processor) --------------------------------------
 
@@ -850,8 +851,8 @@ slices:
               phase: started
               currentRoundIndex: 0
               rounds:
-                - { puzzle: puzzle0, sampleSolution: sampleSol0, reachedValues: { martinId: 20, nilsId: 100 }, roundScores: { martinId: 80, nilsId: -10 }, scored: true }
-                - { puzzle: puzzle1, solutions: {}, scored: false }
+                - round0ScoredUnstarted
+                - round1Fresh
         when:
           - c: AskNextPuzzle
             props: { gameId: gameId }
@@ -893,8 +894,8 @@ slices:
               currentRoundIndex: 1
               players: [hostMartin, playerNils]
               rounds:
-                - { puzzle: puzzle0, roundScores: { martinId: 0, nilsId: 80 }, scored: true }
-                - { puzzle: puzzle1, roundScores: { martinId: 5, nilsId: 0 }, scored: true }
+                - round0Scores0And80
+                - round1Scores5And0
         when:
           - c: EndGame
             props: { gameId: gameId }
@@ -902,8 +903,8 @@ slices:
           - e: Game / GameEnded
             props:
               finalScoreboard:
-                - { playerId: martinId, playerName: Martin, totalScore: 5 }
-                - { playerId: nilsId, playerName: Nils, totalScore: 80 }
+                - sbMartin5
+                - sbNils80
               winnerIds: [martinId]   # martin lowest total (5 < 80)
               endedAt: endedAt
       tied lowest totals share the win:
@@ -914,8 +915,8 @@ slices:
               currentRoundIndex: 1
               players: [hostMartin, playerNils]
               rounds:
-                - { puzzle: puzzle0, roundScores: { martinId: 10, nilsId: 10 }, scored: true }
-                - { puzzle: puzzle1, roundScores: { martinId: 5, nilsId: 5 }, scored: true }
+                - round0Scores10Each
+                - round1Scores5Each
         when:
           - c: EndGame
             props: { gameId: gameId }
@@ -923,8 +924,8 @@ slices:
           - e: Game / GameEnded
             props:
               finalScoreboard:
-                - { playerId: martinId, playerName: Martin, totalScore: 15 }
-                - { playerId: nilsId, playerName: Nils, totalScore: 15 }
+                - sbMartin15
+                - sbNils15
               winnerIds: [martinId, nilsId]   # equal lowest total -> shared win
               endedAt: endedAt
 
@@ -943,16 +944,16 @@ slices:
           - e: Game / GameEnded
             props:
               finalScoreboard:
-                - { playerId: martinId, playerName: Martin, totalScore: 5 }
-                - { playerId: nilsId, playerName: Nils, totalScore: 80 }
+                - sbMartin5
+                - sbNils80
               winnerIds: [martinId]
               endedAt: endedAt
         then:
           - v: Screen / Final standings
             props:
               finalScoreboard:
-                - { playerId: martinId, playerName: Martin, totalScore: 5 }
-                - { playerId: nilsId, playerName: Nils, totalScore: 80 }
+                - sbMartin5
+                - sbNils80
               winnerIds: [martinId]
 
   # --- Decision model (decider State) — APPENDIX, not a timeline step ------
@@ -970,8 +971,9 @@ slices:
   # players, so the fold keeps a single source of truth and no redundant flags.
   #
   # PuzzleRound fixtures (puzzle = a Puzzle fixture; solutions/reachedValues/roundScores are maps
-  # keyed by playerId). Tests build rounds inline as flow-maps, e.g.
-  # { puzzle: puzzle0, startedAt: startedAt, solutions: { martinId: solHit }, scored: false }.
+  # keyed by playerId). Tests reference rounds by fixture name (round0Fresh, round0Scored, …);
+  # each fixture is a named PuzzleRound, e.g.
+  # round0MartinHitOnly = { puzzle: puzzle0, startedAt: startedAt, solutions: { martinId: solHit }, scored: false }.
   #
   # Player fixtures (Player = { playerId: Guid, name: string, isHost: bool }), reused by the
   # Join / Start / Submit GWTs:
@@ -1029,8 +1031,8 @@ slices:
               hostPlayerId: martinId
               currentRoundIndex: 0
               rounds:
-                - { puzzle: puzzle0, startedAt: startedAt, solutions: { martinId: solMiss }, scored: false }   # nilsId still pending (derived)
-                - { puzzle: puzzle1, solutions: {}, scored: false }
+                - round0MartinMiss   # nilsId still pending (derived)
+                - round1Fresh
       scoring a round folds the reveal and scores into that round:
         given:
           - e: Game / LobbyOpened
@@ -1056,5 +1058,5 @@ slices:
               currentRoundIndex: 0   # scoring does not advance; AskNextPuzzle does
               rounds:
                 # round0 fully scored: reveal + per-player reached/scores folded in
-                - { puzzle: puzzle0, startedAt: startedAt, solutions: { martinId: solMiss, nilsId: solHit }, sampleSolution: sampleSol0, reachedValues: { martinId: 20, nilsId: 100 }, roundScores: { martinId: 80, nilsId: -10 }, scored: true }
-                - { puzzle: puzzle1, solutions: {}, scored: false }
+                - round0Scored
+                - round1Fresh
