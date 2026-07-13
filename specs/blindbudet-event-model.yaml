@@ -142,9 +142,9 @@ slices:
         then:
           - e: Game / AuctionOpened
             props:
-              hostPlayerId: hostPlayerId
+              hostPlayerId: minted
               hostName: Martin
-              joinCode: joinCode
+              joinCode: minted
               packId: blindbudet
               lots: [lot0, lot1]
               openedAt: openedAt
@@ -214,7 +214,7 @@ slices:
             props: { joinCode: joinCode, playerName: Nils }
         then:
           - e: Game / PlayerJoined
-            props: { playerId: playerId, playerName: Nils, joinedAt: joinedAt }
+            props: { playerId: minted, playerName: Nils, joinedAt: joinedAt }
       cannot join nonexistent auction:
         given: []
         when:
@@ -369,8 +369,7 @@ slices:
               phase: started
               currentLotIndex: 0
               players: [hostMartin, playerNils]
-              lots:
-                - { lot: lot0, bids: {}, resolved: false }
+              lots: [lot0Fresh]
         when:
           - c: PlaceBid
             props: { gameId: gameId, playerId: nilsId, lotIndex: 0, amount: 90 }
@@ -391,8 +390,7 @@ slices:
               phase: started
               currentLotIndex: 0
               players: [hostMartin, playerNils]
-              lots:
-                - { lot: lot0, bids: {}, resolved: false }
+              lots: [lot0Fresh]
         when:
           - c: PlaceBid
             props: { gameId: gameId, playerId: nilsId, lotIndex: 0, amount: -5 }   # < 0 rejected; an overbid (too LARGE) is allowed and may go negative at score
@@ -405,8 +403,7 @@ slices:
               phase: started
               currentLotIndex: 0
               players: [hostMartin, playerNils]
-              lots:
-                - { lot: lot0, bids: { nilsId: 50 }, resolved: false }
+              lots: [lot0Nils50]
         when:
           - c: PlaceBid
             props: { gameId: gameId, playerId: nilsId, lotIndex: 0, amount: 70 }
@@ -419,8 +416,7 @@ slices:
               phase: started
               currentLotIndex: 0
               players: [hostMartin, playerNils]
-              lots:
-                - { lot: lot0, bids: { martinId: 60, nilsId: 90 }, trueWorth: 100, winnerIds: [nilsId], pricePaid: 90, profits: { martinId: 0, nilsId: 10 }, resolved: true }
+              lots: [lot0Resolved]
         when:
           - c: PlaceBid
             props: { gameId: gameId, playerId: martinId, lotIndex: 0, amount: 80 }
@@ -479,9 +475,7 @@ slices:
         then:
           - v: Todo / Outstanding bids
             props:
-              lots:
-                - { lotIndex: 0, pendingPlayerIds: [martinId, nilsId], allBidsIn: false }
-                - { lotIndex: 1, pendingPlayerIds: [martinId, nilsId], allBidsIn: false }
+              lots: [ob0AllPending, ob1AllPending]
       a placed bid checks off that player on its lot:
         given:
           - e: Game / AuctionOpened
@@ -494,9 +488,7 @@ slices:
         then:
           - v: Todo / Outstanding bids
             props:
-              lots:
-                - { lotIndex: 0, pendingPlayerIds: [nilsId], allBidsIn: false }
-                - { lotIndex: 1, pendingPlayerIds: [martinId, nilsId], allBidsIn: false }
+              lots: [ob0NilsPending, ob1AllPending]
       a lot shows all bids in once every player has bid:
         given:
           - e: Game / AuctionOpened
@@ -511,9 +503,7 @@ slices:
         then:
           - v: Todo / Outstanding bids
             props:
-              lots:
-                - { lotIndex: 0, pendingPlayerIds: [], allBidsIn: true }
-                - { lotIndex: 1, pendingPlayerIds: [martinId, nilsId], allBidsIn: false }
+              lots: [ob0AllIn, ob1AllPending]
 
   # The reveal processor: once Outstanding bids shows allBidsIn, the System reveals the lot.
   # PURE 0-100 resolver: OVERBID (bid > trueWorth) is disqualified (0 points, ✗, never a
@@ -565,9 +555,7 @@ slices:
               phase: started
               currentLotIndex: 0
               players: [hostMartin, playerNils]
-              lots:
-                - { lot: lot0, bids: { martinId: 70, nilsId: 90 }, resolved: false }   # both in -> allBidsIn derived true
-                - { lot: lot1, bids: {}, resolved: false }
+              lots: [lot0BothIn, lot1Fresh]   # both in -> allBidsIn derived true
         when:
           - c: RevealLot
             props: { gameId: gameId, lotIndex: 0 }
@@ -585,9 +573,7 @@ slices:
               phase: started
               currentLotIndex: 0
               players: [hostMartin, playerNils]
-              lots:
-                - { lot: lot0, bids: { martinId: 120, nilsId: 80 }, resolved: false }   # martin overbids the worth (100) -> disqualified
-                - { lot: lot1, bids: {}, resolved: false }
+              lots: [lot0MartinOverbid, lot1Fresh]   # martin overbids the worth (100) -> disqualified
         when:
           - c: RevealLot
             props: { gameId: gameId, lotIndex: 0 }
@@ -605,9 +591,7 @@ slices:
               phase: started
               currentLotIndex: 0
               players: [hostMartin, playerNils]
-              lots:
-                - { lot: lot0, bids: { martinId: 80, nilsId: 80 }, resolved: false }   # equal top valid bids -> shared win
-                - { lot: lot1, bids: {}, resolved: false }
+              lots: [lot0Tied80, lot1Fresh]   # equal top valid bids -> shared win
         when:
           - c: RevealLot
             props: { gameId: gameId, lotIndex: 0 }
@@ -625,9 +609,7 @@ slices:
               phase: started
               currentLotIndex: 0
               players: [hostMartin, playerNils]
-              lots:
-                - { lot: lot0, bids: { martinId: 100, nilsId: 100 }, resolved: false }   # both hit the worth exactly
-                - { lot: lot1, bids: {}, resolved: false }
+              lots: [lot0Exact100, lot1Fresh]   # both hit the worth exactly
         when:
           - c: RevealLot
             props: { gameId: gameId, lotIndex: 0 }
@@ -645,9 +627,7 @@ slices:
               phase: started
               currentLotIndex: 0
               players: [hostMartin, playerNils]
-              lots:
-                - { lot: lot0, bids: { martinId: 120, nilsId: 150 }, resolved: false }   # everyone overbids the worth (100)
-                - { lot: lot1, bids: {}, resolved: false }
+              lots: [lot0AllOverbid, lot1Fresh]   # everyone overbids the worth (100)
         when:
           - c: RevealLot
             props: { gameId: gameId, lotIndex: 0 }
@@ -665,10 +645,8 @@ slices:
               phase: started
               currentLotIndex: 1
               players: [hostMartin, playerNils]
-              lots:
-                # lot0 already resolved -> its profits are the source of the running total
-                - { lot: lot0, trueWorth: 100, winnerIds: [nilsId], pricePaid: 90, profits: { martinId: 0, nilsId: 10 }, resolved: true }
-                - { lot: lot1, bids: { martinId: 40, nilsId: 30 }, resolved: false }
+              # lot0 already resolved -> its profits are the source of the running total
+              lots: [lot0Scored, lot1BothIn]
         when:
           - c: RevealLot
             props: { gameId: gameId, lotIndex: 1 }
@@ -686,9 +664,7 @@ slices:
               phase: started
               currentLotIndex: 0
               players: [hostMartin, playerNils]
-              lots:
-                - { lot: lot0, bids: { martinId: 70 }, resolved: false }   # nilsId missing -> allBidsIn derived false
-                - { lot: lot1, bids: {}, resolved: false }
+              lots: [lot0MartinOnly, lot1Fresh]   # nilsId missing -> allBidsIn derived false
         when:
           - c: RevealLot
             props: { gameId: gameId, lotIndex: 0 }
@@ -701,9 +677,7 @@ slices:
               phase: started
               currentLotIndex: 0
               players: [hostMartin, playerNils]
-              lots:
-                - { lot: lot0, trueWorth: 100, winnerIds: [nilsId], pricePaid: 90, profits: { martinId: 0, nilsId: 10 }, resolved: true }   # already resolved -> double fire guarded
-                - { lot: lot1, bids: {}, resolved: false }
+              lots: [lot0Resolved, lot1Fresh]   # already resolved (bids folded in) -> double fire guarded
         when:
           - c: RevealLot
             props: { gameId: gameId, lotIndex: 0 }
@@ -748,9 +722,7 @@ slices:
               trueWorth: 100
               winnerIds: [nilsId]
               pricePaid: 90
-              playerProfits:
-                - { playerId: martinId, profit: 0, totalScore: 0 }
-                - { playerId: nilsId, profit: 10, totalScore: 10 }
+              playerProfits: [ppMartin0, ppNils10]
 
   # --- Progression (System processor) --------------------------------------
 
@@ -821,9 +793,7 @@ slices:
             props:
               phase: started
               currentLotIndex: 0
-              lots:
-                - { lot: lot0, trueWorth: 100, winnerIds: [nilsId], pricePaid: 90, profits: { martinId: 0, nilsId: 10 }, resolved: true }
-                - { lot: lot1, bids: {}, resolved: false }
+              lots: [lot0Scored, lot1Fresh]
         when:
           - c: AskNextLot
             props: { gameId: gameId }
@@ -864,18 +834,14 @@ slices:
               phase: started
               currentLotIndex: 1
               players: [hostMartin, playerNils]
-              lots:
-                - { lot: lot0, profits: { martinId: 20, nilsId: 0 }, resolved: true }
-                - { lot: lot1, profits: { martinId: 0, nilsId: 5 }, resolved: true }
+              lots: [lot0Profits20And0, lot1Profits0And5]
         when:
           - c: EndAuction
             props: { gameId: gameId }
         then:
           - e: Game / AuctionEnded
             props:
-              finalScoreboard:
-                - { playerId: martinId, playerName: Martin, totalScore: 20 }
-                - { playerId: nilsId, playerName: Nils, totalScore: 5 }
+              finalScoreboard: [sbMartin20, sbNils5]
               winnerIds: [martinId]   # martin highest total (20 > 5)
               endedAt: endedAt
       tied highest totals share the win:
@@ -885,18 +851,14 @@ slices:
               phase: started
               currentLotIndex: 1
               players: [hostMartin, playerNils]
-              lots:
-                - { lot: lot0, profits: { martinId: 10, nilsId: 10 }, resolved: true }
-                - { lot: lot1, profits: { martinId: 5, nilsId: 5 }, resolved: true }
+              lots: [lot0Profits10Each, lot1Profits5Each]
         when:
           - c: EndAuction
             props: { gameId: gameId }
         then:
           - e: Game / AuctionEnded
             props:
-              finalScoreboard:
-                - { playerId: martinId, playerName: Martin, totalScore: 15 }
-                - { playerId: nilsId, playerName: Nils, totalScore: 15 }
+              finalScoreboard: [sbMartin15, sbNils15]
               winnerIds: [martinId, nilsId]   # equal highest total -> shared win
               endedAt: endedAt
 
@@ -914,17 +876,13 @@ slices:
         given:
           - e: Game / AuctionEnded
             props:
-              finalScoreboard:
-                - { playerId: martinId, playerName: Martin, totalScore: 20 }
-                - { playerId: nilsId, playerName: Nils, totalScore: 5 }
+              finalScoreboard: [sbMartin20, sbNils5]
               winnerIds: [martinId]
               endedAt: endedAt
         then:
           - v: Screen / Final standings
             props:
-              finalScoreboard:
-                - { playerId: martinId, playerName: Martin, totalScore: 20 }
-                - { playerId: nilsId, playerName: Nils, totalScore: 5 }
+              finalScoreboard: [sbMartin20, sbNils5]
               winnerIds: [martinId]
 
   # --- Decision model (decider State) — APPENDIX, not a timeline step ------
@@ -944,9 +902,10 @@ slices:
   # keeps a single source of truth and no redundant flags.
   #
   # LotRound fixtures (lot = a Lot fixture; bids/profits are maps keyed by playerId; value
-  # objects never repeat the key). Tests build rounds inline as flow-maps, e.g.
-  # { lot: lot0, bids: { martinId: 70 }, resolved: false }. The bids map holds a raw decimal
-  # amount per player, folded in event-log order (so the earliest top bidder wins a tie).
+  # objects never repeat the key). Tests reference rounds by fixture NAME (lot0Fresh,
+  # lot0BothIn, lot0Scored, …) — the names resolve to Fixtures.* in the generated SpecTests
+  # (ADR 017); the fixture definitions live in Blindbudet.Domain.Tests/Fixtures.cs. The bids
+  # map holds a raw decimal amount per player, folded in event-log order.
   #
   # Player fixtures (Player = { playerId: Guid, name: string, isHost: bool }), reused by the
   # Join / Start / Bid GWTs:
@@ -998,9 +957,7 @@ slices:
               phase: started
               hostPlayerId: martinId
               currentLotIndex: 0
-              lots:
-                - { lot: lot0, bids: { martinId: 70 }, resolved: false }   # nilsId still pending (derived)
-                - { lot: lot1, bids: {}, resolved: false }
+              lots: [lot0MartinOnly, lot1Fresh]   # nilsId still pending (derived)
       resolving a lot folds the reveal and profits into that lot:
         given:
           - e: Game / AuctionOpened
@@ -1023,8 +980,6 @@ slices:
             props:
               phase: started
               currentLotIndex: 0   # resolving does not advance; AskNextLot does
-              lots:
-                # lot0 fully resolved: reveal + per-player profits folded in
-                # (totalScore is DERIVED by summing profits across resolved lots: martin 0, nils 10)
-                - { lot: lot0, bids: { martinId: 70, nilsId: 90 }, trueWorth: 100, winnerIds: [nilsId], pricePaid: 90, profits: { martinId: 0, nilsId: 10 }, resolved: true }
-                - { lot: lot1, bids: {}, resolved: false }
+              # lot0 fully resolved: reveal + per-player profits folded in
+              # (totalScore is DERIVED by summing profits across resolved lots: martin 0, nils 10)
+              lots: [lot0ResolvedFull, lot1Fresh]

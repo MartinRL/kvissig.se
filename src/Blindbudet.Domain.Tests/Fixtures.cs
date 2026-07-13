@@ -1,10 +1,9 @@
-using Xunit;
-
 namespace Blindbudet.Domain.Tests;
 
 /// <summary>
-/// Shared fixtures (named to match the spec's GWT cases) plus a Given/When/Then scaffold for
-/// the decider-true GWTs. Fixtures: lot0 trueWorth 100, lot1 trueWorth 50; host = martinId.
+/// Shared fixtures, named exactly as the spec's `tests:` reference them (the generated
+/// SpecTests resolve bare words to Fixtures.* — a missing name is a CS0117).
+/// lot0 trueWorth 100, lot1 trueWorth 50; host = martinId.
 /// </summary>
 public static class Fixtures
 {
@@ -29,14 +28,81 @@ public static class Fixtures
         "Blindbudet mini",
         [.. Enumerable.Range(0, 10).Select(i => new Lot($"lot{i}", 10m * i, "u"))]);
 
+    /// <summary>A fixed clock so timestamp pins are deterministic in tests.</summary>
+    public static readonly DateTimeOffset Now = new(2026, 1, 1, 12, 0, 0, TimeSpan.Zero);
+
+    // Timestamps the decider stamps from the fixed clock — all Now under Context.
+    public static readonly DateTimeOffset OpenedAt = Now;
+    public static readonly DateTimeOffset JoinedAt = Now;
+    public static readonly DateTimeOffset StartedAt = Now;
+    public static readonly DateTimeOffset BidAt = Now;
+    public static readonly DateTimeOffset EndedAt = Now;
+
+    /// <summary>A join code / game id that resolves to nothing.</summary>
+    public static readonly Guid Unknown = new("ffffffff-ffff-ffff-ffff-ffffffffffff");
+
+    // LotRound fixtures, named as the spec's `tests:` reference them (lot0Fresh, …).
+    public static readonly LotRound Lot0Fresh = Round(Lot0);
+    public static readonly LotRound Lot1Fresh = Round(Lot1);
+    public static readonly LotRound Lot0Nils50 = Round(Lot0,
+        bids: new Dictionary<Guid, decimal> { [NilsId] = 50m });
+    public static readonly LotRound Lot0MartinOnly = Round(Lot0,
+        bids: new Dictionary<Guid, decimal> { [MartinId] = 70m });
+    public static readonly LotRound Lot0BothIn = Round(Lot0,
+        bids: new Dictionary<Guid, decimal> { [MartinId] = 70m, [NilsId] = 90m });
+    public static readonly LotRound Lot0MartinOverbid = Round(Lot0,
+        bids: new Dictionary<Guid, decimal> { [MartinId] = 120m, [NilsId] = 80m });
+    public static readonly LotRound Lot0Tied80 = Round(Lot0,
+        bids: new Dictionary<Guid, decimal> { [MartinId] = 80m, [NilsId] = 80m });
+    public static readonly LotRound Lot0Exact100 = Round(Lot0,
+        bids: new Dictionary<Guid, decimal> { [MartinId] = 100m, [NilsId] = 100m });
+    public static readonly LotRound Lot0AllOverbid = Round(Lot0,
+        bids: new Dictionary<Guid, decimal> { [MartinId] = 120m, [NilsId] = 150m });
+    public static readonly LotRound Lot1BothIn = Round(Lot1,
+        bids: new Dictionary<Guid, decimal> { [MartinId] = 40m, [NilsId] = 30m });
+    public static readonly LotRound Lot0Resolved = Round(Lot0,
+        bids: new Dictionary<Guid, decimal> { [MartinId] = 60m, [NilsId] = 90m },
+        trueWorth: 100m, winnerIds: [NilsId], pricePaid: 90m,
+        profits: new Dictionary<Guid, int> { [MartinId] = 0, [NilsId] = 10 }, resolved: true);
+    public static readonly LotRound Lot0Scored = Round(Lot0,
+        trueWorth: 100m, winnerIds: [NilsId], pricePaid: 90m,
+        profits: new Dictionary<Guid, int> { [MartinId] = 0, [NilsId] = 10 }, resolved: true);
+    public static readonly LotRound Lot0ResolvedFull = Round(Lot0,
+        bids: new Dictionary<Guid, decimal> { [MartinId] = 70m, [NilsId] = 90m },
+        trueWorth: 100m, winnerIds: [NilsId], pricePaid: 90m,
+        profits: new Dictionary<Guid, int> { [MartinId] = 0, [NilsId] = 10 }, resolved: true);
+    public static readonly LotRound Lot0Profits20And0 = Round(Lot0,
+        profits: new Dictionary<Guid, int> { [MartinId] = 20, [NilsId] = 0 }, resolved: true);
+    public static readonly LotRound Lot1Profits0And5 = Round(Lot1,
+        profits: new Dictionary<Guid, int> { [MartinId] = 0, [NilsId] = 5 }, resolved: true);
+    public static readonly LotRound Lot0Profits10Each = Round(Lot0,
+        profits: new Dictionary<Guid, int> { [MartinId] = 10, [NilsId] = 10 }, resolved: true);
+    public static readonly LotRound Lot1Profits5Each = Round(Lot1,
+        profits: new Dictionary<Guid, int> { [MartinId] = 5, [NilsId] = 5 }, resolved: true);
+
+    // View-row fixtures (Outstanding bids / Round results / final scoreboards).
+    public static readonly OutstandingBid Ob0AllPending = new(0, [MartinId, NilsId], false);
+    public static readonly OutstandingBid Ob1AllPending = new(1, [MartinId, NilsId], false);
+    public static readonly OutstandingBid Ob0NilsPending = new(0, [NilsId], false);
+    public static readonly OutstandingBid Ob0AllIn = new(0, [], true);
+
+    public static readonly PlayerProfit PpMartin0 = new(MartinId, 0, 0);
+    public static readonly PlayerProfit PpNils10 = new(NilsId, 10, 10);
+
+    public static readonly ScoreboardEntry SbMartin20 = new(MartinId, "Martin", 20);
+    public static readonly ScoreboardEntry SbNils5 = new(NilsId, "Nils", 5);
+    public static readonly ScoreboardEntry SbMartin15 = new(MartinId, "Martin", 15);
+    public static readonly ScoreboardEntry SbNils15 = new(NilsId, "Nils", 15);
+
     /// <summary>
-    /// Stub context: FindPack resolves the 2-lot fixture pack for "blindbudet" and the 10-lot
-    /// MiniPack for "blindbudet-mini", else null. NextRandom is fixed to 0 so Fisher-Yates is
-    /// deterministic in tests. NewGuid/Now are real (minted values asserted only by presence).
+    /// Stub context: a fixed clock at Now; FindPack resolves the 2-lot fixture pack for
+    /// "blindbudet" and the 10-lot MiniPack for "blindbudet-mini", else null. NextRandom is
+    /// fixed to 0 so Fisher-Yates is deterministic in tests. NewGuid is real (minted values
+    /// asserted only by presence).
     /// </summary>
     public static readonly AuctionContext Context = new(
         NewGuid: Guid.NewGuid,
-        Now: () => DateTimeOffset.UtcNow,
+        Now: () => Now,
         FindPack: slug => slug switch
         {
             "blindbudet" => Pack,
@@ -65,113 +131,4 @@ public static class Fixtures
             Profits = profits ?? new Dictionary<Guid, int>(),
             Resolved = resolved
         };
-}
-
-/// <summary>Entry point for the decider GWT scaffold: Gwt.Given(state).When(command).</summary>
-public static class Gwt
-{
-    public static GivenState Given(AuctionState state) => new(state);
-    public static GivenState GivenInitial() => new(AuctionState.Initial);
-}
-
-public sealed record GivenState(AuctionState State)
-{
-    public Result<AuctionEvent[]> When(AuctionCommand command) =>
-        Decider.Decide(State, command, Fixtures.Context);
-}
-
-/// <summary>
-/// Result/union extractors. Union case checks MUST use the `is`-pattern against a CONCRETE
-/// case type (the union's runtime type is the union, not the case — a generic `is T` would
-/// fall back to isinst and never match). So these helpers take concrete types only.
-/// </summary>
-public static class ResultAssertions
-{
-    public static AuctionEvent[] Events(this Result<AuctionEvent[]> result)
-    {
-        if (result is Ok<AuctionEvent[]> ok)
-            return ok.Value;
-        Assert.Fail("expected Ok (events), got an error");
-        return [];
-    }
-
-    public static Err Error(this Result<AuctionEvent[]> result)
-    {
-        if (result is Err err)
-            return err;
-        Assert.Fail("expected Err, got Ok (events)");
-        return null!;
-    }
-
-    public static AuctionOpened Opened(this AuctionEvent[] events)
-    {
-        foreach (var e in events)
-            if (e is AuctionOpened a)
-                return a;
-        Assert.Fail("no AuctionOpened event");
-        return null!;
-    }
-
-    public static PlayerJoined Joined(this AuctionEvent[] events)
-    {
-        foreach (var e in events)
-            if (e is PlayerJoined a)
-                return a;
-        Assert.Fail("no PlayerJoined event");
-        return null!;
-    }
-
-    public static AuctionStarted Started(this AuctionEvent[] events)
-    {
-        foreach (var e in events)
-            if (e is AuctionStarted a)
-                return a;
-        Assert.Fail("no AuctionStarted event");
-        return null!;
-    }
-
-    public static BidPlaced Bid(this AuctionEvent[] events)
-    {
-        foreach (var e in events)
-            if (e is BidPlaced a)
-                return a;
-        Assert.Fail("no BidPlaced event");
-        return null!;
-    }
-
-    public static LotRevealed Revealed(this AuctionEvent[] events)
-    {
-        foreach (var e in events)
-            if (e is LotRevealed a)
-                return a;
-        Assert.Fail("no LotRevealed event");
-        return null!;
-    }
-
-    public static RoundScored ScoredFor(this AuctionEvent[] events, Guid playerId)
-    {
-        foreach (var e in events)
-            if (e is RoundScored s && s.PlayerId == playerId)
-                return s;
-        Assert.Fail($"no RoundScored for {playerId}");
-        return null!;
-    }
-
-    public static NextLotStarted NextLot(this AuctionEvent[] events)
-    {
-        foreach (var e in events)
-            if (e is NextLotStarted a)
-                return a;
-        Assert.Fail("no NextLotStarted event");
-        return null!;
-    }
-
-    public static AuctionEnded Ended(this AuctionEvent[] events)
-    {
-        foreach (var e in events)
-            if (e is AuctionEnded a)
-                return a;
-        Assert.Fail("no AuctionEnded event");
-        return null!;
-    }
 }
