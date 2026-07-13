@@ -276,7 +276,8 @@ file per spec.
 - **Preconditions:** step 0 shadow green.
 - **Deliverable:** `Emlang.Generators` analyzer wrapper; Analyzer `ProjectReference`
   wiring; **delete** `Commands.cs`, `Events.cs`, `Errors.cs` + pure view records
-  (~166 LOC in BB). Then repeat for MEM (~225) and TTT (~164).
+  (~166 LOC in BB). Then repeat for MEM (~225) and TTT (~164). **[DONE for all three
+  games — BB §9.1, MEM+TTT §9.2.]**
 - **Done-gate:** `dotnet build` + full test suite green with generated types; deleted
   files gone from git; shadow tests for this layer retired (the generator *is* the
   source now).
@@ -373,3 +374,411 @@ point for the thesis.
   `src/MerEllerMindre.Domain.Tests/ArchitectureTests.cs:140-211` (siblings in
   Blindbudet/TankTillTusen arch tests); fixture comments,
   `specs/mer-eller-mindre-event-model.yaml:150-156`.
+
+## 9. Experiment log — step 0 (2026-07-12, branch `experiment/emlang-codegen-shadow`)
+
+**Question tested:** do the specs' `c:`/`e:`/`x:` props deterministically define the
+committed record surfaces (type names, prop names, prop types, order) across all three
+games?
+
+**Answer: YES — the assumption holds, stronger than expected.** The shadow tests
+(`SpecSurfaceShadowTests` × 3, backed by `src/Emlang.CodeGen`'s
+SpecModel/CodeSurface/SurfaceComparer) went green for all three games **on the first
+run**, with an **empty findings allowlist**. The planned classification loop converged
+at iteration 0. A false green is structurally excluded: the comparison is
+bidirectional (an empty parse on either side floods missing-record /
+union-extra divergences), and 23 inline-YAML/C# negative cases prove the comparer
+fails on fabricated divergences (fake prop, extra param, wrong type, missing element,
+orphan record, swapped order, union drift both ways, wrong namespace).
+
+| Metric | Result |
+|---|---|
+| # general mapping rules | **6** — (1) camelCase → PascalCase prop names; (2) `X[]` → `IReadOnlyList<X>`; (3) strip parenthesized note (`Direction (mer\|mindre)` → `Direction`); (4) events strip the `Game / ` stream prefix; (5) surface comes from slice *steps* only (`tests:` props are fixture values); (6) the props-richest occurrence of an element defines it (bare re-occurrences are slice inputs). Inline `# comments` cost nothing (YAML scalars end at the comment). |
+| # manifest facts per game | **3 categories** (`GameManifest`, three literal instances): union names (`GameCommand`/`AuctionCommand`/`TankCommand` + Event/Error), namespace, file paths (spec + Commands/Events/Errors.cs). Exactly the per-game facts the spec structurally cannot say — confirmed by construction. |
+| # (c)-findings (irreducible spec↔code gaps) | **0** — no allowlist entries in any game. |
+| Probe A verdict | `emlang lint` v1.0.0 **hard-rejects** `fixtures:` at both placements — `unknown top-level key "fixtures"` and `unknown slice key "fixtures"` are *parse* errors, so the `.emlang.yaml` ignore fallback is dead too. **Step 3 must use sidecar `specs/<game>-fixtures.yaml`** parsed only by Emlang.CodeGen. |
+
+**Interpretation:** rules small (6), manifest tiny (3 facts/game), zero findings ⇒
+the deterministic-mapping thesis **holds** for the stratum-1 record layer. The 6 regex
+spec-coverage facts (2 × 3 games) are deleted, superseded by the strictly stronger
+structural check (adds prop names/types/order, union membership both ways, namespace).
+Proceed to **step 1** (analyzer wiring, flip Blindbudet records — separate plan +
+ADR 016). Residual risks unchanged: analyzer/preview-SDK wiring (§7.1) and the
+`fixtures:` test-semantics dialect (§7.3) were *not* exercised here, except that
+Probe A now fixes the fixtures placement to a sidecar.
+
+## 9.1 Experiment log — step 1 (2026-07-12, same branch)
+
+**Flip executed: Blindbudet's Commands.cs/Events.cs/Errors.cs are generated, not
+committed.** Mechanism per ADR 016: `Emlang.CodeGen` retargeted netstandard2.0, new
+`SurfaceEmitter` (spec elements → C# text, records in spec order + closed union),
+new `Emlang.Generators` incremental generator (AdditionalFiles → manifest match →
+`AddSource`), output in `obj/` only.
+
+| Metric | Result |
+|---|---|
+| LOC removed from git | **166** domain (Commands 51 + Events 78 + Errors 37) + 29 retired shadow test = 195, vs the ~166 §6 prediction — exact hit |
+| Wiring pain (§7.1, the deferred risk) | **None.** The cookbook stack (netstandard2.0 + Roslyn pinned 4.14.0 + `GetDependencyTargetPaths` shipping Emlang.CodeGen.dll/YamlDotNet.dll) built and generated **on the first attempt** — no CS9057, no analyzer-load failures. The real cost was the netstandard2.0 retarget itself: ~8 mechanical API fixes (ranges → `Substring`, `Contains(char)`, `TrimEntries`, non-generic `MatchCollection`, KVP deconstruction, explicit usings, `IsExternalInit` shim) |
+| Test delta | 243 → **247**: −1 Blindbudet shadow test (tautological post-flip), +5 emitter self-tests. All green; Web compiles unchanged against generated types |
+| Correctness proof | emit → `SurfaceComparer` → 0 divergences for **all three** manifests against the real specs — the step-0 harness reused as the generator's own gate. Reflection arch tests (`All_public_domain_types_are_records` etc.) validate the generated types for free |
+
+**Interpretation:** the analyzer-wiring risk (§7.1) is retired empirically. MEM (~225
+LOC) and TankTillTusen (~164) are now a csproj-wiring + `git rm` + shadow-test-retire
+each — the generator and manifests already handle them. Next material risk is step 2's
+partial-method Decider seam.
+
+### 9.1.1 Practical findings — netstandard2.0 retarget of the core library
+
+The §4 assumption "generator project targets netstandard2.0, core is source-linked"
+was replaced by a simpler shape: **the core itself (`Emlang.CodeGen`) retargeted to
+netstandard2.0** and ships as a dll beside the analyzer. One TFM, no multi-targeting,
+no source-linking — the net11.0 test projects consume the netstandard2.0 dll fine.
+
+Every API gap surfaced as a build error and was mechanical to fix. The complete list
+(useful as a checklist for any future library that must load in-compiler):
+
+| netstandard2.0 gap | Fix |
+|---|---|
+| Records need `IsExternalInit` | 3-line internal shim in the library (no PolySharp dep) |
+| Range/index operators on `string` (`s[1..]`, `s[..^2]`) | `Substring(...)` equivalents |
+| `string.Contains(char)` | `IndexOf(char)` — or restructure (`LastIndexOf + 1` handles the no-prefix case for free, since `-1 + 1 = 0`) |
+| `StringSplitOptions.TrimEntries` + `Split(char, StringSplitOptions)` | `Split(',')` + LINQ `Select(Trim)` / `Where(Length > 0)` |
+| `MatchCollection` is non-generic (`IEnumerable`, not `IEnumerable<Match>`) | `.Cast<Match>()` before LINQ |
+| `KeyValuePair<K,V>` has no `Deconstruct` | iterate the pair, use `.Key`/`.Value` |
+| `ImplicitUsings=enable` emits **no** default usings on netstandard2.0 (the SDK gates them on net6.0+) | explicit `using` lines per file; drop the property |
+
+What did **not** need fixing: `LangVersion=preview` features (collection expressions
+`[.. x]` incl. `IReadOnlyList<T>` targets, switch expressions, pattern matching,
+file-scoped namespaces, target-typed `new`) all compile down to netstandard2.0 — they
+are compiler features, not BCL features. `ValueTuple`, `Array.Empty<T>`,
+`[CallerFilePath]`, `EndsWith(string, StringComparison)` all exist in ns2.0.
+YamlDotNet 16.3.0 and Microsoft.CodeAnalysis.CSharp 4.14.0 both carry netstandard2.0
+assets.
+
+### 9.1.2 Practical findings — analyzer wiring (the exact recipe that worked)
+
+First attempt, zero failures. The three load-bearing pieces:
+
+1. **Roslyn pin, old-stable:** `Microsoft.CodeAnalysis.CSharp 4.14.0` with
+   `PrivateAssets="all"`. CS9057 only fires when the analyzer's Roslyn is *newer* than
+   the compiler's — under a preview SDK (11.0.100-preview.5) old is always safe.
+2. **Dependency shipping** in Emlang.Generators.csproj — every
+   `TargetPathWithTargetPlatformMoniker` item returned from `GetTargetPath` becomes an
+   Analyzer item in the consuming project, which is how Emlang.CodeGen.dll and
+   YamlDotNet.dll get into the compiler's analyzer load context:
+
+   ```xml
+   <PropertyGroup>
+     <GetTargetPathDependsOn>$(GetTargetPathDependsOn);GetDependencyTargetPaths</GetTargetPathDependsOn>
+   </PropertyGroup>
+   <Target Name="GetDependencyTargetPaths">
+     <ItemGroup>
+       <TargetPathWithTargetPlatformMoniker Include="$(PKGYamlDotNet)\lib\netstandard2.0\YamlDotNet.dll" IncludeRuntimeDependency="false" />
+       <TargetPathWithTargetPlatformMoniker Include="$(TargetDir)Emlang.CodeGen.dll" IncludeRuntimeDependency="false" />
+     </ItemGroup>
+   </Target>
+   ```
+
+   (`$(PKGYamlDotNet)` requires `GeneratePathProperty="true"` on the YamlDotNet
+   PackageReference; `$(TargetDir)Emlang.CodeGen.dll` works because the plain
+   ProjectReference copy-locals the dll into the generator's own output.)
+3. **Consumer wiring** — two lines in the Domain csproj:
+
+   ```xml
+   <AdditionalFiles Include="..\..\specs\blindbudet-event-model.yaml" />
+   <ProjectReference Include="..\Emlang.Generators\Emlang.Generators.csproj"
+                     OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+   ```
+
+Confirmations of §4's untested claims: emitting C# 15 `union` **text** from a
+netstandard2.0 analyzer works exactly as predicted — the generated tree parses with
+the *consumer's* `LangVersion=preview`. The generator emits `#nullable enable` +
+explicit `using System; using System.Collections.Generic;` so the output is
+self-contained under `TreatWarningsAsErrors` regardless of the consumer's
+ImplicitUsings.
+
+### 9.1.3 Practical findings — test architecture after a flip
+
+- **The step-0 shadow harness converts into the generator's correctness proof for
+  free.** `SurfaceEmitterTests` runs emit → `SurfaceComparer.Compare(manifest, spec,
+  emitted…)` → must be empty, for all three games. Same comparer, same 23 negative
+  cases guarding against false greens — no new proof machinery was written for step 1.
+- **A flipped game's per-game shadow test must be deleted, not kept:** it reads the
+  committed files from disk (crash post-`git rm`), and spec↔generated comparison is
+  tautological anyway. Unflipped games' shadow tests stay — their committed files can
+  still drift.
+- **Reflection-based architecture tests need no changes** — they inspect the compiled
+  assembly, so `All_public_domain_types_are_records`, the union-exhaustiveness facts
+  etc. validate generated types automatically. Path-scanning arch tests
+  (`No_reflection_or_dynamic_in_domain` globs `src/<Game>.Domain/*.cs`) silently skip
+  generated code — acceptable: the emitter is deterministic and comparer-gated.
+- **Tooling gates hold by construction:** codehealth.sh already excluded `\.g\.cs$` and
+  `/obj/`, so generated output is invisible to the CH gate; the scope regex needed
+  `Emlang\.(CodeGen|Generators)` so the generator projects themselves stay scored (all
+  new files CH 10.0).
+- The pre-verified "no test guards the Domain csproj" held for Blindbudet. **MEM is
+  different:** `Domain_project_has_no_dependencies` reads MEM's csproj text — flipping
+  MEM will require amending it to allow Analyzer-only ProjectReferences (an honest
+  fitness-function change, anticipated by §6 step 1).
+
+### 9.1.4 Flip recipe (for MEM and TankTillTusen, when decided)
+
+Per game, the whole flip is: (1) add the two wiring lines (§9.1.2 item 3, pointing at
+that game's spec) to the Domain csproj; (2) `git rm Commands.cs Events.cs Errors.cs`;
+(3) delete that game's `SpecSurfaceShadowTests.cs` and drop the now-unused
+Emlang.CodeGen ProjectReference from its Tests csproj; (4) MEM only: amend
+`Domain_project_has_no_dependencies`. The generator, manifests, and emitter self-tests
+already cover all three specs — no generator-side work remains.
+
+## 9.2 Experiment log — step 1 completed for MEM + TankTillTusen (2026-07-12)
+
+The §9.1.4 recipe executed verbatim for the remaining two games; **step 1 is now DONE
+for all three games** — no stratum-1 record file remains in git anywhere.
+
+| Metric | Result |
+|---|---|
+| LOC removed from git | MEM **225** domain (Commands 62 + Events 108 + Errors 55) — exact §6 prediction; TTT **166** (Commands 51 + Events 78 + Errors 37) vs ~164 predicted. +29 LOC retired shadow test each |
+| Wiring pain | **None**, again. Two csproj blocks (AdditionalFiles + Analyzer ref), first-attempt green build for both |
+| Test delta | 247 → **245**: −2 retired shadow tests (MEM + TTT, tautological post-flip). Whole suite green; Web + all Decider/Evolve/Projection tests compile unchanged against the generated surface |
+| Fitness-function amendment (the anticipated §6 touchpoint) | `Domain_project_has_no_dependencies` now parses MEM's csproj XML: every `<ProjectReference>` must carry `OutputItemType="Analyzer"` + `ReferenceOutputAssembly="false"`; `<PackageReference>` still banned outright. Still red on any runtime dependency. TTT needed no arch-test change (`TankArchitectureTests` never reads the csproj) |
+| Deviations from the §9.1.4 recipe | None |
+
+**Interpretation:** flips after the pilot are pure mechanics, ~10 lines of csproj per
+game. Running total for step 1: **557 domain LOC + 3 shadow tests (87 LOC) out of
+git**. The next material risk is unchanged: step 2's partial-method Decider seam
+(CS8795).
+
+## 9.3 LOC accounting — branch vs main (2026-07-12)
+
+An honest close-of-step-1 balance sheet: how much does the branch (10 commits ahead of
+`main`) differ from `main` in committed C# source, in percent?
+
+Committed C# LOC per branch (`git ls-tree -r --name-only <ref> | grep '\.cs$'`, then
+`git show <ref>:<file> | wc -l` summed per area):
+
+| Area | main | branch | delta |
+|---|---|---|---|
+| Game prod (Domain + Web) | 6 173 | 5 616 | **−557 (−9.0 %)** |
+| Game tests | 4 372 | 4 228 | −144 (−3.3 %) |
+| Emlang.CodeGen + Emlang.Generators (new infra) | 0 | 442 | +442 |
+| Emlang.CodeGen.Tests (new) | 0 | 266 | +266 |
+| **Total .cs in git** | **10 545** | **10 552** | **+7 (+0.07 %)** |
+
+Churn (`git diff main...HEAD --shortstat` on `*.cs`): 22 files, **+729/−722** — roughly
+13.8 % of main's C# corpus touched. Non-C# churn: +336/−2 (this doc §9–9.2, ADR 016,
+csproj wiring, memory files). Infra breakdown: Emlang.CodeGen 398 LOC (SpecModel 107,
+SurfaceComparer 126, GameManifest 61, CodeSurface 58, SurfaceEmitter 42, IsExternalInit 4)
++ Emlang.Generators 44.
+
+**Interpretation (honest):** at n=3 games the experiment is **LOC-neutral** (+7 net).
+What was deleted is O(games) transcription (~186 LOC/game plus shadow tests); what was
+added is O(1) infrastructure (708 LOC incl. tests). The breakeven point is crossed with
+game 4: its record layer costs ~2 csproj lines instead of ~186 LOC. The real win is
+structural, not numeric — the spec is now the single change surface for the record
+layer, enforced by the compiler.
+
+## 10. Analysis — the 1:1 spec↔implementation thesis for agentic engineering (2026-07-12)
+
+Written after step 1 completed for all three games (§9–9.3). Synthesis of a three-track
+research pass: (a) in-repo evidence inventory, (b) the 2023–2026 spec-driven-development
+literature, (c) the strongest steelmanned counter-case (MDA history, DSL critiques,
+LLM training-data distribution). The claim under test:
+
+> **Thesis.** An architecture whose implementation maps 1:1 onto a formal spec is
+> dramatically smoother for agentic engineering than "programming in English" over a
+> conventional layered/clean/onion + ORM + RDBMS stack.
+
+### 10.1 The decisive axis is the transformer, not the spec
+
+The 2025 SDD wave — GitHub Spec Kit, AWS Kiro, OpenAI's "The New Code" — already agrees
+with half the thesis: intent, not code, should be the durable artifact. But all of them
+keep an **LLM as the spec→code transformer**: markdown in, probabilistic code out. That
+is exactly why the published critiques land on them — spec drift and duplication
+("waterfall in markdown"), review burden *moving* to prose instead of shrinking
+(Böckeler's taxonomy and skepticism on martinfowler.com: spec-first artifacts go stale;
+she would rather review code than markdown), ceremony that doesn't scale down to a bug
+fix (Kiro), and the measured non-determinism of LLM codegen even at temperature 0
+(arXiv 2308.02828, 2408.04667). Non-determinism is fatal for review economics:
+regeneration produces incidental churn, so diffs don't compose and every regeneration
+is a fresh review event.
+
+What this repo does differs categorically on that axis: emlang → records is a
+**deterministic function**, and its determinism was *measured before mechanizing*
+(step 0: zero irreducible findings). Same spec in, byte-identical code out; spec-diff ↔
+code-diff correspondence is stable; CI can assert `artifact == f(spec, generator)`.
+Böckeler's non-determinism objection — the sharpest published critique of SDD —
+structurally cannot reach the deterministic stratum. Dijkstra made the underlying point
+in 1978 (EWD667): formal texts are effective precisely because their legitimacy is
+checkable by a few simple rules, while natural language excels at making nonsense
+non-obvious. Karpathy's "English is the hottest new programming language" line is the
+antithesis — but note that when he coined "vibe coding" he scoped it to throwaway
+projects himself.
+
+So the honest framing is not two points on one scale but a ladder of **who transforms
+and what verifies**:
+
+1. English prompt → LLM → code; humans review everything (vibe coding).
+2. Markdown spec → LLM → code + tests (Spec Kit, Kiro): intent captured, transformation
+   still stochastic, spec itself drifts.
+3. **Formal spec → deterministic generator for the provable stratum + agent writing the
+   residue against compiler/test oracles** ← this repo.
+4. Full formal synthesis (nobody credibly claims it).
+
+Each rung up buys review-once semantics for a larger stratum. No published source
+argues rung 3 end-to-end (closest: the "Compiled AI" pattern — run the LLM at
+generation time, validate deterministically — and event-sourced agent-state papers);
+this document is, as far as the research pass found, an original synthesis of
+documented properties, not a citation of an established result.
+
+### 10.2 Why the agent cares — mechanisms with in-repo evidence
+
+The 2025–26 practitioner consensus is that **generation is no longer the bottleneck;
+verification is**. An architecture is agent-friendly to the degree it maximizes *oracle
+density per token*: how fast and how mechanically can wrongness be detected?
+
+| Mechanism                              | Layered + ORM + RDBMS                                                       | This repo                                                                        | Evidence                                                                        |
+| -------------------------------------- | --------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| Transformation                         | LLM interprets prose per change                                             | deterministic generator, reviewed once                                           | §9 round-trip: 0 divergences, 3 games                                           |
+| Strongest oracle                       | runtime (ORM mapping, DI resolution, SQL)                                   | compile time (exhaustive unions, no default arms, TreatWarningsAsErrors)         | new `e:` in spec ⇒ build error today; CS8795 seam in step 2                     |
+| Test loop                              | DB/containers/migrations, minutes                                           | 181 pure-function `[Fact]`s in **< 8 s**, no mocks, no IO                        | Decider determinism (Chassaing): (State, Command) → same Events, always         |
+| Edit surface for one behavioral change | entity + DTO + mapper + migration + validator + controller + service + repo | spec + ~4–6 hand files, **0 generated files touched**                            | "add a field to SubmitGuess" trace: spec, State, Decider, endpoint, razor, test |
+| Behavioral ground truth                | smeared across layers + SQL                                                 | 3,444 spec LOC describe all 3 games' surfaces (vs 2,720 hand-written domain LOC) | agent loads one artifact to know the behavior                                   |
+| Spec↔code drift                        | discipline (fails)                                                          | build error — the spec is load-bearing for compilation                           | ADR 016                                                                         |
+
+The deepest row deserves a name: **representational redundancy**. A layered ORM stack
+states one domain fact in many representations — entity, DTO, mapper, SQL schema,
+validator, API contract — and coherent multi-site editing is precisely the failure mode
+of LLM agents (and of humans, which is why drift folklore exists). Deterministic
+derivation doesn't *manage* that redundancy, it deletes it. This also sharpens what the
+thesis is **not**: it is not anti-layering. The repo keeps the strictest boundary there
+is — functional core / imperative shell, enforced by fitness tests — because dependency
+discipline *helps* agents (small blast radius, testable seams; the pro-boundaries
+agent-era literature is right about that). What it deletes is ceremonial
+*representational* tiers. Honest note: the read side here still passes one fact through
+4–5 representations (spec → record → projection → Vm → Razor), so the thesis is only
+partially realized in-repo; steps 3–4 target part of that.
+
+Agents also change spec-first economics twice over. Keeping spec and code in sync used
+to be human toil (why "the documentation lies" became folklore); here the sync is
+compiler-enforced, and the agent makes spec-editing cheap. "Programming in English"
+does the opposite: it reinstates documentation-as-source *without* enforcement. Grove's
+indictment of current practice — teams discard the prompt and version-control its
+output, i.e. shred the source and keep the binary — applies to prompt-driven work, and
+his proposed fix (markdown specs) still lacks the deterministic bridge.
+
+### 10.3 The honest counter-case
+
+1. **Training-data distribution — the strongest single objection.** LLMs are most
+   fluent where training data is thickest: mainstream layered CRUD. emlang is a
+   zero-resource DSL; the LRPL/DSL performance gap is documented (ACM TOSEM survey,
+   arXiv 2410.03981). The agent's raw fluency is highest exactly where the thesis says
+   the architecture is worst. In-repo mitigations: the repo carries its own instruction
+   set (CLAUDE.md, specs/CLAUDE.md cheat-sheet, constitution, 16 ADRs, fitness tests) —
+   a fixed context cost replacing per-change scattered reads — and the DSL is small,
+   YAML-shaped, lint-guarded. Three 1:1 agent transcriptions and two zero-deviation
+   flips (§9.2) suggest the mitigation works, but that is anecdote; **no published
+   benchmark measures agent performance on a well-documented project-local DSL.**
+2. **MDA is the ghost at this feast.** 1:1 model→code with generated artifacts kept out
+   of source control is precisely what MDA promised, and it died on: hand-edits
+   breaking round-trip (protected regions), models as cumbersome as code, the last 20%
+   never fitting, model-level tooling gaps (den Haan's 8 reasons), and Fowler's point
+   that the model layer is itself a platform you're locked to. The experiment's
+   survival conditions, stated so a future reader can check them: (a) generation stays
+   restricted to strata whose determinism is **proved before flipping** (step 0's
+   methodology — the discipline MDA lacked); (b) generated code is never hand-edited
+   *by construction* (obj/, not disk — no protected regions to rot); (c) the escape
+   valve is a **typed seam** (partial methods, fixtures referenced by identifier) where
+   missing human code is a compile error, not a silently-lost region; (d) the language
+   doesn't creep toward general-purpose. On (d), honesty: emlang lint already rejected
+   `fixtures:`, forcing a sidecar file — the expressiveness ceiling and the governance
+   risk of a DSL we don't own are real and already touched.
+3. **The escape hatches already exist.** The 3-fact GameManifest; scoring formulas
+   present in the spec only as prose that an agent must transcribe into C#; solver,
+   sampling and banding algorithms that live only in code. Each hatch is a place where
+   "1:1" is really "1:1 for the mechanical stratum, spec-*anchored* for the rest." The
+   thesis as stated overreaches; the proven claim is the narrower one.
+4. **Toolchain liability.** netstandard2.0 freeze, incremental-caching footguns that
+   degrade the IDE silently (even Microsoft's own generators shipped non-incremental —
+   dotnet/runtime #74557), generator debugging through obj/, Roslyn version drift
+   between IDE and CLI. A compiler-adjacent component maintained by a team of one, in
+   the LLM's weakest training-data zone. §9.1's zero-pain wiring is one data point, not
+   a refutation.
+5. **Fowler's quagmire cuts both ways.** His OrmHate argument — teams that flee a
+   mainstream tool's 20% pain rebuild the 80% badly as a homegrown framework — applies
+   verbatim to homegrown spec toolchains. The step-5 measurement exists to catch this.
+6. **RDBMS/ORM persist for the read side.** Ad-hoc queries, reporting, migrations,
+   fifty years of ops tooling. A quiz game with in-memory streams *dodges* that
+   question rather than answering it. If the thesis generalizes, it generalizes to
+   systems where the write model dominates — or must show spec-generated read-side
+   schema/projections.
+7. **Scale of evidence.** n=3 small games, one author, and LOC-neutral net (+7, §9.3).
+   The numeric case is modest; the structural case (single change surface) is the real
+   claim, and it is untested under team concurrency, schema migration, or performance
+   pressure.
+8. **The disposability camp attacks from the other flank:** if agent-generated code is
+   cheap and regenerable, why build machinery to keep 557 LOC out of git? Recorded
+   answer: the machinery's value is not the LOC, it is the **contract** — determinism
+   turns regeneration from a review event into a build step. But if generator
+   maintenance ever rivals the drift it prevents, the experiment failed by its own
+   standard.
+
+### 10.4 Verdict
+
+The thesis survives in a refined form:
+
+> For agentic engineering the leverage is not "spec instead of code," nor "fewer
+> layers" — it is **maximizing the fraction of the system whose correctness is
+> machine-decided, and minimizing representational redundancy in what remains.** A 1:1
+> spec↔impl mapping with a *deterministic* generator is the strongest available form of
+> the first; a functional-core/event-sourced shape with exhaustive unions and
+> spec-derived GWT tests is the strongest available form of the second. "Programming in
+> English" over a layered ORM stack is weak on both axes at once: the transformation is
+> stochastic, and verification is diffuse, slow, and multi-representation.
+
+The agent is not the reason the architecture is good; the agent is an **amplifier of
+whatever verification regime exists**. Amplified diffuse verification yields plausible
+drift at machine speed; amplified concentrated verification yields checkable increments
+at machine speed. That asymmetry — not taste — is the content of the thesis.
+
+Falsifiers, extending §7:
+
+- **F1 (MDA relapse):** step 2/3 seams accumulate hand-maintained metadata until
+  reviewing spec + seam costs more than reviewing the code it replaces (Böckeler risk
+  realized).
+- **F2 (economics):** a 4th game's record layer costs materially more than the
+  predicted ~2 csproj lines + spec.
+- **F3 (agent benchmark):** an agent performing a comparable end-to-end change ("add a
+  field") in this repo vs a conventional stack shows no reduction in files touched,
+  tokens consumed, or review iterations. Nothing published measures this; it is worth
+  running deliberately.
+- **F4 (toolchain drag):** generator/toolchain maintenance commits start rivaling the
+  transcription commits they replaced.
+
+### 10.5 Sources (additions to §8)
+
+- Dijkstra, EWD667 *On the foolishness of "natural language programming"* —
+  https://www.cs.utexas.edu/~EWD/transcriptions/EWD06xx/EWD667.html
+- Böckeler, *Understanding Spec-Driven Development: Kiro, spec-kit, and Tessl* —
+  https://martinfowler.com/articles/exploring-gen-ai/sdd-3-tools.html
+- GitHub Spec Kit — https://github.com/github/spec-kit (+ Scott Logic critique:
+  https://blog.scottlogic.com/2025/11/26/putting-spec-kit-through-its-paces-radical-idea-or-reinvented-waterfall.html)
+- AWS Kiro, spec-driven IDE + EARS notation — https://kiro.dev/docs/specs/
+- Grove (OpenAI), *The New Code*, AI Engineer 2025 — specs as durable artifact
+- Karpathy: English-as-PL (2023) / vibe coding + its throwaway-scope caveat (2025);
+  Willison, *Not all AI-assisted programming is vibe coding* —
+  https://simonwillison.net/2025/Mar/19/vibe-coding/
+- LLM codegen non-determinism: arXiv 2308.02828; temp-0 non-determinism: arXiv
+  2408.04667; "Compiled AI" (LLM at generation time, deterministic validation): arXiv
+  2604.05150
+- LRPL/DSL performance gap survey — https://arxiv.org/abs/2410.03981
+- MDA post-mortems: Fowler *ModelDrivenArchitecture* / *UmlAsProgrammingLanguage*
+  blikis; den Haan, *8 Reasons Why Model-Driven Approaches (will) Fail* —
+  https://www.infoq.com/articles/8-reasons-why-MDE-fails/
+- Neward, *The Vietnam of Computer Science* (2006); Fowler, *OrmHate* —
+  https://martinfowler.com/bliki/OrmHate.html
+- Fowler, *Language Workbenches* (DSL lock-in/cost) —
+  https://martinfowler.com/articles/languageWorkbench.html
+- Chassaing, *Functional Event Sourcing Decider* —
+  https://thinkbeforecoding.com/post/2021/12/17/functional-event-sourcing-decider
+- .NET SG risks: Andrew Lock series parts 9–10 (incremental caching);
+  dotnet/roslyn#72777 (netstandard2.0); dotnet/runtime#74557

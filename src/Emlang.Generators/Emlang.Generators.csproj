@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!-- Analyzers run inside the compiler process: netstandard2.0, old-stable Roslyn —
+         CS9057 fires only when the analyzer's Roslyn is NEWER than the compiler's,
+         so old is the safe direction under a preview SDK (ADR 016). -->
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+    <IsRoslynComponent>true</IsRoslynComponent>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.14.0" PrivateAssets="all" />
+    <PackageReference Include="YamlDotNet" Version="16.3.0" GeneratePathProperty="true" PrivateAssets="all" />
+    <ProjectReference Include="..\Emlang.CodeGen\Emlang.CodeGen.csproj" />
+  </ItemGroup>
+
+  <!-- Roslyn-cookbook dependency shipping: every TargetPathWithTargetPlatformMoniker we
+       return from GetTargetPath becomes an Analyzer item in the consuming project, so
+       Emlang.CodeGen.dll + YamlDotNet.dll load in the compiler's analyzer load context. -->
+  <PropertyGroup>
+    <GetTargetPathDependsOn>$(GetTargetPathDependsOn);GetDependencyTargetPaths</GetTargetPathDependsOn>
+  </PropertyGroup>
+  <Target Name="GetDependencyTargetPaths">
+    <ItemGroup>
+      <TargetPathWithTargetPlatformMoniker Include="$(PKGYamlDotNet)\lib\netstandard2.0\YamlDotNet.dll" IncludeRuntimeDependency="false" />
+      <TargetPathWithTargetPlatformMoniker Include="$(TargetDir)Emlang.CodeGen.dll" IncludeRuntimeDependency="false" />
+    </ItemGroup>
+  </Target>
+
+</Project>

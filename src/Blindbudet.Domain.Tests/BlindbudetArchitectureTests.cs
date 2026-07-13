@@ -1,6 +1,5 @@
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Text.RegularExpressions;
 using AwesomeAssertions;
 using Xunit;
 
@@ -93,31 +92,9 @@ public class BlindbudetArchitectureTests
         offenders.Should().BeEmpty("the forbidden price word must never appear (hard rule) — the game may be monetised");
     }
 
-    // --- emlang spec-coverage cross-check (both directions) -----------------------------
-
-    [Fact]
-    public void Every_spec_element_has_a_code_type()
-    {
-        var missing = SpecElementNames()
-            .Where(name => Domain.GetType("Blindbudet.Domain." + name) is null)
-            .ToList();
-
-        missing.Should().BeEmpty("every c:/e:/x: in the spec must resolve to a Domain type");
-    }
-
-    [Fact]
-    public void Every_union_case_appears_in_the_spec()
-    {
-        var spec = SpecElementNames();
-
-        var cases = UnionMembers(Read("src/Blindbudet.Domain/Commands.cs"), "AuctionCommand")
-            .Concat(UnionMembers(Read("src/Blindbudet.Domain/Events.cs"), "AuctionEvent"))
-            .Concat(UnionMembers(Read("src/Blindbudet.Domain/Errors.cs"), "AuctionError"));
-
-        var orphans = cases.Where(c => !spec.Contains(c)).ToList();
-
-        orphans.Should().BeEmpty("every union case must appear as a c:/e:/x: in the spec");
-    }
+    // The emlang spec-coverage cross-check is now redundant by construction: the
+    // Commands/Events/Errors records are GENERATED from the spec (ADR 016), and the
+    // emitter round-trips through SurfaceComparer in Emlang.CodeGen.Tests.
 
     // --- helpers ------------------------------------------------------------------------
 
@@ -136,35 +113,6 @@ public class BlindbudetArchitectureTests
         t.IsGenericType
         && (t.GetGenericTypeDefinition() == typeof(IReadOnlyList<>)
             || t.GetGenericTypeDefinition() == typeof(IReadOnlyDictionary<,>));
-
-    private static IReadOnlyList<string> UnionMembers(string source, string unionName)
-    {
-        var match = Regex.Match(source, $@"union\s+{unionName}\s*\((?<body>[^)]*)\)", RegexOptions.Singleline);
-        match.Success.Should().BeTrue($"union {unionName}(...) must exist in source");
-        return match.Groups["body"].Value
-            .Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
-    }
-
-    private static readonly Regex SpecElementPattern =
-        new(@"^\s*-?\s*(?<kind>[cex]):\s*(?<value>\S.*?)\s*$", RegexOptions.Multiline);
-
-    private static HashSet<string> SpecElementNames()
-    {
-        var yaml = Read("specs/blindbudet-event-model.yaml");
-        var names = new HashSet<string>(StringComparer.Ordinal);
-        foreach (Match m in SpecElementPattern.Matches(yaml))
-        {
-            var value = m.Groups["value"].Value;
-            var comment = value.IndexOf('#'); // strip inline "# ..." comments
-            if (comment >= 0)
-                value = value[..comment];
-            value = value.Trim();
-            // Events carry the "Game / " stream prefix; commands/exceptions are bare.
-            var name = value.Contains('/') ? value[(value.LastIndexOf('/') + 1)..].Trim() : value;
-            names.Add(name);
-        }
-        return names;
-    }
 
     private static string Read(string relativePath) =>
         File.ReadAllText(Path.Combine(RepoRoot, relativePath));

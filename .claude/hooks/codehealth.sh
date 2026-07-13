@@ -46,7 +46,7 @@ cd "${CLAUDE_PROJECT_DIR:-$(git rev-parse --show-toplevel)}" || exit 0
 # NOTE: every new game's Domain project MUST be added to the regex or its files are never scored.
 scope_files() {
   { git ls-files -- '*.cs'; git ls-files --others --exclude-standard -- '*.cs'; } | sort -u \
-    | grep -E '^src/(MerEllerMindre\.Domain|Blindbudet\.Domain|TankTillTusen\.Domain|MerEllerMindre\.Web)/' \
+    | grep -E '^src/(MerEllerMindre\.Domain|Blindbudet\.Domain|TankTillTusen\.Domain|MerEllerMindre\.Web|Emlang\.(CodeGen|Generators))/' \
     | grep -viE '(/obj/|/bin/|\.Tests/|\.g\.cs$)'
 }
 
