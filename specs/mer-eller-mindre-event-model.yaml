@@ -182,9 +182,9 @@ slices:
         then:
           - e: Game / LobbyOpened
             props:
-              hostPlayerId: hostPlayerId
+              hostPlayerId: minted
               hostName: Martin
-              joinCode: joinCode
+              joinCode: minted
               questionPackId: mer-eller-mindre
               questions: [question0, question1]
               createdAt: createdAt
@@ -262,7 +262,7 @@ slices:
             props: { joinCode: joinCode, playerName: Nils }
         then:
           - e: Game / PlayerJoined
-            props: { playerId: playerId, playerName: Nils, joinedAt: joinedAt }
+            props: { playerId: minted, playerName: Nils, joinedAt: joinedAt }
       cannot join nonexistent game:
         given: []
         when:
@@ -432,7 +432,7 @@ slices:
               currentQuestionIndex: 0
               players: [hostMartin, playerNils]
               questions:
-                - { card: question0, directions: {}, scored: false }
+                - q0Fresh
         when:
           - c: SubmitDirection
             props: { gameId: gameId, playerId: nilsId, direction: mer }
@@ -476,7 +476,7 @@ slices:
               currentQuestionIndex: 0
               players: [hostMartin, playerNils]
               questions:
-                - { card: question0, directions: { nilsId: mer }, scored: false }
+                - q0NilsMer
         when:
           - c: SubmitDirection
             props: { gameId: gameId, playerId: nilsId, direction: mindre }
@@ -534,7 +534,7 @@ slices:
               currentQuestionIndex: 0
               players: [hostMartin, playerNils]
               questions:
-                - { card: question0, directions: { martinId: mer, nilsId: mindre }, correctDirection: mer, directionScores: { martinId: -10, nilsId: 0 }, differences: {}, scored: false }
+                - q0DirectionRevealed
         when:
           - c: SubmitDifference
             props: { gameId: gameId, playerId: nilsId, guessedDifference: 50 }
@@ -549,7 +549,7 @@ slices:
               currentQuestionIndex: 0
               players: [hostMartin, playerNils]
               questions:
-                - { card: question0, directions: { martinId: mer, nilsId: mindre }, differences: {}, scored: false }   # correctDirection still null -> not revealed
+                - q0BothDirectionsIn   # correctDirection still null -> not revealed
         when:
           - c: SubmitDifference
             props: { gameId: gameId, playerId: nilsId, guessedDifference: 50 }
@@ -563,7 +563,7 @@ slices:
               currentQuestionIndex: 0
               players: [hostMartin, playerNils]
               questions:
-                - { card: question0, directions: { martinId: mer, nilsId: mindre }, correctDirection: mer, directionScores: { martinId: -10, nilsId: 0 }, differences: { nilsId: 50 }, scored: false }
+                - q0NilsSized
         when:
           - c: SubmitDifference
             props: { gameId: gameId, playerId: nilsId, guessedDifference: 20 }
@@ -577,7 +577,7 @@ slices:
               currentQuestionIndex: 0
               players: [hostMartin, playerNils]
               questions:
-                - { card: question0, directions: { martinId: mer, nilsId: mindre }, correctDirection: mer, directionScores: { martinId: -10, nilsId: 0 }, differences: {}, scored: false }
+                - q0DirectionRevealed
         when:
           - c: SubmitDifference
             props: { gameId: gameId, playerId: nilsId, guessedDifference: -5 }   # raw guess < 0; a too-LARGE guess is clamped at 100, never rejected
@@ -640,8 +640,8 @@ slices:
           - v: Todo / Outstanding directions
             props:
               questions:
-                - { questionIndex: 0, pendingPlayerIds: [martinId, nilsId], allDirectionsIn: false }
-                - { questionIndex: 1, pendingPlayerIds: [martinId, nilsId], allDirectionsIn: false }
+                - od0AllPending
+                - od1AllPending
       a submitted direction checks off that player on its question:
         given:
           - e: Game / LobbyOpened
@@ -655,8 +655,8 @@ slices:
           - v: Todo / Outstanding directions
             props:
               questions:
-                - { questionIndex: 0, pendingPlayerIds: [nilsId], allDirectionsIn: false }
-                - { questionIndex: 1, pendingPlayerIds: [martinId, nilsId], allDirectionsIn: false }
+                - od0NilsPending
+                - od1AllPending
       a question shows all directions in once every player has answered:
         given:
           - e: Game / LobbyOpened
@@ -672,8 +672,8 @@ slices:
           - v: Todo / Outstanding directions
             props:
               questions:
-                - { questionIndex: 0, pendingPlayerIds: [], allDirectionsIn: true }
-                - { questionIndex: 1, pendingPlayerIds: [martinId, nilsId], allDirectionsIn: false }
+                - od0AllIn
+                - od1AllPending
 
   # Outstanding Differences gates ⚙️ System / Score difference (stage 2):
   #   { questionIndex, pendingPlayerIds, allDifferencesIn, directionRevealed }. Each
@@ -709,8 +709,8 @@ slices:
           - v: Todo / Outstanding differences
             props:
               questions:
-                - { questionIndex: 0, pendingPlayerIds: [nilsId], allDifferencesIn: false, directionRevealed: true }
-                - { questionIndex: 1, pendingPlayerIds: [martinId, nilsId], allDifferencesIn: false, directionRevealed: false }
+                - of0NilsPending
+                - of1AllPending
       a question shows all differences in once every player has sized it:
         given:
           - e: Game / LobbyOpened
@@ -736,8 +736,8 @@ slices:
           - v: Todo / Outstanding differences
             props:
               questions:
-                - { questionIndex: 0, pendingPlayerIds: [], allDifferencesIn: true, directionRevealed: true }
-                - { questionIndex: 1, pendingPlayerIds: [martinId, nilsId], allDifferencesIn: false, directionRevealed: false }
+                - of0AllIn
+                - of1AllPending
 
   # STAGE 1 processor: once Outstanding directions shows allDirectionsIn, the System
   # reveals the correct direction (larger raw value -> mer) and deals the -10 bonus — the
@@ -783,8 +783,8 @@ slices:
               currentQuestionIndex: 0
               players: [hostMartin, playerNils]
               questions:
-                - { card: question0, directions: { martinId: mer, nilsId: mindre }, scored: false }   # both in -> allDirectionsIn derived true
-                - { card: question1, directions: {}, scored: false }
+                - q0BothDirectionsIn   # both in -> allDirectionsIn derived true
+                - q1Fresh
         when:
           - c: RevealDirection
             props: { gameId: gameId, questionIndex: 0 }
@@ -803,8 +803,8 @@ slices:
               currentQuestionIndex: 0
               players: [hostMartin, playerNils]
               questions:
-                - { card: question0, directions: { martinId: mer }, scored: false }   # nilsId missing -> allDirectionsIn derived false
-                - { card: question1, directions: {}, scored: false }
+                - q0MartinDirectionOnly   # nilsId missing -> allDirectionsIn derived false
+                - q1Fresh
         when:
           - c: RevealDirection
             props: { gameId: gameId, questionIndex: 0 }
@@ -818,8 +818,8 @@ slices:
               currentQuestionIndex: 0
               players: [hostMartin, playerNils]
               questions:
-                - { card: question0, directions: { martinId: mer, nilsId: mindre }, correctDirection: mer, directionScores: { martinId: -10, nilsId: 0 }, scored: false }   # already revealed
-                - { card: question1, directions: {}, scored: false }
+                - q0DirectionRevealed   # already revealed
+                - q1Fresh
         when:
           - c: RevealDirection
             props: { gameId: gameId, questionIndex: 0 }
@@ -875,8 +875,8 @@ slices:
               currentQuestionIndex: 0
               players: [hostMartin, playerNils]
               questions:
-                - { card: question0, directions: { martinId: mer, nilsId: mindre }, correctDirection: mer, directionScores: { martinId: -10, nilsId: 0 }, differences: { martinId: 30, nilsId: 50 }, scored: false }
-                - { card: question1, directions: {}, scored: false }
+                - q0BothSized
+                - q1Fresh
         when:
           - c: ScoreDifference
             props: { gameId: gameId, questionIndex: 0 }
@@ -895,8 +895,8 @@ slices:
               currentQuestionIndex: 0
               players: [hostMartin, playerNils]
               questions:
-                - { card: question0, directions: { martinId: mer, nilsId: mindre }, correctDirection: mer, directionScores: { martinId: -10, nilsId: 0 }, differences: { martinId: 40, nilsId: 50 }, scored: false }
-                - { card: question1, directions: {}, scored: false }
+                - q0MartinExact
+                - q1Fresh
         when:
           - c: ScoreDifference
             props: { gameId: gameId, questionIndex: 0 }
@@ -916,8 +916,8 @@ slices:
               players: [hostMartin, playerNils]
               questions:
                 # question0 already scored -> its roundScores are the source of the running total
-                - { card: question0, correctDirection: mer, correctDifference: 40, roundScores: { martinId: 0, nilsId: 10 }, scored: true }
-                - { card: question1, directions: { martinId: mindre, nilsId: mindre }, correctDirection: mindre, directionScores: { martinId: -10, nilsId: -10 }, differences: { martinId: 25, nilsId: 20 }, scored: false }
+                - q0Scored
+                - q1BothSized
         when:
           - c: ScoreDifference
             props: { gameId: gameId, questionIndex: 1 }
@@ -936,8 +936,8 @@ slices:
               currentQuestionIndex: 0
               players: [hostMartin, playerNils]
               questions:
-                - { card: question0, directions: { martinId: mer, nilsId: mindre }, correctDirection: mer, directionScores: { martinId: -10, nilsId: 0 }, differences: { martinId: 30 }, scored: false }   # nilsId missing -> allDifferencesIn derived false
-                - { card: question1, directions: {}, scored: false }
+                - q0MartinSizedOnly   # nilsId missing -> allDifferencesIn derived false
+                - q1Fresh
         when:
           - c: ScoreDifference
             props: { gameId: gameId, questionIndex: 0 }
@@ -951,8 +951,8 @@ slices:
               currentQuestionIndex: 0
               players: [hostMartin, playerNils]
               questions:
-                - { card: question0, correctDirection: mer, correctDifference: 40, roundScores: { martinId: 0, nilsId: 10 }, scored: true }   # already scored -> double fire guarded
-                - { card: question1, directions: {}, scored: false }
+                - q0Scored   # already scored -> double fire guarded
+                - q1Fresh
         when:
           - c: ScoreDifference
             props: { gameId: gameId, questionIndex: 0 }
@@ -997,8 +997,8 @@ slices:
               questionIndex: 0
               correctDirection: mer
               playerDirections:
-                - { playerId: martinId, guessedDirection: mer, directionCorrect: true, bonusPoints: -10, totalSoFar: -10 }
-                - { playerId: nilsId, guessedDirection: mindre, directionCorrect: false, bonusPoints: 0, totalSoFar: 0 }
+                - pdMartin
+                - pdNils
 
   👀 Round Results:
     steps:
@@ -1048,8 +1048,8 @@ slices:
               correctDirection: mer
               correctDifference: 40
               playerScores:
-                - { playerId: martinId, roundScore: 0, totalScore: 0 }
-                - { playerId: nilsId, roundScore: 10, totalScore: 10 }
+                - psMartin0
+                - psNils10
 
   # --- Progression (System processor) --------------------------------------
 
@@ -1129,8 +1129,8 @@ slices:
               phase: started
               currentQuestionIndex: 0
               questions:
-                - { card: question0, correctDirection: mer, correctDifference: 40, roundScores: { martinId: 0, nilsId: 10 }, scored: true }
-                - { card: question1, directions: {}, scored: false }
+                - q0Scored
+                - q1Fresh
         when:
           - c: AskNextQuestion
             props: { gameId: gameId }
@@ -1172,8 +1172,8 @@ slices:
               currentQuestionIndex: 1
               players: [hostMartin, playerNils]
               questions:
-                - { card: question0, roundScores: { martinId: 0, nilsId: 10 }, scored: true }
-                - { card: question1, roundScores: { martinId: 5, nilsId: 0 }, scored: true }
+                - q0Scores0And10
+                - q1Scores5And0
         when:
           - c: EndGame
             props: { gameId: gameId }
@@ -1181,8 +1181,8 @@ slices:
           - e: Game / GameEnded
             props:
               finalScoreboard:
-                - { playerId: martinId, playerName: Martin, totalScore: 5 }
-                - { playerId: nilsId, playerName: Nils, totalScore: 10 }
+                - sbMartin5
+                - sbNils10
               winnerIds: [martinId]   # martin lowest total (5 < 10)
               endedAt: endedAt
       tied lowest totals share the win:
@@ -1193,8 +1193,8 @@ slices:
               currentQuestionIndex: 1
               players: [hostMartin, playerNils]
               questions:
-                - { card: question0, roundScores: { martinId: 5, nilsId: 5 }, scored: true }
-                - { card: question1, roundScores: { martinId: 5, nilsId: 5 }, scored: true }
+                - q0Scores5Each
+                - q1Scores5Each
         when:
           - c: EndGame
             props: { gameId: gameId }
@@ -1202,8 +1202,8 @@ slices:
           - e: Game / GameEnded
             props:
               finalScoreboard:
-                - { playerId: martinId, playerName: Martin, totalScore: 10 }
-                - { playerId: nilsId, playerName: Nils, totalScore: 10 }
+                - sbMartin10
+                - sbNils10
               winnerIds: [martinId, nilsId]   # equal lowest total -> shared win
               endedAt: endedAt
 
@@ -1222,16 +1222,16 @@ slices:
           - e: Game / GameEnded
             props:
               finalScoreboard:
-                - { playerId: martinId, playerName: Martin, totalScore: 5 }
-                - { playerId: nilsId, playerName: Nils, totalScore: 10 }
+                - sbMartin5
+                - sbNils10
               winnerIds: [martinId]
               endedAt: endedAt
         then:
           - v: Screen / Final standings
             props:
               finalScoreboard:
-                - { playerId: martinId, playerName: Martin, totalScore: 5 }
-                - { playerId: nilsId, playerName: Nils, totalScore: 10 }
+                - sbMartin5
+                - sbNils10
               winnerIds: [martinId]
 
   # --- Decision model (decider State) — APPENDIX, not a timeline step ------
@@ -1256,8 +1256,8 @@ slices:
   #
   # QuestionRound fixtures (card = a Question fixture; directions/directionScores/
   # differences/roundScores are maps keyed by playerId; value objects never repeat the key).
-  # Tests build rounds inline as flow-maps, e.g.
-  # { card: question0, directions: { martinId: mer }, scored: false }. The stage-1 map holds
+  # Tests reference rounds by fixture NAME (q0Fresh, q0Scored, …); the generated SpecTests
+  # resolve each name to Fixtures.* in the test project (ADR 017). The stage-1 map holds
   # a bare Direction per player; the stage-2 map a raw decimal guessedDifference. Both
   # fixture cards have mx=100, so a raw guessedDifference d (0<=d<=100) normalizes to itself.
   #
@@ -1312,8 +1312,8 @@ slices:
               hostPlayerId: martinId
               currentQuestionIndex: 0
               questions:
-                - { card: question0, directions: { martinId: mer }, scored: false }   # nilsId still pending (derived)
-                - { card: question1, directions: {}, scored: false }
+                - q0MartinDirectionOnly   # nilsId still pending (derived)
+                - q1Fresh
       scoring a question folds both reveals and round scores into that question:
         given:
           - e: Game / LobbyOpened
@@ -1349,6 +1349,6 @@ slices:
               questions:
                 # question0 fully scored: both reveals + per-player round scores folded in
                 # (totalScore is DERIVED by summing roundScores across scored questions: martin 0, nils 10)
-                - { card: question0, directions: { martinId: mer, nilsId: mindre }, correctDirection: mer, directionScores: { martinId: -10, nilsId: 0 }, differences: { martinId: 30, nilsId: 50 }, correctDifference: 40, roundScores: { martinId: 0, nilsId: 10 }, scored: true }
-                - { card: question1, directions: {}, scored: false }
+                - q0Scored
+                - q1Fresh
 
