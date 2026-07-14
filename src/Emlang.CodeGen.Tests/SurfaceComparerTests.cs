@@ -14,7 +14,7 @@ public class SurfaceComparerTests
     private static readonly GameManifest Fake = new(
         "Fake", "unused.yaml", "Fake.Domain",
         "Commands.cs", "Events.cs", "Errors.cs",
-        "FakeCommand", "FakeEvent", "FakeError", "FakeState");
+        "FakeCommand", "FakeEvent", "FakeError", "FakeState", "FakeContext");
 
     private const string Spec = """
         slices:

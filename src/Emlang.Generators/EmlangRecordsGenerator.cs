@@ -45,12 +45,14 @@ public sealed class EmlangRecordsGenerator : IIncrementalGenerator
     {
         context.RegisterSourceOutput(EmlangEmit.Specs(context), static (production, spec) =>
         {
-            if (spec.Mode != "surface" || EmlangEmit.Manifest(spec.FileName) is not { } manifest)
+            if (spec.Mode is not ("surface" or "core") || EmlangEmit.Manifest(spec.FileName) is not { } manifest)
                 return;
             var elements = SpecModel.Parse(spec.Yaml);
             production.AddSource("Commands.g.cs", SurfaceEmitter.Emit(manifest, elements, 'c'));
             production.AddSource("Events.g.cs", SurfaceEmitter.Emit(manifest, elements, 'e'));
             production.AddSource("Errors.g.cs", SurfaceEmitter.Emit(manifest, elements, 'x'));
+            if (spec.Mode == "core")
+                production.AddSource("Decider.g.cs", DeciderEmitter.Emit(manifest, elements));
         });
     }
 }

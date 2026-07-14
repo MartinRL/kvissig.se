@@ -18,7 +18,8 @@ public record GameManifest(
     string CommandUnion,
     string EventUnion,
     string ErrorUnion,
-    string StateType)
+    string StateType,
+    string ContextType)
 {
     /// <summary>Where SpecTests.g.cs lands (the sibling test project's namespace).</summary>
     public string TestsNamespace => Namespace + ".Tests";
@@ -30,7 +31,7 @@ public record GameManifest(
         "src/MerEllerMindre.Domain/Commands.cs",
         "src/MerEllerMindre.Domain/Events.cs",
         "src/MerEllerMindre.Domain/Errors.cs",
-        "GameCommand", "GameEvent", "GameError", "GameState");
+        "GameCommand", "GameEvent", "GameError", "GameState", "GameContext");
 
     public static readonly GameManifest Blindbudet = new(
         "Blindbudet",
@@ -39,7 +40,7 @@ public record GameManifest(
         "src/Blindbudet.Domain/Commands.cs",
         "src/Blindbudet.Domain/Events.cs",
         "src/Blindbudet.Domain/Errors.cs",
-        "AuctionCommand", "AuctionEvent", "AuctionError", "AuctionState");
+        "AuctionCommand", "AuctionEvent", "AuctionError", "AuctionState", "AuctionContext");
 
     public static readonly GameManifest TankTillTusen = new(
         "TankTillTusen",
@@ -48,7 +49,7 @@ public record GameManifest(
         "src/TankTillTusen.Domain/Commands.cs",
         "src/TankTillTusen.Domain/Events.cs",
         "src/TankTillTusen.Domain/Errors.cs",
-        "TankCommand", "TankEvent", "TankError", "TankState");
+        "TankCommand", "TankEvent", "TankError", "TankState", "TankContext");
 
     public static readonly System.Collections.Generic.IReadOnlyList<GameManifest> All =
         [MerEllerMindre, Blindbudet, TankTillTusen];
