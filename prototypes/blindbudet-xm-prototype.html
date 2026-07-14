@@ -1,0 +1,570 @@
+<!doctype html>
+<!--
+  Blindbudet — playable prototype generated from the spec pair alone (clean-room experiment):
+    * specs/blindbudet-event-model.yaml  (emlang v1.0.0)  — all behavior
+    * specs/blindbudet.xm.yaml           (xmlang v0.1.0)  — surfaces, salience, labels, tokens
+  No peeking at src/. Dead mockup per prototypes/ convention — never wired to the app.
+  Lot data lifted from data/auction-packs/blindbudet-mini.csv (7 sample lots).
+-->
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blindbudet · xm-prototyp</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+/* tokens 1:1 from blindbudet.xm.yaml `tokens` (DTCG) */
+:root{
+  --bg:#fff7ec; --bg-2:#ffeccf; --ink:#2b2118; --ink-soft:#7a6a58;
+  --card:#fffdf9; --line:#f0e0c8;
+  --mer:#21c08a; --mer-deep:#12805c; --mer-ink:#06281f;
+  --mindre:#ffab40; --mindre-deep:#e07f0e; --mindre-ink:#3a2300;
+  --accent:#ff5d73; --accent-2:#ff8a3d;
+  --radius-md:22px; --radius-sm:16px;
+  --font-display:"Baloo 2",system-ui,sans-serif;
+  --font-body:Nunito,system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg-2);color:var(--ink);font-family:var(--font-body)}
+.topbar{display:flex;align-items:center;gap:16px;padding:14px 20px;flex-wrap:wrap}
+.topbar h1{font-family:var(--font-display);font-size:1.4rem;margin:0}
+.topbar .sub{font-weight:400;color:var(--ink-soft);font-size:.9rem;font-family:var(--font-body)}
+#frames{display:flex;flex-wrap:wrap;gap:20px;padding:0 20px 60px;align-items:flex-start}
+.phone{width:330px;background:var(--bg);border:10px solid var(--ink);border-radius:38px;min-height:620px;display:flex;flex-direction:column;overflow:hidden}
+.phone-head{font-family:var(--font-display);text-align:center;padding:10px;background:var(--bg-2);border-bottom:2px solid var(--line);font-size:.95rem}
+.phone-body{padding:18px;display:flex;flex-direction:column;gap:14px;flex:1}
+.surface-title{font-family:var(--font-display);font-size:1.5rem;margin:0;line-height:1.2}
+.card{background:var(--card);border:2px solid var(--line);border-radius:var(--radius-md);padding:14px}
+.pack-name{font-family:var(--font-display);font-size:1.2rem}
+.secondary{color:var(--ink-soft);font-size:.85rem}
+.field-label{color:var(--ink-soft);font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;font-weight:800}
+.foot{margin-top:auto;display:flex;flex-direction:column;gap:4px}
+.ondemand{font-size:.75rem;color:var(--ink-soft)}
+.ondemand code{word-break:break-all}
+.btn{font-family:var(--font-display);border:none;border-radius:var(--radius-sm);padding:12px 18px;font-size:1.05rem;cursor:pointer}
+.btn.primary{background:var(--accent);color:#fff;width:100%}
+.btn.plain{background:var(--card);border:2px solid var(--line)}
+form{display:flex;flex-direction:column;gap:10px;margin:0}
+label{display:flex;flex-direction:column;gap:4px;font-weight:800;font-size:.9rem}
+input{font-family:var(--font-body);font-size:1.1rem;padding:10px 12px;border:2px solid var(--line);border-radius:var(--radius-sm);background:var(--card);width:100%}
+.joincode{font-family:ui-monospace,monospace;background:var(--card);border:2px dashed var(--accent-2);border-radius:var(--radius-sm);padding:12px;word-break:break-all;font-size:1rem;text-align:center}
+.players{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;font-size:1.15rem;font-weight:800}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:var(--mindre);color:var(--mindre-ink);border-radius:999px;padding:6px 14px;font-weight:800;font-family:var(--font-display)}
+.lot-desc{font-family:var(--font-display);font-size:1.45rem;margin:0;line-height:1.2}
+.bidrow{display:flex;gap:8px;align-items:center}
+.unit{font-weight:800;color:var(--ink-soft);white-space:nowrap}
+.tw-value{font-family:var(--font-display);font-size:1.9rem;color:var(--mer-deep);line-height:1.1}
+table.results{width:100%;border-collapse:collapse;font-size:.95rem}
+.results th,.results td{padding:6px 4px;text-align:left;border-bottom:1px solid var(--line)}
+.results th{color:var(--ink-soft);font-size:.75rem;text-transform:uppercase;letter-spacing:.05em}
+.num{text-align:right;font-variant-numeric:tabular-nums}
+tr.winner td{background:color-mix(in srgb, var(--mer) 18%, transparent);font-weight:800}
+.mark.bad{color:var(--accent);font-weight:900}
+.allover{font-family:var(--font-display);color:var(--accent);font-size:1.1rem}
+.standings{margin:0;padding-left:1.5em;font-size:1.2rem;display:flex;flex-direction:column;gap:8px;font-weight:700}
+.standings .num{float:right;font-family:var(--font-display)}
+.standings li.winner{color:var(--mer-deep)}
+.err{background:color-mix(in srgb, var(--accent) 15%, transparent);color:var(--accent);border-radius:var(--radius-sm);padding:8px 12px;font-weight:800;margin:0;font-size:.9rem}
+.spec-badge{position:fixed;right:14px;bottom:14px;font-family:var(--font-display);padding:8px 14px;border-radius:999px;color:#fff;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+.spec-badge.pass{background:var(--mer-deep)}
+.spec-badge.fail{background:var(--accent)}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <h1>Blindbudet <span class="sub">prototyp ur em + xm</span></h1>
+  <button id="addPlayer" class="btn plain">+ Lägg till spelare</button>
+</header>
+<main id="frames"></main>
+<div id="specBadge" class="spec-badge"></div>
+
+<script>
+'use strict';
+
+/* ---------- labels — verbatim from blindbudet.xm.yaml labels.sv ---------- */
+const L = {
+  OpenAuction:'Skapa auktion', JoinAuction:'Gå med', StartAuction:'Starta auktion',
+  PlaceBid:'Lägg bud!', AskNextLot:'Nästa budrunda', EndAuction:'Visa slutställning',
+  hostName:'Ditt namn', playerName:'Ditt namn', amount:'Ditt bud',
+  players:'Spelare', submitted:'Klara', pending:'Väntar på',
+  trueWorth:'Sant värde', playerProfits:'Poäng', pricePaid:'Bud',
+  finalScoreboard:'Slutställning',
+  Katalog:'Välj lek', LobbyVard:'Skanna för att gå med', LobbySpelare:'Du är med! 🎉',
+  Vantan:'Ditt bud är lagt ✓', Slutstallning:'Slutställning',
+  Vard:'Värd', Spelare:'Spelare'
+};
+
+/* ---------- lot pack — data from data/auction-packs/blindbudet-mini.csv ---------- */
+const PACKS = [{
+  packId:'blindbudet-mini', name:'Blindbudet mini',
+  lots:[
+    { description:'Höjden på Mount Everest över havet',  trueWorth:8849,   unit:'meter' },
+    { description:'Ett maratonlopp',                     trueWorth:42.195, unit:'km' },
+    { description:'Antal tangenter på ett standardpiano',trueWorth:88,     unit:'stycken' },
+    { description:'Antal ben i en vuxen människokropp',  trueWorth:206,    unit:'stycken' },
+    { description:'Toppfarten för en gepard',            trueWorth:110,    unit:'km/h' },
+    { description:'Höjden på Eiffeltornet med antenner', trueWorth:330,    unit:'meter' },
+    { description:'Längden på en T. rex',                trueWorth:12,     unit:'meter' }
+  ]
+}];
+const MINI_AUCTION_SIZE = 7;   // "mini"-slug packs sample down to a 7-lot round (em assumption)
+const findPack = id => PACKS.find(p => p.packId === id) ?? null;
+function sample(lots, n){      // plain shuffle + take, per the em (no band-balancing)
+  const a = [...lots];
+  for(let i = a.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+  return a.slice(0, n);
+}
+
+/* ---------- decider — transcribed from blindbudet-event-model.yaml ---------- */
+const initial = () => ({ gameId:null, joinCode:null, phase:'none', hostPlayerId:null,
+                         players:[], currentLotIndex:-1, lots:[],
+                         finalScoreboard:[], finalWinnerIds:[] });
+
+// ponytail: evolve mutates its argument; fold always starts from a fresh initial()
+function evolve(s, e){
+  switch(e.type){
+    case 'AuctionOpened':
+      s.gameId = e.gameId; s.joinCode = e.joinCode; s.phase = 'lobby'; s.hostPlayerId = e.hostPlayerId;
+      s.players = [{ playerId:e.hostPlayerId, name:e.hostName, isHost:true }];
+      s.lots = e.lots.map(lot => ({ lot, bids:{}, trueWorth:null, winnerIds:[], pricePaid:null, profits:{}, resolved:false }));
+      return s;
+    case 'PlayerJoined':
+      s.players.push({ playerId:e.playerId, name:e.playerName, isHost:false }); return s;
+    case 'AuctionStarted':
+      s.phase = 'started'; s.currentLotIndex = e.firstLotIndex; return s;
+    case 'BidPlaced':
+      s.lots[e.lotIndex].bids[e.playerId] = e.amount; return s;
+    case 'LotRevealed': {
+      const r = s.lots[e.lotIndex];
+      r.trueWorth = e.trueWorth; r.winnerIds = e.winnerIds; r.pricePaid = e.pricePaid; r.resolved = true;
+      return s;
+    }
+    case 'RoundScored':
+      s.lots[e.lotIndex].profits[e.playerId] = e.profit; return s;
+    case 'NextLotStarted':
+      s.currentLotIndex = e.lotIndex; return s;
+    case 'AuctionEnded':
+      s.phase = 'ended'; s.finalScoreboard = e.finalScoreboard; s.finalWinnerIds = e.winnerIds; return s;
+  }
+  return s;
+}
+const fold = events => events.reduce(evolve, initial());
+
+/* derived — computed, never stored (em Decision Model appendix) */
+const pendingBidPlayerIds = (s, i) => s.players.filter(p => !(p.playerId in s.lots[i].bids)).map(p => p.playerId);
+const allBidsIn  = (s, i) => pendingBidPlayerIds(s, i).length === 0;
+const hasNextLot = s => s.currentLotIndex + 1 < s.lots.length;
+const totalScore = (s, pid) => s.lots.filter(r => r.resolved).reduce((sum, r) => sum + (r.profits[pid] ?? 0), 0);
+
+const uuid = () => crypto.randomUUID();
+const now  = () => new Date().toISOString();
+const ok   = (...events) => ({ ok:events });
+const err  = name => ({ err:name });
+
+function decide(s, c){
+  switch(c.type){
+    case 'OpenAuction': {
+      const pack = findPack(c.packId);
+      if(!pack) return err('AuctionPackNotFound');
+      const lots = c.packId.includes('mini') ? sample(pack.lots, MINI_AUCTION_SIZE) : [...pack.lots];
+      return ok({ type:'AuctionOpened', gameId:uuid(), hostPlayerId:uuid(), hostName:c.hostName,
+                  joinCode:uuid(), packId:c.packId, lots, openedAt:now() });
+    }
+    case 'JoinAuction': {
+      if(!s.gameId || c.joinCode !== s.joinCode) return err('AuctionNotFound');
+      if(s.phase !== 'lobby') return err('AuctionAlreadyStarted');
+      if(s.players.some(p => p.name === c.playerName)) return err('NameAlreadyTaken');
+      return ok({ type:'PlayerJoined', gameId:s.gameId, playerId:uuid(), playerName:c.playerName, joinedAt:now() });
+    }
+    case 'StartAuction': {
+      if(!s.gameId || c.gameId !== s.gameId) return err('AuctionNotFound');
+      if(s.players.length < 2) return err('NotEnoughPlayers');
+      return ok({ type:'AuctionStarted', gameId:s.gameId, firstLotIndex:0, startedAt:now() });
+    }
+    case 'PlaceBid': {
+      if(!s.gameId || c.gameId !== s.gameId) return err('AuctionNotFound');
+      if(c.amount < 0) return err('BidNegative');
+      const r = s.lots[c.lotIndex];
+      if(r.resolved) return err('LotAlreadyResolved');
+      if(c.playerId in r.bids) return err('AlreadyBid');
+      return ok({ type:'BidPlaced', gameId:s.gameId, playerId:c.playerId, lotIndex:c.lotIndex, amount:c.amount, bidAt:now() });
+    }
+    case 'RevealLot': {
+      const r = s.lots[c.lotIndex];
+      if(r.resolved) return err('LotAlreadyResolved');
+      if(!allBidsIn(s, c.lotIndex)) return err('NotAllBidsIn');
+      // pure 0-100 resolver: overbid (> trueWorth) disqualified; highest valid bid wins, shared on ties;
+      // profit = exact ? 10 : round((trueWorth - winningBid)/trueWorth*100); non-winners 0
+      const tw = r.lot.trueWorth;
+      const valid = Object.values(r.bids).filter(a => a <= tw);
+      const winningBid = valid.length ? Math.max(...valid) : null;
+      const winnerIds = winningBid === null ? []
+        : s.players.filter(p => r.bids[p.playerId] === winningBid).map(p => p.playerId);
+      const winnerProfit = winningBid === null ? 0
+        : (winningBid === tw ? 10 : Math.round((tw - winningBid) / tw * 100));
+      const events = [{ type:'LotRevealed', gameId:s.gameId, lotIndex:c.lotIndex,
+                        trueWorth:tw, winnerIds, pricePaid:winningBid ?? 0 }];
+      for(const p of s.players){
+        const profit = winnerIds.includes(p.playerId) ? winnerProfit : 0;
+        events.push({ type:'RoundScored', gameId:s.gameId, lotIndex:c.lotIndex, playerId:p.playerId,
+                      profit, totalScore: totalScore(s, p.playerId) + profit });
+      }
+      return { ok:events };
+    }
+    case 'AskNextLot':
+      return ok({ type:'NextLotStarted', gameId:s.gameId, lotIndex:s.currentLotIndex + 1 });
+    case 'EndAuction': {
+      // HIGHEST total wins (the opposite of MEM); ties share the win
+      const board = s.players.map(p => ({ playerId:p.playerId, playerName:p.name, totalScore:totalScore(s, p.playerId) }));
+      const top = Math.max(...board.map(b => b.totalScore));
+      return ok({ type:'AuctionEnded', gameId:s.gameId, finalScoreboard:board,
+                  winnerIds:board.filter(b => b.totalScore === top).map(b => b.playerId), endedAt:now() });
+    }
+  }
+  return err('UnknownCommand');
+}
+
+/* ---------- event log + processor gear ---------- */
+const log = [];
+
+function dispatch(cmd){
+  const res = decide(fold(log), cmd);
+  if(res.ok){ log.push(...res.ok); runProcessors(); }
+  return res;
+}
+
+// ⚙️ System / Reveal lot — fires on the state condition allBidsIn (no clock, em processor pattern).
+// AskNextLot / EndAuction are host buttons per the xm (finding 3), not gears here.
+function runProcessors(){
+  const s = fold(log);
+  if(s.phase === 'started'){
+    const i = s.currentLotIndex, r = s.lots[i];
+    if(r && !r.resolved && allBidsIn(s, i)){
+      const res = decide(s, { type:'RevealLot', gameId:s.gameId, lotIndex:i });
+      if(res.ok) log.push(...res.ok);
+    }
+  }
+}
+
+/* ---------- rendering: one function per xm surface, salience-faithful ----------
+   primary = large/prominent, secondary = small/muted, on-demand = <details> */
+const esc = t => String(t).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+const fmt = n => Number(n).toLocaleString('sv-SE', { maximumFractionDigits:3 });
+const names = (s, ids) => ids.map(id => s.players.find(p => p.playerId === id)?.name ?? id);
+const onDemand = (label, value) => `<details class="ondemand"><summary>${esc(label)}</summary><code>${esc(value)}</code></details>`;
+const foot = (...items) => `<div class="foot">${items.join('')}</div>`;
+
+function katalog(f){
+  return `<h2 class="surface-title">${L.Katalog}</h2>
+    <div class="pack card">
+      <div class="pack-name">${esc(PACKS[0].name)}</div>
+      <div class="secondary">${PACKS[0].lots.length} budrundor</div>
+    </div>
+    <form data-cmd="OpenAuction">
+      <input type="hidden" name="packId" value="${PACKS[0].packId}">
+      <label>${L.hostName} <input name="hostName" required autocomplete="off" value="${esc(f.draft.hostName ?? '')}"></label>
+      <button class="btn primary">${L.OpenAuction}</button>
+    </form>`;
+}
+
+function joinForm(f, s){
+  return `<h2 class="surface-title">${L.JoinAuction}</h2>
+    <form data-cmd="JoinAuction">
+      <label>joinCode <input name="joinCode" required autocomplete="off" value="${esc(f.draft.joinCode ?? s.joinCode ?? '')}"></label>
+      <label>${L.playerName} <input name="playerName" required autocomplete="off" value="${esc(f.draft.playerName ?? '')}"></label>
+      <button class="btn primary">${L.JoinAuction}</button>
+    </form>`;
+}
+
+const playerList = s => `<div class="field-label">${L.players}</div>
+  <ul class="players">${s.players.map(p => `<li>${esc(p.name)}${p.isHost ? ' 👑' : ''}</li>`).join('')}</ul>`;
+
+function lobbyVard(s){
+  return `<h2 class="surface-title">${L.LobbyVard}</h2>
+    <div class="joincode">${esc(s.joinCode)}</div>
+    ${playerList(s)}
+    <form data-cmd="StartAuction"><button class="btn primary">${L.StartAuction}</button></form>
+    ${foot(onDemand('gameId', s.gameId))}`;
+}
+
+function lobbySpelare(s){
+  return `<h2 class="surface-title">${L.LobbySpelare}</h2>
+    ${playerList(s)}
+    ${foot(onDemand('joinCode', s.joinCode), onDemand('gameId', s.gameId))}`;
+}
+
+function budgivning(s, f){
+  const i = s.currentLotIndex, r = s.lots[i];
+  return `<div class="secondary">Budrunda ${i + 1} av ${s.lots.length}</div>
+    <h2 class="lot-desc">${esc(r.lot.description)}</h2>
+    <form data-cmd="PlaceBid">
+      <label>${L.amount}
+        <span class="bidrow">
+          <input name="amount" inputmode="decimal" required autocomplete="off" value="${esc(f.draft.amount ?? '')}">
+          <span class="unit">${esc(r.lot.unit)}</span>
+        </span>
+      </label>
+      <button class="btn primary">${L.PlaceBid}</button>
+    </form>
+    ${foot(onDemand('gameId', s.gameId))}`;
+}
+
+function vantan(s){
+  const i = s.currentLotIndex, r = s.lots[i];
+  const pending = names(s, pendingBidPlayerIds(s, i));
+  const submitted = names(s, Object.keys(r.bids));
+  return `<h2 class="surface-title">${L.Vantan}</h2>
+    <div class="field-label">${L.pending}</div>
+    <div class="chips">${pending.map(n => `<span class="chip">${esc(n)}</span>`).join('')}</div>
+    <div class="secondary">${L.submitted}: ${submitted.map(esc).join(', ')} · Budrunda ${i + 1}</div>
+    ${foot(onDemand('gameId', s.gameId))}`;
+}
+
+function rundresultat(s, isHost){
+  const i = s.currentLotIndex, r = s.lots[i];
+  const rows = s.players.map(p => {
+    const bid = r.bids[p.playerId];
+    const over = bid > r.trueWorth;
+    const win = r.winnerIds.includes(p.playerId);
+    return `<tr class="${win ? 'winner' : ''}">
+      <td>${win ? '🏆 ' : ''}${esc(p.name)}</td>
+      <td class="num">${fmt(bid)}${over ? ' <span class="mark bad">✗</span>' : ''}</td>
+      <td class="num">+${r.profits[p.playerId] ?? 0}</td>
+      <td class="num secondary">${totalScore(s, p.playerId)}</td>
+    </tr>`;
+  }).join('');
+  const hostActions = !isHost ? '' : hasNextLot(s)
+    ? `<form data-cmd="AskNextLot"><button class="btn primary">${L.AskNextLot}</button></form>`
+    : `<form data-cmd="EndAuction"><button class="btn primary">${L.EndAuction}</button></form>`;
+  return `<div class="secondary">Budrunda ${i + 1} av ${s.lots.length}</div>
+    <div class="trueworth">
+      <div class="field-label">${L.trueWorth}</div>
+      <div class="tw-value">${fmt(r.trueWorth)} ${esc(r.lot.unit)}</div>
+    </div>
+    ${r.winnerIds.length ? '' : '<div class="allover">Alla bjöd över ✗</div>'}
+    <table class="results card">
+      <thead><tr><th></th><th class="num">${L.pricePaid}</th><th class="num">${L.playerProfits}</th><th class="num">Totalt</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+    <div class="secondary">${L.pricePaid}: ${fmt(r.pricePaid)}</div>
+    ${hostActions}
+    ${foot(onDemand('gameId', s.gameId))}`;
+}
+
+function slutstallning(s){
+  const sorted = [...s.finalScoreboard].sort((a, b) => b.totalScore - a.totalScore);
+  return `<h2 class="surface-title">${L.Slutstallning}</h2>
+    <ol class="standings">${sorted.map(b => {
+      const win = s.finalWinnerIds.includes(b.playerId);
+      return `<li class="${win ? 'winner' : ''}">${win ? '🏆 ' : ''}${esc(b.playerName)} <span class="num">${b.totalScore}</span></li>`;
+    }).join('')}</ol>
+    ${foot(onDemand('gameId', s.gameId))}`;
+}
+
+/* surface routing per frame (persona-scoped: host vs player variants side by side) */
+function surface(f, s, me){
+  if(!s.gameId) return f.isFirst ? katalog(f) : joinForm(f, s);
+  if(!me) return joinForm(f, s);                                  // spawned frame not joined yet
+  if(s.phase === 'lobby') return me.isHost ? lobbyVard(s) : lobbySpelare(s);
+  if(s.phase === 'started'){
+    const r = s.lots[s.currentLotIndex];
+    if(r.resolved) return rundresultat(s, me.isHost);              // RundresultatVärd / RundresultatSpelare
+    if(f.playerId in r.bids) return vantan(s);
+    return budgivning(s, f);
+  }
+  return slutstallning(s);
+}
+
+/* ---------- phone frames (multi-player simulation, one shared event log) ---------- */
+const frames = [];
+const addFrame = isFirst => frames.push({ id:frames.length, isFirst, playerId:null, draft:{}, error:null });
+
+function frameHtml(f, s){
+  const me = s.players.find(p => p.playerId === f.playerId);
+  const who = me ? `${esc(me.name)} · ${me.isHost ? L.Vard : L.Spelare}` : 'Ny spelare';
+  return `<section class="phone" data-frame="${f.id}">
+    <div class="phone-head">${who}</div>
+    <div class="phone-body">${surface(f, s, me)}${f.error ? `<p class="err">${esc(f.error)}</p>` : ''}</div>
+  </section>`;
+}
+
+function render(){
+  const s = fold(log);
+  document.getElementById('frames').innerHTML = frames.map(f => frameHtml(f, s)).join('');
+}
+
+function handle(f, kind, data){
+  const s = fold(log);
+  f.error = null;
+  let cmd;
+  if(kind === 'OpenAuction') cmd = { type:kind, hostName:data.hostName.trim(), packId:data.packId };
+  else if(kind === 'JoinAuction') cmd = { type:kind, joinCode:data.joinCode.trim(), playerName:data.playerName.trim() };
+  else if(kind === 'PlaceBid'){
+    const amount = parseFloat(String(data.amount).replace(/\s/g, '').replace(',', '.'));
+    if(Number.isNaN(amount)){ f.error = 'Ange ett tal'; render(); return; }
+    cmd = { type:kind, gameId:s.gameId, playerId:f.playerId, lotIndex:s.currentLotIndex, amount };
+  }
+  else cmd = { type:kind, gameId:s.gameId };   // StartAuction / AskNextLot / EndAuction
+  const res = dispatch(cmd);
+  if(res.err) f.error = res.err;               // exceptions shown by their EM name (xmlang default)
+  else {
+    if(kind === 'OpenAuction') f.playerId = res.ok[0].hostPlayerId;
+    if(kind === 'JoinAuction') f.playerId = res.ok[0].playerId;
+    if(kind === 'PlaceBid') delete f.draft.amount;
+  }
+  render();
+}
+
+const framesEl = document.getElementById('frames');
+framesEl.addEventListener('input', e => {           // keep half-typed input across re-renders
+  const fr = e.target.closest('[data-frame]');
+  if(fr && e.target.name) frames[+fr.dataset.frame].draft[e.target.name] = e.target.value;
+});
+framesEl.addEventListener('submit', e => {
+  e.preventDefault();
+  const f = frames[+e.target.closest('[data-frame]').dataset.frame];
+  handle(f, e.target.dataset.cmd, Object.fromEntries(new FormData(e.target)));
+});
+document.getElementById('addPlayer').onclick = () => { addFrame(false); render(); };
+
+/* ---------- embedded spec self-check: the em's GWT cases against this decider ---------- */
+function runSpecTests(){
+  const lot0 = { description:'lot0', trueWorth:100, unit:'lot0U' };
+  const lot1 = { description:'lot1', trueWorth:50,  unit:'lot1U' };
+  const hostMartin = { playerId:'martinId', name:'Martin', isHost:true };
+  const playerNils = { playerId:'nilsId',   name:'Nils',   isHost:false };
+  const R = (lot, extra = {}) => ({ lot, bids:{}, trueWorth:null, winnerIds:[], pricePaid:null, profits:{}, resolved:false, ...extra });
+  const S = props => ({ gameId:'gameId', joinCode:'joinCode', phase:'started', hostPlayerId:'martinId',
+                        players:[hostMartin, playerNils], currentLotIndex:0, lots:[], ...props });
+  const expectErr = (res, name) => { if(res.err !== name) throw new Error(`expected x:${name}, got ${res.err ?? 'events'}`); };
+  const expectEvents = (res, exp) => {
+    if(!res.ok) throw new Error('expected events, got x:' + res.err);
+    if(res.ok.length !== exp.length) throw new Error(`expected ${exp.length} events, got ${res.ok.length}`);
+    exp.forEach((e, i) => { for(const k in e){
+      if(JSON.stringify(res.ok[i][k]) !== JSON.stringify(e[k]))
+        throw new Error(`event ${i} .${k}: expected ${JSON.stringify(e[k])}, got ${JSON.stringify(res.ok[i][k])}`);
+    }});
+  };
+
+  const tests = [
+    /* --- Reveal Lot --- */
+    ['highest bid wins and pays its bid', () => {
+      const s = S({ lots:[R(lot0, { bids:{ martinId:70, nilsId:90 } }), R(lot1)] });
+      expectEvents(decide(s, { type:'RevealLot', gameId:'gameId', lotIndex:0 }), [
+        { type:'LotRevealed', lotIndex:0, trueWorth:100, winnerIds:['nilsId'], pricePaid:90 },
+        { type:'RoundScored', playerId:'martinId', profit:0,  totalScore:0 },
+        { type:'RoundScored', playerId:'nilsId',   profit:10, totalScore:10 }]);
+    }],
+    ['overbidding excludes from winning, never negative', () => {
+      const s = S({ lots:[R(lot0, { bids:{ martinId:120, nilsId:80 } }), R(lot1)] });
+      expectEvents(decide(s, { type:'RevealLot', gameId:'gameId', lotIndex:0 }), [
+        { type:'LotRevealed', lotIndex:0, trueWorth:100, winnerIds:['nilsId'], pricePaid:80 },
+        { type:'RoundScored', playerId:'martinId', profit:0,  totalScore:0 },
+        { type:'RoundScored', playerId:'nilsId',   profit:20, totalScore:20 }]);
+    }],
+    ['tie on the winning bid is shared', () => {
+      const s = S({ lots:[R(lot0, { bids:{ martinId:80, nilsId:80 } }), R(lot1)] });
+      expectEvents(decide(s, { type:'RevealLot', gameId:'gameId', lotIndex:0 }), [
+        { type:'LotRevealed', lotIndex:0, trueWorth:100, winnerIds:['martinId','nilsId'], pricePaid:80 },
+        { type:'RoundScored', playerId:'martinId', profit:20, totalScore:20 },
+        { type:'RoundScored', playerId:'nilsId',   profit:20, totalScore:20 }]);
+    }],
+    ['exact guess scores ten for all', () => {
+      const s = S({ lots:[R(lot0, { bids:{ martinId:100, nilsId:100 } }), R(lot1)] });
+      expectEvents(decide(s, { type:'RevealLot', gameId:'gameId', lotIndex:0 }), [
+        { type:'LotRevealed', lotIndex:0, trueWorth:100, winnerIds:['martinId','nilsId'], pricePaid:100 },
+        { type:'RoundScored', playerId:'martinId', profit:10, totalScore:10 },
+        { type:'RoundScored', playerId:'nilsId',   profit:10, totalScore:10 }]);
+    }],
+    ['all overbid yields no winner', () => {
+      const s = S({ lots:[R(lot0, { bids:{ martinId:120, nilsId:150 } }), R(lot1)] });
+      expectEvents(decide(s, { type:'RevealLot', gameId:'gameId', lotIndex:0 }), [
+        { type:'LotRevealed', lotIndex:0, trueWorth:100, winnerIds:[], pricePaid:0 },
+        { type:'RoundScored', playerId:'martinId', profit:0, totalScore:0 },
+        { type:'RoundScored', playerId:'nilsId',   profit:0, totalScore:0 }]);
+    }],
+    ['scores accumulate across lots', () => {
+      const s = S({ currentLotIndex:1, lots:[
+        R(lot0, { trueWorth:100, winnerIds:['nilsId'], pricePaid:90, profits:{ martinId:0, nilsId:10 }, resolved:true }),
+        R(lot1, { bids:{ martinId:40, nilsId:30 } })] });
+      expectEvents(decide(s, { type:'RevealLot', gameId:'gameId', lotIndex:1 }), [
+        { type:'LotRevealed', lotIndex:1, trueWorth:50, winnerIds:['martinId'], pricePaid:40 },
+        { type:'RoundScored', playerId:'martinId', profit:20, totalScore:20 },
+        { type:'RoundScored', playerId:'nilsId',   profit:0,  totalScore:10 }]);
+    }],
+    ['cannot reveal before all bids in', () => {
+      const s = S({ lots:[R(lot0, { bids:{ martinId:70 } }), R(lot1)] });
+      expectErr(decide(s, { type:'RevealLot', gameId:'gameId', lotIndex:0 }), 'NotAllBidsIn');
+    }],
+    ['cannot reveal an already-resolved lot', () => {
+      const s = S({ lots:[
+        R(lot0, { trueWorth:100, winnerIds:['nilsId'], pricePaid:90, profits:{ martinId:0, nilsId:10 }, resolved:true }),
+        R(lot1)] });
+      expectErr(decide(s, { type:'RevealLot', gameId:'gameId', lotIndex:0 }), 'LotAlreadyResolved');
+    }],
+    /* --- End Auction --- */
+    ['highest score wins', () => {
+      const s = S({ currentLotIndex:1, lots:[
+        R(lot0, { profits:{ martinId:20, nilsId:0 }, resolved:true }),
+        R(lot1, { profits:{ martinId:0,  nilsId:5 }, resolved:true })] });
+      expectEvents(decide(s, { type:'EndAuction', gameId:'gameId' }), [
+        { type:'AuctionEnded',
+          finalScoreboard:[{ playerId:'martinId', playerName:'Martin', totalScore:20 },
+                           { playerId:'nilsId',   playerName:'Nils',   totalScore:5 }],
+          winnerIds:['martinId'] }]);
+    }],
+    ['tied highest totals share the win', () => {
+      const s = S({ currentLotIndex:1, lots:[
+        R(lot0, { profits:{ martinId:10, nilsId:10 }, resolved:true }),
+        R(lot1, { profits:{ martinId:5,  nilsId:5  }, resolved:true })] });
+      expectEvents(decide(s, { type:'EndAuction', gameId:'gameId' }), [
+        { type:'AuctionEnded',
+          finalScoreboard:[{ playerId:'martinId', playerName:'Martin', totalScore:15 },
+                           { playerId:'nilsId',   playerName:'Nils',   totalScore:15 }],
+          winnerIds:['martinId','nilsId'] }]);
+    }],
+    /* --- Place Bid --- */
+    ['negative bid rejected', () => {
+      const s = S({ lots:[R(lot0), R(lot1)] });
+      expectErr(decide(s, { type:'PlaceBid', gameId:'gameId', playerId:'nilsId', lotIndex:0, amount:-5 }), 'BidNegative');
+    }],
+    ['cannot bid twice on same lot', () => {
+      const s = S({ lots:[R(lot0, { bids:{ nilsId:50 } }), R(lot1)] });
+      expectErr(decide(s, { type:'PlaceBid', gameId:'gameId', playerId:'nilsId', lotIndex:0, amount:70 }), 'AlreadyBid');
+    }],
+    ['cannot bid on an already-resolved lot', () => {
+      const s = S({ lots:[
+        R(lot0, { bids:{ martinId:60, nilsId:90 }, trueWorth:100, winnerIds:['nilsId'], pricePaid:90, profits:{ martinId:0, nilsId:10 }, resolved:true }),
+        R(lot1)] });
+      expectErr(decide(s, { type:'PlaceBid', gameId:'gameId', playerId:'martinId', lotIndex:0, amount:80 }), 'LotAlreadyResolved');
+    }],
+    /* --- Join Auction --- */
+    ['cannot join started auction', () => {
+      const s = S({ phase:'started' });
+      expectErr(decide(s, { type:'JoinAuction', joinCode:'joinCode', playerName:'Sven' }), 'AuctionAlreadyStarted');
+    }],
+    ['cannot join with name already taken', () => {
+      const s = S({ phase:'lobby' });
+      expectErr(decide(s, { type:'JoinAuction', joinCode:'joinCode', playerName:'Nils' }), 'NameAlreadyTaken');
+    }]
+  ];
+
+  let pass = 0;
+  for(const [name, fn] of tests){
+    try { fn(); pass++; }
+    catch(e){ console.error(`spec FAIL: ${name}: ${e.message}`); }
+  }
+  console.log(`runSpecTests: ${pass}/${tests.length} pass`);
+  const badge = document.getElementById('specBadge');
+  badge.textContent = `em-spec ${pass}/${tests.length} ${pass === tests.length ? '✓' : '✗'}`;
+  badge.classList.add(pass === tests.length ? 'pass' : 'fail');
+}
+
+addFrame(true);
+render();
+runSpecTests();
+</script>
+</body>
+</html>
