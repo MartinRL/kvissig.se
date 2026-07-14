@@ -51,7 +51,7 @@ public class BlindbudetArchitectureTests
     [Fact]
     public void Decider_is_total_and_synchronous()
     {
-        var decider = Read("src/Blindbudet.Domain/Decider.cs");
+        var decider = Read("src/Blindbudet.Domain/Decider.Impl.cs");
 
         decider.Should().NotContain("throw ", "the functional core is total — failures are Result values");
         decider.Should().NotContain("async ", "the functional core is synchronous");

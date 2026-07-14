@@ -5,11 +5,13 @@ namespace Blindbudet.Domain;
 /// - Evolve: (State, Event) -> State
 /// - Decide: (State, Command, AuctionContext) -> Result&lt;Event[]&gt;
 ///
-/// Both use exhaustive union switches (no default arm). Business failures are values on the
-/// Result failure track, never thrown exceptions (ROP; see ADR 006). Sister to MEM's Decider
-/// — a second, independent Decider. HIGHEST total wins (the OPPOSITE of MEM).
+/// The exhaustive union switches are GENERATED from the emlang spec (Decider.g.cs, ADR 018);
+/// this file holds the case BODIES as partial-method implementations — a new e:/c: in the
+/// spec is a CS8795 compile error until its body is written here. Business failures are
+/// values on the Result failure track, never thrown exceptions (ROP; see ADR 006). Sister to
+/// MEM's Decider — a second, independent Decider. HIGHEST total wins (the OPPOSITE of MEM).
 /// </summary>
-public static class Decider
+public static partial class Decider
 {
     /// <summary>
     /// A "mini" (concept-scale) pack is a large pool of lots sampled down to this many per game
@@ -17,93 +19,78 @@ public static class Decider
     /// </summary>
     public const int MiniAuctionSize = 7;
 
-    /// <summary>
-    /// Evolve applies an event to produce new state. Pure, no side effects.
-    /// </summary>
-    public static AuctionState Evolve(AuctionState state, AuctionEvent @event) =>
-        @event switch
+    private static partial AuctionState EvolveAuctionOpened(AuctionState state, AuctionOpened e) =>
+        state with
         {
-            AuctionOpened e => state with
-            {
-                GameId = e.GameId,
-                JoinCode = e.JoinCode,
-                PackId = e.PackId,
-                HostPlayerId = e.HostPlayerId,
-                Phase = AuctionPhase.Lobby,
-                Players = [new Player(e.HostPlayerId, e.HostName, IsHost: true)],
-                Lots = e.Lots.Select(l => new LotRound { Lot = l }).ToList()
-            },
-
-            PlayerJoined e => state with
-            {
-                Players = [.. state.Players, new Player(e.PlayerId, e.PlayerName, IsHost: false)]
-            },
-
-            AuctionStarted e => state with
-            {
-                Phase = AuctionPhase.Started,
-                CurrentLotIndex = e.FirstLotIndex
-            },
-
-            BidPlaced e => state with
-            {
-                // Bids fold in event-log order (Dictionary preserves insertion order absent
-                // removals — which never happen), so the earliest top bidder wins a tie.
-                Lots = MapLot(state.Lots, e.LotIndex, l => l with
-                {
-                    Bids = new Dictionary<Guid, decimal>(l.Bids) { [e.PlayerId] = e.Amount }
-                })
-            },
-
-            LotRevealed e => state with
-            {
-                Lots = MapLot(state.Lots, e.LotIndex, l => l with
-                {
-                    TrueWorth = e.TrueWorth,
-                    WinnerIds = e.WinnerIds,
-                    PricePaid = e.PricePaid,
-                    Resolved = true
-                })
-            },
-
-            RoundScored e => state with
-            {
-                Lots = MapLot(state.Lots, e.LotIndex, l => l with
-                {
-                    Profits = new Dictionary<Guid, int>(l.Profits) { [e.PlayerId] = e.Profit }
-                })
-            },
-
-            NextLotStarted e => state with
-            {
-                CurrentLotIndex = e.LotIndex
-            },
-
-            AuctionEnded e => state with
-            {
-                Phase = AuctionPhase.Ended,
-                FinalScoreboard = e.FinalScoreboard,
-                WinnerIds = e.WinnerIds
-            }
+            GameId = e.GameId,
+            JoinCode = e.JoinCode,
+            PackId = e.PackId,
+            HostPlayerId = e.HostPlayerId,
+            Phase = AuctionPhase.Lobby,
+            Players = [new Player(e.HostPlayerId, e.HostName, IsHost: true)],
+            Lots = e.Lots.Select(l => new LotRound { Lot = l }).ToList()
         };
 
-    /// <summary>
-    /// Decide validates a command against current state and produces events, or an error
-    /// explaining the rejection.
-    /// </summary>
-    public static Result<AuctionEvent[]> Decide(AuctionState state, AuctionCommand command, AuctionContext context) =>
-        command switch
+    private static partial AuctionState EvolvePlayerJoined(AuctionState state, PlayerJoined e) =>
+        state with
         {
-            OpenAuction c => DecideOpenAuction(c, context),
-            JoinAuction c => DecideJoinAuction(state, c, context),
-            StartAuction c => DecideStartAuction(state, c, context),
-            PlaceBid c => DecidePlaceBid(state, c, context),
-            RevealLot c => DecideRevealLot(state, c),
-            AskNextLot c => DecideAskNextLot(state, c),
-            EndAuction c => DecideEndAuction(state, c, context)
+            Players = [.. state.Players, new Player(e.PlayerId, e.PlayerName, IsHost: false)]
         };
 
-    private static Result<AuctionEvent[]> DecideOpenAuction(OpenAuction command, AuctionContext context)
+    private static partial AuctionState EvolveAuctionStarted(AuctionState state, AuctionStarted e) =>
+        state with
+        {
+            Phase = AuctionPhase.Started,
+            CurrentLotIndex = e.FirstLotIndex
+        };
+
+    private static partial AuctionState EvolveBidPlaced(AuctionState state, BidPlaced e) =>
+        state with
+        {
+            // Bids fold in event-log order (Dictionary preserves insertion order absent
+            // removals — which never happen), so the earliest top bidder wins a tie.
+            Lots = MapLot(state.Lots, e.LotIndex, l => l with
+            {
+                Bids = new Dictionary<Guid, decimal>(l.Bids) { [e.PlayerId] = e.Amount }
+            })
+        };
+
+    private static partial AuctionState EvolveLotRevealed(AuctionState state, LotRevealed e) =>
+        state with
+        {
+            Lots = MapLot(state.Lots, e.LotIndex, l => l with
+            {
+                TrueWorth = e.TrueWorth,
+                WinnerIds = e.WinnerIds,
+                PricePaid = e.PricePaid,
+                Resolved = true
+            })
+        };
+
+    private static partial AuctionState EvolveRoundScored(AuctionState state, RoundScored e) =>
+        state with
+        {
+            Lots = MapLot(state.Lots, e.LotIndex, l => l with
+            {
+                Profits = new Dictionary<Guid, int>(l.Profits) { [e.PlayerId] = e.Profit }
+            })
+        };
+
+    private static partial AuctionState EvolveNextLotStarted(AuctionState state, NextLotStarted e) =>
+        state with
+        {
+            CurrentLotIndex = e.LotIndex
+        };
+
+    private static partial AuctionState EvolveAuctionEnded(AuctionState state, AuctionEnded e) =>
+        state with
+        {
+            Phase = AuctionPhase.Ended,
+            FinalScoreboard = e.FinalScoreboard,
+            WinnerIds = e.WinnerIds
+        };
+
+    private static partial Result<AuctionEvent[]> DecideOpenAuction(AuctionState state, OpenAuction command, AuctionContext context)
     {
         var pack = context.FindPack(command.PackId);
         if (pack is null)
@@ -140,7 +127,7 @@ public static class Decider
         return copy.Take(count).ToList();
     }
 
-    private static Result<AuctionEvent[]> DecideJoinAuction(AuctionState state, JoinAuction command, AuctionContext context)
+    private static partial Result<AuctionEvent[]> DecideJoinAuction(AuctionState state, JoinAuction command, AuctionContext context)
     {
         if (state.Phase == AuctionPhase.NotCreated)
             return new Err(new AuctionNotFound());
@@ -158,7 +145,7 @@ public static class Decider
         ]);
     }
 
-    private static Result<AuctionEvent[]> DecideStartAuction(AuctionState state, StartAuction command, AuctionContext context)
+    private static partial Result<AuctionEvent[]> DecideStartAuction(AuctionState state, StartAuction command, AuctionContext context)
     {
         if (state.Phase == AuctionPhase.NotCreated)
             return new Err(new AuctionNotFound());
@@ -171,7 +158,7 @@ public static class Decider
         ]);
     }
 
-    private static Result<AuctionEvent[]> DecidePlaceBid(AuctionState state, PlaceBid command, AuctionContext context)
+    private static partial Result<AuctionEvent[]> DecidePlaceBid(AuctionState state, PlaceBid command, AuctionContext context)
     {
         if (state.Phase == AuctionPhase.NotCreated)
             return new Err(new AuctionNotFound());
@@ -192,7 +179,7 @@ public static class Decider
         ]);
     }
 
-    private static Result<AuctionEvent[]> DecideRevealLot(AuctionState state, RevealLot command)
+    private static partial Result<AuctionEvent[]> DecideRevealLot(AuctionState state, RevealLot command, AuctionContext context)
     {
         if (!state.AllBidsIn(command.LotIndex))
             return new Err(new NotAllBidsIn());
@@ -246,12 +233,12 @@ public static class Decider
         return new Ok<AuctionEvent[]>([.. events]);
     }
 
-    private static Result<AuctionEvent[]> DecideAskNextLot(AuctionState state, AskNextLot command) =>
+    private static partial Result<AuctionEvent[]> DecideAskNextLot(AuctionState state, AskNextLot command, AuctionContext context) =>
         new Ok<AuctionEvent[]>([
             new NextLotStarted(state.GameId, state.CurrentLotIndex + 1)
         ]);
 
-    private static Result<AuctionEvent[]> DecideEndAuction(AuctionState state, EndAuction command, AuctionContext context)
+    private static partial Result<AuctionEvent[]> DecideEndAuction(AuctionState state, EndAuction command, AuctionContext context)
     {
         var scoreboard = state.Players
             .Select(p => new ScoreboardEntry(p.PlayerId, p.Name, state.TotalScore(p.PlayerId)))
