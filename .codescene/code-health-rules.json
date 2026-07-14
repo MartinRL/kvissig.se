@@ -1,6 +1,6 @@
 {
   "rule_sets" : [ {
-    "matching_content_path" : "**/Decider.cs",
+    "matching_content_path" : "**/Decider*.cs",
     "thresholds" : [ {
       "name" : "function_cyclomatic_complexity_warning",
       "value" : 12

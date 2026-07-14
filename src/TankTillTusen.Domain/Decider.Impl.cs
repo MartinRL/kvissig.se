@@ -5,11 +5,14 @@ namespace TankTillTusen.Domain;
 /// - Evolve: (State, Event) -> State
 /// - Decide: (State, Command, TankContext) -> Result&lt;Event[]&gt;
 ///
-/// Both use exhaustive union switches (no default arm). Business failures are values on the
-/// Result failure track, never thrown exceptions (ROP; see ADR 006). A THIRD Decider beside
-/// MEM's and BlindBudet's — independent. LOWEST total wins (like MEM, OPPOSITE of BlindBudet).
+/// The exhaustive union switches are GENERATED from the emlang spec (Decider.g.cs, ADR 018);
+/// this file holds the case BODIES as partial-method implementations — a new e:/c: in the
+/// spec is a CS8795 compile error until its body is written here. Business failures are
+/// values on the Result failure track, never thrown exceptions (ROP; see ADR 006). A THIRD
+/// Decider beside MEM's and BlindBudet's — independent. LOWEST total wins (like MEM,
+/// OPPOSITE of BlindBudet).
 /// </summary>
-public static class Decider
+public static partial class Decider
 {
     /// <summary>The hard per-round countdown: deadline = round.StartedAt + this many seconds.</summary>
     public const int CountdownSeconds = 60;
@@ -24,96 +27,81 @@ public static class Decider
     /// <summary>How many puzzles a game generates (the default context stamps this many rounds).</summary>
     public const int RoundCount = 5;
 
-    /// <summary>
-    /// Evolve applies an event to produce new state. Pure, no side effects.
-    /// </summary>
-    public static TankState Evolve(TankState state, TankEvent @event) =>
-        @event switch
+    private static partial TankState EvolveLobbyOpened(TankState state, LobbyOpened e) =>
+        state with
         {
-            LobbyOpened e => state with
-            {
-                GameId = e.GameId,
-                JoinCode = e.JoinCode,
-                HostPlayerId = e.HostPlayerId,
-                Phase = TankPhase.Lobby,
-                Players = [new Player(e.HostPlayerId, e.HostName, IsHost: true)],
-                Rounds = e.Puzzles.Select(p => new PuzzleRound { Puzzle = p }).ToList()
-            },
-
-            PlayerJoined e => state with
-            {
-                Players = [.. state.Players, new Player(e.PlayerId, e.PlayerName, IsHost: false)]
-            },
-
-            GameStarted e => state with
-            {
-                Phase = TankPhase.Started,
-                CurrentRoundIndex = e.FirstRoundIndex,
-                Rounds = MapRound(state.Rounds, e.FirstRoundIndex, r => r with { StartedAt = e.StartedAt })
-            },
-
-            SolutionSubmitted e => state with
-            {
-                // Solutions fold in event-log order (Dictionary preserves insertion order absent
-                // removals — which never happen).
-                Rounds = MapRound(state.Rounds, e.RoundIndex, r => r with
-                {
-                    Solutions = new Dictionary<Guid, Solution>(r.Solutions) { [e.PlayerId] = e.Solution }
-                })
-            },
-
-            PuzzleRevealed e => state with
-            {
-                // Reveal fires once per round score → also the moment the round is marked scored.
-                Rounds = MapRound(state.Rounds, e.RoundIndex, r => r with
-                {
-                    SampleSolution = e.SampleSolution,
-                    Scored = true
-                })
-            },
-
-            RoundScored e => state with
-            {
-                Rounds = MapRound(state.Rounds, e.RoundIndex, r => r with
-                {
-                    ReachedValues = e.ReachedValue is { } v
-                        ? new Dictionary<Guid, int>(r.ReachedValues) { [e.PlayerId] = v }
-                        : r.ReachedValues,
-                    RoundScores = new Dictionary<Guid, int>(r.RoundScores) { [e.PlayerId] = e.RoundScore }
-                })
-            },
-
-            NextPuzzleStarted e => state with
-            {
-                CurrentRoundIndex = e.RoundIndex,
-                Rounds = MapRound(state.Rounds, e.RoundIndex, r => r with { StartedAt = e.StartedAt })
-            },
-
-            GameEnded e => state with
-            {
-                Phase = TankPhase.Ended,
-                FinalScoreboard = e.FinalScoreboard,
-                WinnerIds = e.WinnerIds
-            }
+            GameId = e.GameId,
+            JoinCode = e.JoinCode,
+            HostPlayerId = e.HostPlayerId,
+            Phase = TankPhase.Lobby,
+            Players = [new Player(e.HostPlayerId, e.HostName, IsHost: true)],
+            Rounds = e.Puzzles.Select(p => new PuzzleRound { Puzzle = p }).ToList()
         };
 
-    /// <summary>
-    /// Decide validates a command against current state and produces events, or an error
-    /// explaining the rejection.
-    /// </summary>
-    public static Result<TankEvent[]> Decide(TankState state, TankCommand command, TankContext context) =>
-        command switch
+    private static partial TankState EvolvePlayerJoined(TankState state, PlayerJoined e) =>
+        state with
         {
-            OpenLobby c => DecideOpenLobby(c, context),
-            JoinGame c => DecideJoinGame(state, c, context),
-            StartGame c => DecideStartGame(state, c, context),
-            SubmitSolution c => DecideSubmitSolution(state, c, context),
-            ScoreRound c => DecideScoreRound(state, c, context),
-            AskNextPuzzle c => DecideAskNextPuzzle(state, c, context),
-            EndGame c => DecideEndGame(state, c, context)
+            Players = [.. state.Players, new Player(e.PlayerId, e.PlayerName, IsHost: false)]
         };
 
-    private static Result<TankEvent[]> DecideOpenLobby(OpenLobby command, TankContext context)
+    private static partial TankState EvolveGameStarted(TankState state, GameStarted e) =>
+        state with
+        {
+            Phase = TankPhase.Started,
+            CurrentRoundIndex = e.FirstRoundIndex,
+            Rounds = MapRound(state.Rounds, e.FirstRoundIndex, r => r with { StartedAt = e.StartedAt })
+        };
+
+    private static partial TankState EvolveSolutionSubmitted(TankState state, SolutionSubmitted e) =>
+        state with
+        {
+            // Solutions fold in event-log order (Dictionary preserves insertion order absent
+            // removals — which never happen).
+            Rounds = MapRound(state.Rounds, e.RoundIndex, r => r with
+            {
+                Solutions = new Dictionary<Guid, Solution>(r.Solutions) { [e.PlayerId] = e.Solution }
+            })
+        };
+
+    private static partial TankState EvolvePuzzleRevealed(TankState state, PuzzleRevealed e) =>
+        state with
+        {
+            // Reveal fires once per round score → also the moment the round is marked scored.
+            Rounds = MapRound(state.Rounds, e.RoundIndex, r => r with
+            {
+                SampleSolution = e.SampleSolution,
+                Scored = true
+            })
+        };
+
+    private static partial TankState EvolveRoundScored(TankState state, RoundScored e) =>
+        state with
+        {
+            Rounds = MapRound(state.Rounds, e.RoundIndex, r => r with
+            {
+                ReachedValues = e.ReachedValue is { } v
+                    ? new Dictionary<Guid, int>(r.ReachedValues) { [e.PlayerId] = v }
+                    : r.ReachedValues,
+                RoundScores = new Dictionary<Guid, int>(r.RoundScores) { [e.PlayerId] = e.RoundScore }
+            })
+        };
+
+    private static partial TankState EvolveNextPuzzleStarted(TankState state, NextPuzzleStarted e) =>
+        state with
+        {
+            CurrentRoundIndex = e.RoundIndex,
+            Rounds = MapRound(state.Rounds, e.RoundIndex, r => r with { StartedAt = e.StartedAt })
+        };
+
+    private static partial TankState EvolveGameEnded(TankState state, GameEnded e) =>
+        state with
+        {
+            Phase = TankPhase.Ended,
+            FinalScoreboard = e.FinalScoreboard,
+            WinnerIds = e.WinnerIds
+        };
+
+    private static partial Result<TankEvent[]> DecideOpenLobby(TankState state, OpenLobby command, TankContext context)
     {
         var gameId = context.NewGuid();
         var hostPlayerId = context.NewGuid();
@@ -125,7 +113,7 @@ public static class Decider
         ]);
     }
 
-    private static Result<TankEvent[]> DecideJoinGame(TankState state, JoinGame command, TankContext context)
+    private static partial Result<TankEvent[]> DecideJoinGame(TankState state, JoinGame command, TankContext context)
     {
         if (state.Phase == TankPhase.NotCreated)
             return new Err(new GameNotFound());
@@ -143,7 +131,7 @@ public static class Decider
         ]);
     }
 
-    private static Result<TankEvent[]> DecideStartGame(TankState state, StartGame command, TankContext context)
+    private static partial Result<TankEvent[]> DecideStartGame(TankState state, StartGame command, TankContext context)
     {
         if (state.Phase == TankPhase.NotCreated)
             return new Err(new GameNotFound());
@@ -156,7 +144,7 @@ public static class Decider
         ]);
     }
 
-    private static Result<TankEvent[]> DecideSubmitSolution(TankState state, SubmitSolution command, TankContext context)
+    private static partial Result<TankEvent[]> DecideSubmitSolution(TankState state, SubmitSolution command, TankContext context)
     {
         if (state.Phase == TankPhase.NotCreated)
             return new Err(new GameNotFound());
@@ -184,7 +172,7 @@ public static class Decider
         ]);
     }
 
-    private static Result<TankEvent[]> DecideScoreRound(TankState state, ScoreRound command, TankContext context)
+    private static partial Result<TankEvent[]> DecideScoreRound(TankState state, ScoreRound command, TankContext context)
     {
         var round = state.Rounds[command.RoundIndex];
 
@@ -228,12 +216,12 @@ public static class Decider
         return new Ok<TankEvent[]>([.. events]);
     }
 
-    private static Result<TankEvent[]> DecideAskNextPuzzle(TankState state, AskNextPuzzle command, TankContext context) =>
+    private static partial Result<TankEvent[]> DecideAskNextPuzzle(TankState state, AskNextPuzzle command, TankContext context) =>
         new Ok<TankEvent[]>([
             new NextPuzzleStarted(state.GameId, state.CurrentRoundIndex + 1, context.Now())
         ]);
 
-    private static Result<TankEvent[]> DecideEndGame(TankState state, EndGame command, TankContext context)
+    private static partial Result<TankEvent[]> DecideEndGame(TankState state, EndGame command, TankContext context)
     {
         var scoreboard = state.Players
             .Select(p => new ScoreboardEntry(p.PlayerId, p.Name, state.TotalScore(p.PlayerId)))
