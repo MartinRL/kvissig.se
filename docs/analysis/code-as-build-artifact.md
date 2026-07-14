@@ -577,6 +577,30 @@ game 4: its record layer costs ~2 csproj lines instead of ~186 LOC. The real win
 structural, not numeric — the spec is now the single change surface for the record
 layer, enforced by the compiler.
 
+## 9.4 Experiment log — step 2, Decide/Evolve skeletons (2026-07-14)
+
+The §6 "Step 2" seam is live for all three games (commits `4b29bf2`…`ecb12bc`):
+`DeciderEmitter` emits `Decider.g.cs` (exhaustive Evolve/Decide dispatch + one
+`private static partial` declaration per spec `e:`/`c:`, spec order, no default arm);
+each game's `Decider.cs` became `Decider.Impl.cs` holding only the case bodies as
+partial-method implementations. Fold, constants, helpers (MapRound/MapQuestion/
+NormalizeDifference/QuestionSelection), the Context records and the sister Result
+unions stayed in the Impl files untouched.
+
+| Metric | Result |
+|---|---|
+| CS8795 proof (the done-gate) | A fake `e: Game / TemporaryCs8795Proof` in the tank spec fails the build with **CS8795** ("partial method must have an implementation part") pointing into `Decider.g.cs` — then reverted. A new spec element is now a compile error until a human/agent writes the body |
+| LOC | **Honest correction of the ~410-LOC prediction:** only the *dispatch* switches left git (~150 generated lines across 3 games); the switch *arms* were already delegating one-liners (Decide) or `state with {…}` bodies (Evolve) that survive as partial-method impls. Net git delta per game ≈ −6 LOC. The win is the seam, not the count |
+| Signature uniformity | One convention prevents CS8826 (param-name mismatch warnings under TreatWarningsAsErrors): `Evolve<E>(<State> state, <E> e)` / `Decide<C>(<State> state, <C> command, <Context> context)`. Four impls gained a previously-omitted `state`/`context` param (TTT+MEM `DecideOpenLobby`, MEM `RevealDirection`/`ScoreDifference`/`AskNextQuestion`, BB `RevealLot`/`AskNextLot`); unused params in an impl raise no warning |
+| Mode gate | A transient `EmlangEmit=core` mode let the flip land one game per commit; the final commit collapsed it — `surface` now always emits `Decider.g.cs`, zero csproj metadata remains |
+| Test delta | 269 → **272** (+3 `DeciderEmitterTests`: one switch arm + one partial declaration per spec element, per game). All green throughout; arch-tests repointed at `Decider.Impl.cs` |
+| Touchpoints beyond the recipe | `.codescene/code-health-rules.json` pattern `**/Decider.cs` → `**/Decider*.cs` (Impl inherits the intentional-pattern thresholds); `GameManifest` gained `ContextType` |
+
+**Interpretation:** the §6 roadmap is now exhausted — step 3 (GWT generation) landed
+earlier as ADR 017, and steps 0–2 are done. The compiler now enforces both directions
+of stratum-1+2 sync: a spec element without code is CS8795, code without a spec
+element is CS0103 (the partial impl has nothing to attach to).
+
 ## 10. Analysis — the 1:1 spec↔implementation thesis for agentic engineering (2026-07-12)
 
 Written after step 1 completed for all three games (§9–9.3). Synthesis of a three-track

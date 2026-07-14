@@ -26,3 +26,4 @@ and **`game-design`** (product / game-rule decisions: how the game plays, not ho
 | [015](015-entydigt-santvarde.md) | Entydigt verifierbart santVärde per lott | game-design | Accepted |
 | [016](016-generated-stratum-1-records.md) | Stratum-1 Records Are Build Artifacts Generated from the emlang Spec | architecture | Accepted |
 | [017](017-generated-spec-tests.md) | Spec `tests:` Sections Are Compiled into xUnit Facts at Build Time | architecture | Accepted |
+| [018](018-generated-decider-skeletons.md) | Decider Evolve/Decide Switch Skeletons Are Generated (CS8795 Seam) | architecture | Accepted |
