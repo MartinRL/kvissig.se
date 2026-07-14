@@ -33,10 +33,11 @@ internal static class EmlangEmit
 }
 
 /// <summary>
-/// Thin analyzer wrapper over Emlang.CodeGen (ADR 016): each AdditionalFiles spec that
-/// matches a GameManifest gets its stratum-1 Commands/Events/Errors emitted straight
-/// into the compilation (obj/, never disk). Correctness lives in SurfaceEmitterTests'
-/// comparer round-trip — this class only routes text.
+/// Thin analyzer wrapper over Emlang.CodeGen (ADR 016/018): each AdditionalFiles spec that
+/// matches a GameManifest gets its stratum-1 Commands/Events/Errors plus the Decider
+/// Evolve/Decide switch skeletons emitted straight into the compilation (obj/, never disk).
+/// Correctness lives in SurfaceEmitterTests' comparer round-trip and DeciderEmitterTests —
+/// this class only routes text.
 /// </summary>
 [Generator]
 public sealed class EmlangRecordsGenerator : IIncrementalGenerator
@@ -45,14 +46,13 @@ public sealed class EmlangRecordsGenerator : IIncrementalGenerator
     {
         context.RegisterSourceOutput(EmlangEmit.Specs(context), static (production, spec) =>
         {
-            if (spec.Mode is not ("surface" or "core") || EmlangEmit.Manifest(spec.FileName) is not { } manifest)
+            if (spec.Mode != "surface" || EmlangEmit.Manifest(spec.FileName) is not { } manifest)
                 return;
             var elements = SpecModel.Parse(spec.Yaml);
             production.AddSource("Commands.g.cs", SurfaceEmitter.Emit(manifest, elements, 'c'));
             production.AddSource("Events.g.cs", SurfaceEmitter.Emit(manifest, elements, 'e'));
             production.AddSource("Errors.g.cs", SurfaceEmitter.Emit(manifest, elements, 'x'));
-            if (spec.Mode == "core")
-                production.AddSource("Decider.g.cs", DeciderEmitter.Emit(manifest, elements));
+            production.AddSource("Decider.g.cs", DeciderEmitter.Emit(manifest, elements));
         });
     }
 }

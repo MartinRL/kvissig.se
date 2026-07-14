@@ -4,13 +4,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <!-- ADR 018: also generate the Decider Evolve/Decide switch skeletons (CS8795 seam). -->
-    <EmlangEmit>core</EmlangEmit>
   </PropertyGroup>
-
-  <ItemGroup>
-    <CompilerVisibleProperty Include="EmlangEmit" />
-  </ItemGroup>
 
   <!-- No CSV/pack content: puzzles are GENERATED per game (PuzzleGenerator), not curated. -->
 
