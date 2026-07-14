@@ -24,3 +24,5 @@ and **`game-design`** (product / game-rule decisions: how the game plays, not ho
 | [013](013-balanced-card-draw.md) | Balanced 21-Card Draw per Game | game-design | Accepted |
 | [014](014-ralph-loop-over-goal.md) | Ralph Loop over Built-in /goal for Autonomous Pack Builds | operations | Accepted |
 | [015](015-entydigt-santvarde.md) | Entydigt verifierbart santVärde per lott | game-design | Accepted |
+| [016](016-generated-stratum-1-records.md) | Stratum-1 Records Are Build Artifacts Generated from the emlang Spec | architecture | Accepted |
+| [017](017-generated-spec-tests.md) | Spec `tests:` Sections Are Compiled into xUnit Facts at Build Time | architecture | Accepted |
