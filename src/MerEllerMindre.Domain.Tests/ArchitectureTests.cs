@@ -96,7 +96,7 @@ public class ArchitectureTests
     [Fact]
     public void Decider_is_total_and_synchronous()
     {
-        var decider = Read("src/MerEllerMindre.Domain/Decider.cs");
+        var decider = Read("src/MerEllerMindre.Domain/Decider.Impl.cs");
 
         // "throw " (with trailing space) so the "never thrown exceptions" doc comment is ignored.
         decider.Should().NotContain("throw ", "the functional core is total — failures are Result values");

@@ -4,7 +4,13 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <!-- ADR 018: also generate the Decider Evolve/Decide switch skeletons (CS8795 seam). -->
+    <EmlangEmit>core</EmlangEmit>
   </PropertyGroup>
+
+  <ItemGroup>
+    <CompilerVisibleProperty Include="EmlangEmit" />
+  </ItemGroup>
 
   <!-- The Quiz catalog (question packs) is domain reference data. Copy the CSVs to
        output so referencing projects (Web, Tests) find them beside the assembly. -->

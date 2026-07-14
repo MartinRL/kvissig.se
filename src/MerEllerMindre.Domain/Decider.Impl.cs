@@ -5,10 +5,12 @@ namespace MerEllerMindre.Domain;
 /// - Evolve: (State, Event) -> State
 /// - Decide: (State, Command, GameContext) -> Result&lt;Event[]&gt;
 ///
-/// Both use exhaustive union switches (no default arm). Business failures are values on
-/// the Result failure track, never thrown exceptions (ROP; see ADR 006).
+/// The exhaustive union switches are GENERATED from the emlang spec (Decider.g.cs, ADR 018);
+/// this file holds the case BODIES as partial-method implementations — a new e:/c: in the
+/// spec is a CS8795 compile error until its body is written here. Business failures are
+/// values on the Result failure track, never thrown exceptions (ROP; see ADR 006).
 /// </summary>
-public static class Decider
+public static partial class Decider
 {
     /// <summary>
     /// Number of question cards a single game plays, drawn balanced from the pack.
@@ -20,127 +22,113 @@ public static class Decider
     public const int FullGameSize = 21;
     public const int MiniGameSize = 7;
 
-    /// <summary>
-    /// Evolve applies an event to produce new state. Pure, no side effects.
-    /// </summary>
-    public static GameState Evolve(GameState state, GameEvent @event) =>
-        @event switch
+    private static partial GameState EvolveLobbyOpened(GameState state, LobbyOpened e) =>
+        state with
         {
-            LobbyOpened e => state with
-            {
-                GameId = e.GameId,
-                JoinCode = e.JoinCode,
-                QuestionPackId = e.QuestionPackId,
-                HostPlayerId = e.HostPlayerId,
-                Phase = GamePhase.Lobby,
-                Players = [new Player(e.HostPlayerId, e.HostName, IsHost: true)],
-                Questions = e.Questions.Select(q => new QuestionRound { Card = q }).ToList()
-            },
-
-            PlayerJoined e => state with
-            {
-                Players = [.. state.Players, new Player(e.PlayerId, e.PlayerName, IsHost: false)]
-            },
-
-            GameStarted e => state with
-            {
-                Phase = GamePhase.Started,
-                CurrentQuestionIndex = e.FirstQuestionIndex
-            },
-
-            DirectionSubmitted e => state with
-            {
-                Questions = MapQuestion(state.Questions, e.QuestionIndex, q => q with
-                {
-                    Directions = new Dictionary<Guid, Direction>(q.Directions)
-                    {
-                        [e.PlayerId] = e.Direction
-                    }
-                })
-            },
-
-            QuestionDirectionRevealed e => state with
-            {
-                Questions = MapQuestion(state.Questions, e.QuestionIndex, q => q with
-                {
-                    CorrectDirection = e.CorrectDirection
-                })
-            },
-
-            DirectionScored e => state with
-            {
-                Questions = MapQuestion(state.Questions, e.QuestionIndex, q => q with
-                {
-                    DirectionScores = new Dictionary<Guid, int>(q.DirectionScores)
-                    {
-                        [e.PlayerId] = e.BonusPoints
-                    }
-                })
-            },
-
-            DifferenceSubmitted e => state with
-            {
-                Questions = MapQuestion(state.Questions, e.QuestionIndex, q => q with
-                {
-                    Differences = new Dictionary<Guid, decimal>(q.Differences)
-                    {
-                        [e.PlayerId] = e.GuessedDifference
-                    }
-                })
-            },
-
-            QuestionDifferenceRevealed e => state with
-            {
-                Questions = MapQuestion(state.Questions, e.QuestionIndex, q => q with
-                {
-                    CorrectDifference = e.CorrectDifference,
-                    Scored = true
-                })
-            },
-
-            DifferenceScored e => state with
-            {
-                Questions = MapQuestion(state.Questions, e.QuestionIndex, q => q with
-                {
-                    RoundScores = new Dictionary<Guid, int>(q.RoundScores)
-                    {
-                        [e.PlayerId] = e.RoundScore
-                    }
-                })
-            },
-
-            NextQuestionStarted e => state with
-            {
-                CurrentQuestionIndex = e.QuestionIndex
-            },
-
-            GameEnded e => state with
-            {
-                Phase = GamePhase.Ended,
-                FinalScoreboard = e.FinalScoreboard,
-                WinnerIds = e.WinnerIds
-            }
+            GameId = e.GameId,
+            JoinCode = e.JoinCode,
+            QuestionPackId = e.QuestionPackId,
+            HostPlayerId = e.HostPlayerId,
+            Phase = GamePhase.Lobby,
+            Players = [new Player(e.HostPlayerId, e.HostName, IsHost: true)],
+            Questions = e.Questions.Select(q => new QuestionRound { Card = q }).ToList()
         };
 
-    /// <summary>
-    /// Decide validates a command against current state and produces events,
-    /// or an error explaining the rejection.
-    /// </summary>
-    public static Result<GameEvent[]> Decide(GameState state, GameCommand command, GameContext context) =>
-        command switch
+    private static partial GameState EvolvePlayerJoined(GameState state, PlayerJoined e) =>
+        state with
         {
-            OpenLobby c => DecideOpenLobby(c, context),
-            JoinGame c => DecideJoinGame(state, c, context),
-            StartGame c => DecideStartGame(state, c, context),
-            SubmitDirection c => DecideSubmitDirection(state, c, context),
-            RevealDirection c => DecideRevealDirection(state, c),
-            SubmitDifference c => DecideSubmitDifference(state, c, context),
-            ScoreDifference c => DecideScoreDifference(state, c),
-            AskNextQuestion c => DecideAskNextQuestion(state, c),
-            EndGame c => DecideEndGame(state, c, context)
+            Players = [.. state.Players, new Player(e.PlayerId, e.PlayerName, IsHost: false)]
         };
 
-    private static Result<GameEvent[]> DecideOpenLobby(OpenLobby command, GameContext context)
+    private static partial GameState EvolveGameStarted(GameState state, GameStarted e) =>
+        state with
+        {
+            Phase = GamePhase.Started,
+            CurrentQuestionIndex = e.FirstQuestionIndex
+        };
+
+    private static partial GameState EvolveDirectionSubmitted(GameState state, DirectionSubmitted e) =>
+        state with
+        {
+            Questions = MapQuestion(state.Questions, e.QuestionIndex, q => q with
+            {
+                Directions = new Dictionary<Guid, Direction>(q.Directions)
+                {
+                    [e.PlayerId] = e.Direction
+                }
+            })
+        };
+
+    private static partial GameState EvolveQuestionDirectionRevealed(GameState state, QuestionDirectionRevealed e) =>
+        state with
+        {
+            Questions = MapQuestion(state.Questions, e.QuestionIndex, q => q with
+            {
+                CorrectDirection = e.CorrectDirection
+            })
+        };
+
+    private static partial GameState EvolveDirectionScored(GameState state, DirectionScored e) =>
+        state with
+        {
+            Questions = MapQuestion(state.Questions, e.QuestionIndex, q => q with
+            {
+                DirectionScores = new Dictionary<Guid, int>(q.DirectionScores)
+                {
+                    [e.PlayerId] = e.BonusPoints
+                }
+            })
+        };
+
+    private static partial GameState EvolveDifferenceSubmitted(GameState state, DifferenceSubmitted e) =>
+        state with
+        {
+            Questions = MapQuestion(state.Questions, e.QuestionIndex, q => q with
+            {
+                Differences = new Dictionary<Guid, decimal>(q.Differences)
+                {
+                    [e.PlayerId] = e.GuessedDifference
+                }
+            })
+        };
+
+    private static partial GameState EvolveQuestionDifferenceRevealed(GameState state, QuestionDifferenceRevealed e) =>
+        state with
+        {
+            Questions = MapQuestion(state.Questions, e.QuestionIndex, q => q with
+            {
+                CorrectDifference = e.CorrectDifference,
+                Scored = true
+            })
+        };
+
+    private static partial GameState EvolveDifferenceScored(GameState state, DifferenceScored e) =>
+        state with
+        {
+            Questions = MapQuestion(state.Questions, e.QuestionIndex, q => q with
+            {
+                RoundScores = new Dictionary<Guid, int>(q.RoundScores)
+                {
+                    [e.PlayerId] = e.RoundScore
+                }
+            })
+        };
+
+    private static partial GameState EvolveNextQuestionStarted(GameState state, NextQuestionStarted e) =>
+        state with
+        {
+            CurrentQuestionIndex = e.QuestionIndex
+        };
+
+    private static partial GameState EvolveGameEnded(GameState state, GameEnded e) =>
+        state with
+        {
+            Phase = GamePhase.Ended,
+            FinalScoreboard = e.FinalScoreboard,
+            WinnerIds = e.WinnerIds
+        };
+
+    private static partial Result<GameEvent[]> DecideOpenLobby(GameState state, OpenLobby command, GameContext context)
     {
         var pack = context.FindPack(command.QuestionPackId);
         if (pack is null)
@@ -158,7 +146,7 @@ public static class Decider
         ]);
     }
 
-    private static Result<GameEvent[]> DecideJoinGame(GameState state, JoinGame command, GameContext context)
+    private static partial Result<GameEvent[]> DecideJoinGame(GameState state, JoinGame command, GameContext context)
     {
         if (state.Phase == GamePhase.NotCreated)
             return new Err(new GameNotFound());
@@ -176,7 +164,7 @@ public static class Decider
         ]);
     }
 
-    private static Result<GameEvent[]> DecideStartGame(GameState state, StartGame command, GameContext context)
+    private static partial Result<GameEvent[]> DecideStartGame(GameState state, StartGame command, GameContext context)
     {
         if (state.Phase == GamePhase.NotCreated)
             return new Err(new GameNotFound());
@@ -189,7 +177,7 @@ public static class Decider
         ]);
     }
 
-    private static Result<GameEvent[]> DecideSubmitDirection(GameState state, SubmitDirection command, GameContext context)
+    private static partial Result<GameEvent[]> DecideSubmitDirection(GameState state, SubmitDirection command, GameContext context)
     {
         if (state.Phase == GamePhase.NotCreated)
             return new Err(new GameNotFound());
@@ -208,7 +196,7 @@ public static class Decider
         ]);
     }
 
-    private static Result<GameEvent[]> DecideRevealDirection(GameState state, RevealDirection command)
+    private static partial Result<GameEvent[]> DecideRevealDirection(GameState state, RevealDirection command, GameContext context)
     {
         if (!state.AllDirectionsIn(command.QuestionIndex))
             return new Err(new NotAllDirectionsIn());
@@ -242,7 +230,7 @@ public static class Decider
         return new Ok<GameEvent[]>([.. events]);
     }
 
-    private static Result<GameEvent[]> DecideSubmitDifference(GameState state, SubmitDifference command, GameContext context)
+    private static partial Result<GameEvent[]> DecideSubmitDifference(GameState state, SubmitDifference command, GameContext context)
     {
         if (state.Phase == GamePhase.NotCreated)
             return new Err(new GameNotFound());
@@ -276,7 +264,7 @@ public static class Decider
         mx <= 0 ? (byte)0
         : (byte)Math.Min(100m, Math.Round(value / mx * 100, MidpointRounding.AwayFromZero));
 
-    private static Result<GameEvent[]> DecideScoreDifference(GameState state, ScoreDifference command)
+    private static partial Result<GameEvent[]> DecideScoreDifference(GameState state, ScoreDifference command, GameContext context)
     {
         if (!state.AllDifferencesIn(command.QuestionIndex))
             return new Err(new NotAllDifferencesIn());
@@ -319,12 +307,12 @@ public static class Decider
         return new Ok<GameEvent[]>([.. events]);
     }
 
-    private static Result<GameEvent[]> DecideAskNextQuestion(GameState state, AskNextQuestion command) =>
+    private static partial Result<GameEvent[]> DecideAskNextQuestion(GameState state, AskNextQuestion command, GameContext context) =>
         new Ok<GameEvent[]>([
             new NextQuestionStarted(state.GameId, state.CurrentQuestionIndex + 1)
         ]);
 
-    private static Result<GameEvent[]> DecideEndGame(GameState state, EndGame command, GameContext context)
+    private static partial Result<GameEvent[]> DecideEndGame(GameState state, EndGame command, GameContext context)
     {
         var scoreboard = state.Players
             .Select(p => new ScoreboardEntry(p.PlayerId, p.Name, state.TotalScore(p.PlayerId)))
