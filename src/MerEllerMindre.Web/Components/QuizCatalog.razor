@@ -10,7 +10,9 @@
             <span class="pill soft">Värd</span>
         </div>
 
-        <h1>Välj kviss</h1>
+        <p class="sub">Vill ni hellre spela ett snabbt sifferspel? Prova <a href="/tank-till-tusen">Tänk Till Tusen →</a></p>
+
+        <h1>Välj Mer eller Mindre-kviss</h1>
         <p class="sub">Ett frågepaket motsvarar en kortlek. Du blir värd och första spelaren.</p>
 
         @foreach (var pack in Model.Packs)
@@ -25,6 +27,16 @@
                 </div>
             </div>
         }
+
+        <div class="card">
+            <div class="pack">
+                <div class="info">
+                    <div class="name">Tänk Till Tusen</div>
+                    <div class="count">Sifferspelet: sex tal, ett mål, en minut</div>
+                </div>
+                <a class="btn" href="/tank-till-tusen">Spela</a>
+            </div>
+        </div>
     </div>
 </MainLayout>
 

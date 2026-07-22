@@ -88,7 +88,7 @@ public static class GameEndpoints
     private static IResult GetSitemap(FileSystemQuestionPackCatalog catalog, HttpContext http)
     {
         var root = $"{http.Request.Scheme}://{http.Request.Host}";
-        var urls = new List<string> { "/", "/om-spelet", "/om-mig", "/spel-som-0-100", "/lev-som-du-lar", "/fragespel-online", "/spel-som-more-or-less", "/hund-fragesport-tillsammans", "/elbil-fragesport-tillsammans", "/fotboll-fragesport-tillsammans", "/tank-till-tusen" };
+        var urls = new List<string> { "/", "/om-spelet", "/om-mig", "/spel-som-0-100", "/lev-som-du-lar", "/fragespel-online", "/spel-som-more-or-less", "/hund-fragesport-tillsammans", "/elbil-fragesport-tillsammans", "/fotboll-fragesport-tillsammans", "/tank-till-tusen", "/tank-till-tusen/om-spelet" };
         urls.AddRange(catalog.Packs.Select(p => $"/games/new/{p.PackId}"));
         var body = string.Concat(urls.Select(u =>
             $"<url><loc>{System.Security.SecurityElement.Escape(root + u)}</loc></url>"));

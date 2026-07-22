@@ -36,6 +36,7 @@ public static class TankEndpoints
     public static void MapTankEndpoints(this WebApplication app)
     {
         app.MapGet("/tank-till-tusen", GetCatalog);
+        app.MapGet("/tank-till-tusen/om-spelet", () => new RazorComponentResult<TankOmSpelet>());
         app.MapGet("/tank-till-tusen/new", GetNew);
         app.MapPost("/tank-till-tusen", PostOpen);
         app.MapGet("/tank-till-tusen/{code}/join", GetJoin);
