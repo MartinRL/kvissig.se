@@ -25,7 +25,7 @@ public static partial class Decider
     public const int GraceSeconds = 3;
 
     /// <summary>How many puzzles a game generates (the default context stamps this many rounds).</summary>
-    public const int RoundCount = 5;
+    public const int RoundCount = 7;
 
     private static partial TankState EvolveLobbyOpened(TankState state, LobbyOpened e) =>
         state with

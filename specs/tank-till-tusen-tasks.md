@@ -18,7 +18,7 @@ beside MEM and BlindBudet; generated puzzles, hard 45 s countdown, LOWEST total 
 - [x] `Events.cs` — `union TankEvent`
 - [x] `Errors.cs` — `union TankError` (9 markers)
 - [x] `State.cs` — `TankPhase`, `Player`, `PuzzleRound`, `ScoreboardEntry`, `TankState` + derived
-- [x] `Decider.cs` — Evolve/Decide/Fold, `TankContext`, `Result<T>`, `CountdownSeconds=45`, `RoundCount=5`
+- [x] `Decider.cs` — Evolve/Decide/Fold, `TankContext`, `Result<T>`, `CountdownSeconds=45`, `RoundCount=7`
 - [x] `Projections.cs` — pure State→View for the 6 screens
 
 ## Tests — `src/TankTillTusen.Domain.Tests/` (55 green)
