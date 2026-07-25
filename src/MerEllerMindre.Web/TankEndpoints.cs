@@ -56,8 +56,15 @@ public static class TankEndpoints
         return new RazorComponentResult<TankHostForm>(new { Model = new TankHostFormVm(token, ParseDifficulty(difficulty).ToString()) });
     }
 
-    /// <summary>The host form's fields, bound as one <c>[FromForm]</c> arg.</summary>
-    public record OpenForm(string HostName, string? Difficulty, int? RoundCount);
+    /// <summary>The host form's fields, bound as one <c>[FromForm]</c> arg. Init-properties, not
+    /// constructor params: the form mapper treats every constructor parameter as required, and a
+    /// hand-post without difficulty/roundCount should fall back to defaults rather than 400.</summary>
+    public record OpenForm
+    {
+        public string HostName { get; init; } = "";
+        public string? Difficulty { get; init; }
+        public int? RoundCount { get; init; }
+    }
 
     private static IResult PostOpen([FromForm] OpenForm form, [AsParameters] TankDeps d, HttpContext http)
     {
