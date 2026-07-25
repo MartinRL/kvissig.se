@@ -13,14 +13,24 @@ namespace MerEllerMindre.Domain;
 public static partial class Decider
 {
     /// <summary>
-    /// Number of question cards a single game plays, drawn balanced from the pack.
-    /// Prod decks play the full round; concept ("mini") packs play a short round to test
-    /// a game idea cheaply.
+    /// Default question counts per pack size class — the host-form slider's starting value.
+    /// Prod decks default to the full round; concept ("mini") packs to a short round.
+    /// The host picks the actual count (MinRoundCount-MaxRoundCount) when opening the lobby.
     /// </summary>
-    // ponytail: "mini"-slug marker picks the size; promote = rename without "mini" + grow
-    // the pack to 1085, which auto-makes it a 21-question prod deck.
+    // ponytail: "mini"-slug marker picks the default; promote = rename without "mini" + grow
+    // the pack to 1085, which auto-makes it a 21-question-default prod deck.
     public const int FullGameSize = 21;
     public const int MiniGameSize = 7;
+
+    /// <summary>Smallest question count the host can pick (slider lower bound).</summary>
+    public const int MinRoundCount = 4;
+
+    /// <summary>Largest question count the host can pick (slider upper bound).</summary>
+    public const int MaxRoundCount = 21;
+
+    /// <summary>The host-form default for a pack: mini packs 7, prod decks 21.</summary>
+    public static int DefaultRoundCount(string packId) =>
+        packId.Contains("mini") ? MiniGameSize : FullGameSize;
 
     private static partial GameState EvolveLobbyOpened(GameState state, LobbyOpened e) =>
         state with
@@ -47,15 +57,16 @@ public static partial class Decider
             CurrentQuestionIndex = e.FirstQuestionIndex
         };
 
+    /// <summary>Copy-on-write add: the per-player maps on QuestionRound are immutable snapshots.</summary>
+    private static Dictionary<Guid, T> With<T>(IReadOnlyDictionary<Guid, T> map, Guid playerId, T value) =>
+        new(map) { [playerId] = value };
+
     private static partial GameState EvolveDirectionSubmitted(GameState state, DirectionSubmitted e) =>
         state with
         {
             Questions = MapQuestion(state.Questions, e.QuestionIndex, q => q with
             {
-                Directions = new Dictionary<Guid, Direction>(q.Directions)
-                {
-                    [e.PlayerId] = e.Direction
-                }
+                Directions = With(q.Directions, e.PlayerId, e.Direction)
             })
         };
 
@@ -73,10 +84,7 @@ public static partial class Decider
         {
             Questions = MapQuestion(state.Questions, e.QuestionIndex, q => q with
             {
-                DirectionScores = new Dictionary<Guid, int>(q.DirectionScores)
-                {
-                    [e.PlayerId] = e.BonusPoints
-                }
+                DirectionScores = With(q.DirectionScores, e.PlayerId, e.BonusPoints)
             })
         };
 
@@ -85,10 +93,7 @@ public static partial class Decider
         {
             Questions = MapQuestion(state.Questions, e.QuestionIndex, q => q with
             {
-                Differences = new Dictionary<Guid, decimal>(q.Differences)
-                {
-                    [e.PlayerId] = e.GuessedDifference
-                }
+                Differences = With(q.Differences, e.PlayerId, e.GuessedDifference)
             })
         };
 
@@ -107,10 +112,7 @@ public static partial class Decider
         {
             Questions = MapQuestion(state.Questions, e.QuestionIndex, q => q with
             {
-                RoundScores = new Dictionary<Guid, int>(q.RoundScores)
-                {
-                    [e.PlayerId] = e.RoundScore
-                }
+                RoundScores = With(q.RoundScores, e.PlayerId, e.RoundScore)
             })
         };
 
@@ -130,6 +132,9 @@ public static partial class Decider
 
     private static partial Result<GameEvent[]> DecideOpenLobby(GameState state, OpenLobby command, GameContext context)
     {
+        if (command.RoundCount is < MinRoundCount or > MaxRoundCount)
+            return new Err(new RoundCountOutOfRange());
+
         var pack = context.FindPack(command.QuestionPackId);
         if (pack is null)
             return new Err(new QuestionPackNotFound());
@@ -138,8 +143,7 @@ public static partial class Decider
         var hostPlayerId = context.NewGuid();
         var joinCode = context.NewGuid();
 
-        var count = command.QuestionPackId.Contains("mini") ? MiniGameSize : FullGameSize;
-        var questions = QuestionSelection.PickBalanced(pack.Questions, count, context.NextRandom);
+        var questions = QuestionSelection.PickBalanced(pack.Questions, command.RoundCount, context.NextRandom);
 
         return new Ok<GameEvent[]>([
             new LobbyOpened(gameId, hostPlayerId, command.HostName, joinCode, command.QuestionPackId, questions, context.Now())

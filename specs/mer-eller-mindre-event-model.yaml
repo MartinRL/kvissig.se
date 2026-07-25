@@ -140,13 +140,18 @@ slices:
 
   # OpenLobby resolves {questionPackId} to a pack via a GameContext dependency
   # (same pattern that stamps gameId/joinCode/createdAt) and snapshots a BALANCED
-  # selection of N=21 cards onto LobbyOpened — NOT the full pack (a pack with <= 21
-  # cards is used whole). The host is the first player (hostPlayerId), so a game is
-  # never empty. x: QuestionPackNotFound when the id resolves to no pack.
+  # selection of N=roundCount cards onto LobbyOpened — NOT the full pack (a pack with
+  # <= roundCount cards is used whole). The host picks roundCount (4-21) on the host
+  # form; the default is the pack's size class (mini 7, prod 21). The host is the first
+  # player (hostPlayerId), so a game is never empty. x: QuestionPackNotFound when the
+  # id resolves to no pack; x: RoundCountOutOfRange when roundCount is outside 4-21.
   # ASSUMPTION: "balanced" = difficulty-band quotas from specs/question-style-guide.md
-  # (band = round(|A-B|/max(A,B)*100); [0-20]/[20-60]/[60-85]/[85-100] ~ 3/9/6/3 of 21),
-  # shuffled order, RNG injected via GameContext.NextRandom. The 21 are frozen on
+  # (band = round(|A-B|/max(A,B)*100); [0-20]/[20-60]/[60-85]/[85-100] ~ 3/9/6/3 of N),
+  # shuffled order, RNG injected via GameContext.NextRandom. The N cards are frozen on
   # LobbyOpened so Evolve replays the stored deck and never re-selects.
+  #
+  # NOTE: any GWT issuing OpenLobby MUST carry roundCount — an omitted int prop
+  # constructs as 0, which trips RoundCountOutOfRange before anything else.
   #
   # Test fixtures (referenced by name in the cases below):
   #   pack mer-eller-mindre = [ question0, question1 ]  (the default deck)
@@ -162,6 +167,8 @@ slices:
         props:
           hostName: string
           questionPackId: string   # filename slug of the chosen pack (e.g. mer-eller-mindre)
+          roundCount: int (4-21)   # how many questions the host chose on the host form; default = pack size class (mini 7, prod 21)
+      - x: RoundCountOutOfRange
       - x: QuestionPackNotFound
       - e: Game / LobbyOpened
         props:
@@ -178,7 +185,7 @@ slices:
         given: []
         when:
           - c: OpenLobby
-            props: { hostName: Martin, questionPackId: mer-eller-mindre }
+            props: { hostName: Martin, questionPackId: mer-eller-mindre, roundCount: 7 }
         then:
           - e: Game / LobbyOpened
             props:
@@ -192,9 +199,23 @@ slices:
         given: []
         when:
           - c: OpenLobby
-            props: { questionPackId: unknown }
+            props: { questionPackId: unknown, roundCount: 7 }
         then:
           - x: QuestionPackNotFound
+      cannot open lobby with too few questions:
+        given: []
+        when:
+          - c: OpenLobby
+            props: { hostName: Martin, questionPackId: mer-eller-mindre, roundCount: 3 }
+        then:
+          - x: RoundCountOutOfRange
+      cannot open lobby with too many questions:
+        given: []
+        when:
+          - c: OpenLobby
+            props: { hostName: Martin, questionPackId: mer-eller-mindre, roundCount: 22 }
+        then:
+          - x: RoundCountOutOfRange
 
   👀 Game Lobby:
     steps:

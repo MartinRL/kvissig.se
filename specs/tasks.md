@@ -97,6 +97,7 @@ source, no GT).
 - [x] nu när vi inte längre ser maxvärdet, utan bara hur den mindre förhåller sig till den större (mindre vs mer) så är det lämpligt att på något vis introducera %. dvs när rikting har valts och man rör slidern, så är det ju i praktiken den mindres % av mer man gissar. detta ska du ultrathink om ur ett spel- och UX-mässigt perspektiv innan lösning.
 - [x] textöverlapp under staplarna när man svarar. ser bra ut när man har svarat och ser svaret.
 - [x] pongsammanställning ska visa vilken "rond" som just spelats (under spelets gång visas rond#/21)
+- [x] värden väljer antal frågor per omgång (slider 4-21 på host-formen; default = MiniGameSize 7 för mini-packs, FullGameSize 21 för prod; RoundCountOutOfRange vaktar range i Decide)
 - [ ] Mobile-friendly CSS
 - [x] PWA manifest
   - [x] Skärmdumpar för rikare installationsdialog (valfritt — påverkar inte "installable")

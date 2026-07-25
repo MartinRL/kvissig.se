@@ -102,12 +102,22 @@ public static class GameEndpoints
             return Results.NotFound("Frågepaketet hittades inte.");
 
         var token = antiforgery.GetAndStoreTokens(http).RequestToken!;
-        return new RazorComponentResult<HostForm>(new { Model = new HostFormVm(pack.PackId, pack.Name, token) });
+        return new RazorComponentResult<HostForm>(new { Model = new HostFormVm(pack.PackId, pack.Name, token, Decider.DefaultRoundCount(pack.PackId)) });
     }
 
-    private static IResult PostGame([FromForm] string questionPackId, [FromForm] string hostName, [AsParameters] GameDeps d, HttpContext http)
+    /// <summary>The host form's fields, bound as one <c>[FromForm]</c> arg. Init-properties, not
+    /// constructor params: the form mapper treats every constructor parameter as required, and a
+    /// hand-post without roundCount should fall back to the pack default rather than 400.</summary>
+    public record OpenForm
     {
-        var result = d.Svc.Open(new OpenLobby(hostName, questionPackId));
+        public string QuestionPackId { get; init; } = "";
+        public string HostName { get; init; } = "";
+        public int? RoundCount { get; init; }
+    }
+
+    private static IResult PostGame([FromForm] OpenForm form, [AsParameters] GameDeps d, HttpContext http)
+    {
+        var result = d.Svc.Open(new OpenLobby(form.HostName, form.QuestionPackId, form.RoundCount ?? Decider.DefaultRoundCount(form.QuestionPackId)));
         if (result is not DomainOk ok || ok.Value is not [LobbyOpened opened, ..])
             return Results.BadRequest(result is Err err ? Describe(err.Error) : "Något gick fel.");
 
@@ -277,6 +287,7 @@ public static class GameEndpoints
         NotAllDirectionsIn => "Alla har inte svarat mer eller mindre än.",
         DirectionAlreadyRevealed => "Mer eller mindre är redan avslöjat.",
         NotAllDifferencesIn => "Alla har inte gissat än.",
-        QuestionAlreadyScored => "Frågan är redan rättad."
+        QuestionAlreadyScored => "Frågan är redan rättad.",
+        RoundCountOutOfRange => "Välj mellan 4 och 21 frågor."
     };
 }

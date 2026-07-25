@@ -17,12 +17,38 @@
                 <input type="hidden" name="questionPackId" value="@Model.PackId" />
                 <label for="name">Ditt namn</label>
                 <input type="text" id="name" name="hostName" placeholder="Skriv ditt namn" autofocus required />
+                <label for="roundCount">Antal frågor: <span id="roundCountVal">@Model.DefaultRoundCount</span></label>
+                <div class="diffwrap">
+                    <input type="range" id="roundCount" name="roundCount"
+                           min="@MinRoundCount" max="@MaxRoundCount" step="1" value="@Model.DefaultRoundCount"
+                           aria-label="Antal frågor" />
+                </div>
                 <button type="submit" class="btn">Skapa spel</button>
             </form>
         </div>
     </div>
+
+    <script>
+        (function () {
+            const range = document.getElementById('roundCount');
+            const val = document.getElementById('roundCountVal');
+            const min = Number(range.min), max = Number(range.max);
+            function render() {
+                const v = Number(range.value);
+                val.textContent = v;
+                const n = Math.round((v - min) / (max - min) * 100);
+                range.style.background = `linear-gradient(90deg, var(--accent) ${n}%, var(--line) ${n}%)`;
+                range.setAttribute('aria-valuetext', `${v} frågor`);
+            }
+            range.addEventListener('input', render);
+            render();
+        })();
+    </script>
 </MainLayout>
 
 @code {
     [Parameter] public required HostFormVm Model { get; set; }
+
+    private static int MinRoundCount => MerEllerMindre.Domain.Decider.MinRoundCount;
+    private static int MaxRoundCount => MerEllerMindre.Domain.Decider.MaxRoundCount;
 }

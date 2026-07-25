@@ -13,7 +13,7 @@ public sealed record PackVm(string PackId, string Name, int QuestionCount, bool 
 
 public sealed record CatalogVm(IReadOnlyList<PackVm> Packs);
 
-public sealed record HostFormVm(string PackId, string PackName, string AntiforgeryToken);
+public sealed record HostFormVm(string PackId, string PackName, string AntiforgeryToken, int DefaultRoundCount);
 
 public sealed record JoinVm(Guid JoinCode, string HostName, string AntiforgeryToken);
 
