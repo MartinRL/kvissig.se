@@ -56,9 +56,12 @@ public static class TankEndpoints
         return new RazorComponentResult<TankHostForm>(new { Model = new TankHostFormVm(token, ParseDifficulty(difficulty).ToString()) });
     }
 
-    private static IResult PostOpen([FromForm] string hostName, [FromForm] string? difficulty, [AsParameters] TankDeps d, HttpContext http)
+    /// <summary>The host form's fields, bound as one <c>[FromForm]</c> arg.</summary>
+    public record OpenForm(string HostName, string? Difficulty, int? RoundCount);
+
+    private static IResult PostOpen([FromForm] OpenForm form, [AsParameters] TankDeps d, HttpContext http)
     {
-        var result = d.Svc.Open(new OpenLobby(hostName, ParseDifficulty(difficulty)));
+        var result = d.Svc.Open(new OpenLobby(form.HostName, ParseDifficulty(form.Difficulty), form.RoundCount ?? Decider.DefaultRoundCount));
         if (result is not TankOk ok || ok.Value is not [LobbyOpened opened, ..])
             return Results.BadRequest(result is Err err ? Describe(err.Error) : "Något gick fel.");
 
@@ -205,6 +208,7 @@ public static class TankEndpoints
         RoundAlreadyScored => "Pusslet är redan avslöjat.",
         DeadlinePassed => "Tiden är ute för det här pusslet.",
         InvalidSolution => "Ogiltigt svar.",
-        NotReadyToScore => "Alla har inte svarat än."
+        NotReadyToScore => "Alla har inte svarat än.",
+        RoundCountOutOfRange => "Välj mellan 4 och 21 pussel."
     };
 }

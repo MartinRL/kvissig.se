@@ -14,7 +14,7 @@
         <p class="sub">Vill ni hellre spela frågespel? <a href="/">Mer eller Mindre →</a></p>
 
         <h1>Välj nivå</h1>
-        <p class="sub">Sex tal, ett mål, en minut. Du blir värd och första spelaren. @RoundCount pussel per spel, lägst total vinner.</p>
+        <p class="sub">Sex tal, ett mål, en minut. Du blir värd och första spelaren, och väljer hur många pussel ni spelar (@MinRoundCount till @MaxRoundCount). Lägst total vinner.</p>
 
         <div class="card">
             <div class="pack">
@@ -49,5 +49,6 @@
 </MainLayout>
 
 @code {
-    private static int RoundCount => global::TankTillTusen.Domain.Decider.RoundCount;
+    private static int MinRoundCount => global::TankTillTusen.Domain.Decider.MinRoundCount;
+    private static int MaxRoundCount => global::TankTillTusen.Domain.Decider.MaxRoundCount;
 }

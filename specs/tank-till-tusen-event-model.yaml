@@ -111,6 +111,10 @@ slices:
   #   sampleSol0 = Solution { steps: [{ leftIndex: 0, op: mul, rightIndex: 1 }], answerIndex: 2 }  # 10×10=100
   #   sampleSol1 = Solution { steps: [{ leftIndex: 0, op: mul, rightIndex: 1 }], answerIndex: 2 }  # 5×20=100
   #   host hostName = Martin ; minted joinCode = joinCode
+  #
+  # NOTE: the stub context's GeneratePuzzles ignores roundCount and returns the two fixture
+  # puzzles — decider-true: decide only range-checks the count and passes it through. Any GWT
+  # issuing OpenLobby MUST carry roundCount (an omitted int prop constructs as 0 → RoundCountOutOfRange).
   ✍️ Open Lobby:
     steps:
       - t: 🧑‍🏫 host /Quiz catalog
@@ -118,6 +122,8 @@ slices:
         props:
           hostName: string
           difficulty: Difficulty (familj|klassisk|svår)   # the catalog row the host picked; the generation knob
+          roundCount: int (4-21)   # how many puzzles the host chose on the host form; default 7
+      - x: RoundCountOutOfRange
       - e: Game / LobbyOpened
         props:
           gameId: Guid
@@ -133,7 +139,7 @@ slices:
         given: []
         when:
           - c: OpenLobby
-            props: { hostName: Martin, difficulty: klassisk }
+            props: { hostName: Martin, difficulty: klassisk, roundCount: 7 }
         then:
           - e: Game / LobbyOpened
             props:
@@ -143,6 +149,20 @@ slices:
               difficulty: klassisk
               puzzles: [puzzle0, puzzle1]
               openedAt: openedAt
+      cannot open with too few puzzles:
+        given: []
+        when:
+          - c: OpenLobby
+            props: { hostName: Martin, difficulty: klassisk, roundCount: 3 }
+        then:
+          - x: RoundCountOutOfRange
+      cannot open with too many puzzles:
+        given: []
+        when:
+          - c: OpenLobby
+            props: { hostName: Martin, difficulty: klassisk, roundCount: 22 }
+        then:
+          - x: RoundCountOutOfRange
 
   👀 Game Lobby:
     steps:

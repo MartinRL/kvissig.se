@@ -18,7 +18,7 @@ beside MEM and BlindBudet; generated puzzles, hard 45 s countdown, LOWEST total 
 - [x] `Events.cs` — `union TankEvent`
 - [x] `Errors.cs` — `union TankError` (9 markers)
 - [x] `State.cs` — `TankPhase`, `Player`, `PuzzleRound`, `ScoreboardEntry`, `TankState` + derived
-- [x] `Decider.cs` — Evolve/Decide/Fold, `TankContext`, `Result<T>`, `CountdownSeconds=45`, `RoundCount=7`
+- [x] `Decider.cs` — Evolve/Decide/Fold, `TankContext`, `Result<T>`, `CountdownSeconds=45`, `DefaultRoundCount=7, Min 4 / Max 21`
 - [x] `Projections.cs` — pure State→View for the 6 screens
 
 ## Tests — `src/TankTillTusen.Domain.Tests/` (55 green)
@@ -62,3 +62,11 @@ beside MEM and BlindBudet; generated puzzles, hard 45 s countdown, LOWEST total 
 - [x] Tests: shortest-route self-check + familj/svår step-count theories + updated fixtures
 - [x] Web: TankCatalog 3 nivå-rader → /new?difficulty=..., TankHostForm hidden field,
       PostOpen/GetNew ParseDifficulty (unknown → Klassisk); build + test green (224 total)
+
+## Värden väljer antal pussel (4-21, default 7)
+- [x] Spec: `roundCount: int (4-21)` on OpenLobby + `x: RoundCountOutOfRange` + GWT
+      (too few / too many); `emlang lint` OK
+- [x] Domain: `DefaultRoundCount=7` / `MinRoundCount=4` / `MaxRoundCount=21`, range guard in
+      DecideOpenLobby, `TankContext.GeneratePuzzles` takes count
+- [x] Web: TankHostForm range-slider (MEM:s slider-känsla, live värde + gradient),
+      PostOpen `roundCount ?? DefaultRoundCount`, Describe-case; copy till "sista pusslet"

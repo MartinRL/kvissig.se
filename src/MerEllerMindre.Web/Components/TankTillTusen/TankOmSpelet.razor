@@ -29,7 +29,8 @@
                 samma sex tal och samma mål. Med de fyra räknesätten (plus, minus, gånger,
                 delat) bygger var och en sin väg mot målet på @CountdownSeconds sekunder.
                 Den som kommer närmast vinner rundan, exakt träff ger bonus, och efter
-                @RoundCount pussel vinner den med lägst total.
+                sista pusslet vinner den med lägst total. Värden väljer hur många pussel
+                ett spel är, @MinRoundCount till @MaxRoundCount.
             </p>
         </div>
 
@@ -44,7 +45,7 @@
                 <li><strong>Räkna.</strong> Varje pussel ger sex tal och ett mål. Kombinera
                     talen med de fyra räknesätten och lås ditt bästa svar innan minuten är ute.</li>
                 <li><strong>Lägst vinner.</strong> Avståndet till målet blir dina poäng, exakt
-                    träff ger minuspoäng i bonus. Efter @RoundCount pussel vinner den
+                    träff ger minuspoäng i bonus. Efter sista pusslet vinner den
                     med lägst total.</li>
             </ol>
         </div>
@@ -98,7 +99,7 @@
 
             <h3>Hur räknas poängen?</h3>
             <p>Ditt avstånd till målet blir dina poäng för rundan (max 100). Exakt träff ger
-               minus 10. Inget svar ger 100. Lägst total efter @RoundCount pussel
+               minus 10. Inget svar ger 100. Lägst total efter sista pusslet
                vinner.</p>
 
             <h3>Måste man vara bra på huvudräkning?</h3>
@@ -121,12 +122,13 @@
         {"@type":"Question","name":"Måste vi sitta i samma rum?","acceptedAnswer":{"@type":"Answer","text":"Spelet är gjort för det: en skärm var, alla i samma rum. Det fungerar tekniskt på distans också, men det är roligast tillsammans."}},
         {"@type":"Question","name":"Behöver man installera en app?","acceptedAnswer":{"@type":"Answer","text":"Nej. Det spelas direkt i webbläsaren. Den som är värd öppnar ett spel och delar koden eller QR-koden."}},
         {"@type":"Question","name":"Hur många kan spela?","acceptedAnswer":{"@type":"Answer","text":"Från 2 spelare och uppåt. Varje deltagare använder sin egen skärm."}},
-        {"@type":"Question","name":"Hur räknas poängen?","acceptedAnswer":{"@type":"Answer","text":"Ditt avstånd till målet blir dina poäng för rundan (max 100). Exakt träff ger minus 10. Inget svar ger 100. Lägst total efter sju pussel vinner."}},
+        {"@type":"Question","name":"Hur räknas poängen?","acceptedAnswer":{"@type":"Answer","text":"Ditt avstånd till målet blir dina poäng för rundan (max 100). Exakt träff ger minus 10. Inget svar ger 100. Lägst total efter sista pusslet vinner."}},
         {"@type":"Question","name":"Måste man vara bra på huvudräkning?","acceptedAnswer":{"@type":"Answer","text":"Nej. Nivån Familj är byggd så att målet alltid går att nå på två räknesteg, och även ett ungefärligt svar ger poäng. Det räcker att komma nära."}}
       ]}
     ]}
     """;
 
-    private static int RoundCount => global::TankTillTusen.Domain.Decider.RoundCount;
+    private static int MinRoundCount => global::TankTillTusen.Domain.Decider.MinRoundCount;
+    private static int MaxRoundCount => global::TankTillTusen.Domain.Decider.MaxRoundCount;
     private static int CountdownSeconds => global::TankTillTusen.Domain.Decider.CountdownSeconds;
 }

@@ -44,12 +44,12 @@ public class TestModelTests
     }
 
     [Fact]
-    public void Tank_spec_parses_the_full_census_of_38_tests()
+    public void Tank_spec_parses_the_full_census_of_40_tests()
     {
         var tests = TankTests();
 
-        tests.Should().HaveCount(38);
-        tests.Count(t => t.When is not null).Should().Be(26, "GWT decide cases");
+        tests.Should().HaveCount(40);
+        tests.Count(t => t.When is not null).Should().Be(28, "GWT decide cases");
         tests.Count(t => t.When is null && t.Then is [{ Kind: 'v', Lane: "State" }])
             .Should().Be(2, "GT fold cases");
         tests.Count(t => t.When is null && t.Then is [{ Kind: 'v', Lane: "Screen" or "Todo" }])

@@ -24,8 +24,14 @@ public static partial class Decider
     /// </summary>
     public const int GraceSeconds = 3;
 
-    /// <summary>How many puzzles a game generates (the default context stamps this many rounds).</summary>
-    public const int RoundCount = 7;
+    /// <summary>Default puzzle count — the host-form slider's starting value.</summary>
+    public const int DefaultRoundCount = 7;
+
+    /// <summary>Smallest puzzle count the host can pick (slider lower bound).</summary>
+    public const int MinRoundCount = 4;
+
+    /// <summary>Largest puzzle count the host can pick (slider upper bound).</summary>
+    public const int MaxRoundCount = 21;
 
     private static partial TankState EvolveLobbyOpened(TankState state, LobbyOpened e) =>
         state with
@@ -103,10 +109,13 @@ public static partial class Decider
 
     private static partial Result<TankEvent[]> DecideOpenLobby(TankState state, OpenLobby command, TankContext context)
     {
+        if (command.RoundCount is < MinRoundCount or > MaxRoundCount)
+            return new Err(new RoundCountOutOfRange());
+
         var gameId = context.NewGuid();
         var hostPlayerId = context.NewGuid();
         var joinCode = context.NewGuid();
-        var puzzles = context.GeneratePuzzles(command.Difficulty);
+        var puzzles = context.GeneratePuzzles(command.RoundCount, command.Difficulty);
 
         return new Ok<TankEvent[]>([
             new LobbyOpened(gameId, hostPlayerId, command.HostName, joinCode, command.Difficulty, puzzles, context.Now())
@@ -260,13 +269,13 @@ public static partial class Decider
 public record TankContext(
     Func<Guid> NewGuid,
     Func<DateTimeOffset> Now,
-    Func<Difficulty, IReadOnlyList<Puzzle>> GeneratePuzzles
+    Func<int, Difficulty, IReadOnlyList<Puzzle>> GeneratePuzzles
 )
 {
     public static TankContext Default => new(
         NewGuid: Guid.NewGuid,
         Now: () => DateTimeOffset.UtcNow,
-        GeneratePuzzles: difficulty => PuzzleGenerator.GenerateSet(Decider.RoundCount, difficulty, Random.Shared.Next)
+        GeneratePuzzles: (count, difficulty) => PuzzleGenerator.GenerateSet(count, difficulty, Random.Shared.Next)
     );
 }
 
