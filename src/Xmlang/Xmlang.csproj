@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Runtime home of the xmlang model/parser/linter (xmlang-spec.md v0.2). TWO consumers:
+       tools/xm.cs (CLI lint) and MerEllerMindre.Web (XmCatalog startup lint + SDUI render
+       model). Deliberately NOT in Emlang.CodeGen: that project hard-references
+       Microsoft.CodeAnalysis and would drag Roslyn into the deploy image. -->
+  <PropertyGroup>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="YamlDotNet" Version="16.3.0" />
+  </ItemGroup>
+
+</Project>
