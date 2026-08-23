@@ -1,0 +1,42 @@
+@* Renders ONE Field with its playful.css idiom. The closed switch mirrors the closed Field
+   vocabulary in Xm/Fields.cs; adding an arm is a plan-level vocabulary event, never a
+   per-surface special case. GAME-AGNOSTIC BY CONTRACT. *@
+@switch (Field)
+{
+    case TextField { Css: "pill" } pill:
+        <span class="pill">@pill.Text</span>
+        break;
+    case TextField { Label: not null } answer:
+        <p class="@answer.Css">@answer.Label: <span class="mer">@answer.Text</span></p>
+        break;
+    case TextField { Strong: not null } banner:
+        <p class="@banner.Css"><span class="name">@banner.Strong</span> @banner.Text</p>
+        break;
+    case TextField text:
+        <p class="@text.Css">@text.Text</p>
+        break;
+    case QrField qr:
+        <QrPanel Model="qr" />
+        break;
+    case RosterField roster:
+        <PlayerRoster Model="roster" />
+        break;
+    case TableField table:
+        <ScoreTable Model="table" />
+        break;
+    case StepsField steps:
+        <div class="card">
+            <div class="cardhead">@steps.Head</div>
+            <ol class="steps">
+                @foreach (var step in steps.Steps)
+                {
+                    <li><strong>@step.Lead</strong> @step.Rest</li>
+                }
+            </ol>
+        </div>
+        break;
+}
+
+@code {
+    [Parameter] public required Field Field { get; set; }
+}

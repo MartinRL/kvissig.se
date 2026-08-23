@@ -1,0 +1,28 @@
+@* Player-list card: lobby roster, waiting Klara / Väntar på. Same markup idiom as the
+   hand-written screens (cardhead + ul.players + dot/who/tag). *@
+<div class="card">
+    @if (Model.Head is not null)
+    {
+        <div class="cardhead">
+            @Model.Head
+            @if (Model.CountPill is not null)
+            {
+                <span class="pill">@Model.CountPill</span>
+            }
+        </div>
+    }
+    <ul class="players">
+        @foreach (var row in Model.Rows)
+        {
+            <li>
+                <span class="dot @(row.Pending ? "pending" : null)"></span>
+                <span class="who">@row.Name</span>
+                <span class="tag">@row.Tag</span>
+            </li>
+        }
+    </ul>
+</div>
+
+@code {
+    [Parameter] public required RosterField Model { get; set; }
+}

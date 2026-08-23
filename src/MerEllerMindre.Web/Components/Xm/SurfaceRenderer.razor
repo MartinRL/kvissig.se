@@ -1,0 +1,91 @@
+@* The xm interpreter engine: renders one XmScreenModel. The xm surface owns composition
+   ORDER and salience TIERS; the FieldBag owns presence; playful.css idioms come from the
+   Field records themselves. Layout: header card (secondary pills, heading, sub, primary
+   inline fields) → block-field cards → on-demand <details> → command forms → footer.
+   GAME-AGNOSTIC BY CONTRACT: no game name, route or copy may ever appear here. *@
+<div @attributes="WrapperAttrs">
+    <div class="card center">
+        @foreach (var pill in Tier(v => v.Secondary).OfType<TextField>())
+        {
+            <FieldBlock Field="pill" />
+        }
+        @if (Model.Heading is not null)
+        {
+            <h1 style="@(HasPills ? "margin-top:1.1rem" : null)">@Model.Heading</h1>
+        }
+        @if (Model.Sub is not null)
+        {
+            <p class="sub">@Model.Sub</p>
+        }
+        @foreach (var field in Tier(v => v.Primary).Where(Inline))
+        {
+            <FieldBlock Field="field" />
+        }
+    </div>
+
+    @foreach (var field in Tier(v => v.Primary).Concat(Tier(v => v.Secondary)).Where(f => !Inline(f)))
+    {
+        <FieldBlock Field="field" />
+    }
+
+    @if (Tier(v => v.OnDemand).Any())
+    {
+        <details class="ondemand">
+            <summary>Mer</summary>
+            @foreach (var field in Tier(v => v.OnDemand))
+            {
+                <FieldBlock Field="field" />
+            }
+        </details>
+    }
+
+    @foreach (var command in Model.Commands)
+    {
+        <ActionForm Model="command" Token="@Model.Token" />
+    }
+
+    @if (Model.Footer is not null)
+    {
+        <p class="muted center">@Model.Footer</p>
+    }
+
+    @if (Model.PlayAgainHref is not null)
+    {
+        <a class="btn" style="margin-bottom:1.1rem" href="@Model.PlayAgainHref">Spela igen</a>
+    }
+    @if (Model.ShareText is not null)
+    {
+        <div class="card center">
+            <p class="steplabel">Gillade ni spelet?</p>
+            <p class="muted">Dela det med familj och vänner så får de samma fina upplevelse.</p>
+            <ShareButton Text="@Model.ShareText" />
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter] public required XmScreenModel Model { get; set; }
+
+    private Dictionary<string, object>? WrapperAttrs => Model.PollPath is null ? null : new()
+    {
+        ["hx-get"] = Model.PollPath,
+        ["hx-trigger"] = "every 2s",
+        ["hx-target"] = "#screen",
+        ["hx-swap"] = "innerHTML",
+    };
+
+    /// <summary>Walk the surface's composed views in xm order, yielding the tier's fields
+    /// that the materializer put in the bag (the presence contract).</summary>
+    private IEnumerable<Field> Tier(Func<Xmlang.XmViewItem, IReadOnlyList<string>> tier) =>
+        Model.Surface.Compose
+            .Select(item => item.View)
+            .Where(view => view is not null)
+            .SelectMany(view => tier(view!))
+            .Select(name => Model.Fields.GetValueOrDefault(name))
+            .OfType<Field>();
+
+    /// <summary>Inline fields live in the header card; block fields get their own card.</summary>
+    private static bool Inline(Field field) => field is TextField or QrField;
+
+    private bool HasPills => Tier(v => v.Secondary).OfType<TextField>().Any();
+}

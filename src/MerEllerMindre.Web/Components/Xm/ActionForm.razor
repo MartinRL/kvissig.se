@@ -1,0 +1,24 @@
+@* One composed command as an hx-post form. The interpreter renders the FORM only —
+   endpoints, binding records and Decider dispatch stay hand-written (D3 residue). *@
+@if (Model.Input == CommandInput.Keypad)
+{
+    <div class="card">
+        <form hx-post="@Model.Route" hx-target="#screen" hx-swap="innerHTML">
+            <input type="hidden" name="__RequestVerificationToken" value="@Token" />
+            <KeypadInput Label="@Model.InputLabel" Unit="@Model.Unit" />
+            <button type="submit" class="btn" style="margin-top:1.5rem">@Model.Label</button>
+        </form>
+    </div>
+}
+else
+{
+    <form hx-post="@Model.Route" hx-target="#screen" hx-swap="innerHTML">
+        <input type="hidden" name="__RequestVerificationToken" value="@Token" />
+        <button type="submit" class="btn">@Model.Label</button>
+    </form>
+}
+
+@code {
+    [Parameter] public required CommandModel Model { get; set; }
+    [Parameter] public required string Token { get; set; }
+}

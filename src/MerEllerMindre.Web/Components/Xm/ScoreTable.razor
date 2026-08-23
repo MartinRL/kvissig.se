@@ -1,0 +1,32 @@
+@* Scoreboard table card (round results, final standings). Empty Head = no header row;
+   Bad appends the disqualified-mark exactly as the hand-written screen did. *@
+<div class="card">
+    <table class="scoreboard">
+        @if (Model.Head.Count > 0)
+        {
+            <thead>
+                <tr>
+                    @foreach (var cell in Model.Head)
+                    {
+                        <th class="@cell.Css">@cell.Text</th>
+                    }
+                </tr>
+            </thead>
+        }
+        <tbody>
+            @foreach (var row in Model.Rows)
+            {
+                <tr class="@(row.IsWinner ? "winner" : null)">
+                    @foreach (var cell in row.Cells)
+                    {
+                        <td class="@cell.Css" data-label="@cell.DataLabel">@cell.Text@(cell.Bad ? (MarkupString)" <span class=\"mark bad\">✗</span>" : (MarkupString)"")</td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@code {
+    [Parameter] public required TableField Model { get; set; }
+}

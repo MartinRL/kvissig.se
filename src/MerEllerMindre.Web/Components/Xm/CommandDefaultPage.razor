@@ -1,0 +1,42 @@
+@* The xm "defaults" contract at runtime: a bare (uncomposed) command must remain reachable,
+   the form is transformer-defined. This full page IS that transformer-defined form: brand,
+   one text input, one submit. Used for host/join name entry. *@
+<MainLayout Title="@Title">
+    <div class="wrap">
+        <div class="brand">
+            <div class="logo"><span class="mer">@LogoA</span><span class="mindre">@LogoB</span></div>
+            <span class="pill soft">@RolePill</span>
+        </div>
+
+        <div class="card">
+            <h1>@Heading</h1>
+            <p class="sub">@Sub</p>
+
+            <form hx-post="@PostPath" hx-swap="none">
+                <input type="hidden" name="__RequestVerificationToken" value="@Token" />
+                @foreach (var (name, value) in Hidden)
+                {
+                    <input type="hidden" name="@name" value="@value" />
+                }
+                <label for="name">@InputLabel</label>
+                <input type="text" id="name" name="@InputName" placeholder="Skriv ditt namn" autofocus required />
+                <button type="submit" class="btn">@SubmitLabel</button>
+            </form>
+        </div>
+    </div>
+</MainLayout>
+
+@code {
+    [Parameter] public required string Title { get; set; }
+    [Parameter] public required string LogoA { get; set; }
+    [Parameter] public required string LogoB { get; set; }
+    [Parameter] public required string RolePill { get; set; }
+    [Parameter] public required string Heading { get; set; }
+    [Parameter] public required string Sub { get; set; }
+    [Parameter] public required string PostPath { get; set; }
+    [Parameter] public required string Token { get; set; }
+    [Parameter] public IReadOnlyDictionary<string, string> Hidden { get; set; } = new Dictionary<string, string>();
+    [Parameter] public required string InputName { get; set; }
+    [Parameter] public required string InputLabel { get; set; }
+    [Parameter] public required string SubmitLabel { get; set; }
+}
