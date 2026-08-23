@@ -14,7 +14,8 @@ namespace MerEllerMindre.Web;
 public record TankDeps(
     TankApplicationService Svc,
     PlayerIdentity Identity,
-    IAntiforgery Antiforgery);
+    IAntiforgery Antiforgery,
+    Xm.XmCatalog Xm);
 
 /// <summary>Everything a screen fragment needs to render, so RenderState takes one argument.</summary>
 public record TankRenderContext(
@@ -84,7 +85,22 @@ public static class TankEndpoints
 
         var token = d.Antiforgery.GetAndStoreTokens(http).RequestToken!;
         var hostName = state.Players.FirstOrDefault(p => p.IsHost)?.Name ?? "";
-        return new RazorComponentResult<TankJoinForm>(new { Model = new TankJoinFormVm(state.JoinCode, hostName, token) });
+        // xm defaults contract: JoinGame composes no view, so its form is transformer-defined.
+        var spec = d.Xm.TankTillTusen;
+        return new RazorComponentResult<Components.Xm.CommandDefaultPage>(new
+        {
+            Title = $"Tänk Till Tusen: {TankSurfaces.Label(spec, "JoinGame")}",
+            LogoA = "Tänk Till ",
+            LogoB = "Tusen",
+            RolePill = TankSurfaces.Label(spec, "JoinGame"),
+            Heading = "Gå med i spelet",
+            Sub = $"{hostName} (värd)",
+            PostPath = $"/tank-till-tusen/{state.JoinCode:N}/join",
+            Token = token,
+            InputName = "playerName",
+            InputLabel = TankSurfaces.Label(spec, "JoinGame", "playerName"),
+            SubmitLabel = TankSurfaces.Label(spec, "JoinGame"),
+        });
     }
 
     private static IResult PostJoin(string code, [FromForm] string playerName, [AsParameters] TankDeps d, HttpContext http)
@@ -177,25 +193,20 @@ public static class TankEndpoints
     private static string AbsoluteJoinUrl(HttpContext http, Guid joinCode) =>
         $"{http.Request.Scheme}://{http.Request.Host}/tank-till-tusen/{joinCode:N}/join";
 
-    private static IResult Rendered(TankState state, Guid? viewer, TankDeps d, HttpContext http) =>
-        RenderState(new TankRenderContext(
+    private static IResult Rendered(TankState state, Guid? viewer, TankDeps d, HttpContext http)
+    {
+        var c = new TankRenderContext(
             state, viewer,
             d.Antiforgery.GetAndStoreTokens(http).RequestToken!,
             AbsoluteJoinUrl(http, state.JoinCode),
             d.Svc.Now,
-            http.Request.Query.ContainsKey("url")));
-
-    private static IResult RenderState(TankRenderContext c) =>
-        TankScreens.Select(c.State, c.Viewer) switch
-        {
-            TankScreenKind.LobbyHost => new RazorComponentResult<TankLobbyHostScreen>(new { Model = TankScreens.Lobby(c.State, c.Viewer, c.Token, c.JoinUrl, c.ShowJoinUrl) }),
-            TankScreenKind.LobbyPlayer => new RazorComponentResult<TankLobbyPlayerScreen>(new { Model = TankScreens.Lobby(c.State, c.Viewer, c.Token, c.JoinUrl, showJoinUrl: false) }),
-            TankScreenKind.Puzzle => new RazorComponentResult<PuzzleScreen>(new { Model = TankScreens.Puzzle(c.State, c.Now, c.Token) }),
-            TankScreenKind.Waiting => new RazorComponentResult<TankWaitingScreen>(new { Model = TankScreens.Waiting(c.State, c.Viewer) }),
-            TankScreenKind.RoundResults => new RazorComponentResult<TankRoundResultsScreen>(new { Model = TankScreens.RoundResults(c.State, c.Viewer, c.Token) }),
-            TankScreenKind.Standings => new RazorComponentResult<TankStandingsScreen>(new { Model = TankScreens.Standings(c.State) }),
-            _ => throw new InvalidOperationException($"Unhandled tank screen kind for game {c.State.GameId}.")
-        };
+            http.Request.Query.ContainsKey("url"));
+        // The Pussel surface opts out of the xm renderer: the räknartejp puzzle builder is a
+        // hand-written idiom (xm finding 5). Every other screen is drawn by SurfaceRenderer.
+        return TankSurfaces.Select(c.State, c.Viewer) == "Pussel"
+            ? new RazorComponentResult<PuzzleScreen>(new { Model = TankSurfaces.Puzzle(c.State, c.Now, c.Token) })
+            : new RazorComponentResult<Components.Xm.SurfaceRenderer>(new { Model = TankSurfaces.Screen(d.Xm.TankTillTusen, c) });
+    }
 
     private static (Guid GameId, TankState State)? Resolve(TankApplicationService svc, string code)
     {
