@@ -49,7 +49,10 @@ public static class XmLinter
             findings.Add(new("xm-surface-without-view", XmSeverity.Error,
                 $"surface '{surface.Name}' composes no view"));
         foreach (var item in surface.Compose)
+        {
             LintComposeItem(surface.Name, item, em, findings);
+            LintSlot(surface.Name, item, findings);
+        }
         if (em.Elements.Any(e => e.Kind == 'v' && (e.Name == surface.Name || $"{e.Lane} / {e.Name}" == surface.Name)))
             findings.Add(new("xm-surface-shadows-view", XmSeverity.Warning,
                 $"surface '{surface.Name}' shares its name with an Event Model view"));
@@ -62,6 +65,20 @@ public static class XmLinter
         if (item.Command is { } command && em.FindCommand(command.Name) is null)
             findings.Add(new("xm-dangling-ref", XmSeverity.Error,
                 $"surface '{surface}' composes unknown command '{command.Name}'"));
+    }
+
+    /// <summary>v0.3-experimental slot rules. Deliberately EmSpec-free: slot legality is
+    /// decidable from the Experience Model alone (experiment tripwire e).</summary>
+    private static void LintSlot(string surface, XmComposeItem item, List<XmFinding> findings)
+    {
+        if (item.Slot is not { } slot)
+            return;
+        if (slot is not ("header" or "body" or "footer"))
+            findings.Add(new("xm-unknown-slot", XmSeverity.Error,
+                $"surface '{surface}': slot '{slot}' is not header, body, or footer"));
+        else if (item.Command is { } command && slot == "footer")
+            findings.Add(new("xm-slot-restates-default", XmSeverity.Info,
+                $"surface '{surface}': command '{command.Name}' slot 'footer' restates the default"));
     }
 
     private static void LintViewItem(string surface, XmViewItem item, EmSpec em, List<XmFinding> findings)
