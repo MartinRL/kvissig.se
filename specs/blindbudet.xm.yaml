@@ -1,4 +1,4 @@
-# Blindbudet — Experience Model (xmlang v0.1.0), reverse-engineered AS-IMPLEMENTED from
+# Blindbudet — Experience Model (xmlang v0.2.0), reverse-engineered AS-IMPLEMENTED from
 # the shipped UI (Components/Blindbudet/*.razor, AuctionScreenModels.cs, playful.css)
 # against specs/blindbudet-event-model.yaml. Judgments were read off the running product
 # and recorded as data; nothing here is invented.
@@ -6,10 +6,11 @@
 # Findings from the reverse-engineering (spec dogfood notes):
 #   1. Every EM view name trips xm-surface-shadows-view in spirit: the EM's view lanes are
 #      named `Screen / …` and `Todo / …`, i.e. the Event Model modeled SURFACES instead of
-#      data nouns. Referenced as-is per decision; a possible EM rename is deferred.
+#      data nouns. Referenced as-is per decision; a possible EM rename is deferred
+#      (v0.2's xm-screen-lane-view info documents the smell without legislating it).
 #   2. Bare command forms exist in the real UI exactly as the strict compose rule predicts:
 #      AuctionHostForm (OpenAuction) and AuctionJoinForm (JoinAuction) compose no view and
-#      are therefore NOT surfaces here — they are served by the generator's defaults.
+#      are therefore NOT surfaces here — they are served by the transformer's defaults.
 #   3. EM/UI divergence: the EM has AskNextLot/EndAuction as ⚙️ System processors gated by
 #      Todo read-models; the implemented UI gives the host explicit buttons ("Nästa
 #      budrunda" / "Visa slutställning") on the round-results screen. As-implemented, both
@@ -18,9 +19,17 @@
 #      surfaces; the shared view is composed twice with different salience/commands.
 #   5. The keypad bid input and the 2 s polling wait states are concrete-UI stratum:
 #      correctly inexpressible in xmlang (geometry/behavior prohibition holds).
-#   6. EM view names containing `/` and spaces force quoted YAML keys and awkward dotted
-#      label paths ("Screen / Round results".trueWorth); spec-feedback candidate.
+#   6. RESOLVED in v0.2: dotted label paths broke on EM names containing `/` and spaces;
+#      labels are now nested exact-name maps (rename-indifferent by construction).
+#   7. Katalog carries no `during:` — the catalog is STREAM-LESS reference data shown before
+#      any auction exists (AuctionPhase's NotCreated is a C# sentinel, not an EM phase).
+#      A phase claim would be invented, so the surface stays active in all phases.
+#   8. `during` × `for` places every game surface, but the started-phase player split
+#      (Budgivning vs Väntan vs Rundresultat: has the viewer bid? is the lot resolved?)
+#      is exactly the fine selection v0.2 declares inexpressible — it stays a hand-written
+#      selector (AuctionScreens.Select) in the concrete stratum.
 
+xmlang: "0.2"
 model: blindbudet-event-model.yaml
 
 personas:
@@ -39,6 +48,7 @@ personas:
 
 surfaces:
   Katalog:
+    # no during: — stream-less reference data (finding 7)
     compose:
       - v: Screen / Auction catalog
         fields:
@@ -47,9 +57,11 @@ surfaces:
         prominence: primary
 
   LobbyVärd:
+    during: [lobby]
     for: [Värd]
     compose:
       - v: Screen / Auction lobby
+        self: players.playerId
         fields:
           primary: [joinCode, players]
           on-demand: [gameId]
@@ -57,14 +69,17 @@ surfaces:
         prominence: primary
 
   LobbySpelare:
+    during: [lobby]
     for: [Spelare]
     compose:
       - v: Screen / Auction lobby
+        self: players.playerId
         fields:
           primary: [players]
           on-demand: [joinCode, gameId]
 
   Budgivning:
+    during: [started]
     compose:
       - v: Screen / Lot
         fields:
@@ -75,17 +90,23 @@ surfaces:
         prominence: primary
 
   Väntan:
+    during: [started]
     compose:
       - v: Screen / Waiting for bids
+        # identity lives in the id lists themselves; the viewer is by construction in
+        # submittedPlayerIds (you only see Väntan after your own bid) — "du · klar"
+        self: submittedPlayerIds
         fields:
           primary: [pendingPlayerIds]
           secondary: [submittedPlayerIds, lotIndex]
           on-demand: [gameId]
 
   RundresultatVärd:
+    during: [started]
     for: [Värd]
     compose:
       - v: Screen / Round results
+        self: playerProfits.playerId
         fields:
           primary: [trueWorth, winnerIds, playerProfits]
           secondary: [pricePaid, lotIndex]
@@ -96,15 +117,18 @@ surfaces:
         prominence: primary
 
   RundresultatSpelare:
+    during: [started]
     for: [Spelare]
     compose:
       - v: Screen / Round results
+        self: playerProfits.playerId
         fields:
           primary: [trueWorth, winnerIds, playerProfits]
           secondary: [pricePaid, lotIndex]
           on-demand: [gameId]
 
   Slutställning:
+    during: [ended]
     compose:
       - v: Screen / Final standings
         fields:
@@ -129,28 +153,38 @@ journeys:
       - ✍️ Reveal Lot
 
 # Copy harvested verbatim from the Razor components (sv-SE, playful/informal register).
+# v0.2 nested labels: keys are EXACT element names (no dotted paths); $self = the
+# element's own label beside field keys, $empty = empty-state copy.
 labels:
   sv:
     register: lekfull, informell
-    # commands
-    OpenAuction: Skapa auktion
-    JoinAuction: Gå med
+    # commands (+ their form fields)
+    OpenAuction:
+      $self: Skapa auktion
+      hostName: Ditt namn
+    JoinAuction:
+      $self: Gå med
+      playerName: Ditt namn
     StartAuction: Starta auktion
-    PlaceBid: Lägg bud!
+    PlaceBid:
+      $self: Lägg bud!
+      amount: Ditt bud
     AskNextLot: Nästa budrunda
     EndAuction: Visa slutställning
-    # command fields
-    OpenAuction.hostName: Ditt namn
-    JoinAuction.playerName: Ditt namn
-    PlaceBid.amount: Ditt bud
     # view fields
-    "Screen / Auction lobby.players": Spelare
-    "Screen / Waiting for bids.submittedPlayerIds": Klara
-    "Screen / Waiting for bids.pendingPlayerIds": Väntar på
-    "Screen / Round results.trueWorth": Sant värde
-    "Screen / Round results.playerProfits": Poäng
-    "Screen / Round results.pricePaid": Bud
-    "Screen / Final standings.finalScoreboard": Slutställning
+    "Screen / Auction lobby":
+      players: Spelare
+    "Screen / Waiting for bids":
+      submittedPlayerIds: Klara
+      pendingPlayerIds: Väntar på
+    "Screen / Round results":
+      trueWorth: Sant värde
+      playerProfits: Poäng
+      pricePaid: Bud
+      winnerIds:
+        $empty: Ingen vann – alla bjöd över.
+    "Screen / Final standings":
+      finalScoreboard: Slutställning
     # surfaces (their on-screen headings)
     Katalog: Välj lek
     LobbyVärd: Skanna för att gå med
