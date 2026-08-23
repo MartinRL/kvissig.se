@@ -9,7 +9,7 @@ WORKDIR /src
 
 # Restore against the SDK pin + centralized build props, then the csprojs only,
 # so the restore layer caches independently of source changes.
-COPY global.json Directory.Build.props ./
+COPY global.json Directory.Build.props NuGet.config ./
 COPY src/MerEllerMindre.Domain/MerEllerMindre.Domain.csproj src/MerEllerMindre.Domain/
 COPY src/MerEllerMindre.Web/MerEllerMindre.Web.csproj src/MerEllerMindre.Web/
 RUN dotnet restore src/MerEllerMindre.Web/MerEllerMindre.Web.csproj
