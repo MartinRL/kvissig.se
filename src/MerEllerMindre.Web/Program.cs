@@ -30,6 +30,10 @@ builder.Services.AddSingleton<AuctionApplicationService>();
 // Tänk Till Tusen (Countdown-style number game) — no catalog: puzzles are generated per game.
 builder.Services.AddSingleton<TankApplicationService>();
 
+// The load-bearing xm spec pair (Experience Model + Event Model): parsed + linted at
+// startup, fail-fast on any lint error. The runtime renderer reads screens from this.
+builder.Services.AddSingleton(new MerEllerMindre.Web.Xm.XmCatalog(Path.Combine(AppContext.BaseDirectory, "specs")));
+
 // Razor Components in STATIC SSR (no interactive render mode → no circuit, no WebSocket,
 // no blazor.web.js). Endpoints return RazorComponentResult<T>. See ADR 007.
 builder.Services.AddRazorComponents();

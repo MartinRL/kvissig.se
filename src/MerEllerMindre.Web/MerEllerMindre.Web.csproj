@@ -11,6 +11,16 @@
     <ProjectReference Include="..\MerEllerMindre.Domain\MerEllerMindre.Domain.csproj" />
     <ProjectReference Include="..\Blindbudet.Domain\Blindbudet.Domain.csproj" />
     <ProjectReference Include="..\TankTillTusen.Domain\TankTillTusen.Domain.csproj" />
+    <ProjectReference Include="..\Xmlang\Xmlang.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- The xm spec pair is LOAD-BEARING at runtime (XmCatalog renders game screens from it).
+         Copied beside the assembly so publish/Docker and the test host all find it under
+         AppContext.BaseDirectory\specs. The spec never reaches the browser. -->
+    <Content Include="..\..\specs\blindbudet.xm.yaml;..\..\specs\blindbudet-event-model.yaml"
+             Link="specs\%(Filename)%(Extension)"
+             CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
 </Project>

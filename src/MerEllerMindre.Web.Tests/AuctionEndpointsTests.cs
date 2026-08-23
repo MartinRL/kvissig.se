@@ -2,6 +2,7 @@ using System.Net;
 using System.Text.RegularExpressions;
 using AwesomeAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
 namespace MerEllerMindre.Web.Tests;
@@ -72,6 +73,15 @@ public class AuctionEndpointsTests : IClassFixture<TestAppFactory>
 
     private static async Task Next(HttpClient host, string code) =>
         await host.PostAsync($"/blindbudet/{code}/next", Form(Token(await State(host, code))));
+
+    [Fact]
+    public void XmCatalog_LoadsAndLintsTheBlindbudetSpecPairAtStartup()
+    {
+        var xm = _factory.Services.GetRequiredService<Web.Xm.XmCatalog>();
+
+        xm.Blindbudet.Surfaces.Should().NotBeEmpty();
+        xm.BlindbudetModel.PhaseValues.Should().Contain(["lobby", "started", "ended"]);
+    }
 
     [Fact]
     public async Task Catalog_ListsTheAuctionPack()
