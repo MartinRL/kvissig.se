@@ -81,7 +81,7 @@
     private Dictionary<string, object>? WrapperAttrs => Model.PollPath is null ? null : new()
     {
         ["hx-get"] = Model.PollPath,
-        ["hx-trigger"] = "every 2s",
+        ["hx-trigger"] = "every 1s",
         ["hx-target"] = "#screen",
         ["hx-swap"] = "innerHTML",
     };
