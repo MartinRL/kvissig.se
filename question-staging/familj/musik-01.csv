@@ -1,0 +1,28 @@
+﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Har ett piano fler eller färre tangenter än en gitarr har strängar?;Piano;Gitarr;88;6;stycken;Hur många skiljer det?
+Har en fiol fler eller färre strängar än en harpa?;Fiol;Harpa;4;47;strängar;Hur många strängar skiljer det?
+Är en kontrabas längre eller kortare än en fiol?;Kontrabas;Fiol;180;60;centimeter;Hur många centimeter skiljer det?
+Väger en flygel mer eller mindre än ett vanligt piano?;Flygel;Piano;400;250;kilo;Hur många kilo skiljer det?
+Har ABBA fler eller färre medlemmar än en symfoniorkester har musiker?;ABBA;Symfoniorkester;4;100;personer;Hur många skiljer det?
+Är Beatles låt Hey Jude längre eller kortare än ABBA:s Waterloo?;Hey Jude;Waterloo;431;162;sekunder;Hur många sekunder skiljer det?
+Väger en tuba mer eller mindre än en trumpet?;Tuba;Trumpet;10;1,1;kilo;Hur många kilo skiljer det?
+Har en cello fler eller färre strängar än en tolvsträngad gitarr?;Cello;Tolvsträngad gitarr;4;12;strängar;Hur många strängar skiljer det?
+Väger ett trumset mer eller mindre än en flygel?;Trumset;Flygel;25;400;kilo;Hur många kilo skiljer det?
+Har ett fullstort dragspel fler eller färre basknappar än en trumpet har ventiler?;Dragspel;Trumpet;120;3;stycken;Hur många skiljer det?
+Är en blockflöjt längre eller kortare än en tvärflöjt?;Blockflöjt;Tvärflöjt;32;67;centimeter;Hur många centimeter skiljer det?
+Väger en saxofon mer eller mindre än en tuba?;Saxofon;Tuba;2,5;10;kilo;Hur många kilo skiljer det?
+Har en harpa fler eller färre strängar än ett piano?;Harpa;Piano;47;230;strängar;Hur många strängar skiljer det?
+Väger en konsertharpa mer eller mindre än en ukulele?;Konsertharpa;Ukulele;36;0,5;kilo;Hur många kilo skiljer det?
+Är ABBA:s Gimme! Gimme! Gimme! längre eller kortare än Waterloo?;Gimme! Gimme! Gimme!;Waterloo;285;162;sekunder;Hur många sekunder skiljer det?
+Väger en tvärflöjt mer eller mindre än en saxofon?;Tvärflöjt;Saxofon;0,45;2,5;kilo;Hur många kilo skiljer det?
+Har ett trumset fler eller färre trummor än en trumpet har ventiler?;Trumset;Trumpet;5;3;stycken;Hur många skiljer det?
+Väger en ukulele mer eller mindre än en gitarr?;Ukulele;Gitarr;0,5;2;kilo;Hur många kilo skiljer det?
+Har ett fullstort dragspel fler eller färre tangenter än en harpa har strängar?;Dragspel;Harpa;41;47;stycken;Hur många skiljer det?
+Väger en kontrabas mer eller mindre än en elgitarr?;Kontrabas;Elgitarr;10;3,6;kilo;Hur många kilo skiljer det?
+Är Michael Jacksons Thriller längre eller kortare än ABBA:s Dancing Queen?;Thriller;Dancing Queen;357;230;sekunder;Hur många sekunder skiljer det?
+Väger en blockflöjt mer eller mindre än en elgitarr?;Blockflöjt;Elgitarr;150;3600;gram;Hur många gram skiljer det?
+Har en stråkkvartett fler eller färre musiker än ett storband?;Stråkkvartett;Storband;4;17;musiker;Hur många musiker skiljer det?
+Är en konsertflygel längre eller kortare än en fiolstråke?;Konsertflygel;Fiolstråke;274;74;centimeter;Hur många centimeter skiljer det?
+Har ett munspel fler eller färre hål än en cello har strängar?;Munspel;Cello;10;4;stycken;Hur många skiljer det?
+Är en cello längre eller kortare än en kontrabas?;Cello;Kontrabas;120;180;centimeter;Hur många centimeter skiljer det?
+Var Agnetha äldre eller yngre än Björn när ABBA vann Eurovision?;Agnetha Fältskog;Björn Ulvaeus;24;28;år;Hur många år skiljer det?
