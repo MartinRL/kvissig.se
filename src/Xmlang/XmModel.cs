@@ -23,9 +23,8 @@ public record XmSurface(
     IReadOnlyList<XmComposeItem> Compose);
 
 /// <summary>Exactly one of View or Command is non-null (spec: a composition item MUST
-/// contain exactly one of v:/c:). A plain pair keeps compose an ordered list.
-/// Slot (v0.3-experimental) names a region (header|body|footer); null = transformer judgment.</summary>
-public record XmComposeItem(XmViewItem? View, XmCommandItem? Command, string? Slot = null);
+/// contain exactly one of v:/c:). A plain pair keeps compose an ordered list.</summary>
+public record XmComposeItem(XmViewItem? View, XmCommandItem? Command);
 
 public record XmViewItem(
     string Name,

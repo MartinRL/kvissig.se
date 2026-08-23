@@ -21,7 +21,6 @@
         {
             <FieldBlock Field="field" />
         }
-        @Region("header")
         @if (Model.Source is not null)
         {
             <details class="source">
@@ -35,7 +34,6 @@
     {
         <FieldBlock Field="field" />
     }
-    @Region("body")
 
     @if (Model.Steps is not null)
     {
@@ -53,11 +51,10 @@
         </details>
     }
 
-    @foreach (var command in Model.Commands.Where(c => SlotOf(c.Name) is null or "footer"))
+    @foreach (var command in Model.Commands)
     {
         <ActionForm Model="command" Token="@Model.Token" />
     }
-    @Region("footer")
 
     @if (Model.Footer is not null)
     {
@@ -89,54 +86,15 @@
         ["hx-swap"] = "innerHTML",
     };
 
-    /// <summary>Walk the surface's UNSLOTTED composed views in xm order, yielding the tier's
-    /// fields that the materializer put in the bag (the presence contract). Slotted items
-    /// (xmlang v0.3-experimental) render wholesale in their region instead.</summary>
+    /// <summary>Walk the surface's composed views in xm order, yielding the tier's fields
+    /// that the materializer put in the bag (the presence contract).</summary>
     private IEnumerable<Field> Tier(Func<Xmlang.XmViewItem, IReadOnlyList<string>> tier) =>
         Model.Surface.Compose
-            .Where(item => item.Slot is null)
             .Select(item => item.View)
             .Where(view => view is not null)
             .SelectMany(view => tier(view!))
             .Select(name => Model.Fields.GetValueOrDefault(name))
             .OfType<Field>();
-
-    /// <summary>One region's slotted items, in compose order: a view item's primary+secondary
-    /// fields as blocks, its on-demand fields behind a disclosure (salience is orthogonal to
-    /// region), a command item's form. Footer commands render in the default command loop
-    /// (footer IS the default command region).</summary>
-    private RenderFragment<string> Region => slot => @<text>
-        @foreach (var item in Model.Surface.Compose.Where(i => i.Slot == slot))
-        {
-            @if (item.View is { } view)
-            {
-                foreach (var f in ItemFields(view, v => v.Primary).Concat(ItemFields(view, v => v.Secondary)))
-                {
-                    <FieldBlock Field="f" />
-                }
-                @if (ItemFields(view, v => v.OnDemand).Any())
-                {
-                    <details class="ondemand">
-                        <summary>Mer</summary>
-                        @foreach (var f in ItemFields(view, v => v.OnDemand))
-                        {
-                            <FieldBlock Field="f" />
-                        }
-                    </details>
-                }
-            }
-            @if (item.Command is { } c && slot != "footer" && Model.Commands.FirstOrDefault(m => m.Name == c.Name) is { } command)
-            {
-                <ActionForm Model="command" Token="@Model.Token" />
-            }
-        }
-    </text>;
-
-    private IEnumerable<Field> ItemFields(Xmlang.XmViewItem view, Func<Xmlang.XmViewItem, IReadOnlyList<string>> tier) =>
-        tier(view).Select(name => Model.Fields.GetValueOrDefault(name)).OfType<Field>();
-
-    private string? SlotOf(string command) =>
-        Model.Surface.Compose.FirstOrDefault(i => i.Command?.Name == command)?.Slot;
 
     /// <summary>Inline fields live in the header card; block fields get their own card.</summary>
     private static bool Inline(Field field) => field is TextField or QrField or BarsField;

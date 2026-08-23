@@ -54,8 +54,8 @@ public static class XmParser
 
     private static XmComposeItem ComposeItem(YamlMappingNode item) =>
         Scalar(item, "v") is { } view
-            ? new XmComposeItem(ViewItem(view, item), null, Scalar(item, "slot"))
-            : new XmComposeItem(null, new XmCommandItem(Scalar(item, "c") ?? "", Scalar(item, "prominence") ?? "primary"), Scalar(item, "slot"));
+            ? new XmComposeItem(ViewItem(view, item), null)
+            : new XmComposeItem(null, new XmCommandItem(Scalar(item, "c") ?? "", Scalar(item, "prominence") ?? "primary"));
 
     private static XmViewItem ViewItem(string view, YamlMappingNode item)
     {
