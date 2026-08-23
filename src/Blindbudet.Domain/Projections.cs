@@ -6,13 +6,13 @@ namespace Blindbudet.Domain;
 /// AuctionState.Players order. (Auction Catalog is NOT here — it is Web-only reference data
 /// read straight from the CSV catalog, like MEM's Quiz Catalog.)
 /// </summary>
-public record AuctionLobbyView(
+public record RosterView(
     Guid GameId,
     Guid JoinCode,
     IReadOnlyList<Player> Players
 );
 
-public record LotView(
+public record LotCardView(
     Guid GameId,
     int LotIndex,
     int TotalLots,
@@ -20,7 +20,7 @@ public record LotView(
     string Unit
 );
 
-public record WaitingForBidsView(
+public record BidProgressView(
     Guid GameId,
     int LotIndex,
     IReadOnlyList<Guid> SubmittedPlayerIds,
@@ -46,7 +46,7 @@ public record PlayerProfit(
     int TotalScore
 );
 
-public record RoundResultsView(
+public record RoundScoresView(
     Guid GameId,
     int LotIndex,
     decimal TrueWorth,
@@ -63,7 +63,7 @@ public record AuctionProgressView(
     bool HasNextLot
 );
 
-public record FinalStandingsView(
+public record ScoreboardView(
     Guid GameId,
     IReadOnlyList<ScoreboardEntry> FinalScoreboard,
     IReadOnlyList<Guid> WinnerIds
@@ -75,24 +75,24 @@ public record FinalStandingsView(
 /// </summary>
 public static class Projections
 {
-    public static AuctionLobbyView AuctionLobby(AuctionState state) =>
+    public static RosterView Roster(AuctionState state) =>
         new(state.GameId, state.JoinCode, state.Players);
 
-    public static LotView Lot(AuctionState state)
+    public static LotCardView LotCard(AuctionState state)
     {
         var i = state.CurrentLotIndex;
         var lot = state.Lots[i].Lot;
-        return new LotView(state.GameId, i, state.Lots.Count, lot.Description, lot.Unit);
+        return new LotCardView(state.GameId, i, state.Lots.Count, lot.Description, lot.Unit);
     }
 
-    public static WaitingForBidsView WaitingForBids(AuctionState state)
+    public static BidProgressView BidProgress(AuctionState state)
     {
         var i = state.CurrentLotIndex;
         var submitted = state.Players
             .Where(p => state.Lots[i].Bids.ContainsKey(p.PlayerId))
             .Select(p => p.PlayerId)
             .ToList();
-        return new WaitingForBidsView(state.GameId, i, submitted, state.PendingBidPlayerIds(i));
+        return new BidProgressView(state.GameId, i, submitted, state.PendingBidPlayerIds(i));
     }
 
     public static OutstandingBidsView OutstandingBids(AuctionState state)
@@ -103,14 +103,14 @@ public static class Projections
         return new OutstandingBidsView(state.GameId, lots);
     }
 
-    public static RoundResultsView RoundResults(AuctionState state)
+    public static RoundScoresView RoundScores(AuctionState state)
     {
         var i = state.CurrentLotIndex;
         var round = state.Lots[i];
         var playerProfits = state.Players
             .Select(p => new PlayerProfit(p.PlayerId, round.Profits[p.PlayerId], RunningTotal(state, p.PlayerId, i)))
             .ToList();
-        return new RoundResultsView(
+        return new RoundScoresView(
             state.GameId,
             i,
             round.TrueWorth!.Value,
@@ -127,7 +127,7 @@ public static class Projections
             state.Lots.Count(l => l.Resolved),
             state.HasNextLot);
 
-    public static FinalStandingsView FinalStandings(AuctionState state) =>
+    public static ScoreboardView Scoreboard(AuctionState state) =>
         new(state.GameId, state.FinalScoreboard, state.WinnerIds);
 
     /// <summary>Running total at lot i: sum of a player's profits over resolved lots up to and including i.</summary>

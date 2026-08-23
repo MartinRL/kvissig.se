@@ -302,7 +302,7 @@ public static class TestsEmitter
     }
 
     /// <summary>Rule: lane-stripped view names word-PascalCase into projection methods
-    /// ("Screen / Game lobby" -> Projections.GameLobby).</summary>
+    /// ("Round scores" -> Projections.RoundScores, "Todo / Game progress" -> Projections.GameProgress).</summary>
     public static string ProjectionMethod(string viewName) =>
         string.Concat(viewName.Split(' ').Select(SpecModel.PascalCase));
 

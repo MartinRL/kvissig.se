@@ -111,7 +111,7 @@ public static class TankSurfaces
 
     /// <summary>players self-highlighting ("du") per the xm self: players.playerId.</summary>
     private static RosterField LobbyRoster(TankRenderContext c, IReadOnlyDictionary<string, XmLabelEntry> labels) =>
-        new(labels["Screen / Game lobby"].Fields["players"].Self,
+        new(labels["Roster"].Fields["players"].Self,
             [.. c.State.Players.Select(p => new RosterRow(
                 p.Name + (p.IsHost ? " (värd)" : ""),
                 p.PlayerId == c.Viewer ? "du" : "med"))],
@@ -124,7 +124,7 @@ public static class TankSurfaces
         var submitted = c.State.Rounds[i].Solutions.Keys.ToHashSet();
         var done = c.State.Players.Where(p => submitted.Contains(p.PlayerId)).ToList();
         var pending = c.State.Players.Where(p => !submitted.Contains(p.PlayerId)).ToList();
-        var view = labels["Screen / Waiting for others"].Fields;
+        var view = labels["Solution progress"].Fields;
 
         var fields = new Dictionary<string, Field>
         {
@@ -149,7 +149,7 @@ public static class TankSurfaces
     {
         var i = c.State.CurrentRoundIndex;
         var round = c.State.Rounds[i];
-        var view = labels["Screen / Round results"].Fields;
+        var view = labels["Round scores"].Fields;
         var viewerIsHost = c.Viewer == c.State.HostPlayerId;
 
         var fields = new Dictionary<string, Field>

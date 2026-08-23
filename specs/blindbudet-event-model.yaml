@@ -9,12 +9,13 @@
 #   commands are bare              (OpenAuction, PlaceBid)
 #   events carry the stream        (Game / AuctionOpened)
 #   exceptions are bare            (AuctionNotFound)
-#   views carry a view lane        (Screen / Auction lobby, Todo / Outstanding bids)
+#   screen views are bare data nouns; State/Todo views carry a lane
+#                                  (Roster, Todo / Outstanding bids)
 #
 # View lanes:
 #   State / ...   the decider's decision model (folded AuctionState); read by `decide`
-#   Screen / ...  human screens players & the host actually see
 #   Todo / ...    processor-facing read-models the System observes (never shown)
+#   bare noun     human screens, named for the DATA they carry (Roster, Round scores)
 # NOTE: emlang renders views by bare name (no per-view lane label); the prefix still
 #   documents intent and maps to code, exactly as in mer-eller-mindre-event-model.yaml.
 #
@@ -60,7 +61,7 @@
 # ASSUMPTION: lot content (description, unit, the hidden trueWorth) is snapshotted onto
 # Game / AuctionOpened (lots: Lot[]). OpenAuction resolves the chosen pack via a
 # GameContext dependency (same pattern that mints gameId/joinCode/openedAt) and stamps the
-# full lot set, so read models read events only. Screen / Lot reads the description/unit by
+# full lot set, so read models read events only. Lot card reads the description/unit by
 # index from folded state; totalLots = lots.Count. The lot carries NO precomputed result —
 # winner/pricePaid/profit are derived by the decider at RevealLot from the bids + trueWorth.
 #
@@ -96,7 +97,7 @@ slices:
   # unit }. Reuses the QuestionPackCsvParser pattern + tools/pack.cs convention. See
   # specs/CLAUDE.md.
   👀 Auction Catalog:
-    - v: Screen / Auction catalog
+    - v: Pack catalog
       props:
         packs: AuctionPack[]   # { packId: string (slug), name: string, lotCount: int }
 
@@ -132,7 +133,7 @@ slices:
           packId: string          # slug of the chosen pack (audit reference)
           lots: Lot[]             # { description: string, trueWorth: decimal, unit: string } — hidden worth; no precomputed result
           openedAt: DateTimeOffset
-      - v: Screen / Auction lobby
+      - v: Roster
     tests:
       auction can be created:
         given: []
@@ -158,7 +159,7 @@ slices:
 
   👀 Auction Lobby:
     steps:
-      - v: Screen / Auction lobby
+      - v: Roster
         props:
           gameId: Guid
           joinCode: Guid
@@ -173,7 +174,7 @@ slices:
           - e: Game / PlayerJoined
             props: { playerId: nilsId, playerName: Nils }
         then:
-          - v: Screen / Auction lobby
+          - v: Roster
             props:
               joinCode: joinCode
               players: [hostMartin, playerNils]
@@ -200,7 +201,7 @@ slices:
           playerId: Guid
           playerName: string
           joinedAt: DateTimeOffset
-      - v: Screen / Auction lobby
+      - v: Roster
     tests:
       player can join lobby:
         given:
@@ -266,7 +267,7 @@ slices:
           gameId: Guid
           firstLotIndex: int
           startedAt: DateTimeOffset
-      - v: Screen / Lot
+      - v: Lot card
     tests:
       auction can be started:
         given:
@@ -301,7 +302,7 @@ slices:
 
   👀 Lot:
     steps:
-      - v: Screen / Lot
+      - v: Lot card
         props:
           gameId: Guid
           lotIndex: int
@@ -319,7 +320,7 @@ slices:
           - e: Game / AuctionStarted
             props: { firstLotIndex: 0 }
         then:
-          - v: Screen / Lot
+          - v: Lot card
             props:
               lotIndex: 0
               totalLots: 2
@@ -357,7 +358,7 @@ slices:
           lotIndex: int
           amount: decimal
           bidAt: DateTimeOffset
-      - v: Screen / Waiting for bids
+      - v: Bid progress
     # Decider-true GWT: given the folded State / Game props `decide` reads — the current lot's
     # bids (AlreadyBid), resolved flag (LotAlreadyResolved) — when PlaceBid, then BidPlaced |
     # rejection. AuctionNotFound = empty stream.
@@ -425,7 +426,7 @@ slices:
 
   👀 Waiting For Bids:
     steps:
-      - v: Screen / Waiting for bids
+      - v: Bid progress
         props:
           gameId: Guid
           lotIndex: int
@@ -444,7 +445,7 @@ slices:
           - e: Game / BidPlaced
             props: { playerId: martinId, lotIndex: 0, amount: 70 }
         then:
-          - v: Screen / Waiting for bids
+          - v: Bid progress
             props:
               lotIndex: 0
               submittedPlayerIds: [martinId]
@@ -543,7 +544,7 @@ slices:
           playerId: Guid
           profit: int                          # winner ? (winningBid == trueWorth ? 10 : round((trueWorth - winningBid)/trueWorth*100)) : 0
           totalScore: int                      # running sum over resolved lots (signed)
-      - v: Screen / Round results
+      - v: Round scores
     # Decider-true GWT: given the folded State / Game, when RevealLot, then the events |
     # rejection. allBidsIn is DERIVED: players == the current lot's bids keys. totalScore is the
     # running sum of profits across resolved lots.
@@ -686,7 +687,7 @@ slices:
 
   👀 Round Results:
     steps:
-      - v: Screen / Round results
+      - v: Round scores
         props:
           gameId: Guid
           lotIndex: int
@@ -716,7 +717,7 @@ slices:
           - e: Game / RoundScored
             props: { lotIndex: 0, playerId: nilsId, profit: 10, totalScore: 10 }
         then:
-          - v: Screen / Round results
+          - v: Round scores
             props:
               lotIndex: 0
               trueWorth: 100
@@ -782,7 +783,7 @@ slices:
         props:
           gameId: Guid
           lotIndex: int
-      - v: Screen / Lot
+      - v: Lot card
     # Decider-true GWT: given the folded State / Game (current lot resolved, another remains —
     # hasNextLot derived true), when AskNextLot, then NextLotStarted at the next index. The gate
     # is verified by Auction progress' GT.
@@ -821,7 +822,7 @@ slices:
           finalScoreboard: ScoreboardEntry[]   # { playerId: Guid, playerName: string, totalScore: int }
           winnerIds: Guid[]                     # all players tied at the HIGHEST total
           endedAt: DateTimeOffset
-      - v: Screen / Final standings
+      - v: Scoreboard
     # Decider-true GWT: given the folded State / Game (all lots resolved, none left -> hasNextLot
     # derived false), when EndAuction, then AuctionEnded with the scoreboard and the
     # HIGHEST-total winner(s). No x: — the hasNextLot gate makes End Auction / Next Lot mutually
@@ -864,7 +865,7 @@ slices:
 
   👀 Final Standings:
     steps:
-      - v: Screen / Final standings
+      - v: Scoreboard
         props:
           gameId: Guid
           finalScoreboard: ScoreboardEntry[]   # { playerId: Guid, playerName: string, totalScore: int }
@@ -880,7 +881,7 @@ slices:
               winnerIds: [martinId]
               endedAt: endedAt
         then:
-          - v: Screen / Final standings
+          - v: Scoreboard
             props:
               finalScoreboard: [sbMartin20, sbNils5]
               winnerIds: [martinId]

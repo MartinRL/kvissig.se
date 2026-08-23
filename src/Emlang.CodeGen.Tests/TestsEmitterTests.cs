@@ -34,8 +34,8 @@ public class TestsEmitterTests
         TestsEmitter.MethodName(name).Should().Be(expected);
 
     [Theory]
-    [InlineData("Game lobby", "GameLobby")]
-    [InlineData("Waiting for others", "WaitingForOthers")]
+    [InlineData("Roster", "Roster")]
+    [InlineData("Round scores", "RoundScores")]
     [InlineData("Outstanding solutions", "OutstandingSolutions")]
     public void Projection_methods_word_pascal_case_the_view_name(string view, string expected) =>
         TestsEmitter.ProjectionMethod(view).Should().Be(expected);
@@ -59,7 +59,7 @@ public class TestsEmitterTests
         text.Should().Contain("Difficulty.Klassisk");                          // enum note
         text.Should().Contain("Fixtures.SolHit");                              // fixture ref
         text.Should().Contain(".Should().NotBe(default(Guid));");              // minted pin
-        text.Should().Contain("Projections.GameLobby(Decider.Fold(new TankEvent[]"); // projection GT
+        text.Should().Contain("Projections.Roster(Decider.Fold(new TankEvent[]"); // projection GT
         text.Should().Contain("(err.Error is GameNotFound).Should().BeTrue");  // error then
         text.Should().Contain("if (result is not Ok<TankEvent[]> ok)");        // concrete union check
         text.Should().Contain("o => o.WithStrictOrdering()");

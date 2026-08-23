@@ -4,8 +4,8 @@
 # product and recorded as data; nothing here is invented.
 #
 # Findings (sister notes to blindbudet.xm.yaml's; numbering continues that file's spirit):
-#   1. Same EM smell: view lanes are named `Screen / …` (surfaces, not data nouns) —
-#      referenced as-is; the EM rename decision lands at the MEM roll-over.
+#   1. Same EM smell as BB's finding 1 (surface-named views), RESOLVED the same way:
+#      screen views are now bare data nouns (Roster, Round scores, Scoreboard).
 #   2. Bare command forms: JoinGame composes no view → served by the transformer's
 #      defaults (CommandDefaultPage). OpenLobby's REAL form however carries a difficulty
 #      hidden field + a roundCount slider — richer than the defaults contract, so the
@@ -47,7 +47,7 @@ surfaces:
   Katalog:
     # no during: — stream-less reference data (finding 6)
     compose:
-      - v: Screen / Quiz catalog
+      - v: Difficulty catalog
       - c: OpenLobby
         prominence: primary
 
@@ -55,7 +55,7 @@ surfaces:
     during: [lobby]
     for: [Värd]
     compose:
-      - v: Screen / Game lobby
+      - v: Roster
         self: players.playerId
         fields:
           primary: [joinCode, players]
@@ -67,7 +67,7 @@ surfaces:
     during: [lobby]
     for: [Spelare]
     compose:
-      - v: Screen / Game lobby
+      - v: Roster
         self: players.playerId
         fields:
           primary: [players]
@@ -76,7 +76,7 @@ surfaces:
   Pussel:
     during: [started]
     compose:
-      - v: Screen / Puzzle
+      - v: Puzzle
         fields:
           primary: [target, numbers]
           secondary: [roundIndex, totalRounds, deadline]
@@ -87,7 +87,7 @@ surfaces:
   Väntan:
     during: [started]
     compose:
-      - v: Screen / Waiting for others
+      - v: Solution progress
         # identity lives in the id lists themselves; the viewer is by construction in
         # submittedPlayerIds (you only see Väntan after locking) — "du · klar"
         self: submittedPlayerIds
@@ -100,7 +100,7 @@ surfaces:
     during: [started]
     for: [Värd]
     compose:
-      - v: Screen / Round results
+      - v: Round scores
         self: playerResults.playerId
         fields:
           primary: [target, sampleSolution, playerResults]
@@ -115,7 +115,7 @@ surfaces:
     during: [started]
     for: [Spelare]
     compose:
-      - v: Screen / Round results
+      - v: Round scores
         self: playerResults.playerId
         fields:
           primary: [target, sampleSolution, playerResults]
@@ -125,7 +125,7 @@ surfaces:
   Slutställning:
     during: [ended]
     compose:
-      - v: Screen / Final standings
+      - v: Scoreboard
         fields:
           primary: [finalScoreboard, winnerIds]
           on-demand: [gameId]
@@ -167,18 +167,18 @@ labels:
     AskNextPuzzle: Nästa pussel
     EndGame: Visa slutställning
     # view fields
-    "Screen / Game lobby":
+    "Roster":
       players: Spelare
-    "Screen / Puzzle":
+    "Puzzle":
       target: Nå så nära du kan
-    "Screen / Waiting for others":
+    "Solution progress":
       submittedPlayerIds: Klara
       pendingPlayerIds: Väntar på
-    "Screen / Round results":
+    "Round scores":
       target: Mål
       sampleSolution: Ett sätt
       playerResults: Poäng
-    "Screen / Final standings":
+    "Scoreboard":
       finalScoreboard: Slutställning
     # surfaces (their on-screen headings)
     Katalog: Välj nivå

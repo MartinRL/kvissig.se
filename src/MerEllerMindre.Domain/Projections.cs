@@ -6,13 +6,13 @@ namespace MerEllerMindre.Domain;
 /// never stored (consistent with GameState's derive-all members). Per-player ordering
 /// follows GameState.Players order.
 /// </summary>
-public record GameLobbyView(
+public record RosterView(
     Guid GameId,
     Guid JoinCode,
     IReadOnlyList<Player> Players
 );
 
-public record QuestionView(
+public record QuestionCardView(
     Guid GameId,
     int QuestionIndex,
     int TotalQuestions,
@@ -21,7 +21,7 @@ public record QuestionView(
     string ItemB
 );
 
-public record WaitingForOthersView(
+public record GuessProgressView(
     Guid GameId,
     int QuestionIndex,
     IReadOnlyList<Guid> SubmittedPlayerIds,
@@ -41,14 +41,14 @@ public record PlayerDirectionResult(
     int TotalSoFar
 );
 
-public record DirectionResultsView(
+public record DirectionRevealView(
     Guid GameId,
     int QuestionIndex,
     Direction CorrectDirection,
     IReadOnlyList<PlayerDirectionResult> PlayerDirections
 );
 
-public record RoundResultsView(
+public record RoundScoresView(
     Guid GameId,
     int QuestionIndex,
     Direction CorrectDirection,
@@ -56,7 +56,7 @@ public record RoundResultsView(
     IReadOnlyList<PlayerScore> PlayerScores
 );
 
-public record FinalStandingsView(
+public record ScoreboardView(
     Guid GameId,
     IReadOnlyList<ScoreboardEntry> FinalScoreboard,
     IReadOnlyList<Guid> WinnerIds
@@ -107,13 +107,13 @@ public record GameProgressView(
 /// </summary>
 public static class Projections
 {
-    public static GameLobbyView GameLobby(GameState state) =>
+    public static RosterView Roster(GameState state) =>
         new(state.GameId, state.JoinCode, state.Players);
 
-    public static QuestionView Question(GameState state)
+    public static QuestionCardView QuestionCard(GameState state)
     {
         var card = state.Questions[state.CurrentQuestionIndex].Card;
-        return new QuestionView(
+        return new QuestionCardView(
             state.GameId,
             state.CurrentQuestionIndex,
             state.Questions.Count,
@@ -122,7 +122,7 @@ public static class Projections
             card.ItemB);
     }
 
-    public static WaitingForOthersView WaitingForOthers(GameState state)
+    public static GuessProgressView GuessProgress(GameState state)
     {
         var i = state.CurrentQuestionIndex;
         // Pending is derived from the ACTIVE stage: directions while stage 1 is open
@@ -134,10 +134,10 @@ public static class Projections
             .Where(p => submittedSet.Contains(p.PlayerId))
             .Select(p => p.PlayerId)
             .ToList();
-        return new WaitingForOthersView(state.GameId, i, submitted, pending);
+        return new GuessProgressView(state.GameId, i, submitted, pending);
     }
 
-    public static DirectionResultsView DirectionResults(GameState state)
+    public static DirectionRevealView DirectionReveal(GameState state)
     {
         var i = state.CurrentQuestionIndex;
         var round = state.Questions[i];
@@ -149,17 +149,17 @@ public static class Projections
                 round.DirectionScores[p.PlayerId],
                 state.TotalScore(p.PlayerId) + round.DirectionScores[p.PlayerId]))
             .ToList();
-        return new DirectionResultsView(state.GameId, i, round.CorrectDirection!.Value, playerDirections);
+        return new DirectionRevealView(state.GameId, i, round.CorrectDirection!.Value, playerDirections);
     }
 
-    public static RoundResultsView RoundResults(GameState state)
+    public static RoundScoresView RoundScores(GameState state)
     {
         var i = state.CurrentQuestionIndex;
         var round = state.Questions[i];
         var playerScores = state.Players
             .Select(p => new PlayerScore(p.PlayerId, round.RoundScores[p.PlayerId], RunningTotal(state, p.PlayerId, i)))
             .ToList();
-        return new RoundResultsView(
+        return new RoundScoresView(
             state.GameId,
             i,
             round.CorrectDirection!.Value,
@@ -167,7 +167,7 @@ public static class Projections
             playerScores);
     }
 
-    public static FinalStandingsView FinalStandings(GameState state) =>
+    public static ScoreboardView Scoreboard(GameState state) =>
         new(state.GameId, state.FinalScoreboard, state.WinnerIds);
 
     public static OutstandingDirectionsView OutstandingDirections(GameState state)

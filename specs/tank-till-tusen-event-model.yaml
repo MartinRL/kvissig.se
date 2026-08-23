@@ -10,12 +10,13 @@
 #   commands are bare              (OpenLobby, SubmitSolution)
 #   events carry the stream        (Game / LobbyOpened)
 #   exceptions are bare            (GameNotFound)
-#   views carry a view lane        (Screen / Puzzle, Todo / Outstanding solutions)
+#   screen views are bare data nouns; State/Todo views carry a lane
+#                                  (Puzzle, Todo / Outstanding solutions)
 #
 # View lanes:
 #   State / ...   the decider's decision model (folded TankState); read by `decide`
-#   Screen / ...  human screens players & the host actually see
 #   Todo / ...    processor-facing read-models the System observes (never shown)
+#   bare noun     human screens, named for the DATA they carry (Puzzle, Round scores)
 #
 # Verification is decider-true: Given -> State / Game (prior events folded via evolve),
 # When -> command, Then -> events | x. Every command/processor slice expresses its Given
@@ -60,8 +61,8 @@
 # solvable and yields a sample solution. OpenLobby resolves the generator via a TankContext
 # dependency (same pattern that mints gameId/joinCode/openedAt) and stamps the full puzzle set
 # onto Game / LobbyOpened (puzzles: Puzzle[]). Each Puzzle carries its hidden sampleSolution
-# (like BlindBudet's hidden trueWorth) — Screen / Puzzle shows only numbers + target; the
-# sample is surfaced only at reveal (Screen / Round results).
+# (like BlindBudet's hidden trueWorth) — Puzzle shows only numbers + target; the
+# sample is surfaced only at reveal (Round scores).
 #
 # DIFFICULTY: the Quiz catalog offers three nivåer — the generation knob is the MINIMUM number
 # of steps required to reach the target (the true difficulty dial of a Countdown puzzle):
@@ -98,7 +99,7 @@ slices:
   # catalog is three fixed rows, one per difficulty (familj | klassisk | svår; see DIFFICULTY
   # above). Choosing one mints a game whose puzzles are generated at open with that knob.
   👀 Quiz Catalog:
-    - v: Screen / Quiz catalog
+    - v: Difficulty catalog
 
   # OpenLobby mints the game and stamps a freshly GENERATED puzzle set onto LobbyOpened (same
   # pattern that stamps gameId/joinCode/openedAt). The host is the first player (hostPlayerId),
@@ -133,7 +134,7 @@ slices:
           difficulty: Difficulty (familj|klassisk|svår)   # record of the choice; the puzzles embody it
           puzzles: Puzzle[]       # { numbers: int[], target: int, sampleSolution: Solution } — hidden sample; generated, always solvable
           openedAt: DateTimeOffset
-      - v: Screen / Game lobby
+      - v: Roster
     tests:
       game can be created:
         given: []
@@ -166,7 +167,7 @@ slices:
 
   👀 Game Lobby:
     steps:
-      - v: Screen / Game lobby
+      - v: Roster
         props:
           gameId: Guid
           joinCode: Guid
@@ -179,7 +180,7 @@ slices:
           - e: Game / PlayerJoined
             props: { playerId: nilsId, playerName: Nils }
         then:
-          - v: Screen / Game lobby
+          - v: Roster
             props:
               joinCode: joinCode
               players: [hostMartin, playerNils]
@@ -205,7 +206,7 @@ slices:
           playerId: Guid
           playerName: string
           joinedAt: DateTimeOffset
-      - v: Screen / Game lobby
+      - v: Roster
     tests:
       player can join lobby:
         given:
@@ -271,7 +272,7 @@ slices:
           gameId: Guid
           firstRoundIndex: int
           startedAt: DateTimeOffset   # the round-0 deadline anchor (deadline = startedAt + 60s)
-      - v: Screen / Puzzle
+      - v: Puzzle
     tests:
       game can be started:
         given:
@@ -306,7 +307,7 @@ slices:
 
   👀 Puzzle:
     steps:
-      - v: Screen / Puzzle
+      - v: Puzzle
         props:
           gameId: Guid
           roundIndex: int
@@ -324,7 +325,7 @@ slices:
           - e: Game / GameStarted
             props: { firstRoundIndex: 0, startedAt: startedAt }
         then:
-          - v: Screen / Puzzle
+          - v: Puzzle
             props:
               roundIndex: 0
               totalRounds: 2
@@ -366,7 +367,7 @@ slices:
           roundIndex: int
           solution: Solution
           submittedAt: DateTimeOffset
-      - v: Screen / Waiting for others
+      - v: Solution progress
     # Decider-true GWT: given the folded State / Game props `decide` reads — the current round's
     # solutions (AlreadySubmitted), scored flag (RoundAlreadyScored), startedAt (DeadlinePassed
     # vs context.Now) — when SubmitSolution, then SolutionSubmitted | rejection. GameNotFound =
@@ -471,7 +472,7 @@ slices:
 
   👀 Waiting For Others:
     steps:
-      - v: Screen / Waiting for others
+      - v: Solution progress
         props:
           gameId: Guid
           roundIndex: int
@@ -491,7 +492,7 @@ slices:
           - e: Game / SolutionSubmitted
             props: { playerId: martinId, roundIndex: 0, solution: solMiss }
         then:
-          - v: Screen / Waiting for others
+          - v: Solution progress
             props:
               roundIndex: 0
               submittedPlayerIds: [martinId]
@@ -600,7 +601,7 @@ slices:
           reachedValue: int?                   # replay of that player's solution; null if no submission
           roundScore: int                      # min(Δ, 100); -10 if exact; 100 if none/invalid
           totalScore: int                      # running sum over scored rounds
-      - v: Screen / Round results
+      - v: Round scores
     # Decider-true GWT: given the folded State / Game, when ScoreRound, then the events |
     # rejection. allSolutionsIn is DERIVED: players == the current round's solutions keys.
     # totalScore is the running sum of roundScores across scored rounds.
@@ -759,7 +760,7 @@ slices:
 
   👀 Round Results:
     steps:
-      - v: Screen / Round results
+      - v: Round scores
         props:
           gameId: Guid
           roundIndex: int
@@ -789,7 +790,7 @@ slices:
           - e: Game / RoundScored
             props: { roundIndex: 0, playerId: nilsId, reachedValue: 100, roundScore: -10, totalScore: -10 }
         then:
-          - v: Screen / Round results
+          - v: Round scores
             props:
               roundIndex: 0
               target: 100
@@ -860,7 +861,7 @@ slices:
           gameId: Guid
           roundIndex: int
           startedAt: DateTimeOffset   # the next round's deadline anchor
-      - v: Screen / Puzzle
+      - v: Puzzle
     # Decider-true GWT: given the folded State / Game (current round scored, another remains —
     # hasNextPuzzle derived true), when AskNextPuzzle, then NextPuzzleStarted at the next index.
     tests:
@@ -900,7 +901,7 @@ slices:
           finalScoreboard: ScoreboardEntry[]   # { playerId: Guid, playerName: string, totalScore: int }
           winnerIds: Guid[]                     # all players tied at the LOWEST total
           endedAt: DateTimeOffset
-      - v: Screen / Final standings
+      - v: Scoreboard
     # Decider-true GWT: given the folded State / Game (all rounds scored, none left -> hasNextPuzzle
     # derived false), when EndGame, then GameEnded with the scoreboard and the LOWEST-total
     # winner(s). No x: — the hasNextPuzzle gate makes End Game / Ask Next Puzzle mutually
@@ -951,7 +952,7 @@ slices:
 
   👀 Final Standings:
     steps:
-      - v: Screen / Final standings
+      - v: Scoreboard
         props:
           gameId: Guid
           finalScoreboard: ScoreboardEntry[]   # { playerId: Guid, playerName: string, totalScore: int }
@@ -969,7 +970,7 @@ slices:
               winnerIds: [martinId]
               endedAt: endedAt
         then:
-          - v: Screen / Final standings
+          - v: Scoreboard
             props:
               finalScoreboard:
                 - sbMartin5

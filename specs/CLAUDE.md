@@ -39,7 +39,7 @@ Root is a single `slices:` map. Each slice is either:
       - t: host / Quiz catalog
       - c: OpenLobby
       - e: Game / LobbyOpened
-      - v: Game lobby
+      - v: Roster
   ```
 
 - **extended form** — `steps:` + `tests:`:
@@ -112,8 +112,8 @@ Two user roles + System. Events live on the `Game` stream; views are bare.
 - **Commands are bare**: `OpenLobby`, `SubmitDirection`.
 - **Events carry the stream**: `Game / LobbyOpened`.
 - **Exceptions are bare**: `GameNotFound`.
-- **Views carry a view lane**: `Screen / Game lobby`, `Todo / Outstanding directions`
-  (see below).
+- **Screen views are bare data nouns** (`Roster`, `Round scores`); **State/Todo views
+  carry a lane**: `State / Game`, `Todo / Outstanding directions` (see below).
 
 ### Slice-name emoji prefix (slice TYPE marker)
 
@@ -158,25 +158,27 @@ Consequences for this spec:
 
 ### Views (read models)
 
-Two view lanes distinguish human screens from processor-facing projections:
+Human screens are **bare data nouns** (named for the DATA the view carries, never the
+surface that shows it — surfaces live in the xm spec); processor-facing projections
+carry a lane:
 
-- `Screen / ...` — screens players & the host actually see.
+- bare noun — screens players & the host actually see (`Roster`, `Round scores`).
 - `Todo / ...` — read-models a `System /` processor consumes; never shown to a human.
+- `State / ...` — the decider's decision model.
 
-> **NOTE**: emlang parses + lints both lanes fine, but the diagram renders views by
+> **NOTE**: emlang parses + lints lane prefixes fine, but the diagram renders views by
 > their bare name without a per-view lane label (only triggers and events get a
-> visible swimlane label). The prefix still documents intent and maps to code, so we
-> keep it regardless.
+> visible swimlane label). The Todo/State prefix still documents intent and maps to code.
 
-| View (Screen lane)            | Shown when                                  |
-|-------------------------------|---------------------------------------------|
-| `Screen / Quiz catalog`       | host browses packs (kviss) to start a game  |
-| `Screen / Game lobby`         | After open-lobby / join, waiting to start   |
-| `Screen / Question`           | A question is presented (Q0 or next)        |
-| `Screen / Waiting for others` | Player submitted, others still pending      |
-| `Screen / Direction results`  | Stage 1 closed: direction revealed + bonus  |
-| `Screen / Round results`      | Question scored, per-player round + total   |
-| `Screen / Final standings`    | Game ended, scoreboard + winner             |
+| View (screen, bare noun) | Shown when                                  |
+|--------------------------|---------------------------------------------|
+| `Pack catalog`           | host browses packs (kviss) to start a game  |
+| `Roster`                 | After open-lobby / join, waiting to start   |
+| `Question card`          | A question is presented (Q0 or next)        |
+| `Guess progress`         | Player submitted, others still pending      |
+| `Direction reveal`       | Stage 1 closed: direction revealed + bonus  |
+| `Round scores`           | Question scored, per-player round + total   |
+| `Scoreboard`             | Game ended, scoreboard + winner             |
 
 | View (Todo lane)                 | Consumed by                                    |
 |----------------------------------|------------------------------------------------|
@@ -184,7 +186,7 @@ Two view lanes distinguish human screens from processor-facing projections:
 | `Todo / Outstanding differences` | `System / Score difference` (allDifferencesIn) |
 | `Todo / Game progress`           | `System / Ask next question`, `End game`       |
 
-`Screen / Question` derives its card text/items from the chosen **question pack**
+`Question card` derives its card text/items from the chosen **question pack**
 by index; those are not carried on events.
 
 Roles:
@@ -296,8 +298,8 @@ Notes:
 | riktning (mer/mindre)  | direction           |
 | differens / skillnad   | difference          |
 | poäng                  | score               |
-| resultat               | Round results       |
-| slutställning          | Final standings     |
+| resultat               | Round scores        |
+| slutställning          | Scoreboard          |
 | vinnare                | winner              |
 
 **QuestionPack**: a deck of designated question-cards (one card per question, e.g.

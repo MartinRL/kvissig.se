@@ -4,10 +4,9 @@
 # and recorded as data; nothing here is invented.
 #
 # Findings from the reverse-engineering (spec dogfood notes):
-#   1. Every EM view name trips xm-surface-shadows-view in spirit: the EM's view lanes are
-#      named `Screen / …` and `Todo / …`, i.e. the Event Model modeled SURFACES instead of
-#      data nouns. Referenced as-is per decision; a possible EM rename is deferred
-#      (v0.2's xm-screen-lane-view info documents the smell without legislating it).
+#   1. The EM originally modeled SURFACES instead of data nouns (`Screen /` view lane);
+#      v0.2's xm-screen-lane-view info documented the smell. RESOLVED: screen views are
+#      now bare data nouns (Roster, Round scores, Scoreboard) across all three games.
 #   2. Bare command forms exist in the real UI exactly as the strict compose rule predicts:
 #      AuctionHostForm (OpenAuction) and AuctionJoinForm (JoinAuction) compose no view and
 #      are therefore NOT surfaces here — they are served by the transformer's defaults.
@@ -50,7 +49,7 @@ surfaces:
   Katalog:
     # no during: — stream-less reference data (finding 7)
     compose:
-      - v: Screen / Auction catalog
+      - v: Pack catalog
         fields:
           primary: [packs]
       - c: OpenAuction
@@ -60,7 +59,7 @@ surfaces:
     during: [lobby]
     for: [Värd]
     compose:
-      - v: Screen / Auction lobby
+      - v: Roster
         self: players.playerId
         fields:
           primary: [joinCode, players]
@@ -72,7 +71,7 @@ surfaces:
     during: [lobby]
     for: [Spelare]
     compose:
-      - v: Screen / Auction lobby
+      - v: Roster
         self: players.playerId
         fields:
           primary: [players]
@@ -81,7 +80,7 @@ surfaces:
   Budgivning:
     during: [started]
     compose:
-      - v: Screen / Lot
+      - v: Lot card
         fields:
           primary: [description, unit]
           secondary: [lotIndex, totalLots]
@@ -92,7 +91,7 @@ surfaces:
   Väntan:
     during: [started]
     compose:
-      - v: Screen / Waiting for bids
+      - v: Bid progress
         # identity lives in the id lists themselves; the viewer is by construction in
         # submittedPlayerIds (you only see Väntan after your own bid) — "du · klar"
         self: submittedPlayerIds
@@ -105,7 +104,7 @@ surfaces:
     during: [started]
     for: [Värd]
     compose:
-      - v: Screen / Round results
+      - v: Round scores
         self: playerProfits.playerId
         fields:
           primary: [trueWorth, winnerIds, playerProfits]
@@ -120,7 +119,7 @@ surfaces:
     during: [started]
     for: [Spelare]
     compose:
-      - v: Screen / Round results
+      - v: Round scores
         self: playerProfits.playerId
         fields:
           primary: [trueWorth, winnerIds, playerProfits]
@@ -130,7 +129,7 @@ surfaces:
   Slutställning:
     during: [ended]
     compose:
-      - v: Screen / Final standings
+      - v: Scoreboard
         fields:
           primary: [finalScoreboard, winnerIds]
           on-demand: [gameId]
@@ -172,18 +171,18 @@ labels:
     AskNextLot: Nästa budrunda
     EndAuction: Visa slutställning
     # view fields
-    "Screen / Auction lobby":
+    "Roster":
       players: Spelare
-    "Screen / Waiting for bids":
+    "Bid progress":
       submittedPlayerIds: Klara
       pendingPlayerIds: Väntar på
-    "Screen / Round results":
+    "Round scores":
       trueWorth: Sant värde
       playerProfits: Poäng
       pricePaid: Bud
       winnerIds:
         $empty: Ingen vann – alla bjöd över.
-    "Screen / Final standings":
+    "Scoreboard":
       finalScoreboard: Slutställning
     # surfaces (their on-screen headings)
     Katalog: Välj lek

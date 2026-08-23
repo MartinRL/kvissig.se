@@ -52,7 +52,7 @@ public class TestModelTests
         tests.Count(t => t.When is not null).Should().Be(28, "GWT decide cases");
         tests.Count(t => t.When is null && t.Then is [{ Kind: 'v', Lane: "State" }])
             .Should().Be(2, "GT fold cases");
-        tests.Count(t => t.When is null && t.Then is [{ Kind: 'v', Lane: "Screen" or "Todo" }])
+        tests.Count(t => t.When is null && t.Then is [{ Kind: 'v', Lane: "" or "Todo" }])
             .Should().Be(10, "GT projection cases");
     }
 

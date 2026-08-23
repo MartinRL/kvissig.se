@@ -93,7 +93,7 @@ public static class AuctionSurfaces
 
     /// <summary>players self-highlighting ("du") per the xm self: players.playerId.</summary>
     private static RosterField LobbyRoster(AuctionRenderContext c, IReadOnlyDictionary<string, XmLabelEntry> labels) =>
-        new(labels["Screen / Auction lobby"].Fields["players"].Self,
+        new(labels["Roster"].Fields["players"].Self,
             [.. c.State.Players.Select(p => new RosterRow(
                 p.Name + (p.IsHost ? " (värd)" : ""),
                 p.PlayerId == c.Viewer ? "du" : "med"))],
@@ -127,7 +127,7 @@ public static class AuctionSurfaces
         var submitted = c.State.Lots[i].Bids.Keys.ToHashSet();
         var done = c.State.Players.Where(p => submitted.Contains(p.PlayerId)).ToList();
         var pending = c.State.Players.Where(p => !submitted.Contains(p.PlayerId)).ToList();
-        var view = labels["Screen / Waiting for bids"].Fields;
+        var view = labels["Bid progress"].Fields;
 
         var fields = new Dictionary<string, Field>
         {
@@ -152,7 +152,7 @@ public static class AuctionSurfaces
     {
         var i = c.State.CurrentLotIndex;
         var round = c.State.Lots[i];
-        var view = labels["Screen / Round results"].Fields;
+        var view = labels["Round scores"].Fields;
         var viewerIsHost = c.Viewer == c.State.HostPlayerId;
 
         var fields = new Dictionary<string, Field>

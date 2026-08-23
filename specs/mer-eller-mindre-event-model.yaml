@@ -7,12 +7,13 @@
 #   commands are bare              (OpenLobby, SubmitDirection)
 #   events carry the stream        (Game / LobbyOpened)
 #   exceptions are bare            (GameNotFound)
-#   views carry a view lane        (Screen / Game lobby, Todo / Outstanding directions)
+#   screen views are bare data nouns; State/Todo views carry a lane
+#                                  (Roster, Todo / Outstanding directions)
 #
 # View lanes:
 #   State / ...   the decider's decision model (folded GameState); read by `decide`
-#   Screen / ...  human screens players & the host actually see
 #   Todo / ...    processor-facing read-models the System observes (never shown)
+#   bare noun     human screens, named for the DATA they carry (Roster, Round scores)
 # NOTE: emlang parses + lints these view-lane prefixes fine, but the diagram renders
 #   views by their bare name without a per-view lane label (only triggers and events
 #   get a visible swimlane label). The prefix still documents intent and maps to code.
@@ -88,7 +89,7 @@
 # ASSUMPTION: question-card content (text, item labels, the unit, and the two RAW values
 # valueA/valueB) is snapshotted onto Game / LobbyOpened (questions: Question[]).
 # OpenLobby resolves the chosen pack via a GameContext dependency and stamps the full
-# question set, so read models read events only. Screen / Question reads card
+# question set, so read models read events only. Question card reads card
 # text/labels by index from folded state; totalQuestions = questions.Count. The card
 # carries NO precomputed answer — the per-question reveal (correctDirection/normalized
 # correctDifference) is derived by the decider from valueA/valueB in that state.
@@ -134,7 +135,7 @@ slices:
   # project (src/MerEllerMindre.Domain/data/packs) and copied to output. The author edits
   # cards in Excel / Google Sheets (sv-SE ';'-separated, ','-decimal). See specs/CLAUDE.md.
   👀 Quiz Catalog:
-    - v: Screen / Quiz catalog
+    - v: Pack catalog
       props:
         packs: QuestionPack[]   # { packId: string (slug), name: string, questionCount: int } — each card also carries a differencePrompt (string)
 
@@ -179,7 +180,7 @@ slices:
           questionPackId: string  # slug of the chosen pack (audit reference)
           questions: Question[]   # { questionText: string, itemA: string, itemB: string, valueA: decimal, valueB: decimal, unit: string, differencePrompt: string } — raw values; no precomputed answer
           createdAt: DateTimeOffset
-      - v: Screen / Game lobby
+      - v: Roster
     tests:
       game can be created:
         given: []
@@ -219,7 +220,7 @@ slices:
 
   👀 Game Lobby:
     steps:
-      - v: Screen / Game lobby
+      - v: Roster
         props:
           gameId: Guid
           joinCode: Guid
@@ -235,7 +236,7 @@ slices:
           - e: Game / PlayerJoined
             props: { playerId: nilsId, playerName: Nils }
         then:
-          - v: Screen / Game lobby
+          - v: Roster
             props:
               joinCode: joinCode
               players: [hostMartin, playerNils]
@@ -266,7 +267,7 @@ slices:
           playerId: Guid
           playerName: string
           joinedAt: DateTimeOffset
-      - v: Screen / Game lobby
+      - v: Roster
     # Decider-true GWT: given the folded State / Game props `decide` reads (phase guards
     # the lobby-open window, players guards a duplicate name), when JoinGame, then the
     # event | rejection. GameNotFound is the empty stream (no State / Game yet).
@@ -340,7 +341,7 @@ slices:
           gameId: Guid
           firstQuestionIndex: int
           startedAt: DateTimeOffset
-      - v: Screen / Question
+      - v: Question card
     # Decider-true GWT: given the folded State / Game props `decide` reads (players
     # count guards NotEnoughPlayers; phase: lobby is the start window), when StartGame,
     # then the event | rejection. GameNotFound is the empty stream (no State / Game yet).
@@ -378,7 +379,7 @@ slices:
 
   👀 Question:
     steps:
-      - v: Screen / Question
+      - v: Question card
         props:
           gameId: Guid
           questionIndex: int
@@ -397,7 +398,7 @@ slices:
           - e: Game / GameStarted
             props: { firstQuestionIndex: 0 }
         then:
-          - v: Screen / Question
+          - v: Question card
             props:
               questionIndex: 0
               totalQuestions: 2
@@ -439,7 +440,7 @@ slices:
           questionIndex: int
           direction: Direction (mer|mindre)
           submittedAt: DateTimeOffset
-      - v: Screen / Waiting for others
+      - v: Guess progress
     # Decider-true GWT: given the folded State / Game props `decide` reads — phase
     # (GameNotStarted), players (PlayerNotInGame), the current question's directions
     # (AlreadySubmittedDirection) — when SubmitDirection, then DirectionSubmitted |
@@ -540,7 +541,7 @@ slices:
           questionIndex: int
           guessedDifference: decimal   # RAW absolute guess in the card's unit, >= 0
           submittedAt: DateTimeOffset
-      - v: Screen / Waiting for others
+      - v: Guess progress
     # Decider-true GWT: given the folded State / Game props `decide` reads — phase,
     # players, the current question's correctDirection (DirectionNotRevealed) and
     # differences (AlreadySubmittedDifference) — when SubmitDifference, then
@@ -607,7 +608,7 @@ slices:
 
   👀 Waiting For Others:
     steps:
-      - v: Screen / Waiting for others
+      - v: Guess progress
         props:
           gameId: Guid
           questionIndex: int
@@ -628,7 +629,7 @@ slices:
           - e: Game / DirectionSubmitted
             props: { playerId: martinId, questionIndex: 0, direction: mer }
         then:
-          - v: Screen / Waiting for others
+          - v: Guess progress
             props:
               questionIndex: 0
               submittedPlayerIds: [martinId]
@@ -791,7 +792,7 @@ slices:
           guessedDirection: Direction (mer|mindre)
           directionCorrect: bool
           bonusPoints: int                            # directionCorrect ? -10 : 0
-      - v: Screen / Direction results
+      - v: Direction reveal
     # Decider-true GWT: given the folded State / Game, when RevealDirection, then the
     # events | rejection. allDirectionsIn is DERIVED: players == the current question's
     # directions keys.
@@ -882,7 +883,7 @@ slices:
           differencePoints: byte (0-100)               # = |guessedDifferenceNormalized - correctDifference|
           roundScore: int                              # differencePoints + stage-1 bonus (signed)
           totalScore: int                              # running sum over scored questions (signed)
-      - v: Screen / Round results
+      - v: Round scores
     # Decider-true GWT: given the folded State / Game (directionScores carry the stage-1
     # bonus), when ScoreDifference, then the events | rejection. allDifferencesIn is DERIVED:
     # players == the current question's differences keys. roundScore = differencePoints +
@@ -985,7 +986,7 @@ slices:
   # the running total SO FAR (includes the just-awarded bonus, for drama).
   👀 Direction Results:
     steps:
-      - v: Screen / Direction results
+      - v: Direction reveal
         props:
           gameId: Guid
           questionIndex: int
@@ -1013,7 +1014,7 @@ slices:
           - e: Game / DirectionScored
             props: { questionIndex: 0, playerId: nilsId, guessedDirection: mindre, directionCorrect: false, bonusPoints: 0 }
         then:
-          - v: Screen / Direction results
+          - v: Direction reveal
             props:
               questionIndex: 0
               correctDirection: mer
@@ -1023,7 +1024,7 @@ slices:
 
   👀 Round Results:
     steps:
-      - v: Screen / Round results
+      - v: Round scores
         props:
           gameId: Guid
           questionIndex: int
@@ -1063,7 +1064,7 @@ slices:
           - e: Game / DifferenceScored
             props: { questionIndex: 0, playerId: nilsId, roundScore: 10, totalScore: 10 }
         then:
-          - v: Screen / Round results
+          - v: Round scores
             props:
               questionIndex: 0
               correctDirection: mer
@@ -1138,7 +1139,7 @@ slices:
         props:
           gameId: Guid
           questionIndex: int
-      - v: Screen / Question
+      - v: Question card
     # Decider-true GWT: given the folded State / Game (current question scored, another
     # remains — hasNextQuestion derived true), when AskNextQuestion, then
     # NextQuestionStarted at the next index. The gate is verified by Game progress' GT.
@@ -1179,7 +1180,7 @@ slices:
           finalScoreboard: ScoreboardEntry[]   # { playerId: Guid, playerName: string, totalScore: int }
           winnerIds: Guid[]                     # all players tied at the lowest total
           endedAt: DateTimeOffset
-      - v: Screen / Final standings
+      - v: Scoreboard
     # Decider-true GWT: given the folded State / Game (all questions scored, none left —
     # hasNextQuestion derived false), when EndGame, then GameEnded with the scoreboard and
     # the lowest-total winner(s). No x: — the hasNextQuestion gate makes End Game / Ask Next
@@ -1230,7 +1231,7 @@ slices:
 
   👀 Final Standings:
     steps:
-      - v: Screen / Final standings
+      - v: Scoreboard
         props:
           gameId: Guid
           finalScoreboard: ScoreboardEntry[]   # { playerId: Guid, playerName: string, totalScore: int }
@@ -1248,7 +1249,7 @@ slices:
               winnerIds: [martinId]
               endedAt: endedAt
         then:
-          - v: Screen / Final standings
+          - v: Scoreboard
             props:
               finalScoreboard:
                 - sbMartin5

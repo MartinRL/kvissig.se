@@ -31,7 +31,7 @@ public record EmSpec(
         Elements.FirstOrDefault(e => e.Kind == 'c' && e.Name == name);
 
     /// <summary>Rule (SpecModel.cs): the prefix before the LAST slash is the lane; both
-    /// sides are trimmed so "host /Auction catalog" and "Screen / Lot" normalize alike.</summary>
+    /// sides are trimmed so "host /Auction catalog" and "State / Game" normalize alike.</summary>
     public static (string Lane, string Name) Split(string reference)
     {
         var slash = reference.LastIndexOf('/');

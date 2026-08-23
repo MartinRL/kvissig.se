@@ -7,7 +7,7 @@ namespace Xmlang;
 
 /// <summary>
 /// Parses an xmlang v0.2 document into XmSpec. RepresentationModel, same style as
-/// Emlang.CodeGen/SpecModel.cs — quoted "Screen / Lot" keys survive verbatim.
+/// Emlang.CodeGen/SpecModel.cs — quoted "Todo / Outstanding bids" keys survive verbatim.
 /// Structural only: unknown keys are ignored here; resolution errors are XmLinter's job.
 /// </summary>
 public static class XmParser

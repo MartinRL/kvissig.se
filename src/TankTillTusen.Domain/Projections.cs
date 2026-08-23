@@ -5,7 +5,7 @@ namespace TankTillTusen.Domain;
 /// view data is DERIVED, never stored. Per-player ordering follows TankState.Players order.
 /// (Quiz Catalog is NOT here — it is Web-only reference data, a single fixed v1 "Spela".)
 /// </summary>
-public record GameLobbyView(
+public record RosterView(
     Guid GameId,
     Guid JoinCode,
     IReadOnlyList<Player> Players
@@ -20,7 +20,7 @@ public record PuzzleView(
     DateTimeOffset Deadline
 );
 
-public record WaitingForOthersView(
+public record SolutionProgressView(
     Guid GameId,
     int RoundIndex,
     IReadOnlyList<Guid> SubmittedPlayerIds,
@@ -48,7 +48,7 @@ public record PlayerResult(
     int TotalScore
 );
 
-public record RoundResultsView(
+public record RoundScoresView(
     Guid GameId,
     int RoundIndex,
     int Target,
@@ -64,7 +64,7 @@ public record GameProgressView(
     bool HasNextPuzzle
 );
 
-public record FinalStandingsView(
+public record ScoreboardView(
     Guid GameId,
     IReadOnlyList<ScoreboardEntry> FinalScoreboard,
     IReadOnlyList<Guid> WinnerIds
@@ -76,7 +76,7 @@ public record FinalStandingsView(
 /// </summary>
 public static class Projections
 {
-    public static GameLobbyView GameLobby(TankState state) =>
+    public static RosterView Roster(TankState state) =>
         new(state.GameId, state.JoinCode, state.Players);
 
     public static PuzzleView Puzzle(TankState state)
@@ -86,14 +86,14 @@ public static class Projections
         return new PuzzleView(state.GameId, i, state.Rounds.Count, puzzle.Numbers, puzzle.Target, state.Deadline(i)!.Value);
     }
 
-    public static WaitingForOthersView WaitingForOthers(TankState state)
+    public static SolutionProgressView SolutionProgress(TankState state)
     {
         var i = state.CurrentRoundIndex;
         var submitted = state.Players
             .Where(p => state.Rounds[i].Solutions.ContainsKey(p.PlayerId))
             .Select(p => p.PlayerId)
             .ToList();
-        return new WaitingForOthersView(state.GameId, i, submitted, state.PendingPlayerIds(i));
+        return new SolutionProgressView(state.GameId, i, submitted, state.PendingPlayerIds(i));
     }
 
     public static OutstandingSolutionsView OutstandingSolutions(TankState state)
@@ -104,7 +104,7 @@ public static class Projections
         return new OutstandingSolutionsView(state.GameId, rounds);
     }
 
-    public static RoundResultsView RoundResults(TankState state)
+    public static RoundScoresView RoundScores(TankState state)
     {
         var i = state.CurrentRoundIndex;
         var round = state.Rounds[i];
@@ -115,7 +115,7 @@ public static class Projections
                 round.RoundScores[p.PlayerId],
                 RunningTotal(state, p.PlayerId, i)))
             .ToList();
-        return new RoundResultsView(state.GameId, i, round.Puzzle.Target, round.SampleSolution!, playerResults);
+        return new RoundScoresView(state.GameId, i, round.Puzzle.Target, round.SampleSolution!, playerResults);
     }
 
     public static GameProgressView GameProgress(TankState state) =>
@@ -126,7 +126,7 @@ public static class Projections
             state.Rounds.Count(r => r.Scored),
             state.HasNextPuzzle);
 
-    public static FinalStandingsView FinalStandings(TankState state) =>
+    public static ScoreboardView Scoreboard(TankState state) =>
         new(state.GameId, state.FinalScoreboard, state.WinnerIds);
 
     /// <summary>Running total at round i: sum of a player's scores over scored rounds up to and including i.</summary>
