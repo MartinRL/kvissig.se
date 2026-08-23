@@ -10,7 +10,6 @@ Har Sverige större eller mindre yta än Spanien?;Sverige;Spanien;450295;505990;
 Är Donau längre eller kortare än Mississippi?;Donau;Mississippi;2850;3766;kilometer;Hur många kilometer skiljer det?
 Är Rhen längre eller kortare än Donau?;Rhen;Donau;1233;2850;kilometer;Hur många kilometer skiljer det?
 Är Empire State Building högre eller lägre än CN-tornet?;Empire State Building;CN-tornet;381;553;meter;Hur många meter skiljer det?
-Är Eiffeltornet högre eller lägre än Shanghai Tower?;Eiffeltornet;Shanghai Tower;330;632;meter;Hur många meter skiljer det?
 Är CN-tornet högre eller lägre än Burj Khalifa?;CN-tornet;Burj Khalifa;553;828;meter;Hur många meter skiljer det?
 Har Huronsjön större eller mindre yta än Övre sjön?;Huronsjön;Övre sjön;59600;82103;kvadratkilometer;Hur många kvadratkilometer skiljer det?
 Har Michigansjön större eller mindre yta än Eriesjön?;Michigansjön;Eriesjön;58000;25667;kvadratkilometer;Hur många kvadratkilometer skiljer det?
@@ -69,7 +68,6 @@ Har Italien större eller mindre yta än Ukraina?;Italien;Ukraina;301958;603500;
 Är Olympos högre eller lägre än Zugspitze?;Olympos;Zugspitze;2917;2962;meter;Hur många meter skiljer det?
 Är Pico de Orizaba högre eller lägre än Mount Fuji?;Pico de Orizaba;Mount Fuji;5636;3776;meter;Hur många meter skiljer det?
 Har Victoriasjön större eller mindre yta än Tanganyikasjön?;Victoriasjön;Tanganyikasjön;59947;32900;kvadratkilometer;Hur många kvadratkilometer skiljer det?
-Har Vänern större eller mindre yta än Ladogasjön?;Vänern;Ladogasjön;5580;17891;kvadratkilometer;Hur många kvadratkilometer skiljer det?
 Har Övre sjön större eller mindre yta än Kaspiska havet?;Övre sjön;Kaspiska havet;82100;374000;kvadratkilometer;Hur många kvadratkilometer skiljer det?
 Är Gula floden längre eller kortare än floden Jenisej?;Gula floden;Jenisej;5464;5539;kilometer;Hur många kilometer skiljer det?
 Är floden Lena längre eller kortare än floden Ob?;Lena;Ob;4400;5410;kilometer;Hur många kilometer skiljer det?
@@ -193,7 +191,6 @@ Har Kaspiska havet större eller mindre yta än Victoriasjön?;Kaspiska havet;Vi
 Har Maracaibosjön större eller mindre yta än Övre sjön?;Maracaibosjön;Övre sjön;13512;82103;kvadratkilometer;Hur många kvadratkilometer skiljer det?
 Ligger Mexico City högre eller lägre än Quito?;Mexico City;Quito;2240;2850;meter;Hur många meter skiljer det i höjd över havet?
 Har Venus en större eller mindre diameter än jorden?;Venus;Jorden;12104;12756;km;Hur många km skiljer det i diameter?
-Har dvärgplaneten Eris en större eller mindre diameter än Pluto?;Eris;Pluto;2326;2377;km;Hur många km skiljer det i diameter?
 Är månen Io större eller mindre i diameter än jordens måne?;Io;Månen;3640;3474;km;Hur många km skiljer det i diameter?
 Har Neptunus en större eller mindre diameter än Uranus?;Neptunus;Uranus;49528;51118;km;Hur många km skiljer det i diameter?
 Är Jupitermånen Ganymedes större eller mindre i diameter än Saturnusmånen Titan?;Ganymedes;Titan;5262;5150;km;Hur många km skiljer det i diameter?
@@ -221,7 +218,6 @@ Har dvärgplaneten Haumea en större eller mindre diameter än dvärgplaneten Er
 Har dvärgplaneten Ceres i asteroidbältet en större eller mindre diameter än dvärgplaneten Orcus?;Ceres;Orcus;946;960;km;Hur många km skiljer det i diameter?
 Har Plutos måne Charon en större eller mindre diameter än dvärgplaneten Gonggong?;Charon;Gonggong;1212;1230;km;Hur många km skiljer det i diameter?
 Har Saturnusmånen Tethys en större eller mindre diameter än grannmånen Dione?;Tethys;Dione;1062;1123;km;Hur många km skiljer det i diameter?
-Har Pluto en större eller mindre diameter än Neptunusmånen Triton?;Pluto;Triton;2376;2707;km;Hur många km skiljer det i diameter?
 Har Plutos måne Charon en större eller mindre diameter än dvärgplaneten Makemake?;Charon;Makemake;1212;1426;km;Hur många km skiljer det i diameter?
 Har Saturnusmånen Mimas en större eller mindre diameter än grannmånen Enceladus?;Mimas;Enceladus;396;504;km;Hur många km skiljer det i diameter?
 Har Pluto en större eller mindre diameter än Jupitermånen Europa?;Pluto;Europa;2376;3122;km;Hur många km skiljer det i diameter?
@@ -270,20 +266,14 @@ Har Uranus en längre eller kortare omloppstid än Pluto?;Uranus;Pluto;84;248;å
 Har Halleys komet en längre eller kortare omloppstid än Pluto?;Halleys komet;Pluto;75;248;år;Hur många år skiljer det i omloppstid?
 Har Jupitermånen Ganymedes en större eller mindre massa än månen?;Ganymedes;Månen;0,148;0,0735;10^24 kg;Hur stor är skillnaden i massa?
 Har Pluto en större eller mindre massa än månen?;Pluto;Månen;0,0130;0,0735;10^24 kg;Hur stor är skillnaden i massa?
-Är Empire State Building högre eller lägre än Eiffeltornet?;Empire State Building;Eiffeltornet;443,2;330;meter;Hur många meter skiljer det?
 Är Shanghai Tower högre eller lägre än Tokyo Skytree?;Shanghai Tower;Tokyo Skytree;632;634;meter;Hur många meter skiljer det?
 Är Petronas Towers högre eller lägre än Empire State Building?;Petronas Towers;Empire State Building;451,9;443,2;meter;Hur många meter skiljer det?
 Är Frihetsgudinnan högre eller lägre än Burj Khalifa?;Frihetsgudinnan;Burj Khalifa;93;828;meter;Hur många meter skiljer det?
-Är Burj Khalifa högre eller lägre än Eiffeltornet?;Burj Khalifa;Eiffeltornet;828;330;meter;Hur många meter skiljer det?
-Är CN Tower högre eller lägre än Globen?;CN Tower;Globen;553;85;meter;Hur många meter skiljer det?
-Är Tokyo Skytree högre eller lägre än Eiffeltornet?;Tokyo Skytree;Eiffeltornet;634;330;meter;Hur många meter skiljer det?
 Är Kölnerdomen högre eller lägre än Sagrada Família?;Kölnerdomen;Sagrada Família;157;162,9;meter;Hur många meter skiljer det?
 Är Ulms domkyrka högre eller lägre än Big Ben?;Ulms domkyrka;Big Ben;161,5;96;meter;Hur många meter skiljer det?
-Är lutande tornet i Pisa högre eller lägre än Big Ben?;Lutande tornet i Pisa;Big Ben;56,7;96;meter;Hur många meter skiljer det?
 Är Washingtonmonumentet högre eller lägre än Space Needle?;Washingtonmonumentet;Space Needle;169;184,4;meter;Hur många meter skiljer det?
 Är Washingtonmonumentet högre eller lägre än Big Ben?;Washingtonmonumentet;Big Ben;169;96;meter;Hur många meter skiljer det?
 Är Kristusstatyn i Rio högre eller lägre än Frihetsgudinnan?;Kristusstatyn i Rio;Frihetsgudinnan;38;93;meter;Hur många meter skiljer det?
-Är Cheopspyramiden högre eller lägre än Kristusstatyn i Rio?;Cheopspyramiden;Kristusstatyn i Rio;146,6;38;meter;Hur många meter skiljer det?
 Är Globen högre eller lägre än Burj Khalifa?;Globen;Burj Khalifa;85;828;meter;Hur många meter skiljer det?
 Är Globen högre eller lägre än Kaknästornet?;Globen;Kaknästornet;85;170;meter;Hur många meter skiljer det?
 Har Akashi Kaikyo-bron längre eller kortare huvudspann än Golden Gate-bron?;Akashi Kaikyo-bron;Golden Gate-bron;1991;1280;meter;Hur många meter skiljer det?
@@ -296,8 +286,6 @@ Har Öresundsbron längre eller kortare huvudspann än Akashi Kaikyo-bron?;Öres
 Är Kinesiska muren längre eller kortare än Öresundsbron?;Kinesiska muren;Öresundsbron;21196;7,8;kilometer;Hur många kilometer skiljer det?
 Är Stonehenge äldre eller yngre än Colosseum?;Stonehenge;Colosseum;5000;1946;år;Hur många år skiljer det?
 Är Notre-Dame i Paris äldre eller yngre än Colosseum?;Notre-Dame i Paris;Colosseum;681;1946;år;Hur många år skiljer det?
-Är Eiffeltornet äldre eller yngre än Notre-Dame i Paris?;Eiffeltornet;Notre-Dame i Paris;137;681;år;Hur många år skiljer det?
-Är Cheopspyramiden äldre eller yngre än Colosseum?;Cheopspyramiden;Colosseum;4586;1946;år;Hur många år skiljer det?
 Har Sydneyoperan högre eller lägre tak än Kristusstatyn i Rio?;Sydneyoperan;Kristusstatyn i Rio;67;38;meter;Hur många meter skiljer det?
 Är Shanghai Tower högre eller lägre än Merdeka 118?;Shanghai Tower;Merdeka 118;632;678,9;meter;Hur många meter skiljer det?
 Är Lotte World Tower högre eller lägre än One World Trade Center?;Lotte World Tower;One World Trade Center;555,7;541,3;meter;Hur många meter skiljer det?
@@ -313,16 +301,13 @@ Har Empire State Building fler eller färre våningar än Willis Tower?;Empire S
 Är Sankt Stefansdomen i Wien högre eller lägre än Strasbourgs katedral?;Sankt Stefansdomen i Wien;Strasbourgs katedral;136;142;meter;Hur många meter skiljer det?
 Har Humberbron längre eller kortare huvudspann än Verrazzano-Narrows-bron?;Humberbron;Verrazzano-Narrows-bron;1410;1298;meter;Hur många meter skiljer det?
 Har Storbältsbron längre eller kortare huvudspann än Akashi Kaikyo-bron?;Storbältsbron;Akashi Kaikyo-bron;1624;1991;meter;Hur många meter skiljer det?
-Är Chryslerbyggnaden högre eller lägre än Eiffeltornet?;Chryslerbyggnaden;Eiffeltornet;318,9;330;meter;Hur många meter skiljer det?
 Är Hooverdammen högre eller lägre än Grande Dixence-dammen?;Hooverdammen;Grande Dixence-dammen;221;285;meter;Hur många meter skiljer det?
 Är Big Ben högre eller lägre än Turning Torso?;Big Ben;Turning Torso;96;190;meter;Hur många meter skiljer det?
-Sitter Petronas-tornens skybridge högre eller lägre än Eiffeltornet?;Petronas skybridge;Eiffeltornet;170;330;meter;Hur många meter skiljer det?
 Är Frihetsgudinnan högre eller lägre än Cheopspyramiden?;Frihetsgudinnan;Cheopspyramiden;93;146,6;meter;Hur många meter skiljer det?
 Är en fotbollsplan längre eller kortare än Cheopspyramidens bassida?;Fotbollsplan;Cheopspyramiden;105;230;meter;Hur många meter skiljer det?
 Är Solens pyramid i Teotihuacán högre eller lägre än Cheopspyramiden?;Solens pyramid;Cheopspyramiden;65;146,6;meter;Hur många meter skiljer det?
 Är Brandenburger Tor högre eller lägre än Triumfbågen i Paris?;Brandenburger Tor;Triumfbågen i Paris;26;50;meter;Hur många meter skiljer det?
 Är Big Ben högre eller lägre än London Eye?;Big Ben;London Eye;96;135;meter;Hur många meter skiljer det?
-Är Eiffeltornet högre eller lägre än Turning Torso?;Eiffeltornet;Turning Torso;330;190;meter;Hur många meter skiljer det?
 Är Itaipú-dammen högre eller lägre än Grande Dixence-dammen?;Itaipú-dammen;Grande Dixence-dammen;196;285;meter;Hur många meter skiljer det?
 Är Gotthards vägtunnel längre eller kortare än Lærdalstunneln?;Gotthards vägtunnel;Lærdalstunneln;16,9;24,5;kilometer;Hur många kilometer skiljer det?
 Är Lærdalstunneln längre eller kortare än Kanaltunneln?;Lærdalstunneln;Kanaltunneln;24,5;50,5;kilometer;Hur många kilometer skiljer det?
@@ -337,9 +322,7 @@ Har Empire State Building större eller mindre golvyta än Pentagon?;Empire Stat
 Har Vatikanstaten större eller mindre yta än Förbjudna staden?;Vatikanstaten;Förbjudna staden;440000;720000;kvadratmeter;Hur många kvadratmeter skiljer det?
 Har Maracanã större eller mindre publikkapacitet än Camp Nou?;Maracanã;Camp Nou;78838;99354;åskådare;Hur många åskådare skiljer det?
 Har Wembley större eller mindre publikkapacitet än Friends Arena?;Wembley;Friends Arena;90000;50000;åskådare;Hur många åskådare skiljer det?
-Är Eiffeltornet högre eller lägre än Petronas Towers?;Eiffeltornet;Petronas Towers;330;451,9;meter;Hur många meter skiljer det?
 Är Empire State Building högre eller lägre än One World Trade Center?;Empire State Building;One World Trade Center;381;541,3;meter;Hur många meter skiljer det?
-Är Eiffeltornet högre eller lägre än Oriental Pearl Tower?;Eiffeltornet;Oriental Pearl Tower;330;468;meter;Hur många meter skiljer det?
 Är Stratosphere Tower i Las Vegas högre eller lägre än Space Needle?;Stratosphere Tower;Space Needle;350,2;184,4;meter;Hur många meter skiljer det?
 Är Moderlandet-statyn i Volgograd högre eller lägre än Sardar Patel-statyn?;Moderlandet-statyn;Sardar Patel-statyn;85;182;meter;Hur många meter skiljer det?
 Är Globen högre eller lägre än Washingtonmonumentet?;Globen;Washingtonmonumentet;85;169;meter;Hur många meter skiljer det?
@@ -352,14 +335,12 @@ Har Wembley större eller mindre publikkapacitet än Friends Arena?;Wembley;Frie
 Har Maracanã större eller mindre publikkapacitet än Friends Arena?;Maracanã;Friends Arena;78838;50000;åskådare;Hur många åskådare skiljer det?
 Har Michigan Stadium större eller mindre publikkapacitet än Friends Arena?;Michigan Stadium;Friends Arena;107601;50000;åskådare;Hur många åskådare skiljer det?
 Är Kölnerdomen högre eller lägre än Frihetsgudinnan?;Kölnerdomen;Frihetsgudinnan;157;93;meter;Hur många meter skiljer det?
-Är Washingtonmonumentet högre eller lägre än Eiffeltornet?;Washingtonmonumentet;Eiffeltornet;169;330;meter;Hur många meter skiljer det?
 Är Eiffeltornet högre eller lägre än CN Tower?;Eiffeltornet;CN Tower;330;553;meter;Hur många meter skiljer det?
 Har Buckingham Palace fler eller färre rum än Versailles slott?;Buckingham Palace;Versailles;775;2300;rum;Hur många rum skiljer det?
 Har Buckingham Palace fler eller färre rum än Vita huset?;Buckingham Palace;Vita huset;775;132;rum;Hur många rum skiljer det?
 Är Atomium högre eller lägre än Kristusstatyn i Rio?;Atomium;Kristusstatyn i Rio;102;38;meter;Hur många meter skiljer det?
 Är lutande tornet i Pisa högre eller lägre än Washingtonmonumentet?;Lutande tornet i Pisa;Washingtonmonumentet;56,7;169;meter;Hur många meter skiljer det?
 Väger Eiffeltornet mer eller mindre än Atomium?;Eiffeltornet;Atomium;10100;2400;ton;Hur många ton skiljer det?
-Är Empire State Building högre eller lägre än Big Ben?;Empire State Building;Big Ben;381;96;meter;Hur många meter skiljer det?
 Har Brooklynbron längre eller kortare huvudspann än Golden Gate-bron?;Brooklynbron;Golden Gate-bron;486;1280;meter;Hur många meter skiljer det?
 Är Stratosphere Tower i Las Vegas högre eller lägre än lutande tornet i Pisa?;Stratosphere Tower;Lutande tornet i Pisa;350,2;56,7;meter;Hur många meter skiljer det?
 Är Space Needle högre eller lägre än One World Trade Center?;Space Needle;One World Trade Center;184,4;541,3;meter;Hur många meter skiljer det?
@@ -378,13 +359,11 @@ Har Akashi Kaikyo-bron längre eller kortare huvudspann än Brooklynbron?;Akashi
 Är Stonehenge äldre eller yngre än Hagia Sofia?;Stonehenge;Hagia Sofia;5000;1488;år;Hur många år skiljer det?
 Är Cheopspyramiden äldre eller yngre än Hagia Sofia?;Cheopspyramiden;Hagia Sofia;4586;1488;år;Hur många år skiljer det?
 Är Petra äldre eller yngre än Notre-Dame i Paris?;Petra;Notre-Dame i Paris;2050;681;år;Hur många år skiljer det?
-Är Eiffeltornet äldre eller yngre än Angkor Wat?;Eiffeltornet;Angkor Wat;137;875;år;Hur många år skiljer det?
 Är Taj Mahal äldre eller yngre än Eiffeltornet?;Taj Mahal;Eiffeltornet;375;137;år;Hur många år skiljer det?
 Är Machu Picchu äldre eller yngre än Eiffeltornet?;Machu Picchu;Eiffeltornet;575;137;år;Hur många år skiljer det?
 Är CN Tower högre eller lägre än Kaknästornet?;CN Tower;Kaknästornet;553;170;meter;Hur många meter skiljer det?
 Är Oriental Pearl Tower högre eller lägre än Kaknästornet?;Oriental Pearl Tower;Kaknästornet;468;170;meter;Hur många meter skiljer det?
 Är Big Ben högre eller lägre än Burj Khalifa?;Big Ben;Burj Khalifa;96;828;meter;Hur många meter skiljer det?
-Är Tokyo Skytree högre eller lägre än Globen?;Tokyo Skytree;Globen;634;85;meter;Hur många meter skiljer det?
 Är Burj Khalifa högre eller lägre än lutande tornet i Pisa?;Burj Khalifa;Lutande tornet i Pisa;828;56,7;meter;Hur många meter skiljer det?
 Är Burj Khalifa högre eller lägre än Atomium?;Burj Khalifa;Atomium;828;102;meter;Hur många meter skiljer det?
 Är CN Tower högre eller lägre än lutande tornet i Pisa?;CN Tower;Lutande tornet i Pisa;553;56,7;meter;Hur många meter skiljer det?
@@ -406,16 +385,13 @@ Väger en rödräv mer eller mindre än en grävling?;Rödräv;Grävling;6;12;ki
 Väger en huskatt mer eller mindre än en rödräv?;Huskatt;Rödräv;4;6;kilo;Hur många kilo skiljer det?
 Är en gepard snabbare eller långsammare än en pilgrimsfalk i störtdykning?;Gepard;Pilgrimsfalk;110;350;km/h;Hur många km/h skiljer det?
 Springer en gaffelbock fortare eller långsammare än en gepard?;Gaffelbock;Gepard;88;110;km/h;Hur många km/h skiljer det?
-Väger en blåvals tunga mer eller mindre än en människa?;Blåvalstunga;Människa;3600;70;kilo;Hur många kilo skiljer det?
 Springer en greyhound fortare eller långsammare än en gaffelbock?;Greyhound;Gaffelbock;69;88;km/h;Hur många km/h skiljer det?
 Lever en galapagossköldpadda längre eller kortare än en grönlandshaj?;Galapagossköldpadda;Grönlandshaj;180;390;år;Hur många år skiljer det?
 Lever en elefant längre eller kortare än en grönlandsval?;Elefant;Grönlandsval;70;200;år;Hur många år skiljer det?
 Lever en hund längre eller kortare än en huskatt?;Hund;Huskatt;13;16;år;Hur många år skiljer det?
 Lever en galapagossköldpadda längre eller kortare än en grönlandsval?;Galapagossköldpadda;Grönlandsval;180;200;år;Hur många år skiljer det?
 Är dräktighetstiden för en giraff längre eller kortare än för en afrikansk elefant?;Giraff;Afrikansk elefant;450;645;dygn;Hur många dygn skiljer det?
-Är dräktighetstiden för en människa längre eller kortare än för en hund?;Människa;Hund;266;63;dygn;Hur många dygn skiljer det?
 Väger ett strutsägg mer eller mindre än ett hönsägg?;Strutsägg;Hönsägg;1400;60;gram;Hur många gram skiljer det?
-Är dräktighetstiden för en mus längre eller kortare än för en människa?;Mus;Människa;19;266;dygn;Hur många dygn skiljer det?
 Är en valhaj längre eller kortare än en saltvattenskrokodil?;Valhaj;Saltvattenskrokodil;18;5;meter;Hur många meter skiljer det?
 Är en valhaj längre eller kortare än en vithaj?;Valhaj;Vithaj;18;6;meter;Hur många meter skiljer det?
 Är en vithaj längre eller kortare än en saltvattenskrokodil?;Vithaj;Saltvattenskrokodil;6;5;meter;Hur många meter skiljer det?
@@ -479,7 +455,6 @@ Lever en sengångare längre eller kortare än en koala i det vilda?;Sengångare
 Väger en goliatbagge mer eller mindre än en ekoxe?;Goliatbagge;Ekoxe;50;20;gram;Hur många gram skiljer det?
 Väger en flyghund mer eller mindre än en vampyrfladdermus?;Flyghund;Vampyrfladdermus;1000;40;gram;Hur många gram skiljer det?
 Lägger en anka fler eller färre ägg per år än en höna?;Anka;Höna;320;290;ägg;Hur många ägg skiljer det?
-Är en nyfödd giraffkalv högre eller lägre än en vuxen människa?;Giraffkalv;Människa;1,9;1,7;meter;Hur många meter skiljer det?
 Har en saltvattenskrokodil starkare eller svagare bett än ett lejon?;Saltvattenskrokodil;Lejon;3700;1000;PSI;Hur många PSI skiljer det?
 Har en bläckfisk fler eller färre armar och tentakler än en tioarmad bläckfisk?;Bläckfisk;Tioarmad bläckfisk;8;10;armar;Hur många skiljer det?
 Springer en känguru fortare eller långsammare än en emu?;Känguru;Emu;71;50;km/h;Hur många km/h skiljer det?
@@ -590,7 +565,6 @@ Blir en ek i regel äldre eller yngre än ett äppelträd?;Ek;Äppelträd;300;10
 Är Mauna Loa högre eller lägre än Vesuvius?;Mauna Loa;Vesuvius;4169;1281;meter;Hur många meter skiljer det?
 Är Angelfallen högre eller lägre än Niagarafallen?;Angelfallen;Niagarafallen;979;57;meter;Hur många meter skiljer det?
 Är Tugelafallen högre eller lägre än Niagarafallen?;Tugelafallen;Niagarafallen;948;57;meter;Hur många meter skiljer det?
-Är Bajkalsjön djupare eller grundare än Vänern?;Bajkalsjön;Vänern;1642;106;meter;Hur många meter skiljer det?
 Blir en tall i regel äldre eller yngre än en björk?;Tall;Björk;1000;50;år;Hur många år skiljer det?
 Blir en bristleconetall i regel äldre eller yngre än ett äppelträd?;Bristleconetall;Äppelträd;5000;100;år;Hur många år skiljer det?
 Har avokado mer eller mindre energi per 100 gram än banan?;Avokado;Banan;160;89;kcal;Hur många kcal skiljer det?
@@ -1084,3 +1058,29 @@ Levererade Tesla fler eller färre bilar än Volkswagen-koncernen 2023?;Tesla;Vo
 Levererade Tesla fler eller färre bilar än Toyota 2023?;Tesla;Toyota;1,81;11,23;miljoner bilar;Hur många miljoner bilar skiljer det?
 Hade Saudiarabien fler eller färre invånare än Sverige 2024?;Saudiarabien;Sverige;35,3;10,59;miljoner invånare;Hur många miljoner invånare skiljer det?
 Hade Nvidia en större eller mindre årsomsättning än Apple räkenskapsåret 2024/2025?;Nvidia;Apple;130,5;391;miljarder dollar;Hur många miljarder dollar skiljer det?
+Har The Beatles gett ut fler eller färre brittiska studioalbum än The Rolling Stones? (t.o.m. 2024);The Beatles;The Rolling Stones;12;24;studioalbum;Hur många studioalbum skiljer det?
+Skrev Beethoven fler eller färre symfonier än Mozart?;Beethoven;Mozart;9;41;symfonier;Hur många symfonier skiljer det?
+Är Queens Bohemian Rhapsody längre eller kortare än The Beatles Hey Jude?;Bohemian Rhapsody;Hey Jude;355;431;sekunder;Hur många sekunder skiljer det?
+Har Sverige fler eller färre vinster i Eurovision än Storbritannien? (t.o.m. 2024);Sverige;Storbritannien;7;5;vinster;Hur många vinster skiljer det?
+Blev Avicii äldre eller yngre än Jimi Hendrix?;Avicii;Jimi Hendrix;28;27;år;Hur många år skiljer det?
+Fick ABBA:s Waterloo fler eller färre poäng i Eurovision 1974 än Loreens Euphoria fick 2012?;Waterloo (ABBA 1974);Euphoria (Loreen 2012);24;372;poäng;Hur många poäng skiljer det?
+Hade Elvis Presley fler eller färre listettor i USA än The Beatles? (t.o.m. 2024);Elvis Presley;The Beatles;18;20;listettor;Hur många listettor skiljer det?
+Är en cello längre eller kortare än en kontrabas?;Cello;Kontrabas;120;180;centimeter;Hur många centimeter skiljer det?
+Är Miles Davis album Kind of Blue längre eller kortare än John Coltranes A Love Supreme?;Kind of Blue;A Love Supreme;46;33;minuter;Hur många minuter skiljer det?
+Skrev Mozart fler eller färre symfonier än Haydn?;Mozart;Haydn;41;104;symfonier;Hur många symfonier skiljer det?
+Väger en Steinway D-konsertflygel mer eller mindre än en konsertharpa?;Steinway D-flygel;Konsertharpa;480;36;kilo;Hur många kilo skiljer det?
+Har ABBA haft fler eller färre listettor i Storbritannien än The Beatles? (t.o.m. 2024);ABBA;The Beatles;9;18;listettor;Hur många listettor skiljer det?
+Har Mozarts opera Trollflöjten fler eller färre akter än Bizets Carmen?;Trollflöjten;Carmen;2;4;akter;Hur många akter skiljer det?
+Har Max Martin skrivit fler eller färre listettor i USA än John Lennon? (t.o.m. 2024);Max Martin;John Lennon;27;26;listettor;Hur många listettor skiljer det?
+Hade Roxette fler eller färre listettor i USA än ABBA? (t.o.m. 2024);Roxette;ABBA;4;1;listettor;Hur många listettor skiljer det?
+Är ABBA:s Dancing Queen längre eller kortare än The Winner Takes It All?;Dancing Queen;The Winner Takes It All;230;294;sekunder;Hur många sekunder skiljer det?
+Blev Louis Armstrong äldre eller yngre än Miles Davis?;Louis Armstrong;Miles Davis;69;65;år;Hur många år skiljer det?
+Deltog fler eller färre länder i den första Eurovision 1956 än i Eurovision 2024?;Eurovision 1956;Eurovision 2024;7;37;länder;Hur många länder skiljer det?
+Snurrar en LP-skiva fler eller färre varv per minut än en vinylsingel?;LP-skiva;Vinylsingel;33,3;45;varv per minut;Hur många varv per minut skiljer det?
+Har Carola fler eller färre segrar i Melodifestivalen än Loreen? (t.o.m. 2024);Carola;Loreen;3;2;segrar;Hur många segrar skiljer det?
+Har Händels Messias fler eller färre satser än Orffs Carmina Burana?;Messias;Carmina Burana;53;25;satser;Hur många satser skiljer det?
+Hade Paul McCartneys konsert på Maracanã 1990 större eller mindre publik än Bruce Springsteens konsert på Ullevi 1985?;Paul McCartney på Maracanã 1990;Bruce Springsteen på Ullevi 1985;184000;64312;personer;Hur många personer skiljer det?
+Har en konsertharpa fler eller färre strängar än en cello?;Konsertharpa;Cello;47;4;strängar;Hur många strängar skiljer det?
+Har ABBA gett ut fler eller färre studioalbum än Roxette? (t.o.m. 2024);ABBA;Roxette;9;10;studioalbum;Hur många studioalbum skiljer det?
+Hade Woodstockfestivalen 1969 större eller mindre publik än Live Aid på Wembley 1985?;Woodstockfestivalen 1969;Live Aid Wembley 1985;400000;72000;personer;Hur många personer skiljer det?
+Har den högsta tonen på ett piano högre eller lägre frekvens än den lägsta tonen?;Pianots högsta ton (C8);Pianots lägsta ton (A0);4186;27,5;hertz;Hur många hertz skiljer det?
