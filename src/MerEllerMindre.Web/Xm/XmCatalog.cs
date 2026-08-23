@@ -13,9 +13,14 @@ public sealed class XmCatalog
 {
     public XmSpec Blindbudet { get; }
     public EmSpec BlindbudetModel { get; }
+    public XmSpec TankTillTusen { get; }
+    public EmSpec TankTillTusenModel { get; }
 
-    public XmCatalog(string specsDirectory) =>
+    public XmCatalog(string specsDirectory)
+    {
         (Blindbudet, BlindbudetModel) = Load(Path.Combine(specsDirectory, "blindbudet.xm.yaml"));
+        (TankTillTusen, TankTillTusenModel) = Load(Path.Combine(specsDirectory, "tank-till-tusen.xm.yaml"));
+    }
 
     private static (XmSpec Xm, EmSpec Em) Load(string xmPath)
     {

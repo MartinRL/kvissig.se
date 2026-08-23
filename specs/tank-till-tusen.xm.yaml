@@ -1,0 +1,252 @@
+# Tänk Till Tusen — Experience Model (xmlang v0.2.0), reverse-engineered AS-IMPLEMENTED from
+# the shipped UI (Components/TankTillTusen/*.razor, TankScreenModels.cs, playful.css)
+# against specs/tank-till-tusen-event-model.yaml. Judgments were read off the running
+# product and recorded as data; nothing here is invented.
+#
+# Findings (sister notes to blindbudet.xm.yaml's; numbering continues that file's spirit):
+#   1. Same EM smell: view lanes are named `Screen / …` (surfaces, not data nouns) —
+#      referenced as-is; the EM rename decision lands at the MEM roll-over.
+#   2. Bare command forms: JoinGame composes no view → served by the transformer's
+#      defaults (CommandDefaultPage). OpenLobby's REAL form however carries a difficulty
+#      hidden field + a roundCount slider — richer than the defaults contract, so the
+#      host form OPTS OUT to hand-written Razor (the sanctioned escape hatch; never new
+#      spec syntax).
+#   3. EM/UI divergence, same as BB: AskNextPuzzle/EndGame are ⚙️ System processors in
+#      the EM but explicit host buttons in the UI ("Nästa pussel" / "Visa slutställning")
+#      — as-implemented, both are composed on RundresultatVärd. ScoreRound stays a true
+#      gear (fires on any poll), composed nowhere.
+#   4. Host/player variants (lobby, round results) = the shared view composed twice with
+#      different salience/commands, exactly the BB pattern.
+#   5. The räknartejp puzzle builder (tiles, operators, tape, undo, cosmetic countdown,
+#      timeout auto-lock) is concrete-UI stratum: an idiom component, correctly
+#      inexpressible in xmlang.
+#   6. Katalog carries no `during:` — stream-less reference data (three fixed difficulty
+#      rows; TankPhase's NotCreated is a C# sentinel, not an EM phase).
+#   7. The started-phase player split (Pussel vs Väntan vs Rundresultat: has the viewer
+#      locked? is the round scored?) is the fine selection v0.2 declares inexpressible —
+#      it stays a hand-written selector in the concrete stratum.
+
+xmlang: "0.2"
+model: tank-till-tusen-event-model.yaml
+
+personas:
+  Värd:
+    role: 🧑‍🏫 host
+    props:
+      goal: pick a nivå, open and start the game, drive the reveal pacing — and play along
+      device: phone in hand
+      context: co-located party, one room, everyone on their own screen
+  Spelare:
+    role: 🧑‍🎓 Player
+    props:
+      goal: join via QR/link, race the clock to build the target with the four räknesätt
+      device: phone in hand
+      context: co-located party, one room
+
+surfaces:
+  Katalog:
+    # no during: — stream-less reference data (finding 6)
+    compose:
+      - v: Screen / Quiz catalog
+      - c: OpenLobby
+        prominence: primary
+
+  LobbyVärd:
+    during: [lobby]
+    for: [Värd]
+    compose:
+      - v: Screen / Game lobby
+        self: players.playerId
+        fields:
+          primary: [joinCode, players]
+          on-demand: [gameId]
+      - c: StartGame
+        prominence: primary
+
+  LobbySpelare:
+    during: [lobby]
+    for: [Spelare]
+    compose:
+      - v: Screen / Game lobby
+        self: players.playerId
+        fields:
+          primary: [players]
+          on-demand: [joinCode, gameId]
+
+  Pussel:
+    during: [started]
+    compose:
+      - v: Screen / Puzzle
+        fields:
+          primary: [target, numbers]
+          secondary: [roundIndex, totalRounds, deadline]
+          on-demand: [gameId]
+      - c: SubmitSolution      # the build itself is the räknartejp idiom (finding 5)
+        prominence: primary
+
+  Väntan:
+    during: [started]
+    compose:
+      - v: Screen / Waiting for others
+        # identity lives in the id lists themselves; the viewer is by construction in
+        # submittedPlayerIds (you only see Väntan after locking) — "du · klar"
+        self: submittedPlayerIds
+        fields:
+          primary: [pendingPlayerIds]
+          secondary: [submittedPlayerIds, roundIndex]
+          on-demand: [gameId]
+
+  RundresultatVärd:
+    during: [started]
+    for: [Värd]
+    compose:
+      - v: Screen / Round results
+        self: playerResults.playerId
+        fields:
+          primary: [target, sampleSolution, playerResults]
+          secondary: [roundIndex]
+          on-demand: [gameId]
+      - c: AskNextPuzzle       # see finding 3: System processor in the EM, host button in the UI
+        prominence: primary
+      - c: EndGame             # see finding 3
+        prominence: primary
+
+  RundresultatSpelare:
+    during: [started]
+    for: [Spelare]
+    compose:
+      - v: Screen / Round results
+        self: playerResults.playerId
+        fields:
+          primary: [target, sampleSolution, playerResults]
+          secondary: [roundIndex]
+          on-demand: [gameId]
+
+  Slutställning:
+    during: [ended]
+    compose:
+      - v: Screen / Final standings
+        fields:
+          primary: [finalScoreboard, winnerIds]
+          on-demand: [gameId]
+
+journeys:
+  VärdensSpel:
+    for: [Värd]
+    slices:
+      - ✍️ Open Lobby
+      - ✍️ Start Game
+      - ✍️ Submit Solution
+      - ✍️ Score Round
+      - ✍️ Ask Next Puzzle
+      - ✍️ End Game
+  SpelarensPussel:
+    for: [Spelare]
+    slices:
+      - ✍️ Join Game
+      - ✍️ Submit Solution
+      - ✍️ Score Round
+
+# Copy harvested verbatim from the Razor components (sv-SE, playful/informal register).
+# v0.2 nested labels: keys are EXACT element names (no dotted paths); $self = the
+# element's own label beside field keys.
+labels:
+  sv:
+    register: lekfull, informell
+    # commands (+ their form fields)
+    OpenLobby:
+      $self: Skapa spel
+      hostName: Ditt namn
+      difficulty: Nivå
+      roundCount: Antal pussel
+    JoinGame:
+      $self: Gå med
+      playerName: Ditt namn
+    StartGame: Starta spel
+    SubmitSolution: Lås svar!
+    AskNextPuzzle: Nästa pussel
+    EndGame: Visa slutställning
+    # view fields
+    "Screen / Game lobby":
+      players: Spelare
+    "Screen / Puzzle":
+      target: Nå så nära du kan
+    "Screen / Waiting for others":
+      submittedPlayerIds: Klara
+      pendingPlayerIds: Väntar på
+    "Screen / Round results":
+      target: Mål
+      sampleSolution: Ett sätt
+      playerResults: Poäng
+    "Screen / Final standings":
+      finalScoreboard: Slutställning
+    # surfaces (their on-screen headings)
+    Katalog: Välj nivå
+    LobbyVärd: Skanna för att gå med
+    LobbySpelare: Du är med! 🎉
+    Väntan: Ditt svar är låst ✓
+    Slutställning: Slutställning
+    # personas
+    Värd: Värd
+    Spelare: Spelare
+
+# Sanctioned visual vocabulary (DTCG), transcribed from wwwroot/css/playful.css :root —
+# the same shared palette as the sister specs (one site, one skin).
+tokens:
+  color:
+    bg:
+      $type: color
+      $value: "#fff7ec"
+    bg-2:
+      $type: color
+      $value: "#ffeccf"
+    ink:
+      $type: color
+      $value: "#2b2118"
+    ink-soft:
+      $type: color
+      $value: "#7a6a58"
+    card:
+      $type: color
+      $value: "#fffdf9"
+    line:
+      $type: color
+      $value: "#f0e0c8"
+    mer:
+      $type: color
+      $value: "#21c08a"
+    mer-deep:
+      $type: color
+      $value: "#12805c"
+    mer-ink:
+      $type: color
+      $value: "#06281f"
+    mindre:
+      $type: color
+      $value: "#ffab40"
+    mindre-deep:
+      $type: color
+      $value: "#e07f0e"
+    mindre-ink:
+      $type: color
+      $value: "#3a2300"
+    accent:
+      $type: color
+      $value: "#ff5d73"
+    accent-2:
+      $type: color
+      $value: "#ff8a3d"
+  radius:
+    md:
+      $type: dimension
+      $value: 22px
+    sm:
+      $type: dimension
+      $value: 16px
+  font:
+    display:
+      $type: fontFamily
+      $value: ["Baloo 2", system-ui, sans-serif]
+    body:
+      $type: fontFamily
+      $value: [Nunito, system-ui, sans-serif]

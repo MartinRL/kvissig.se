@@ -2,6 +2,7 @@ using System.Net;
 using System.Text.RegularExpressions;
 using AwesomeAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
 namespace MerEllerMindre.Web.Tests;
@@ -79,6 +80,15 @@ public sealed class TankEndpointsTests : IClassFixture<TestAppFactory>
 
     private static async Task Next(HttpClient host, string code) =>
         await host.PostAsync($"/tank-till-tusen/{code}/next", Form(Token(await State(host, code))));
+
+    [Fact]
+    public void XmCatalog_LoadsAndLintsTheTankSpecPairAtStartup()
+    {
+        var xm = Factory.Services.GetRequiredService<Web.Xm.XmCatalog>();
+
+        xm.TankTillTusen.Surfaces.Should().NotBeEmpty();
+        xm.TankTillTusenModel.PhaseValues.Should().Contain(["lobby", "started", "ended"]);
+    }
 
     [Fact]
     public async Task Catalog_ListsTheThreeDifficulties()
