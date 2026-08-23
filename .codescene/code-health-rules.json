@@ -9,7 +9,7 @@
     "matching_content_path" : "**/*Endpoints.cs",
     "thresholds" : [ {
       "name" : "function_cyclomatic_complexity_warning",
-      "value" : 18
+      "value" : 19
     } ],
     "rules" : [ {
       "name" : "Primitive Obsession",

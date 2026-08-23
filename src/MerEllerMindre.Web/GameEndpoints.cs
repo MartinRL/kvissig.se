@@ -192,19 +192,27 @@ public static class GameEndpoints
         return Rendered(d.Svc.Load(gameId), d.Identity.GetPlayer(http, gameId), d, http);
     }
 
-    private static IResult PostDirection(string code, [FromForm] string direction, [AsParameters] GameDeps d, HttpContext http)
+    /// <summary>The shared guess-post shape: resolve game → identify viewer → submit → re-render.
+    /// The two stages differ only in how the form value parses into a command + gear.</summary>
+    private static IResult PostGuess(string code, GameDeps d, HttpContext http, Action<Guid, Guid> submit)
     {
         if (Resolve(d.Svc, code) is not var (gameId, _))
             return Results.NotFound("Spelet hittades inte.");
 
         var viewer = d.Identity.GetPlayer(http, gameId);
-        if (viewer is { } playerId && Enum.TryParse<Direction>(direction, out var dir))
-        {
-            d.Svc.Execute(gameId, new SubmitDirection(gameId, playerId, dir));
-            d.Svc.RunRevealDirectionGear(gameId);
-        }
+        if (viewer is { } playerId)
+            submit(gameId, playerId);
         return Rendered(d.Svc.Load(gameId), viewer, d, http);
     }
+
+    private static IResult PostDirection(string code, [FromForm] string direction, [AsParameters] GameDeps d, HttpContext http) =>
+        PostGuess(code, d, http, (gameId, playerId) =>
+        {
+            if (!Enum.TryParse<Direction>(direction, out var dir))
+                return;
+            d.Svc.Execute(gameId, new SubmitDirection(gameId, playerId, dir));
+            d.Svc.RunRevealDirectionGear(gameId);
+        });
 
     // Mellansteg → slider: render the stage-2 question once the direction is revealed.
     private static IResult GetDifference(string code, [AsParameters] GameDeps d, HttpContext http)
@@ -226,20 +234,14 @@ public static class GameEndpoints
         return state.Phase == GamePhase.Started && state.DirectionRevealed(i) && !state.Questions[i].Scored;
     }
 
-    private static IResult PostDifference(string code, [FromForm] string guessedDifference, [AsParameters] GameDeps d, HttpContext http)
-    {
-        if (Resolve(d.Svc, code) is not var (gameId, _))
-            return Results.NotFound("Spelet hittades inte.");
-
-        var viewer = d.Identity.GetPlayer(http, gameId);
-        if (viewer is { } playerId
-            && decimal.TryParse(guessedDifference, NumberStyles.Number, CultureInfo.InvariantCulture, out var diff))
+    private static IResult PostDifference(string code, [FromForm] string guessedDifference, [AsParameters] GameDeps d, HttpContext http) =>
+        PostGuess(code, d, http, (gameId, playerId) =>
         {
+            if (!decimal.TryParse(guessedDifference, NumberStyles.Number, CultureInfo.InvariantCulture, out var diff))
+                return;
             d.Svc.Execute(gameId, new SubmitDifference(gameId, playerId, diff));
             d.Svc.RunScoreDifferenceGear(gameId);
-        }
-        return Rendered(d.Svc.Load(gameId), viewer, d, http);
-    }
+        });
 
     private static IResult PostNext(string code, [AsParameters] GameDeps d, HttpContext http)
     {
