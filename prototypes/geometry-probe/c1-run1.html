@@ -1,0 +1,772 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Blindbudet — xm clean-room-prototyp (c1-run1)</title>
+<style>
+/* Tokens transcribed 1:1 from blindbudet.xm.yaml (DTCG) — the sanctioned vocabulary. */
+:root{
+  --color-bg:#fff7ec; --color-bg-2:#ffeccf; --color-ink:#2b2118; --color-ink-soft:#7a6a58;
+  --color-card:#fffdf9; --color-line:#f0e0c8;
+  --color-mer:#21c08a; --color-mer-deep:#12805c; --color-mer-ink:#06281f;
+  --color-mindre:#ffab40; --color-mindre-deep:#e07f0e; --color-mindre-ink:#3a2300;
+  --color-accent:#ff5d73; --color-accent-2:#ff8a3d;
+  --radius-md:22px; --radius-sm:16px;
+  --font-display:"Baloo 2",system-ui,sans-serif;
+  --font-body:Nunito,system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; padding:20px 16px 40px;
+  font-family:var(--font-body); color:var(--color-ink);
+  background:linear-gradient(180deg,var(--color-bg),var(--color-bg-2));
+  min-height:100vh;
+}
+header{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-start;justify-content:space-between;max-width:1200px;margin:0 auto 14px}
+h1{font-family:var(--font-display);font-size:2rem;margin:0;color:var(--color-accent)}
+.sub{margin:2px 0 0;color:var(--color-ink-soft);font-size:.85rem;max-width:640px}
+.hdr-right{display:flex;gap:10px;align-items:center}
+.badge{border:none;cursor:pointer;font-family:var(--font-display);font-size:1rem;padding:8px 16px;border-radius:999px;color:#fff}
+.badge.pass{background:var(--color-mer-deep)}
+.badge.fail{background:var(--color-accent)}
+.btn{font-family:var(--font-display);border:none;cursor:pointer;border-radius:var(--radius-sm);padding:10px 18px;font-size:1rem}
+.btn.primary{background:var(--color-accent);color:#fff;box-shadow:0 3px 0 rgba(43,33,24,.25)}
+.btn.primary:active{transform:translateY(2px);box-shadow:none}
+.btn.primary:disabled{background:var(--color-line);color:var(--color-ink-soft);box-shadow:none;cursor:not-allowed}
+.btn.ghost{background:transparent;border:2px solid var(--color-line);color:var(--color-ink-soft);padding:6px 14px;font-size:.85rem}
+#testReportWrap{max-width:1200px;margin:0 auto 18px;background:var(--color-card);border:1px solid var(--color-line);border-radius:var(--radius-sm);padding:10px 16px;font-size:.85rem}
+#testReportWrap summary{cursor:pointer;font-family:var(--font-display);color:var(--color-ink-soft)}
+#testReport table{border-collapse:collapse;width:100%;margin-top:8px}
+#testReport td{padding:3px 8px;border-top:1px solid var(--color-line);vertical-align:top}
+#testReport .ok{color:var(--color-mer-deep);font-weight:700}
+#testReport .bad{color:var(--color-accent);font-weight:700}
+#testReport .slice{color:var(--color-ink-soft)}
+#testReport pre{margin:4px 0 0;white-space:pre-wrap;font-size:.75rem;color:var(--color-accent)}
+.frames{display:flex;flex-wrap:wrap;gap:22px;justify-content:center;align-items:flex-start;max-width:1200px;margin:0 auto}
+/* Phone frame chrome = concrete-stratum presentation, not model geometry. */
+.phone{width:340px;background:var(--color-ink);border-radius:38px;padding:12px 10px 16px;box-shadow:0 12px 30px rgba(43,33,24,.25)}
+.phone .notch{width:110px;height:8px;border-radius:999px;background:#5a4a3a;margin:0 auto 8px}
+.screen{background:var(--color-card);border-radius:28px;min-height:560px;padding:14px 14px 18px;display:flex;flex-direction:column;gap:10px}
+.persona-tag{align-self:flex-start;font-family:var(--font-display);font-size:.8rem;padding:3px 12px;border-radius:999px;color:#fff}
+.persona-tag.vard{background:var(--color-accent)}
+.persona-tag.spelare{background:var(--color-mer-deep)}
+.surface h2{font-family:var(--font-display);font-size:1.35rem;margin:2px 0 8px;color:var(--color-ink)}
+.card{background:var(--color-bg);border:1px solid var(--color-line);border-radius:var(--radius-md);padding:14px}
+.pri{font-size:1.05rem}
+.pri .big{font-family:var(--font-display);font-size:1.5rem;line-height:1.2}
+.sec{color:var(--color-ink-soft);font-size:.82rem;margin-top:6px}
+details.od{margin-top:10px;font-size:.78rem;color:var(--color-ink-soft)}
+details.od summary{cursor:pointer}
+details.od code{background:var(--color-bg-2);padding:1px 6px;border-radius:6px}
+.fieldlbl{display:block;font-size:.8rem;color:var(--color-ink-soft);margin:10px 0 4px;font-weight:700}
+input[type=text],input[type=number]{
+  width:100%;padding:10px 12px;font-size:1.05rem;font-family:var(--font-body);
+  border:2px solid var(--color-line);border-radius:var(--radius-sm);background:#fff;color:var(--color-ink);
+}
+input:focus{outline:2px solid var(--color-mindre);border-color:var(--color-mindre)}
+.playerlist{list-style:none;margin:6px 0 0;padding:0}
+.playerlist li{display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:var(--radius-sm);background:#fff;border:1px solid var(--color-line);margin-bottom:6px}
+.playerlist .dot{width:10px;height:10px;border-radius:50%;background:var(--color-mer)}
+.playerlist .host .dot{background:var(--color-accent)}
+.youchip{margin-left:auto;font-size:.7rem;font-family:var(--font-display);background:var(--color-mindre);color:var(--color-mindre-ink);padding:2px 8px;border-radius:999px}
+.joincode{font-family:var(--font-display);font-size:1.15rem;letter-spacing:.05em;background:#fff;border:2px dashed var(--color-mindre-deep);border-radius:var(--radius-sm);padding:8px 12px;text-align:center;color:var(--color-mindre-deep);word-break:break-all}
+.err{background:var(--color-accent);color:#fff;border-radius:var(--radius-sm);padding:8px 12px;font-size:.85rem;font-family:var(--font-display)}
+.hint{color:var(--color-ink-soft);font-size:.85rem;font-style:italic}
+.scorelist{list-style:none;margin:8px 0 0;padding:0}
+.scorelist li{display:flex;align-items:baseline;gap:8px;background:#fff;border:1px solid var(--color-line);border-radius:var(--radius-sm);padding:8px 10px;margin-bottom:6px}
+.scorelist .nm{font-weight:700}
+.scorelist .profit{margin-left:auto;font-family:var(--font-display)}
+.scorelist .total{color:var(--color-ink-soft);font-size:.8rem;min-width:64px;text-align:right}
+.scorelist li.winner{border-color:var(--color-mer);background:#f0fbf6}
+.scorelist li.me{outline:2px solid var(--color-mindre)}
+.mark.good{color:var(--color-mer-deep);font-weight:900}
+.mark.bad{color:var(--color-accent);font-weight:900}
+.trueworth{font-family:var(--font-display);font-size:1.8rem;color:var(--color-mer-deep);text-align:center;margin:4px 0}
+.nowinner{background:var(--color-bg-2);border-radius:var(--radius-sm);padding:8px 12px;text-align:center;font-family:var(--font-display);color:var(--color-mindre-deep)}
+.packpick{display:flex;flex-direction:column;gap:8px;margin-top:6px}
+.packpick label{display:flex;gap:10px;align-items:center;background:#fff;border:2px solid var(--color-line);border-radius:var(--radius-sm);padding:10px 12px;cursor:pointer}
+.packpick label:has(input:checked){border-color:var(--color-accent);background:#fff2f4}
+.packpick .pname{font-family:var(--font-display)}
+.packpick .pcount{margin-left:auto;color:var(--color-ink-soft);font-size:.8rem}
+.actions{margin-top:12px;display:flex;flex-direction:column;gap:8px}
+.devbar{margin-top:auto;padding-top:10px;font-size:.68rem;color:var(--color-ink-soft);border-top:1px dashed var(--color-line)}
+.bidunit{display:flex;gap:8px;align-items:center}
+.bidunit .unit{color:var(--color-ink-soft);font-size:.9rem;white-space:nowrap}
+.waitfx{text-align:center;font-size:2rem;margin:8px 0}
+footer{max-width:1200px;margin:26px auto 0;color:var(--color-ink-soft);font-size:.78rem;text-align:center}
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>Blindbudet</h1>
+    <p class="sub">Clean-room-prototyp ur spec-paret <code>blindbudet-event-model.yaml</code> + <code>blindbudet.xm.yaml</code> (xmlang 0.2). JS-decider + xm-ytor, en telefonram per persona.</p>
+  </div>
+  <div class="hdr-right">
+    <button id="testBadge" class="badge" title="Klicka för testrapport">GWT …</button>
+    <button id="resetBtn" class="btn ghost" title="Nollställ eventloggen">Börja om</button>
+  </div>
+</header>
+<details id="testReportWrap"><summary>Testrapport: inbäddade GWT-fall ur eventmodellen</summary><div id="testReport"></div></details>
+<main id="frames" class="frames"></main>
+<footer>
+  Reveal är en ⚙️ System-gear (fyrar automatiskt när alla bud är inne); Nästa budrunda / Visa slutställning är värd-knappar per xm finding 3.
+  Överbud diskas (✗, aldrig negativt). HÖGST total vinner.
+</footer>
+<script>
+"use strict";
+/* ============================================================
+ * 1. Reference data (Pack catalog — stream-less, xm finding 7)
+ * ============================================================ */
+const PACKS = [
+  { packId:"blindbudet", name:"Blindbudet", lots:[
+    { description:"Mount Everests höjd över havet", trueWorth:8849, unit:"meter" },
+    { description:"Antal tangenter på ett standardpiano", trueWorth:88, unit:"tangenter" },
+    { description:"Eiffeltornets höjd (med antenn)", trueWorth:330, unit:"meter" },
+  ]},
+  { packId:"rymden", name:"Rymden", lots:[
+    { description:"Medelavståndet jorden–månen", trueWorth:384400, unit:"kilometer" },
+    { description:"Antal planeter i solsystemet", trueWorth:8, unit:"planeter" },
+  ]},
+];
+
+/* ============================================================
+ * 2. Decider — evolve: (State, Event) -> State
+ *              decide: (State, Command, Ctx) -> {events} | {error}
+ * ============================================================ */
+const freshRound = lot => ({ lot, bids:{}, trueWorth:null, winnerIds:[], pricePaid:null, profits:{}, resolved:false });
+
+function evolve(s, ev) {
+  switch (ev.type) {
+    case "AuctionOpened": return {
+      gameId: ev.gameId ?? null, joinCode: ev.joinCode ?? null, phase:"lobby",
+      hostPlayerId: ev.hostPlayerId, packId: ev.packId ?? null,
+      players: [{ playerId: ev.hostPlayerId, name: ev.hostName, isHost:true }],
+      currentLotIndex: 0,
+      lots: ev.lots.map(freshRound),
+      finalScoreboard: null, winnerIds: null,
+    };
+    case "PlayerJoined": return { ...s,
+      players: [...s.players, { playerId: ev.playerId, name: ev.playerName, isHost:false }] };
+    case "AuctionStarted": return { ...s, phase:"started", currentLotIndex: ev.firstLotIndex ?? 0 };
+    case "BidPlaced": return { ...s,
+      lots: s.lots.map((lr,i)=> i===ev.lotIndex ? { ...lr, bids:{ ...lr.bids, [ev.playerId]: ev.amount } } : lr) };
+    case "LotRevealed": return { ...s,
+      lots: s.lots.map((lr,i)=> i===ev.lotIndex ? { ...lr, trueWorth: ev.trueWorth, winnerIds: ev.winnerIds, pricePaid: ev.pricePaid, resolved:true } : lr) };
+    case "RoundScored": return { ...s,
+      lots: s.lots.map((lr,i)=> i===ev.lotIndex ? { ...lr, profits:{ ...lr.profits, [ev.playerId]: ev.profit } } : lr) };
+    case "NextLotStarted": return { ...s, currentLotIndex: ev.lotIndex };
+    case "AuctionEnded": return { ...s, phase:"ended", finalScoreboard: ev.finalScoreboard, winnerIds: ev.winnerIds };
+    default: return s;
+  }
+}
+const fold = events => events.reduce(evolve, null);
+
+/* DERIVED helpers (single source of truth in lots + players) */
+const pendingBidPlayerIds = (s,i) => s.players.map(p=>p.playerId).filter(id => !(id in s.lots[i].bids));
+const allBidsIn  = (s,i) => pendingBidPlayerIds(s,i).length === 0;
+const hasNextLot = s => s.currentLotIndex + 1 < s.lots.length;
+const totalScore = (s,pid) => s.lots.reduce((sum,lr)=> sum + (lr.resolved ? (lr.profits[pid] ?? 0) : 0), 0);
+
+function decide(s, cmd, ctx) {
+  const err = e => ({ error: e });
+  const ok  = (...events) => ({ events });
+  switch (cmd.type) {
+    case "OpenAuction": {
+      const pack = ctx.findPack(cmd.packId);
+      if (!pack) return err("AuctionPackNotFound");
+      return ok({ type:"AuctionOpened", gameId: ctx.newId(), hostPlayerId: ctx.newId(),
+        hostName: cmd.hostName, joinCode: ctx.newId(), packId: pack.packId,
+        lots: pack.lots, openedAt: ctx.now() });
+    }
+    case "JoinAuction": {
+      if (!s || s.joinCode !== cmd.joinCode) return err("AuctionNotFound");
+      if (s.phase !== "lobby") return err("AuctionAlreadyStarted");
+      if (s.players.some(p => p.name === cmd.playerName)) return err("NameAlreadyTaken");
+      return ok({ type:"PlayerJoined", gameId: s.gameId, playerId: ctx.newId(),
+        playerName: cmd.playerName, joinedAt: ctx.now() });
+    }
+    case "StartAuction": {
+      if (!s) return err("AuctionNotFound");
+      if (s.players.length < 2) return err("NotEnoughPlayers");
+      return ok({ type:"AuctionStarted", gameId: s.gameId, firstLotIndex: 0, startedAt: ctx.now() });
+    }
+    case "PlaceBid": {
+      if (!s) return err("AuctionNotFound");
+      if (cmd.amount < 0) return err("BidNegative");
+      const lr = s.lots[cmd.lotIndex];
+      if (lr.resolved) return err("LotAlreadyResolved");
+      if (cmd.playerId in lr.bids) return err("AlreadyBid");
+      return ok({ type:"BidPlaced", gameId: s.gameId, playerId: cmd.playerId,
+        lotIndex: cmd.lotIndex, amount: cmd.amount, bidAt: ctx.now() });
+    }
+    case "RevealLot": {
+      const lr = s.lots[cmd.lotIndex];
+      if (lr.resolved) return err("LotAlreadyResolved");
+      if (!allBidsIn(s, cmd.lotIndex)) return err("NotAllBidsIn");
+      const tw = lr.lot.trueWorth;
+      const valid = Object.entries(lr.bids).filter(([,a]) => a <= tw);
+      const winningBid = valid.length ? Math.max(...valid.map(([,a])=>a)) : null;
+      const winnerIds = winningBid === null ? []
+        : s.players.map(p=>p.playerId).filter(id => lr.bids[id] === winningBid);
+      const winnerProfit = winningBid === null ? 0
+        : (winningBid === tw ? 10 : Math.round((tw - winningBid) / tw * 100));
+      return ok(
+        { type:"LotRevealed", gameId: s.gameId, lotIndex: cmd.lotIndex, trueWorth: tw,
+          winnerIds, pricePaid: winningBid ?? 0 },
+        ...s.players.map(p => {
+          const profit = winnerIds.includes(p.playerId) ? winnerProfit : 0;
+          return { type:"RoundScored", gameId: s.gameId, lotIndex: cmd.lotIndex,
+            playerId: p.playerId, profit, totalScore: totalScore(s, p.playerId) + profit };
+        })
+      );
+    }
+    case "AskNextLot":
+      return ok({ type:"NextLotStarted", gameId: s.gameId, lotIndex: s.currentLotIndex + 1 });
+    case "EndAuction": {
+      const board = s.players.map(p => ({ playerId: p.playerId, playerName: p.name, totalScore: totalScore(s, p.playerId) }));
+      const top = Math.max(...board.map(b => b.totalScore));   // HIGHEST total wins — the opposite of MEM
+      return ok({ type:"AuctionEnded", gameId: s.gameId, finalScoreboard: board,
+        winnerIds: board.filter(b => b.totalScore === top).map(b => b.playerId), endedAt: ctx.now() });
+    }
+    default: return err("UnknownCommand");
+  }
+}
+
+/* ============================================================
+ * 3. Projections — pure GameState -> View
+ * ============================================================ */
+const Projections = {
+  roster: s => ({ gameId: s.gameId, joinCode: s.joinCode, players: s.players }),
+  lotCard: s => ({ gameId: s.gameId, lotIndex: s.currentLotIndex, totalLots: s.lots.length,
+    description: s.lots[s.currentLotIndex].lot.description, unit: s.lots[s.currentLotIndex].lot.unit }),
+  bidProgress: s => ({ gameId: s.gameId, lotIndex: s.currentLotIndex,
+    submittedPlayerIds: s.players.map(p=>p.playerId).filter(id => id in s.lots[s.currentLotIndex].bids),
+    pendingPlayerIds: pendingBidPlayerIds(s, s.currentLotIndex) }),
+  roundScores: s => { const i = s.currentLotIndex, lr = s.lots[i]; return {
+    gameId: s.gameId, lotIndex: i, trueWorth: lr.trueWorth, winnerIds: lr.winnerIds, pricePaid: lr.pricePaid,
+    playerProfits: s.players.map(p => ({ playerId: p.playerId, profit: lr.profits[p.playerId] ?? 0, totalScore: totalScore(s, p.playerId) })) }; },
+  scoreboard: s => ({ gameId: s.gameId, finalScoreboard: s.finalScoreboard, winnerIds: s.winnerIds }),
+  outstandingBids: s => ({ gameId: s.gameId,
+    lots: s.lots.map((lr,i)=>({ lotIndex:i, pendingPlayerIds: pendingBidPlayerIds(s,i), allBidsIn: allBidsIn(s,i) })) }),
+  auctionProgress: s => ({ gameId: s.gameId, lotIndex: s.currentLotIndex, totalLots: s.lots.length,
+    resolvedLotCount: s.lots.filter(lr=>lr.resolved).length, hasNextLot: hasNextLot(s) }),
+};
+
+/* ============================================================
+ * 4. Embedded GWT test cases (verbatim from the Event Model)
+ * ============================================================ */
+const WILD = new Set(["minted","openedAt","joinedAt","startedAt","bidAt","endedAt"]);
+function subsetMatch(exp, act) {
+  if (typeof exp === "string" && WILD.has(exp)) return act !== undefined && act !== null;
+  if (Array.isArray(exp)) return Array.isArray(act) && exp.length === act.length && exp.every((e,i)=>subsetMatch(e, act[i]));
+  if (exp !== null && typeof exp === "object")
+    return act !== null && typeof act === "object" && Object.keys(exp).every(k => subsetMatch(exp[k], act[k]));
+  return exp === act;
+}
+
+/* Fixtures (spec appendix) */
+const L0 = { description:"lot0", trueWorth:100, unit:"lot0U" };
+const L1 = { description:"lot1", trueWorth:50,  unit:"lot1U" };
+const hostMartin = { playerId:"martinId", name:"Martin", isHost:true };
+const playerNils = { playerId:"nilsId",   name:"Nils",   isHost:false };
+const LR = (lot, bids, rev) => ({ lot, bids, trueWorth: rev?rev.trueWorth:null, winnerIds: rev?rev.winnerIds:[],
+  pricePaid: rev?rev.pricePaid:null, profits: rev?rev.profits:{}, resolved: !!rev });
+const FX = {
+  lot0Fresh: () => LR(L0, {}),
+  lot1Fresh: () => LR(L1, {}),
+  lot0Nils50: () => LR(L0, { nilsId:50 }),
+  lot0MartinOnly: () => LR(L0, { martinId:70 }),
+  lot0BothIn: () => LR(L0, { martinId:70, nilsId:90 }),
+  lot0MartinOverbid: () => LR(L0, { martinId:110, nilsId:80 }),
+  lot0Tied80: () => LR(L0, { martinId:80, nilsId:80 }),
+  lot0Exact100: () => LR(L0, { martinId:100, nilsId:100 }),
+  lot0AllOverbid: () => LR(L0, { martinId:120, nilsId:110 }),
+  lot0Resolved: () => LR(L0, { martinId:70, nilsId:90 }, { trueWorth:100, winnerIds:["nilsId"], pricePaid:90, profits:{ martinId:0, nilsId:10 } }),
+  lot0Scored: () => LR(L0, { martinId:70, nilsId:90 }, { trueWorth:100, winnerIds:["nilsId"], pricePaid:90, profits:{ martinId:0, nilsId:10 } }),
+  lot0ResolvedFull: () => LR(L0, { martinId:70, nilsId:90 }, { trueWorth:100, winnerIds:["nilsId"], pricePaid:90, profits:{ martinId:0, nilsId:10 } }),
+  lot1BothIn: () => LR(L1, { martinId:40, nilsId:60 }),
+  lot0Profits20And0: () => LR(L0, { martinId:80, nilsId:110 }, { trueWorth:100, winnerIds:["martinId"], pricePaid:80, profits:{ martinId:20, nilsId:0 } }),
+  lot1Profits0And5: () => LR(L1, { martinId:60, nilsId:47.5 }, { trueWorth:50, winnerIds:["nilsId"], pricePaid:47.5, profits:{ martinId:0, nilsId:5 } }),
+  lot0Profits10Each: () => LR(L0, { martinId:100, nilsId:100 }, { trueWorth:100, winnerIds:["martinId","nilsId"], pricePaid:100, profits:{ martinId:10, nilsId:10 } }),
+  lot1Profits5Each: () => LR(L1, { martinId:47.5, nilsId:47.5 }, { trueWorth:50, winnerIds:["martinId","nilsId"], pricePaid:47.5, profits:{ martinId:5, nilsId:5 } }),
+};
+const mkState = p => ({ gameId:"gameId", joinCode: p.joinCode ?? "joinCode", phase: p.phase,
+  hostPlayerId: p.hostPlayerId ?? "martinId", packId:"blindbudet",
+  players: p.players ?? [hostMartin], currentLotIndex: p.currentLotIndex ?? 0,
+  lots: p.lots ?? [], finalScoreboard: null, winnerIds: null });
+const testCtx = () => { let n = 0; return {
+  findPack: slug => slug === "blindbudet" ? { packId:"blindbudet", name:"Blindbudet", lots:[L0,L1] } : null,
+  newId: () => "minted-" + (++n), now: () => "2026-08-23T00:00:00Z" }; };
+
+/* Each case: slice, name, then either
+ *  cmd form:  given (state|null), when (command), then {events|error}
+ *  proj form: givenEvents, project (fn name), then view props
+ *  state form: givenEvents, thenState (subset of folded state) */
+const openedFx = p => ({ type:"AuctionOpened", hostPlayerId:"martinId", hostName:"Martin",
+  joinCode:"joinCode", gameId:"gameId", packId:"blindbudet", lots:[L0,L1], ...p });
+const joinedNils = { type:"PlayerJoined", playerId:"nilsId", playerName:"Nils" };
+const startedFx = { type:"AuctionStarted", firstLotIndex:0 };
+
+const TESTS = [
+// --- Open Auction ---
+{ slice:"✍️ Open Auction", name:"auction can be created", given:null,
+  when:{ type:"OpenAuction", hostName:"Martin", packId:"blindbudet" },
+  then:{ events:[ { type:"AuctionOpened", hostPlayerId:"minted", hostName:"Martin", joinCode:"minted",
+    packId:"blindbudet", lots:[L0,L1], openedAt:"openedAt" } ] } },
+{ slice:"✍️ Open Auction", name:"cannot open auction with unknown pack", given:null,
+  when:{ type:"OpenAuction", packId:"unknown" }, then:{ error:"AuctionPackNotFound" } },
+// --- Auction Lobby (projection) ---
+{ slice:"👀 Auction Lobby", name:"lobby lists the host and joined players",
+  givenEvents:[ openedFx(), joinedNils ], project:"roster",
+  then:{ joinCode:"joinCode", players:[hostMartin, playerNils] } },
+// --- Join Auction ---
+{ slice:"✍️ Join Auction", name:"player can join lobby",
+  given: mkState({ phase:"lobby", joinCode:"joinCode", players:[hostMartin] }),
+  when:{ type:"JoinAuction", joinCode:"joinCode", playerName:"Nils" },
+  then:{ events:[ { type:"PlayerJoined", playerId:"minted", playerName:"Nils", joinedAt:"joinedAt" } ] } },
+{ slice:"✍️ Join Auction", name:"cannot join nonexistent auction", given:null,
+  when:{ type:"JoinAuction", joinCode:"unknown", playerName:"Nils" }, then:{ error:"AuctionNotFound" } },
+{ slice:"✍️ Join Auction", name:"cannot join started auction",
+  given: mkState({ phase:"started", joinCode:"joinCode", players:[hostMartin, playerNils] }),
+  when:{ type:"JoinAuction", joinCode:"joinCode", playerName:"Sven" }, then:{ error:"AuctionAlreadyStarted" } },
+{ slice:"✍️ Join Auction", name:"cannot join with name already taken",
+  given: mkState({ phase:"lobby", joinCode:"joinCode", players:[hostMartin, playerNils] }),
+  when:{ type:"JoinAuction", joinCode:"joinCode", playerName:"Nils" }, then:{ error:"NameAlreadyTaken" } },
+// --- Start Auction ---
+{ slice:"✍️ Start Auction", name:"auction can be started",
+  given: mkState({ phase:"lobby", players:[hostMartin, playerNils] }),
+  when:{ type:"StartAuction", gameId:"gameId" },
+  then:{ events:[ { type:"AuctionStarted", firstLotIndex:0, startedAt:"startedAt" } ] } },
+{ slice:"✍️ Start Auction", name:"cannot start nonexistent auction", given:null,
+  when:{ type:"StartAuction", gameId:"unknown" }, then:{ error:"AuctionNotFound" } },
+{ slice:"✍️ Start Auction", name:"cannot start without enough players",
+  given: mkState({ phase:"lobby", players:[hostMartin] }),
+  when:{ type:"StartAuction", gameId:"gameId" }, then:{ error:"NotEnoughPlayers" } },
+// --- Lot (projection) ---
+{ slice:"👀 Lot", name:"current lot presented with content and progress",
+  givenEvents:[ openedFx(), startedFx ], project:"lotCard",
+  then:{ lotIndex:0, totalLots:2, description:"lot0", unit:"lot0U" } },
+// --- Place Bid ---
+{ slice:"✍️ Place Bid", name:"bid placed successfully",
+  given: mkState({ phase:"started", currentLotIndex:0, players:[hostMartin, playerNils], lots:[FX.lot0Fresh()] }),
+  when:{ type:"PlaceBid", gameId:"gameId", playerId:"nilsId", lotIndex:0, amount:90 },
+  then:{ events:[ { type:"BidPlaced", playerId:"nilsId", lotIndex:0, amount:90, bidAt:"bidAt" } ] } },
+{ slice:"✍️ Place Bid", name:"cannot bid in nonexistent auction", given:null,
+  when:{ type:"PlaceBid", gameId:"unknown", playerId:"nilsId", lotIndex:0, amount:90 }, then:{ error:"AuctionNotFound" } },
+{ slice:"✍️ Place Bid", name:"negative bid rejected",
+  given: mkState({ phase:"started", currentLotIndex:0, players:[hostMartin, playerNils], lots:[FX.lot0Fresh()] }),
+  when:{ type:"PlaceBid", gameId:"gameId", playerId:"nilsId", lotIndex:0, amount:-5 }, then:{ error:"BidNegative" } },
+{ slice:"✍️ Place Bid", name:"cannot bid twice on same lot",
+  given: mkState({ phase:"started", currentLotIndex:0, players:[hostMartin, playerNils], lots:[FX.lot0Nils50()] }),
+  when:{ type:"PlaceBid", gameId:"gameId", playerId:"nilsId", lotIndex:0, amount:70 }, then:{ error:"AlreadyBid" } },
+{ slice:"✍️ Place Bid", name:"cannot bid on an already-resolved lot",
+  given: mkState({ phase:"started", currentLotIndex:0, players:[hostMartin, playerNils], lots:[FX.lot0Resolved()] }),
+  when:{ type:"PlaceBid", gameId:"gameId", playerId:"martinId", lotIndex:0, amount:80 }, then:{ error:"LotAlreadyResolved" } },
+// --- Waiting For Bids (projection) ---
+{ slice:"👀 Waiting For Bids", name:"shows who has bid and who is still pending",
+  givenEvents:[ openedFx(), joinedNils, startedFx, { type:"BidPlaced", playerId:"martinId", lotIndex:0, amount:70 } ],
+  project:"bidProgress",
+  then:{ lotIndex:0, submittedPlayerIds:["martinId"], pendingPlayerIds:["nilsId"] } },
+// --- Outstanding Bids (projection) ---
+{ slice:"📋 Outstanding Bids", name:"every lot opens for every player when the auction starts",
+  givenEvents:[ openedFx(), joinedNils, startedFx ], project:"outstandingBids",
+  then:{ lots:[ { lotIndex:0, pendingPlayerIds:["martinId","nilsId"], allBidsIn:false },
+                { lotIndex:1, pendingPlayerIds:["martinId","nilsId"], allBidsIn:false } ] } },
+{ slice:"📋 Outstanding Bids", name:"a placed bid checks off that player on its lot",
+  givenEvents:[ openedFx(), joinedNils, startedFx, { type:"BidPlaced", playerId:"martinId", lotIndex:0, amount:70 } ],
+  project:"outstandingBids",
+  then:{ lots:[ { lotIndex:0, pendingPlayerIds:["nilsId"], allBidsIn:false },
+                { lotIndex:1, pendingPlayerIds:["martinId","nilsId"], allBidsIn:false } ] } },
+{ slice:"📋 Outstanding Bids", name:"a lot shows all bids in once every player has bid",
+  givenEvents:[ openedFx(), joinedNils, startedFx,
+    { type:"BidPlaced", playerId:"martinId", lotIndex:0, amount:70 },
+    { type:"BidPlaced", playerId:"nilsId", lotIndex:0, amount:90 } ],
+  project:"outstandingBids",
+  then:{ lots:[ { lotIndex:0, pendingPlayerIds:[], allBidsIn:true },
+                { lotIndex:1, pendingPlayerIds:["martinId","nilsId"], allBidsIn:false } ] } },
+// --- Reveal Lot ---
+{ slice:"✍️ Reveal Lot", name:"highest bid wins and pays its bid",
+  given: mkState({ phase:"started", currentLotIndex:0, players:[hostMartin, playerNils], lots:[FX.lot0BothIn(), FX.lot1Fresh()] }),
+  when:{ type:"RevealLot", gameId:"gameId", lotIndex:0 },
+  then:{ events:[
+    { type:"LotRevealed", lotIndex:0, trueWorth:100, winnerIds:["nilsId"], pricePaid:90 },
+    { type:"RoundScored", playerId:"martinId", profit:0, totalScore:0 },
+    { type:"RoundScored", playerId:"nilsId", profit:10, totalScore:10 } ] } },
+{ slice:"✍️ Reveal Lot", name:"overbidding excludes from winning, never negative",
+  given: mkState({ phase:"started", currentLotIndex:0, players:[hostMartin, playerNils], lots:[FX.lot0MartinOverbid(), FX.lot1Fresh()] }),
+  when:{ type:"RevealLot", gameId:"gameId", lotIndex:0 },
+  then:{ events:[
+    { type:"LotRevealed", lotIndex:0, trueWorth:100, winnerIds:["nilsId"], pricePaid:80 },
+    { type:"RoundScored", playerId:"martinId", profit:0, totalScore:0 },
+    { type:"RoundScored", playerId:"nilsId", profit:20, totalScore:20 } ] } },
+{ slice:"✍️ Reveal Lot", name:"tie on the winning bid is shared",
+  given: mkState({ phase:"started", currentLotIndex:0, players:[hostMartin, playerNils], lots:[FX.lot0Tied80(), FX.lot1Fresh()] }),
+  when:{ type:"RevealLot", gameId:"gameId", lotIndex:0 },
+  then:{ events:[
+    { type:"LotRevealed", lotIndex:0, trueWorth:100, winnerIds:["martinId","nilsId"], pricePaid:80 },
+    { type:"RoundScored", playerId:"martinId", profit:20, totalScore:20 },
+    { type:"RoundScored", playerId:"nilsId", profit:20, totalScore:20 } ] } },
+{ slice:"✍️ Reveal Lot", name:"exact guess scores ten for all",
+  given: mkState({ phase:"started", currentLotIndex:0, players:[hostMartin, playerNils], lots:[FX.lot0Exact100(), FX.lot1Fresh()] }),
+  when:{ type:"RevealLot", gameId:"gameId", lotIndex:0 },
+  then:{ events:[
+    { type:"LotRevealed", lotIndex:0, trueWorth:100, winnerIds:["martinId","nilsId"], pricePaid:100 },
+    { type:"RoundScored", playerId:"martinId", profit:10, totalScore:10 },
+    { type:"RoundScored", playerId:"nilsId", profit:10, totalScore:10 } ] } },
+{ slice:"✍️ Reveal Lot", name:"all overbid yields no winner",
+  given: mkState({ phase:"started", currentLotIndex:0, players:[hostMartin, playerNils], lots:[FX.lot0AllOverbid(), FX.lot1Fresh()] }),
+  when:{ type:"RevealLot", gameId:"gameId", lotIndex:0 },
+  then:{ events:[
+    { type:"LotRevealed", lotIndex:0, trueWorth:100, winnerIds:[], pricePaid:0 },
+    { type:"RoundScored", playerId:"martinId", profit:0, totalScore:0 },
+    { type:"RoundScored", playerId:"nilsId", profit:0, totalScore:0 } ] } },
+{ slice:"✍️ Reveal Lot", name:"scores accumulate across lots",
+  given: mkState({ phase:"started", currentLotIndex:1, players:[hostMartin, playerNils], lots:[FX.lot0Scored(), FX.lot1BothIn()] }),
+  when:{ type:"RevealLot", gameId:"gameId", lotIndex:1 },
+  then:{ events:[
+    { type:"LotRevealed", lotIndex:1, trueWorth:50, winnerIds:["martinId"], pricePaid:40 },
+    { type:"RoundScored", playerId:"martinId", profit:20, totalScore:20 },
+    { type:"RoundScored", playerId:"nilsId", profit:0, totalScore:10 } ] } },
+{ slice:"✍️ Reveal Lot", name:"cannot reveal before all bids in",
+  given: mkState({ phase:"started", currentLotIndex:0, players:[hostMartin, playerNils], lots:[FX.lot0MartinOnly(), FX.lot1Fresh()] }),
+  when:{ type:"RevealLot", gameId:"gameId", lotIndex:0 }, then:{ error:"NotAllBidsIn" } },
+{ slice:"✍️ Reveal Lot", name:"cannot reveal an already-resolved lot",
+  given: mkState({ phase:"started", currentLotIndex:0, players:[hostMartin, playerNils], lots:[FX.lot0Resolved(), FX.lot1Fresh()] }),
+  when:{ type:"RevealLot", gameId:"gameId", lotIndex:0 }, then:{ error:"LotAlreadyResolved" } },
+// --- Round Results (projection) ---
+{ slice:"👀 Round Results", name:"reveals the worth, winner and per-player profit once resolved",
+  givenEvents:[ openedFx(), joinedNils, startedFx,
+    { type:"BidPlaced", playerId:"martinId", lotIndex:0, amount:70 },
+    { type:"BidPlaced", playerId:"nilsId", lotIndex:0, amount:90 },
+    { type:"LotRevealed", lotIndex:0, trueWorth:100, winnerIds:["nilsId"], pricePaid:90 },
+    { type:"RoundScored", lotIndex:0, playerId:"martinId", profit:0, totalScore:0 },
+    { type:"RoundScored", lotIndex:0, playerId:"nilsId", profit:10, totalScore:10 } ],
+  project:"roundScores",
+  then:{ lotIndex:0, trueWorth:100, winnerIds:["nilsId"], pricePaid:90,
+    playerProfits:[ { playerId:"martinId", profit:0, totalScore:0 }, { playerId:"nilsId", profit:10, totalScore:10 } ] } },
+// --- Auction Progress (projection) ---
+{ slice:"📋 Auction Progress", name:"progress shows a next lot while lots remain",
+  givenEvents:[ openedFx(), joinedNils, startedFx,
+    { type:"LotRevealed", lotIndex:0, trueWorth:100, winnerIds:["nilsId"], pricePaid:90 } ],
+  project:"auctionProgress",
+  then:{ lotIndex:0, totalLots:2, resolvedLotCount:1, hasNextLot:true } },
+{ slice:"📋 Auction Progress", name:"progress shows no next lot once the last is resolved",
+  givenEvents:[ openedFx(), joinedNils, startedFx,
+    { type:"LotRevealed", lotIndex:0, trueWorth:100, winnerIds:["nilsId"], pricePaid:90 },
+    { type:"NextLotStarted", lotIndex:1 },
+    { type:"LotRevealed", lotIndex:1, trueWorth:50, winnerIds:["martinId"], pricePaid:40 } ],
+  project:"auctionProgress",
+  then:{ lotIndex:1, totalLots:2, resolvedLotCount:2, hasNextLot:false } },
+// --- Next Lot ---
+{ slice:"✍️ Next Lot", name:"next lot presented when one remains",
+  given: mkState({ phase:"started", currentLotIndex:0, lots:[FX.lot0Scored(), FX.lot1Fresh()] }),
+  when:{ type:"AskNextLot", gameId:"gameId" },
+  then:{ events:[ { type:"NextLotStarted", lotIndex:1 } ] } },
+// --- End Auction ---
+{ slice:"✍️ End Auction", name:"highest score wins",
+  given: mkState({ phase:"started", currentLotIndex:1, players:[hostMartin, playerNils], lots:[FX.lot0Profits20And0(), FX.lot1Profits0And5()] }),
+  when:{ type:"EndAuction", gameId:"gameId" },
+  then:{ events:[ { type:"AuctionEnded",
+    finalScoreboard:[ { playerId:"martinId", playerName:"Martin", totalScore:20 }, { playerId:"nilsId", playerName:"Nils", totalScore:5 } ],
+    winnerIds:["martinId"], endedAt:"endedAt" } ] } },
+{ slice:"✍️ End Auction", name:"tied highest totals share the win",
+  given: mkState({ phase:"started", currentLotIndex:1, players:[hostMartin, playerNils], lots:[FX.lot0Profits10Each(), FX.lot1Profits5Each()] }),
+  when:{ type:"EndAuction", gameId:"gameId" },
+  then:{ events:[ { type:"AuctionEnded",
+    finalScoreboard:[ { playerId:"martinId", playerName:"Martin", totalScore:15 }, { playerId:"nilsId", playerName:"Nils", totalScore:15 } ],
+    winnerIds:["martinId","nilsId"], endedAt:"endedAt" } ] } },
+// --- Final Standings (projection) ---
+{ slice:"👀 Final Standings", name:"shows the final scoreboard and winner",
+  givenEvents:[ { type:"AuctionEnded",
+      finalScoreboard:[ { playerId:"martinId", playerName:"Martin", totalScore:20 }, { playerId:"nilsId", playerName:"Nils", totalScore:5 } ],
+      winnerIds:["martinId"], endedAt:"endedAt" } ],
+  project:"scoreboard",
+  then:{ finalScoreboard:[ { playerId:"martinId", playerName:"Martin", totalScore:20 }, { playerId:"nilsId", playerName:"Nils", totalScore:5 } ],
+    winnerIds:["martinId"] } },
+// --- Decision Model (state fold) ---
+{ slice:"👀 Decision Model", name:"state folds a bid into the decision model",
+  givenEvents:[ openedFx(), joinedNils, startedFx, { type:"BidPlaced", playerId:"martinId", lotIndex:0, amount:70 } ],
+  thenState:{ phase:"started", hostPlayerId:"martinId", currentLotIndex:0, lots:[FX.lot0MartinOnly(), FX.lot1Fresh()] } },
+{ slice:"👀 Decision Model", name:"resolving a lot folds the reveal and profits into that lot",
+  givenEvents:[ openedFx(), joinedNils, startedFx,
+    { type:"BidPlaced", playerId:"martinId", lotIndex:0, amount:70 },
+    { type:"BidPlaced", playerId:"nilsId", lotIndex:0, amount:90 },
+    { type:"LotRevealed", lotIndex:0, trueWorth:100, winnerIds:["nilsId"], pricePaid:90 },
+    { type:"RoundScored", lotIndex:0, playerId:"martinId", profit:0, totalScore:0 },
+    { type:"RoundScored", lotIndex:0, playerId:"nilsId", profit:10, totalScore:10 } ],
+  thenState:{ phase:"started", currentLotIndex:0, lots:[FX.lot0ResolvedFull(), FX.lot1Fresh()] } },
+];
+
+function runTests() {
+  return TESTS.map(t => {
+    try {
+      if (t.when) {                                   // command GWT (decider-true)
+        const r = decide(t.given, t.when, testCtx());
+        if (t.then.error) {
+          const pass = r.error === t.then.error;
+          return { ...t, pass, detail: pass ? "" : "expected x:" + t.then.error + " got " + JSON.stringify(r) };
+        }
+        const pass = !r.error && r.events.length === t.then.events.length
+          && t.then.events.every((e,i)=> e.type === r.events[i].type && subsetMatch(e, r.events[i]));
+        return { ...t, pass, detail: pass ? "" : "got " + JSON.stringify(r) };
+      }
+      const s = fold(t.givenEvents);
+      if (t.project) {                                // projection GT
+        const v = Projections[t.project](s);
+        const pass = subsetMatch(t.then, v);
+        return { ...t, pass, detail: pass ? "" : "got " + JSON.stringify(v) };
+      }
+      const pass = subsetMatch(t.thenState, s);       // state fold GT
+      return { ...t, pass, detail: pass ? "" : "got " + JSON.stringify(s) };
+    } catch (ex) { return { ...t, pass:false, detail:"threw " + ex.message }; }
+  });
+}
+
+/* ============================================================
+ * 5. xm labels (sv, verbatim from blindbudet.xm.yaml; fallback = element name)
+ * ============================================================ */
+const LBL = {
+  OpenAuction:{ $self:"Skapa auktion", hostName:"Ditt namn" },
+  JoinAuction:{ $self:"Gå med", playerName:"Ditt namn" },
+  StartAuction:"Starta auktion",
+  PlaceBid:{ $self:"Lägg bud!", amount:"Ditt bud" },
+  AskNextLot:"Nästa budrunda",
+  EndAuction:"Visa slutställning",
+  "Roster":{ players:"Spelare" },
+  "Bid progress":{ submittedPlayerIds:"Klara", pendingPlayerIds:"Väntar på" },
+  "Round scores":{ trueWorth:"Sant värde", playerProfits:"Poäng", pricePaid:"Bud",
+    winnerIds:{ $empty:"Ingen vann – alla bjöd över." } },
+  "Scoreboard":{ finalScoreboard:"Slutställning" },
+  Katalog:"Välj lek", LobbyVärd:"Skanna för att gå med", LobbySpelare:"Du är med! 🎉",
+  Väntan:"Ditt bud är lagt ✓", Slutställning:"Slutställning",
+  Värd:"Värd", Spelare:"Spelare",
+};
+const lbl = name => { const v = LBL[name]; return typeof v === "string" ? v : (v && v.$self) || name; };
+const flbl = (el, f) => { const v = LBL[el]; const fv = v && typeof v === "object" ? v[f] : undefined;
+  return typeof fv === "string" ? fv : (fv && fv.$self) || f; };
+const fempty = (el, f) => { const v = LBL[el]; const fv = v && typeof v === "object" ? v[f] : undefined;
+  return (fv && fv.$empty) || ""; };
+
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fmt = n => Number(n).toLocaleString("sv-SE");
+
+/* ============================================================
+ * 6. App runtime — one live auction, one phone per persona instance
+ * ============================================================ */
+let log = [], live = null, idSeq = 0;
+const liveCtx = { findPack: slug => PACKS.find(p => p.packId === slug) || null,
+  newId: () => "id-" + (++idSeq) + "-" + Math.random().toString(36).slice(2,6),
+  now: () => new Date().toISOString() };
+
+const frames = [
+  { id:"f1", persona:"Värd",    playerId:null, draft:{ name:"Martin", pack:"blindbudet", bid:"" }, err:null },
+  { id:"f2", persona:"Spelare", playerId:null, draft:{ name:"Nils", bid:"" }, err:null },
+  { id:"f3", persona:"Spelare", playerId:null, draft:{ name:"Sven", bid:"" }, err:null },
+];
+
+function apply(events) { events.forEach(e => { log.push(e); live = evolve(live, e); }); }
+
+function systemGears() {
+  // ⚙️ System / Reveal lot — gated by Todo / Outstanding bids (allBidsIn on the current row).
+  // AskNextLot / EndAuction stay HOST buttons per xm finding 3.
+  if (!live || live.phase !== "started") return;
+  const row = Projections.outstandingBids(live).lots[live.currentLotIndex];
+  if (row.allBidsIn && !live.lots[live.currentLotIndex].resolved) {
+    const r = decide(live, { type:"RevealLot", gameId: live.gameId, lotIndex: live.currentLotIndex }, liveCtx);
+    if (r.events) apply(r.events);
+  }
+}
+
+function dispatch(frame, cmd) {
+  const r = decide(live, cmd, liveCtx);
+  if (r.error) { frame.err = r.error; }
+  else {
+    frame.err = null;
+    apply(r.events);
+    r.events.forEach(e => {
+      if (e.type === "AuctionOpened") frame.playerId = e.hostPlayerId;
+      if (e.type === "PlayerJoined" && cmd.type === "JoinAuction") frame.playerId = e.playerId;
+    });
+    systemGears();
+  }
+  render();
+}
+
+/* Concrete-stratum surface selector (the hand-written pure fn xm finding 8 predicts). */
+function selectSurface(frame) {
+  if (!live) return frame.persona === "Värd" ? "Katalog" : "JoinFormDefault";
+  if (live.phase === "lobby")
+    return frame.persona === "Värd" ? "LobbyVärd" : (frame.playerId ? "LobbySpelare" : "JoinFormDefault");
+  if (live.phase === "started") {
+    const lr = live.lots[live.currentLotIndex];
+    if (lr.resolved) return frame.persona === "Värd" ? "RundresultatVärd" : "RundresultatSpelare";
+    if (frame.playerId && frame.playerId in lr.bids) return "Väntan";
+    return frame.playerId ? "Budgivning" : "JoinFormDefault";
+  }
+  return "Slutställning";
+}
+
+/* --- per-surface renderers (salience: primary big, secondary muted, on-demand <details>) --- */
+const odBlock = pairs => `<details class="od"><summary>Detaljer</summary>${
+  pairs.map(([k,v]) => `<div>${esc(k)}: <code>${esc(v ?? "–")}</code></div>`).join("")}</details>`;
+const nameOf = pid => { const p = live && live.players.find(p => p.playerId === pid); return p ? p.name : pid; };
+
+function renderKatalog(f) {
+  const packsHtml = PACKS.map(p => `<label><input type="radio" name="pack-${f.id}" value="${esc(p.packId)}"
+      ${f.draft.pack === p.packId ? "checked" : ""} onchange="onDraft('${f.id}','pack',this.value)">
+      <span class="pname">${esc(p.name)}</span><span class="pcount">${p.lots.length} lotter</span></label>`).join("");
+  return `<h2>${esc(lbl("Katalog"))}</h2>
+    <div class="card pri"><div class="packpick">${packsHtml}</div></div>
+    <label class="fieldlbl">${esc(flbl("OpenAuction","hostName"))}</label>
+    <input type="text" value="${esc(f.draft.name)}" oninput="onDraft('${f.id}','name',this.value)">
+    <div class="actions"><button class="btn primary" onclick="onOpen('${f.id}')">${esc(lbl("OpenAuction"))}</button></div>`;
+}
+function renderJoinDefault(f) {
+  // Bare command form (JoinAuction composes no view) — served by the transformer's defaults.
+  const open = !!live && live.phase === "lobby";
+  return `<h2>${esc(lbl("JoinAuction"))}</h2>
+    ${open ? "" : `<p class="hint">${live ? "Auktionen har redan startat." : "Värden har inte skapat någon auktion ännu."}</p>`}
+    <label class="fieldlbl">${esc(flbl("JoinAuction","playerName"))}</label>
+    <input type="text" value="${esc(f.draft.name)}" ${open ? "" : "disabled"} oninput="onDraft('${f.id}','name',this.value)">
+    <div class="actions"><button class="btn primary" ${open ? "" : "disabled"} onclick="onJoin('${f.id}')">${esc(lbl("JoinAuction"))}</button></div>`;
+}
+const rosterList = (v, selfId) => `<ul class="playerlist">${v.players.map(p =>
+  `<li class="${p.isHost ? "host" : ""}"><span class="dot"></span>${esc(p.name)}${p.isHost ? " 🎩" : ""}
+   ${p.playerId === selfId ? '<span class="youchip">du</span>' : ""}</li>`).join("")}</ul>`;
+function renderLobbyVard(f) {
+  const v = Projections.roster(live);
+  return `<h2>${esc(lbl("LobbyVärd"))}</h2>
+    <div class="pri"><div class="joincode">${esc(v.joinCode)}</div>
+    <label class="fieldlbl">${esc(flbl("Roster","players"))}</label>${rosterList(v, f.playerId)}</div>
+    ${odBlock([["gameId", v.gameId]])}
+    <div class="actions"><button class="btn primary" onclick="onStart('${f.id}')">${esc(lbl("StartAuction"))}</button></div>`;
+}
+function renderLobbySpelare(f) {
+  const v = Projections.roster(live);
+  return `<h2>${esc(lbl("LobbySpelare"))}</h2>
+    <div class="pri"><label class="fieldlbl">${esc(flbl("Roster","players"))}</label>${rosterList(v, f.playerId)}</div>
+    <p class="hint">Väntar på att värden startar…</p>
+    ${odBlock([["joinCode", v.joinCode], ["gameId", v.gameId]])}`;
+}
+function renderBudgivning(f) {
+  const v = Projections.lotCard(live);
+  return `<h2>Budgivning</h2>
+    <div class="card pri"><div class="big">${esc(v.description)}</div>
+      <div class="sec">Svara i ${esc(v.unit)} · Budrunda ${v.lotIndex + 1} av ${v.totalLots}</div></div>
+    <label class="fieldlbl">${esc(flbl("PlaceBid","amount"))}</label>
+    <div class="bidunit"><input type="number" min="0" step="any" inputmode="decimal"
+      value="${esc(f.draft.bid)}" oninput="onDraft('${f.id}','bid',this.value)"><span class="unit">${esc(v.unit)}</span></div>
+    <div class="actions"><button class="btn primary" onclick="onBid('${f.id}')">${esc(lbl("PlaceBid"))}</button></div>
+    ${odBlock([["gameId", v.gameId]])}`;
+}
+function renderVantan(f) {
+  const v = Projections.bidProgress(live);
+  return `<h2>${esc(lbl("Väntan"))}</h2><div class="waitfx">⏳</div>
+    <div class="card pri"><label class="fieldlbl">${esc(flbl("Bid progress","pendingPlayerIds"))}</label>
+      ${v.pendingPlayerIds.length ? `<ul class="playerlist">${v.pendingPlayerIds.map(id =>
+        `<li><span class="dot" style="background:var(--color-mindre)"></span>${esc(nameOf(id))}</li>`).join("")}</ul>`
+        : '<p class="hint">Alla bud inne — avslöjar…</p>'}
+      <div class="sec">${esc(flbl("Bid progress","submittedPlayerIds"))}: ${v.submittedPlayerIds.map(id =>
+        esc(nameOf(id)) + (id === f.playerId ? " (du · klar)" : "")).join(", ")} · Budrunda ${v.lotIndex + 1}</div></div>
+    ${odBlock([["gameId", v.gameId]])}`;
+}
+function renderRundresultat(f, isHost) {
+  const v = Projections.roundScores(live);
+  const winnersHtml = v.winnerIds.length
+    ? `<div class="pri">🏆 ${v.winnerIds.map(id => esc(nameOf(id))).join(" & ")} vinner för ${fmt(v.pricePaid)}!</div>`
+    : `<div class="nowinner">${esc(fempty("Round scores","winnerIds"))}</div>`;
+  const rows = v.playerProfits.map(pp => {
+    const won = v.winnerIds.includes(pp.playerId);
+    const bid = live.lots[v.lotIndex].bids[pp.playerId];
+    const overbid = bid !== undefined && bid > v.trueWorth;
+    return `<li class="${won ? "winner" : ""} ${pp.playerId === f.playerId ? "me" : ""}">
+      <span class="nm">${esc(nameOf(pp.playerId))}</span>
+      ${won ? '<span class="mark good">✓</span>' : overbid ? '<span class="mark bad">✗</span>' : ""}
+      <span class="profit">+${pp.profit}</span><span class="total">tot ${pp.totalScore}</span></li>`;
+  }).join("");
+  const prog = Projections.auctionProgress(live);
+  const hostActions = !isHost ? `<p class="hint">Värden går vidare…</p>` : `<div class="actions">${
+    prog.hasNextLot
+      ? `<button class="btn primary" onclick="onNext('${f.id}')">${esc(lbl("AskNextLot"))}</button>`
+      : `<button class="btn primary" onclick="onEnd('${f.id}')">${esc(lbl("EndAuction"))}</button>`}</div>`;
+  return `<h2>${isHost ? "RundresultatVärd" : "RundresultatSpelare"}</h2>
+    <div class="card"><div class="sec">${esc(flbl("Round scores","trueWorth"))}</div>
+      <div class="trueworth">${fmt(v.trueWorth)} ${esc(live.lots[v.lotIndex].lot.unit)}</div>
+      ${winnersHtml}
+      <label class="fieldlbl">${esc(flbl("Round scores","playerProfits"))}</label><ul class="scorelist">${rows}</ul>
+      <div class="sec">${esc(flbl("Round scores","pricePaid"))}: ${v.pricePaid ? fmt(v.pricePaid) : "–"} · Budrunda ${v.lotIndex + 1} av ${prog.totalLots}</div></div>
+    ${hostActions}
+    ${odBlock([["gameId", v.gameId]])}`;
+}
+function renderSlutstallning(f) {
+  const v = Projections.scoreboard(live);
+  const sorted = [...v.finalScoreboard].sort((a,b) => b.totalScore - a.totalScore);
+  return `<h2>${esc(lbl("Slutställning"))}</h2>
+    <div class="card pri"><label class="fieldlbl">${esc(flbl("Scoreboard","finalScoreboard"))} (högst vinner)</label>
+    <ul class="scorelist">${sorted.map((e,i) => `<li class="${v.winnerIds.includes(e.playerId) ? "winner" : ""} ${e.playerId === f.playerId ? "me" : ""}">
+      <span class="nm">${i + 1}. ${esc(e.playerName)}</span>${v.winnerIds.includes(e.playerId) ? " 🏆" : ""}
+      <span class="profit">${e.totalScore}</span></li>`).join("")}</ul></div>
+    ${odBlock([["gameId", v.gameId]])}`;
+}
+
+const SURFACE_RENDER = {
+  Katalog: renderKatalog, JoinFormDefault: renderJoinDefault,
+  LobbyVärd: renderLobbyVard, LobbySpelare: renderLobbySpelare,
+  Budgivning: renderBudgivning, Väntan: renderVantan,
+  RundresultatVärd: f => renderRundresultat(f, true), RundresultatSpelare: f => renderRundresultat(f, false),
+  Slutställning: renderSlutstallning,
+};
+
+function render() {
+  document.getElementById("frames").innerHTML = frames.map(f => {
+    const surface = selectSurface(f);
+    return `<div class="phone"><div class="notch"></div><div class="screen">
+      <span class="persona-tag ${f.persona === "Värd" ? "vard" : "spelare"}">${esc(lbl(f.persona))}${f.playerId && live ? " · " + esc(nameOf(f.playerId)) : ""}</span>
+      ${f.err ? `<div class="err">⚠ ${esc(f.err)}</div>` : ""}
+      <div class="surface">${SURFACE_RENDER[surface](f)}</div>
+      <div class="devbar">fas: ${live ? live.phase : "–"} · yta: ${esc(surface)} · events: ${log.length}</div>
+    </div></div>`;
+  }).join("");
+}
+
+/* --- handlers (globals for inline attributes) --- */
+window.onDraft = (fid, k, v) => { frames.find(f => f.id === fid).draft[k] = v; };
+window.onOpen  = fid => { const f = frames.find(x => x.id === fid);
+  dispatch(f, { type:"OpenAuction", hostName: f.draft.name.trim() || "Värd", packId: f.draft.pack }); };
+window.onJoin  = fid => { const f = frames.find(x => x.id === fid);
+  dispatch(f, { type:"JoinAuction", joinCode: live ? live.joinCode : "unknown", playerName: f.draft.name.trim() || "Spelare" }); };
+window.onStart = fid => { const f = frames.find(x => x.id === fid);
+  dispatch(f, { type:"StartAuction", gameId: live.gameId }); };
+window.onBid   = fid => { const f = frames.find(x => x.id === fid);
+  const amount = parseFloat(String(f.draft.bid).replace(",", "."));
+  if (isNaN(amount)) { f.err = "Ange ett bud"; render(); return; }
+  dispatch(f, { type:"PlaceBid", gameId: live.gameId, playerId: f.playerId, lotIndex: live.currentLotIndex, amount });
+  f.draft.bid = ""; render(); };
+window.onNext  = fid => { const f = frames.find(x => x.id === fid);
+  dispatch(f, { type:"AskNextLot", gameId: live.gameId }); };
+window.onEnd   = fid => { const f = frames.find(x => x.id === fid);
+  dispatch(f, { type:"EndAuction", gameId: live.gameId }); };
+document.getElementById("resetBtn").onclick = () => {
+  log = []; live = null;
+  frames.forEach(f => { f.playerId = null; f.err = null; f.draft.bid = ""; });
+  render();
+};
+
+/* --- run embedded GWT + render badge/report --- */
+(function () {
+  const results = runTests();
+  const passed = results.filter(r => r.pass).length;
+  const badge = document.getElementById("testBadge");
+  badge.textContent = `GWT ${passed}/${results.length}`;
+  badge.className = "badge " + (passed === results.length ? "pass" : "fail");
+  badge.onclick = () => { const w = document.getElementById("testReportWrap"); w.open = !w.open; };
+  document.getElementById("testReport").innerHTML = `<table>${results.map(r =>
+    `<tr><td class="${r.pass ? "ok" : "bad"}">${r.pass ? "✓" : "✗"}</td>
+     <td class="slice">${esc(r.slice)}</td><td>${esc(r.name)}${r.pass ? "" : `<pre>${esc(r.detail)}</pre>`}</td></tr>`).join("")}</table>`;
+  render();
+})();
+</script>
+</body>
+</html>

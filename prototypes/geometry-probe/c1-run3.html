@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Blindbudet — clean-room prototyp (EM + xm)</title>
+<!--
+  Clean-room prototype built ONLY from:
+    specs/blindbudet-event-model.yaml   (emlang Event Model)
+    specs/blindbudet.xm.yaml            (xmlang v0.2 Experience Model)
+    xmlang-spec.md                      (the xmlang specification)
+  JS decider (decide/evolve/fold) + projections implement the EM; surfaces render
+  per the xm (personas, during×for, salience tiers, prominence, labels, tokens).
+  All EM GWT cases are embedded and executable (badge top right).
+  Fine selection inside during×for (has the viewer bid? is the lot resolved?) is the
+  hand-written selector the xm spec declares concrete-stratum (finding 8).
+  Per xm finding 3: AskNextLot/EndAuction are host buttons on RundresultatVärd;
+  RevealLot stays a System gear firing on Outstanding bids' allBidsIn.
+-->
+<style>
+:root{
+  --bg:#fff7ec;--bg-2:#ffeccf;--ink:#2b2118;--ink-soft:#7a6a58;--card:#fffdf9;
+  --line:#f0e0c8;--mer:#21c08a;--mer-deep:#12805c;--mer-ink:#06281f;
+  --mindre:#ffab40;--mindre-deep:#e07f0e;--mindre-ink:#3a2300;
+  --accent:#ff5d73;--accent-2:#ff8a3d;--r-md:22px;--r-sm:16px;
+  --font-display:"Baloo 2",system-ui,sans-serif;--font-body:Nunito,system-ui,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;padding:18px;background:var(--bg-2);color:var(--ink);font-family:var(--font-body)}
+h1{font-family:var(--font-display);font-size:1.35rem;margin:0 0 4px}
+.sub{color:var(--ink-soft);font-size:.85rem;margin:0 0 14px}
+#frames{display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start}
+.phone{width:330px;height:660px;border:10px solid var(--ink);border-radius:36px;
+  background:var(--bg);overflow-y:auto;box-shadow:0 8px 24px rgba(43,33,24,.18);flex:none}
+.personabar{position:sticky;top:0;background:var(--ink);color:var(--bg);padding:6px 14px;
+  font-family:var(--font-display);font-size:.85rem;display:flex;justify-content:space-between;z-index:2}
+.surface{padding:14px 16px 24px}
+.surface h2{font-family:var(--font-display);font-size:1.25rem;margin:6px 0 12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r-md);
+  padding:14px;margin:0 0 12px}
+.primary-val{font-family:var(--font-display);font-size:1.5rem;line-height:1.2;margin:2px 0}
+.big{font-size:2rem}
+.fieldlabel{color:var(--ink-soft);font-size:.75rem;text-transform:uppercase;letter-spacing:.04em}
+.secondary{color:var(--ink-soft);font-size:.8rem;margin-top:8px;display:flex;gap:8px;flex-wrap:wrap}
+.chip{background:var(--bg-2);border:1px solid var(--line);border-radius:999px;padding:2px 10px}
+details.ondemand{margin-top:10px;font-size:.8rem;color:var(--ink-soft)}
+details.ondemand summary{cursor:pointer}
+ul.people{list-style:none;margin:6px 0;padding:0}
+ul.people li{padding:7px 10px;border-bottom:1px dashed var(--line);display:flex;gap:8px;align-items:center}
+ul.people li:last-child{border-bottom:0}
+.you{background:var(--bg-2);border-radius:var(--r-sm);font-weight:700}
+.youtag{font-size:.7rem;background:var(--mer);color:var(--mer-ink);border-radius:999px;padding:1px 8px}
+.hosttag{font-size:.7rem;background:var(--mindre);color:var(--mindre-ink);border-radius:999px;padding:1px 8px}
+.wintag{font-size:.9rem}
+button{font-family:var(--font-display);cursor:pointer;border:0;border-radius:var(--r-sm)}
+.btn-primary{display:block;width:100%;padding:13px;margin-top:10px;font-size:1.1rem;
+  background:var(--accent);color:#fff}
+.btn-primary:disabled{background:var(--line);color:var(--ink-soft);cursor:default}
+.btn-alt{background:var(--accent-2);color:#fff}
+input,select{width:100%;padding:11px;margin:4px 0 10px;font-family:var(--font-body);font-size:1rem;
+  border:1.5px solid var(--line);border-radius:var(--r-sm);background:#fff;color:var(--ink)}
+label{font-size:.85rem;color:var(--ink-soft)}
+.packrow{display:flex;justify-content:space-between;align-items:center;padding:10px;
+  border:1.5px solid var(--line);border-radius:var(--r-sm);margin:6px 0;cursor:pointer}
+.packrow.sel{border-color:var(--mer-deep);background:var(--card)}
+.packrow .n{font-family:var(--font-display)}
+.err{background:var(--accent);color:#fff;border-radius:var(--r-sm);padding:8px 12px;
+  margin:8px 0;font-size:.85rem}
+table.scores{width:100%;border-collapse:collapse;font-size:.95rem}
+table.scores td,table.scores th{padding:7px 6px;border-bottom:1px dashed var(--line);text-align:left}
+table.scores td.num,table.scores th.num{text-align:right;font-variant-numeric:tabular-nums}
+.empty{color:var(--ink-soft);font-style:italic}
+.joincode{font-family:var(--font-display);font-size:1.6rem;background:var(--card);
+  border:2px dashed var(--mer-deep);border-radius:var(--r-md);padding:14px;text-align:center;
+  letter-spacing:.06em;word-break:break-all}
+#badge{position:fixed;top:12px;right:14px;z-index:9;font-family:var(--font-display)}
+#badge summary{list-style:none;cursor:pointer;padding:8px 16px;border-radius:999px;color:#fff;
+  box-shadow:0 4px 12px rgba(43,33,24,.25)}
+#badge.pass summary{background:var(--mer-deep)}
+#badge.fail summary{background:var(--accent)}
+#badge .list{background:var(--card);border:1px solid var(--line);border-radius:var(--r-sm);
+  margin-top:6px;padding:10px;max-height:340px;overflow:auto;width:330px;font-family:var(--font-body);font-size:.78rem}
+#badge .list div{padding:2px 0}
+.ok::before{content:"✔ ";color:var(--mer-deep)}
+.no::before{content:"✘ ";color:var(--accent)}
+.toolbar{margin:12px 0}
+.toolbar button{padding:8px 16px;background:var(--ink);color:var(--bg)}
+.wait-dots{color:var(--ink-soft);font-size:.85rem}
+</style>
+</head>
+<body>
+<h1>Blindbudet — clean-room prototyp</h1>
+<p class="sub">Byggd enbart ur spec-paret (event model + experience model) + xmlang-specen.
+Tre telefoner: en Värd och två Spelare. Reveal är en System-kugge (allBidsIn); Nästa budrunda
+och slutställning är värd-knappar per xm finding 3.</p>
+<details id="badge"><summary id="badgeText">GWT …</summary><div class="list" id="badgeList"></div></details>
+<div class="toolbar"><button onclick="resetGame()">Börja om</button></div>
+<div id="frames"></div>
+
+<script>
+"use strict";
+/* ================= Decider (Event Model) ================= */
+const freshLot = lot => ({lot, bids:{}, trueWorth:null, winnerIds:[], pricePaid:null, profits:{}, resolved:false});
+
+function evolve(s, ev){
+  switch(ev.type){
+    case 'AuctionOpened': return {
+      gameId:ev.gameId, joinCode:ev.joinCode, phase:'lobby', hostPlayerId:ev.hostPlayerId,
+      players:[{playerId:ev.hostPlayerId, name:ev.hostName, isHost:true}],
+      currentLotIndex:0, lots:ev.lots.map(freshLot), finalScoreboard:null, finalWinnerIds:null};
+    case 'PlayerJoined': return {...s, players:[...s.players, {playerId:ev.playerId, name:ev.playerName, isHost:false}]};
+    case 'AuctionStarted': return {...s, phase:'started', currentLotIndex:(ev.firstLotIndex ?? 0)};
+    case 'BidPlaced': return {...s, lots:s.lots.map((r,i)=> i===ev.lotIndex ? {...r, bids:{...r.bids, [ev.playerId]:ev.amount}} : r)};
+    case 'LotRevealed': return {...s, lots:s.lots.map((r,i)=> i===ev.lotIndex ? {...r, trueWorth:ev.trueWorth, winnerIds:ev.winnerIds, pricePaid:ev.pricePaid, resolved:true} : r)};
+    case 'RoundScored': return {...s, lots:s.lots.map((r,i)=> i===ev.lotIndex ? {...r, profits:{...r.profits, [ev.playerId]:ev.profit}} : r)};
+    case 'NextLotStarted': return {...s, currentLotIndex:ev.lotIndex};
+    case 'AuctionEnded': return {...s, phase:'ended', finalScoreboard:ev.finalScoreboard, finalWinnerIds:ev.winnerIds};
+  }
+  return s;
+}
+const fold = evs => evs.reduce(evolve, null);
+
+/* DERIVED (single source of truth in lots + players) */
+const pendingIds = (s,i)=> s.players.map(p=>p.playerId).filter(id=> !(id in s.lots[i].bids));
+const allBidsIn  = (s,i)=> pendingIds(s,i).length===0;
+const hasNextLot = s => s.currentLotIndex+1 < s.lots.length;
+const totalScore = (s,pid)=> s.lots.filter(r=>r.resolved).reduce((t,r)=> t+(r.profits[pid] ?? 0), 0);
+
+const ok = events => ({ok:true, events});
+const err = x => ({ok:false, error:x});
+
+function decide(s, cmd, ctx){
+  switch(cmd.type){
+    case 'OpenAuction': {
+      const pack = ctx.findPack(cmd.packId);
+      if(!pack) return err('AuctionPackNotFound');
+      return ok([{type:'AuctionOpened', gameId:ctx.newId(), hostPlayerId:ctx.newId(),
+        hostName:cmd.hostName, joinCode:ctx.newId(), packId:cmd.packId,
+        lots:pack.lots, openedAt:ctx.now()}]);
+    }
+    case 'JoinAuction': {
+      if(!s || cmd.joinCode!==s.joinCode) return err('AuctionNotFound');
+      if(s.phase!=='lobby') return err('AuctionAlreadyStarted');
+      if(s.players.some(p=>p.name===cmd.playerName)) return err('NameAlreadyTaken');
+      return ok([{type:'PlayerJoined', gameId:s.gameId, playerId:ctx.newId(),
+        playerName:cmd.playerName, joinedAt:ctx.now()}]);
+    }
+    case 'StartAuction': {
+      if(!s) return err('AuctionNotFound');
+      if(s.players.length<2) return err('NotEnoughPlayers');
+      return ok([{type:'AuctionStarted', gameId:s.gameId, firstLotIndex:0, startedAt:ctx.now()}]);
+    }
+    case 'PlaceBid': {
+      if(!s) return err('AuctionNotFound');
+      if(cmd.amount<0) return err('BidNegative');
+      const r = s.lots[cmd.lotIndex];
+      if(r.resolved) return err('LotAlreadyResolved');
+      if(cmd.playerId in r.bids) return err('AlreadyBid');
+      return ok([{type:'BidPlaced', gameId:s.gameId, playerId:cmd.playerId,
+        lotIndex:cmd.lotIndex, amount:cmd.amount, bidAt:ctx.now()}]);
+    }
+    case 'RevealLot': {
+      if(!s) return err('AuctionNotFound');
+      const r = s.lots[cmd.lotIndex];
+      if(r.resolved) return err('LotAlreadyResolved');
+      if(pendingIds(s,cmd.lotIndex).length>0) return err('NotAllBidsIn');
+      const tw = r.lot.trueWorth;
+      const valid = s.players.filter(p=> r.bids[p.playerId] <= tw);   // overbid disqualified
+      const winningBid = valid.length ? Math.max(...valid.map(p=>r.bids[p.playerId])) : null;
+      const winnerIds = valid.filter(p=> r.bids[p.playerId]===winningBid).map(p=>p.playerId);
+      const winnerProfit = winningBid===null ? 0
+        : (winningBid===tw ? 10 : Math.round((tw-winningBid)/tw*100));
+      const evs = [{type:'LotRevealed', gameId:s.gameId, lotIndex:cmd.lotIndex,
+        trueWorth:tw, winnerIds, pricePaid:(winningBid ?? 0)}];
+      for(const p of s.players){
+        const profit = winnerIds.includes(p.playerId) ? winnerProfit : 0;
+        evs.push({type:'RoundScored', gameId:s.gameId, lotIndex:cmd.lotIndex,
+          playerId:p.playerId, profit, totalScore: totalScore(s,p.playerId)+profit});
+      }
+      return ok(evs);
+    }
+    case 'AskNextLot': return ok([{type:'NextLotStarted', gameId:s.gameId, lotIndex:s.currentLotIndex+1}]);
+    case 'EndAuction': {
+      const board = s.players.map(p=>({playerId:p.playerId, playerName:p.name, totalScore:totalScore(s,p.playerId)}));
+      const top = Math.max(...board.map(b=>b.totalScore));
+      return ok([{type:'AuctionEnded', gameId:s.gameId, finalScoreboard:board,
+        winnerIds:board.filter(b=>b.totalScore===top).map(b=>b.playerId), endedAt:ctx.now()}]);
+    }
+  }
+}
+
+/* ================= Projections (read models) ================= */
+const P = {
+  roster: s => ({gameId:s.gameId, joinCode:s.joinCode, players:s.players}),
+  lotCard: s => { const i=s.currentLotIndex, r=s.lots[i];
+    return {gameId:s.gameId, lotIndex:i, totalLots:s.lots.length, description:r.lot.description, unit:r.lot.unit}; },
+  bidProgress: s => { const i=s.currentLotIndex;
+    return {gameId:s.gameId, lotIndex:i,
+      submittedPlayerIds:s.players.filter(p=> p.playerId in s.lots[i].bids).map(p=>p.playerId),
+      pendingPlayerIds:pendingIds(s,i)}; },
+  roundScores: s => { const i=s.currentLotIndex, r=s.lots[i];
+    return {gameId:s.gameId, lotIndex:i, trueWorth:r.trueWorth, winnerIds:r.winnerIds, pricePaid:r.pricePaid,
+      playerProfits:s.players.map(p=>({playerId:p.playerId, profit:(r.profits[p.playerId] ?? 0), totalScore:totalScore(s,p.playerId)}))}; },
+  outstandingBids: s => ({gameId:s.gameId,
+    lots:s.lots.map((r,i)=>({lotIndex:i, pendingPlayerIds:pendingIds(s,i), allBidsIn:allBidsIn(s,i)}))}),
+  progress: s => ({gameId:s.gameId, lotIndex:s.currentLotIndex, totalLots:s.lots.length,
+    resolvedLotCount:s.lots.filter(r=>r.resolved).length, hasNextLot:hasNextLot(s)}),
+  scoreboard: s => ({gameId:s.gameId, finalScoreboard:s.finalScoreboard, winnerIds:s.finalWinnerIds}),
+  state: s => s
+};
+/* ================= EM GWT fixtures ================= */
+const F = {};
+F.lot0 = {description:'lot0', trueWorth:100, unit:'lot0U'};
+F.lot1 = {description:'lot1', trueWorth:50,  unit:'lot1U'};
+F.hostMartin = {playerId:'martinId', name:'Martin', isHost:true};
+F.playerNils = {playerId:'nilsId',   name:'Nils',   isHost:false};
+const LR = (lot,o={}) => ({...freshLot(lot), ...o});
+F.lot0Fresh = LR(F.lot0);
+F.lot1Fresh = LR(F.lot1);
+F.lot0Nils50      = LR(F.lot0, {bids:{nilsId:50}});
+F.lot0MartinOnly  = LR(F.lot0, {bids:{martinId:70}});
+F.lot0BothIn      = LR(F.lot0, {bids:{martinId:70, nilsId:90}});
+F.lot0MartinOverbid = LR(F.lot0, {bids:{martinId:120, nilsId:80}});
+F.lot0Tied80      = LR(F.lot0, {bids:{martinId:80, nilsId:80}});
+F.lot0Exact100    = LR(F.lot0, {bids:{martinId:100, nilsId:100}});
+F.lot0AllOverbid  = LR(F.lot0, {bids:{martinId:110, nilsId:120}});
+F.lot0Resolved    = LR(F.lot0, {bids:{martinId:70, nilsId:90}, trueWorth:100,
+  winnerIds:['nilsId'], pricePaid:90, profits:{martinId:0, nilsId:10}, resolved:true});
+F.lot0ResolvedFull = F.lot0Resolved;
+F.lot0Scored       = F.lot0Resolved;
+F.lot1BothIn      = LR(F.lot1, {bids:{martinId:40, nilsId:60}});
+F.lot0Profits20And0 = LR(F.lot0, {resolved:true, profits:{martinId:20, nilsId:0}});
+F.lot1Profits0And5  = LR(F.lot1, {resolved:true, profits:{martinId:0,  nilsId:5}});
+F.lot0Profits10Each = LR(F.lot0, {resolved:true, profits:{martinId:10, nilsId:10}});
+F.lot1Profits5Each  = LR(F.lot1, {resolved:true, profits:{martinId:5,  nilsId:5}});
+F.ob0AllPending  = {lotIndex:0, pendingPlayerIds:['martinId','nilsId'], allBidsIn:false};
+F.ob1AllPending  = {lotIndex:1, pendingPlayerIds:['martinId','nilsId'], allBidsIn:false};
+F.ob0NilsPending = {lotIndex:0, pendingPlayerIds:['nilsId'], allBidsIn:false};
+F.ob0AllIn       = {lotIndex:0, pendingPlayerIds:[], allBidsIn:true};
+F.ppMartin0 = {playerId:'martinId', profit:0,  totalScore:0};
+F.ppNils10  = {playerId:'nilsId',   profit:10, totalScore:10};
+F.sbMartin20 = {playerId:'martinId', playerName:'Martin', totalScore:20};
+F.sbNils5    = {playerId:'nilsId',   playerName:'Nils',   totalScore:5};
+F.sbMartin15 = {playerId:'martinId', playerName:'Martin', totalScore:15};
+F.sbNils15   = {playerId:'nilsId',   playerName:'Nils',   totalScore:15};
+
+/* State / Game builder for decider-true GWT givens */
+const st = p => ({gameId:'gameId', joinCode:(p.joinCode ?? 'joinCode'), phase:(p.phase ?? 'lobby'),
+  hostPlayerId:(p.hostPlayerId ?? 'martinId'), players:(p.players ?? []),
+  currentLotIndex:(p.currentLotIndex ?? 0), lots:(p.lots ?? []), finalScoreboard:null, finalWinnerIds:null});
+const mkE = (type,p={}) => ({type, gameId:'gameId', ...p});
+/* event shorthands for projection givens */
+const eOpened  = () => mkE('AuctionOpened', {hostPlayerId:'martinId', hostName:'Martin', joinCode:'joinCode', lots:[F.lot0, F.lot1]});
+const eJoined  = () => mkE('PlayerJoined', {playerId:'nilsId', playerName:'Nils'});
+const eStarted = () => mkE('AuctionStarted', {firstLotIndex:0});
+const eBid = (pid,i,amt) => mkE('BidPlaced', {playerId:pid, lotIndex:i, amount:amt});
+const eRev0 = () => mkE('LotRevealed', {lotIndex:0, trueWorth:100, winnerIds:['nilsId'], pricePaid:90});
+
+/* '*' matches any non-null value (minted ids, timestamps) */
+function match(a,e){
+  if(e==='*') return a!==null && a!==undefined;
+  if(Array.isArray(e)) return Array.isArray(a) && a.length===e.length && e.every((x,i)=>match(a[i],x));
+  if(e && typeof e==='object') return !!a && typeof a==='object' && Object.keys(e).every(k=>match(a[k],e[k]));
+  return a===e;
+}
+
+/* ================= EM GWT cases (all 37, verbatim from the Event Model) ================= */
+const bidGiven = lots => st({phase:'started', players:[F.hostMartin,F.playerNils], lots});
+const TESTS = [
+ {n:'auction can be created', gs:null,
+  when:{type:'OpenAuction', hostName:'Martin', packId:'blindbudet'},
+  ev:[{type:'AuctionOpened', hostPlayerId:'*', hostName:'Martin', joinCode:'*', packId:'blindbudet', lots:[F.lot0,F.lot1], openedAt:'*'}]},
+ {n:'cannot open auction with unknown pack', gs:null,
+  when:{type:'OpenAuction', packId:'unknown'}, x:'AuctionPackNotFound'},
+ {n:'lobby lists the host and joined players', ge:[eOpened(),eJoined()],
+  view:'roster', props:{joinCode:'joinCode', players:[F.hostMartin,F.playerNils]}},
+ {n:'player can join lobby', gs:st({phase:'lobby', players:[F.hostMartin]}),
+  when:{type:'JoinAuction', joinCode:'joinCode', playerName:'Nils'},
+  ev:[{type:'PlayerJoined', playerId:'*', playerName:'Nils', joinedAt:'*'}]},
+ {n:'cannot join nonexistent auction', gs:null,
+  when:{type:'JoinAuction', joinCode:'unknown', playerName:'Nils'}, x:'AuctionNotFound'},
+ {n:'cannot join started auction', gs:st({phase:'started', players:[F.hostMartin,F.playerNils]}),
+  when:{type:'JoinAuction', joinCode:'joinCode', playerName:'Sven'}, x:'AuctionAlreadyStarted'},
+ {n:'cannot join with name already taken', gs:st({phase:'lobby', players:[F.hostMartin,F.playerNils]}),
+  when:{type:'JoinAuction', joinCode:'joinCode', playerName:'Nils'}, x:'NameAlreadyTaken'},
+ {n:'auction can be started', gs:st({phase:'lobby', players:[F.hostMartin,F.playerNils]}),
+  when:{type:'StartAuction', gameId:'gameId'},
+  ev:[{type:'AuctionStarted', firstLotIndex:0, startedAt:'*'}]},
+ {n:'cannot start nonexistent auction', gs:null,
+  when:{type:'StartAuction', gameId:'unknown'}, x:'AuctionNotFound'},
+ {n:'cannot start without enough players', gs:st({phase:'lobby', players:[F.hostMartin]}),
+  when:{type:'StartAuction', gameId:'gameId'}, x:'NotEnoughPlayers'},
+ {n:'current lot presented with content and progress', ge:[eOpened(),eStarted()],
+  view:'lotCard', props:{lotIndex:0, totalLots:2, description:'lot0', unit:'lot0U'}},
+ {n:'bid placed successfully', gs:bidGiven([F.lot0Fresh]),
+  when:{type:'PlaceBid', gameId:'gameId', playerId:'nilsId', lotIndex:0, amount:90},
+  ev:[{type:'BidPlaced', playerId:'nilsId', lotIndex:0, amount:90, bidAt:'*'}]},
+ {n:'cannot bid in nonexistent auction', gs:null,
+  when:{type:'PlaceBid', gameId:'unknown', playerId:'nilsId', lotIndex:0, amount:90}, x:'AuctionNotFound'},
+ {n:'negative bid rejected', gs:bidGiven([F.lot0Fresh]),
+  when:{type:'PlaceBid', gameId:'gameId', playerId:'nilsId', lotIndex:0, amount:-5}, x:'BidNegative'},
+ {n:'cannot bid twice on same lot', gs:bidGiven([F.lot0Nils50]),
+  when:{type:'PlaceBid', gameId:'gameId', playerId:'nilsId', lotIndex:0, amount:70}, x:'AlreadyBid'},
+ {n:'cannot bid on an already-resolved lot', gs:bidGiven([F.lot0Resolved]),
+  when:{type:'PlaceBid', gameId:'gameId', playerId:'martinId', lotIndex:0, amount:80}, x:'LotAlreadyResolved'},
+ {n:'shows who has bid and who is still pending', ge:[eOpened(),eJoined(),eStarted(),eBid('martinId',0,70)],
+  view:'bidProgress', props:{lotIndex:0, submittedPlayerIds:['martinId'], pendingPlayerIds:['nilsId']}},
+ {n:'every lot opens for every player when the auction starts', ge:[eOpened(),eJoined(),eStarted()],
+  view:'outstandingBids', props:{lots:[F.ob0AllPending,F.ob1AllPending]}},
+ {n:'a placed bid checks off that player on its lot', ge:[eOpened(),eJoined(),eStarted(),eBid('martinId',0,70)],
+  view:'outstandingBids', props:{lots:[F.ob0NilsPending,F.ob1AllPending]}},
+ {n:'a lot shows all bids in once every player has bid', ge:[eOpened(),eJoined(),eStarted(),eBid('martinId',0,70),eBid('nilsId',0,90)],
+  view:'outstandingBids', props:{lots:[F.ob0AllIn,F.ob1AllPending]}},
+ {n:'highest bid wins and pays its bid', gs:bidGiven([F.lot0BothIn,F.lot1Fresh]),
+  when:{type:'RevealLot', gameId:'gameId', lotIndex:0},
+  ev:[{type:'LotRevealed', lotIndex:0, trueWorth:100, winnerIds:['nilsId'], pricePaid:90},
+      {type:'RoundScored', playerId:'martinId', profit:0, totalScore:0},
+      {type:'RoundScored', playerId:'nilsId', profit:10, totalScore:10}]},
+ {n:'overbidding excludes from winning, never negative', gs:bidGiven([F.lot0MartinOverbid,F.lot1Fresh]),
+  when:{type:'RevealLot', gameId:'gameId', lotIndex:0},
+  ev:[{type:'LotRevealed', lotIndex:0, trueWorth:100, winnerIds:['nilsId'], pricePaid:80},
+      {type:'RoundScored', playerId:'martinId', profit:0, totalScore:0},
+      {type:'RoundScored', playerId:'nilsId', profit:20, totalScore:20}]},
+ {n:'tie on the winning bid is shared', gs:bidGiven([F.lot0Tied80,F.lot1Fresh]),
+  when:{type:'RevealLot', gameId:'gameId', lotIndex:0},
+  ev:[{type:'LotRevealed', lotIndex:0, trueWorth:100, winnerIds:['martinId','nilsId'], pricePaid:80},
+      {type:'RoundScored', playerId:'martinId', profit:20, totalScore:20},
+      {type:'RoundScored', playerId:'nilsId', profit:20, totalScore:20}]},
+ {n:'exact guess scores ten for all', gs:bidGiven([F.lot0Exact100,F.lot1Fresh]),
+  when:{type:'RevealLot', gameId:'gameId', lotIndex:0},
+  ev:[{type:'LotRevealed', lotIndex:0, trueWorth:100, winnerIds:['martinId','nilsId'], pricePaid:100},
+      {type:'RoundScored', playerId:'martinId', profit:10, totalScore:10},
+      {type:'RoundScored', playerId:'nilsId', profit:10, totalScore:10}]},
+ {n:'all overbid yields no winner', gs:bidGiven([F.lot0AllOverbid,F.lot1Fresh]),
+  when:{type:'RevealLot', gameId:'gameId', lotIndex:0},
+  ev:[{type:'LotRevealed', lotIndex:0, trueWorth:100, winnerIds:[], pricePaid:0},
+      {type:'RoundScored', playerId:'martinId', profit:0, totalScore:0},
+      {type:'RoundScored', playerId:'nilsId', profit:0, totalScore:0}]},
+ {n:'scores accumulate across lots', gs:st({phase:'started', currentLotIndex:1, players:[F.hostMartin,F.playerNils], lots:[F.lot0Scored,F.lot1BothIn]}),
+  when:{type:'RevealLot', gameId:'gameId', lotIndex:1},
+  ev:[{type:'LotRevealed', lotIndex:1, trueWorth:50, winnerIds:['martinId'], pricePaid:40},
+      {type:'RoundScored', playerId:'martinId', profit:20, totalScore:20},
+      {type:'RoundScored', playerId:'nilsId', profit:0, totalScore:10}]},
+ {n:'cannot reveal before all bids in', gs:bidGiven([F.lot0MartinOnly,F.lot1Fresh]),
+  when:{type:'RevealLot', gameId:'gameId', lotIndex:0}, x:'NotAllBidsIn'},
+ {n:'cannot reveal an already-resolved lot', gs:bidGiven([F.lot0Resolved,F.lot1Fresh]),
+  when:{type:'RevealLot', gameId:'gameId', lotIndex:0}, x:'LotAlreadyResolved'},
+ {n:'reveals the worth, winner and per-player profit once resolved',
+  ge:[eOpened(),eJoined(),eStarted(),eBid('martinId',0,70),eBid('nilsId',0,90),eRev0(),
+      mkE('RoundScored',{lotIndex:0, playerId:'martinId', profit:0, totalScore:0}),
+      mkE('RoundScored',{lotIndex:0, playerId:'nilsId', profit:10, totalScore:10})],
+  view:'roundScores', props:{lotIndex:0, trueWorth:100, winnerIds:['nilsId'], pricePaid:90, playerProfits:[F.ppMartin0,F.ppNils10]}},
+ {n:'progress shows a next lot while lots remain', ge:[eOpened(),eJoined(),eStarted(),eRev0()],
+  view:'progress', props:{lotIndex:0, totalLots:2, resolvedLotCount:1, hasNextLot:true}},
+ {n:'progress shows no next lot once the last is resolved',
+  ge:[eOpened(),eJoined(),eStarted(),eRev0(), mkE('NextLotStarted',{lotIndex:1}),
+      mkE('LotRevealed',{lotIndex:1, trueWorth:50, winnerIds:['martinId'], pricePaid:40})],
+  view:'progress', props:{lotIndex:1, totalLots:2, resolvedLotCount:2, hasNextLot:false}},
+ {n:'next lot presented when one remains', gs:st({phase:'started', currentLotIndex:0, lots:[F.lot0Scored,F.lot1Fresh]}),
+  when:{type:'AskNextLot', gameId:'gameId'},
+  ev:[{type:'NextLotStarted', lotIndex:1}]},
+ {n:'highest score wins', gs:st({phase:'started', currentLotIndex:1, players:[F.hostMartin,F.playerNils], lots:[F.lot0Profits20And0,F.lot1Profits0And5]}),
+  when:{type:'EndAuction', gameId:'gameId'},
+  ev:[{type:'AuctionEnded', finalScoreboard:[F.sbMartin20,F.sbNils5], winnerIds:['martinId'], endedAt:'*'}]},
+ {n:'tied highest totals share the win', gs:st({phase:'started', currentLotIndex:1, players:[F.hostMartin,F.playerNils], lots:[F.lot0Profits10Each,F.lot1Profits5Each]}),
+  when:{type:'EndAuction', gameId:'gameId'},
+  ev:[{type:'AuctionEnded', finalScoreboard:[F.sbMartin15,F.sbNils15], winnerIds:['martinId','nilsId'], endedAt:'*'}]},
+ {n:'shows the final scoreboard and winner',
+  ge:[mkE('AuctionEnded',{finalScoreboard:[F.sbMartin20,F.sbNils5], winnerIds:['martinId'], endedAt:'endedAt'})],
+  view:'scoreboard', props:{finalScoreboard:[F.sbMartin20,F.sbNils5], winnerIds:['martinId']}},
+ {n:'state folds a bid into the decision model', ge:[eOpened(),eJoined(),eStarted(),eBid('martinId',0,70)],
+  view:'state', props:{phase:'started', hostPlayerId:'martinId', currentLotIndex:0, lots:[F.lot0MartinOnly,F.lot1Fresh]}},
+ {n:'resolving a lot folds the reveal and profits into that lot',
+  ge:[eOpened(),eJoined(),eStarted(),eBid('martinId',0,70),eBid('nilsId',0,90),eRev0(),
+      mkE('RoundScored',{lotIndex:0, playerId:'martinId', profit:0, totalScore:0}),
+      mkE('RoundScored',{lotIndex:0, playerId:'nilsId', profit:10, totalScore:10})],
+  view:'state', props:{phase:'started', currentLotIndex:0, lots:[F.lot0ResolvedFull,F.lot1Fresh]}}
+];
+
+function runTests(){
+  let n = 0;
+  const testCtx = () => ({findPack: id => id==='blindbudet' ? {lots:[F.lot0,F.lot1]} : null,
+    newId: () => 'minted-'+(++n), now: () => 'T'});
+  return TESTS.map(t => {
+    try {
+      if(t.view){
+        const s = fold(t.ge);
+        const actual = P[t.view](s);
+        return {n:t.n, pass:match(actual, t.props)};
+      }
+      const s = ('gs' in t) ? t.gs : fold(t.ge);
+      const r = decide(s, t.when, testCtx());
+      if(t.x) return {n:t.n, pass:(!r.ok && r.error===t.x)};
+      return {n:t.n, pass:(r.ok && match(r.events, t.ev))};
+    } catch(e){ return {n:t.n, pass:false, msg:String(e)}; }
+  });
+}
+
+function renderBadge(){
+  const res = runTests();
+  const passed = res.filter(r=>r.pass).length;
+  const badge = document.getElementById('badge');
+  badge.className = passed===res.length ? 'pass' : 'fail';
+  document.getElementById('badgeText').textContent =
+    `GWT ${passed}/${res.length} ${passed===res.length ? '✔' : '✘'}`;
+  document.getElementById('badgeList').innerHTML =
+    res.map(r=>`<div class="${r.pass?'ok':'no'}">${r.n}${r.msg?' — '+r.msg:''}</div>`).join('');
+}
+/* ================= Experience Model: labels (sv, verbatim) + tokens are the CSS vars ================= */
+const L = {
+  OpenAuction:{$self:'Skapa auktion', hostName:'Ditt namn'},
+  JoinAuction:{$self:'Gå med', playerName:'Ditt namn'},
+  StartAuction:'Starta auktion',
+  PlaceBid:{$self:'Lägg bud!', amount:'Ditt bud'},
+  AskNextLot:'Nästa budrunda',
+  EndAuction:'Visa slutställning',
+  Roster:{players:'Spelare'},
+  'Bid progress':{submittedPlayerIds:'Klara', pendingPlayerIds:'Väntar på'},
+  'Round scores':{trueWorth:'Sant värde', playerProfits:'Poäng', pricePaid:'Bud',
+    winnerIds:{$empty:'Ingen vann – alla bjöd över.'}},
+  Scoreboard:{finalScoreboard:'Slutställning'},
+  Katalog:'Välj lek', 'LobbyVärd':'Skanna för att gå med', LobbySpelare:'Du är med! 🎉',
+  'Väntan':'Ditt bud är lagt ✓', 'Slutställning':'Slutställning',
+  'Värd':'Värd', Spelare:'Spelare'
+  // Budgivning / RundresultatVärd / RundresultatSpelare have no label -> surface name (spec default)
+};
+
+/* ================= Demo pack (reference data, sv-SE) ================= */
+const PACKS = {
+  'blindbudet-mini': {packId:'blindbudet-mini', name:'Blindbudet mini', lots:[
+    {description:'Mount Everests höjd över havet', trueWorth:8849, unit:'meter'},
+    {description:'Kalorier i en medelstor banan', trueWorth:89, unit:'kcal'},
+    {description:'Antal tangenter på ett standardpiano', trueWorth:88, unit:'tangenter'},
+    {description:'Frihetsgudinnans höjd inklusive sockel', trueWorth:93, unit:'meter'},
+    {description:'Antal rutor på ett schackbräde', trueWorth:64, unit:'rutor'}
+  ]}
+};
+
+/* ================= App runtime ================= */
+let uidN = 0;
+const liveCtx = {findPack: slug => PACKS[slug] ?? null,
+  newId: () => 'id-'+(++uidN), now: () => new Date().toISOString()};
+const app = {log:[], errors:{}, selectedPack:'blindbudet-mini'};
+const FRAMES = [
+  {id:'f0', persona:'Värd',    defaultName:'Martin', playerId:null},
+  {id:'f1', persona:'Spelare', defaultName:'Nils',   playerId:null},
+  {id:'f2', persona:'Spelare', defaultName:'Sven',   playerId:null}
+];
+const state = () => app.log.length ? fold(app.log) : null;
+
+function dispatch(frameId, cmd){
+  delete app.errors[frameId];
+  const r = decide(state(), cmd, liveCtx);
+  if(!r.ok){ app.errors[frameId] = r.error; renderAll(); return null; }
+  app.log.push(...r.events);
+  systemGear();
+  renderAll();
+  return r.events;
+}
+
+/* ⚙️ System / Reveal lot — fires when Todo / Outstanding bids shows allBidsIn (EM processor).
+   AskNextLot / EndAuction are host buttons per xm finding 3, so no gear for them here. */
+function systemGear(){
+  const s = state();
+  if(!s || s.phase!=='started') return;
+  const row = P.outstandingBids(s).lots[s.currentLotIndex];
+  if(row.allBidsIn && !s.lots[s.currentLotIndex].resolved){
+    const r = decide(s, {type:'RevealLot', gameId:s.gameId, lotIndex:s.currentLotIndex}, liveCtx);
+    if(r.ok) app.log.push(...r.events);
+  }
+}
+
+function resetGame(){ app.log = []; app.errors = {}; uidN = 0;
+  FRAMES.forEach(f => f.playerId = null); renderAll(); }
+
+/* ---- helpers ---- */
+const esc = x => String(x).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt = n => Number(n).toLocaleString('sv-SE');
+const nameOf = (s,id) => (s.players.find(p=>p.playerId===id) || {name:id}).name;
+const errBox = f => app.errors[f.id] ? `<div class="err">${esc(app.errors[f.id])}</div>` : '';
+const onDemand = pairs => `<details class="ondemand"><summary>Mer</summary>${
+  pairs.map(([k,v])=>`<div>${esc(k)}: ${esc(v ?? '–')}</div>`).join('')}</details>`;
+const personRow = (s,id,self,extra='') => {
+  const isSelf = id===self, p = s.players.find(q=>q.playerId===id);
+  return `<li class="${isSelf?'you':''}">${esc(nameOf(s,id))}` +
+    (p && p.isHost ? ' <span class="hosttag">värd</span>' : '') +
+    (isSelf ? ' <span class="youtag">du</span>' : '') + extra + '</li>'; };
+
+/* ---- concrete-stratum fine selector (xm finding 8: hand-written, not in the model) ---- */
+function selectSurface(f, s){
+  if(!s) return f.persona==='Värd' ? 'Katalog' : 'JoinForm';
+  if(!f.playerId) return f.persona==='Värd' ? 'Katalog' : 'JoinForm';
+  if(s.phase==='lobby') return f.persona==='Värd' ? 'LobbyVärd' : 'LobbySpelare';
+  if(s.phase==='ended') return 'Slutställning';
+  const r = s.lots[s.currentLotIndex];
+  if(r.resolved) return f.persona==='Värd' ? 'RundresultatVärd' : 'RundresultatSpelare';
+  return (f.playerId in r.bids) ? 'Väntan' : 'Budgivning';
+}
+
+/* ---- surface renderers (compose order = descending importance; tiers per the xm) ---- */
+const SURFACES = {
+  Katalog(f){ // v: Pack catalog (primary: packs) + c: OpenAuction (primary)
+    const packs = Object.values(PACKS).map(p=>({packId:p.packId, name:p.name, lotCount:p.lots.length}));
+    return `<h2>${esc(L.Katalog)}</h2>
+      <div class="card">${packs.map(p=>
+        `<div class="packrow ${app.selectedPack===p.packId?'sel':''}" onclick="app.selectedPack='${esc(p.packId)}';renderAll()">
+          <span class="n">${esc(p.name)}</span><span class="chip">${p.lotCount} lotter</span></div>`).join('')}
+      </div>
+      ${errBox(f)}
+      <div class="card">
+        <label>${esc(L.OpenAuction.hostName)}</label>
+        <input id="${f.id}-name" value="${esc(f.defaultName)}">
+        <button class="btn-primary" onclick="uiOpen('${f.id}')">${esc(L.OpenAuction.$self)}</button>
+      </div>`;
+  },
+  JoinForm(f){ // bare command form (JoinAuction composes no surface -> transformer default)
+    const s = state();
+    return `<h2>${esc(L.JoinAuction.$self)}</h2>
+      ${errBox(f)}
+      <div class="card">
+        <label>joinCode</label>
+        <input id="${f.id}-code" value="${s ? esc(s.joinCode) : ''}" placeholder="klistra in koden">
+        <label>${esc(L.JoinAuction.playerName)}</label>
+        <input id="${f.id}-name" value="${esc(f.defaultName)}">
+        <button class="btn-primary" onclick="uiJoin('${f.id}')">${esc(L.JoinAuction.$self)}</button>
+      </div>
+      ${!s ? '<p class="wait-dots">Väntar på att värden skapar auktionen …</p>' : ''}`;
+  },
+  'LobbyVärd'(f){ // Roster: primary [joinCode, players], on-demand [gameId]; c: StartAuction primary
+    const s = state(), v = P.roster(s);
+    return `<h2>${esc(L['LobbyVärd'])}</h2>
+      <div class="card"><div class="fieldlabel">joinCode</div>
+        <div class="joincode">${esc(v.joinCode)}</div></div>
+      <div class="card"><div class="fieldlabel">${esc(L.Roster.players)}</div>
+        <ul class="people">${v.players.map(p=>personRow(s,p.playerId,f.playerId)).join('')}</ul></div>
+      ${errBox(f)}
+      <button class="btn-primary" onclick="uiStart('${f.id}')">${esc(L.StartAuction)}</button>
+      ${onDemand([['gameId', v.gameId]])}`;
+  },
+  LobbySpelare(f){ // Roster: primary [players], on-demand [joinCode, gameId]
+    const s = state(), v = P.roster(s);
+    return `<h2>${esc(L.LobbySpelare)}</h2>
+      <div class="card"><div class="fieldlabel">${esc(L.Roster.players)}</div>
+        <ul class="people">${v.players.map(p=>personRow(s,p.playerId,f.playerId)).join('')}</ul></div>
+      <p class="wait-dots">Väntar på att värden startar …</p>
+      ${onDemand([['joinCode', v.joinCode], ['gameId', v.gameId]])}`;
+  },
+  Budgivning(f){ // Lot card: primary [description, unit], secondary [lotIndex, totalLots]; c: PlaceBid primary
+    const s = state(), v = P.lotCard(s);
+    return `<h2>Budgivning</h2>
+      <div class="card">
+        <div class="primary-val">${esc(v.description)}</div>
+        <div class="fieldlabel">unit</div><div class="primary-val">${esc(v.unit)}</div>
+        <div class="secondary"><span class="chip">lotIndex ${v.lotIndex}</span><span class="chip">totalLots ${v.totalLots}</span></div>
+      </div>
+      ${errBox(f)}
+      <div class="card">
+        <label>${esc(L.PlaceBid.amount)} (${esc(v.unit)})</label>
+        <input id="${f.id}-bid" inputmode="decimal" placeholder="0">
+        <button class="btn-primary" onclick="uiBid('${f.id}')">${esc(L.PlaceBid.$self)}</button>
+      </div>
+      ${onDemand([['gameId', v.gameId]])}`;
+  },
+  'Väntan'(f){ // Bid progress: primary [pendingPlayerIds], secondary [submittedPlayerIds, lotIndex]
+    const s = state(), v = P.bidProgress(s);
+    return `<h2>${esc(L['Väntan'])}</h2>
+      <div class="card"><div class="fieldlabel">${esc(L['Bid progress'].pendingPlayerIds)}</div>
+        <ul class="people">${v.pendingPlayerIds.length
+          ? v.pendingPlayerIds.map(id=>personRow(s,id,f.playerId)).join('')
+          : '<li class="empty">ingen</li>'}</ul></div>
+      <div class="secondary"><span class="chip">${esc(L['Bid progress'].submittedPlayerIds)}: ${
+        v.submittedPlayerIds.map(id=> id===f.playerId ? 'du · klar' : esc(nameOf(s,id))).join(', ')}</span>
+        <span class="chip">lotIndex ${v.lotIndex}</span></div>
+      ${onDemand([['gameId', v.gameId]])}`;
+  },
+  rundresultat(f, host, nm){ // Round scores: primary [trueWorth, winnerIds, playerProfits], secondary [pricePaid, lotIndex]
+    const s = state(), v = P.roundScores(s), unit = s.lots[v.lotIndex].lot.unit;
+    const prog = P.progress(s);
+    const winners = v.winnerIds.length
+      ? `<div class="primary-val">🏆 ${v.winnerIds.map(id=>esc(nameOf(s,id))+(id===f.playerId?' (du)':'')).join(' & ')}</div>`
+      : `<div class="primary-val empty">${esc(L['Round scores'].winnerIds.$empty)}</div>`;
+    return `<h2>${esc(nm)}</h2>
+      <div class="card">
+        <div class="fieldlabel">${esc(L['Round scores'].trueWorth)}</div>
+        <div class="primary-val big">${fmt(v.trueWorth)} ${esc(unit)}</div>
+        ${winners}
+      </div>
+      <div class="card"><div class="fieldlabel">${esc(L['Round scores'].playerProfits)}</div>
+        <table class="scores"><tr><th></th><th class="num">+</th><th class="num">Totalt</th></tr>
+        ${v.playerProfits.map(pp=>`<tr class="${pp.playerId===f.playerId?'you':''}">
+          <td>${esc(nameOf(s,pp.playerId))}${pp.playerId===f.playerId?' <span class="youtag">du</span>':''}${
+            v.winnerIds.includes(pp.playerId)?' <span class="wintag">🏆</span>':''}</td>
+          <td class="num">${pp.profit}</td><td class="num">${pp.totalScore}</td></tr>`).join('')}
+        </table></div>
+      <div class="secondary"><span class="chip">${esc(L['Round scores'].pricePaid)}: ${fmt(v.pricePaid)}</span>
+        <span class="chip">lotIndex ${v.lotIndex}</span></div>
+      ${errBox(f)}
+      ${host ? (prog.hasNextLot
+        ? `<button class="btn-primary" onclick="uiNext('${f.id}')">${esc(L.AskNextLot)}</button>`
+        : `<button class="btn-primary btn-alt" onclick="uiEnd('${f.id}')">${esc(L.EndAuction)}</button>`) : ''}
+      ${onDemand([['gameId', v.gameId]])}`;
+  },
+  'RundresultatVärd'(f){ return SURFACES.rundresultat(f, true, 'RundresultatVärd'); },
+  RundresultatSpelare(f){ return SURFACES.rundresultat(f, false, 'RundresultatSpelare'); },
+  'Slutställning'(f){ // Scoreboard: primary [finalScoreboard, winnerIds], on-demand [gameId]
+    const s = state(), v = P.scoreboard(s);
+    const rows = [...v.finalScoreboard].sort((a,b)=>b.totalScore-a.totalScore); // HIGHEST total wins
+    return `<h2>${esc(L['Slutställning'])}</h2>
+      <div class="card"><div class="fieldlabel">${esc(L.Scoreboard.finalScoreboard)}</div>
+        <table class="scores">
+        ${rows.map(e=>`<tr class="${e.playerId===f.playerId?'you':''}">
+          <td>${v.winnerIds.includes(e.playerId)?'🏆 ':''}${esc(e.playerName)}${
+            e.playerId===f.playerId?' <span class="youtag">du</span>':''}</td>
+          <td class="num">${e.totalScore}</td></tr>`).join('')}
+        </table></div>
+      <p class="sub">Högst total vinner.</p>
+      ${onDemand([['gameId', v.gameId]])}`;
+  }
+};
+
+/* ---- UI command handlers ---- */
+function uiOpen(fid){
+  const f = FRAMES.find(x=>x.id===fid);
+  const hostName = document.getElementById(fid+'-name').value.trim() || f.defaultName;
+  const evs = dispatch(fid, {type:'OpenAuction', hostName, packId:app.selectedPack});
+  if(evs) f.playerId = evs[0].hostPlayerId;
+  renderAll();
+}
+function uiJoin(fid){
+  const f = FRAMES.find(x=>x.id===fid);
+  const joinCode = document.getElementById(fid+'-code').value.trim();
+  const playerName = document.getElementById(fid+'-name').value.trim() || f.defaultName;
+  const evs = dispatch(fid, {type:'JoinAuction', joinCode, playerName});
+  if(evs) f.playerId = evs[0].playerId;
+  renderAll();
+}
+function uiStart(fid){ dispatch(fid, {type:'StartAuction', gameId:state().gameId}); }
+function uiBid(fid){
+  const f = FRAMES.find(x=>x.id===fid), s = state();
+  const raw = document.getElementById(fid+'-bid').value.trim().replace(/\s/g,'').replace(',','.');
+  const amount = Number(raw);
+  if(raw==='' || Number.isNaN(amount)){ app.errors[fid]='Skriv en siffra'; renderAll(); return; }
+  dispatch(fid, {type:'PlaceBid', gameId:s.gameId, playerId:f.playerId, lotIndex:s.currentLotIndex, amount});
+}
+function uiNext(fid){ dispatch(fid, {type:'AskNextLot', gameId:state().gameId}); }
+function uiEnd(fid){ dispatch(fid, {type:'EndAuction', gameId:state().gameId}); }
+
+/* ---- render ---- */
+function renderAll(){
+  const s = state();
+  document.getElementById('frames').innerHTML = FRAMES.map(f=>{
+    const surf = selectSurface(f, s);
+    return `<div class="phone"><div class="personabar">
+        <span>${esc(L[f.persona] ?? f.persona)}</span>
+        <span>${s && f.playerId ? esc(nameOf(s, f.playerId)) : esc(f.defaultName)}</span></div>
+      <div class="surface">${SURFACES[surf](f)}</div></div>`;
+  }).join('');
+}
+
+renderBadge();
+renderAll();
+</script>
+</body>
+</html>

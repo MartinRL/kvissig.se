@@ -1,0 +1,743 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blindbudet — xm clean-room prototype (c1-run2)</title>
+<style>
+/* Tokens transcribed from specs/blindbudet.xm.yaml (DTCG) — the sanctioned vocabulary */
+:root{
+  --color-bg:#fff7ec; --color-bg-2:#ffeccf; --color-ink:#2b2118; --color-ink-soft:#7a6a58;
+  --color-card:#fffdf9; --color-line:#f0e0c8;
+  --color-mer:#21c08a; --color-mer-deep:#12805c; --color-mer-ink:#06281f;
+  --color-mindre:#ffab40; --color-mindre-deep:#e07f0e; --color-mindre-ink:#3a2300;
+  --color-accent:#ff5d73; --color-accent-2:#ff8a3d;
+  --radius-md:22px; --radius-sm:16px;
+  --font-display:"Baloo 2",system-ui,sans-serif;
+  --font-body:Nunito,system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(180deg,var(--color-bg),var(--color-bg-2));color:var(--color-ink);font-family:var(--font-body);min-height:100vh}
+header.page{display:flex;align-items:center;gap:16px;padding:14px 22px;flex-wrap:wrap}
+header.page h1{font-family:var(--font-display);font-size:1.5rem;margin:0}
+header.page .sub{color:var(--color-ink-soft);font-size:.85rem}
+#badge{margin-left:auto;border:none;font-family:var(--font-display);font-size:1rem;padding:8px 16px;border-radius:999px;color:#fff;cursor:pointer;box-shadow:0 2px 6px rgba(43,33,24,.2)}
+#badge.pass{background:var(--color-mer-deep)}
+#badge.fail{background:var(--color-accent)}
+#testlog{display:none;margin:0 22px 16px;background:var(--color-card);border:1px solid var(--color-line);border-radius:var(--radius-sm);padding:12px 18px;max-height:300px;overflow:auto;font-size:.82rem}
+#testlog.open{display:block}
+#testlog li.ok{color:var(--color-mer-deep)}
+#testlog li.bad{color:var(--color-accent)}
+#testlog pre{white-space:pre-wrap;margin:2px 0 8px;color:var(--color-ink-soft)}
+main{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;padding:8px 16px 40px}
+/* phone frame */
+.phone{width:340px;background:#2b2118;border-radius:38px;padding:12px 10px 18px;box-shadow:0 12px 30px rgba(43,33,24,.28);flex:0 0 auto}
+.phone .persona{color:#fff7ec;text-align:center;font-family:var(--font-display);font-size:.9rem;padding:2px 0 8px}
+.phone .notch{width:110px;height:8px;background:#4a3a2b;border-radius:8px;margin:0 auto 8px}
+.screen{background:var(--color-bg);border-radius:26px;height:600px;overflow-y:auto;padding:16px 14px 22px;display:flex;flex-direction:column;gap:12px}
+/* surface pieces */
+h2.surface{font-family:var(--font-display);font-size:1.35rem;margin:2px 0 4px;text-align:center}
+.card{background:var(--color-card);border:1px solid var(--color-line);border-radius:var(--radius-md);padding:14px 16px;box-shadow:0 2px 4px rgba(43,33,24,.05)}
+.primary-txt{font-family:var(--font-display);font-size:1.5rem;line-height:1.25;text-align:center;margin:6px 0}
+.big-num{font-family:var(--font-display);font-size:2.4rem;text-align:center;color:var(--color-mer-deep);margin:4px 0}
+.secondary-txt{color:var(--color-ink-soft);font-size:.85rem;text-align:center}
+.fieldlab{font-size:.78rem;color:var(--color-ink-soft);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
+details.ondemand{font-size:.78rem;color:var(--color-ink-soft)}
+details.ondemand summary{cursor:pointer}
+details.ondemand code{word-break:break-all}
+ul.plist{list-style:none;margin:4px 0;padding:0}
+ul.plist li{display:flex;align-items:center;gap:8px;padding:7px 10px;border-bottom:1px dashed var(--color-line);font-size:1rem}
+ul.plist li:last-child{border-bottom:none}
+ul.plist li .dot{width:10px;height:10px;border-radius:50%;background:var(--color-mer)}
+ul.plist li.pending .dot{background:var(--color-mindre)}
+ul.plist li.self{background:var(--color-bg-2);border-radius:10px;font-weight:700}
+.you{font-size:.72rem;background:var(--color-accent);color:#fff;border-radius:999px;padding:1px 8px}
+.hosttag{font-size:.72rem;background:var(--color-mindre);color:var(--color-mindre-ink);border-radius:999px;padding:1px 8px}
+.joincode{font-family:var(--font-display);font-size:1.15rem;text-align:center;background:var(--color-bg-2);border-radius:var(--radius-sm);padding:10px;letter-spacing:.04em;word-break:break-all}
+.qr{width:120px;height:120px;margin:0 auto;display:grid;grid-template-columns:repeat(8,1fr);gap:2px;background:#fff;padding:8px;border-radius:12px;border:1px solid var(--color-line)}
+.qr i{background:var(--color-ink);border-radius:2px}
+.qr i.o{background:transparent}
+button.cta{display:block;width:100%;border:none;border-radius:var(--radius-md);padding:14px;font-family:var(--font-display);font-size:1.15rem;color:#fff;background:linear-gradient(135deg,var(--color-accent),var(--color-accent-2));cursor:pointer;box-shadow:0 4px 10px rgba(255,93,115,.35)}
+button.cta:disabled{opacity:.45;cursor:default;box-shadow:none}
+button.cta.alt{background:linear-gradient(135deg,var(--color-mer),var(--color-mer-deep));box-shadow:0 4px 10px rgba(33,192,138,.3)}
+label.f{display:block;font-size:.85rem;color:var(--color-ink-soft);margin:8px 0 4px}
+input.f{width:100%;border:2px solid var(--color-line);border-radius:var(--radius-sm);padding:10px 12px;font-size:1.1rem;font-family:var(--font-body);background:#fff;color:var(--color-ink)}
+input.f:focus{outline:none;border-color:var(--color-accent-2)}
+.packs{display:flex;flex-direction:column;gap:8px}
+.pack{border:2px solid var(--color-line);border-radius:var(--radius-sm);padding:10px 12px;cursor:pointer;background:var(--color-card)}
+.pack.sel{border-color:var(--color-accent);background:var(--color-bg-2)}
+.pack .pname{font-family:var(--font-display);font-size:1.05rem}
+.pack .pmeta{font-size:.8rem;color:var(--color-ink-soft)}
+.err{background:var(--color-accent);color:#fff;border-radius:var(--radius-sm);padding:8px 12px;font-size:.85rem}
+.gear{font-size:.75rem;color:var(--color-ink-soft);text-align:center}
+table.scores{width:100%;border-collapse:collapse;font-size:.95rem}
+table.scores td,table.scores th{padding:7px 6px;border-bottom:1px dashed var(--color-line);text-align:left}
+table.scores th{font-size:.75rem;color:var(--color-ink-soft);text-transform:uppercase;letter-spacing:.05em}
+table.scores tr.self{background:var(--color-bg-2);font-weight:700}
+table.scores td.num{text-align:right;font-family:var(--font-display)}
+.mark.bad{color:var(--color-accent);font-weight:700}
+.mark.win{color:var(--color-mer-deep);font-weight:700}
+.winnerline{text-align:center;font-family:var(--font-display);font-size:1.15rem;color:var(--color-mer-deep)}
+.winnerline.none{color:var(--color-mindre-deep)}
+.crown{font-size:1.6rem;text-align:center}
+.waitpulse{width:56px;height:56px;margin:14px auto;border-radius:50%;background:var(--color-mer);opacity:.85;animation:pulse 1.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(.85);opacity:.5}50%{transform:scale(1);opacity:.95}}
+.spacer{flex:1}
+footer.note{color:var(--color-ink-soft);font-size:.75rem;text-align:center;padding:0 22px 30px;max-width:900px;margin:0 auto}
+</style>
+</head>
+<body>
+<header class="page">
+  <div>
+    <h1>Blindbudet</h1>
+    <div class="sub">clean-room xm prototype · em: blindbudet-event-model.yaml · xm: blindbudet.xm.yaml (xmlang 0.2)</div>
+  </div>
+  <button id="badge" class="pass" onclick="document.getElementById('testlog').classList.toggle('open')">GWT …</button>
+</header>
+<ul id="testlog"></ul>
+<main id="frames"></main>
+<footer class="note">
+  Ett auktionsspel: varje budrunda visar en pryl med dolt sant värde. Alla lägger ETT hemligt bud.
+  Bud över sanna värdet diskas (✗). Högsta giltiga bud vinner och får poäng som andel av värdet.
+  HÖGST total vinner. Reveal sker automatiskt (⚙️ System) när alla bud är inne; värden driver tempot vidare.
+</footer>
+<script>
+"use strict";
+/* ========================================================================
+ * FIXTURES — names lifted verbatim from the Event Model's test appendix
+ * ====================================================================== */
+const martinId="martinId", nilsId="nilsId", svenId="svenId";
+const FX={};
+FX.martinId=martinId; FX.nilsId=nilsId; FX.svenId=svenId;
+FX.gameId="gameId"; FX.joinCode="joinCode";
+FX.lot0={description:"lot0",trueWorth:100,unit:"lot0U"};
+FX.lot1={description:"lot1",trueWorth:50,unit:"lot1U"};
+FX.hostMartin={playerId:martinId,name:"Martin",isHost:true};
+FX.playerNils={playerId:nilsId,name:"Nils",isHost:false};
+FX.playerSven={playerId:svenId,name:"Sven",isHost:false};
+function round(lot,bids,rev){ // rev = {trueWorth,winnerIds,pricePaid,profits} when resolved
+  const r={lot,bids:bids||{},trueWorth:null,winnerIds:[],pricePaid:null,profits:{},resolved:false};
+  if(rev){r.trueWorth=rev.trueWorth;r.winnerIds=rev.winnerIds;r.pricePaid=rev.pricePaid;r.profits=rev.profits;r.resolved=true;}
+  return r;
+}
+FX.lot0Fresh      =()=>round(FX.lot0);
+FX.lot1Fresh      =()=>round(FX.lot1);
+FX.lot0Nils50     =()=>round(FX.lot0,{[nilsId]:50});
+FX.lot0MartinOnly =()=>round(FX.lot0,{[martinId]:70});
+FX.lot0BothIn     =()=>round(FX.lot0,{[martinId]:70,[nilsId]:90});
+FX.lot0MartinOverbid=()=>round(FX.lot0,{[martinId]:120,[nilsId]:80});
+FX.lot0Tied80     =()=>round(FX.lot0,{[martinId]:80,[nilsId]:80});
+FX.lot0Exact100   =()=>round(FX.lot0,{[martinId]:100,[nilsId]:100});
+FX.lot0AllOverbid =()=>round(FX.lot0,{[martinId]:150,[nilsId]:120});
+FX.lot0Resolved   =()=>round(FX.lot0,{[martinId]:70,[nilsId]:90},{trueWorth:100,winnerIds:[nilsId],pricePaid:90,profits:{[martinId]:0,[nilsId]:10}});
+FX.lot0ResolvedFull=FX.lot0Resolved;
+FX.lot0Scored     =FX.lot0Resolved;
+FX.lot1BothIn     =()=>round(FX.lot1,{[martinId]:40,[nilsId]:60});
+FX.lot0Profits20And0=()=>round(FX.lot0,{[martinId]:80,[nilsId]:110},{trueWorth:100,winnerIds:[martinId],pricePaid:80,profits:{[martinId]:20,[nilsId]:0}});
+FX.lot1Profits0And5 =()=>round(FX.lot1,{[martinId]:60,[nilsId]:47.5},{trueWorth:50,winnerIds:[nilsId],pricePaid:47.5,profits:{[martinId]:0,[nilsId]:5}});
+FX.lot0Profits10Each=()=>round(FX.lot0,{[martinId]:100,[nilsId]:100},{trueWorth:100,winnerIds:[martinId,nilsId],pricePaid:100,profits:{[martinId]:10,[nilsId]:10}});
+FX.lot1Profits5Each =()=>round(FX.lot1,{[martinId]:47.5,[nilsId]:47.5},{trueWorth:50,winnerIds:[martinId,nilsId],pricePaid:47.5,profits:{[martinId]:5,[nilsId]:5}});
+FX.ob0AllPending={lotIndex:0,pendingPlayerIds:[martinId,nilsId],allBidsIn:false};
+FX.ob1AllPending={lotIndex:1,pendingPlayerIds:[martinId,nilsId],allBidsIn:false};
+FX.ob0NilsPending={lotIndex:0,pendingPlayerIds:[nilsId],allBidsIn:false};
+FX.ob0AllIn={lotIndex:0,pendingPlayerIds:[],allBidsIn:true};
+FX.ppMartin0={playerId:martinId,profit:0,totalScore:0};
+FX.ppNils10={playerId:nilsId,profit:10,totalScore:10};
+FX.sbMartin20={playerId:martinId,playerName:"Martin",totalScore:20};
+FX.sbNils5={playerId:nilsId,playerName:"Nils",totalScore:5};
+FX.sbMartin15={playerId:martinId,playerName:"Martin",totalScore:15};
+FX.sbNils15={playerId:nilsId,playerName:"Nils",totalScore:15};
+function fx(v){ // resolve a fixture name (string) or pass through literals; arrays resolve element-wise
+  if(Array.isArray(v))return v.map(fx);
+  if(typeof v==="string"&&Object.prototype.hasOwnProperty.call(FX,v)){const f=FX[v];return typeof f==="function"?f():f;}
+  return v;
+}
+/* ========================================================================
+ * DECIDER — evolve: (State, Event) -> State ; decide: (State, Command, Ctx) -> Result<Event[]>
+ * Straight transcription of the Event Model's commands/events/exceptions.
+ * ====================================================================== */
+const initialState={phase:"none",gameId:null,joinCode:null,hostPlayerId:null,packId:null,
+  players:[],currentLotIndex:0,lots:[],finalScoreboard:[],winnerIds:[]};
+const clone=o=>JSON.parse(JSON.stringify(o));
+function evolve(state,ev){
+  const s=clone(state);
+  switch(ev.type){
+    case "AuctionOpened":
+      s.phase="lobby"; s.gameId=ev.gameId??null; s.joinCode=ev.joinCode??null;
+      s.hostPlayerId=ev.hostPlayerId??null; s.packId=ev.packId??null;
+      s.players=[{playerId:ev.hostPlayerId,name:ev.hostName,isHost:true}];
+      s.lots=(ev.lots||[]).map(l=>round(l));
+      s.currentLotIndex=0;
+      return s;
+    case "PlayerJoined":
+      s.players.push({playerId:ev.playerId,name:ev.playerName,isHost:false}); return s;
+    case "AuctionStarted":
+      s.phase="started"; s.currentLotIndex=ev.firstLotIndex??0; return s;
+    case "BidPlaced":
+      s.lots[ev.lotIndex].bids[ev.playerId]=ev.amount; return s;
+    case "LotRevealed":{
+      const r=s.lots[ev.lotIndex];
+      r.trueWorth=ev.trueWorth; r.winnerIds=ev.winnerIds; r.pricePaid=ev.pricePaid; r.resolved=true;
+      return s;}
+    case "RoundScored":
+      s.lots[ev.lotIndex].profits[ev.playerId]=ev.profit; return s;
+    case "NextLotStarted":
+      s.currentLotIndex=ev.lotIndex; return s;
+    case "AuctionEnded":
+      s.phase="ended"; s.finalScoreboard=ev.finalScoreboard; s.winnerIds=ev.winnerIds; return s;
+    default: return s;
+  }
+}
+const fold=(events,seed)=>events.reduce(evolve,seed||initialState);
+const ok=events=>({ok:true,events});
+const err=x=>({ok:false,error:x});
+/* DERIVED helpers (Decision Model appendix) */
+const pendingBidPlayerIds=(s,i)=>s.players.map(p=>p.playerId).filter(id=>!(id in s.lots[i].bids));
+const allBidsIn=(s,i)=>pendingBidPlayerIds(s,i).length===0;
+const hasNextLot=s=>s.currentLotIndex+1<s.lots.length;
+const totalScore=(s,pid)=>s.lots.filter(l=>l.resolved).reduce((a,l)=>a+(l.profits[pid]||0),0);
+function decide(state,cmd,ctx){
+  switch(cmd.type){
+    case "OpenAuction":{
+      const pack=ctx.findPack(cmd.packId);
+      if(!pack)return err("AuctionPackNotFound");
+      let lots=pack.lots;
+      if(cmd.packId.includes("mini")&&lots.length>7){ // mini marker: shuffle + take 7
+        lots=lots.slice(); for(let i=lots.length-1;i>0;i--){const j=ctx.nextRandom(i+1);[lots[i],lots[j]]=[lots[j],lots[i]];}
+        lots=lots.slice(0,7);
+      }
+      return ok([{type:"AuctionOpened",gameId:ctx.newId(),hostPlayerId:ctx.newId(),
+        hostName:cmd.hostName,joinCode:ctx.newId(),packId:cmd.packId,lots,openedAt:ctx.now()}]);}
+    case "JoinAuction":{
+      if(state.phase==="none"||state.joinCode!==cmd.joinCode)return err("AuctionNotFound");
+      if(state.phase!=="lobby")return err("AuctionAlreadyStarted");
+      if(state.players.some(p=>p.name===cmd.playerName))return err("NameAlreadyTaken");
+      return ok([{type:"PlayerJoined",gameId:state.gameId,playerId:ctx.newId(),
+        playerName:cmd.playerName,joinedAt:ctx.now()}]);}
+    case "StartAuction":{
+      if(state.phase==="none")return err("AuctionNotFound");
+      if(state.players.length<2)return err("NotEnoughPlayers");
+      return ok([{type:"AuctionStarted",gameId:cmd.gameId,firstLotIndex:0,startedAt:ctx.now()}]);}
+    case "PlaceBid":{
+      if(state.phase==="none")return err("AuctionNotFound");
+      if(cmd.amount<0)return err("BidNegative");
+      const r=state.lots[cmd.lotIndex];
+      if(r.resolved)return err("LotAlreadyResolved");
+      if(cmd.playerId in r.bids)return err("AlreadyBid");
+      return ok([{type:"BidPlaced",gameId:cmd.gameId,playerId:cmd.playerId,
+        lotIndex:cmd.lotIndex,amount:cmd.amount,bidAt:ctx.now()}]);}
+    case "RevealLot":{
+      const r=state.lots[cmd.lotIndex];
+      if(r.resolved)return err("LotAlreadyResolved");
+      if(!allBidsIn(state,cmd.lotIndex))return err("NotAllBidsIn");
+      const tw=r.lot.trueWorth;
+      const valid=state.players.filter(p=>r.bids[p.playerId]<=tw);
+      const winningBid=valid.length?Math.max(...valid.map(p=>r.bids[p.playerId])):null;
+      const winnerIds=winningBid===null?[]:state.players.filter(p=>r.bids[p.playerId]===winningBid).map(p=>p.playerId);
+      const winnerProfit=winningBid===null?0:(winningBid===tw?10:Math.round((tw-winningBid)/tw*100));
+      const events=[{type:"LotRevealed",gameId:cmd.gameId,lotIndex:cmd.lotIndex,
+        trueWorth:tw,winnerIds,pricePaid:winningBid===null?0:winningBid}];
+      for(const p of state.players){
+        const profit=winnerIds.includes(p.playerId)?winnerProfit:0;
+        events.push({type:"RoundScored",gameId:cmd.gameId,lotIndex:cmd.lotIndex,
+          playerId:p.playerId,profit,totalScore:totalScore(state,p.playerId)+profit});
+      }
+      return ok(events);}
+    case "AskNextLot":
+      return ok([{type:"NextLotStarted",gameId:cmd.gameId,lotIndex:state.currentLotIndex+1}]);
+    case "EndAuction":{
+      const board=state.players.map(p=>({playerId:p.playerId,playerName:p.name,totalScore:totalScore(state,p.playerId)}));
+      const top=Math.max(...board.map(b=>b.totalScore)); // HIGHEST total wins (opposite of MEM)
+      return ok([{type:"AuctionEnded",gameId:cmd.gameId,finalScoreboard:board,
+        winnerIds:board.filter(b=>b.totalScore===top).map(b=>b.playerId),endedAt:ctx.now()}]);}
+    default: return err("UnknownCommand");
+  }
+}
+/* ========================================================================
+ * PROJECTIONS — pure State -> View, one per Event Model view
+ * ====================================================================== */
+const P={
+  "Roster":s=>({gameId:s.gameId,joinCode:s.joinCode,players:s.players}),
+  "Lot card":s=>{const r=s.lots[s.currentLotIndex];return {gameId:s.gameId,lotIndex:s.currentLotIndex,
+    totalLots:s.lots.length,description:r.lot.description,unit:r.lot.unit};},
+  "Bid progress":s=>({gameId:s.gameId,lotIndex:s.currentLotIndex,
+    submittedPlayerIds:s.players.filter(p=>p.playerId in s.lots[s.currentLotIndex].bids).map(p=>p.playerId),
+    pendingPlayerIds:pendingBidPlayerIds(s,s.currentLotIndex)}),
+  "Todo / Outstanding bids":s=>({gameId:s.gameId,lots:s.lots.map((l,i)=>({lotIndex:i,
+    pendingPlayerIds:pendingBidPlayerIds(s,i),allBidsIn:allBidsIn(s,i)}))}),
+  "Round scores":s=>{const i=s.currentLotIndex,r=s.lots[i];return {gameId:s.gameId,lotIndex:i,
+    trueWorth:r.trueWorth,winnerIds:r.winnerIds,pricePaid:r.pricePaid,
+    playerProfits:s.players.map(p=>({playerId:p.playerId,profit:r.profits[p.playerId]??0,
+      totalScore:totalScore(s,p.playerId)}))};},
+  "Todo / Auction progress":s=>({gameId:s.gameId,lotIndex:s.currentLotIndex,totalLots:s.lots.length,
+    resolvedLotCount:s.lots.filter(l=>l.resolved).length,hasNextLot:hasNextLot(s)}),
+  "Scoreboard":s=>({gameId:s.gameId,finalScoreboard:s.finalScoreboard,winnerIds:s.winnerIds}),
+  "State / Game":s=>s
+};
+/* ========================================================================
+ * GWT HARNESS — the Event Model's tests: given (events | State/Game view),
+ * when (command), then (events | views | exceptions). Asserts only the
+ * props each case lists; "minted"/timestamp placeholders assert presence.
+ * ====================================================================== */
+const WILD=new Set(["minted","openedAt","joinedAt","startedAt","bidAt","endedAt"]);
+function match(exp,act,path,fails){
+  if(typeof exp==="string"&&WILD.has(exp)){if(act===undefined||act===null)fails.push(path+": expected a value");return;}
+  if(Array.isArray(exp)){
+    if(!Array.isArray(act)||act.length!==exp.length){fails.push(path+": expected "+JSON.stringify(exp)+" got "+JSON.stringify(act));return;}
+    exp.forEach((e,i)=>match(e,act[i],path+"["+i+"]",fails));return;
+  }
+  if(exp&&typeof exp==="object"){
+    if(!act||typeof act!=="object"){fails.push(path+": expected object got "+JSON.stringify(act));return;}
+    for(const k of Object.keys(exp))match(exp[k],act[k],path+"."+k,fails);return;
+  }
+  if(exp!==act)fails.push(path+": expected "+JSON.stringify(exp)+" got "+JSON.stringify(act));
+}
+const testCtx={findPack:id=>id==="blindbudet"?{packId:"blindbudet",lots:[FX.lot0,FX.lot1]}:null,
+  newId:()=>"minted-"+Math.random().toString(36).slice(2,8),now:()=>"2026-08-23T00:00:00Z",
+  nextRandom:n=>Math.floor(Math.random()*n)};
+function stateFromView(props){ // given: State / Game — build the folded decision model from fixture props
+  const s=clone(initialState);
+  s.phase=props.phase??s.phase; s.gameId=FX.gameId; s.joinCode=fx(props.joinCode)??s.joinCode;
+  s.hostPlayerId=fx(props.hostPlayerId)??s.hostPlayerId;
+  if(props.players)s.players=fx(props.players);
+  if(props.lots)s.lots=fx(props.lots);
+  if(props.currentLotIndex!==undefined)s.currentLotIndex=props.currentLotIndex;
+  return s;
+}
+function runCase(tc){
+  const fails=[];
+  let state=initialState, givenEvents=[];
+  for(const g of tc.given||[]){
+    if(g.v==="State / Game")state=stateFromView(g.props||{});
+    else if(g.e){givenEvents.push(Object.assign({type:g.e.replace("Game / ","")},resolveProps(g.props)));}
+  }
+  if(givenEvents.length)state=fold(givenEvents,state);
+  if(tc.when){ // command slice
+    const res=decide(state,Object.assign({type:tc.when.c},resolveProps(tc.when.props)),testCtx);
+    const expX=(tc.then||[]).find(t=>t.x);
+    if(expX){
+      if(res.ok)fails.push("expected exception "+expX.x+" but got events "+res.events.map(e=>e.type).join(","));
+      else if(res.error!==expX.x)fails.push("expected "+expX.x+" got "+res.error);
+    }else{
+      if(!res.ok)fails.push("expected events but got exception "+res.error);
+      else{
+        const expEvents=(tc.then||[]).filter(t=>t.e);
+        if(expEvents.length!==res.events.length)fails.push("expected "+expEvents.length+" events, got "+res.events.length+" ("+res.events.map(e=>e.type).join(",")+")");
+        expEvents.forEach((t,i)=>{const act=res.events[i];if(!act)return;
+          const type=t.e.replace("Game / ","");
+          if(act.type!==type)fails.push("event["+i+"]: expected "+type+" got "+act.type);
+          match(resolveProps(t.props),act,"event["+i+"]",fails);});
+      }
+    }
+  }else{ // projection GT: then views only
+    for(const t of tc.then||[]){
+      if(!t.v)continue;
+      const view=P[t.v](state);
+      match(resolveProps(t.props),view,t.v,fails);
+    }
+  }
+  return fails;
+}
+function resolveProps(props){const o={};for(const k of Object.keys(props||{}))o[k]=fx(props[k]);return o;}
+/* --- the 37 GWT cases, transcribed from specs/blindbudet-event-model.yaml --- */
+const s=(g,w,t)=>({given:g,when:w,then:t}); // command case
+const p=(g,t)=>({given:g,then:t});           // projection case
+const SG=(props)=>({v:"State / Game",props});
+const TESTS=[
+["auction can be created",s([], {c:"OpenAuction",props:{hostName:"Martin",packId:"blindbudet"}},
+  [{e:"Game / AuctionOpened",props:{hostPlayerId:"minted",hostName:"Martin",joinCode:"minted",packId:"blindbudet",lots:["lot0","lot1"],openedAt:"openedAt"}}])],
+["cannot open auction with unknown pack",s([],{c:"OpenAuction",props:{packId:"unknown"}},[{x:"AuctionPackNotFound"}])],
+["lobby lists the host and joined players",p(
+  [{e:"Game / AuctionOpened",props:{hostPlayerId:"martinId",hostName:"Martin",joinCode:"joinCode",lots:["lot0","lot1"]}},
+   {e:"Game / PlayerJoined",props:{playerId:"nilsId",playerName:"Nils"}}],
+  [{v:"Roster",props:{joinCode:"joinCode",players:["hostMartin","playerNils"]}}])],
+["player can join lobby",s([SG({phase:"lobby",joinCode:"joinCode",players:["hostMartin"]})],
+  {c:"JoinAuction",props:{joinCode:"joinCode",playerName:"Nils"}},
+  [{e:"Game / PlayerJoined",props:{playerId:"minted",playerName:"Nils",joinedAt:"joinedAt"}}])],
+["cannot join nonexistent auction",s([],{c:"JoinAuction",props:{joinCode:"unknown",playerName:"Nils"}},[{x:"AuctionNotFound"}])],
+["cannot join started auction",s([SG({phase:"started",joinCode:"joinCode",players:["hostMartin","playerNils"]})],
+  {c:"JoinAuction",props:{joinCode:"joinCode",playerName:"Sven"}},[{x:"AuctionAlreadyStarted"}])],
+["cannot join with name already taken",s([SG({phase:"lobby",joinCode:"joinCode",players:["hostMartin","playerNils"]})],
+  {c:"JoinAuction",props:{joinCode:"joinCode",playerName:"Nils"}},[{x:"NameAlreadyTaken"}])],
+["auction can be started",s([SG({phase:"lobby",players:["hostMartin","playerNils"]})],
+  {c:"StartAuction",props:{gameId:"gameId"}},
+  [{e:"Game / AuctionStarted",props:{firstLotIndex:0,startedAt:"startedAt"}}])],
+["cannot start nonexistent auction",s([],{c:"StartAuction",props:{gameId:"unknown"}},[{x:"AuctionNotFound"}])],
+["cannot start without enough players",s([SG({phase:"lobby",players:["hostMartin"]})],
+  {c:"StartAuction",props:{gameId:"gameId"}},[{x:"NotEnoughPlayers"}])],
+["current lot presented with content and progress",p(
+  [{e:"Game / AuctionOpened",props:{hostPlayerId:"martinId",hostName:"Martin",lots:["lot0","lot1"]}},
+   {e:"Game / AuctionStarted",props:{firstLotIndex:0}}],
+  [{v:"Lot card",props:{lotIndex:0,totalLots:2,description:"lot0",unit:"lot0U"}}])],
+["bid placed successfully",s([SG({phase:"started",currentLotIndex:0,players:["hostMartin","playerNils"],lots:["lot0Fresh"]})],
+  {c:"PlaceBid",props:{gameId:"gameId",playerId:"nilsId",lotIndex:0,amount:90}},
+  [{e:"Game / BidPlaced",props:{playerId:"nilsId",lotIndex:0,amount:90,bidAt:"bidAt"}}])],
+["cannot bid in nonexistent auction",s([],{c:"PlaceBid",props:{gameId:"unknown",playerId:"nilsId",lotIndex:0,amount:90}},[{x:"AuctionNotFound"}])],
+["negative bid rejected",s([SG({phase:"started",currentLotIndex:0,players:["hostMartin","playerNils"],lots:["lot0Fresh"]})],
+  {c:"PlaceBid",props:{gameId:"gameId",playerId:"nilsId",lotIndex:0,amount:-5}},[{x:"BidNegative"}])],
+["cannot bid twice on same lot",s([SG({phase:"started",currentLotIndex:0,players:["hostMartin","playerNils"],lots:["lot0Nils50"]})],
+  {c:"PlaceBid",props:{gameId:"gameId",playerId:"nilsId",lotIndex:0,amount:70}},[{x:"AlreadyBid"}])],
+["cannot bid on an already-resolved lot",s([SG({phase:"started",currentLotIndex:0,players:["hostMartin","playerNils"],lots:["lot0Resolved"]})],
+  {c:"PlaceBid",props:{gameId:"gameId",playerId:"martinId",lotIndex:0,amount:80}},[{x:"LotAlreadyResolved"}])],
+["shows who has bid and who is still pending",p(
+  [{e:"Game / AuctionOpened",props:{hostPlayerId:"martinId",hostName:"Martin",lots:["lot0","lot1"]}},
+   {e:"Game / PlayerJoined",props:{playerId:"nilsId",playerName:"Nils"}},
+   {e:"Game / AuctionStarted"},
+   {e:"Game / BidPlaced",props:{playerId:"martinId",lotIndex:0,amount:70}}],
+  [{v:"Bid progress",props:{lotIndex:0,submittedPlayerIds:["martinId"],pendingPlayerIds:["nilsId"]}}])],
+["every lot opens for every player when the auction starts",p(
+  [{e:"Game / AuctionOpened",props:{joinCode:"joinCode",hostPlayerId:"martinId",hostName:"Martin",lots:["lot0","lot1"]}},
+   {e:"Game / PlayerJoined",props:{playerId:"nilsId",playerName:"Nils"}},
+   {e:"Game / AuctionStarted"}],
+  [{v:"Todo / Outstanding bids",props:{lots:["ob0AllPending","ob1AllPending"]}}])],
+["a placed bid checks off that player on its lot",p(
+  [{e:"Game / AuctionOpened",props:{joinCode:"joinCode",hostPlayerId:"martinId",hostName:"Martin",lots:["lot0","lot1"]}},
+   {e:"Game / PlayerJoined",props:{playerId:"nilsId",playerName:"Nils"}},
+   {e:"Game / AuctionStarted"},
+   {e:"Game / BidPlaced",props:{playerId:"martinId",lotIndex:0,amount:70}}],
+  [{v:"Todo / Outstanding bids",props:{lots:["ob0NilsPending","ob1AllPending"]}}])],
+["a lot shows all bids in once every player has bid",p(
+  [{e:"Game / AuctionOpened",props:{joinCode:"joinCode",hostPlayerId:"martinId",hostName:"Martin",lots:["lot0","lot1"]}},
+   {e:"Game / PlayerJoined",props:{playerId:"nilsId",playerName:"Nils"}},
+   {e:"Game / AuctionStarted"},
+   {e:"Game / BidPlaced",props:{playerId:"martinId",lotIndex:0,amount:70}},
+   {e:"Game / BidPlaced",props:{playerId:"nilsId",lotIndex:0,amount:90}}],
+  [{v:"Todo / Outstanding bids",props:{lots:["ob0AllIn","ob1AllPending"]}}])],
+["highest bid wins and pays its bid",s([SG({phase:"started",currentLotIndex:0,players:["hostMartin","playerNils"],lots:["lot0BothIn","lot1Fresh"]})],
+  {c:"RevealLot",props:{gameId:"gameId",lotIndex:0}},
+  [{e:"Game / LotRevealed",props:{lotIndex:0,trueWorth:100,winnerIds:["nilsId"],pricePaid:90}},
+   {e:"Game / RoundScored",props:{playerId:"martinId",profit:0,totalScore:0}},
+   {e:"Game / RoundScored",props:{playerId:"nilsId",profit:10,totalScore:10}}])],
+["overbidding excludes from winning, never negative",s([SG({phase:"started",currentLotIndex:0,players:["hostMartin","playerNils"],lots:["lot0MartinOverbid","lot1Fresh"]})],
+  {c:"RevealLot",props:{gameId:"gameId",lotIndex:0}},
+  [{e:"Game / LotRevealed",props:{lotIndex:0,trueWorth:100,winnerIds:["nilsId"],pricePaid:80}},
+   {e:"Game / RoundScored",props:{playerId:"martinId",profit:0,totalScore:0}},
+   {e:"Game / RoundScored",props:{playerId:"nilsId",profit:20,totalScore:20}}])],
+["tie on the winning bid is shared",s([SG({phase:"started",currentLotIndex:0,players:["hostMartin","playerNils"],lots:["lot0Tied80","lot1Fresh"]})],
+  {c:"RevealLot",props:{gameId:"gameId",lotIndex:0}},
+  [{e:"Game / LotRevealed",props:{lotIndex:0,trueWorth:100,winnerIds:["martinId","nilsId"],pricePaid:80}},
+   {e:"Game / RoundScored",props:{playerId:"martinId",profit:20,totalScore:20}},
+   {e:"Game / RoundScored",props:{playerId:"nilsId",profit:20,totalScore:20}}])],
+["exact guess scores ten for all",s([SG({phase:"started",currentLotIndex:0,players:["hostMartin","playerNils"],lots:["lot0Exact100","lot1Fresh"]})],
+  {c:"RevealLot",props:{gameId:"gameId",lotIndex:0}},
+  [{e:"Game / LotRevealed",props:{lotIndex:0,trueWorth:100,winnerIds:["martinId","nilsId"],pricePaid:100}},
+   {e:"Game / RoundScored",props:{playerId:"martinId",profit:10,totalScore:10}},
+   {e:"Game / RoundScored",props:{playerId:"nilsId",profit:10,totalScore:10}}])],
+["all overbid yields no winner",s([SG({phase:"started",currentLotIndex:0,players:["hostMartin","playerNils"],lots:["lot0AllOverbid","lot1Fresh"]})],
+  {c:"RevealLot",props:{gameId:"gameId",lotIndex:0}},
+  [{e:"Game / LotRevealed",props:{lotIndex:0,trueWorth:100,winnerIds:[],pricePaid:0}},
+   {e:"Game / RoundScored",props:{playerId:"martinId",profit:0,totalScore:0}},
+   {e:"Game / RoundScored",props:{playerId:"nilsId",profit:0,totalScore:0}}])],
+["scores accumulate across lots",s([SG({phase:"started",currentLotIndex:1,players:["hostMartin","playerNils"],lots:["lot0Scored","lot1BothIn"]})],
+  {c:"RevealLot",props:{gameId:"gameId",lotIndex:1}},
+  [{e:"Game / LotRevealed",props:{lotIndex:1,trueWorth:50,winnerIds:["martinId"],pricePaid:40}},
+   {e:"Game / RoundScored",props:{playerId:"martinId",profit:20,totalScore:20}},
+   {e:"Game / RoundScored",props:{playerId:"nilsId",profit:0,totalScore:10}}])],
+["cannot reveal before all bids in",s([SG({phase:"started",currentLotIndex:0,players:["hostMartin","playerNils"],lots:["lot0MartinOnly","lot1Fresh"]})],
+  {c:"RevealLot",props:{gameId:"gameId",lotIndex:0}},[{x:"NotAllBidsIn"}])],
+["cannot reveal an already-resolved lot",s([SG({phase:"started",currentLotIndex:0,players:["hostMartin","playerNils"],lots:["lot0Resolved","lot1Fresh"]})],
+  {c:"RevealLot",props:{gameId:"gameId",lotIndex:0}},[{x:"LotAlreadyResolved"}])],
+["reveals the worth, winner and per-player profit once resolved",p(
+  [{e:"Game / AuctionOpened",props:{hostPlayerId:"martinId",hostName:"Martin",lots:["lot0","lot1"]}},
+   {e:"Game / PlayerJoined",props:{playerId:"nilsId",playerName:"Nils"}},
+   {e:"Game / AuctionStarted"},
+   {e:"Game / BidPlaced",props:{playerId:"martinId",lotIndex:0,amount:70}},
+   {e:"Game / BidPlaced",props:{playerId:"nilsId",lotIndex:0,amount:90}},
+   {e:"Game / LotRevealed",props:{lotIndex:0,trueWorth:100,winnerIds:["nilsId"],pricePaid:90}},
+   {e:"Game / RoundScored",props:{lotIndex:0,playerId:"martinId",profit:0,totalScore:0}},
+   {e:"Game / RoundScored",props:{lotIndex:0,playerId:"nilsId",profit:10,totalScore:10}}],
+  [{v:"Round scores",props:{lotIndex:0,trueWorth:100,winnerIds:["nilsId"],pricePaid:90,playerProfits:["ppMartin0","ppNils10"]}}])],
+["progress shows a next lot while lots remain",p(
+  [{e:"Game / AuctionOpened",props:{joinCode:"joinCode",hostPlayerId:"martinId",hostName:"Martin",lots:["lot0","lot1"]}},
+   {e:"Game / PlayerJoined",props:{playerId:"nilsId",playerName:"Nils"}},
+   {e:"Game / AuctionStarted"},
+   {e:"Game / LotRevealed",props:{lotIndex:0,trueWorth:100,winnerIds:["nilsId"],pricePaid:90}}],
+  [{v:"Todo / Auction progress",props:{lotIndex:0,totalLots:2,resolvedLotCount:1,hasNextLot:true}}])],
+["progress shows no next lot once the last is resolved",p(
+  [{e:"Game / AuctionOpened",props:{joinCode:"joinCode",hostPlayerId:"martinId",hostName:"Martin",lots:["lot0","lot1"]}},
+   {e:"Game / PlayerJoined",props:{playerId:"nilsId",playerName:"Nils"}},
+   {e:"Game / AuctionStarted"},
+   {e:"Game / LotRevealed",props:{lotIndex:0,trueWorth:100,winnerIds:["nilsId"],pricePaid:90}},
+   {e:"Game / NextLotStarted",props:{lotIndex:1}},
+   {e:"Game / LotRevealed",props:{lotIndex:1,trueWorth:50,winnerIds:["martinId"],pricePaid:40}}],
+  [{v:"Todo / Auction progress",props:{lotIndex:1,totalLots:2,resolvedLotCount:2,hasNextLot:false}}])],
+["next lot presented when one remains",s([SG({phase:"started",currentLotIndex:0,lots:["lot0Scored","lot1Fresh"]})],
+  {c:"AskNextLot",props:{gameId:"gameId"}},
+  [{e:"Game / NextLotStarted",props:{lotIndex:1}}])],
+["highest score wins",s([SG({phase:"started",currentLotIndex:1,players:["hostMartin","playerNils"],lots:["lot0Profits20And0","lot1Profits0And5"]})],
+  {c:"EndAuction",props:{gameId:"gameId"}},
+  [{e:"Game / AuctionEnded",props:{finalScoreboard:["sbMartin20","sbNils5"],winnerIds:["martinId"],endedAt:"endedAt"}}])],
+["tied highest totals share the win",s([SG({phase:"started",currentLotIndex:1,players:["hostMartin","playerNils"],lots:["lot0Profits10Each","lot1Profits5Each"]})],
+  {c:"EndAuction",props:{gameId:"gameId"}},
+  [{e:"Game / AuctionEnded",props:{finalScoreboard:["sbMartin15","sbNils15"],winnerIds:["martinId","nilsId"],endedAt:"endedAt"}}])],
+["shows the final scoreboard and winner",p(
+  [{e:"Game / AuctionEnded",props:{finalScoreboard:["sbMartin20","sbNils5"],winnerIds:["martinId"],endedAt:"endedAt"}}],
+  [{v:"Scoreboard",props:{finalScoreboard:["sbMartin20","sbNils5"],winnerIds:["martinId"]}}])],
+["state folds a bid into the decision model",p(
+  [{e:"Game / AuctionOpened",props:{joinCode:"joinCode",hostPlayerId:"martinId",hostName:"Martin",lots:["lot0","lot1"]}},
+   {e:"Game / PlayerJoined",props:{playerId:"nilsId",playerName:"Nils"}},
+   {e:"Game / AuctionStarted"},
+   {e:"Game / BidPlaced",props:{playerId:"martinId",lotIndex:0,amount:70}}],
+  [{v:"State / Game",props:{phase:"started",hostPlayerId:"martinId",currentLotIndex:0,lots:["lot0MartinOnly","lot1Fresh"]}}])],
+["resolving a lot folds the reveal and profits into that lot",p(
+  [{e:"Game / AuctionOpened",props:{joinCode:"joinCode",hostPlayerId:"martinId",hostName:"Martin",lots:["lot0","lot1"]}},
+   {e:"Game / PlayerJoined",props:{playerId:"nilsId",playerName:"Nils"}},
+   {e:"Game / AuctionStarted"},
+   {e:"Game / BidPlaced",props:{playerId:"martinId",lotIndex:0,amount:70}},
+   {e:"Game / BidPlaced",props:{playerId:"nilsId",lotIndex:0,amount:90}},
+   {e:"Game / LotRevealed",props:{lotIndex:0,trueWorth:100,winnerIds:["nilsId"],pricePaid:90}},
+   {e:"Game / RoundScored",props:{lotIndex:0,playerId:"martinId",profit:0,totalScore:0}},
+   {e:"Game / RoundScored",props:{lotIndex:0,playerId:"nilsId",profit:10,totalScore:10}}],
+  [{v:"State / Game",props:{phase:"started",currentLotIndex:0,lots:["lot0ResolvedFull","lot1Fresh"]}}])]
+];
+function runAllTests(){
+  const log=document.getElementById("testlog"),badge=document.getElementById("badge");
+  let pass=0;
+  for(const [name,tc] of TESTS){
+    let fails;
+    try{fails=runCase(tc);}catch(e){fails=["threw: "+e.message];}
+    const li=document.createElement("li");
+    li.className=fails.length?"bad":"ok";
+    li.textContent=(fails.length?"✗ ":"✓ ")+name;
+    log.appendChild(li);
+    if(fails.length){const pre=document.createElement("pre");pre.textContent=fails.join("\n");log.appendChild(pre);}
+    else pass++;
+  }
+  badge.textContent="GWT "+pass+"/"+TESTS.length;
+  badge.className=pass===TESTS.length?"pass":"fail";
+}
+/* ========================================================================
+ * LIVE GAME — event store + System processors (gears) + persona frames
+ * ====================================================================== */
+const PACKS=[{packId:"blindbudet",name:"Blindbudet",lots:[
+  {description:"Mount Everests höjd över havet",trueWorth:8849,unit:"meter"},
+  {description:"Antal tangenter på ett standardpiano",trueWorth:88,unit:"tangenter"},
+  {description:"Frihetsgudinnans höjd inklusive sockeln",trueWorth:93,unit:"meter"},
+  {description:"Antal rutor på ett schackbräde",trueWorth:64,unit:"rutor"},
+  {description:"Maratonloppets officiella distans",trueWorth:42195,unit:"meter"}]}];
+const liveCtx={findPack:id=>PACKS.find(p=>p.packId===id)||null,
+  newId:()=>crypto.randomUUID?crypto.randomUUID():("id-"+Math.random().toString(36).slice(2,10)),
+  now:()=>new Date().toISOString(),nextRandom:n=>Math.floor(Math.random()*n)};
+let store=[];               // the Game stream
+const liveState=()=>fold(store);
+/* frames: one per persona instance. Värd = Martin; two Spelare. */
+const frames=[
+  {key:"host",persona:"Värd",name:"Martin",playerId:null,error:null,selPack:"blindbudet"},
+  {key:"p1",persona:"Spelare",name:"Nils",playerId:null,error:null,joined:false},
+  {key:"p2",persona:"Spelare",name:"Sven",playerId:null,error:null,joined:false}
+];
+function dispatch(frame,cmd){
+  const res=decide(liveState(),cmd,liveCtx);
+  if(!res.ok){if(frame)frame.error=res.error;render();return null;}
+  if(frame)frame.error=null;
+  store=store.concat(res.events);
+  runGears();          // ⚙️ System processors react to new events
+  render();
+  return res.events;
+}
+/* ⚙️ System / Reveal lot — gated on Todo / Outstanding bids (allBidsIn on the current lot).
+ * AskNextLot / EndAuction stay HOST buttons per xm finding 3 (as-implemented divergence). */
+function runGears(){
+  const st=liveState();
+  if(st.phase!=="started")return;
+  const todo=P["Todo / Outstanding bids"](st);
+  const row=todo.lots[st.currentLotIndex];
+  if(row&&row.allBidsIn&&!st.lots[st.currentLotIndex].resolved){
+    const res=decide(st,{type:"RevealLot",gameId:st.gameId,lotIndex:st.currentLotIndex},liveCtx);
+    if(res.ok)store=store.concat(res.events);
+  }
+}
+/* ---- labels (sv) from the xm spec; fallbacks = Event Model names (Defaults) ---- */
+const L={
+  OpenAuction:{$self:"Skapa auktion",hostName:"Ditt namn"},
+  JoinAuction:{$self:"Gå med",playerName:"Ditt namn"},
+  StartAuction:"Starta auktion",
+  PlaceBid:{$self:"Lägg bud!",amount:"Ditt bud"},
+  AskNextLot:"Nästa budrunda", EndAuction:"Visa slutställning",
+  Roster:{players:"Spelare"},
+  "Bid progress":{submittedPlayerIds:"Klara",pendingPlayerIds:"Väntar på"},
+  "Round scores":{trueWorth:"Sant värde",playerProfits:"Poäng",pricePaid:"Bud",
+    winnerIds:{$empty:"Ingen vann – alla bjöd över."}},
+  Scoreboard:{finalScoreboard:"Slutställning"},
+  Katalog:"Välj lek", LobbyVärd:"Skanna för att gå med", LobbySpelare:"Du är med! 🎉",
+  Väntan:"Ditt bud är lagt ✓", Slutställning:"Slutställning",
+  Budgivning:"Budgivning", RundresultatVärd:"Rundresultat", RundresultatSpelare:"Rundresultat",
+  Värd:"Värd", Spelare:"Spelare"
+};
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const num=n=>Number(n).toLocaleString("sv-SE");
+const pname=(st,id)=>{const p=st.players.find(p=>p.playerId===id);return p?p.name:id;};
+/* ---- surface renderers. Salience: primary = big, secondary = muted small,
+ * on-demand = <details>. self: = "du"-highlight. Order = importance, not position. ---- */
+function surfKatalog(f){
+  const packs=PACKS.map(p=>'<div class="pack'+(f.selPack===p.packId?" sel":"")+'" onclick="frames[0].selPack=\''+p.packId+'\';render()">'+
+    '<div class="pname">'+esc(p.name)+'</div><div class="pmeta">'+p.lots.length+' budrundor</div></div>').join("");
+  return '<h2 class="surface">'+L.Katalog+'</h2>'+
+    '<div class="card"><div class="fieldlab">Lekar</div><div class="packs">'+packs+'</div></div>'+
+    '<div class="card"><label class="f">'+L.OpenAuction.hostName+'</label>'+
+    '<input class="f" id="hostName" value="'+esc(f.name)+'">'+
+    '<div style="height:10px"></div>'+
+    '<button class="cta" onclick="doOpen()">'+L.OpenAuction.$self+'</button></div>';
+}
+function qrHtml(seed){ // decorative QR stand-in (concrete-stratum choice; the model only says joinCode is primary)
+  let h=0;for(const ch of seed)h=(h*31+ch.charCodeAt(0))>>>0;
+  let cells="";for(let i=0;i<64;i++){h=(h*1103515245+12345)>>>0;cells+='<i class="'+((h>>16)%3===0?"o":"")+'"></i>';}
+  return '<div class="qr">'+cells+'</div>';
+}
+function rosterList(st,selfId){
+  return '<ul class="plist">'+st.players.map(p=>'<li class="'+(p.playerId===selfId?"self":"")+'">'+
+    '<span class="dot"></span>'+esc(p.name)+
+    (p.isHost?' <span class="hosttag">värd</span>':"")+
+    (p.playerId===selfId?' <span class="you">du</span>':"")+'</li>').join("")+'</ul>';
+}
+function surfLobbyVard(f,st){
+  const v=P["Roster"](st);
+  return '<h2 class="surface">'+L.LobbyVärd+'</h2>'+
+    '<div class="card">'+qrHtml(v.joinCode||"")+'<div style="height:8px"></div>'+
+    '<div class="joincode">'+esc(v.joinCode)+'</div></div>'+
+    '<div class="card"><div class="fieldlab">'+L.Roster.players+'</div>'+rosterList(st,f.playerId)+'</div>'+
+    '<button class="cta" onclick="doStart()" '+(st.players.length<2?"disabled":"")+'>'+L.StartAuction+'</button>'+
+    (st.players.length<2?'<div class="secondary-txt">Minst 2 spelare behövs</div>':"")+
+    '<details class="ondemand"><summary>Detaljer</summary>gameId: <code>'+esc(v.gameId)+'</code></details>';
+}
+function surfLobbySpelare(f,st){
+  const v=P["Roster"](st);
+  return '<h2 class="surface">'+L.LobbySpelare+'</h2>'+
+    '<div class="card"><div class="fieldlab">'+L.Roster.players+'</div>'+rosterList(st,f.playerId)+'</div>'+
+    '<div class="secondary-txt">Väntar på att värden startar …</div>'+
+    '<details class="ondemand"><summary>Detaljer</summary>joinCode: <code>'+esc(v.joinCode)+'</code><br>gameId: <code>'+esc(v.gameId)+'</code></details>';
+}
+function surfBudgivning(f,st){
+  const v=P["Lot card"](st);
+  return '<h2 class="surface">'+L.Budgivning+'</h2>'+
+    '<div class="card"><div class="primary-txt">'+esc(v.description)+'</div>'+
+    '<div class="secondary-txt" style="font-size:1rem">'+esc(v.unit)+'</div></div>'+
+    '<div class="secondary-txt">Budrunda '+(v.lotIndex+1)+' av '+v.totalLots+'</div>'+
+    '<div class="card"><label class="f">'+L.PlaceBid.amount+' ('+esc(v.unit)+')</label>'+
+    '<input class="f" type="number" min="0" step="any" id="bid-'+f.key+'" placeholder="0">'+
+    '<div style="height:10px"></div>'+
+    '<button class="cta" onclick="doBid(\''+f.key+'\')">'+L.PlaceBid.$self+'</button></div>'+
+    '<details class="ondemand"><summary>Detaljer</summary>gameId: <code>'+esc(v.gameId)+'</code></details>';
+}
+function surfVantan(f,st){
+  const v=P["Bid progress"](st);
+  return '<h2 class="surface">'+L.Väntan+'</h2>'+
+    '<div class="waitpulse"></div>'+
+    '<div class="card"><div class="fieldlab">'+L["Bid progress"].pendingPlayerIds+'</div>'+
+    '<ul class="plist">'+(v.pendingPlayerIds.map(id=>'<li class="pending"><span class="dot"></span>'+esc(pname(st,id))+'</li>').join("")||'<li>–</li>')+'</ul></div>'+
+    '<div class="secondary-txt">'+L["Bid progress"].submittedPlayerIds+': '+
+      v.submittedPlayerIds.map(id=>esc(pname(st,id))+(id===f.playerId?" (du · klar)":"")).join(", ")+
+      ' · Budrunda '+(v.lotIndex+1)+'</div>'+
+    '<details class="ondemand"><summary>Detaljer</summary>gameId: <code>'+esc(v.gameId)+'</code></details>';
+}
+function surfRundresultat(f,st,isHost){
+  const v=P["Round scores"](st);
+  const lotr=st.lots[v.lotIndex];
+  const winnerLine=v.winnerIds.length
+    ?'<div class="winnerline">🏆 '+v.winnerIds.map(id=>esc(pname(st,id))).join(" & ")+' vann!</div>'
+    :'<div class="winnerline none">'+L["Round scores"].winnerIds.$empty+'</div>';
+  const rows=v.playerProfits.map(pp=>{
+    const bid=lotr.bids[pp.playerId], overbid=bid>v.trueWorth;
+    const mark=overbid?'<span class="mark bad">✗</span>':(v.winnerIds.includes(pp.playerId)?'<span class="mark win">🏆</span>':"");
+    return '<tr class="'+(pp.playerId===f.playerId?"self":"")+'"><td>'+esc(pname(st,pp.playerId))+
+      (pp.playerId===f.playerId?' <span class="you">du</span>':"")+'</td><td class="num">'+num(bid)+' '+mark+
+      '</td><td class="num">+'+pp.profit+'</td><td class="num">'+pp.totalScore+'</td></tr>';}).join("");
+  let actions="";
+  if(isHost){ // xm finding 3: host buttons; hasNextLot gate makes them mutually exclusive
+    const prog=P["Todo / Auction progress"](st);
+    actions=prog.hasNextLot
+      ?'<button class="cta alt" onclick="doNext()">'+L.AskNextLot+'</button>'
+      :'<button class="cta" onclick="doEnd()">'+L.EndAuction+'</button>';
+  }
+  return '<h2 class="surface">'+L.RundresultatVärd+'</h2>'+
+    '<div class="card"><div class="fieldlab">'+L["Round scores"].trueWorth+'</div>'+
+    '<div class="big-num">'+num(v.trueWorth)+'</div>'+
+    '<div class="secondary-txt">'+esc(lotr.lot.description)+' ('+esc(lotr.lot.unit)+')</div></div>'+
+    winnerLine+
+    '<div class="card"><div class="fieldlab">'+L["Round scores"].playerProfits+'</div>'+
+    '<table class="scores"><tr><th>Spelare</th><th>'+L["Round scores"].pricePaid+'</th><th>Poäng</th><th>Totalt</th></tr>'+rows+'</table></div>'+
+    '<div class="secondary-txt">'+L["Round scores"].pricePaid+': '+num(v.pricePaid)+' · Budrunda '+(v.lotIndex+1)+' av '+st.lots.length+'</div>'+
+    actions+
+    (isHost?"":'<div class="gear">Värden driver vidare …</div>')+
+    '<details class="ondemand"><summary>Detaljer</summary>gameId: <code>'+esc(v.gameId)+'</code></details>';
+}
+function surfSlutstallning(f,st){
+  const v=P["Scoreboard"](st);
+  const board=v.finalScoreboard.slice().sort((a,b)=>b.totalScore-a.totalScore); // HIGHEST wins
+  const rows=board.map(e=>'<tr class="'+(e.playerId===f.playerId?"self":"")+'"><td>'+
+    (v.winnerIds.includes(e.playerId)?"🏆 ":"")+esc(e.playerName)+
+    (e.playerId===f.playerId?' <span class="you">du</span>':"")+'</td><td class="num">'+e.totalScore+'</td></tr>').join("");
+  return '<h2 class="surface">'+L.Slutställning+'</h2>'+
+    '<div class="crown">👑</div>'+
+    '<div class="winnerline">'+v.winnerIds.map(id=>esc(pname(st,id))).join(" & ")+' vann auktionen!</div>'+
+    '<div class="card"><div class="fieldlab">'+L.Scoreboard.finalScoreboard+'</div>'+
+    '<table class="scores"><tr><th>Spelare</th><th>Totalt</th></tr>'+rows+'</table></div>'+
+    '<div class="secondary-txt">Högst total vinner</div>'+
+    '<details class="ondemand"><summary>Detaljer</summary>gameId: <code>'+esc(v.gameId)+'</code></details>';
+}
+function surfJoinForm(f,st){ // bare command form (composes no view) — transformer-default form
+  const ready=st.phase==="lobby";
+  return '<h2 class="surface">'+L.JoinAuction.$self+'</h2>'+
+    '<div class="card">'+
+    (ready?'<div class="secondary-txt">Kod skannad ✓</div><div class="joincode">'+esc(st.joinCode)+'</div>'
+          :'<div class="secondary-txt">Väntar på att värden skapar auktionen …</div>')+
+    '<label class="f">'+L.JoinAuction.playerName+'</label>'+
+    '<input class="f" id="join-'+f.key+'" value="'+esc(f.name)+'">'+
+    '<div style="height:10px"></div>'+
+    '<button class="cta" '+(ready?"":"disabled")+' onclick="doJoin(\''+f.key+'\')">'+L.JoinAuction.$self+'</button></div>';
+}
+/* ---- fine selection inside started phase = hand-written selector (xm finding 8) ---- */
+function selectSurface(f,st){
+  const isHost=f.persona==="Värd";
+  if(st.phase==="none")return isHost?surfKatalog(f):surfJoinForm(f,st);
+  if(st.phase==="lobby"){
+    if(isHost)return surfLobbyVard(f,st);
+    return f.joined?surfLobbySpelare(f,st):surfJoinForm(f,st);
+  }
+  if(st.phase==="ended")return surfSlutstallning(f,st);
+  // started
+  if(!f.joined&&!isHost)return '<h2 class="surface">Auktionen har startat</h2><div class="secondary-txt">Du hann inte med den här gången.</div>';
+  const lot=st.lots[st.currentLotIndex];
+  if(lot.resolved)return surfRundresultat(f,st,isHost);
+  if(f.playerId in lot.bids)return surfVantan(f,st);
+  return surfBudgivning(f,st);
+}
+function render(){
+  const st=liveState(), root=document.getElementById("frames");
+  const saved={},focusId=document.activeElement&&document.activeElement.id;
+  root.querySelectorAll("input").forEach(i=>saved[i.id]=i.value);
+  root.innerHTML=frames.map(f=>'<div class="phone"><div class="notch"></div>'+
+    '<div class="persona">'+L[f.persona]+' · '+esc(f.name)+'</div>'+
+    '<div class="screen">'+(f.error?'<div class="err">'+esc(f.error)+'</div>':"")+
+    selectSurface(f,st)+'<div class="spacer"></div></div></div>').join("");
+  root.querySelectorAll("input").forEach(i=>{if(saved[i.id]!==undefined&&i.id.startsWith("bid-"))i.value=saved[i.id];});
+  if(focusId){const el=document.getElementById(focusId);if(el)el.focus();}
+}
+/* ---- command handlers ---- */
+function doOpen(){
+  const f=frames[0];
+  f.name=document.getElementById("hostName").value.trim()||"Martin";
+  const evs=dispatch(f,{type:"OpenAuction",hostName:f.name,packId:f.selPack});
+  if(evs){f.playerId=evs[0].hostPlayerId;render();}
+}
+function doJoin(key){
+  const f=frames.find(x=>x.key===key), st=liveState();
+  f.name=document.getElementById("join-"+key).value.trim()||f.name;
+  const evs=dispatch(f,{type:"JoinAuction",joinCode:st.joinCode,playerName:f.name});
+  if(evs){f.playerId=evs[0].playerId;f.joined=true;render();}
+}
+function doStart(){const st=liveState();dispatch(frames[0],{type:"StartAuction",gameId:st.gameId});}
+function doBid(key){
+  const f=frames.find(x=>x.key===key), st=liveState();
+  const el=document.getElementById("bid-"+key), amount=parseFloat(el.value);
+  if(isNaN(amount)){f.error="BidNegative";render();return;}
+  dispatch(f,{type:"PlaceBid",gameId:st.gameId,playerId:f.playerId,lotIndex:st.currentLotIndex,amount});
+}
+function doNext(){const st=liveState();dispatch(frames[0],{type:"AskNextLot",gameId:st.gameId});}
+function doEnd(){const st=liveState();dispatch(frames[0],{type:"EndAuction",gameId:st.gameId});}
+/* boot */
+runAllTests();
+render();
+</script>
+</body>
+</html>
