@@ -18,6 +18,20 @@
     case QrField qr:
         <QrPanel Model="qr" />
         break;
+    case BarsField bars:
+        <div class="twobars" aria-hidden="true">
+            <div class="bar a" style="height:100%"><span>@bars.Larger.BarLabel</span></div>
+            <div class="bar b" style="height:@(bars.SmallerPercent)%"><span>@bars.Smaller.BarLabel</span></div>
+        </div>
+        <div class="twobars-legend">
+            <span>@if (bars.Larger.LogoUrl is not null) { <img class="logoimg" src="@bars.Larger.LogoUrl" alt="" /> } @bars.Larger.Legend</span>
+            <span>@if (bars.Smaller.LogoUrl is not null) { <img class="logoimg" src="@bars.Smaller.LogoUrl" alt="" /> } @bars.Smaller.Legend</span>
+        </div>
+        @if (bars.Caption is not null)
+        {
+            <p style="margin-top:2.2rem">@bars.Caption</p>
+        }
+        break;
     case RosterField roster:
         <PlayerRoster Model="roster" />
         break;

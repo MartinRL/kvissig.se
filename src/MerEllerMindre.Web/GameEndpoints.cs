@@ -20,7 +20,8 @@ public record GameDeps(
     PlayerIdentity Identity,
     LogoCatalog Logos,
     PlausibleClient Plausible,
-    IAntiforgery Antiforgery);
+    IAntiforgery Antiforgery,
+    Xm.XmCatalog Xm);
 
 /// <summary>Everything a screen fragment needs to render, so RenderState takes one argument.</summary>
 public record RenderContext(
@@ -134,7 +135,22 @@ public static class GameEndpoints
 
         var token = d.Antiforgery.GetAndStoreTokens(http).RequestToken!;
         var hostName = state.Players.FirstOrDefault(p => p.IsHost)?.Name ?? "";
-        return new RazorComponentResult<JoinForm>(new { Model = new JoinVm(state.JoinCode, hostName, token) });
+        // xm defaults contract: JoinGame composes no view, so its form is transformer-defined.
+        var spec = d.Xm.MerEllerMindre;
+        return new RazorComponentResult<Components.Xm.CommandDefaultPage>(new
+        {
+            Title = $"Mer eller Mindre: {GameSurfaces.Label(spec, "JoinGame")}",
+            LogoA = "Mer eller ",
+            LogoB = "Mindre",
+            RolePill = GameSurfaces.Label(spec, "JoinGame"),
+            Heading = "Gå med i spelet",
+            Sub = $"{hostName} (värd)",
+            PostPath = $"/games/{state.JoinCode:N}/join",
+            Token = token,
+            InputName = "playerName",
+            InputLabel = GameSurfaces.Label(spec, "JoinGame", "playerName"),
+            SubmitLabel = GameSurfaces.Label(spec, "JoinGame"),
+        });
     }
 
     private static IResult PostJoin(string code, [FromForm] string playerName, [AsParameters] GameDeps d, HttpContext http)
@@ -200,7 +216,7 @@ public static class GameEndpoints
             return Rendered(state, viewer: null, d, http);
 
         var token = d.Antiforgery.GetAndStoreTokens(http).RequestToken!;
-        return new RazorComponentResult<QuestionScreen>(new { Model = GameScreens.Question(state, token, QuestionStage.Difference, d.Logos.UrlFor) });
+        return new RazorComponentResult<QuestionScreen>(new { Model = GameSurfaces.Question(state, token, QuestionStage.Difference, d.Logos.UrlFor) });
     }
 
     // The stage-2 slider is only valid on a started game whose direction is revealed but not yet scored.
@@ -242,26 +258,24 @@ public static class GameEndpoints
     private static string AbsoluteJoinUrl(HttpContext http, Guid joinCode) =>
         $"{http.Request.Scheme}://{http.Request.Host}/games/{joinCode:N}/join";
 
-    private static IResult Rendered(GameState state, Guid? viewer, GameDeps d, HttpContext http) =>
-        RenderState(new RenderContext(
+    private static IResult Rendered(GameState state, Guid? viewer, GameDeps d, HttpContext http)
+    {
+        var c = new RenderContext(
             state, viewer,
             d.Antiforgery.GetAndStoreTokens(http).RequestToken!,
             AbsoluteJoinUrl(http, state.JoinCode),
             d.Logos.UrlFor,
-            http.Request.Query.ContainsKey("url")));
-
-    private static IResult RenderState(RenderContext c) =>
-        GameScreens.Select(c.State, c.Viewer) switch
+            http.Request.Query.ContainsKey("url"));
+        // Riktningsfråga + Riktningsavslöjande opt out of the xm renderer: the ▲/▼ picker and
+        // the mellansteg tap-through are hand-written idioms (xm findings 5 + 8). Every other
+        // screen is drawn by SurfaceRenderer.
+        return GameSurfaces.Select(c.State, c.Viewer) switch
         {
-            ScreenKind.LobbyHost => new RazorComponentResult<LobbyHostScreen>(new { Model = GameScreens.Lobby(c.State, c.Viewer, c.Token, c.JoinUrl, c.ShowJoinUrl) }),
-            ScreenKind.LobbyPlayer => new RazorComponentResult<LobbyPlayerScreen>(new { Model = GameScreens.Lobby(c.State, c.Viewer, c.Token, c.JoinUrl, showJoinUrl: false) }),
-            ScreenKind.Question => new RazorComponentResult<QuestionScreen>(new { Model = GameScreens.Question(c.State, c.Token, QuestionStage.Direction, c.ResolveLogo) }),
-            ScreenKind.Waiting => new RazorComponentResult<WaitingScreen>(new { Model = GameScreens.Waiting(c.State, c.Viewer) }),
-            ScreenKind.DirectionResults => new RazorComponentResult<DirectionResultsScreen>(new { Model = GameScreens.DirectionResults(c.State, c.Viewer, c.ResolveLogo) }),
-            ScreenKind.Results => new RazorComponentResult<ResultsScreen>(new { Model = GameScreens.Results(c.State, c.Viewer, c.Token, c.ResolveLogo) }),
-            ScreenKind.Standings => new RazorComponentResult<StandingsScreen>(new { Model = GameScreens.Standings(c.State, c.Viewer) }),
-            _ => throw new InvalidOperationException($"Unhandled screen kind for game {c.State.GameId}.")
+            "Riktningsfråga" => new RazorComponentResult<QuestionScreen>(new { Model = GameSurfaces.Question(c.State, c.Token, QuestionStage.Direction, c.ResolveLogo) }),
+            "Riktningsavslöjande" => new RazorComponentResult<DirectionResultsScreen>(new { Model = GameSurfaces.DirectionResults(c.State, c.Viewer, c.ResolveLogo) }),
+            _ => new RazorComponentResult<Components.Xm.SurfaceRenderer>(new { Model = GameSurfaces.Screen(d.Xm.MerEllerMindre, c) }),
         };
+    }
 
     private static (Guid GameId, GameState State)? Resolve(GameApplicationService svc, string code)
     {

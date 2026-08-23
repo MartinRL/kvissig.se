@@ -25,8 +25,17 @@ public sealed record TableField(IReadOnlyList<TableCell> Head, IReadOnlyList<Tab
 
 public sealed record TableRow(IReadOnlyList<TableCell> Cells, bool IsWinner = false);
 
-/// <summary>Bad appends the disqualified-mark (mark bad ✗) after the text.</summary>
-public sealed record TableCell(string Text, string? Css = null, string? DataLabel = null, bool Bad = false);
+/// <summary>Bad appends the disqualified-mark (mark bad ✗), Ok the correct-mark (mark ok ✓),
+/// after the text.</summary>
+public sealed record TableCell(string Text, string? Css = null, string? DataLabel = null, bool Bad = false, bool Ok = false);
+
+/// <summary>Two proportional bars + legend — the transformer's judgment for a revealed
+/// magnitude pair (MEM xm finding 7: bars are renderer vocabulary, not spec vocabulary).
+/// The smaller bar's height is SmallerPercent of the larger's; Caption is an optional
+/// facit line under the legend.</summary>
+public sealed record BarsField(BarRow Larger, BarRow Smaller, int SmallerPercent, string? Caption = null) : Field;
+
+public sealed record BarRow(string BarLabel, string Legend, string? LogoUrl = null);
 
 /// <summary>The scannable join QR, with an optional plain-text join URL + copy button.</summary>
 public sealed record QrField(string Svg, string JoinUrl, bool ShowUrl) : Field;

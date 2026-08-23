@@ -36,4 +36,8 @@ public sealed record XmScreenModel(
     string? PollPath = null,
     string? PlayAgainHref = null,
     string? ShareText = null,
-    StepsField? Steps = null);
+    StepsField? Steps = null,
+    // Optional per-item citation (a collapsed "Källa" disclosure with auto-linked URLs) —
+    // residue chrome like Steps: the EM view carries no source field, so it rides beside
+    // the bag rather than through a tier.
+    string? Source = null);

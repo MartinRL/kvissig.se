@@ -19,7 +19,7 @@
                 <tr class="@(row.IsWinner ? "winner" : null)">
                     @foreach (var cell in row.Cells)
                     {
-                        <td class="@cell.Css" data-label="@cell.DataLabel">@cell.Text@(cell.Bad ? (MarkupString)" <span class=\"mark bad\">✗</span>" : (MarkupString)"")</td>
+                        <td class="@cell.Css" data-label="@cell.DataLabel">@cell.Text@(cell.Bad ? (MarkupString)" <span class=\"mark bad\">✗</span>" : cell.Ok ? (MarkupString)" <span class=\"mark ok\">✓</span>" : (MarkupString)"")</td>
                     }
                 </tr>
             }

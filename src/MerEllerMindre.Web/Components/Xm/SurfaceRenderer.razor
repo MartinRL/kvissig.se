@@ -21,6 +21,13 @@
         {
             <FieldBlock Field="field" />
         }
+        @if (Model.Source is not null)
+        {
+            <details class="source">
+                <summary>Källa</summary>
+                <div class="muted">@((MarkupString)Linkified(Model.Source))</div>
+            </details>
+        }
     </div>
 
     @foreach (var field in Tier(v => v.Primary).Concat(Tier(v => v.Secondary)).Where(f => !Inline(f)))
@@ -90,7 +97,19 @@
             .OfType<Field>();
 
     /// <summary>Inline fields live in the header card; block fields get their own card.</summary>
-    private static bool Inline(Field field) => field is TextField or QrField;
+    private static bool Inline(Field field) => field is TextField or QrField or BarsField;
 
     private bool HasPills => Tier(v => v.Secondary).OfType<TextField>().Any();
+
+    private static readonly System.Text.RegularExpressions.Regex UrlRe =
+        new(@"https?://\S+", System.Text.RegularExpressions.RegexOptions.Compiled);
+
+    // HTML-encode the whole citation first (boundary hygiene even though pack data is trusted),
+    // then turn well-formed http(s) URLs into links. Bare domains (arla.com) stay plain text.
+    private static string Linkified(string source)
+    {
+        var encoded = System.Net.WebUtility.HtmlEncode(source);
+        return UrlRe.Replace(encoded, m =>
+            $"<a href=\"{m.Value}\" target=\"_blank\" rel=\"noopener\">{m.Value}</a>");
+    }
 }
