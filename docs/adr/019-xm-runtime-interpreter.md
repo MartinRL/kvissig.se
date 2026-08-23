@@ -70,3 +70,8 @@ functions, and game #4 ≈ an xm file + ~250 LOC residue.
 - MEM and TTT roll over next (new idioms DirectionPicker/DifferenceSlider/ItemField are
   the expected vocabulary additions); the EM view-rename decision lands at MEM.
 - Rollback of the cut-over = revert one commit; the engine is inert without callers.
+
+## Postscript (2026-08)
+
+`src/Xmlang` was extracted to github.com/MartinRL/xmlang and is consumed as the
+NuGet package `Xmlang` (CLI: `Xmlang.Cli`, global tool `xm`).

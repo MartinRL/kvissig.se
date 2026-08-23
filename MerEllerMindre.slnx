@@ -17,6 +17,5 @@
     <Project Path="src/MerEllerMindre.Web.Tests/MerEllerMindre.Web.Tests.csproj" />
     <Project Path="src/TankTillTusen.Domain/TankTillTusen.Domain.csproj" />
     <Project Path="src/TankTillTusen.Domain.Tests/TankTillTusen.Domain.Tests.csproj" />
-    <Project Path="src/Xmlang/Xmlang.csproj" />
   </Folder>
 </Solution>

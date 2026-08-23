@@ -141,6 +141,8 @@ formulas). No `.csproj`, no global tool.
     `question-staging/*.csv` candidates.
   - `merge --out <path>` concats + dedups staging into a valid pack CSV; `--out` required,
     refuses the live-pack path unless `--force`.
+- xm linter = the `Xmlang.Cli` global tool (github.com/MartinRL/xmlang):
+  `dotnet tool install -g Xmlang.Cli`, then `xm lint specs/<x>.xm.yaml`.
 
 ## Plans
 
