@@ -5,7 +5,7 @@ using Xunit;
 
 namespace MerEllerMindre.Web.Tests;
 
-public class GameScreensLogoTests
+public class GameSurfacesLogoTests
 {
     private static GameState Started(string packId) => new()
     {
@@ -19,7 +19,7 @@ public class GameScreensLogoTests
     [Fact]
     public void Question_LogoPack_ResolvesLogoUrls()
     {
-        var vm = GameScreens.Question(Started("loggor-mini-1"), "tok", QuestionStage.Direction, name => $"/logos/{name}.png");
+        var vm = GameSurfaces.Question(Started("loggor-mini-1"), "tok", QuestionStage.Direction, name => $"/logos/{name}.png");
 
         vm.LogoA.Should().Be("/logos/Volvo.png");
         vm.LogoB.Should().Be("/logos/Ericsson.png");
@@ -28,7 +28,7 @@ public class GameScreensLogoTests
     [Fact]
     public void Question_TextPack_LeavesLogosNull()
     {
-        var vm = GameScreens.Question(Started("mer-eller-mindre"), "tok", QuestionStage.Direction, _ => "/logos/x.png");
+        var vm = GameSurfaces.Question(Started("mer-eller-mindre"), "tok", QuestionStage.Direction, _ => "/logos/x.png");
 
         vm.LogoA.Should().BeNull();
         vm.LogoB.Should().BeNull();
@@ -54,7 +54,7 @@ public class GameScreensLogoTests
             ],
         };
 
-        var vm = GameScreens.DirectionResults(state, player, name => $"/logos/{name}.png");
+        var vm = GameSurfaces.DirectionResults(state, player, name => $"/logos/{name}.png");
 
         // Mer = Volvo (larger value); the names must be present for the logo+name reveal.
         vm.MerItem.Should().Be("Volvo");
