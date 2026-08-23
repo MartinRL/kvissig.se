@@ -15,12 +15,7 @@ public record AuctionDeps(
     AuctionApplicationService Svc,
     PlayerIdentity Identity,
     IAntiforgery Antiforgery,
-    Xm.XmCatalog Xm,
-    IConfiguration Config)
-{
-    /// <summary>ADR-018-style cut-over flag: the xm runtime renderer, default OFF.</summary>
-    public bool UseXm => Config.GetValue<bool>("XmRenderer:Blindbudet");
-}
+    Xm.XmCatalog Xm);
 
 /// <summary>Everything a screen fragment needs to render, so RenderState takes one argument.</summary>
 public record AuctionRenderContext(
@@ -66,9 +61,6 @@ public static class AuctionEndpoints
             return Results.NotFound("Lottpaketet hittades inte.");
 
         var token = d.Antiforgery.GetAndStoreTokens(http).RequestToken!;
-        if (!d.UseXm)
-            return new RazorComponentResult<AuctionHostForm>(new { Model = new AuctionHostFormVm(pack.PackId, pack.Name, token) });
-
         // xm defaults contract: OpenAuction composes no view, so its form is transformer-defined.
         var spec = d.Xm.Blindbudet;
         return new RazorComponentResult<Components.Xm.CommandDefaultPage>(new
@@ -106,9 +98,6 @@ public static class AuctionEndpoints
 
         var token = d.Antiforgery.GetAndStoreTokens(http).RequestToken!;
         var hostName = state.Players.FirstOrDefault(p => p.IsHost)?.Name ?? "";
-        if (!d.UseXm)
-            return new RazorComponentResult<AuctionJoinForm>(new { Model = new AuctionJoinFormVm(state.JoinCode, hostName, token) });
-
         var spec = d.Xm.Blindbudet;
         return new RazorComponentResult<Components.Xm.CommandDefaultPage>(new
         {
@@ -196,22 +185,8 @@ public static class AuctionEndpoints
             d.Antiforgery.GetAndStoreTokens(http).RequestToken!,
             AbsoluteJoinUrl(http, state.JoinCode),
             http.Request.Query.ContainsKey("url"));
-        return d.UseXm
-            ? new RazorComponentResult<Components.Xm.SurfaceRenderer>(new { Model = AuctionSurfaces.Screen(d.Xm.Blindbudet, context) })
-            : RenderState(context);
+        return new RazorComponentResult<Components.Xm.SurfaceRenderer>(new { Model = AuctionSurfaces.Screen(d.Xm.Blindbudet, context) });
     }
-
-    private static IResult RenderState(AuctionRenderContext c) =>
-        AuctionScreens.Select(c.State, c.Viewer) switch
-        {
-            AuctionScreenKind.LobbyHost => new RazorComponentResult<AuctionLobbyHostScreen>(new { Model = AuctionScreens.Lobby(c.State, c.Viewer, c.Token, c.JoinUrl, c.ShowJoinUrl) }),
-            AuctionScreenKind.LobbyPlayer => new RazorComponentResult<AuctionLobbyPlayerScreen>(new { Model = AuctionScreens.Lobby(c.State, c.Viewer, c.Token, c.JoinUrl, showJoinUrl: false) }),
-            AuctionScreenKind.Bid => new RazorComponentResult<AuctionBidScreen>(new { Model = AuctionScreens.Bid(c.State, c.Token) }),
-            AuctionScreenKind.Waiting => new RazorComponentResult<AuctionWaitingScreen>(new { Model = AuctionScreens.Waiting(c.State, c.Viewer) }),
-            AuctionScreenKind.RoundResults => new RazorComponentResult<AuctionRoundResultsScreen>(new { Model = AuctionScreens.RoundResults(c.State, c.Viewer, c.Token) }),
-            AuctionScreenKind.Standings => new RazorComponentResult<AuctionStandingsScreen>(new { Model = AuctionScreens.Standings(c.State, c.Viewer) }),
-            _ => throw new InvalidOperationException($"Unhandled auction screen kind for game {c.State.GameId}.")
-        };
 
     private static (Guid GameId, AuctionState State)? Resolve(AuctionApplicationService svc, string code)
     {

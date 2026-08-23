@@ -16,7 +16,8 @@ public static class AuctionSurfaces
 {
     private static readonly CultureInfo SvSe = CultureInfo.GetCultureInfo("sv-SE");
 
-    /// <summary>(AuctionState, viewer) → xm surface name. Mirrors AuctionScreens.Select.</summary>
+    /// <summary>(AuctionState, viewer) → xm surface name — the fine selection the xm
+    /// during×for lattice deliberately leaves to the concrete stratum (xmlang v0.2).</summary>
     public static string Select(AuctionState state, Guid? viewer) =>
         state.Phase switch
         {

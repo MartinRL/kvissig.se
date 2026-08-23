@@ -1,6 +1,8 @@
 using System.Net;
 using System.Text.RegularExpressions;
 using AwesomeAssertions;
+using Blindbudet.Domain;
+using MerEllerMindre.Web.Presentation;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
@@ -9,15 +11,15 @@ namespace MerEllerMindre.Web.Tests;
 
 /// <summary>
 /// Blindbudet characterization suite over the real Web vertical (static-SSR fragments +
-/// htmx form posts) — the Everest-8849 flow. One HttpClient per participant = one phone.
-/// Assertions pin SEMANTIC markers (labels, CSS classes, ordering), not full HTML, so the
-/// suite doubles as the parity oracle for the xm runtime renderer cut-over.
+/// htmx form posts) — the Everest-8849 flow, rendered by the xm runtime interpreter
+/// (ADR 019). One HttpClient per participant = one phone. Assertions pin SEMANTIC markers
+/// (labels, CSS classes, ordering), not full HTML.
 /// Deck: TestAppFactory's 2-lot "testauktion" pack — lot 0 Everest 8849 meter,
 /// lot 1 equator 40075 km, played whole in file order (no mini sampling).
 /// </summary>
-public class AuctionEndpointsTests : IClassFixture<TestAppFactory>
+public sealed class AuctionEndpointsTests : IClassFixture<TestAppFactory>
 {
-    protected TestAppFactory Factory { get; }
+    private TestAppFactory Factory { get; }
 
     public AuctionEndpointsTests(TestAppFactory factory) => Factory = factory;
 
@@ -257,5 +259,26 @@ public class AuctionEndpointsTests : IClassFixture<TestAppFactory>
             .Should().BeLessThan(standings.IndexOf("Nils", StringComparison.Ordinal),
                 "standings are ordered by total, descending");
         standings.Should().Contain("Spela igen");
+    }
+
+    [Fact]
+    public void EverySelectableSurfaceNameExistsInTheXmSpec()
+    {
+        var surfaces = Factory.Services.GetRequiredService<Web.Xm.XmCatalog>()
+            .Blindbudet.Surfaces.Select(s => s.Name).ToHashSet();
+
+        // The selector's complete co-domain (AuctionSurfaces.Select return literals).
+        string[] reachable = ["LobbyVärd", "LobbySpelare", "Budgivning", "Väntan",
+            "RundresultatVärd", "RundresultatSpelare", "Slutställning"];
+        reachable.Should().OnlyContain(name => surfaces.Contains(name));
+    }
+
+    [Fact]
+    public void SelectorMirrorsTheHandWrittenScreenSelection()
+    {
+        var lobby = new AuctionState { Phase = AuctionPhase.Lobby, HostPlayerId = Guid.NewGuid() };
+        AuctionSurfaces.Select(lobby, lobby.HostPlayerId).Should().Be("LobbyVärd");
+        AuctionSurfaces.Select(lobby, Guid.NewGuid()).Should().Be("LobbySpelare");
+        AuctionSurfaces.Select(lobby with { Phase = AuctionPhase.Ended }, null).Should().Be("Slutställning");
     }
 }
