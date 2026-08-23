@@ -2,6 +2,7 @@ using System.Net;
 using System.Text.RegularExpressions;
 using AwesomeAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
 namespace MerEllerMindre.Web.Tests;
@@ -72,6 +73,15 @@ public class GameEndpointsTests : IClassFixture<TestAppFactory>
     {
         var slider = await (await client.GetAsync($"/games/{code}/difference")).Content.ReadAsStringAsync();
         await client.PostAsync($"/games/{code}/difference", Form(Token(slider), ("guessedDifference", value)));
+    }
+
+    [Fact]
+    public void XmCatalog_LoadsAndLintsTheMerEllerMindreSpecPairAtStartup()
+    {
+        var xm = _factory.Services.GetRequiredService<Web.Xm.XmCatalog>();
+
+        xm.MerEllerMindre.Surfaces.Should().NotBeEmpty();
+        xm.MerEllerMindreModel.PhaseValues.Should().Contain(["lobby", "started", "ended"]);
     }
 
     [Fact]
@@ -313,6 +323,59 @@ public class GameEndpointsTests : IClassFixture<TestAppFactory>
         var q1 = await State(player, code);
         // Q1 = Sverige 450295 / Norge 385207 (km²) — stage-1 direction screen.
         q1.Should().Contain("Är Sveriges yta större eller mindre än Norges?");
+    }
+
+    [Fact]
+    public async Task WaitingScreen_ShowsWhoIsDoneAndWhoIsStillGuessing()
+    {
+        var host = NewClient();
+        var player = NewClient();
+        var code = await CreateGame(host);
+        await Join(player, code, "Nils");
+        await host.PostAsync($"/games/{code}/start", Form(Token(await State(host, code))));
+
+        // Only Martin has called stage 1 → he waits on Nils.
+        await SubmitDirection(host, code, "Mer");
+
+        var waiting = await State(host, code);
+        waiting.Should().Contain("Du har gissat ✓");
+        waiting.Should().Contain("1 av 2 klara");
+        waiting.Should().Contain("Klara");
+        waiting.Should().Contain("du · klar");
+        waiting.Should().Contain("Väntar på");
+        waiting.Should().Contain("gissar…");
+    }
+
+    [Fact]
+    public async Task FullGame_EndsWithTheLowestTotalWinningTheStandings()
+    {
+        var host = NewClient();
+        var player = NewClient();
+        var code = await CreateGame(host);
+        await Join(player, code, "Nils");
+        await host.PostAsync($"/games/{code}/start", Form(Token(await State(host, code))));
+
+        // Both rounds: Martin perfect (Mer + exact raw diff), Nils wrong direction + off.
+        await SubmitDirection(host, code, "Mer");
+        await SubmitDirection(player, code, "Mindre");
+        await SubmitDifference(host, code, "0.4");
+        await SubmitDifference(player, code, "2");
+        await host.PostAsync($"/games/{code}/next", Form(Token(await State(host, code))));
+
+        await SubmitDirection(host, code, "Mer");
+        await SubmitDirection(player, code, "Mindre");
+        await SubmitDifference(host, code, "65088");
+        await SubmitDifference(player, code, "200000");
+        var results = await State(host, code);
+        results.Should().Contain("Visa slutställning");   // last question → End, not Next
+        await host.PostAsync($"/games/{code}/next", Form(Token(results)));
+
+        var standings = await State(player, code);
+        standings.Should().Contain("Slutställning");
+        standings.Should().Contain("vann!"); // trophy emoji arrives entity-encoded (&#x1F3C6;), same glyph in the browser
+        standings.Should().Contain("Martin");             // lowest total wins
+        standings.Should().Contain("Lägst total poäng vinner.");
+        standings.Should().Contain("Spela igen");
     }
 
     [Fact]

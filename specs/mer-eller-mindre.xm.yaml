@@ -1,0 +1,293 @@
+# Mer eller Mindre — Experience Model (xmlang v0.2.0), reverse-engineered AS-IMPLEMENTED
+# from the shipped UI (Components/Screens/*.razor, ScreenModels.cs, playful.css) against
+# specs/mer-eller-mindre-event-model.yaml. Judgments were read off the running product and
+# recorded as data; nothing here is invented.
+#
+# Findings (sister notes to blindbudet.xm.yaml's and tank-till-tusen.xm.yaml's):
+#   1. Same EM smell as BB's finding 1 (surface-named views), RESOLVED the same way:
+#      screen views are now bare data nouns (Roster, Question card, Round scores, ...).
+#   2. Bare command forms: JoinGame composes no view → served by the transformer's
+#      defaults (CommandDefaultPage). OpenLobby's REAL form carries a roundCount slider —
+#      richer than the defaults contract, so the host form OPTS OUT to hand-written Razor
+#      (same as TTT finding 2; the sanctioned escape hatch, never new spec syntax).
+#   3. EM/UI divergence, same as BB/TTT: AskNextQuestion/EndGame are ⚙️ System processors
+#      in the EM but explicit host buttons in the UI ("Nästa fråga" / "Visa slutställning")
+#      — as-implemented, both are composed on RundresultatVärd. RevealDirection and
+#      ScoreDifference stay true gears (fire on any poll), composed nowhere.
+#   4. The TVÅSTEGSRAKET is the finding-4 pattern at full stretch: Question card is the
+#      SAME view composed on TWO surfaces (Riktningsfråga, Skillnadsfråga) with different
+#      commands — stage selection (has the viewer picked? is the direction revealed?) is
+#      the fine selection v0.2 declares inexpressible; it stays a hand-written selector.
+#   5. The direction picker (two ▲/▼ buttons + hidden input) and the difference slider
+#      (raw range posting the card-unit value, 0-100-framed display, live twobars) are
+#      concrete-UI stratum: idiom components, correctly inexpressible in xmlang — the
+#      exact doctrine of BB's keypad and TTT's räknartejp. NOT a v0.2 spec hole; input
+#      GEOMETRY/BEHAVIOR never becomes spec syntax (research caution 1).
+#   6. Katalog carries no `during:` — stream-less reference data (BB finding 7); the
+#      catalog page itself stays hand-written Razor (SEO residue).
+#   7. The results twobars visualization (raw values as proportional bars + legend) and
+#      the per-card källa `<details>` (citation with auto-linked URLs) are renderer
+#      vocabulary, not spec vocabulary: the xm says WHICH fields show at WHICH salience;
+#      that a decimal pair renders as bars is the transformer's judgment. Källa is just
+#      an on-demand-tier field — already expressible, nothing new needed.
+#   8. Riktningsavslöjande (the mellansteg) is self-paced: each player taps through to
+#      the stage-2 slider via a GET navigation. Navigation mechanics = concrete stratum,
+#      same bucket as polling (xmlang v0.2 non-normative note). No command is composed —
+#      the tap-through writes nothing.
+#   VERDICT (user question 2026-08-23): findings 5/7/8 are all transformer-stratum, so
+#   NO xmlang v0.3 is needed for MEM. Reconsider only if the same gap recurs at game #4.
+
+xmlang: "0.2"
+model: mer-eller-mindre-event-model.yaml
+
+personas:
+  Värd:
+    role: 🧑‍🏫 host
+    props:
+      goal: pick a kviss, open and start the game, drive the pacing — and play along
+      device: phone in hand
+      context: co-located party, one room, everyone on their own screen
+  Spelare:
+    role: 🧑‍🎓 Player
+    props:
+      goal: join via QR/link, guess mer/mindre, then pin the difference on the slider
+      device: phone in hand
+      context: co-located party, one room
+
+surfaces:
+  Katalog:
+    # no during: — stream-less reference data (finding 6)
+    compose:
+      - v: Pack catalog
+      - c: OpenLobby
+        prominence: primary
+
+  LobbyVärd:
+    during: [lobby]
+    for: [Värd]
+    compose:
+      - v: Roster
+        self: players.playerId
+        fields:
+          primary: [joinCode, players]
+          on-demand: [gameId]
+      - c: StartGame
+        prominence: primary
+
+  LobbySpelare:
+    during: [lobby]
+    for: [Spelare]
+    compose:
+      - v: Roster
+        self: players.playerId
+        fields:
+          primary: [players]
+          on-demand: [joinCode, gameId]
+
+  Riktningsfråga:
+    during: [started]
+    compose:
+      - v: Question card
+        fields:
+          primary: [questionText, itemA, itemB]
+          secondary: [questionIndex, totalQuestions]
+          on-demand: [gameId]
+      - c: SubmitDirection    # the ▲/▼ picker itself is an idiom (finding 5)
+        prominence: primary
+
+  Väntan:
+    during: [started]
+    compose:
+      - v: Guess progress
+        # identity lives in the id lists themselves; the viewer is by construction in
+        # submittedPlayerIds (you only see Väntan after submitting) — "du · klar"
+        self: submittedPlayerIds
+        fields:
+          primary: [pendingPlayerIds]
+          secondary: [submittedPlayerIds, questionIndex]
+          on-demand: [gameId]
+
+  Riktningsavslöjande:
+    # the mellansteg: no command composed — the player taps through via a GET
+    # navigation, which is concrete stratum (finding 8)
+    during: [started]
+    compose:
+      - v: Direction reveal
+        self: playerDirections.playerId
+        fields:
+          primary: [correctDirection, playerDirections]
+          secondary: [questionIndex]
+          on-demand: [gameId]
+
+  Skillnadsfråga:
+    # the SAME Question card composed a second time — finding 4, the tvåstegsraket
+    during: [started]
+    compose:
+      - v: Question card
+        fields:
+          primary: [questionText, itemA, itemB]
+          secondary: [questionIndex, totalQuestions]
+          on-demand: [gameId]
+      - c: SubmitDifference   # the slider + live twobars are an idiom (finding 5)
+        prominence: primary
+
+  RundresultatVärd:
+    during: [started]
+    for: [Värd]
+    compose:
+      - v: Round scores
+        self: playerScores.playerId
+        fields:
+          primary: [correctDirection, correctDifference, playerScores]
+          secondary: [questionIndex]
+          on-demand: [gameId]
+      - c: AskNextQuestion    # see finding 3: System processor in the EM, host button in the UI
+        prominence: primary
+      - c: EndGame            # see finding 3
+        prominence: primary
+
+  RundresultatSpelare:
+    during: [started]
+    for: [Spelare]
+    compose:
+      - v: Round scores
+        self: playerScores.playerId
+        fields:
+          primary: [correctDirection, correctDifference, playerScores]
+          secondary: [questionIndex]
+          on-demand: [gameId]
+
+  Slutställning:
+    during: [ended]
+    compose:
+      - v: Scoreboard
+        fields:
+          primary: [finalScoreboard, winnerIds]
+          on-demand: [gameId]
+
+journeys:
+  VärdensSpel:
+    for: [Värd]
+    slices:
+      - ✍️ Open Lobby
+      - ✍️ Start Game
+      - ✍️ Submit Direction
+      - ✍️ Reveal Direction
+      - ✍️ Submit Difference
+      - ✍️ Score Difference
+      - ✍️ Ask Next Question
+      - ✍️ End Game
+  SpelarensGissning:
+    for: [Spelare]
+    slices:
+      - ✍️ Join Game
+      - ✍️ Submit Direction
+      - ✍️ Reveal Direction
+      - ✍️ Submit Difference
+      - ✍️ Score Difference
+
+# Copy harvested verbatim from the Razor components (sv-SE, playful/informal register).
+# v0.2 nested labels: keys are EXACT element names (no dotted paths); $self = the
+# element's own label beside field keys. The stage-2 steplabel ("Om X är 100, var hamnar
+# Y?") is TEMPLATED on card content — that judgment is residue, not a static label.
+labels:
+  sv:
+    register: lekfull, informell
+    # commands (+ their form fields)
+    OpenLobby:
+      $self: Skapa spel
+      hostName: Ditt namn
+      roundCount: Antal frågor
+    JoinGame:
+      $self: Gå med
+      playerName: Ditt namn
+    StartGame: Starta omgång
+    SubmitDirection:
+      $self: Gissa!
+      direction: Vilken är mer?
+    SubmitDifference: Gissa!
+    AskNextQuestion: Nästa fråga
+    EndGame: Visa slutställning
+    # view fields
+    "Roster":
+      players: Spelare
+    "Guess progress":
+      submittedPlayerIds: Klara
+      pendingPlayerIds: Väntar på
+    "Direction reveal":
+      playerDirections: Mer eller Mindre
+    "Round scores":
+      playerScores: Poäng
+    "Scoreboard":
+      finalScoreboard: Slutställning
+    # surfaces (their on-screen headings; the question surfaces head with the card's
+    # own questionText, so they carry no static heading)
+    Katalog: Välj Mer eller Mindre-kviss
+    LobbyVärd: Skanna för att gå med
+    LobbySpelare: Du är med! 🎉
+    Väntan: Du har gissat ✓
+    Slutställning: Slutställning
+    # personas
+    Värd: Värd
+    Spelare: Spelare
+
+# Sanctioned visual vocabulary (DTCG), transcribed from wwwroot/css/playful.css :root —
+# the same shared palette as the sister specs (one site, one skin).
+tokens:
+  color:
+    bg:
+      $type: color
+      $value: "#fff7ec"
+    bg-2:
+      $type: color
+      $value: "#ffeccf"
+    ink:
+      $type: color
+      $value: "#2b2118"
+    ink-soft:
+      $type: color
+      $value: "#7a6a58"
+    card:
+      $type: color
+      $value: "#fffdf9"
+    line:
+      $type: color
+      $value: "#f0e0c8"
+    mer:
+      $type: color
+      $value: "#21c08a"
+    mer-deep:
+      $type: color
+      $value: "#12805c"
+    mer-ink:
+      $type: color
+      $value: "#06281f"
+    mindre:
+      $type: color
+      $value: "#ffab40"
+    mindre-deep:
+      $type: color
+      $value: "#e07f0e"
+    mindre-ink:
+      $type: color
+      $value: "#3a2300"
+    accent:
+      $type: color
+      $value: "#ff5d73"
+    accent-2:
+      $type: color
+      $value: "#ff8a3d"
+  radius:
+    md:
+      $type: dimension
+      $value: 22px
+    sm:
+      $type: dimension
+      $value: 16px
+  font:
+    display:
+      $type: fontFamily
+      $value: ["Baloo 2", system-ui, sans-serif]
+    body:
+      $type: fontFamily
+      $value: [Nunito, system-ui, sans-serif]
