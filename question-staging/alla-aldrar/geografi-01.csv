@@ -1,0 +1,28 @@
+﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Är berget K2 högre eller lägre än Mont Blanc?;K2;Mont Blanc;8611;4809;meter;Hur många meter skiljer det?
+Är Matterhorn högre eller lägre än berget Elbrus i Kaukasus?;Matterhorn;Elbrus;4478;5642;meter;Hur många meter skiljer det?
+Är Angelfallen i Venezuela högre eller lägre än klippan Uluru i Australien?;Angelfallen;Uluru;979;348;meter;Hur många meter skiljer det?
+Är floden Volga längre eller kortare än Amazonas?;Volga;Amazonas;3530;6400;km;Hur många km skiljer det?
+Är floden Ganges längre eller kortare än Themsen?;Ganges;Themsen;2525;346;km;Hur många km skiljer det?
+Är Amazonas längre eller kortare än floden Ganges?;Amazonas;Ganges;6400;2525;km;Hur många km skiljer det?
+Är floden Mississippi längre eller kortare än Seine i Frankrike?;Mississippi;Seine;3766;777;km;Hur många km skiljer det?
+Är Malawisjön djupare eller grundare än Tanganyikasjön?;Malawisjön;Tanganyikasjön;706;1470;meter;Hur många meter skiljer det?
+Är Titicacasjön i Sydamerika större eller mindre än Malawisjön till ytan?;Titicacasjön;Malawisjön;8372;29500;km²;Hur många km² skiljer det?
+Är Döda havet större eller mindre än Titicacasjön till ytan?;Döda havet;Titicacasjön;605;8372;km²;Hur många km² skiljer det?
+"Är Svarta havet djupare eller grundare än Östersjön, mätt där de är som djupast?";Svarta havet;Östersjön;2212;459;meter;Hur många meter skiljer det?
+Är Röda havet större eller mindre än Medelhavet till ytan?;Röda havet;Medelhavet;438;2500;tusen km²;Hur många tusen km² skiljer det?
+Är Norra ishavet större eller mindre än Indiska oceanen till ytan?;Norra ishavet;Indiska oceanen;14,1;70,6;miljoner km²;Hur många miljoner km² skiljer det?
+Är Atlanten större eller mindre än Stilla havet till ytan?;Atlanten;Stilla havet;106,5;165,3;miljoner km²;Hur många miljoner km² skiljer det?
+Är Grand Canyon djupare eller grundare än Marianergraven?;Grand Canyon;Marianergraven;1857;10935;meter;Hur många meter skiljer det?
+Är ön Nya Guinea större eller mindre än Borneo till ytan?;Nya Guinea;Borneo;786;748;tusen km²;Hur många tusen km² skiljer det?
+Är Kreta större eller mindre än ön Tasmanien till ytan?;Kreta;Tasmanien;8,3;64,5;tusen km²;Hur många tusen km² skiljer det?
+Är Tasmanien större eller mindre än den japanska ön Honshu till ytan?;Tasmanien;Honshu;64,5;228;tusen km²;Hur många tusen km² skiljer det?
+Är Korsika större eller mindre än Bornholm till ytan?;Korsika;Bornholm;8722;588;km²;Hur många km² skiljer det?
+Är Grönland större eller mindre än Madagaskar till ytan?;Grönland;Madagaskar;2166;587;tusen km²;Hur många tusen km² skiljer det?
+Är Madagaskar större eller mindre än ön Nya Guinea till ytan?;Madagaskar;Nya Guinea;587;786;tusen km²;Hur många tusen km² skiljer det?
+Är Kenya större eller mindre än Madagaskar till ytan?;Kenya;Madagaskar;580;587;tusen km²;Hur många tusen km² skiljer det?
+Är Atacamaöknen större eller mindre än Namiböknen till ytan?;Atacamaöknen;Namiböknen;105;81;tusen km²;Hur många tusen km² skiljer det?
+Är Nya Zeeland större eller mindre än Storbritannien till ytan?;Nya Zeeland;Storbritannien;268;244;tusen km²;Hur många tusen km² skiljer det?
+Har Indien fler eller färre invånare än Bangladesh? (2024);Indien;Bangladesh;1451;174;miljoner invånare;Hur många miljoner invånare skiljer det?
+Har Turkiet fler eller färre grannländer än Schweiz?;Turkiet;Schweiz;8;5;grannländer;Hur många grannländer skiljer det?
+Har Australien fler eller färre invånare än Kanada? (2024);Australien;Kanada;27,2;41,3;miljoner invånare;Hur många miljoner invånare skiljer det?
