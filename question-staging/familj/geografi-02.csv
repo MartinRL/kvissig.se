@@ -1,0 +1,28 @@
+﻿fråga;sakA;sakB;värdeA;värdeB;enhet;differensfråga
+Är floden Yangtze i Kina längre eller kortare än Mississippifloden?;Yangtze;Mississippifloden;6300;3766;km;Hur många kilometer skiljer det?
+Är floden Rhen längre eller kortare än Donau?;Rhen;Donau;1233;2850;km;Hur många kilometer skiljer det?
+Är Klarälven längre eller kortare än Torneälven?;Klarälven;Torneälven;460;522;km;Hur många kilometer skiljer det?
+Är Göta älv längre eller kortare än Klarälven?;Göta älv;Klarälven;93;460;km;Hur många kilometer skiljer det?
+Är berget Fuji i Japan högre eller lägre än vulkanen Teide på Teneriffa?;Fuji;Teide;3776;3715;meter;Hur många meter skiljer det?
+Är Norges högsta berg Galdhøpiggen högre eller lägre än vulkanen Teide?;Galdhøpiggen;Teide;2469;3715;meter;Hur många meter skiljer det?
+Är bergskedjan Anderna längre eller kortare än Alperna?;Anderna;Alperna;7000;1200;km;Hur många kilometer skiljer det?
+Är Uralbergen längre eller kortare än Pyrenéerna?;Uralbergen;Pyrenéerna;2500;430;km;Hur många kilometer skiljer det?
+Är Victoriasjön i Afrika större eller mindre än Storsjön i Jämtland till ytan?;Victoriasjön;Storsjön;68870;456;km²;Hur många kvadratkilometer skiljer det?
+Är Vänern större eller mindre än Kaspiska havet till ytan?;Vänern;Kaspiska havet;5655;371000;km²;Hur många kvadratkilometer skiljer det?
+Är sjön Hornavan i Lappland djupare eller grundare än Storsjön i Jämtland?;Hornavan;Storsjön;221;74;meter;Hur många meter skiljer det?
+Är Vänern djupare eller grundare än sjön Hornavan?;Vänern;Hornavan;106;221;meter;Hur många meter skiljer det?
+Är Victoriafallen i Afrika högre eller lägre än Niagarafallen?;Victoriafallen;Niagarafallen;108;51;meter;Hur många meter skiljer det?
+Är Bornholm större eller mindre än Själland till ytan?;Bornholm;Själland;588;7031;km²;Hur många kvadratkilometer skiljer det?
+Är Madagaskar större eller mindre än Grönland till ytan?;Madagaskar;Grönland;587;2166;tusen km²;Hur många tusen kvadratkilometer skiljer det?
+Är Australien större eller mindre än Antarktis till ytan?;Australien;Antarktis;7,7;14,2;miljoner km²;Hur många miljoner kvadratkilometer skiljer det?
+Är Grönlands inlandsis större eller mindre än Sahara till ytan?;Grönlands inlandsis;Sahara;1,7;9,2;miljoner km²;Hur många miljoner kvadratkilometer skiljer det?
+Är Norra ishavet större eller mindre än Medelhavet till ytan?;Norra ishavet;Medelhavet;14,1;2,5;miljoner km²;Hur många miljoner kvadratkilometer skiljer det?
+Gränsar Frankrike till fler eller färre länder än Kina?;Frankrike;Kina;8;14;länder;Hur många länder skiljer det?
+Gränsar Norge till fler eller färre länder än Danmark?;Norge;Danmark;3;1;länder;Hur många länder skiljer det?
+Är Vänern djupare eller grundare än Bajkalsjön i Ryssland?;Vänern;Bajkalsjön;106;1642;meter;Hur många meter skiljer det?
+Är Mississippifloden längre eller kortare än Göta älv?;Mississippifloden;Göta älv;3766;93;km;Hur många kilometer skiljer det?
+Är Marianergraven i Stilla havet djupare eller grundare än Bajkalsjön?;Marianergraven;Bajkalsjön;10935;1642;meter;Hur många meter skiljer det?
+Är vulkanen Vesuvius högre eller lägre än vulkanen Teide?;Vesuvius;Teide;1281;3715;meter;Hur många meter skiljer det?
+Är Island större eller mindre än den danska ön Själland till ytan?;Island;Själland;103000;7031;km²;Hur många kvadratkilometer skiljer det?
+Är Mallorca större eller mindre än Bornholm till ytan?;Mallorca;Bornholm;3640;588;km²;Hur många kvadratkilometer skiljer det?
+Är Victoriafallen högre eller lägre än Angelfallen i Venezuela?;Victoriafallen;Angelfallen;108;979;meter;Hur många meter skiljer det?
