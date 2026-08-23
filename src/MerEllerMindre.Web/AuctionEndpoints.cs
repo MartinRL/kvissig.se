@@ -14,7 +14,13 @@ namespace MerEllerMindre.Web;
 public record AuctionDeps(
     AuctionApplicationService Svc,
     PlayerIdentity Identity,
-    IAntiforgery Antiforgery);
+    IAntiforgery Antiforgery,
+    Xm.XmCatalog Xm,
+    IConfiguration Config)
+{
+    /// <summary>ADR-018-style cut-over flag: the xm runtime renderer, default OFF.</summary>
+    public bool UseXm => Config.GetValue<bool>("XmRenderer:Blindbudet");
+}
 
 /// <summary>Everything a screen fragment needs to render, so RenderState takes one argument.</summary>
 public record AuctionRenderContext(
@@ -54,13 +60,32 @@ public static class AuctionEndpoints
         return new RazorComponentResult<AuctionCatalog>(new { Model = new AuctionCatalogVm(packs) });
     }
 
-    private static IResult GetNew(string packId, FileSystemAuctionPackCatalog catalog, IAntiforgery antiforgery, HttpContext http)
+    private static IResult GetNew(string packId, FileSystemAuctionPackCatalog catalog, [AsParameters] AuctionDeps d, HttpContext http)
     {
         if (catalog.Find(packId) is not { } pack)
             return Results.NotFound("Lottpaketet hittades inte.");
 
-        var token = antiforgery.GetAndStoreTokens(http).RequestToken!;
-        return new RazorComponentResult<AuctionHostForm>(new { Model = new AuctionHostFormVm(pack.PackId, pack.Name, token) });
+        var token = d.Antiforgery.GetAndStoreTokens(http).RequestToken!;
+        if (!d.UseXm)
+            return new RazorComponentResult<AuctionHostForm>(new { Model = new AuctionHostFormVm(pack.PackId, pack.Name, token) });
+
+        // xm defaults contract: OpenAuction composes no view, so its form is transformer-defined.
+        var spec = d.Xm.Blindbudet;
+        return new RazorComponentResult<Components.Xm.CommandDefaultPage>(new
+        {
+            Title = $"BlindBudet: {AuctionSurfaces.Label(spec, "OpenAuction")}",
+            LogoA = "Blind",
+            LogoB = "Budet",
+            RolePill = AuctionSurfaces.Label(spec, "Värd"),
+            Heading = AuctionSurfaces.Label(spec, "OpenAuction"),
+            Sub = pack.Name,
+            PostPath = "/blindbudet",
+            Token = token,
+            Hidden = (IReadOnlyDictionary<string, string>)new Dictionary<string, string> { ["packId"] = pack.PackId },
+            InputName = "hostName",
+            InputLabel = AuctionSurfaces.Label(spec, "OpenAuction", "hostName"),
+            SubmitLabel = AuctionSurfaces.Label(spec, "OpenAuction"),
+        });
     }
 
     private static IResult PostOpen([FromForm] string packId, [FromForm] string hostName, [AsParameters] AuctionDeps d, HttpContext http)
@@ -81,7 +106,24 @@ public static class AuctionEndpoints
 
         var token = d.Antiforgery.GetAndStoreTokens(http).RequestToken!;
         var hostName = state.Players.FirstOrDefault(p => p.IsHost)?.Name ?? "";
-        return new RazorComponentResult<AuctionJoinForm>(new { Model = new AuctionJoinFormVm(state.JoinCode, hostName, token) });
+        if (!d.UseXm)
+            return new RazorComponentResult<AuctionJoinForm>(new { Model = new AuctionJoinFormVm(state.JoinCode, hostName, token) });
+
+        var spec = d.Xm.Blindbudet;
+        return new RazorComponentResult<Components.Xm.CommandDefaultPage>(new
+        {
+            Title = $"BlindBudet: {AuctionSurfaces.Label(spec, "JoinAuction")}",
+            LogoA = "Blind",
+            LogoB = "Budet",
+            RolePill = AuctionSurfaces.Label(spec, "JoinAuction"),
+            Heading = "Gå med i auktionen",
+            Sub = $"{hostName} (värd)",
+            PostPath = $"/blindbudet/{state.JoinCode:N}/join",
+            Token = token,
+            InputName = "playerName",
+            InputLabel = AuctionSurfaces.Label(spec, "JoinAuction", "playerName"),
+            SubmitLabel = AuctionSurfaces.Label(spec, "JoinAuction"),
+        });
     }
 
     private static IResult PostJoin(string code, [FromForm] string playerName, [AsParameters] AuctionDeps d, HttpContext http)
@@ -147,12 +189,17 @@ public static class AuctionEndpoints
     private static string AbsoluteJoinUrl(HttpContext http, Guid joinCode) =>
         $"{http.Request.Scheme}://{http.Request.Host}/blindbudet/{joinCode:N}/join";
 
-    private static IResult Rendered(AuctionState state, Guid? viewer, AuctionDeps d, HttpContext http) =>
-        RenderState(new AuctionRenderContext(
+    private static IResult Rendered(AuctionState state, Guid? viewer, AuctionDeps d, HttpContext http)
+    {
+        var context = new AuctionRenderContext(
             state, viewer,
             d.Antiforgery.GetAndStoreTokens(http).RequestToken!,
             AbsoluteJoinUrl(http, state.JoinCode),
-            http.Request.Query.ContainsKey("url")));
+            http.Request.Query.ContainsKey("url"));
+        return d.UseXm
+            ? new RazorComponentResult<Components.Xm.SurfaceRenderer>(new { Model = AuctionSurfaces.Screen(d.Xm.Blindbudet, context) })
+            : RenderState(context);
+    }
 
     private static IResult RenderState(AuctionRenderContext c) =>
         AuctionScreens.Select(c.State, c.Viewer) switch

@@ -35,4 +35,5 @@ public sealed record XmScreenModel(
     string? Footer = null,
     string? PollPath = null,
     string? PlayAgainHref = null,
-    string? ShareText = null);
+    string? ShareText = null,
+    StepsField? Steps = null);

@@ -17,12 +17,12 @@ namespace MerEllerMindre.Web.Tests;
 /// </summary>
 public class AuctionEndpointsTests : IClassFixture<TestAppFactory>
 {
-    private readonly TestAppFactory _factory;
+    protected TestAppFactory Factory { get; }
 
-    public AuctionEndpointsTests(TestAppFactory factory) => _factory = factory;
+    public AuctionEndpointsTests(TestAppFactory factory) => Factory = factory;
 
     private HttpClient NewClient() =>
-        _factory.CreateClient(new WebApplicationFactoryClientOptions { AllowAutoRedirect = false });
+        Factory.CreateClient(new WebApplicationFactoryClientOptions { AllowAutoRedirect = false });
 
     private static readonly Regex TokenRx =
         new("name=\"__RequestVerificationToken\"[^>]*value=\"([^\"]+)\"", RegexOptions.Compiled);
@@ -60,8 +60,10 @@ public class AuctionEndpointsTests : IClassFixture<TestAppFactory>
         resp.Headers.GetValues("HX-Redirect").Single().Should().Be($"/blindbudet/{code}");
     }
 
+    /// <summary>HtmlDecode makes the oracle entity-insensitive: hand-written markup carries
+    /// emoji raw, @-expressions encode astral chars (&#x1F389;) — the DOM is identical.</summary>
     private static async Task<string> State(HttpClient client, string code) =>
-        await (await client.GetAsync($"/blindbudet/{code}/state")).Content.ReadAsStringAsync();
+        WebUtility.HtmlDecode(await (await client.GetAsync($"/blindbudet/{code}/state")).Content.ReadAsStringAsync());
 
     private static async Task Start(HttpClient host, string code) =>
         await host.PostAsync($"/blindbudet/{code}/start", Form(Token(await State(host, code))));
@@ -77,7 +79,7 @@ public class AuctionEndpointsTests : IClassFixture<TestAppFactory>
     [Fact]
     public void XmCatalog_LoadsAndLintsTheBlindbudetSpecPairAtStartup()
     {
-        var xm = _factory.Services.GetRequiredService<Web.Xm.XmCatalog>();
+        var xm = Factory.Services.GetRequiredService<Web.Xm.XmCatalog>();
 
         xm.Blindbudet.Surfaces.Should().NotBeEmpty();
         xm.BlindbudetModel.PhaseValues.Should().Contain(["lobby", "started", "ended"]);

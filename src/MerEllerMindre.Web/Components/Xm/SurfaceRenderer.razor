@@ -28,6 +28,11 @@
         <FieldBlock Field="field" />
     }
 
+    @if (Model.Steps is not null)
+    {
+        <FieldBlock Field="Model.Steps" />
+    }
+
     @if (Tier(v => v.OnDemand).Any())
     {
         <details class="ondemand">

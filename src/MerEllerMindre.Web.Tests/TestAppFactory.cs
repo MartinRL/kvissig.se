@@ -14,8 +14,12 @@ namespace MerEllerMindre.Web.Tests;
 /// written below. Without this the balanced selection would shuffle 21 of the ~350-card
 /// production pack and the per-card assertions (Danmark, Sverige) would be non-deterministic.
 /// </summary>
-public sealed class TestAppFactory : WebApplicationFactory<Program>
+public class TestAppFactory : WebApplicationFactory<Program>
 {
+    /// <summary>Overridden by XmTestAppFactory to run the whole suite against the xm
+    /// runtime renderer — the D3 parity contract (green on BOTH configs).</summary>
+    protected virtual bool XmBlindbudet => false;
+
     private readonly string _packsDir;
     private readonly string _auctionPacksDir;
 
@@ -49,7 +53,7 @@ public sealed class TestAppFactory : WebApplicationFactory<Program>
     }
 
     protected override void ConfigureWebHost(IWebHostBuilder builder) =>
-        builder.ConfigureServices(services =>
+        builder.UseSetting("XmRenderer:Blindbudet", XmBlindbudet ? "true" : "false").ConfigureServices(services =>
         {
             services.RemoveAll<FileSystemQuestionPackCatalog>();
             services.AddSingleton(new FileSystemQuestionPackCatalog(_packsDir));
