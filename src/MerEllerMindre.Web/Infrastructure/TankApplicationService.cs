@@ -17,12 +17,12 @@ namespace MerEllerMindre.Web.Infrastructure;
 /// never submits. The progression gear (host-paced from the round-results "next" button)
 /// advances to the next puzzle or ends the game.
 /// </summary>
-public sealed class TankApplicationService
+public sealed class TankApplicationService(TankContext? context = null)
 {
     private readonly Lock _gate = new();
     private readonly Dictionary<Guid, ImmutableArray<TankEvent>> _streams = new();
     private readonly Dictionary<Guid, Guid> _joinCodeToGameId = new();
-    private readonly TankContext _context = TankContext.Default;
+    private readonly TankContext _context = context ?? TankContext.Default;
 
     public DateTimeOffset Now => _context.Now();
 

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using TankTillTusen.Domain;
 
 namespace MerEllerMindre.Web.Tests;
 
@@ -18,6 +19,26 @@ public class TestAppFactory : WebApplicationFactory<Program>
 {
     private readonly string _packsDir;
     private readonly string _auctionPacksDir;
+
+    /// <summary>
+    /// Shifts the Tank stub clock forward, letting a test expire a round's 60 s deadline
+    /// without sleeping. Tests that set it must reset it (shared class fixture).
+    /// </summary>
+    public TimeSpan TankClockSkew { get; set; }
+
+    /// <summary>
+    /// Deterministic 2-puzzle set (the spec's puzzle0/puzzle1 fixtures): [10,10]→100 and
+    /// [5,20]→100, both sampled by 0×1. The stub generator ignores the posted roundCount,
+    /// so every test game is exactly 2 rounds with known exact/miss solutions.
+    /// </summary>
+    private static IReadOnlyList<Puzzle> TestPuzzles
+    {
+        get
+        {
+            var sample = new Solution([new Step(0, Operator.Mul, 1)], AnswerIndex: 2);
+            return [new Puzzle([10, 10], 100, sample), new Puzzle([5, 20], 100, sample)];
+        }
+    }
 
     public TestAppFactory()
     {
@@ -55,6 +76,12 @@ public class TestAppFactory : WebApplicationFactory<Program>
             services.AddSingleton(new FileSystemQuestionPackCatalog(_packsDir));
             services.RemoveAll<FileSystemAuctionPackCatalog>();
             services.AddSingleton(new FileSystemAuctionPackCatalog(_auctionPacksDir));
+            services.RemoveAll<TankApplicationService>();
+            services.AddSingleton(new TankApplicationService(TankContext.Default with
+            {
+                Now = () => DateTimeOffset.UtcNow + TankClockSkew,
+                GeneratePuzzles = (_, _) => TestPuzzles
+            }));
         });
 
     protected override void Dispose(bool disposing)
