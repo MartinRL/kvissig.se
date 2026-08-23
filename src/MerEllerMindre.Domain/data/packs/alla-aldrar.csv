@@ -7,7 +7,6 @@ Väger en dromedar mer eller mindre än en giraff?;Dromedar;Giraff;600;1200;kilo
 Väger en gepard mer eller mindre än en tiger?;Gepard;Tiger;60;250;kilo;Hur många kilo skiljer det?
 Väger en kejsarpingvin mer eller mindre än en vandringsalbatross?;Kejsarpingvin;Vandringsalbatross;35;9;kilo;Hur många kilo skiljer det?
 Lever en galapagossköldpadda längre eller kortare än en grå jako?;Galapagossköldpadda;Grå jako;150;45;år;Hur många år skiljer det?
-Väger en späckhuggare mer eller mindre än en blåval?;Späckhuggare;Blåval;5000;150000;kilo;Hur många kilo skiljer det?
 Väger en komodovaran mer eller mindre än en grön leguan?;Komodovaran;Grön leguan;70;15;kilo;Hur många kilo skiljer det?
 Lägger en nilkrokodil fler eller färre ägg per kull än en havssköldpadda?;Nilkrokodil;Havssköldpadda;50;110;ägg;Hur många ägg skiljer det?
 Slår en mus fler eller färre hjärtslag per minut än en kolibri?;Mus;Kolibri;600;1200;slag/min;Hur många slag per minut skiljer det?
@@ -51,7 +50,6 @@ Väger en hyena mer eller mindre än en schakal?;Hyena;Schakal;60;10;kilo;Hur m�
 Väger en manat mer eller mindre än en narval?;Manat;Narval;500;1600;kilo;Hur många kilo skiljer det?
 Väger en pottval mer eller mindre än en knölval?;Pottval;Knölval;40;30;ton;Hur många ton skiljer det?
 Väger ett sjölejon mer eller mindre än en vikare?;Sjölejon;Vikare;300;70;kilo;Hur många kilo skiljer det?
-Väger en lax mer eller mindre än en makrill?;Lax;Makrill;5;0,5;kilo;Hur många kilo skiljer det?
 Är en barracuda längre eller kortare än en tigerhaj?;Barracuda;Tigerhaj;1,5;5;meter;Hur många meter skiljer det?
 Är vingspannet på en monarkfjäril större eller mindre än på en nyckelpiga?;Monarkfjäril;Nyckelpiga;10;0,8;centimeter;Hur många centimeter skiljer det?
 Är en humla längre eller kortare än en bålgeting?;Humla;Bålgeting;22;35;millimeter;Hur många millimeter skiljer det?
@@ -88,10 +86,8 @@ Lever en koala längre eller kortare än en röd känguru?;Koala;Röd känguru;1
 Lever en kakadua längre eller kortare än en grå jako?;Kakadua;Grå jako;40;60;år;Hur många år skiljer det?
 Väger en isbjörn mer eller mindre än en jättepanda?;Isbjörn;Jättepanda;450;100;kilo;Hur många kilo skiljer det?
 Är en flasknosdelfin längre eller kortare än en pottval?;Flasknosdelfin;Pottval;3;16;meter;Hur många meter skiljer det?
-Väger en noshörning mer eller mindre än en vattenbuffel?;Noshörning;Vattenbuffel;2300;800;kilo;Hur många kilo skiljer det?
 Är en pottval längre eller kortare än en narval?;Pottval;Narval;16;4,5;meter;Hur många meter skiljer det?
 Är en utter längre eller kortare än en sjöelefant?;Utter;Sjöelefant;1;5;meter;Hur många meter skiljer det?
-Väger en gorilla mer eller mindre än en koala?;Gorilla;Koala;170;12;kilo;Hur många kilo skiljer det?
 Väger en vikare mer eller mindre än en valross?;Vikare;Valross;70;1000;kilo;Hur många kilo skiljer det?
 Väger ett piggsvin mer eller mindre än en noshörning?;Piggsvin;Noshörning;15;2300;kilo;Hur många kilo skiljer det?
 Väger en kejsarpingvin mer eller mindre än en struts?;Kejsarpingvin;Struts;35;130;kilo;Hur många kilo skiljer det?
@@ -103,7 +99,6 @@ Väger en ren mer eller mindre än en älg?;Ren;Älg;150;500;kilo;Hur många kil
 Springer en struts fortare eller långsammare än en emu?;Struts;Emu;70;50;km/h;Hur många km/h skiljer det?
 Väger en noshörning mer eller mindre än en afrikansk elefant?;Noshörning;Afrikansk elefant;2300;6000;kilo;Hur många kilo skiljer det?
 Väger en brunbjörn mer eller mindre än en varg?;Brunbjörn;Varg;200;45;kilo;Hur många kilo skiljer det?
-Är dräktighetstiden för en människa längre eller kortare än för en hund?;Människa;Hund;266;63;dygn;Hur många dygn skiljer det?
 Springer en kanin fortare eller långsammare än en hare?;Kanin;Hare;48;70;km/h;Hur många km/h skiljer det?
 Lever en elefant längre eller kortare än en häst?;Afrikansk elefant;Häst;70;30;år;Hur många år skiljer det?
 Är en kejsarpingvin högre eller lägre än en kungspingvin?;Kejsarpingvin;Kungspingvin;115;95;centimeter;Hur många centimeter skiljer det?
@@ -118,7 +113,6 @@ Springer en sengångare fortare eller långsammare än en människa?;Sengångare
 Springer en känguru fortare eller långsammare än en emu?;Känguru;Emu;71;50;km/h;Hur många km/h skiljer det?
 Störtdyker en pilgrimsfalk fortare eller långsammare än en gepard springer?;Pilgrimsfalk;Gepard;350;110;km/h;Hur många km/h skiljer det?
 Väger en babian mer eller mindre än en orangutang?;Babian;Orangutang;30;100;kilo;Hur många kilo skiljer det?
-Är en älg högre eller lägre än en kronhjort i mankhöjd?;Älg;Kronhjort;2,1;1,2;meter;Hur många meter skiljer det?
 Är en gorilla högre eller lägre än en isbjörn stående?;Gorilla;Isbjörn;1,75;2,4;meter;Hur många meter skiljer det?
 Väger en brandbil mer eller mindre än en ambulans?;Brandbil;Ambulans;14000;3500;kilo;Hur många kilo skiljer det?
 Har en snöskoter högre eller lägre toppfart än en vattenskoter?;Snöskoter;Vattenskoter;150;110;km/h;Hur många km/h skiljer toppfarten?
@@ -140,7 +134,6 @@ Har en skördetröska starkare eller svagare motor än en traktor?;Skördetrösk
 Har en grävmaskin starkare eller svagare motor än en monstertruck?;Grävmaskin;Monstertruck;150;1500;hk;Hur många hästkrafter skiljer det?
 Har en dragster högre eller lägre toppfart än en racingbåt?;Dragster;Racingbåt;530;250;km/h;Hur många km/h skiljer toppfarten?
 Är ett segelflygplan längre eller kortare än ett jaktplan?;Segelflygplan;Jaktplan;7;15;meter;Hur många meter skiljer längden?
-Är VW-bubblan längre eller kortare än en Volvo Amazon?;VW-bubblan;Volvo Amazon;4,03;4,45;meter;Hur många meter skiljer det i längd?
 Har en Ford T högre eller lägre toppfart än en Volvo Amazon?;Ford T;Volvo Amazon;72;150;km/h;Hur många km/h skiljer det i toppfart?
 Är en kanot längre eller kortare än en roddbåt?;Kanot;Roddbåt;5;3,5;meter;Hur många meter skiljer det i längd?
 Är en gondol i Venedig längre eller kortare än ett vikingaskepp?;Gondol (Venedig);Vikingaskepp;11;24;meter;Hur många meter skiljer det i längd?
@@ -149,7 +142,6 @@ Väger en sopbil mer eller mindre än en betongbil?;Sopbil;Betongbil;18;32;ton;H
 Har en elsparkcykel högre eller lägre toppfart än en mountainbike?;Elsparkcykel;Mountainbike;20;40;km/h;Hur många km/h skiljer det i toppfart?
 Är en limousine längre eller kortare än en VW-bubbla?;Limousine;VW-bubblan;9;4;meter;Hur många meter skiljer det i längd?
 Har ett pendeltåg högre eller lägre toppfart än ett X2000-tåg?;Pendeltåg;X2000;120;200;km/h;Hur många km/h skiljer det i toppfart?
-Har ett Airbus A380 fler eller färre sittplatser än Concorde?;Airbus A380;Concorde;555;100;platser;Hur många sittplatser skiljer det?
 Är en isbrytare längre eller kortare än ett hangarfartyg?;Isbrytare;Hangarfartyg;108;333;meter;Hur många meter skiljer det i längd?
 Är en katamaran längre eller kortare än en roddbåt?;Katamaran;Roddbåt;12;3,5;meter;Hur många meter skiljer det i längd?
 Väger en sopbil mer eller mindre än en stridsvagn?;Sopbil;Stridsvagn;18;60;ton;Hur många ton skiljer det?
@@ -181,14 +173,10 @@ Väger Saturn V-raketen mer eller mindre än Queen Mary 2?;Saturn V-raketen;Quee
 Är Saturn V-raketen längre eller kortare än en livbåt?;Saturn V-raketen;Livbåt;110;7,5;meter;Hur många meter skiljer det i längd?
 Har ett Boeing 787 Dreamliner fler eller färre passagerare än en jolle?;Boeing 787 Dreamliner;Jolle;290;2;personer;Hur många passagerare skiljer det?
 Har en skolbuss fler eller färre passagerare än en golfbil?;Skolbuss;Golfbil;72;4;personer;Hur många passagerare skiljer det?
-Har en cykel högre eller lägre toppfart än en moped?;Cykel;Moped;30;45;km/h;Hur många km/h skiljer toppfarten?
 Har en jumbojet fler eller färre sittplatser än ett litet propellerplan?;Jumbojet (Boeing 747);Litet propellerplan;410;4;platser;Hur många sittplatser skiljer det?
 Har en personbil högre eller lägre toppfart än ett höghastighetståg?;Personbil;Höghastighetståg;200;320;km/h;Hur många km/h skiljer toppfarten?
 Har en motorcykel högre eller lägre toppfart än en moped?;Motorcykel;Moped;200;45;km/h;Hur många km/h skiljer toppfarten?
-Är Titanic längre eller kortare än en oljetanker?;Titanic;Oljetanker;269;380;meter;Hur många meter skiljer längden?
 Har ett ånglok högre eller lägre toppfart än en personbil?;Ånglok;Personbil;100;200;km/h;Hur många km/h skiljer toppfarten?
-Har en spårvagn högre eller lägre toppfart än ett tunnelbanetåg?;Spårvagn;Tunnelbanetåg;60;80;km/h;Hur många km/h skiljer toppfarten?
-Är en lastbil längre eller kortare än en stadsbuss?;Lastbil;Stadsbuss;18;12;meter;Hur många meter skiljer längden?
 Har en stadsbuss fler eller färre sittplatser än ett tunnelbanetåg?;Stadsbuss;Tunnelbanetåg;50;240;platser;Hur många sittplatser skiljer det?
 Har en traktor högre eller lägre toppfart än ett höghastighetståg?;Traktor;Höghastighetståg;40;320;km/h;Hur många km/h skiljer toppfarten?
 Väger en Formel 1-bil mer eller mindre än en motorcykel?;Formel 1-bil;Motorcykel;798;200;kilo;Hur många kilo skiljer det?
@@ -203,8 +191,6 @@ Har en segelbåt högre eller lägre toppfart än en motorbåt?;Segelbåt;Motorb
 Väger en oljetanker mer eller mindre än ett containerfartyg?;Oljetanker;Containerfartyg;320000;200000;ton;Hur många ton skiljer det?
 Är Titanic längre eller kortare än en bilfärja?;Titanic;Bilfärja;269;180;meter;Hur många meter skiljer längden?
 Är floden Nilen längre eller kortare än Yangtze?;Nilen;Yangtze;6650;6300;km;Hur många km skiljer det?
-Är berget Kilimanjaro högre eller lägre än Mont Blanc?;Kilimanjaro;Mont Blanc;5895;4809;meter;Hur många meter skiljer det?
-Är öknen Sahara större eller mindre till ytan än Arabiska öknen?;Sahara;Arabiska öknen;9,2;2,33;miljoner km²;Hur många miljoner km² skiljer det?
 Ligger staden La Paz högre eller lägre över havet än Mexico City?;La Paz;Mexico City;3640;2240;meter;Hur många meter skiljer det?
 Hade Tokyos storstadsområde fler eller färre invånare än Londons 2025?;Tokyo;London;37;9,8;miljoner invånare;Hur många miljoner invånare skiljer det?
 Är floden Volga längre eller kortare än Rhen?;Volga;Rhen;3530;1230;km;Hur många km skiljer det?
@@ -212,11 +198,8 @@ Hade Tokyos storstadsområde fler eller färre invånare än Londons 2025?;Tokyo
 Är Vatikanstaten större eller mindre till ytan än Island?;Vatikanstaten;Island;0,49;103000;km²;Hur många km² skiljer det?
 Är Monaco större eller mindre till ytan än Singapore?;Monaco;Singapore;2;735;km²;Hur många km² skiljer det?
 Är floden Donau längre eller kortare än Yangtze?;Donau;Yangtze;2850;6300;km;Hur många km skiljer det?
-Är vulkanen Etna högre eller lägre än Mount Everest?;Etna;Mount Everest;3357;8849;meter;Hur många meter skiljer det?
-Är Island större eller mindre till ytan än Storbritannien?;Island;Storbritannien;103;242;tusen km²;Hur många tusen km² skiljer det?
 Är floden Seine längre eller kortare än Donau?;Seine;Donau;777;2850;km;Hur många km skiljer det?
 Har staden Oslo fler eller färre invånare än Madrid?;Oslo;Madrid;0,7;3,3;miljoner invånare;Hur många miljoner invånare skiljer det?
-Är Grekland större eller mindre till ytan än Sverige?;Grekland;Sverige;131,9;450;tusen km²;Hur många tusen km² skiljer det?
 Är Österrike större eller mindre till ytan än Italien?;Österrike;Italien;83,9;301;tusen km²;Hur många tusen km² skiljer det?
 Har staden Wien fler eller färre invånare än Madrid?;Wien;Madrid;2;3,3;miljoner invånare;Hur många miljoner invånare skiljer det?
 Är Rumänien större eller mindre till ytan än Spanien?;Rumänien;Spanien;238;506;tusen km²;Hur många tusen km² skiljer det?
@@ -232,9 +215,6 @@ Har Iran fler eller färre invånare än Australien? (2024);Iran;Australien;91;2
 Är Kanada större eller mindre än Saudiarabien till ytan?;Kanada;Saudiarabien;9,98;2,15;miljoner km²;Hur många miljoner km² skiljer det?
 Har Mexiko fler eller färre invånare än Peru? (2024);Mexiko;Peru;132;34;miljoner invånare;Hur många miljoner invånare skiljer det?
 Har São Paulos storstadsområde fler eller färre invånare än Santiagos? (2024);São Paulo;Santiago;22,6;7;miljoner invånare;Hur många miljoner invånare skiljer det?
-Är Portugal större eller mindre än Polen till ytan?;Portugal;Polen;92;313;tusen km²;Hur många tusen km² skiljer det?
-Är Schweiz större eller mindre än Grekland till ytan?;Schweiz;Grekland;41;132;tusen km²;Hur många tusen km² skiljer det?
-Har Saudiarabien fler eller färre invånare än Iran? (2024);Saudiarabien;Iran;35;91;miljoner invånare;Hur många miljoner invånare skiljer det?
 Har Island fler eller färre invånare än Pakistan? (2024);Island;Pakistan;0,39;240;miljoner invånare;Hur många miljoner invånare skiljer det?
 Är Kazakstan större eller mindre än Nederländerna till ytan?;Kazakstan;Nederländerna;2,72;0,0415;miljoner km²;Hur många miljoner km² skiljer det?
 Har Indonesien fler eller färre invånare än Nya Zeeland? (2024);Indonesien;Nya Zeeland;281;5,3;miljoner invånare;Hur många miljoner invånare skiljer det?
@@ -256,7 +236,6 @@ Hade Torontos storstadsområde fler eller färre invånare än Dhaka? (2024);Tor
 Har Myanmar fler eller färre invånare än Bangladesh? (2024);Myanmar;Bangladesh;54;173;miljoner invånare;Hur många miljoner invånare skiljer det?
 Är Ecuador större eller mindre än Argentina till ytan?;Ecuador;Argentina;284;2780;tusen km²;Hur många tusen km² skiljer det?
 Är Algeriet större eller mindre än Belgien till ytan?;Algeriet;Belgien;2382;30,5;tusen km²;Hur många tusen km² skiljer det?
-Har Vietnam fler eller färre invånare än Mongoliet? (2024);Vietnam;Mongoliet;100;3,5;miljoner invånare;Hur många miljoner invånare skiljer det?
 Har Sydsudan fler eller färre invånare än Bangladesh? (2024);Sydsudan;Bangladesh;11;173;miljoner invånare;Hur många miljoner invånare skiljer det?
 Är ön Sumatra större eller mindre än Kuba till ytan?;Sumatra;Kuba;473;110;tusen km²;Hur många tusen km² skiljer det?
 Har Filippinerna fler eller färre invånare än Kuba? (2024);Filippinerna;Kuba;113;11;miljoner invånare;Hur många miljoner invånare skiljer det?
@@ -264,9 +243,7 @@ Har Filippinerna fler eller färre invånare än Kuba? (2024);Filippinerna;Kuba;
 Har Etiopien fler eller färre invånare än Venezuela? (2024);Etiopien;Venezuela;132;28;miljoner invånare;Hur många miljoner invånare skiljer det?
 Är Ghana större eller mindre än Angola till ytan?;Ghana;Angola;239;1247;tusen km²;Hur många tusen km² skiljer det?
 Hade Dhakas storstadsområde fler eller färre invånare än Köpenhamn? (2024);Dhaka;Köpenhamn;23;1,4;miljoner invånare;Hur många miljoner invånare skiljer det?
-Har Argentina fler eller färre invånare än Colombia? (2024);Argentina;Colombia;46;53;miljoner invånare;Hur många miljoner invånare skiljer det?
 Har Spanien fler eller färre invånare än Polen? (2024);Spanien;Polen;48;38;miljoner invånare;Hur många miljoner invånare skiljer det?
-Har Sydafrika fler eller färre invånare än Etiopien? (2024);Sydafrika;Etiopien;63;132;miljoner invånare;Hur många miljoner invånare skiljer det?
 Har Etiopien fler eller färre invånare än Marocko? (2024);Etiopien;Marocko;132;38;miljoner invånare;Hur många miljoner invånare skiljer det?
 Har Filippinerna fler eller färre invånare än Chile? (2024);Filippinerna;Chile;113;19,5;miljoner invånare;Hur många miljoner invånare skiljer det?
 Har Kenya fler eller färre invånare än Indonesien? (2024);Kenya;Indonesien;56;281;miljoner invånare;Hur många miljoner invånare skiljer det?
@@ -291,10 +268,8 @@ Har Istanbuls storstadsområde fler eller färre invånare än Rom? (2024);Istan
 Har Frankrike fler eller färre invånare än Tyskland? (2024);Frankrike;Tyskland;68;83;miljoner invånare;Hur många miljoner invånare skiljer det?
 Har Japan fler eller färre invånare än Ryssland? (2024);Japan;Ryssland;124;144;miljoner invånare;Hur många miljoner invånare skiljer det?
 Är Sverige större eller mindre än Norge till ytan?;Sverige;Norge;450;385;tusen km²;Hur många tusen km² skiljer det?
-Har Egypten fler eller färre invånare än Tyskland? (2024);Egypten;Tyskland;107;83;miljoner invånare;Hur många miljoner invånare skiljer det?
 Är USA större eller mindre än Ryssland till ytan?;USA;Ryssland;9,8;17,1;miljoner km²;Hur många miljoner km² skiljer det?
 Är Australien större eller mindre än Ryssland till ytan?;Australien;Ryssland;7,69;17,1;miljoner km²;Hur många miljoner km² skiljer det?
-Är floden Mississippi längre eller kortare än Donau?;Mississippi;Donau;3766;2850;km;Hur många km skiljer det?
 Är floden Amazonas längre eller kortare än Mississippi?;Amazonas;Mississippi;6400;3766;km;Hur många km skiljer det?
 Har Kina fler eller färre invånare än USA? (2024);Kina;USA;1410;340;miljoner invånare;Hur många miljoner invånare skiljer det?
 Har Sverige fler eller färre invånare än Frankrike? (2024);Sverige;Frankrike;10,6;68;miljoner invånare;Hur många miljoner invånare skiljer det?
@@ -538,7 +513,6 @@ Rinner det mer eller mindre vatten i Nilen än i Mississippifloden, mätt vid my
 Är Lake Superior djupare eller grundare än Baikalsjön i Ryssland?;Lake Superior;Baikalsjön;406;1642;meter;Hur många meter skiljer det?
 Är Niagarafallen högre eller lägre än Victoriafallen i Afrika?;Niagarafallen;Victoriafallen;51;108;meter;Hur många meter skiljer det?
 Är Angelfallen i Venezuela högre eller lägre än Niagarafallen?;Angelfallen;Niagarafallen;979;51;meter;Hur många meter skiljer det?
-Är Kalahariöknen större eller mindre till ytan än Gobiöknen?;Kalahariöknen;Gobiöknen;900000;1295000;kvadratkilometer;Hur många kvadratkilometer skiljer det?
 Är Gobiöknen större eller mindre till ytan än Arabiska öknen?;Gobiöknen;Arabiska öknen;1295000;2330000;kvadratkilometer;Hur många kvadratkilometer skiljer det?
 Är Gobiöknen större eller mindre till ytan än Atacamaöknen i Sydamerika?;Gobiöknen;Atacamaöknen;1295000;105000;kvadratkilometer;Hur många kvadratkilometer skiljer det?
 Är Grönlands inlandsis större eller mindre till ytan än Arabiska öknen?;Grönlands inlandsis;Arabiska öknen;1710000;2330000;kvadratkilometer;Hur många kvadratkilometer skiljer det?
@@ -661,7 +635,6 @@ Har Sarek nationalpark större eller mindre yta än Färnebofjärdens nationalpa
 Har Stockholm större eller mindre folkmängd än Visby? (2023);Stockholm;Visby;1652895;26305;invånare;Hur många invånare skiljer det?
 Har Gotland större eller mindre yta än ön Ven?;Gotland;Ven;3134;7,5;kvadratkilometer;Hur många kvadratkilometer skiljer det?
 Är Kebnekaise högre eller lägre än Söderåsen, Skånes högsta punkt?;Kebnekaise;Söderåsen;2097;212;meter;Hur många meter skiljer det?
-Har Vänern större eller mindre yta än Storsjön i Jämtland?;Vänern;Storsjön;5650;456;kvadratkilometer;Hur många kvadratkilometer skiljer det?
 Har Stockholm större eller mindre folkmängd än Östersund? (2023);Stockholm;Östersund;1652895;55493;invånare;Hur många invånare skiljer det?
 Är Kebnekaise högre eller lägre än Kinnekulle?;Kebnekaise;Kinnekulle;2097;306;meter;Hur många meter skiljer det?
 Är Ölandsbron längre eller kortare än Öresundsbron?;Ölandsbron;Öresundsbron;6072;7845;meter;Hur många meter skiljer det?
@@ -1084,3 +1057,30 @@ Har en ukulele fler eller färre strängar än en flygel?;Ukulele;Flygel;4;230;s
 Har Indien fler eller färre invånare än Bangladesh? (2024);Indien;Bangladesh;1451;174;miljoner invånare;Hur många miljoner invånare skiljer det?
 Har Turkiet fler eller färre grannländer än Schweiz?;Turkiet;Schweiz;8;5;grannländer;Hur många grannländer skiljer det?
 Har Australien fler eller färre invånare än Kanada? (2024);Australien;Kanada;27,2;41,3;miljoner invånare;Hur många miljoner invånare skiljer det?
+Är berget Denali i Alaska högre eller lägre än Kilimanjaro?;Denali;Kilimanjaro;6190;5895;meter;Hur många meter skiljer det?
+Har Grekland fler eller färre invånare än Portugal? (2024);Grekland;Portugal;10,4;10,6;miljoner invånare;Hur många miljoner invånare skiljer det?
+Är Cypern större eller mindre än Jamaica till ytan?;Cypern;Jamaica;9251;10991;km²;Hur många km² skiljer det?
+Är Kebnekaise högre eller lägre än berget Mount Fuji i Japan?;Kebnekaise;Mount Fuji;2097;3776;meter;Hur många meter skiljer det?
+Är Kongofloden längre eller kortare än Yangtzefloden?;Kongofloden;Yangtzefloden;4700;6300;km;Hur många km skiljer det?
+Är floden Po längre eller kortare än floden Ebro?;Po;Ebro;652;930;km;Hur många km skiljer det?
+Är Mackenzieflodens flodsystem i Kanada längre eller kortare än floden Zambezi i Afrika?;Mackenzieflodens flodsystem;Zambezi;4241;2574;km;Hur många km skiljer det?
+Är Vostoksjön under Antarktis is större eller mindre än Vänern till ytan?;Vostoksjön;Vänern;12500;5450;km²;Hur många km² skiljer det?
+Är önationen Malta större eller mindre än ön Ibiza till ytan?;Malta;Ibiza;316;571;km²;Hur många km² skiljer det?
+Är Teneriffa större eller mindre än Rhodos till ytan?;Teneriffa;Rhodos;2034;1401;km²;Hur många km² skiljer det?
+Är Österrike större eller mindre än Schweiz till ytan?;Österrike;Schweiz;83,9;41,3;tusen km²;Hur många tusen km² skiljer det?
+Är Botswana större eller mindre än Sydafrika till ytan?;Botswana;Sydafrika;582;1221;tusen km²;Hur många tusen km² skiljer det?
+Har Mongoliet fler eller färre invånare än Nya Zeeland? (2024);Mongoliet;Nya Zeeland;3,5;5,2;miljoner invånare;Hur många miljoner invånare skiljer det?
+Är vulkanen Vesuvius högre eller lägre än vulkanen Etna?;Vesuvius;Etna;1281;3403;meter;Hur många meter skiljer det?
+Är floden Loire längre eller kortare än floden Zambezi?;Loire;Zambezi;1006;2574;km;Hur många km skiljer det?
+Är Ontariosjön större eller mindre än Victoriasjön till ytan?;Ontariosjön;Victoriasjön;18960;59947;km²;Hur många km² skiljer det?
+Är Öland större eller mindre än den danska ön Själland till ytan?;Öland;Själland;1342;7031;km²;Hur många km² skiljer det?
+Är Italien större eller mindre än Portugal till ytan?;Italien;Portugal;301;92;tusen km²;Hur många tusen km² skiljer det?
+Är Mount Everest högre eller lägre än Kebnekaise?;Mount Everest;Kebnekaise;8849;2097;meter;Hur många meter skiljer det?
+Är Michigansjön större eller mindre än Ontariosjön till ytan?;Michigansjön;Ontariosjön;58000;18960;km²;Hur många km² skiljer det?
+Är ögruppen Azorerna större eller mindre än Kanarieöarna till ytan?;Azorerna;Kanarieöarna;2333;7447;km²;Hur många km² skiljer det?
+Har Tanzania fler eller färre invånare än Grekland? (2024);Tanzania;Grekland;68,6;10,4;miljoner invånare;Hur många miljoner invånare skiljer det?
+Är Torneälven längre eller kortare än Nilen?;Torneälven;Nilen;522;6650;km;Hur många km skiljer det?
+Är Sahara större eller mindre än Gobiöknen till ytan?;Sahara;Gobiöknen;9200;1295;tusen km²;Hur många tusen km² skiljer det?
+Har Nepal fler eller färre invånare än Bhutan? (2024);Nepal;Bhutan;29,7;0,8;miljoner invånare;Hur många miljoner invånare skiljer det?
+Är Grönland större eller mindre än Island till ytan?;Grönland;Island;2166;103;tusen km²;Hur många tusen km² skiljer det?
+Är Mongoliet större eller mindre än Danmark till ytan?;Mongoliet;Danmark;1564;43;tusen km²;Hur många tusen km² skiljer det?
