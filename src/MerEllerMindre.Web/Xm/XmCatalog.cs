@@ -29,7 +29,7 @@ public sealed class XmCatalog
     {
         var xm = XmParser.Parse(File.ReadAllText(xmPath));
         var dir = Path.GetDirectoryName(xmPath)!;
-        var em = EmModel.Merge([.. xm.Models.Select(m => EmModel.Parse(File.ReadAllText(Path.Combine(dir, m))))]);
+        var em = EmParser.Merge([.. xm.Models.Select(m => EmParser.Parse(File.ReadAllText(Path.Combine(dir, m))))]);
 
         var errors = XmLinter.Lint(xm, em).Where(f => f.Severity == XmSeverity.Error).ToList();
         if (errors.Count > 0)
