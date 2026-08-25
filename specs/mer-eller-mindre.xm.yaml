@@ -1,6 +1,6 @@
 # Mer eller Mindre — Experience Model (xmlang v0.2.0), reverse-engineered AS-IMPLEMENTED
 # from the shipped UI (Components/Screens/*.razor, ScreenModels.cs, playful.css) against
-# specs/mer-eller-mindre-event-model.yaml. Judgments were read off the running product and
+# specs/mer-eller-mindre.em.yaml. Judgments were read off the running product and
 # recorded as data; nothing here is invented.
 #
 # Findings (sister notes to blindbudet.xm.yaml's and tank-till-tusen.xm.yaml's):
@@ -38,7 +38,7 @@
 #   NO xmlang v0.3 is needed for MEM. Reconsider only if the same gap recurs at game #4.
 
 xmlang: "0.2"
-model: mer-eller-mindre-event-model.yaml
+model: mer-eller-mindre.em.yaml
 
 personas:
   Värd:

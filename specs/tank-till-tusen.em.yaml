@@ -1,6 +1,6 @@
 # Tänk Till Tusen — Event-Modeling spec for one arithmetic-puzzle game ("omgång").
-# Third sister spec, beside mer-eller-mindre-event-model.yaml (MEM) and
-# blindbudet-event-model.yaml (BlindBudet). Same emlang dialect & conventions; see
+# Third sister spec, beside mer-eller-mindre.em.yaml (MEM) and
+# blindbudet.em.yaml (BlindBudet). Same emlang dialect & conventions; see
 # specs/CLAUDE.md. This is a THIRD Decider (TankState + its own Commands/Events/Errors)
 # living beside MEM and BlindBudet — it does NOT touch theirs.
 #

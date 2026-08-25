@@ -8,7 +8,7 @@ namespace TankTillTusen.Domain.Tests;
 /// <summary>
 /// Fitness functions for the Tänk Till Tusen sister-domain — the mechanically-checkable subset
 /// of the constitution/ADRs, plus the spec↔domain contract binding
-/// specs/tank-till-tusen-event-model.yaml to the tank unions. Mirror of MEM's / BlindBudet's
+/// specs/tank-till-tusen.em.yaml to the tank unions. Mirror of MEM's / BlindBudet's
 /// ArchitectureTests (scoped to the TankTillTusen.Domain assembly + its spec).
 /// </summary>
 public class TankArchitectureTests

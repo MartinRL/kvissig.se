@@ -1,6 +1,6 @@
 # Blindbudet — Implementation Tasks
 
-Sister-checklist to `specs/tasks.md`. Source of truth = `specs/blindbudet-event-model.yaml`.
+Sister-checklist to `specs/tasks.md`. Source of truth = `specs/blindbudet.em.yaml`.
 Physical progress spår for the ralph-loop (`BLINDBUDET-TASK.md`). Check off `[x]` as pieces land.
 
 ## Phase 0: Solution wiring

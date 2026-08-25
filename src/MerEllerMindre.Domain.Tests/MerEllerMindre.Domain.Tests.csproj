@@ -13,7 +13,7 @@
 
   <ItemGroup>
     <CompilerVisibleProperty Include="EmlangEmit" />
-    <AdditionalFiles Include="..\..\specs\mer-eller-mindre-event-model.yaml" />
+    <AdditionalFiles Include="..\..\specs\mer-eller-mindre.em.yaml" />
     <ProjectReference Include="..\Emlang.Generators\Emlang.Generators.csproj"
                       OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>

@@ -148,6 +148,25 @@ public class ArchitectureTests
             .Should().NotContain("AddInteractiveServerComponents", "no interactive render mode (ADR 007)");
     }
 
+    [Fact]
+    public void Spec_files_follow_the_em_xm_naming_convention()
+    {
+        var yamls = Directory.EnumerateFiles(Path.Combine(RepoRoot, "specs"), "*.yaml")
+            .Select(Path.GetFileName)
+            .ToList();
+
+        // Guard against vacuous pass if specs/ moves.
+        yamls.Should().Contain("mer-eller-mindre.em.yaml", "the emlang spec is the source of truth");
+
+        var offenders = yamls
+            .Where(f => !f!.EndsWith(".em.yaml", StringComparison.Ordinal)
+                        && !f.EndsWith(".xm.yaml", StringComparison.Ordinal))
+            .ToList();
+
+        offenders.Should().BeEmpty(
+            "spec YAML files are named <game>.em.yaml (emlang) or <game>.xm.yaml (xmlang)");
+    }
+
     // The emlang spec-coverage cross-check (names both directions) moved to
     // SpecSurfaceShadowTests — the structural SurfaceComparer check is strictly stronger
     // (prop names/types/order, union membership, namespace).

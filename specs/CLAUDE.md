@@ -1,7 +1,7 @@
-# Authoring the emlang spec (`mer-eller-mindre-event-model.yaml`)
+# Authoring the emlang spec (`mer-eller-mindre.em.yaml`)
 
 This folder holds the **Event-Modeling spec** for one round ("omgång") of
-*Mer eller Mindre*. `mer-eller-mindre-event-model.yaml` is the single source of truth that the C#
+*Mer eller Mindre*. `mer-eller-mindre.em.yaml` is the single source of truth that the C#
 domain maps to 1:1. It is written in **emlang YAML** (CLI v1.0.0) — not the old
 custom `.em` DSL.
 
@@ -18,10 +18,10 @@ export PATH="$PATH:/c/Program Files/Go/bin:$HOME/go/bin"
 From the repo root:
 
 ```bash
-emlang lint specs/mer-eller-mindre-event-model.yaml       # must print: OK (no issues found)
-emlang parse specs/mer-eller-mindre-event-model.yaml      # inspect parsed structure
-emlang fmt  specs/mer-eller-mindre-event-model.yaml -w    # format in place
-emlang diagram specs/mer-eller-mindre-event-model.yaml -o specs/mer-eller-mindre-event-model.html   # visual review
+emlang lint specs/mer-eller-mindre.em.yaml       # must print: OK (no issues found)
+emlang parse specs/mer-eller-mindre.em.yaml      # inspect parsed structure
+emlang fmt  specs/mer-eller-mindre.em.yaml -w    # format in place
+emlang diagram specs/mer-eller-mindre.em.yaml -o specs/mer-eller-mindre-event-model.html   # visual review
 ```
 
 `emlang` reads `.emlang.yaml` from the repo root. It ignores `slice-missing-event`
@@ -335,7 +335,7 @@ mindre"). Files use the **Swedish Excel dialect** (`;` separator, `,` decimal, s
 
 ## Iterative workflow
 
-1. **Spec first** — edit `mer-eller-mindre-event-model.yaml`.
+1. **Spec first** — edit `mer-eller-mindre.em.yaml`.
 2. **Lint** after every change until `OK (no issues found)`.
 3. **Diagram** and compare against `MEM-omgång.png`.
 4. Then propagate to C# domain (records, Decider, tests) — a separate effort.

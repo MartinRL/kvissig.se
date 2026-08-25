@@ -10,7 +10,7 @@ beside MEM and BlindBudet; generated puzzles, hard 45 s countdown, LOWEST total 
 - [x] User picked **v2 · Räknartejp** → becomes `PuzzleScreen.razor`
 
 ## Spec (emlang)
-- [x] `specs/tank-till-tusen-event-model.yaml` — lints `OK (no issues found)`
+- [x] `specs/tank-till-tusen.em.yaml` — lints `OK (no issues found)`
 
 ## Domain — `src/TankTillTusen.Domain/`
 - [x] `Puzzles.cs` — Operator/Step/Solution/Puzzle, `SolutionValidator`, `Solver`, `PuzzleGenerator`

@@ -1,6 +1,6 @@
 # Tänk Till Tusen — Experience Model (xmlang v0.2.0), reverse-engineered AS-IMPLEMENTED from
 # the shipped UI (Components/TankTillTusen/*.razor, TankScreenModels.cs, playful.css)
-# against specs/tank-till-tusen-event-model.yaml. Judgments were read off the running
+# against specs/tank-till-tusen.em.yaml. Judgments were read off the running
 # product and recorded as data; nothing here is invented.
 #
 # Findings (sister notes to blindbudet.xm.yaml's; numbering continues that file's spirit):
@@ -27,7 +27,7 @@
 #      it stays a hand-written selector in the concrete stratum.
 
 xmlang: "0.2"
-model: tank-till-tusen-event-model.yaml
+model: tank-till-tusen.em.yaml
 
 personas:
   Värd:

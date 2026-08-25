@@ -25,7 +25,7 @@ har dem i kontext. Följ dem exakt.
 {{MÅL}}
 
 ### Obligatorisk arbetsordning (spec-first — hoppa ALDRIG över steg 1)
-1. **Spec** — uppdatera `specs/mer-eller-mindre-event-model.yaml` (emlang YAML) FÖRST. Lägg till/justera
+1. **Spec** — uppdatera `specs/mer-eller-mindre.em.yaml` (emlang YAML) FÖRST. Lägg till/justera
    `t/c/e/x/v` och `tests:` (given/when/then). Inga `tests:` får hittas på i koden —
    de härleds härifrån. Linta specen om emlang CLI finns på PATH.
 2. **Domän** — lägg till/uppdatera records i `MerEllerMindre.Domain` så de matchar

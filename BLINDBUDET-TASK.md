@@ -5,7 +5,7 @@ existing spec to a playable game: domain + GWT-tests + web-shell + a tiny mini-l
 Terminate on a self-verifying DONE: green `dotnet test` (incl. a NEW architecture-contract
 test binding the blindbudet spec to the auction domain) + the marker file `BLINDBUDET-DONE`.
 
-Source of truth = `specs/blindbudet-event-model.yaml` (lint-green, content already spiked).
+Source of truth = `specs/blindbudet.em.yaml` (lint-green, content already spiked).
 Progress spår = `specs/blindbudet-tasks.md` (check off `[x]` as each piece lands).
 
 ## Game model (from the spec — do not re-derive, just implement)
@@ -27,7 +27,7 @@ budget in v1.
   in-memory event-store pattern.
 
 ## Build order per iteration (spec-first, same discipline as `.claude/ralph-prompt.md`)
-1. **Spec** — `specs/blindbudet-event-model.yaml` is the source; only touch it if a gap surfaces
+1. **Spec** — `specs/blindbudet.em.yaml` is the source; only touch it if a gap surfaces
    during the build (re-lint if emlang is on PATH). Content is already spiked.
 2. **Domain** (`Blindbudet.Domain`), records/unions mirrored on MEM:
    - `union AuctionCommand` (OpenAuction, JoinAuction, StartAuction, PlaceBid, RevealLot,
@@ -50,7 +50,7 @@ budget in v1.
 5. **GWT tests** (`Blindbudet.Domain.Tests`): implement ALL `tests:` from the spec. Test name =
    deterministic transform of the emlang name.
 6. **Architecture-contract test** (NEW `BlindbudetArchitectureTests`): parse
-   `specs/blindbudet-event-model.yaml` (`c:`/`e:`/`x:`) and contract-check against the auction
+   `specs/blindbudet.em.yaml` (`c:`/`e:`/`x:`) and contract-check against the auction
    unions — mirror of MEM's `ArchitectureTests`. The Stop-hook already runs all
    `ArchitectureTests`, so this becomes an automatic fitness gate overnight.
 7. **Web-shell**: Blindbudet endpoints + Razor screens in `MerEllerMindre.Web` (lobby / join /

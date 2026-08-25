@@ -58,12 +58,12 @@ MerEllerMindre.Domain/
 ### Source of Truth
 
 ```
-specs/mer-eller-mindre-event-model.yaml   # emlang YAML spec (CLI v1.0.0) — ALL behavior defined here
+specs/mer-eller-mindre.em.yaml   # emlang YAML spec (CLI v1.0.0) — ALL behavior defined here
 specs/tasks.md                   # Implementation checklist
 .claude/constitution.md          # Coding standards
 ```
 
-### emlang Syntax (in mer-eller-mindre-event-model.yaml)
+### emlang Syntax (in mer-eller-mindre.em.yaml)
 
 YAML element types (one key per element, plus optional `props`):
 
@@ -94,7 +94,7 @@ See `specs/CLAUDE.md` for the full cheat-sheet.
 
 ## Workflow
 
-1. **Spec first**: Update `specs/mer-eller-mindre-event-model.yaml`
+1. **Spec first**: Update `specs/mer-eller-mindre.em.yaml`
 2. **Domain types**: Add records matching the spec
 3. **Decider**: Update `Evolve` and `Decide` switches
 4. **Tests**: Implement GWT from `?TestName?` blocks

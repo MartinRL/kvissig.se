@@ -15,7 +15,7 @@
   <!-- Stratum-1 records (Commands/Events/Errors + unions) are BUILD ARTIFACTS generated
        from the emlang spec into obj/ — they are deliberately NOT on disk (ADR 016). -->
   <ItemGroup>
-    <AdditionalFiles Include="..\..\specs\blindbudet-event-model.yaml" />
+    <AdditionalFiles Include="..\..\specs\blindbudet.em.yaml" />
     <ProjectReference Include="..\Emlang.Generators\Emlang.Generators.csproj"
                       OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>

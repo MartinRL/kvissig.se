@@ -1,9 +1,9 @@
 # Blindbudet — Event-Modeling spec for one sealed-bid auction ("auktion").
-# Sister spec to mer-eller-mindre-event-model.yaml (Mer eller Mindre). Same emlang dialect &
+# Sister spec to mer-eller-mindre.em.yaml (Mer eller Mindre). Same emlang dialect &
 # conventions; see specs/CLAUDE.md. This is a SECOND Decider (AuctionState +
 # its own Commands/Events/Errors) living beside MEM — it does NOT touch MEM's.
 #
-# Conventions (identical to mer-eller-mindre-event-model.yaml):
+# Conventions (identical to mer-eller-mindre.em.yaml):
 #   triggers carry the actor role + originating screen
 #                                  (host / Auction catalog, Player / Lot, System / ...)
 #   commands are bare              (OpenAuction, PlaceBid)
@@ -17,7 +17,7 @@
 #   Todo / ...    processor-facing read-models the System observes (never shown)
 #   bare noun     human screens, named for the DATA they carry (Roster, Round scores)
 # NOTE: emlang renders views by bare name (no per-view lane label); the prefix still
-#   documents intent and maps to code, exactly as in mer-eller-mindre-event-model.yaml.
+#   documents intent and maps to code, exactly as in mer-eller-mindre.em.yaml.
 #
 # Verification is decider-true: Given -> State / Game (prior events folded via evolve),
 # When -> command, Then -> events | x. emlang has no `state` element, so every

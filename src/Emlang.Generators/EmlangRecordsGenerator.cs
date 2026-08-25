@@ -21,7 +21,7 @@ internal static class EmlangEmit
                 ? value
                 : "surface");
         return context.AdditionalTextsProvider
-            .Where(static text => text.Path.EndsWith("-event-model.yaml", StringComparison.OrdinalIgnoreCase))
+            .Where(static text => text.Path.EndsWith(".em.yaml", StringComparison.OrdinalIgnoreCase))
             .Select(static (text, ct) =>
                 (FileName: Path.GetFileName(text.Path), Yaml: text.GetText(ct)?.ToString() ?? string.Empty))
             .Combine(mode)

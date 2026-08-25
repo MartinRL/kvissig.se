@@ -1,6 +1,6 @@
 # Blindbudet — Experience Model (xmlang v0.2.0), reverse-engineered AS-IMPLEMENTED from
 # the shipped UI (Components/Blindbudet/*.razor, AuctionScreenModels.cs, playful.css)
-# against specs/blindbudet-event-model.yaml. Judgments were read off the running product
+# against specs/blindbudet.em.yaml. Judgments were read off the running product
 # and recorded as data; nothing here is invented.
 #
 # Findings from the reverse-engineering (spec dogfood notes):
@@ -29,7 +29,7 @@
 #      selector (AuctionScreens.Select) in the concrete stratum.
 
 xmlang: "0.2"
-model: blindbudet-event-model.yaml
+model: blindbudet.em.yaml
 
 personas:
   Värd:

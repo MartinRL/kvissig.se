@@ -8,7 +8,7 @@ namespace Blindbudet.Domain.Tests;
 /// <summary>
 /// Fitness functions for the Blindbudet (auction) sister-domain — the mechanically-checkable
 /// subset of the constitution/ADRs, plus the spec↔domain contract binding
-/// specs/blindbudet-event-model.yaml to the auction unions. Mirror of MEM's ArchitectureTests
+/// specs/blindbudet.em.yaml to the auction unions. Mirror of MEM's ArchitectureTests
 /// (scoped to the Blindbudet.Domain assembly + its spec). The Stop hook runs all
 /// *ArchitectureTests, so this is an automatic overnight fitness gate.
 /// </summary>

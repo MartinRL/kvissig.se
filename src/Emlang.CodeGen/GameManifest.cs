@@ -26,7 +26,7 @@ public record GameManifest(
 
     public static readonly GameManifest MerEllerMindre = new(
         "MerEllerMindre",
-        "specs/mer-eller-mindre-event-model.yaml",
+        "specs/mer-eller-mindre.em.yaml",
         "MerEllerMindre.Domain",
         "src/MerEllerMindre.Domain/Commands.cs",
         "src/MerEllerMindre.Domain/Events.cs",
@@ -35,7 +35,7 @@ public record GameManifest(
 
     public static readonly GameManifest Blindbudet = new(
         "Blindbudet",
-        "specs/blindbudet-event-model.yaml",
+        "specs/blindbudet.em.yaml",
         "Blindbudet.Domain",
         "src/Blindbudet.Domain/Commands.cs",
         "src/Blindbudet.Domain/Events.cs",
@@ -44,7 +44,7 @@ public record GameManifest(
 
     public static readonly GameManifest TankTillTusen = new(
         "TankTillTusen",
-        "specs/tank-till-tusen-event-model.yaml",
+        "specs/tank-till-tusen.em.yaml",
         "TankTillTusen.Domain",
         "src/TankTillTusen.Domain/Commands.cs",
         "src/TankTillTusen.Domain/Events.cs",

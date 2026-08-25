@@ -9,7 +9,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "if grep -qE '(mer-eller-mindre|blindbudet)-event-model\\.yaml'; then export PATH=\"$PATH:/c/Program Files/Go/bin:$HOME/go/bin\"; emlang diagram specs/mer-eller-mindre-event-model.yaml -o specs/mer-eller-mindre-event-model.html; emlang diagram specs/blindbudet-event-model.yaml -o specs/blindbudet-event-model.html; fi 2>/dev/null || true",
+            "command": "if grep -qE '(mer-eller-mindre|blindbudet)\\.em\\.yaml'; then export PATH=\"$PATH:/c/Program Files/Go/bin:$HOME/go/bin\"; emlang diagram specs/mer-eller-mindre.em.yaml -o specs/mer-eller-mindre.em.html; emlang diagram specs/blindbudet.em.yaml -o specs/blindbudet.em.html; fi 2>/dev/null || true",
             "statusMessage": "Regenerating event-model diagrams"
           }
         ]
