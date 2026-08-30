@@ -9,23 +9,29 @@ The board this spec transcribes is `specs/MEM-omgång.png`.
 
 ## Running the tools
 
-`emlang` lives on PATH via `~/go/bin`. If a fresh shell can't find it:
+`em` is the .NET emlang CLI (same repo as the codegen, github.com/MartinRL/xmlang):
 
 ```bash
-export PATH="$PATH:/c/Program Files/Go/bin:$HOME/go/bin"
+dotnet tool install -g Emlang.Cli
 ```
 
 From the repo root:
 
 ```bash
-emlang lint specs/mer-eller-mindre.em.yaml       # must print: OK (no issues found)
-emlang parse specs/mer-eller-mindre.em.yaml      # inspect parsed structure
+em lint specs/mer-eller-mindre.em.yaml       # must print: OK (no issues found)
+em parse specs/mer-eller-mindre.em.yaml      # inspect parsed structure
+```
+
+`em` reads `.emlang.yaml` from the repo root. It ignores `slice-missing-event`
+so that standalone read-model (view-only) slices stay lint-clean.
+
+`fmt`/`diagram` are not ported yet — for those, the Go reference CLI (`emlang`,
+`~/go/bin`) still works:
+
+```bash
 emlang fmt  specs/mer-eller-mindre.em.yaml -w    # format in place
 emlang diagram specs/mer-eller-mindre.em.yaml -o specs/mer-eller-mindre-event-model.html   # visual review
 ```
-
-`emlang` reads `.emlang.yaml` from the repo root. It ignores `slice-missing-event`
-so that standalone read-model (view-only) slices stay lint-clean.
 
 ## YAML cheat-sheet
 
@@ -222,7 +228,7 @@ per-player test cases, keeping the model generic to N players.
 
 ### Prop type vocabulary
 
-emlang props are free-form annotations (`emlang lint` does not validate them), but
+emlang props are free-form annotations (`em lint` does not validate them), but
 this spec is the single source of truth the C# domain maps to 1:1, so the annotations
 **are** the intended types. Apply this vocabulary consistently:
 

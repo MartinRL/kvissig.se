@@ -144,6 +144,9 @@ formulas). No `.csproj`, no global tool.
 - emlang codegen = the `Emlang.Generators` analyzer NuGet (same repo,
   github.com/MartinRL/xmlang): Commands/Events/Errors + Decider.g.cs + SpecTests.g.cs are
   generated into obj/ from `EmlangPrefix`-tagged AdditionalFiles (ADR 016-018, 020).
+- em linter = the `Emlang.Cli` global tool (github.com/MartinRL/xmlang):
+  `dotnet tool install -g Emlang.Cli`, then `em lint specs/<game>.em.yaml`
+  (reads `.emlang.yaml` from repo root). Replaces the Go `emlang lint`.
 - xm linter = the `Xmlang.Cli` global tool (github.com/MartinRL/xmlang):
   `dotnet tool install -g Xmlang.Cli`, then `xm lint specs/<x>.xm.yaml`.
 
