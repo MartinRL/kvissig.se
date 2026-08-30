@@ -11,9 +11,8 @@
   <!-- Stratum-1 records (Commands/Events/Errors + unions) are BUILD ARTIFACTS generated
        from the emlang spec into obj/ — they are deliberately NOT on disk (ADR 016). -->
   <ItemGroup>
-    <AdditionalFiles Include="..\..\specs\tank-till-tusen.em.yaml" />
-    <ProjectReference Include="..\Emlang.Generators\Emlang.Generators.csproj"
-                      OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+    <AdditionalFiles Include="..\..\specs\tank-till-tusen.em.yaml" EmlangPrefix="Tank" />
+    <PackageReference Include="Emlang.Generators" Version="0.1.0" PrivateAssets="all" />
   </ItemGroup>
 
 </Project>

@@ -94,7 +94,7 @@ public class BlindbudetArchitectureTests
 
     // The emlang spec-coverage cross-check is now redundant by construction: the
     // Commands/Events/Errors records are GENERATED from the spec (ADR 016), and the
-    // emitter round-trips through SurfaceComparer in Emlang.CodeGen.Tests.
+    // emitter round-trips through SurfaceComparer in the xmlang repo's Emlang.Tests.
 
     // --- helpers ------------------------------------------------------------------------
 
