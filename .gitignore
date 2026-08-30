@@ -4,6 +4,7 @@ obj/
 out/
 
 # IDE
+.claude/settings.local.json
 .vs/
 .vscode/
 .idea/
