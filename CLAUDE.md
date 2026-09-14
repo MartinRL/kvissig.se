@@ -141,9 +141,12 @@ formulas). No `.csproj`, no global tool.
     `question-staging/*.csv` candidates.
   - `merge --out <path>` concats + dedups staging into a valid pack CSV; `--out` required,
     refuses the live-pack path unless `--force`.
-- emlang codegen = the `Emlang.Generators` analyzer NuGet (same repo,
-  github.com/MartinRL/xmlang): Commands/Events/Errors + Decider.g.cs + SpecTests.g.cs are
-  generated into obj/ from `EmlangPrefix`-tagged AdditionalFiles (ADR 016-018, 020).
+- emlang codegen = `src/Emlang.Generators`, THIS repo's own Roslyn analyzer (ProjectReference,
+  `OutputItemType="Analyzer"`): Commands/Events/Errors + Decider.g.cs + SpecTests.g.cs are
+  generated into obj/ from `EmlangPrefix`-tagged AdditionalFiles (ADR 016-018; ADR 020 is
+  superseded in part — generators are per app, the xmlang repo holds only the two DSLs).
+  Specs are in the emlang decider dialect (`s: Game` state element, `a:`/`auto:`
+  initiators, folds by reference): github.com/MartinRL/xmlang/blob/main/emlang-dialect.md
 - em linter = the `Emlang.Cli` global tool (github.com/MartinRL/xmlang):
   `dotnet tool install -g Emlang.Cli`, then `em lint specs/<game>.em.yaml`
   (reads `.emlang.yaml` from repo root). Replaces the Go `emlang lint`.

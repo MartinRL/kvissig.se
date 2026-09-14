@@ -11,7 +11,7 @@
 #                                  (Roster, Todo / Outstanding directions)
 #
 # View lanes:
-#   State / ...   the decider's decision model (folded GameState); read by `decide`
+#   s: Game       the decider's decision model (state element, folded GameState); read by `decide`
 #   Todo / ...    processor-facing read-models the System observes (never shown)
 #   bare noun     human screens, named for the DATA they carry (Roster, Round scores)
 # NOTE: emlang parses + lints these view-lane prefixes fine, but the diagram renders
@@ -163,7 +163,7 @@ slices:
   #   host hostName = Martin ; minted joinCode = joinCode
   ✍️ Open Lobby:
     steps:
-      - t: 🧑‍🏫 host /Quiz catalog
+      - a: 🧑‍🏫 host /Quiz catalog
       - c: OpenLobby
         props:
           hostName: string
@@ -183,7 +183,8 @@ slices:
       - v: Roster
     tests:
       game can be created:
-        given: []
+        given:
+          - s: Game
         when:
           - c: OpenLobby
             props: { hostName: Martin, questionPackId: mer-eller-mindre, roundCount: 7 }
@@ -197,21 +198,24 @@ slices:
               questions: [question0, question1]
               createdAt: createdAt
       cannot open lobby with unknown pack:
-        given: []
+        given:
+          - s: Game
         when:
           - c: OpenLobby
             props: { questionPackId: unknown, roundCount: 7 }
         then:
           - x: QuestionPackNotFound
       cannot open lobby with too few questions:
-        given: []
+        given:
+          - s: Game
         when:
           - c: OpenLobby
             props: { hostName: Martin, questionPackId: mer-eller-mindre, roundCount: 3 }
         then:
           - x: RoundCountOutOfRange
       cannot open lobby with too many questions:
-        given: []
+        given:
+          - s: Game
         when:
           - c: OpenLobby
             props: { hostName: Martin, questionPackId: mer-eller-mindre, roundCount: 22 }
@@ -253,7 +257,7 @@ slices:
   #   present in the lobby — including the host's name (the host is the first player).
   ✍️ Join Game:
     steps:
-      - t: 🧑‍🎓 Player /Join form
+      - a: 🧑‍🎓 Player /Join form
       - c: JoinGame
         props:
           joinCode: Guid
@@ -274,7 +278,7 @@ slices:
     tests:
       player can join lobby:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: lobby
               joinCode: joinCode
@@ -286,7 +290,8 @@ slices:
           - e: Game / PlayerJoined
             props: { playerId: minted, playerName: Nils, joinedAt: joinedAt }
       cannot join nonexistent game:
-        given: []
+        given:
+          - s: Game
         when:
           - c: JoinGame
             props: { joinCode: unknown, playerName: Nils }
@@ -294,7 +299,7 @@ slices:
           - x: GameNotFound
       cannot join started game:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               joinCode: joinCode
@@ -306,7 +311,7 @@ slices:
           - x: GameAlreadyStarted
       cannot join with name already taken:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: lobby
               joinCode: joinCode
@@ -330,7 +335,7 @@ slices:
   #   on the command and is deferred.
   ✍️ Start Game:
     steps:
-      - t: 🧑‍🏫 host /Game lobby
+      - a: 🧑‍🏫 host /Game lobby
       - c: StartGame
         props:
           gameId: Guid
@@ -339,6 +344,7 @@ slices:
       - e: Game / GameStarted
         props:
           gameId: Guid
+          hostPlayerId: Guid              # the actor: em-actor-identity (<role>Id, role host)
           firstQuestionIndex: int
           startedAt: DateTimeOffset
       - v: Question card
@@ -348,7 +354,7 @@ slices:
     tests:
       game can be started:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: lobby
               players: [hostMartin, playerNils]
@@ -359,7 +365,8 @@ slices:
           - e: Game / GameStarted
             props: { firstQuestionIndex: 0, startedAt: startedAt }
       cannot start nonexistent game:
-        given: []
+        given:
+          - s: Game
         when:
           - c: StartGame
             props: { gameId: unknown }
@@ -367,7 +374,7 @@ slices:
           - x: GameNotFound
       cannot start without enough players:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: lobby
               players: [hostMartin]
@@ -423,7 +430,7 @@ slices:
   # no questionIndex; DirectionSubmitted stamps the resolved questionIndex.
   ✍️ Submit Direction:
     steps:
-      - t: 🧑‍🎓 Player /Question
+      - a: 🧑‍🎓 Player /Question
       - c: SubmitDirection
         props:
           gameId: Guid
@@ -448,7 +455,7 @@ slices:
     tests:
       direction submitted successfully:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               currentQuestionIndex: 0
@@ -462,7 +469,8 @@ slices:
           - e: Game / DirectionSubmitted
             props: { playerId: nilsId, questionIndex: 0, direction: mer, submittedAt: submittedAt }
       cannot submit direction in nonexistent game:
-        given: []
+        given:
+          - s: Game
         when:
           - c: SubmitDirection
             props: { gameId: unknown, playerId: nilsId, direction: mer }
@@ -470,7 +478,7 @@ slices:
           - x: GameNotFound
       cannot submit direction before game starts:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: lobby
               players: [hostMartin, playerNils]
@@ -481,7 +489,7 @@ slices:
           - x: GameNotStarted
       cannot submit direction as non-member:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               players: [hostMartin, playerNils]
@@ -492,7 +500,7 @@ slices:
           - x: PlayerNotInGame
       cannot submit direction twice on same question:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               currentQuestionIndex: 0
@@ -522,7 +530,7 @@ slices:
   # SubmitDifference carries no questionIndex; DifferenceSubmitted stamps the resolved one.
   ✍️ Submit Difference:
     steps:
-      - t: 🧑‍🎓 Player /Question
+      - a: 🧑‍🎓 Player /Question
       - c: SubmitDifference
         props:
           gameId: Guid
@@ -550,7 +558,7 @@ slices:
     tests:
       difference submitted successfully:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               currentQuestionIndex: 0
@@ -565,7 +573,7 @@ slices:
             props: { playerId: nilsId, questionIndex: 0, guessedDifference: 50, submittedAt: submittedAt }
       cannot submit difference before direction revealed:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               currentQuestionIndex: 0
@@ -579,7 +587,7 @@ slices:
           - x: DirectionNotRevealed
       cannot submit difference twice on same question:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               currentQuestionIndex: 0
@@ -593,7 +601,7 @@ slices:
           - x: AlreadySubmittedDifference
       negative difference rejected:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               currentQuestionIndex: 0
@@ -772,7 +780,7 @@ slices:
     steps:
       - e: Game / DirectionSubmitted
       - v: Todo / Outstanding directions
-      - t: ⚙️ System / Reveal direction
+      - auto: ⚙️ System / Reveal direction
       - c: RevealDirection
         props:
           gameId: Guid
@@ -799,7 +807,7 @@ slices:
     tests:
       all directions in reveals the answer and deals the bonus:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               currentQuestionIndex: 0
@@ -819,7 +827,7 @@ slices:
             props: { playerId: nilsId, guessedDirection: mindre, directionCorrect: false, bonusPoints: 0 }
       cannot reveal before all directions in:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               currentQuestionIndex: 0
@@ -834,7 +842,7 @@ slices:
           - x: NotAllDirectionsIn
       cannot reveal an already-revealed direction:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               currentQuestionIndex: 0
@@ -861,7 +869,7 @@ slices:
     steps:
       - e: Game / DifferenceSubmitted
       - v: Todo / Outstanding differences
-      - t: ⚙️ System / Score difference
+      - auto: ⚙️ System / Score difference
       - c: ScoreDifference
         props:
           gameId: Guid
@@ -891,7 +899,7 @@ slices:
     tests:
       all differences scored and answer revealed:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               currentQuestionIndex: 0
@@ -911,7 +919,7 @@ slices:
             props: { playerId: nilsId, guessedDifference: 50, guessedDifferenceNormalized: 50, differencePoints: 10, roundScore: 10, totalScore: 10 }
       exact difference with correct direction:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               currentQuestionIndex: 0
@@ -931,7 +939,7 @@ slices:
             props: { playerId: nilsId, guessedDifference: 50, guessedDifferenceNormalized: 50, differencePoints: 10, roundScore: 10, totalScore: 10 }
       scores accumulate across rounds:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               currentQuestionIndex: 1
@@ -952,7 +960,7 @@ slices:
             props: { playerId: nilsId, guessedDifference: 20, guessedDifferenceNormalized: 20, differencePoints: 0, roundScore: -10, totalScore: 0 }
       cannot score before all differences in:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               currentQuestionIndex: 0
@@ -967,7 +975,7 @@ slices:
           - x: NotAllDifferencesIn
       cannot score an already-scored question:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               currentQuestionIndex: 0
@@ -1131,7 +1139,7 @@ slices:
     steps:
       - e: Game / QuestionDifferenceRevealed
       - v: Todo / Game progress
-      - t: ⚙️ System / Ask next question
+      - auto: ⚙️ System / Ask next question
       - c: AskNextQuestion
         props:
           gameId: Guid
@@ -1146,7 +1154,7 @@ slices:
     tests:
       next question presented when one remains:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               currentQuestionIndex: 0
@@ -1170,7 +1178,7 @@ slices:
     steps:
       - e: Game / QuestionDifferenceRevealed
       - v: Todo / Game progress
-      - t: ⚙️ System / End game
+      - auto: ⚙️ System / End game
       - c: EndGame
         props:
           gameId: Guid
@@ -1188,7 +1196,7 @@ slices:
     tests:
       lowest score wins:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               currentQuestionIndex: 1
@@ -1209,7 +1217,7 @@ slices:
               endedAt: endedAt
       tied lowest totals share the win:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               currentQuestionIndex: 1
@@ -1290,7 +1298,7 @@ slices:
   #   playerSven = { playerId: svenId,   name: Sven,   isHost: false }
   👀 Decision Model:
     steps:
-      - v: State / Game
+      - s: Game
         props:
           gameId: Guid
           joinCode: Guid
@@ -1328,7 +1336,7 @@ slices:
           - e: Game / DirectionSubmitted
             props: { playerId: martinId, questionIndex: 0, direction: mer }
         then:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               hostPlayerId: martinId
@@ -1364,7 +1372,7 @@ slices:
           - e: Game / DifferenceScored
             props: { questionIndex: 0, playerId: nilsId, roundScore: 10, totalScore: 10 }
         then:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               currentQuestionIndex: 0   # scoring does not advance; AskNextQuestion does
@@ -1374,3 +1382,36 @@ slices:
                 - q0Scored
                 - q1Fresh
 
+      # --- Dialect folds (RFC emlang-0002 §3): every pinned phase and every emitted event
+      # type is produced by a fold of this decision model, so the append condition covers it.
+      an opened game waits in the lobby:
+        given:
+          - e: Game / LobbyOpened
+            props: { joinCode: joinCode, hostPlayerId: martinId, questions: [question0, question1] }
+        then:
+          - s: Game
+            props: { phase: lobby, hostPlayerId: martinId }
+      the next round advances the current index:
+        given:
+          - e: Game / LobbyOpened
+            props: { joinCode: joinCode, hostPlayerId: martinId, questions: [question0, question1] }
+          - e: Game / PlayerJoined
+            props: { playerId: nilsId, playerName: Nils }
+          - e: Game / GameStarted
+          - e: Game / NextQuestionStarted
+            props: { questionIndex: 1 }
+        then:
+          - s: Game
+            props: { phase: started, currentQuestionIndex: 1 }
+      an ended game rests in its terminal phase:
+        given:
+          - e: Game / LobbyOpened
+            props: { joinCode: joinCode, hostPlayerId: martinId, questions: [question0, question1] }
+          - e: Game / PlayerJoined
+            props: { playerId: nilsId, playerName: Nils }
+          - e: Game / GameStarted
+          - e: Game / GameEnded
+            props: { winnerIds: [martinId], endedAt: endedAt }
+        then:
+          - s: Game
+            props: { phase: ended }

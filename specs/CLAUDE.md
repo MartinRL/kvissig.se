@@ -118,8 +118,9 @@ Two user roles + System. Events live on the `Game` stream; views are bare.
 - **Commands are bare**: `OpenLobby`, `SubmitDirection`.
 - **Events carry the stream**: `Game / LobbyOpened`.
 - **Exceptions are bare**: `GameNotFound`.
-- **Screen views are bare data nouns** (`Roster`, `Round scores`); **State/Todo views
-  carry a lane**: `State / Game`, `Todo / Outstanding directions` (see below).
+- **Screen views are bare data nouns** (`Roster`, `Round scores`); **Todo views carry a
+  lane**: `Todo / Outstanding directions`; **the decider's state is the `s:` element**:
+  `s: Game` (emlang decider dialect, see below).
 
 ### Slice-name emoji prefix (slice TYPE marker)
 
@@ -170,7 +171,11 @@ carry a lane:
 
 - bare noun — screens players & the host actually see (`Roster`, `Round scores`).
 - `Todo / ...` — read-models a `System /` processor consumes; never shown to a human.
-- `State / ...` — the decider's decision model.
+- `s: Game` — the decider's decision model (a state element, not a view). Every decision
+  test gives exactly one `s: Game` (no props = the empty state; `given: []` is gone), and
+  every pinned phase / emitted event type is produced by a fold test in `👀 Decision Model`
+  (`em lint` errors otherwise: `em-given-not-one-state`, `em-then-outside-query`,
+  `em-state-phase-without-fold`). Initiators are `a:` (actor) / `auto:` (automation).
 
 > **NOTE**: emlang parses + lints lane prefixes fine, but the diagram renders views by
 > their bare name without a per-view lane label (only triggers and events get a

@@ -154,7 +154,7 @@ public static partial class Decider
             return new Err(new NotEnoughPlayers());
 
         return new Ok<AuctionEvent[]>([
-            new AuctionStarted(state.GameId, FirstLotIndex: 0, context.Now())
+            new AuctionStarted(state.GameId, state.HostPlayerId, FirstLotIndex: 0, context.Now())
         ]);
     }
 

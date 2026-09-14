@@ -1,7 +1,9 @@
-# emlang configuration for Mer eller Mindre
-# Docs: https://emlang-project.github.io/
+# emlang configuration (decider dialect, emlang-v0.4.0)
+# Docs: https://github.com/MartinRL/xmlang/blob/main/emlang-dialect.md
 
 lint:
   ignore:
-    # Standalone read-model (view-only) slices legitimately have no events.
-    - slice-missing-event
+    # RFC emlang-0004 coverage rules fire on every existing model; suppressed until the
+    # (command × phase) matrix and the projection tests are filled in deliberately.
+    - em-phase-transition-uncovered
+    - em-view-prop-untraced

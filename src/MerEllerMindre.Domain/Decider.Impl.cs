@@ -177,7 +177,7 @@ public static partial class Decider
             return new Err(new NotEnoughPlayers());
 
         return new Ok<GameEvent[]>([
-            new GameStarted(state.GameId, FirstQuestionIndex: 0, context.Now())
+            new GameStarted(state.GameId, state.HostPlayerId, FirstQuestionIndex: 0, context.Now())
         ]);
     }
 

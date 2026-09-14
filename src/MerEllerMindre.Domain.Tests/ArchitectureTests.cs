@@ -63,17 +63,19 @@ public class ArchitectureTests
         var doc = System.Xml.Linq.XDocument.Parse(
             Read("src/MerEllerMindre.Domain/MerEllerMindre.Domain.csproj"));
 
-        // ADR 016: the Emlang.Generators analyzer NuGet (PrivateAssets="all", never a runtime
-        // dependency) is the ONLY allowed reference. Anything else is a real dependency and forbidden.
+        // ADR 016: the in-repo Emlang.Generators analyzer (OutputItemType="Analyzer",
+        // ReferenceOutputAssembly="false", never a runtime dependency) is the ONLY allowed
+        // reference. Anything else is a real dependency and forbidden.
         var offenders = doc.Descendants("PackageReference")
-            .Where(r => (string?)r.Attribute("Include") != "Emlang.Generators"
-                        || (string?)r.Attribute("PrivateAssets") != "all")
-            .Concat(doc.Descendants("ProjectReference"))
+            .Concat(doc.Descendants("ProjectReference")
+                .Where(r => !((string?)r.Attribute("Include") ?? "").EndsWith("Emlang.Generators.csproj")
+                            || (string?)r.Attribute("OutputItemType") != "Analyzer"
+                            || (string?)r.Attribute("ReferenceOutputAssembly") != "false"))
             .Select(r => (string?)r.Attribute("Include"))
             .ToList();
 
         offenders.Should().BeEmpty(
-            "the functional core depends on nothing at runtime — only the analyzer-only Emlang.Generators package (ADR 016)");
+            "the functional core depends on nothing at runtime — only the analyzer-only in-repo Emlang.Generators project (ADR 016)");
     }
 
     [Fact]

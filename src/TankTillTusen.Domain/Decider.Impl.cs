@@ -149,7 +149,7 @@ public static partial class Decider
             return new Err(new NotEnoughPlayers());
 
         return new Ok<TankEvent[]>([
-            new GameStarted(state.GameId, FirstRoundIndex: 0, context.Now())
+            new GameStarted(state.GameId, state.HostPlayerId, FirstRoundIndex: 0, context.Now())
         ]);
     }
 

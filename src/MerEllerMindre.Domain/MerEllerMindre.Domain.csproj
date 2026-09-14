@@ -18,7 +18,7 @@
        from the emlang spec into obj/ — they are deliberately NOT on disk (ADR 016). -->
   <ItemGroup>
     <AdditionalFiles Include="..\..\specs\mer-eller-mindre.em.yaml" EmlangPrefix="Game" />
-    <PackageReference Include="Emlang.Generators" Version="0.1.0" PrivateAssets="all" />
+    <ProjectReference Include="..\Emlang.Generators\Emlang.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
 
 </Project>

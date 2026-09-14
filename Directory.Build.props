@@ -9,4 +9,15 @@
     <TargetFramework>net11.0</TargetFramework>
     <LangVersion>preview</LangVersion>
   </PropertyGroup>
+
+  <!-- Makes the spec wiring visible to src/Emlang.Generators:
+         <AdditionalFiles Include="specs/my-game.em.yaml" EmlangPrefix="Game" />
+       optional per-file EmlangNamespace override (default: RootNamespace), and the
+       project-level EmlangEmit gate (absent = "surface", tests projects set "tests"). -->
+  <ItemGroup>
+    <CompilerVisibleItemMetadata Include="AdditionalFiles" MetadataName="EmlangPrefix" />
+    <CompilerVisibleItemMetadata Include="AdditionalFiles" MetadataName="EmlangNamespace" />
+    <CompilerVisibleProperty Include="EmlangEmit" />
+    <CompilerVisibleProperty Include="RootNamespace" />
+  </ItemGroup>
 </Project>

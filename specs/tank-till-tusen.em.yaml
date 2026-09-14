@@ -14,7 +14,7 @@
 #                                  (Puzzle, Todo / Outstanding solutions)
 #
 # View lanes:
-#   State / ...   the decider's decision model (folded TankState); read by `decide`
+#   s: Game       the decider's decision model (state element, folded TankState); read by `decide`
 #   Todo / ...    processor-facing read-models the System observes (never shown)
 #   bare noun     human screens, named for the DATA they carry (Puzzle, Round scores)
 #
@@ -118,7 +118,7 @@ slices:
   # issuing OpenLobby MUST carry roundCount (an omitted int prop constructs as 0 → RoundCountOutOfRange).
   ✍️ Open Lobby:
     steps:
-      - t: 🧑‍🏫 host /Quiz catalog
+      - a: 🧑‍🏫 host /Quiz catalog
       - c: OpenLobby
         props:
           hostName: string
@@ -137,7 +137,8 @@ slices:
       - v: Roster
     tests:
       game can be created:
-        given: []
+        given:
+          - s: Game
         when:
           - c: OpenLobby
             props: { hostName: Martin, difficulty: klassisk, roundCount: 7 }
@@ -151,14 +152,16 @@ slices:
               puzzles: [puzzle0, puzzle1]
               openedAt: openedAt
       cannot open with too few puzzles:
-        given: []
+        given:
+          - s: Game
         when:
           - c: OpenLobby
             props: { hostName: Martin, difficulty: klassisk, roundCount: 3 }
         then:
           - x: RoundCountOutOfRange
       cannot open with too many puzzles:
-        given: []
+        given:
+          - s: Game
         when:
           - c: OpenLobby
             props: { hostName: Martin, difficulty: klassisk, roundCount: 22 }
@@ -192,7 +195,7 @@ slices:
   #   x: NameAlreadyTaken    — a name already present (incl. the host's, the first player).
   ✍️ Join Game:
     steps:
-      - t: 🧑‍🎓 Player /Join form
+      - a: 🧑‍🎓 Player /Join form
       - c: JoinGame
         props:
           joinCode: Guid
@@ -210,7 +213,7 @@ slices:
     tests:
       player can join lobby:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: lobby
               joinCode: joinCode
@@ -222,7 +225,8 @@ slices:
           - e: Game / PlayerJoined
             props: { playerId: minted, playerName: Nils, joinedAt: joinedAt }
       cannot join nonexistent game:
-        given: []
+        given:
+          - s: Game
         when:
           - c: JoinGame
             props: { joinCode: unknown, playerName: Nils }
@@ -230,7 +234,7 @@ slices:
           - x: GameNotFound
       cannot join started game:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               joinCode: joinCode
@@ -242,7 +246,7 @@ slices:
           - x: GameAlreadyStarted
       cannot join with name already taken:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: lobby
               joinCode: joinCode
@@ -261,7 +265,7 @@ slices:
   #   x: NotEnoughPlayers  — at least 2 players (host + >=1 join) are required to start.
   ✍️ Start Game:
     steps:
-      - t: 🧑‍🏫 host /Game lobby
+      - a: 🧑‍🏫 host /Game lobby
       - c: StartGame
         props:
           gameId: Guid
@@ -270,13 +274,14 @@ slices:
       - e: Game / GameStarted
         props:
           gameId: Guid
+          hostPlayerId: Guid              # the actor: em-actor-identity (<role>Id, role host)
           firstRoundIndex: int
           startedAt: DateTimeOffset   # the round-0 deadline anchor (deadline = startedAt + 60s)
       - v: Puzzle
     tests:
       game can be started:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: lobby
               players: [hostMartin, playerNils]
@@ -287,7 +292,8 @@ slices:
           - e: Game / GameStarted
             props: { firstRoundIndex: 0, startedAt: startedAt }
       cannot start nonexistent game:
-        given: []
+        given:
+          - s: Game
         when:
           - c: StartGame
             props: { gameId: unknown }
@@ -295,7 +301,7 @@ slices:
           - x: GameNotFound
       cannot start without enough players:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: lobby
               players: [hostMartin]
@@ -348,7 +354,7 @@ slices:
   # SubmitSolution carries roundIndex; SolutionSubmitted stamps it back.
   ✍️ Submit Solution:
     steps:
-      - t: 🧑‍🎓 Player /Puzzle
+      - a: 🧑‍🎓 Player /Puzzle
       - c: SubmitSolution
         props:
           gameId: Guid
@@ -378,7 +384,7 @@ slices:
     tests:
       solution submitted successfully:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               currentRoundIndex: 0
@@ -392,7 +398,8 @@ slices:
           - e: Game / SolutionSubmitted
             props: { playerId: nilsId, roundIndex: 0, solution: solHit, submittedAt: submittedAt }
       cannot submit in nonexistent game:
-        given: []
+        given:
+          - s: Game
         when:
           - c: SubmitSolution
             props: { gameId: unknown, playerId: nilsId, roundIndex: 0, solution: solHit }
@@ -400,7 +407,7 @@ slices:
           - x: GameNotFound
       invalid solution rejected:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               currentRoundIndex: 0
@@ -414,7 +421,7 @@ slices:
           - x: InvalidSolution
       cannot submit twice on same round:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               currentRoundIndex: 0
@@ -428,7 +435,7 @@ slices:
           - x: AlreadySubmitted
       can submit within the grace window:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               currentRoundIndex: 0
@@ -443,7 +450,7 @@ slices:
             props: { playerId: nilsId, roundIndex: 0, solution: solHit, submittedAt: submittedAt }
       cannot submit after the deadline plus grace:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               currentRoundIndex: 0
@@ -457,7 +464,7 @@ slices:
           - x: DeadlinePassed
       cannot submit to a scored round:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               currentRoundIndex: 0
@@ -581,7 +588,7 @@ slices:
     steps:
       - e: Game / SolutionSubmitted
       - v: Todo / Outstanding solutions
-      - t: ⚙️ System / Score round
+      - auto: ⚙️ System / Score round
       - c: ScoreRound
         props:
           gameId: Guid
@@ -608,7 +615,7 @@ slices:
     tests:
       exact solution scores the bonus, a miss scores by distance:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               currentRoundIndex: 0
@@ -628,7 +635,7 @@ slices:
             props: { playerId: nilsId, reachedValue: 100, roundScore: -10, totalScore: -10 }   # exact hit -> bonus
       a non-submitter scores the worst once the deadline passes:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               currentRoundIndex: 0
@@ -648,7 +655,7 @@ slices:
             props: { playerId: nilsId, reachedValue: null, roundScore: 100, totalScore: 100 }   # no submission -> worst
       scores accumulate across rounds:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               currentRoundIndex: 1
@@ -669,7 +676,7 @@ slices:
             props: { playerId: nilsId, reachedValue: 25, roundScore: 75, totalScore: 65 }        # solMiss 5+20=25 on puzzle1; Δ75 -> 75; running -10 + 75
       a close field scores its raw distance:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               currentRoundIndex: 0
@@ -689,7 +696,7 @@ slices:
             props: { playerId: nilsId, reachedValue: 800, roundScore: -10, totalScore: -10 }   # exact hit -> bonus
       a wild miss caps at 100:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               currentRoundIndex: 0
@@ -709,7 +716,7 @@ slices:
             props: { playerId: nilsId, reachedValue: 520, roundScore: 100, totalScore: 100 }   # Δ280 -> min-cappad 100
       a non-submitter scores 100 beside a raw distance:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               currentRoundIndex: 0
@@ -729,7 +736,7 @@ slices:
             props: { playerId: nilsId, reachedValue: null, roundScore: 100, totalScore: 100 }                      # no submission -> worst
       cannot score before ready:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               currentRoundIndex: 0
@@ -744,7 +751,7 @@ slices:
           - x: NotReadyToScore
       cannot score an already-scored round:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               currentRoundIndex: 0
@@ -852,7 +859,7 @@ slices:
     steps:
       - e: Game / PuzzleRevealed
       - v: Todo / Game progress
-      - t: ⚙️ System / Ask next puzzle
+      - auto: ⚙️ System / Ask next puzzle
       - c: AskNextPuzzle
         props:
           gameId: Guid
@@ -867,7 +874,7 @@ slices:
     tests:
       next puzzle presented when one remains:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               currentRoundIndex: 0
@@ -891,7 +898,7 @@ slices:
     steps:
       - e: Game / PuzzleRevealed
       - v: Todo / Game progress
-      - t: ⚙️ System / End game
+      - auto: ⚙️ System / End game
       - c: EndGame
         props:
           gameId: Guid
@@ -909,7 +916,7 @@ slices:
     tests:
       lowest score wins:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               currentRoundIndex: 1
@@ -930,7 +937,7 @@ slices:
               endedAt: endedAt
       tied lowest totals share the win:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               currentRoundIndex: 1
@@ -1008,7 +1015,7 @@ slices:
   #   startedAtExpired     = a round start whose deadline + grace is BEFORE context.Now
   👀 Decision Model:
     steps:
-      - v: State / Game
+      - s: Game
         props:
           gameId: Guid
           joinCode: Guid
@@ -1046,7 +1053,7 @@ slices:
           - e: Game / SolutionSubmitted
             props: { playerId: martinId, roundIndex: 0, solution: solMiss }
         then:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               hostPlayerId: martinId
@@ -1073,7 +1080,7 @@ slices:
           - e: Game / RoundScored
             props: { roundIndex: 0, playerId: nilsId, reachedValue: 100, roundScore: -10, totalScore: -10 }
         then:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               currentRoundIndex: 0   # scoring does not advance; AskNextPuzzle does
@@ -1081,3 +1088,39 @@ slices:
                 # round0 fully scored: reveal + per-player reached/scores folded in
                 - round0Scored
                 - round1Fresh
+
+      # --- Dialect folds (RFC emlang-0002 §3): every pinned phase and every emitted event
+      # type is produced by a fold of this decision model, so the append condition covers it.
+      an opened game waits in the lobby:
+        given:
+          - e: Game / LobbyOpened
+            props: { joinCode: joinCode, hostPlayerId: martinId, puzzles: [puzzle0, puzzle1] }
+        then:
+          - s: Game
+            props: { phase: lobby, hostPlayerId: martinId }
+      the next round advances the current index:
+        given:
+          - e: Game / LobbyOpened
+            props: { joinCode: joinCode, hostPlayerId: martinId, puzzles: [puzzle0, puzzle1] }
+          - e: Game / PlayerJoined
+            props: { playerId: nilsId, playerName: Nils }
+          - e: Game / GameStarted
+            props: { firstRoundIndex: 0, startedAt: startedAt }
+          - e: Game / NextPuzzleStarted
+            props: { roundIndex: 1, startedAt: startedAt }
+        then:
+          - s: Game
+            props: { phase: started, currentRoundIndex: 1 }
+      an ended game rests in its terminal phase:
+        given:
+          - e: Game / LobbyOpened
+            props: { joinCode: joinCode, hostPlayerId: martinId, puzzles: [puzzle0, puzzle1] }
+          - e: Game / PlayerJoined
+            props: { playerId: nilsId, playerName: Nils }
+          - e: Game / GameStarted
+            props: { firstRoundIndex: 0, startedAt: startedAt }
+          - e: Game / GameEnded
+            props: { winnerIds: [martinId], endedAt: endedAt }
+        then:
+          - s: Game
+            props: { phase: ended }

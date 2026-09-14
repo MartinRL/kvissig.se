@@ -49,3 +49,14 @@ Go-CLI:n (`emlang lint`) används tills `em lint` (Emlang.Cli, fas 3) är släpp
 - Emitter-buggar felsöks/fixas i xmlang-repot; kvissig fångar regressionerna via
   kompilatorkontraktet och spec-testerna.
 - codehealth-scopet tappade `Emlang\.(CodeGen|Generators)` (koden bor inte här).
+
+## Delvis ersatt (2026-09-14)
+
+Generatorerna flyttade tillbaka: `src/Emlang.Generators` (analyzer via ProjectReference,
+`OutputItemType="Analyzer"`) och `src/Emlang.Generators.Tests`. Skälet är att kodgenerering
+är en app-angelägenhet — emittrarna kodar kvissigs egna konventioner (`Prefix + "State"`,
+`Fixtures.*`, `Projections.X`), inte DSL:en — och xmlang-repot ska bara innehålla de två
+DSL:erna (parser, linter, formatter, CLI). `Emlang.Generators`-paketet publiceras inte längre.
+Kvar från NuGet: `Xmlang` (runtime-interpretern) och verktygen `Emlang.Cli`/`Xmlang.Cli`.
+Specarna följer nu emlangs decider-dialekt (`s: Game`, `a:`/`auto:`, folds by reference).
+

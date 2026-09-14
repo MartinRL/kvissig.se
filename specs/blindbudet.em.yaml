@@ -13,7 +13,7 @@
 #                                  (Roster, Todo / Outstanding bids)
 #
 # View lanes:
-#   State / ...   the decider's decision model (folded AuctionState); read by `decide`
+#   s: Game       the decider's decision model (state element, folded AuctionState); read by `decide`
 #   Todo / ...    processor-facing read-models the System observes (never shown)
 #   bare noun     human screens, named for the DATA they carry (Roster, Round scores)
 # NOTE: emlang renders views by bare name (no per-view lane label); the prefix still
@@ -118,7 +118,7 @@ slices:
   #   host hostName = Martin ; minted joinCode = joinCode
   ✍️ Open Auction:
     steps:
-      - t: 🧑‍🏫 host /Auction catalog
+      - a: 🧑‍🏫 host /Auction catalog
       - c: OpenAuction
         props:
           hostName: string
@@ -136,7 +136,8 @@ slices:
       - v: Roster
     tests:
       auction can be created:
-        given: []
+        given:
+          - s: Game
         when:
           - c: OpenAuction
             props: { hostName: Martin, packId: blindbudet }
@@ -150,7 +151,8 @@ slices:
               lots: [lot0, lot1]
               openedAt: openedAt
       cannot open auction with unknown pack:
-        given: []
+        given:
+          - s: Game
         when:
           - c: OpenAuction
             props: { packId: unknown }
@@ -187,7 +189,7 @@ slices:
   #   x: NameAlreadyTaken       — a name already present (incl. the host's, the first player).
   ✍️ Join Auction:
     steps:
-      - t: 🧑‍🎓 Player /Join form
+      - a: 🧑‍🎓 Player /Join form
       - c: JoinAuction
         props:
           joinCode: Guid
@@ -205,7 +207,7 @@ slices:
     tests:
       player can join lobby:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: lobby
               joinCode: joinCode
@@ -217,7 +219,8 @@ slices:
           - e: Game / PlayerJoined
             props: { playerId: minted, playerName: Nils, joinedAt: joinedAt }
       cannot join nonexistent auction:
-        given: []
+        given:
+          - s: Game
         when:
           - c: JoinAuction
             props: { joinCode: unknown, playerName: Nils }
@@ -225,7 +228,7 @@ slices:
           - x: AuctionNotFound
       cannot join started auction:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               joinCode: joinCode
@@ -237,7 +240,7 @@ slices:
           - x: AuctionAlreadyStarted
       cannot join with name already taken:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: lobby
               joinCode: joinCode
@@ -256,7 +259,7 @@ slices:
   #   x: NotEnoughPlayers   — at least 2 players (host + >=1 join) are required to start.
   ✍️ Start Auction:
     steps:
-      - t: 🧑‍🏫 host /Auction lobby
+      - a: 🧑‍🏫 host /Auction lobby
       - c: StartAuction
         props:
           gameId: Guid
@@ -265,13 +268,14 @@ slices:
       - e: Game / AuctionStarted
         props:
           gameId: Guid
+          hostPlayerId: Guid              # the actor: em-actor-identity (<role>Id, role host)
           firstLotIndex: int
           startedAt: DateTimeOffset
       - v: Lot card
     tests:
       auction can be started:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: lobby
               players: [hostMartin, playerNils]
@@ -282,7 +286,8 @@ slices:
           - e: Game / AuctionStarted
             props: { firstLotIndex: 0, startedAt: startedAt }
       cannot start nonexistent auction:
-        given: []
+        given:
+          - s: Game
         when:
           - c: StartAuction
             props: { gameId: unknown }
@@ -290,7 +295,7 @@ slices:
           - x: AuctionNotFound
       cannot start without enough players:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: lobby
               players: [hostMartin]
@@ -340,7 +345,7 @@ slices:
   # PlaceBid carries lotIndex; BidPlaced stamps it back.
   ✍️ Place Bid:
     steps:
-      - t: 🧑‍🎓 Player /Lot
+      - a: 🧑‍🎓 Player /Lot
       - c: PlaceBid
         props:
           gameId: Guid
@@ -365,7 +370,7 @@ slices:
     tests:
       bid placed successfully:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               currentLotIndex: 0
@@ -378,7 +383,8 @@ slices:
           - e: Game / BidPlaced
             props: { playerId: nilsId, lotIndex: 0, amount: 90, bidAt: bidAt }
       cannot bid in nonexistent auction:
-        given: []
+        given:
+          - s: Game
         when:
           - c: PlaceBid
             props: { gameId: unknown, playerId: nilsId, lotIndex: 0, amount: 90 }
@@ -386,7 +392,7 @@ slices:
           - x: AuctionNotFound
       negative bid rejected:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               currentLotIndex: 0
@@ -399,7 +405,7 @@ slices:
           - x: BidNegative
       cannot bid twice on same lot:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               currentLotIndex: 0
@@ -412,7 +418,7 @@ slices:
           - x: AlreadyBid
       cannot bid on an already-resolved lot:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               currentLotIndex: 0
@@ -523,7 +529,7 @@ slices:
     steps:
       - e: Game / BidPlaced
       - v: Todo / Outstanding bids
-      - t: ⚙️ System / Reveal lot
+      - auto: ⚙️ System / Reveal lot
       - c: RevealLot
         props:
           gameId: Guid
@@ -551,7 +557,7 @@ slices:
     tests:
       highest bid wins and pays its bid:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               currentLotIndex: 0
@@ -569,7 +575,7 @@ slices:
             props: { playerId: nilsId, profit: 10, totalScore: 10 }   # 100 - 90
       overbidding excludes from winning, never negative:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               currentLotIndex: 0
@@ -587,7 +593,7 @@ slices:
             props: { playerId: nilsId, profit: 20, totalScore: 20 }   # (100-80)/100*100
       tie on the winning bid is shared:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               currentLotIndex: 0
@@ -605,7 +611,7 @@ slices:
             props: { playerId: nilsId, profit: 20, totalScore: 20 }
       exact guess scores ten for all:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               currentLotIndex: 0
@@ -623,7 +629,7 @@ slices:
             props: { playerId: nilsId, profit: 10, totalScore: 10 }
       all overbid yields no winner:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               currentLotIndex: 0
@@ -641,7 +647,7 @@ slices:
             props: { playerId: nilsId, profit: 0, totalScore: 0 }
       scores accumulate across lots:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               currentLotIndex: 1
@@ -660,7 +666,7 @@ slices:
             props: { playerId: nilsId, profit: 0, totalScore: 10 }       # running 10 + 0
       cannot reveal before all bids in:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               currentLotIndex: 0
@@ -673,7 +679,7 @@ slices:
           - x: NotAllBidsIn
       cannot reveal an already-resolved lot:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               currentLotIndex: 0
@@ -775,7 +781,7 @@ slices:
     steps:
       - e: Game / LotRevealed
       - v: Todo / Auction progress
-      - t: ⚙️ System / Next lot
+      - auto: ⚙️ System / Next lot
       - c: AskNextLot
         props:
           gameId: Guid
@@ -790,7 +796,7 @@ slices:
     tests:
       next lot presented when one remains:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               currentLotIndex: 0
@@ -812,7 +818,7 @@ slices:
     steps:
       - e: Game / LotRevealed
       - v: Todo / Auction progress
-      - t: ⚙️ System / End auction
+      - auto: ⚙️ System / End auction
       - c: EndAuction
         props:
           gameId: Guid
@@ -830,7 +836,7 @@ slices:
     tests:
       highest score wins:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               currentLotIndex: 1
@@ -847,7 +853,7 @@ slices:
               endedAt: endedAt
       tied highest totals share the win:
         given:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               currentLotIndex: 1
@@ -919,7 +925,7 @@ slices:
   #   lot1 = Lot { description: lot1, trueWorth: 50,  unit: lot1U }
   👀 Decision Model:
     steps:
-      - v: State / Game
+      - s: Game
         props:
           gameId: Guid
           joinCode: Guid
@@ -953,7 +959,7 @@ slices:
           - e: Game / BidPlaced
             props: { playerId: martinId, lotIndex: 0, amount: 70 }
         then:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               hostPlayerId: martinId
@@ -977,10 +983,44 @@ slices:
           - e: Game / RoundScored
             props: { lotIndex: 0, playerId: nilsId, profit: 10, totalScore: 10 }
         then:
-          - v: State / Game
+          - s: Game
             props:
               phase: started
               currentLotIndex: 0   # resolving does not advance; AskNextLot does
               # lot0 fully resolved: reveal + per-player profits folded in
               # (totalScore is DERIVED by summing profits across resolved lots: martin 0, nils 10)
               lots: [lot0ResolvedFull, lot1Fresh]
+
+      # --- Dialect folds (RFC emlang-0002 §3): every pinned phase and every emitted event
+      # type is produced by a fold of this decision model, so the append condition covers it.
+      an opened game waits in the lobby:
+        given:
+          - e: Game / AuctionOpened
+            props: { joinCode: joinCode, hostPlayerId: martinId, lots: [lot0, lot1] }
+        then:
+          - s: Game
+            props: { phase: lobby, hostPlayerId: martinId }
+      the next round advances the current index:
+        given:
+          - e: Game / AuctionOpened
+            props: { joinCode: joinCode, hostPlayerId: martinId, lots: [lot0, lot1] }
+          - e: Game / PlayerJoined
+            props: { playerId: nilsId, playerName: Nils }
+          - e: Game / AuctionStarted
+          - e: Game / NextLotStarted
+            props: { lotIndex: 1 }
+        then:
+          - s: Game
+            props: { phase: started, currentLotIndex: 1 }
+      an ended game rests in its terminal phase:
+        given:
+          - e: Game / AuctionOpened
+            props: { joinCode: joinCode, hostPlayerId: martinId, lots: [lot0, lot1] }
+          - e: Game / PlayerJoined
+            props: { playerId: nilsId, playerName: Nils }
+          - e: Game / AuctionStarted
+          - e: Game / AuctionEnded
+            props: { winnerIds: [martinId], endedAt: endedAt }
+        then:
+          - s: Game
+            props: { phase: ended }
