@@ -26,7 +26,7 @@
 #      locked? is the round scored?) is the fine selection v0.2 declares inexpressible —
 #      it stays a hand-written selector in the concrete stratum.
 
-xmlang: "0.2"
+xmlang: "0.6"
 model: tank-till-tusen.em.yaml
 
 personas:
@@ -52,7 +52,7 @@ surfaces:
         prominence: primary
 
   LobbyVärd:
-    during: [lobby]
+    during: { Game: [lobby] }
     for: [Värd]
     compose:
       - v: Roster
@@ -62,9 +62,11 @@ surfaces:
           on-demand: [gameId]
       - c: StartGame
         prominence: primary
+        confirm: true
+        then: Pussel
 
   LobbySpelare:
-    during: [lobby]
+    during: { Game: [lobby] }
     for: [Spelare]
     compose:
       - v: Roster
@@ -74,7 +76,7 @@ surfaces:
           on-demand: [joinCode, gameId]
 
   Pussel:
-    during: [started]
+    during: { Game: [started] }
     compose:
       - v: Puzzle
         fields:
@@ -85,7 +87,7 @@ surfaces:
         prominence: primary
 
   Väntan:
-    during: [started]
+    during: { Game: [started] }
     compose:
       - v: Solution progress
         # identity lives in the id lists themselves; the viewer is by construction in
@@ -97,7 +99,7 @@ surfaces:
           on-demand: [gameId]
 
   RundresultatVärd:
-    during: [started]
+    during: { Game: [started] }
     for: [Värd]
     compose:
       - v: Round scores
@@ -108,11 +110,15 @@ surfaces:
           on-demand: [gameId]
       - c: AskNextPuzzle       # see finding 3: System processor in the EM, host button in the UI
         prominence: primary
+        confirm: true
+        then: Pussel
       - c: EndGame             # see finding 3
         prominence: primary
+        confirm: true
+        then: Slutställning
 
   RundresultatSpelare:
-    during: [started]
+    during: { Game: [started] }
     for: [Spelare]
     compose:
       - v: Round scores
@@ -123,7 +129,7 @@ surfaces:
           on-demand: [gameId]
 
   Slutställning:
-    during: [ended]
+    during: { Game: [ended] }
     compose:
       - v: Scoreboard
         fields:
