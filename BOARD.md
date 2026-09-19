@@ -19,11 +19,11 @@ kanban-plugin: board
 
 
 ## Igång
-- [ ] xmlang-repot: rätta 7 stale Emlang.Tests så release-workflows blir gröna (blockerar riktig publicering av emlang-v0.5.0 / xmlang-v0.6.1)
 
 
 ## Färdigt
 
+- [x] xmlang-repot: 10 stale tester (7 Emlang + 3 Xmlang) rättade efter Rejection/Translator-omdöpningarna (a6c6f4e), taggarna emlang-v0.5.0 / xmlang-v0.6.1 flyttade dit, båda Release-workflows gröna
 - [x] Xmlang 0.6.0 → 0.6.1 + Emlang 0.5.0 via local-nuget/ (packat ur taggat xmlang-källträd, Docker-restore-lagret kopierar mappen); em 0.5.0 / xm 0.6.1 som globala verktyg; 315 tester gröna, em lint OK
 - [x] Mobile-friendly CSS: mobile-first `.wrap` 560px, viewport meta, telefon-bugfixar i bugs.md, PWA narrow-screenshot
 - [x] Error handling UI: `htmx:responseError` → `#error-banner` i MainLayout
