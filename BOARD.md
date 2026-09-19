@@ -4,7 +4,7 @@ kanban-plugin: board
 
 ---
 
-## Backlog
+## Planerat
 
 - [ ] Feedback-kanal: spelet saknar kontaktmöjlighet helt. Minsta version = mailto/formulär på slutskärmen (Final standings) för alla tre spelen
 - [ ] Loading states: `hx-indicator`/`.htmx-request`-CSS på gissa/bjud/lös-knapparna så dubbelklick och "hände nåt?" försvinner
@@ -17,11 +17,11 @@ kanban-plugin: board
 - [ ] Logisk nästa lokala marknad (ej blott språk, utan land/kultur: t.ex. Sverige OCH svenska)
 
 
-## Doing
+## Igång
 
 
 
-## Done
+## Färdigt
 
 - [x] Mobile-friendly CSS: mobile-first `.wrap` 560px, viewport meta, telefon-bugfixar i bugs.md, PWA narrow-screenshot
 - [x] Error handling UI: `htmx:responseError` → `#error-banner` i MainLayout
@@ -47,7 +47,7 @@ kanban-plugin: board
 - [x] specs/bugs.md: 20 bugs logged, all fixed
 
 
-## Archive
+## Arkiv
 
 - [ ] Feature-flagging för WIP-kortlekar: täcks av mini-pack-konventionen (175 kort, `mini` i slug = konceptskala), återuppliva om en deck behöver döljas helt
 - [ ] ACMM level 5/6: explicit icke-mål (acmm.md: "solo weekend project, not a 24/7 CNCF dashboard")
