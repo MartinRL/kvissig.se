@@ -16,10 +16,10 @@ kanban-plugin: board
 - [ ] Lean MVP: knapp "köp detta spel som app till en engångskostnad precis som en fysisk kortlek", mät klick i Plausible innan nåt byggs
 - [ ] Logisk nästa lokala marknad (ej blott språk, utan land/kultur: t.ex. Sverige OCH svenska)
 - [ ] emlang 0.5.0 följdarbete: SpecModel/TestModel-alias `err`/`exception` → `rej`/`rejection`, CLAUDE.md + specs/CLAUDE.md (`t:` = Translator, `x:` = Rejection); när nuget.org har 0.5.0/0.6.1: ta bort local-nuget/ + källraden i NuGet.config
-- [ ] xmlang-repot: rätta 7 stale Emlang.Tests så release-workflows blir gröna (blockerar riktig publicering av emlang-v0.5.0 / xmlang-v0.6.1)
 
 
 ## Igång
+- [ ] xmlang-repot: rätta 7 stale Emlang.Tests så release-workflows blir gröna (blockerar riktig publicering av emlang-v0.5.0 / xmlang-v0.6.1)
 
 
 ## Färdigt
