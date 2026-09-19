@@ -15,16 +15,16 @@ kanban-plugin: board
 - [ ] GSC-uppföljning: följ "spel som 0-100" / "alternativ till 0-100"-queries, utvärdera om 0-100-vinkeln drar trafik (seo-geo.md §7)
 - [ ] Lean MVP: knapp "köp detta spel som app till en engångskostnad precis som en fysisk kortlek", mät klick i Plausible innan nåt byggs
 - [ ] Logisk nästa lokala marknad (ej blott språk, utan land/kultur: t.ex. Sverige OCH svenska)
-- [ ] upgrade xmlang pkg and fix breaking changes
-- [ ] upgrade emlang pkg and fix breaking changes
+- [ ] emlang 0.5.0 följdarbete: SpecModel/TestModel-alias `err`/`exception` → `rej`/`rejection`, CLAUDE.md + specs/CLAUDE.md (`t:` = Translator, `x:` = Rejection); när nuget.org har 0.5.0/0.6.1: ta bort local-nuget/ + källraden i NuGet.config
+- [ ] xmlang-repot: rätta 7 stale Emlang.Tests så release-workflows blir gröna (blockerar riktig publicering av emlang-v0.5.0 / xmlang-v0.6.1)
 
 
 ## Igång
-- [ ] lokalt köra emlang & xmlang pkg för att testa dessa samt slippa vänta på nuget
 
 
 ## Färdigt
 
+- [x] Xmlang 0.6.0 → 0.6.1 + Emlang 0.5.0 via local-nuget/ (packat ur taggat xmlang-källträd, Docker-restore-lagret kopierar mappen); em 0.5.0 / xm 0.6.1 som globala verktyg; 315 tester gröna, em lint OK
 - [x] Mobile-friendly CSS: mobile-first `.wrap` 560px, viewport meta, telefon-bugfixar i bugs.md, PWA narrow-screenshot
 - [x] Error handling UI: `htmx:responseError` → `#error-banner` i MainLayout
 - [x] ACMM full Level 3 (measured, CodeHealth-gate = första slutna loopen; verdict 2026-07-02 i docs/analysis/acmm.md)
