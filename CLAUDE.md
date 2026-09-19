@@ -59,7 +59,8 @@ MerEllerMindre.Domain/
 
 ```
 specs/mer-eller-mindre.em.yaml   # emlang YAML spec (CLI v1.0.0) — ALL behavior defined here
-specs/tasks.md                   # Implementation checklist
+BOARD.md                         # Work board (Obsidian Kanban): Backlog / Doing / Done
+specs/tasks.md                   # Historical implementation checklist (all done)
 .claude/constitution.md          # Coding standards
 ```
 

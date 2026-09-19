@@ -101,8 +101,7 @@ kodändring).
 - [x] Skicka in `https://kvissig.se/sitemap.xml`
 
 ### Uppföljning efter GSC
-- [ ] Följ "spel som 0-100" / "alternativ till 0-100"-queries i Search Console och
-  utvärdera om 0-100-vinkeln drar trafik (se §7).
+→ öppen punkt flyttad till `BOARD.md`.
 
 ---
 

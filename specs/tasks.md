@@ -1,5 +1,7 @@
 # Implementation Tasks
 
+Historical phase checklist. Open work is tracked in `BOARD.md` (repo root, Obsidian Kanban).
+
 ## Phase 1: Domain Types (from spec)
 - [x] Create `Direction` enum (Mer, Mindre)
 - [x] Create `Commands.cs` with all command records (`union GameCommand`)
@@ -98,7 +100,6 @@ source, no GT).
 - [x] textöverlapp under staplarna när man svarar. ser bra ut när man har svarat och ser svaret.
 - [x] pongsammanställning ska visa vilken "rond" som just spelats (under spelets gång visas rond#/21)
 - [x] värden väljer antal frågor per omgång (slider 4-21 på host-formen; default = MiniGameSize 7 för mini-packs, FullGameSize 21 för prod; RoundCountOutOfRange vaktar range i Decide)
-- [ ] Mobile-friendly CSS
 - [x] PWA manifest
   - [x] Skärmdumpar för rikare installationsdialog (valfritt — påverkar inte "installable")
     - [x] Starta appen lokalt: `dotnet run --project src/MerEllerMindre.Web`
@@ -107,10 +108,7 @@ source, no GT).
     - [x] Krav på bilderna: 320–3840 px per sida, längsta sidan ≤ 2,3× kortaste, PNG/JPEG; alla med samma form_factor måste ha samma bildförhållande — båda 16:9, OK
     - [x] Lägg till `screenshots`-blocket i `wwwroot/manifest.json` (en `wide` + en `narrow`, med `src`, `sizes`, `type`, `form_factor`, `label`)
     - [x] Verifiera i Chrome DevTools → Application → Manifest att skärmdumps-varningarna är borta
-- [ ] Error handling UI
-- [ ] Loading states
 - [x] create favicon
-- [ ] feedback. nu saknar spelet kontaktmöjlighet helt och hållet.  
 - [x] vid poängsammanställningen, när alla spelare svarat, ska det också framgå hur de enskilda spelarna svarat (rondresultatet visar per spelare svarad % "mindre av mer" + rätt/fel-riktning; facit som "mindre är X% av mer")
 
 ## Phase 10: deploy
@@ -126,26 +124,17 @@ source, no GT).
 - [x] stor förändring ska testas: tvåstegsraket. först besvaras mer eller minde och de som gissat rätt riktning får sina -10 poäng. därefter används slidern för att precis som nu gissa %-skillnad
 
 ## Phase 12: product-led growth and growth
-- [ ] hur får vi användare/spela att dela spelet med familj och vänner?
-- [ ] logisk nästa lokala marknad? nb. ej blott baserat på språk med land/kultur (t.ex. sverige OCH svenska)
 - [x] analytics (Plausible Cloud: snippet for traffic + server-side Events API gameplay funnel)
 
 ## product feature validation / lean-startup MVP'ing
-- [ ] klicka på en knapp "köp detta spel som app till en engångskostnad precis som en fysisk kortlek"
-- [ ] feature-flagging, t.ex. WIP-kortlekar
 
 ## ACMM Level-Up!
 - [x] level 1
 - [x] level 2
 - [x] level 3 - half-way there- WIP
-- [ ] level 4
-- [ ] level 5
-- [ ] level 6
 
 - [x] CodeHealth as a part of the harness/evalops
 
 ## SEO/GEO → se specs/seo-geo.md
-- [ ] SEO mattespel
 
 ## feedback/crowdsourcing
-- [ ] kunna skicka feedback (efter avslutat spel?)
