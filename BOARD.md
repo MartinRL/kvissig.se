@@ -15,10 +15,12 @@ kanban-plugin: board
 - [ ] GSC-uppföljning: följ "spel som 0-100" / "alternativ till 0-100"-queries, utvärdera om 0-100-vinkeln drar trafik (seo-geo.md §7)
 - [ ] Lean MVP: knapp "köp detta spel som app till en engångskostnad precis som en fysisk kortlek", mät klick i Plausible innan nåt byggs
 - [ ] Logisk nästa lokala marknad (ej blott språk, utan land/kultur: t.ex. Sverige OCH svenska)
+- [ ] upgrade xmlang pkg and fix breaking changes
+- [ ] upgrade emlang pkg and fix breaking changes
 
 
 ## Igång
-
+- [ ] lokalt köra emlang & xmlang pkg för att testa dessa samt slippa vänta på nuget
 
 
 ## Färdigt
