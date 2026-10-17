@@ -16,7 +16,7 @@ and **`game-design`** (product / game-rule decisions: how the game plays, not ho
 | [005](005-csv-questions.md) | CSV File for Questions | architecture | Accepted |
 | [006](006-result-railway-oriented.md) | Error Handling via Result / Railway Oriented Programming | architecture | Accepted |
 | [007](007-razor-components-static-ssr.md) | Razor Components in Static SSR as the Renderer | architecture | Accepted |
-| [008](008-plausible-analytics.md) | Plausible Cloud for Analytics | operations | Accepted |
+| [008](008-plausible-analytics.md) | Plausible Cloud for Analytics | operations | Superseded by 021 |
 | [009](009-fly-io-hosting.md) | fly.io for Hosting | operations | Accepted |
 | [010](010-github-repository.md) | GitHub for Repository Hosting | operations | Accepted |
 | [011](011-github-actions-ci.md) | GitHub Actions for CI/CD | operations | Accepted |
@@ -27,3 +27,4 @@ and **`game-design`** (product / game-rule decisions: how the game plays, not ho
 | [016](016-generated-stratum-1-records.md) | Stratum-1 Records Are Build Artifacts Generated from the emlang Spec | architecture | Accepted |
 | [017](017-generated-spec-tests.md) | Spec `tests:` Sections Are Compiled into xUnit Facts at Build Time | architecture | Accepted |
 | [018](018-generated-decider-skeletons.md) | Decider Evolve/Decide Switch Skeletons Are Generated (CS8795 Seam) | architecture | Accepted |
+| [021](021-cloudflare-web-analytics.md) | Cloudflare Web Analytics instead of Plausible Cloud | operations | Accepted |

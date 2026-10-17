@@ -1,5 +1,5 @@
 ---
-status: Accepted
+status: Superseded by 021
 type: operations
 created: 2026-06-20
 revised:

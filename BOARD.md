@@ -8,12 +8,12 @@ kanban-plugin: board
 
 - [ ] Feedback-kanal: spelet saknar kontaktmöjlighet helt. Minsta version = mailto/formulär på slutskärmen (Final standings) för alla tre spelen
 - [ ] Loading states: `hx-indicator`/`.htmx-request`-CSS på gissa/bjud/lös-knapparna så dubbelklick och "hände nåt?" försvinner
-- [ ] Dela-CTA på slutskärmen (ShareButton finns bara i katalogerna) + Plausible-event på share-klick, så PLG-frågan "delar spelarna?" går att mäta
+- [ ] Dela-CTA på slutskärmen (ShareButton finns bara i katalogerna) ; mätning av share-klick kräver ett eventverktyg först (ADR 021 släppte Plausible-eventen)
 - [ ] Coverage-metrik: coverlet + CI-tröskel, billigaste kvarvarande ACMM-signalen (docs/analysis/acmm.md §Upgrade path)
 - [ ] ACMM L4 Adaptive: andra slutna loopen, `tools/pack.cs` band-trösklar auto-rejectar kandidater i stället för att rapportera (acmm.md §L4)
 - [ ] SEO content-backlog: per-pack-/temasidor + intern länkning mellan content-sidorna (specs/seo-geo.md §6) + ev. /mattespel-landningssida
 - [ ] GSC-uppföljning: följ "spel som 0-100" / "alternativ till 0-100"-queries, utvärdera om 0-100-vinkeln drar trafik (seo-geo.md §7)
-- [ ] Lean MVP: knapp "köp detta spel som app till en engångskostnad precis som en fysisk kortlek", mät klick i Plausible innan nåt byggs
+- [ ] Lean MVP: knapp "köp detta spel som app till en engångskostnad precis som en fysisk kortlek", mät klick innan nåt byggs (kräver ett eventverktyg, ADR 021)
 - [ ] Logisk nästa lokala marknad (ej blott språk, utan land/kultur: t.ex. Sverige OCH svenska)
 - [ ] emlang 0.5.0 följdarbete: SpecModel/TestModel-alias `err`/`exception` → `rej`/`rejection`, CLAUDE.md + specs/CLAUDE.md (`t:` = Translator, `x:` = Rejection); när nuget.org har 0.5.0/0.6.1: ta bort local-nuget/ + källraden i NuGet.config
 
@@ -23,6 +23,7 @@ kanban-plugin: board
 
 ## Färdigt
 
+- [x] Analytics 2026-10-17: Cloudflare Web Analytics i stället för Plausible (provperioden slut, betalplan krävs); speltratten borttagen (ADR 021 ersätter 008)
 - [x] xmlang-repot: 10 stale tester (7 Emlang + 3 Xmlang) rättade efter Rejection/Translator-omdöpningarna (a6c6f4e), taggarna emlang-v0.5.0 / xmlang-v0.6.1 flyttade dit, båda Release-workflows gröna
 - [x] Xmlang 0.6.0 → 0.6.1 + Emlang 0.5.0 via local-nuget/ (packat ur taggat xmlang-källträd, Docker-restore-lagret kopierar mappen); em 0.5.0 / xm 0.6.1 som globala verktyg; 315 tester gröna, em lint OK
 - [x] Mobile-friendly CSS: mobile-first `.wrap` 560px, viewport meta, telefon-bugfixar i bugs.md, PWA narrow-screenshot
