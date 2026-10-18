@@ -64,6 +64,8 @@
             b.textContent = e.detail.xhr.responseText || 'Något gick fel.';
             b.hidden = false;
         });
+        // ponytail: Apple ritar dela som ruta med pil, alla andra (Android, Windows, Linux) som tre noder; iPad säger Mac i UA.
+        if (/iPhone|iPad|Mac/.test(navigator.userAgent)) document.querySelectorAll('.share-btn svg').forEach(s => s.innerHTML = '<path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" x2="12" y1="2" y2="15"/>');
         document.body.addEventListener('click', async e => {
             const b = e.target.closest('.share-btn'); if (!b) return;
             const data = { title: b.dataset.shareTitle, text: b.dataset.shareText, url: location.origin };
